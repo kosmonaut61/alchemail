@@ -198,7 +198,7 @@ Output the final output in text, not a JSON object.`
 }
 
 // Generate the full preamble from sections
-const DEFAULT_PREAMBLE = `# Master Rules for Emerge Email Generation
+export const DEFAULT_PREAMBLE = `# Master Rules for Emerge Email Generation
 
 ## ${PREAMBLE_SECTIONS.companyOverview.title}
 
@@ -276,6 +276,50 @@ export function updatePreambleSection(sectionKey: keyof typeof PREAMBLE_SECTIONS
 // Get all sections
 export function getAllPreambleSections() {
   return PREAMBLE_SECTIONS
+}
+
+// Parse a full preamble back into sections
+export function parsePreambleToSections(preamble: string): typeof PREAMBLE_SECTIONS {
+  const sections = { ...PREAMBLE_SECTIONS }
+  
+  // Split the preamble by section headers
+  const sectionHeaders = [
+    '## Company Overview',
+    '## Email Rules', 
+    '## Customer References',
+    '## Dynamic Variables',
+    '## Pain Points & Value Props',
+    '## Tone & Language',
+    '## Campaign Rules'
+  ]
+  
+  const parts = preamble.split(/(?=## )/g)
+  
+  sectionHeaders.forEach((header, index) => {
+    const nextHeader = sectionHeaders[index + 1]
+    const sectionPart = parts.find(part => part.includes(header))
+    
+    if (sectionPart) {
+      // Extract content between this header and the next one
+      let content = sectionPart.replace(header, '').trim()
+      if (nextHeader && content.includes(nextHeader)) {
+        content = content.split(nextHeader)[0].trim()
+      }
+      
+      // Map to the correct section key
+      const sectionKeys = Object.keys(sections) as Array<keyof typeof PREAMBLE_SECTIONS>
+      const sectionKey = sectionKeys[index]
+      
+      if (sectionKey && content) {
+        sections[sectionKey] = {
+          ...sections[sectionKey],
+          content: content
+        }
+      }
+    }
+  })
+  
+  return sections
 }
 
 export async function getPreamble(): Promise<string> {

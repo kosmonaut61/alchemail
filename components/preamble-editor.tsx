@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { X, Save, Loader2, RotateCcw, Building2, Mail, Users, Code, Target, MessageSquare, Settings } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-import { PREAMBLE_SECTIONS, getAllPreambleSections, generateFullPreamble, updatePreambleSection } from "@/lib/preamble"
+import { PREAMBLE_SECTIONS, getAllPreambleSections, generateFullPreamble, updatePreambleSection, parsePreambleToSections, DEFAULT_PREAMBLE } from "@/lib/preamble"
 
 interface PreambleEditorProps {
   onClose: () => void
@@ -29,12 +29,21 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
       const response = await fetch("/api/preamble")
       if (response.ok) {
         const data = await response.json()
-        // For now, we'll use the default sections
-        // In the future, we could parse the preamble back into sections
-        setSections(getAllPreambleSections())
+        // Check if we have a saved preamble in localStorage
+        const savedPreamble = localStorage.getItem('email-preamble')
+        if (savedPreamble && savedPreamble !== DEFAULT_PREAMBLE) {
+          // Parse the saved preamble back into sections
+          const parsedSections = parsePreambleToSections(savedPreamble)
+          setSections(parsedSections)
+        } else {
+          // Use default sections
+          setSections(getAllPreambleSections())
+        }
       }
     } catch (error) {
       console.error("Error fetching preamble:", error)
+      // Fallback to default sections on error
+      setSections(getAllPreambleSections())
     } finally {
       setIsLoading(false)
     }
