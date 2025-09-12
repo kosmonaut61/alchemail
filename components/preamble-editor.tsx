@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { X, Save, Loader2 } from "lucide-react"
+import { X, Save, Loader2, RotateCcw } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface PreambleEditorProps {
@@ -66,6 +66,29 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
     }
   }
 
+  const handleResetToDefault = async () => {
+    try {
+      const response = await fetch("/api/preamble")
+      if (response.ok) {
+        const data = await response.json()
+        // Get the default preamble by clearing localStorage first
+        localStorage.removeItem('email-preamble')
+        const defaultPreamble = await fetch("/api/preamble").then(r => r.json())
+        setPreamble(defaultPreamble.preamble)
+        toast({
+          title: "Reset!",
+          description: "Preamble reset to default values.",
+        })
+      }
+    } catch (error) {
+      toast({
+        title: "Reset Failed",
+        description: "Failed to reset preamble. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
   return (
     <Card className="shadow-lg">
       <CardHeader>
@@ -106,6 +129,10 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
                     Save Preamble
                   </>
                 )}
+              </Button>
+              <Button variant="outline" onClick={handleResetToDefault} disabled={isSaving}>
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset to Default
               </Button>
               <Button variant="outline" onClick={onClose}>
                 Cancel
