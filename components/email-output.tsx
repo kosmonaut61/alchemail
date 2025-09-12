@@ -6,6 +6,7 @@ import { Copy, FileText, Eye, Code } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import rehypeRaw from "rehype-raw"
 import { useState } from "react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
@@ -96,6 +97,7 @@ export function EmailOutput({ email }: EmailOutputProps) {
                 <div className="email-rich-text">
                   <ReactMarkdown 
                     remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
                     components={{
                       a: ({ href, children, ...props }) => (
                         <a 
