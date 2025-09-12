@@ -1,16 +1,17 @@
-const DEFAULT_PREAMBLE = `# Master Rules for Emerge Email Generation
-
-## Company Overview
-
-### Emerge Overview
+// Preamble sections for Emerge Email Generation
+export const PREAMBLE_SECTIONS = {
+  companyOverview: {
+    title: "Company Overview",
+    content: `### Emerge Overview
 * Emerge modernizes freight procurement via AI.
 * $30B+ platform transactions.
 * ProcureOS runs RFPs, spot quoting, real-time benchmarking, streamlined comms.
-* Backed by carrier marketplace + advanced reporting → ↓ cost, simplify mgmt.
+* Backed by carrier marketplace + advanced reporting → ↓ cost, simplify mgmt.`
+  },
 
-## Core Email Rules
-
-### Email Format
+  emailRules: {
+    title: "Email Rules",
+    content: `### Email Format
 * Subject: 1–5 words.
 * Body: 70–100 words; 5th grade; ≤3 adverbs; ≤15 words/sentence.
 * Include pain + value + CTA.
@@ -25,21 +26,41 @@ const DEFAULT_PREAMBLE = `# Master Rules for Emerge Email Generation
 * Use varied, descriptive text for links, not raw URLs or repetitive "here".
 * Link text options: "Check it out here", "Read more here", "See the results here", "View the case study here", "Read their story here", etc.
 
-## Call to Action Rules
-
-### CTA
+### Call to Action Rules
 * Use: [https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 * Place near top.
-* Embed phrase (e.g., "Book a 30-min call"), never raw URL. So use href attributes so the user cannot see the entire URL
+* Embed phrase (e.g., "Book a 30-min call"), never raw URL. So use href attributes so the user cannot see the entire URL`
+  },
 
-## Customer References
-
-### Customers (examples)
+  customerReferences: {
+    title: "Customer References",
+    content: `### Customers (examples)
 Airlines: Delta | Apparel: 47 Brand | Auto: Honda, Bridgestone, Discount Tire | Bldg Mat.: Owens Corning, Carlisle, Woodgrain, Pella, Moen, Fortune Brands, Ewing | Chemicals: Ascend, 3V Sigma | Games: Nintendo | Constr.: Floor & Decor | Services: HelloFresh | Dairy: DFA | Defense: MicroSource | Design: RH | Electrical: Atkore, S\&C Electric | Env.: Radius Recycling, US Chem Storage | Farming: Shenandoah, Soli Organic, Alpine, Netafim | Food/Bev: Frito Lay, AB, Olam, Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint | Food Prod.: Tyson, Mars, Land O'Lakes, Smithfield, HP Hood, Butterball, Wine Group | Furniture: Corsicana, Article | Glass/Ceramic: Dal-Tile | Health: Olaplex | Healthcare: Fresenius, Solventum | Logistics: DHL, EZRack | Machinery: Parker Hannifin | Mfg: Unilever, Whirlpool, Stanley B\&D, Jones Soda | Mining: Freeport | Oil/Energy: Calumet, Transocean, Pipe Exchange | Freight: FedEx | Packaging: PCA, Sealed Air | Pharma: AbbVie | Plastics: Crane, IPC | Renewables: Mervis, Valmont | Research: Sylvan | Retail: Aldi, Albertsons, Cumberland, Staples, Dollar Tree, Wayfair, Foot Locker, U-Haul, Abercrombie, Floor & Decor, Ace | Semis: LAM, Liberty Tire | Sporting: Sportsman's Guide | Textiles: Standard Textile, Polartec | Transport: ArcBest, Roadrunner | Warehousing: US Cold Storage, Allen Dist. | Wholesale: Jetro, Padnos, Fortune Brands.
 
-## Dynamic Variables
+### Social Proof URLs
+* Dollar Tree: [link](https://www.emergemarket.com/resource/dollar-tree-study)
+* Golden State Foods: [link](https://www.emergemarket.com/resource/golden-state-foods-case-study)
+* EZ Rack: [link](https://www.emergemarket.com/resource/ezrack-case-study)
+* Premier Carrier Program: [link](https://www.emergemarket.com/resource/premier-carrier-case-study)
+* Dynamic Book It Now: [link](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
+* Pepsi Co.: [link](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
 
-### Basic Dynamic Variables
+### Statistics and Metrics
+* Dollar Tree - Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using ProcureOS. Average lane was ~2% below market average.
+* Golden State Foods - 18% reduction in transportation costs, increased RFP qty to 10 per year since they are so easy to run. During their most recent event, the pool of carriers expanded from 35 to 55—a 57% increase. 35 of their 69 lanes gained new options.
+* EZRack - Realized 6 figure savings in less than a year, saves countless man hours in manual work.
+* Pepsi Co. - Reduced the time to run RFP's by 20%.
+
+### Customer Quotes
+* Dollar Tree - "Emerge is baked into our savings"
+* Golden State Foods - "Emerge has been the best partner in terms of service — they check all the boxes for us. We truly see this as a long-lasting partnership.", "The RFP tool increased the amount of options in our transportation space, providing direct access to asset-based carriers within the Emerge ecosystem. It was a win-win scenario while we were learning the platform,"
+* EZRack - "Emerge provides the best marriage between a TMS and finding coverage", "We got planners out of emails and spreadsheets.", "We now have a single platform for tracking and communicating with carriers."
+* Pepsi Co. - "We can handle the entire process from start to finish without ever feeling overwhelmed or unsupported", "Cost savings in a matter hours"`
+  },
+
+  dynamicVariables: {
+    title: "Dynamic Variables",
+    content: `### Basic Dynamic Variables
 {{first_name}} - Displays the first name for the recipient when it is available (John)
 {{last_name}} - Displays the last name for the recipient when it is available (Smith)
 {{company}} - Displays the name of the company that the recipient works for when it is available (Apollo)
@@ -79,49 +100,27 @@ Use conditional logic for fallbacks:
 - Empty Fallback: {{#if first_name}}{{#endif}}
 - Dynamic Fallback: {{#if first_name}}{{first_name}}{{#else}}there{{#endif}}
 - Letter Case: {{title->lowercase}}, {{title->capitalize_each_word}}, {{title->plural}}
-- Date Operators: {{now_day->plus_X}}, {{now_day->minus_X}}, {{now_month->plus_X}}, {{now_month->minus_X}}, {{now_year->plus_X}}, {{now_year->minus_X}}
+- Date Operators: {{now_day->plus_X}}, {{now_day->minus_X}}, {{now_month->plus_X}}, {{now_month->minus_X}}, {{now_year->plus_X}}, {{now_year->minus_X}}`
+  },
 
-## Pain Points
-
-### Customer Pain Points
+  painPointsValueProps: {
+    title: "Pain Points & Value Props",
+    content: `### Customer Pain Points
 * Freight procurement wastes time: manual tendering, emails, fragmented data → solved w/ automation & centralized comms.
 * Costs unpredictable; overspend risk w/out visibility → solved w/ rate benchmarking.
 * Limited/unused networks leave lanes uncovered → solved w/ 1,000s of vetted carriers in Emerge Marketplace.
-
-## Value Propositions
 
 ### Value Props
 * AI-driven platform simplifies procurement.
 * Benchmark rates vs live market data → avoid overspend.
 * Centralized carrier engagement; automated tendering/comms → save time.
 * Run RFPs, manage spot freight, analyze spend faster/more accurately.
-* Results: ↓ costs, ↑ coverage, actionable insights, smarter transport decisions.
+* Results: ↓ costs, ↑ coverage, actionable insights, smarter transport decisions.`
+  },
 
-## Social Proof
-
-### Social Proof URLs
-* Dollar Tree: [link](https://www.emergemarket.com/resource/dollar-tree-study)
-* Golden State Foods: [link](https://www.emergemarket.com/resource/golden-state-foods-case-study)
-* EZ Rack: [link](https://www.emergemarket.com/resource/ezrack-case-study)
-* Premier Carrier Program: [link](https://www.emergemarket.com/resource/premier-carrier-case-study)
-* Dynamic Book It Now: [link](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
-* Pepsi Co.: [link](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
-
-### Statistics and Metrics
-* Dollar Tree - Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using ProcureOS. Average lane was ~2% below market average.
-* Golden State Foods - 18% reduction in transportation costs, increased RFP qty to 10 per year since they are so easy to run. During their most recent event, the pool of carriers expanded from 35 to 55—a 57% increase. 35 of their 69 lanes gained new options.
-* EZRack - Realized 6 figure savings in less than a year, saves countless man hours in manual work.
-* Pepsi Co. - Reduced the time to run RFP's by 20%.
-
-### Customer Quotes
-* Dollar Tree - "Emerge is baked into our savings"
-* Golden State Foods - "Emerge has been the best partner in terms of service — they check all the boxes for us. We truly see this as a long-lasting partnership.", "The RFP tool increased the amount of options in our transportation space, providing direct access to asset-based carriers within the Emerge ecosystem. It was a win-win scenario while we were learning the platform,"
-* EZRack - "Emerge provides the best marriage between a TMS and finding coverage", "We got planners out of emails and spreadsheets.", "We now have a single platform for tracking and communicating with carriers."
-* Pepsi Co. - "We can handle the entire process from start to finish without ever feeling overwhelmed or unsupported", "Cost savings in a matter hours"
-
-## Email Tone & Personability Rules
-
-### Opening Lines
+  toneLanguage: {
+    title: "Tone & Language",
+    content: `### Opening Lines
 - NEVER start with "Saw you..." or "Smart move/research" patterns
 - Use varied, natural openings like "I noticed...", "I wanted to share...", "I hope this email finds you well"
 - Make the first sentence feel conversational and personal
@@ -161,11 +160,12 @@ Use conditional logic for fallbacks:
 - Be genuinely understanding of their challenges
 - Show enthusiasm about helping them succeed
 - Keep it professional but warm and approachable
-- Instead of saying "I know how frustrating it can be..." just state "It's frustrating when..."
+- Instead of saying "I know how frustrating it can be..." just state "It's frustrating when..."`
+  },
 
-## Sequence/Cadence Rules
-
-### Sequence Structure
+  campaignRules: {
+    title: "Campaign Rules",
+    content: `### Sequence Structure
 * JSON obj = Apollo Sequence.
 * 3–12 emails; SDR judgment for count/timing.
 * Max 3 emails/person/7 days.
@@ -194,8 +194,89 @@ Anything about private fleets should be about helping their private fleet with b
 There should be anywhere from 11-20 touchpoints generated per campaign (with 3 LinkedIn interactions at most per campaign). Make sure more than 80% of the touchpoints say that taking a 30 minute demo will result in up to a $500 Visa gift card (never use the word qualified, make it more natural sounding like it's not big deal). Use the tone based on the audience persona being sent to. Output should be Campaign Name (no preheader needed), and then emails with number of days in between and LinkedIn outreach in between too. Write the email with line breaks that make sense and make the email seem more natural. Make sure all links are actual links and the CTAs are unique to each email.
 
 Output the final output in text, not a JSON object.`
+  }
+}
+
+// Generate the full preamble from sections
+const DEFAULT_PREAMBLE = `# Master Rules for Emerge Email Generation
+
+## ${PREAMBLE_SECTIONS.companyOverview.title}
+
+${PREAMBLE_SECTIONS.companyOverview.content}
+
+## ${PREAMBLE_SECTIONS.emailRules.title}
+
+${PREAMBLE_SECTIONS.emailRules.content}
+
+## ${PREAMBLE_SECTIONS.customerReferences.title}
+
+${PREAMBLE_SECTIONS.customerReferences.content}
+
+## ${PREAMBLE_SECTIONS.dynamicVariables.title}
+
+${PREAMBLE_SECTIONS.dynamicVariables.content}
+
+## ${PREAMBLE_SECTIONS.painPointsValueProps.title}
+
+${PREAMBLE_SECTIONS.painPointsValueProps.content}
+
+## ${PREAMBLE_SECTIONS.toneLanguage.title}
+
+${PREAMBLE_SECTIONS.toneLanguage.content}
+
+## ${PREAMBLE_SECTIONS.campaignRules.title}
+
+${PREAMBLE_SECTIONS.campaignRules.content}`
 
 let storedPreamble = DEFAULT_PREAMBLE
+
+// Helper function to generate full preamble from sections
+export function generateFullPreamble(sections: typeof PREAMBLE_SECTIONS): string {
+  return `# Master Rules for Emerge Email Generation
+
+## ${sections.companyOverview.title}
+
+${sections.companyOverview.content}
+
+## ${sections.emailRules.title}
+
+${sections.emailRules.content}
+
+## ${sections.customerReferences.title}
+
+${sections.customerReferences.content}
+
+## ${sections.dynamicVariables.title}
+
+${sections.dynamicVariables.content}
+
+## ${sections.painPointsValueProps.title}
+
+${sections.painPointsValueProps.content}
+
+## ${sections.toneLanguage.title}
+
+${sections.toneLanguage.content}
+
+## ${sections.campaignRules.title}
+
+${sections.campaignRules.content}`
+}
+
+// Get individual section
+export function getPreambleSection(sectionKey: keyof typeof PREAMBLE_SECTIONS): string {
+  return PREAMBLE_SECTIONS[sectionKey].content
+}
+
+// Update individual section
+export function updatePreambleSection(sectionKey: keyof typeof PREAMBLE_SECTIONS, newContent: string): void {
+  PREAMBLE_SECTIONS[sectionKey].content = newContent
+}
+
+// Get all sections
+export function getAllPreambleSections() {
+  return PREAMBLE_SECTIONS
+}
 
 export async function getPreamble(): Promise<string> {
   // In a real app, you might want to store this in a database
