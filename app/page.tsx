@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Settings, Mail, Edit3 } from "lucide-react"
+import { Settings, Mail, Edit3, Eye } from "lucide-react"
 import { Toaster } from "@/components/ui/toaster"
 import { PreambleEditor } from "@/components/preamble-editor"
 import { EmailWizard } from "@/components/email-wizard"
