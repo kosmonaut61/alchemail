@@ -3,315 +3,133 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, Settings, Mail, Filter, Eye } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
+import { Settings, Mail, Edit3 } from "lucide-react"
 import { Toaster } from "@/components/ui/toaster"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { EmailOutput } from "@/components/email-output"
 import { PreambleEditor } from "@/components/preamble-editor"
-import { ContextSelector } from "@/components/context-selector"
-import { PromptPreview } from "@/components/prompt-preview"
-import { ContextItem } from "@/lib/context-repository"
+import { EmailWizard } from "@/components/email-wizard"
 
 export default function EmailGenerator() {
-  const [persona, setPersona] = useState<string>("")
-  const [signal, setSignal] = useState("")
-  const [painPoints, setPainPoints] = useState<string[]>([])
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedEmail, setGeneratedEmail] = useState("")
+  const [showWizard, setShowWizard] = useState(false)
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
-  const [showContextSelector, setShowContextSelector] = useState(false)
-  const [showPromptPreview, setShowPromptPreview] = useState(false)
-  const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
-  const [isAnalyzingContext, setIsAnalyzingContext] = useState(false)
-  const { toast } = useToast()
 
-  const handlePainPointChange = (painPoint: string, checked: boolean) => {
-    if (checked) {
-      setPainPoints([...painPoints, painPoint])
-    } else {
-      setPainPoints(painPoints.filter((p) => p !== painPoint))
-    }
-  }
-
-  // Auto-analyze context when form is filled out
-  const analyzeContext = async () => {
-    if (!signal || !persona) return
-
-    setIsAnalyzingContext(true)
-    try {
-      const response = await fetch("/api/analyze-context", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          signal,
-          persona,
-          painPoints,
-        }),
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        setSelectedContextItems(data.suggestedItems)
-      }
-    } catch (error) {
-      console.error("Error analyzing context:", error)
-    } finally {
-      setIsAnalyzingContext(false)
-    }
-  }
-
-  // Auto-analyze context when signal or persona changes
-  useEffect(() => {
-    if (signal && persona) {
-      const timeoutId = setTimeout(() => {
-        analyzeContext()
-      }, 1000) // Debounce for 1 second
-      
-      return () => clearTimeout(timeoutId)
-    }
-  }, [signal, persona, painPoints])
-
-  const handleGenerate = async () => {
-    if (!persona || !signal) {
-      toast({
-        title: "Missing Information",
-        description: "Please select a persona and provide a signal.",
-        variant: "destructive",
-      })
-      return
-    }
-
-    // If no context items are selected, try to analyze context first
-    if (selectedContextItems.length === 0) {
-      console.log("No context items selected, analyzing context first...")
-      await analyzeContext()
-      
-      // If still no context items after analysis, show warning
-      if (selectedContextItems.length === 0) {
-        toast({
-          title: "No Context Selected",
-          description: "No context items were selected. The email will be generated with basic information only.",
-          variant: "destructive",
-        })
-      }
-    }
-
-    setIsGenerating(true)
-    try {
-      console.log("[v0] Starting email generation with:", { 
-        persona, 
-        signal, 
-        painPoints, 
-        selectedContextItems: selectedContextItems.length,
-        contextItems: selectedContextItems.map(item => ({ id: item.id, title: item.title }))
-      })
-
-      const response = await fetch("/api/generate-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          persona,
-          signal,
-          painPoints,
-          contextItems: selectedContextItems,
-        }),
-      })
-
-      console.log("[v0] API response status:", response.status)
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
-        console.log("[v0] API error:", errorData)
-        throw new Error(errorData.error || "Failed to generate email")
-      }
-
-      const data = await response.json()
-      console.log("[v0] Email generated successfully")
-      setGeneratedEmail(data.email)
-
-      toast({
-        title: "Email Generated!",
-        description: "Your email sequence has been generated successfully.",
-      })
-    } catch (error) {
-      console.error("[v0] Error generating email:", error)
-      toast({
-        title: "Generation Failed",
-        description:
-          error instanceof Error ? error.message : "There was an error generating your email. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsGenerating(false)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Mail className="h-8 w-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Email Sequence Generator</h1>
+            <Mail className="h-12 w-12 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Email Campaign Generator</h1>
           </div>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Generate personalized email sequences powered by AI. Configure your persona, signal, and pain points to
-            create compelling outreach campaigns.
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Create personalized email sequences powered by AI. Our guided 4-step process helps you craft compelling outreach campaigns with intelligent context selection.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Input Form */}
-          <Card className="shadow-lg">
-            <CardHeader>
-              <div className="flex items-center justify-between">
+        {/* Main CTA Card */}
+        <Card className="shadow-xl max-w-2xl mx-auto">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">Ready to Generate Your Email Campaign?</CardTitle>
+            <CardDescription className="text-lg">
+              Follow our intuitive 4-step process to create targeted email sequences
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Process Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
                 <div>
-                  <CardTitle className="flex items-center gap-2">
-                    <Mail className="h-5 w-5" />
-                    Email Configuration
-                  </CardTitle>
-                  <CardDescription>Configure your email parameters to generate targeted sequences</CardDescription>
-                </div>
-                <div className="flex gap-2">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          onClick={() => setShowPromptPreview(!showPromptPreview)}
-                          disabled={!signal || !persona}
-                        >
-                          <Eye className="h-4 w-4 mr-2" />
-                          Preview
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Preview the exact prompt that will be sent to ChatGPT</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                  <Button variant="outline" size="sm" onClick={() => setShowContextSelector(!showContextSelector)}>
-                    <Filter className="h-4 w-4 mr-2" />
-                    Context
-                    {isAnalyzingContext && <Loader2 className="h-3 w-3 ml-1 animate-spin" />}
-                    {selectedContextItems.length > 0 && !isAnalyzingContext && (
-                      <span className="ml-1 text-xs bg-blue-100 text-blue-800 px-1 rounded">
-                        {selectedContextItems.length}
-                      </span>
-                    )}
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => setShowPreambleEditor(!showPreambleEditor)}>
-                    <Settings className="h-4 w-4 mr-2" />
-                    Settings
-                  </Button>
+                  <h3 className="font-semibold text-blue-900">Campaign Signal</h3>
+                  <p className="text-sm text-blue-700">Describe your email campaign context and target audience</p>
                 </div>
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Persona Selection */}
-              <div className="space-y-2">
-                <Label htmlFor="persona">Persona/Role</Label>
-                <Select value={persona} onValueChange={setPersona}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select target persona" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Enterprise">Enterprise</SelectItem>
-                    <SelectItem value="SMB">SMB</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Signal Input */}
-              <div className="space-y-2">
-                <Label htmlFor="signal">Signal</Label>
-                <Textarea
-                  id="signal"
-                  placeholder="Describe what the email should be about..."
-                  value={signal}
-                  onChange={(e) => setSignal(e.target.value)}
-                  rows={4}
-                  className="resize-none"
-                />
-              </div>
-
-              {/* Pain Points */}
-              <div className="space-y-3">
-                <Label>Pain Points</Label>
-                <div className="space-y-3">
-                  {["Cost", "Effort", "Efficiency"].map((painPoint) => (
-                    <div key={painPoint} className="flex items-center space-x-2">
-                      <Checkbox
-                        id={painPoint.toLowerCase()}
-                        checked={painPoints.includes(painPoint)}
-                        onCheckedChange={(checked) => handlePainPointChange(painPoint, checked as boolean)}
-                      />
-                      <Label
-                        htmlFor={painPoint.toLowerCase()}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {painPoint}
-                      </Label>
-                    </div>
-                  ))}
+              <div className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
+                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                <div>
+                  <h3 className="font-semibold text-green-900">Context Review</h3>
+                  <p className="text-sm text-green-700">Review and customize AI-suggested context items</p>
                 </div>
               </div>
+              <div className="flex items-start space-x-3 p-4 bg-purple-50 rounded-lg">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                <div>
+                  <h3 className="font-semibold text-purple-900">Prompt Review</h3>
+                  <p className="text-sm text-purple-700">Review the final ChatGPT prompt before generation</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg">
+                <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                <div>
+                  <h3 className="font-semibold text-orange-900">Output & Edit</h3>
+                  <p className="text-sm text-orange-700">View results and request edits based on feedback</p>
+                </div>
+              </div>
+            </div>
 
-              {/* Generate Button */}
-              <Button onClick={handleGenerate} disabled={isGenerating} className="w-full" size="lg">
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Generating...
-                  </>
-                ) : (
-                  "Generate Email Sequence"
-                )}
+            {/* Start Button */}
+            <div className="text-center">
+              <Button 
+                onClick={() => setShowWizard(true)} 
+                size="lg" 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
+              >
+                <Mail className="h-5 w-5 mr-2" />
+                Start Email Campaign Generator
               </Button>
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Output */}
-          <EmailOutput email={generatedEmail} />
+            {/* Features */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Settings className="h-6 w-6 text-blue-600" />
+                </div>
+                <h4 className="font-semibold text-gray-900">AI-Powered Context</h4>
+                <p className="text-sm text-gray-600">Intelligent context selection based on your signal</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Eye className="h-6 w-6 text-green-600" />
+                </div>
+                <h4 className="font-semibold text-gray-900">Full Transparency</h4>
+                <p className="text-sm text-gray-600">Preview exactly what gets sent to ChatGPT</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Edit3 className="h-6 w-6 text-purple-600" />
+                </div>
+                <h4 className="font-semibold text-gray-900">Iterative Editing</h4>
+                <p className="text-sm text-gray-600">Request changes and refine your campaigns</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Settings Button */}
+        <div className="text-center">
+          <Button 
+            variant="outline" 
+            onClick={() => setShowPreambleEditor(true)}
+            className="text-gray-600"
+          >
+            <Settings className="h-4 w-4 mr-2" />
+            Advanced Settings
+          </Button>
         </div>
-
-        {/* Prompt Preview */}
-        {showPromptPreview && (
-          <PromptPreview
-            signal={signal}
-            persona={persona}
-            painPoints={painPoints}
-            selectedContextItems={selectedContextItems}
-            onClose={() => setShowPromptPreview(false)}
-          />
-        )}
-
-        {/* Context Selector */}
-        {showContextSelector && (
-          <ContextSelector
-            signal={signal}
-            persona={persona}
-            painPoints={painPoints}
-            selectedContextItems={selectedContextItems}
-            onContextChange={setSelectedContextItems}
-            onClose={() => setShowContextSelector(false)}
-          />
-        )}
-
-        {/* Preamble Editor */}
-        {showPreambleEditor && <PreambleEditor onClose={() => setShowPreambleEditor(false)} />}
       </div>
+
+      {/* Wizard Modal */}
+      {showWizard && (
+        <EmailWizard onClose={() => setShowWizard(false)} />
+      )}
+
+      {/* Preamble Editor */}
+      {showPreambleEditor && (
+        <PreambleEditor onClose={() => setShowPreambleEditor(false)} />
+      )}
+
       <Toaster />
     </div>
   )
