@@ -7,12 +7,14 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, Settings, Mail, Filter } from "lucide-react"
+import { Loader2, Settings, Mail, Filter, Eye } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { EmailOutput } from "@/components/email-output"
 import { PreambleEditor } from "@/components/preamble-editor"
 import { ContextSelector } from "@/components/context-selector"
+import { PromptPreview } from "@/components/prompt-preview"
 import { ContextItem } from "@/lib/context-repository"
 
 export default function EmailGenerator() {
@@ -23,6 +25,7 @@ export default function EmailGenerator() {
   const [generatedEmail, setGeneratedEmail] = useState("")
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
   const [showContextSelector, setShowContextSelector] = useState(false)
+  const [showPromptPreview, setShowPromptPreview] = useState(false)
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [isAnalyzingContext, setIsAnalyzingContext] = useState(false)
   const { toast } = useToast()
@@ -180,6 +183,24 @@ export default function EmailGenerator() {
                   <CardDescription>Configure your email parameters to generate targeted sequences</CardDescription>
                 </div>
                 <div className="flex gap-2">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          onClick={() => setShowPromptPreview(!showPromptPreview)}
+                          disabled={!signal || !persona}
+                        >
+                          <Eye className="h-4 w-4 mr-2" />
+                          Preview
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Preview the exact prompt that will be sent to ChatGPT</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                   <Button variant="outline" size="sm" onClick={() => setShowContextSelector(!showContextSelector)}>
                     <Filter className="h-4 w-4 mr-2" />
                     Context
@@ -264,6 +285,17 @@ export default function EmailGenerator() {
           {/* Output */}
           <EmailOutput email={generatedEmail} />
         </div>
+
+        {/* Prompt Preview */}
+        {showPromptPreview && (
+          <PromptPreview
+            signal={signal}
+            persona={persona}
+            painPoints={painPoints}
+            selectedContextItems={selectedContextItems}
+            onClose={() => setShowPromptPreview(false)}
+          />
+        )}
 
         {/* Context Selector */}
         {showContextSelector && (
