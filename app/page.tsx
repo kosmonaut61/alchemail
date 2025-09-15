@@ -7,11 +7,13 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, Settings, Mail } from "lucide-react"
+import { Loader2, Settings, Mail, Filter } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { EmailOutput } from "@/components/email-output"
 import { PreambleEditor } from "@/components/preamble-editor"
+import { ContextSelector } from "@/components/context-selector"
+import { ContextItem } from "@/lib/context-repository"
 
 export default function EmailGenerator() {
   const [persona, setPersona] = useState<string>("")
@@ -20,6 +22,8 @@ export default function EmailGenerator() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedEmail, setGeneratedEmail] = useState("")
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
+  const [showContextSelector, setShowContextSelector] = useState(false)
+  const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const { toast } = useToast()
 
   const handlePainPointChange = (painPoint: string, checked: boolean) => {
@@ -42,7 +46,7 @@ export default function EmailGenerator() {
 
     setIsGenerating(true)
     try {
-      console.log("[v0] Starting email generation with:", { persona, signal, painPoints })
+      console.log("[v0] Starting email generation with:", { persona, signal, painPoints, selectedContextItems })
 
       const response = await fetch("/api/generate-email", {
         method: "POST",
@@ -53,6 +57,7 @@ export default function EmailGenerator() {
           persona,
           signal,
           painPoints,
+          contextItems: selectedContextItems,
         }),
       })
 
@@ -112,10 +117,16 @@ export default function EmailGenerator() {
                   </CardTitle>
                   <CardDescription>Configure your email parameters to generate targeted sequences</CardDescription>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => setShowPreambleEditor(!showPreambleEditor)}>
-                  <Settings className="h-4 w-4 mr-2" />
-                  Settings
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={() => setShowContextSelector(!showContextSelector)}>
+                    <Filter className="h-4 w-4 mr-2" />
+                    Context
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={() => setShowPreambleEditor(!showPreambleEditor)}>
+                    <Settings className="h-4 w-4 mr-2" />
+                    Settings
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -185,6 +196,17 @@ export default function EmailGenerator() {
           {/* Output */}
           <EmailOutput email={generatedEmail} />
         </div>
+
+        {/* Context Selector */}
+        {showContextSelector && (
+          <ContextSelector
+            signal={signal}
+            persona={persona}
+            painPoints={painPoints}
+            onContextChange={setSelectedContextItems}
+            onClose={() => setShowContextSelector(false)}
+          />
+        )}
 
         {/* Preamble Editor */}
         {showPreambleEditor && <PreambleEditor onClose={() => setShowPreambleEditor(false)} />}

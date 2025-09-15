@@ -153,42 +153,7 @@ Output the final output in text, not a JSON object.`
 
   contextDump: {
     title: "Context Dump",
-    content: `### Customer Pain Points
-* Freight procurement wastes time: manual tendering, emails, fragmented data → solved w/ automation & centralized comms.
-* Costs unpredictable; overspend risk w/out visibility → solved w/ rate benchmarking.
-* Limited/unused networks leave lanes uncovered → solved w/ 1,000s of vetted carriers in Emerge Marketplace.
-
-### Value Props
-* AI-driven platform simplifies procurement.
-* Benchmark rates vs live market data → avoid overspend.
-* Centralized carrier engagement; automated tendering/comms → save time.
-* Run RFPs, manage spot freight, analyze spend faster/more accurately.
-* Results: ↓ costs, ↑ coverage, actionable insights, smarter transport decisions.
-
-### Customers (examples)
-Airlines: Delta | Apparel: 47 Brand | Auto: Honda, Bridgestone, Discount Tire | Bldg Mat.: Owens Corning, Carlisle, Woodgrain, Pella, Moen, Fortune Brands, Ewing | Chemicals: Ascend, 3V Sigma | Games: Nintendo | Constr.: Floor & Decor | Services: HelloFresh | Dairy: DFA | Defense: MicroSource | Design: RH | Electrical: Atkore, S\&C Electric | Env.: Radius Recycling, US Chem Storage | Farming: Shenandoah, Soli Organic, Alpine, Netafim | Food/Bev: Frito Lay, AB, Olam, Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint | Food Prod.: Tyson, Mars, Land O'Lakes, Smithfield, HP Hood, Butterball, Wine Group | Furniture: Corsicana, Article | Glass/Ceramic: Dal-Tile | Health: Olaplex | Healthcare: Fresenius, Solventum | Logistics: DHL, EZRack | Machinery: Parker Hannifin | Mfg: Unilever, Whirlpool, Stanley B\&D, Jones Soda | Mining: Freeport | Oil/Energy: Calumet, Transocean, Pipe Exchange | Freight: FedEx | Packaging: PCA, Sealed Air | Pharma: AbbVie | Plastics: Crane, IPC | Renewables: Mervis, Valmont | Research: Sylvan | Retail: Aldi, Albertsons, Cumberland, Staples, Dollar Tree, Wayfair, Foot Locker, U-Haul, Abercrombie, Floor & Decor, Ace | Semis: LAM, Liberty Tire | Sporting: Sportsman's Guide | Textiles: Standard Textile, Polartec | Transport: ArcBest, Roadrunner | Warehousing: US Cold Storage, Allen Dist. | Wholesale: Jetro, Padnos, Fortune Brands.
-
-### Social Proof URLs
-* Dollar Tree: [link](https://www.emergemarket.com/resource/dollar-tree-study)
-* Golden State Foods: [link](https://www.emergemarket.com/resource/golden-state-foods-case-study)
-* EZ Rack: [link](https://www.emergemarket.com/resource/ezrack-case-study)
-* Premier Carrier Program: [link](https://www.emergemarket.com/resource/premier-carrier-case-study)
-* Dynamic Book It Now: [link](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
-* Pepsi Co.: [link](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
-
-### Statistics and Metrics
-* Dollar Tree - Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using ProcureOS. Average lane was ~2% below market average.
-* Golden State Foods - 18% reduction in transportation costs, increased RFP qty to 10 per year since they are so easy to run. During their most recent event, the pool of carriers expanded from 35 to 55—a 57% increase. 35 of their 69 lanes gained new options.
-* EZRack - Realized 6 figure savings in less than a year, saves countless man hours in manual work.
-* Pepsi Co. - Reduced the time to run RFP's by 20%.
-
-### Customer Quotes
-* Dollar Tree - "Emerge is baked into our savings"
-* Golden State Foods - "Emerge has been the best partner in terms of service — they check all the boxes for us. We truly see this as a long-lasting partnership.", "The RFP tool increased the amount of options in our transportation space, providing direct access to asset-based carriers within the Emerge ecosystem. It was a win-win scenario while we were learning the platform,"
-* EZRack - "Emerge provides the best marriage between a TMS and finding coverage", "We got planners out of emails and spreadsheets.", "We now have a single platform for tracking and communicating with carriers."
-* Pepsi Co. - "We can handle the entire process from start to finish without ever feeling overwhelmed or unsupported", "Cost savings in a matter hours"
-
-### General Rules
+    content: `### General Rules
 - Never use the word Free in the emails
 
 ### Opening Lines
@@ -231,7 +196,13 @@ Airlines: Delta | Apparel: 47 Brand | Auto: Honda, Bridgestone, Discount Tire | 
 - Be genuinely understanding of their challenges
 - Show enthusiasm about helping them succeed
 - Keep it professional but warm and approachable
-- Instead of saying "I know how frustrating it can be..." just state "It's frustrating when..."`
+- Instead of saying "I know how frustrating it can be..." just state "It's frustrating when..."
+
+### Context Usage
+- Use the specific context provided in the "RELEVANT CONTEXT FOR THIS EMAIL" section
+- Prioritize the most relevant customers, case studies, and value props for the target audience
+- Incorporate specific statistics and quotes that match the prospect's industry and pain points
+- Apply the appropriate language style based on the persona and context provided`
   }
 }
 
