@@ -15,7 +15,7 @@ interface PreambleEditorProps {
 
 export function PreambleEditor({ onClose }: PreambleEditorProps) {
   const [sections, setSections] = useState(getAllPreambleSections())
-  const [activeTab, setActiveTab] = useState("companyOverview")
+  const [activeTab, setActiveTab] = useState("goals")
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
   const { toast } = useToast()
@@ -112,22 +112,24 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
   }
 
   const sectionIcons = {
-    companyOverview: Building2,
-    emailRules: Mail,
-    customerReferences: Users,
-    dynamicVariables: Code,
-    painPointsValueProps: Target,
-    toneLanguage: MessageSquare,
-    campaignRules: Settings,
+    goals: Building2,
+    returnFormat: Mail,
+    warnings: Users,
+    contextDump: Target,
   }
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader>
+    <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Preamble Editor</CardTitle>
-            <CardDescription>Edit the AI prompt preamble used for email generation</CardDescription>
+            <CardTitle className="flex items-center gap-3 text-lg">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Settings className="h-5 w-5 text-primary" />
+              </div>
+              Preamble Editor
+            </CardTitle>
+            <CardDescription className="text-muted-foreground">Edit the AI prompt preamble used for email generation</CardDescription>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="h-4 w-4" />
@@ -142,7 +144,7 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
         ) : (
           <>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7">
+              <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
                 {Object.entries(sections).map(([key, section]) => {
                   const Icon = sectionIcons[key as keyof typeof sectionIcons]
                   return (
