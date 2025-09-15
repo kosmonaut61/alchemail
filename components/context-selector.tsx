@@ -27,7 +27,7 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState<string>("all")
-  const [showOnlySuggested, setShowOnlySuggested] = useState(true)
+  const [showOnlySuggested, setShowOnlySuggested] = useState(false)
   const [showAddForm, setShowAddForm] = useState(false)
   const [customItem, setCustomItem] = useState({
     title: "",
@@ -124,6 +124,17 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
     setShowAddForm(false)
   }
 
+  const handleSelectAll = () => {
+    const allFilteredItems = filteredItems
+    setSelectedItems(allFilteredItems)
+    onContextChange(allFilteredItems)
+  }
+
+  const handleClearAll = () => {
+    setSelectedItems([])
+    onContextChange([])
+  }
+
   const filteredItems = allItems.filter(item => {
     const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.content.toLowerCase().includes(searchTerm.toLowerCase())
@@ -150,7 +161,7 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
               Context Selector
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              AI-suggested context items for your email. Customize the selection below.
+              Browse and select context items for your email. All items are shown by default - use filters to narrow down your selection.
             </CardDescription>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
@@ -192,27 +203,45 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
               onCheckedChange={(checked) => setShowOnlySuggested(checked as boolean)}
             />
             <label htmlFor="suggested-only" className="text-sm font-medium">
-              Show only suggested
+              Show only AI suggested
             </label>
           </div>
         </div>
 
-        {/* Stats and Add Button */}
+        {/* Stats and Quick Actions */}
         <div className="flex justify-between items-center">
           <div className="flex gap-4 text-sm text-muted-foreground">
             <span>Total: {allItems.length}</span>
             <span>Suggested: {suggestedItems.length}</span>
             <span>Selected: {selectedItems.length}</span>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowAddForm(!showAddForm)}
-            className="border-border/50"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Add Custom Context
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAddForm(!showAddForm)}
+              className="border-border/50"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Add Custom
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCategoryFilter("case_study")}
+              className="border-border/50"
+            >
+              Case Studies
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCategoryFilter("customer")}
+              className="border-border/50"
+            >
+              Customers
+            </Button>
+          </div>
         </div>
 
         {/* Add Custom Context Form */}
@@ -293,52 +322,76 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
         {/* Context Items */}
         {!isLoading && (
           <div className="space-y-3 max-h-96 overflow-y-auto">
-            {filteredItems.map((item) => {
-              const isSelected = selectedItems.some(s => s.id === item.id)
-              const isSuggested = suggestedItems.some(s => s.id === item.id)
-              
-              return (
-                <div
-                  key={item.id}
-                  className={`p-4 border rounded-lg transition-all duration-200 ${
-                    isSelected ? 'bg-primary/10 border-primary/30 shadow-lg shadow-primary/10' : 'bg-card/50 hover:bg-card border-border/50'
-                  } ${isSuggested ? 'ring-2 ring-green-500/30' : ''}`}
-                >
-                  <div className="flex items-start space-x-3">
-                    <Checkbox
-                      checked={isSelected}
-                      onCheckedChange={(checked) => handleItemToggle(item, checked as boolean)}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-medium text-sm">{item.title}</h4>
-                        <Badge variant="secondary" className="text-xs">
-                          {item.category.replace('_', ' ')}
-                        </Badge>
-                        {isSuggested && (
-                          <Badge variant="default" className="text-xs bg-green-100 text-green-800">
-                            Suggested
+            {filteredItems.length === 0 ? (
+              <div className="text-center py-8 text-muted-foreground">
+                <p>No items found matching your criteria.</p>
+                <p className="text-sm">Try adjusting your search or filters.</p>
+              </div>
+            ) : (
+              filteredItems.map((item) => {
+                const isSelected = selectedItems.some(s => s.id === item.id)
+                const isSuggested = suggestedItems.some(s => s.id === item.id)
+                
+                return (
+                  <div
+                    key={item.id}
+                    className={`p-4 border rounded-lg transition-all duration-200 ${
+                      isSelected ? 'bg-primary/10 border-primary/30 shadow-lg shadow-primary/10' : 'bg-card/50 hover:bg-card border-border/50'
+                    } ${isSuggested ? 'ring-2 ring-green-500/30' : ''}`}
+                  >
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        checked={isSelected}
+                        onCheckedChange={(checked) => handleItemToggle(item, checked as boolean)}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h4 className="font-medium text-sm">{item.title}</h4>
+                          <Badge variant="secondary" className="text-xs">
+                            {item.category.replace('_', ' ')}
                           </Badge>
+                          {isSuggested && (
+                            <Badge variant="default" className="text-xs bg-green-500/20 text-green-400 border-green-500/30">
+                              AI Suggested
+                            </Badge>
+                          )}
+                          {item.url && (
+                            <Badge variant="outline" className="text-xs text-blue-400 border-blue-500/30">
+                              Has URL
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">{item.content}</p>
+                        <div className="flex flex-wrap gap-1">
+                          {item.industry?.map(industry => (
+                            <Badge key={industry} variant="outline" className="text-xs">
+                              {industry}
+                            </Badge>
+                          ))}
+                          {item.pain_points?.map(pp => (
+                            <Badge key={pp} variant="outline" className="text-xs">
+                              {pp}
+                            </Badge>
+                          ))}
+                        </div>
+                        {item.url && (
+                          <div className="mt-2">
+                            <a 
+                              href={item.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-xs text-blue-400 hover:text-blue-300 underline"
+                            >
+                              View case study →
+                            </a>
+                          </div>
                         )}
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">{item.content}</p>
-                      <div className="flex flex-wrap gap-1">
-                        {item.industry?.map(industry => (
-                          <Badge key={industry} variant="outline" className="text-xs">
-                            {industry}
-                          </Badge>
-                        ))}
-                        {item.pain_points?.map(pp => (
-                          <Badge key={pp} variant="outline" className="text-xs">
-                            {pp}
-                          </Badge>
-                        ))}
                       </div>
                     </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })
+            )}
           </div>
         )}
 
@@ -348,13 +401,16 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
             {selectedItems.length} items selected
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => setSelectedItems([])}>
+            <Button variant="outline" onClick={handleSelectAll} size="sm">
+              Select All Visible
+            </Button>
+            <Button variant="outline" onClick={handleClearAll} size="sm">
               Clear All
             </Button>
             <Button variant="outline" onClick={() => {
               setSelectedItems(suggestedItems)
               onContextChange(suggestedItems)
-            }}>
+            }} size="sm">
               Reset to Suggested
             </Button>
             <Button onClick={onClose}>
