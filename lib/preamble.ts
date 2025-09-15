@@ -23,11 +23,15 @@ export const PREAMBLE_SECTIONS = {
 
 ### Link Formatting Rules
 * All URLs must be properly formatted as clickable links.
-* Case study URLs in parentheses: \`(https://example.com)\` → \`<a href="https://example.com">varied text</a>\`
+* For case studies: Use the provided case study URLs to create proper links. Format as: \`<a href="[case_study_url]" target="_blank">[descriptive_text]</a>\`
+* Case study link examples:
+  - Dollar Tree: \`<a href="https://www.emergemarket.com/resource/dollar-tree-study" target="_blank">Read their success story here</a>\`
+  - Golden State Foods: \`<a href="https://www.emergemarket.com/resource/golden-state-foods-case-study" target="_blank">See how they reduced costs by 18%</a>\`
+  - EZRack: \`<a href="https://www.emergemarket.com/resource/ezrack-case-study" target="_blank">Check out their 6-figure savings</a>\`
 * CTA links: \`Book a 30-min call\` → \`<a href="https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min">Book a 30-min call</a>\`
 * All links should be blue, underlined, and open in new tab.
 * Use varied, descriptive text for links, not raw URLs or repetitive "here".
-* Link text options: "Check it out here", "Read more here", "See the results here", "View the case study here", "Read their story here", etc.
+* Link text options: "Check it out here", "Read more here", "See the results here", "Learn more here", "Get started here", "Read their story here", "See how they did it", etc.
 
 ### Call to Action Rules
 * Use: [https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
@@ -202,7 +206,8 @@ Output the final output in text, not a JSON object.`
 - Use the specific context provided in the "RELEVANT CONTEXT FOR THIS EMAIL" section
 - Prioritize the most relevant customers, case studies, and value props for the target audience
 - Incorporate specific statistics and quotes that match the prospect's industry and pain points
-- Apply the appropriate language style based on the persona and context provided`
+- Apply the appropriate language style based on the persona and context provided
+- For case studies: Include both the specific results/company names AND create proper links using the provided case study URLs (e.g., "Dollar Tree saved $3.2 million - <a href='https://www.emergemarket.com/resource/dollar-tree-study' target='_blank'>read their story here</a>")`
   }
 }
 

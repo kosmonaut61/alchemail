@@ -104,7 +104,11 @@ Please generate an email sequence following all the rules and guidelines provide
     if (contextByCategory.case_study) {
       context += "### Relevant Case Studies:\n"
       contextByCategory.case_study.forEach(item => {
-        context += `- ${item.title}: ${item.content}\n`
+        context += `- ${item.title}: ${item.content}`
+        if (item.url) {
+          context += ` (URL: ${item.url})`
+        }
+        context += `\n`
       })
       context += "\n"
     }

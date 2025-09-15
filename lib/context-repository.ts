@@ -9,6 +9,7 @@ export interface ContextItem {
   persona?: string[]
   pain_points?: string[]
   keywords?: string[]
+  url?: string
 }
 
 export const CONTEXT_REPOSITORY: ContextItem[] = [
@@ -62,7 +63,8 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'case_study',
     industry: ['retail', 'food_retail'],
     keywords: ['dollar tree', 'retail', 'savings', 'cost reduction'],
-    pain_points: ['cost']
+    pain_points: ['cost'],
+    url: 'https://www.emergemarket.com/resource/dollar-tree-study'
   },
   {
     id: 'golden_state_foods_case_study',
@@ -71,7 +73,8 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'case_study',
     industry: ['food_beverage', 'food_production'],
     keywords: ['golden state foods', 'food', 'carrier expansion', 'rfp'],
-    pain_points: ['cost', 'efficiency']
+    pain_points: ['cost', 'efficiency'],
+    url: 'https://www.emergemarket.com/resource/golden-state-foods-case-study'
   },
   {
     id: 'ezrack_case_study',
@@ -80,7 +83,8 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'case_study',
     industry: ['logistics', 'warehousing'],
     keywords: ['ezrack', 'logistics', 'savings', 'automation'],
-    pain_points: ['effort', 'efficiency']
+    pain_points: ['effort', 'efficiency'],
+    url: 'https://www.emergemarket.com/resource/ezrack-case-study'
   },
   {
     id: 'pepsi_case_study',
@@ -89,7 +93,28 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'case_study',
     industry: ['food_beverage', 'beverage'],
     keywords: ['pepsi', 'beverage', 'rfp', 'time savings'],
-    pain_points: ['effort', 'efficiency']
+    pain_points: ['effort', 'efficiency'],
+    url: 'https://www.emergemarket.com/resource/pepsi-bottling-case-study'
+  },
+  {
+    id: 'premier_carrier_program_case_study',
+    title: 'Premier Carrier Program Case Study',
+    content: 'Premier Carrier Program provides enhanced service levels and priority access to capacity through strategic carrier partnerships.',
+    category: 'case_study',
+    industry: ['logistics', 'transportation'],
+    keywords: ['premier carrier', 'program', 'service levels', 'capacity', 'partnerships'],
+    pain_points: ['efficiency'],
+    url: 'https://www.emergemarket.com/resource/premier-carrier-case-study'
+  },
+  {
+    id: 'dbin_case_study',
+    title: 'DBIN Case Study',
+    content: 'Dynamic Book It Now (DBIN) enables instant freight booking with real-time pricing and immediate carrier confirmation.',
+    category: 'case_study',
+    industry: ['logistics', 'transportation'],
+    keywords: ['dbin', 'dynamic book it now', 'instant booking', 'real-time pricing', 'immediate confirmation'],
+    pain_points: ['efficiency', 'effort'],
+    url: 'https://www.emergemarket.com/resource/dynamic-book-it-now-case-study'
   },
 
   // Value Propositions
