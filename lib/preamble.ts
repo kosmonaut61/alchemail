@@ -1,7 +1,7 @@
 // Preamble sections for Emerge Email Generation
 export const PREAMBLE_SECTIONS = {
-  companyOverview: {
-    title: "Company Overview",
+  goals: {
+    title: "Goals",
     content: `### Emerge Overview
 * Emerge modernizes freight procurement via AI.
 * $30B+ platform transactions.
@@ -9,8 +9,8 @@ export const PREAMBLE_SECTIONS = {
 * Backed by carrier marketplace + advanced reporting → ↓ cost, simplify mgmt.`
   },
 
-  emailRules: {
-    title: "Email Rules",
+  returnFormat: {
+    title: "Return Format",
     content: `### Email Format
 * Subject: 1–5 words.
 * Body: 70–100 words; 5th grade; ≤3 adverbs; ≤15 words/sentence.
@@ -29,11 +29,84 @@ export const PREAMBLE_SECTIONS = {
 ### Call to Action Rules
 * Use: [https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 * Place near top.
-* Embed phrase (e.g., "Book a 30-min call"), never raw URL. So use href attributes so the user cannot see the entire URL`
+* Embed phrase (e.g., "Book a 30-min call"), never raw URL. So use href attributes so the user cannot see the entire URL
+
+### Dynamic Variables
+#### Basic Dynamic Variables
+{{first_name}} - Displays the first name for the recipient when it is available (John)
+{{last_name}} - Displays the last name for the recipient when it is available (Smith)
+{{company}} - Displays the name of the company that the recipient works for when it is available (Apollo)
+{{company_unprocessed_name}} - Displays the full name of the company that the recipient works for when it is available (Apollo, Inc.)
+{{email}} - Displays the email address of the recipient (recipient@domain.com)
+{{domain}} - Displays the domain for the recipient's email address (domain.com)
+{{location_city}} - Displays the recipient's city location when it is available (Boston)
+{{location_state}} - Displays the recipient's state location when it is available (Massachusetts)
+{{location_country}} - Displays the recipient's country location when it is available (United States)
+{{phone}} - Displays the recipient's phone number when it is available (1 555 123 4567)
+{{sender_first_name}} - Displays the sender's first name when it is available (David)
+{{sender_last_name}} - Displays the sender's last name when it is available (Smith)
+{{sender_email}} - Displays the sender's email address when it is available (user@apollo.io)
+{{primary_intent_signal}} - Displays the saved buying intent topic with the highest ranking score for your team (Performance Marketing)
+{{secondary_intent_signal}} - Displays the saved buying intent topic with the second highest ranking score for your team (Modern Marketing)
+
+#### Time Dynamic Variables
+{{now_day}} - Displays the current day of the month (15)
+{{now_month}} - Displays the current month (September)
+{{now_time_of_day}} - Displays the current phase of the day (morning/afternoon/evening)
+{{now_weekday}} - Displays the current day of the week (Wednesday)
+{{now_year}} - Displays the current year (2024)
+
+#### Additional Dynamic Variables
+{{company_location_city}} - Displays the city where the recipient's company is located (San Francisco)
+{{company_location_state}} - Displays the state where the recipient's company is located (California)
+{{company_location_country}} - Displays the country where the recipient's company is located (Colombia)
+{{latest_funding_type}} - Displays the latest funding stage for the recipient's company (Seed-Stage/Series X/Late-Stage)
+{{company_size}} - Displays the number of people who work at the recipient's company (200)
+{{vertical}} - Displays the vertical for the recipient's company (Cloud Computing)
+{{industry}} - Displays the industry for the recipient's company (Computer Software)
+{{title}} - Displays the recipient's title (Marketing Director)
+{{opt_out_message}} - Displays the unsubscribe message that you defined for your account's email settings
+
+#### Advanced Dynamic Variables
+Use conditional logic for fallbacks:
+- Empty Fallback: {{#if first_name}}{{#endif}}
+- Dynamic Fallback: {{#if first_name}}{{first_name}}{{#else}}there{{#endif}}
+- Letter Case: {{title->lowercase}}, {{title->capitalize_each_word}}, {{title->plural}}
+- Date Operators: {{now_day->plus_X}}, {{now_day->minus_X}}, {{now_month->plus_X}}, {{now_month->minus_X}}, {{now_year->plus_X}}, {{now_year->minus_X}}
+
+### Sequence Structure
+* JSON obj = Apollo Sequence.
+* 3–12 emails; SDR judgment for count/timing.
+* Max 3 emails/person/7 days.
+* If 12 emails → ≤2/week (~6 weeks).
+* Spread logically (not every 3 days).
+
+### Output Structure
+\`{"sequence_name":"<from Category/Audience>","emails":[{"day_offset":0,"subject":"<1–5>","body":"<70–100w; 5th; ≤3 adv; ≤15 words; pain+value+CTA; personalize; no sig>","includes_social_proof":false},{"day_offset":3,"subject":"<...>","body":"<...>","includes_social_proof":true}],"constraints_checklist":{"max_two_emails_per_week":true,"at_least_one_social_proof_email":true,"all_subjects_1_to_5_words":true,"all_bodies_70_to_100_words":true,"all_sentences_<=15_words":true,"≤3_adverbs_per_email":true,"cta_embedded_near_top":true,"no_signature":true}}\`
+
+### Campaign Rules
+* Always output text emails, not JSON.
+* Every email must have CTA (phrased differently).
+* Each email = different pain point/theme.
+* At least 1 email per campaign names customers in target's industry.
+* Never say ENT or SMB in the emails directly. It's okay to use language like Enterprise, but don't directly bring up any language around being an SMB.
+* Make sure every single email focuses on ProcureOS our platform, not just our capacity/marketplace.
+* Do not include a signature or signoff
+
+### Subject Line Rules
+Write cold outreach subject lines, 30–50 chars (4–7 words), no more than 1 emoji (end only, optional), personalized w/ company/role, clear 1 benefit or number, no fake "Re:/Fwd:", avoid vague/cliché ("quick question"), front-load hook for mobile, add ≤90-char preheader, output 5 options, optimized for reply rate.
+
+### Private Fleet Rules
+Anything about private fleets should be about helping their private fleet with backhauls through our marketplace full of freight.
+
+### Campaign Generation Rules
+There should be anywhere from 11-20 touchpoints generated per campaign (with 3 LinkedIn interactions at most per campaign). Make sure more than 80% of the touchpoints say that taking a 30 minute demo will result in up to a $500 Visa gift card (never use the word qualified, make it more natural sounding like it's not big deal). Use the tone based on the audience persona being sent to. Output should be Campaign Name (no preheader needed), and then emails with number of days in between and LinkedIn outreach in between too. Write the email with line breaks that make sense and make the email seem more natural. Make sure all links are actual links and the CTAs are unique to each email.
+
+Output the final output in text, not a JSON object.`
   },
 
-  customerReferences: {
-    title: "Customer References",
+  warnings: {
+    title: "Warnings",
     content: `### Customers (examples)
 Airlines: Delta | Apparel: 47 Brand | Auto: Honda, Bridgestone, Discount Tire | Bldg Mat.: Owens Corning, Carlisle, Woodgrain, Pella, Moen, Fortune Brands, Ewing | Chemicals: Ascend, 3V Sigma | Games: Nintendo | Constr.: Floor & Decor | Services: HelloFresh | Dairy: DFA | Defense: MicroSource | Design: RH | Electrical: Atkore, S\&C Electric | Env.: Radius Recycling, US Chem Storage | Farming: Shenandoah, Soli Organic, Alpine, Netafim | Food/Bev: Frito Lay, AB, Olam, Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint | Food Prod.: Tyson, Mars, Land O'Lakes, Smithfield, HP Hood, Butterball, Wine Group | Furniture: Corsicana, Article | Glass/Ceramic: Dal-Tile | Health: Olaplex | Healthcare: Fresenius, Solventum | Logistics: DHL, EZRack | Machinery: Parker Hannifin | Mfg: Unilever, Whirlpool, Stanley B\&D, Jones Soda | Mining: Freeport | Oil/Energy: Calumet, Transocean, Pipe Exchange | Freight: FedEx | Packaging: PCA, Sealed Air | Pharma: AbbVie | Plastics: Crane, IPC | Renewables: Mervis, Valmont | Research: Sylvan | Retail: Aldi, Albertsons, Cumberland, Staples, Dollar Tree, Wayfair, Foot Locker, U-Haul, Abercrombie, Floor & Decor, Ace | Semis: LAM, Liberty Tire | Sporting: Sportsman's Guide | Textiles: Standard Textile, Polartec | Transport: ArcBest, Roadrunner | Warehousing: US Cold Storage, Allen Dist. | Wholesale: Jetro, Padnos, Fortune Brands.
 
@@ -58,53 +131,8 @@ Airlines: Delta | Apparel: 47 Brand | Auto: Honda, Bridgestone, Discount Tire | 
 * Pepsi Co. - "We can handle the entire process from start to finish without ever feeling overwhelmed or unsupported", "Cost savings in a matter hours"`
   },
 
-  dynamicVariables: {
-    title: "Dynamic Variables",
-    content: `### Basic Dynamic Variables
-{{first_name}} - Displays the first name for the recipient when it is available (John)
-{{last_name}} - Displays the last name for the recipient when it is available (Smith)
-{{company}} - Displays the name of the company that the recipient works for when it is available (Apollo)
-{{company_unprocessed_name}} - Displays the full name of the company that the recipient works for when it is available (Apollo, Inc.)
-{{email}} - Displays the email address of the recipient (recipient@domain.com)
-{{domain}} - Displays the domain for the recipient's email address (domain.com)
-{{location_city}} - Displays the recipient's city location when it is available (Boston)
-{{location_state}} - Displays the recipient's state location when it is available (Massachusetts)
-{{location_country}} - Displays the recipient's country location when it is available (United States)
-{{phone}} - Displays the recipient's phone number when it is available (1 555 123 4567)
-{{sender_first_name}} - Displays the sender's first name when it is available (David)
-{{sender_last_name}} - Displays the sender's last name when it is available (Smith)
-{{sender_email}} - Displays the sender's email address when it is available (user@apollo.io)
-{{primary_intent_signal}} - Displays the saved buying intent topic with the highest ranking score for your team (Performance Marketing)
-{{secondary_intent_signal}} - Displays the saved buying intent topic with the second highest ranking score for your team (Modern Marketing)
-
-### Time Dynamic Variables
-{{now_day}} - Displays the current day of the month (15)
-{{now_month}} - Displays the current month (September)
-{{now_time_of_day}} - Displays the current phase of the day (morning/afternoon/evening)
-{{now_weekday}} - Displays the current day of the week (Wednesday)
-{{now_year}} - Displays the current year (2024)
-
-### Additional Dynamic Variables
-{{company_location_city}} - Displays the city where the recipient's company is located (San Francisco)
-{{company_location_state}} - Displays the state where the recipient's company is located (California)
-{{company_location_country}} - Displays the country where the recipient's company is located (Colombia)
-{{latest_funding_type}} - Displays the latest funding stage for the recipient's company (Seed-Stage/Series X/Late-Stage)
-{{company_size}} - Displays the number of people who work at the recipient's company (200)
-{{vertical}} - Displays the vertical for the recipient's company (Cloud Computing)
-{{industry}} - Displays the industry for the recipient's company (Computer Software)
-{{title}} - Displays the recipient's title (Marketing Director)
-{{opt_out_message}} - Displays the unsubscribe message that you defined for your account's email settings
-
-### Advanced Dynamic Variables
-Use conditional logic for fallbacks:
-- Empty Fallback: {{#if first_name}}{{#endif}}
-- Dynamic Fallback: {{#if first_name}}{{first_name}}{{#else}}there{{#endif}}
-- Letter Case: {{title->lowercase}}, {{title->capitalize_each_word}}, {{title->plural}}
-- Date Operators: {{now_day->plus_X}}, {{now_day->minus_X}}, {{now_month->plus_X}}, {{now_month->minus_X}}, {{now_year->plus_X}}, {{now_year->minus_X}}`
-  },
-
-  painPointsValueProps: {
-    title: "Pain Points & Value Props",
+  contextDump: {
+    title: "Context Dump",
     content: `### Customer Pain Points
 * Freight procurement wastes time: manual tendering, emails, fragmented data → solved w/ automation & centralized comms.
 * Costs unpredictable; overspend risk w/out visibility → solved w/ rate benchmarking.
@@ -161,72 +189,31 @@ Use conditional logic for fallbacks:
 - Show enthusiasm about helping them succeed
 - Keep it professional but warm and approachable
 - Instead of saying "I know how frustrating it can be..." just state "It's frustrating when..."`
-  },
-
-  campaignRules: {
-    title: "Campaign Rules",
-    content: `### Sequence Structure
-* JSON obj = Apollo Sequence.
-* 3–12 emails; SDR judgment for count/timing.
-* Max 3 emails/person/7 days.
-* If 12 emails → ≤2/week (~6 weeks).
-* Spread logically (not every 3 days).
-
-### Output Structure
-\`{"sequence_name":"<from Category/Audience>","emails":[{"day_offset":0,"subject":"<1–5>","body":"<70–100w; 5th; ≤3 adv; ≤15 words; pain+value+CTA; personalize; no sig>","includes_social_proof":false},{"day_offset":3,"subject":"<...>","body":"<...>","includes_social_proof":true}],"constraints_checklist":{"max_two_emails_per_week":true,"at_least_one_social_proof_email":true,"all_subjects_1_to_5_words":true,"all_bodies_70_to_100_words":true,"all_sentences_<=15_words":true,"≤3_adverbs_per_email":true,"cta_embedded_near_top":true,"no_signature":true}}\`
-
-### Campaign Rules
-* Always output text emails, not JSON.
-* Every email must have CTA (phrased differently).
-* Each email = different pain point/theme.
-* At least 1 email per campaign names customers in target's industry.
-* Never say ENT or SMB in the emails directly. It's okay to use language like Enterprise, but don't directly bring up any language around being an SMB.
-* Make sure every single email focuses on ProcureOS our platform, not just our capacity/marketplace.
-* Do not include a signature or signoff
-
-### Subject Line Rules
-Write cold outreach subject lines, 30–50 chars (4–7 words), no more than 1 emoji (end only, optional), personalized w/ company/role, clear 1 benefit or number, no fake "Re:/Fwd:", avoid vague/cliché ("quick question"), front-load hook for mobile, add ≤90-char preheader, output 5 options, optimized for reply rate.
-
-### Private Fleet Rules
-Anything about private fleets should be about helping their private fleet with backhauls through our marketplace full of freight.
-
-### Campaign Generation Rules
-There should be anywhere from 11-20 touchpoints generated per campaign (with 3 LinkedIn interactions at most per campaign). Make sure more than 80% of the touchpoints say that taking a 30 minute demo will result in up to a $500 Visa gift card (never use the word qualified, make it more natural sounding like it's not big deal). Use the tone based on the audience persona being sent to. Output should be Campaign Name (no preheader needed), and then emails with number of days in between and LinkedIn outreach in between too. Write the email with line breaks that make sense and make the email seem more natural. Make sure all links are actual links and the CTAs are unique to each email.
-
-Output the final output in text, not a JSON object.`
   }
 }
 
 // Generate the full preamble from sections
 export const DEFAULT_PREAMBLE = `# Master Rules for Emerge Email Generation
 
-## ${PREAMBLE_SECTIONS.companyOverview.title}
+## ${PREAMBLE_SECTIONS.goals.title}
 
-${PREAMBLE_SECTIONS.companyOverview.content}
+${PREAMBLE_SECTIONS.goals.content}
 
-## ${PREAMBLE_SECTIONS.emailRules.title}
+## ${PREAMBLE_SECTIONS.returnFormat.title}
 
-${PREAMBLE_SECTIONS.emailRules.content}
+${PREAMBLE_SECTIONS.returnFormat.content}
 
-## ${PREAMBLE_SECTIONS.customerReferences.title}
+## ${PREAMBLE_SECTIONS.warnings.title}
 
-${PREAMBLE_SECTIONS.customerReferences.content}
+${PREAMBLE_SECTIONS.warnings.content}
 
-## ${PREAMBLE_SECTIONS.dynamicVariables.title}
+## ${PREAMBLE_SECTIONS.contextDump.title}
 
-${PREAMBLE_SECTIONS.dynamicVariables.content}
-
-## ${PREAMBLE_SECTIONS.painPointsValueProps.title}
-
-${PREAMBLE_SECTIONS.painPointsValueProps.content}
+${PREAMBLE_SECTIONS.contextDump.content}
 
 ## ${PREAMBLE_SECTIONS.toneLanguage.title}
 
-${PREAMBLE_SECTIONS.toneLanguage.content}
-
-## ${PREAMBLE_SECTIONS.campaignRules.title}
-
-${PREAMBLE_SECTIONS.campaignRules.content}`
+${PREAMBLE_SECTIONS.toneLanguage.content}`
 
 let storedPreamble = DEFAULT_PREAMBLE
 
@@ -234,33 +221,25 @@ let storedPreamble = DEFAULT_PREAMBLE
 export function generateFullPreamble(sections: typeof PREAMBLE_SECTIONS): string {
   return `# Master Rules for Emerge Email Generation
 
-## ${sections.companyOverview.title}
+## ${sections.goals.title}
 
-${sections.companyOverview.content}
+${sections.goals.content}
 
-## ${sections.emailRules.title}
+## ${sections.returnFormat.title}
 
-${sections.emailRules.content}
+${sections.returnFormat.content}
 
-## ${sections.customerReferences.title}
+## ${sections.warnings.title}
 
-${sections.customerReferences.content}
+${sections.warnings.content}
 
-## ${sections.dynamicVariables.title}
+## ${sections.contextDump.title}
 
-${sections.dynamicVariables.content}
-
-## ${sections.painPointsValueProps.title}
-
-${sections.painPointsValueProps.content}
+${sections.contextDump.content}
 
 ## ${sections.toneLanguage.title}
 
-${sections.toneLanguage.content}
-
-## ${sections.campaignRules.title}
-
-${sections.campaignRules.content}`
+${sections.toneLanguage.content}`
 }
 
 // Get individual section
@@ -284,13 +263,11 @@ export function parsePreambleToSections(preamble: string): typeof PREAMBLE_SECTI
   
   // Split the preamble by section headers
   const sectionHeaders = [
-    '## Company Overview',
-    '## Email Rules', 
-    '## Customer References',
-    '## Dynamic Variables',
-    '## Pain Points & Value Props',
-    '## Tone & Language',
-    '## Campaign Rules'
+    '## Goals',
+    '## Return Format', 
+    '## Warnings',
+    '## Context Dump',
+    '## Tone & Language'
   ]
   
   const parts = preamble.split(/(?=## )/g)

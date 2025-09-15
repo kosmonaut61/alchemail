@@ -15,7 +15,7 @@ interface PreambleEditorProps {
 
 export function PreambleEditor({ onClose }: PreambleEditorProps) {
   const [sections, setSections] = useState(getAllPreambleSections())
-  const [activeTab, setActiveTab] = useState("companyOverview")
+  const [activeTab, setActiveTab] = useState("goals")
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
   const { toast } = useToast()
@@ -112,13 +112,11 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
   }
 
   const sectionIcons = {
-    companyOverview: Building2,
-    emailRules: Mail,
-    customerReferences: Users,
-    dynamicVariables: Code,
-    painPointsValueProps: Target,
+    goals: Building2,
+    returnFormat: Mail,
+    warnings: Users,
+    contextDump: Target,
     toneLanguage: MessageSquare,
-    campaignRules: Settings,
   }
 
   return (
@@ -142,7 +140,7 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
         ) : (
           <>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7">
+              <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
                 {Object.entries(sections).map(([key, section]) => {
                   const Icon = sectionIcons[key as keyof typeof sectionIcons]
                   return (
