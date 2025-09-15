@@ -93,15 +93,17 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
   }, {} as Record<string, number>)
 
   return (
-    <Card className="shadow-lg max-w-4xl mx-auto">
-      <CardHeader>
+    <Card className="border-border/50 bg-card/50 backdrop-blur-sm max-w-4xl mx-auto">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-3 text-lg">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Filter className="h-5 w-5 text-primary" />
+              </div>
               Context Selector
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-muted-foreground">
               AI-suggested context items for your email. Customize the selection below.
             </CardDescription>
           </div>
@@ -174,9 +176,9 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
               return (
                 <div
                   key={item.id}
-                  className={`p-4 border rounded-lg transition-colors ${
-                    isSelected ? 'bg-blue-50 border-blue-200' : 'bg-white hover:bg-gray-50'
-                  } ${isSuggested ? 'ring-2 ring-green-200' : ''}`}
+                  className={`p-4 border rounded-lg transition-all duration-200 ${
+                    isSelected ? 'bg-primary/10 border-primary/30 shadow-lg shadow-primary/10' : 'bg-card/50 hover:bg-card border-border/50'
+                  } ${isSuggested ? 'ring-2 ring-green-500/30' : ''}`}
                 >
                   <div className="flex items-start space-x-3">
                     <Checkbox

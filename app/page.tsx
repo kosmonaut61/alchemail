@@ -214,34 +214,36 @@ export default function EmailGenerator() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-background">
+      <div className="max-w-6xl mx-auto p-6 space-y-8">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Mail className="h-12 w-12 text-blue-600" />
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Email Campaign Generator</h1>
+        <div className="text-center space-y-6">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="p-3 rounded-xl bg-primary/10">
+              <Mail className="h-8 w-8 text-primary" />
+            </div>
+            <h1 className="text-5xl font-bold text-foreground tracking-tight">Alchemail</h1>
           </div>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Create personalized email sequences powered by AI. Follow the steps below to craft compelling outreach campaigns.
           </p>
         </div>
 
         {/* Progress Indicator */}
         <div className="flex justify-center">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
                   currentStep >= step.id 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 text-gray-500'
+                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25' 
+                    : 'bg-muted text-muted-foreground'
                 }`}>
                   {currentStep > step.id ? '✓' : step.id}
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`w-8 h-0.5 mx-2 ${
-                    currentStep > step.id ? 'bg-blue-600' : 'bg-gray-200'
+                  <div className={`w-12 h-0.5 mx-3 rounded-full transition-colors duration-200 ${
+                    currentStep > step.id ? 'bg-primary' : 'bg-border'
                   }`} />
                 )}
               </div>
@@ -251,13 +253,13 @@ export default function EmailGenerator() {
 
         {/* Step 1: Campaign Signal */}
         {currentStep >= 1 && (
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-6">
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-10 h-10 bg-primary text-primary-foreground rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">1</div>
                 Campaign Signal
               </CardTitle>
-              <CardDescription>Describe your email campaign context and target audience</CardDescription>
+              <CardDescription className="text-base text-muted-foreground">Describe your email campaign context and target audience</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
@@ -313,7 +315,7 @@ export default function EmailGenerator() {
                   <Button 
                     onClick={handleNext} 
                     disabled={!canProceedToNext()}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25"
                   >
                     Next: Review Context
                   </Button>
@@ -325,13 +327,13 @@ export default function EmailGenerator() {
 
         {/* Step 2: Context Review */}
         {currentStep >= 2 && (
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-6">
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-10 h-10 bg-green-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-green-600/25">2</div>
                 Context Review
               </CardTitle>
-              <CardDescription>The AI has analyzed your signal and suggested relevant context items. Review and customize the selection.</CardDescription>
+              <CardDescription className="text-base text-muted-foreground">The AI has analyzed your signal and suggested relevant context items. Review and customize the selection.</CardDescription>
             </CardHeader>
             <CardContent>
               {isAnalyzingContext ? (
@@ -358,7 +360,7 @@ export default function EmailGenerator() {
                   <Button 
                     onClick={handleNext} 
                     disabled={!canProceedToNext()}
-                    className="bg-green-600 hover:bg-green-700"
+                    className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
                   >
                     Next: Review Prompt
                   </Button>
@@ -370,13 +372,13 @@ export default function EmailGenerator() {
 
         {/* Step 3: Prompt Review */}
         {currentStep >= 3 && (
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-6">
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-10 h-10 bg-purple-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-purple-600/25">3</div>
                 Prompt Review
               </CardTitle>
-              <CardDescription>This is exactly what will be sent to ChatGPT to generate your email sequence.</CardDescription>
+              <CardDescription className="text-base text-muted-foreground">This is exactly what will be sent to ChatGPT to generate your email sequence.</CardDescription>
             </CardHeader>
             <CardContent>
               <PromptPreview
@@ -395,7 +397,7 @@ export default function EmailGenerator() {
                   <Button 
                     onClick={handleGenerate} 
                     disabled={!canProceedToNext() || isGenerating}
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
                   >
                     {isGenerating ? (
                       <>
@@ -417,13 +419,13 @@ export default function EmailGenerator() {
 
         {/* Step 4: Output & Edit */}
         {currentStep >= 4 && (
-          <Card className="shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
+          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-6">
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-orange-600/25">4</div>
                 Output & Edit
               </CardTitle>
-              <CardDescription>Review your generated email sequence and request edits if needed.</CardDescription>
+              <CardDescription className="text-base text-muted-foreground">Review your generated email sequence and request edits if needed.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <EmailOutput email={generatedEmail} />
@@ -448,7 +450,7 @@ export default function EmailGenerator() {
                   <Button 
                     onClick={handleEditRequest} 
                     disabled={isEditing || !editFeedback.trim()}
-                    className="bg-orange-600 hover:bg-orange-700"
+                    className="bg-orange-600 hover:bg-orange-700 text-white shadow-lg shadow-orange-600/25"
                   >
                     {isEditing ? (
                       <>
@@ -473,7 +475,7 @@ export default function EmailGenerator() {
           <Button 
             variant="outline" 
             onClick={() => setShowPreambleEditor(true)}
-            className="text-gray-600"
+            className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
           >
             <Settings className="h-4 w-4 mr-2" />
             Advanced Settings

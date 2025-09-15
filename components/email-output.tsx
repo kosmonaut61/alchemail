@@ -35,27 +35,29 @@ export function EmailOutput({ email }: EmailOutputProps) {
   }
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader>
+    <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-3 text-lg">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <FileText className="h-5 w-5 text-primary" />
+              </div>
               Generated Email
             </CardTitle>
-            <CardDescription>Your AI-generated email sequence</CardDescription>
+            <CardDescription className="text-muted-foreground">Your AI-generated email sequence</CardDescription>
           </div>
           {email && (
             <div className="flex items-center gap-2">
               <TooltipProvider>
-                <div className="flex items-center border rounded-md">
+                <div className="flex items-center border border-border/50 rounded-lg overflow-hidden">
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
                         variant={viewMode === 'rich' ? 'default' : 'ghost'}
                         size="sm"
                         onClick={() => setViewMode('rich')}
-                        className="rounded-r-none"
+                        className="rounded-r-none border-0"
                       >
                         <Eye className="h-4 w-4" />
                       </Button>
@@ -70,7 +72,7 @@ export function EmailOutput({ email }: EmailOutputProps) {
                         variant={viewMode === 'markdown' ? 'default' : 'ghost'}
                         size="sm"
                         onClick={() => setViewMode('markdown')}
-                        className="rounded-l-none"
+                        className="rounded-l-none border-0"
                       >
                         <Code className="h-4 w-4" />
                       </Button>
@@ -81,7 +83,7 @@ export function EmailOutput({ email }: EmailOutputProps) {
                   </Tooltip>
                 </div>
               </TooltipProvider>
-              <Button variant="outline" size="sm" onClick={handleCopy}>
+              <Button variant="outline" size="sm" onClick={handleCopy} className="border-border/50">
                 <Copy className="h-4 w-4 mr-2" />
                 Copy
               </Button>
@@ -92,7 +94,7 @@ export function EmailOutput({ email }: EmailOutputProps) {
       <CardContent>
         {email ? (
           <div className="space-y-4">
-            <div className="bg-muted/50 rounded-lg p-4 border">
+            <div className="bg-muted/30 rounded-lg p-6 border border-border/50">
               {viewMode === 'rich' ? (
                 <div className="email-rich-text">
                   <ReactMarkdown 

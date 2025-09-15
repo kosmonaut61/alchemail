@@ -119,12 +119,17 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
   }
 
   return (
-    <Card className="shadow-lg">
-      <CardHeader>
+    <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Preamble Editor</CardTitle>
-            <CardDescription>Edit the AI prompt preamble used for email generation</CardDescription>
+            <CardTitle className="flex items-center gap-3 text-lg">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Settings className="h-5 w-5 text-primary" />
+              </div>
+              Preamble Editor
+            </CardTitle>
+            <CardDescription className="text-muted-foreground">Edit the AI prompt preamble used for email generation</CardDescription>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="h-4 w-4" />
