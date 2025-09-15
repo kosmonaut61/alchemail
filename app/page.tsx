@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -24,6 +24,7 @@ export default function EmailGenerator() {
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
   const [showContextSelector, setShowContextSelector] = useState(false)
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
+  const [isAnalyzingContext, setIsAnalyzingContext] = useState(false)
   const { toast } = useToast()
 
   const handlePainPointChange = (painPoint: string, checked: boolean) => {
@@ -33,6 +34,46 @@ export default function EmailGenerator() {
       setPainPoints(painPoints.filter((p) => p !== painPoint))
     }
   }
+
+  // Auto-analyze context when form is filled out
+  const analyzeContext = async () => {
+    if (!signal || !persona) return
+
+    setIsAnalyzingContext(true)
+    try {
+      const response = await fetch("/api/analyze-context", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          signal,
+          persona,
+          painPoints,
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setSelectedContextItems(data.suggestedItems)
+      }
+    } catch (error) {
+      console.error("Error analyzing context:", error)
+    } finally {
+      setIsAnalyzingContext(false)
+    }
+  }
+
+  // Auto-analyze context when signal or persona changes
+  useEffect(() => {
+    if (signal && persona) {
+      const timeoutId = setTimeout(() => {
+        analyzeContext()
+      }, 1000) // Debounce for 1 second
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [signal, persona, painPoints])
 
   const handleGenerate = async () => {
     if (!persona || !signal) {
@@ -44,9 +85,30 @@ export default function EmailGenerator() {
       return
     }
 
+    // If no context items are selected, try to analyze context first
+    if (selectedContextItems.length === 0) {
+      console.log("No context items selected, analyzing context first...")
+      await analyzeContext()
+      
+      // If still no context items after analysis, show warning
+      if (selectedContextItems.length === 0) {
+        toast({
+          title: "No Context Selected",
+          description: "No context items were selected. The email will be generated with basic information only.",
+          variant: "destructive",
+        })
+      }
+    }
+
     setIsGenerating(true)
     try {
-      console.log("[v0] Starting email generation with:", { persona, signal, painPoints, selectedContextItems })
+      console.log("[v0] Starting email generation with:", { 
+        persona, 
+        signal, 
+        painPoints, 
+        selectedContextItems: selectedContextItems.length,
+        contextItems: selectedContextItems.map(item => ({ id: item.id, title: item.title }))
+      })
 
       const response = await fetch("/api/generate-email", {
         method: "POST",
@@ -121,6 +183,12 @@ export default function EmailGenerator() {
                   <Button variant="outline" size="sm" onClick={() => setShowContextSelector(!showContextSelector)}>
                     <Filter className="h-4 w-4 mr-2" />
                     Context
+                    {isAnalyzingContext && <Loader2 className="h-3 w-3 ml-1 animate-spin" />}
+                    {selectedContextItems.length > 0 && !isAnalyzingContext && (
+                      <span className="ml-1 text-xs bg-blue-100 text-blue-800 px-1 rounded">
+                        {selectedContextItems.length}
+                      </span>
+                    )}
                   </Button>
                   <Button variant="outline" size="sm" onClick={() => setShowPreambleEditor(!showPreambleEditor)}>
                     <Settings className="h-4 w-4 mr-2" />
@@ -203,6 +271,7 @@ export default function EmailGenerator() {
             signal={signal}
             persona={persona}
             painPoints={painPoints}
+            selectedContextItems={selectedContextItems}
             onContextChange={setSelectedContextItems}
             onClose={() => setShowContextSelector(false)}
           />

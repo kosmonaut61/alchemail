@@ -16,6 +16,14 @@ export async function POST(request: NextRequest) {
 
     // Build dynamic context from selected items
     const dynamicContext = buildDynamicContext(contextItems || [])
+    
+    console.log("=== DEBUG INFO ===")
+    console.log("Context items received:", contextItems?.length || 0)
+    if (contextItems && contextItems.length > 0) {
+      console.log("Context items details:", contextItems.map(item => ({ id: item.id, title: item.title, category: item.category })))
+    }
+    console.log("Dynamic context generated:", dynamicContext)
+    console.log("==================")
 
     const prompt = `${preamble}
 

@@ -14,26 +14,31 @@ interface ContextSelectorProps {
   signal: string
   persona: string
   painPoints: string[]
+  selectedContextItems: ContextItem[]
   onContextChange: (selectedItems: ContextItem[]) => void
   onClose: () => void
 }
 
-export function ContextSelector({ signal, persona, painPoints, onContextChange, onClose }: ContextSelectorProps) {
+export function ContextSelector({ signal, persona, painPoints, selectedContextItems, onContextChange, onClose }: ContextSelectorProps) {
   const [allItems, setAllItems] = useState<ContextItem[]>([])
   const [suggestedItems, setSuggestedItems] = useState<ContextItem[]>([])
-  const [selectedItems, setSelectedItems] = useState<ContextItem[]>([])
+  const [selectedItems, setSelectedItems] = useState<ContextItem[]>(selectedContextItems)
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState<string>("all")
   const [showOnlySuggested, setShowOnlySuggested] = useState(true)
 
+  // Initialize with passed selected items
   useEffect(() => {
-    analyzeContext()
-  }, [signal, persona, painPoints])
+    setSelectedItems(selectedContextItems)
+  }, [selectedContextItems])
 
-  const analyzeContext = async () => {
-    if (!signal || !persona) return
+  // Load all items when component mounts
+  useEffect(() => {
+    loadAllItems()
+  }, [])
 
+  const loadAllItems = async () => {
     setIsLoading(true)
     try {
       const response = await fetch("/api/analyze-context", {
@@ -52,15 +57,14 @@ export function ContextSelector({ signal, persona, painPoints, onContextChange, 
         const data = await response.json()
         setAllItems(data.allItems)
         setSuggestedItems(data.suggestedItems)
-        setSelectedItems(data.suggestedItems) // Auto-select suggested items
-        onContextChange(data.suggestedItems)
       }
     } catch (error) {
-      console.error("Error analyzing context:", error)
+      console.error("Error loading context items:", error)
     } finally {
       setIsLoading(false)
     }
   }
+
 
   const handleItemToggle = (item: ContextItem, checked: boolean) => {
     if (checked) {
@@ -156,7 +160,7 @@ export function ContextSelector({ signal, persona, painPoints, onContextChange, 
         {isLoading && (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="h-6 w-6 animate-spin mr-2" />
-            Analyzing context...
+            Loading context items...
           </div>
         )}
 
