@@ -116,7 +116,6 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
     returnFormat: Mail,
     warnings: Users,
     contextDump: Target,
-    toneLanguage: MessageSquare,
   }
 
   return (
@@ -140,7 +139,7 @@ export function PreambleEditor({ onClose }: PreambleEditorProps) {
         ) : (
           <>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
+              <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
                 {Object.entries(sections).map(([key, section]) => {
                   const Icon = sectionIcons[key as keyof typeof sectionIcons]
                   return (
