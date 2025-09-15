@@ -107,7 +107,7 @@ Write cold outreach subject lines, 30–50 chars (4–7 words), no more than 1 e
 Anything about private fleets should be about helping their private fleet with backhauls through our marketplace full of freight.
 
 ### Campaign Generation Rules
-There should be anywhere from 11-20 touchpoints generated per campaign (with 3 LinkedIn interactions at most per campaign). Make sure more than 80% of the touchpoints say that taking a 30 minute demo will result in up to a $500 Visa gift card (never use the word qualified, make it more natural sounding like it's not big deal). Use the tone based on the audience persona being sent to. Output should be Campaign Name (no preheader needed), and then emails with number of days in between and LinkedIn outreach in between too. Write the email with line breaks that make sense and make the email seem more natural. Make sure all links are actual links and the CTAs are unique to each email.
+There should be anywhere from 11-20 touchpoints generated per campaign (with 3 LinkedIn interactions at most per campaign). Focus on the value proposition and benefits of the solution. Use the tone based on the audience persona being sent to. Output should be Campaign Name (no preheader needed), and then emails with number of days in between and LinkedIn outreach in between too. Write the email with line breaks that make sense and make the email seem more natural. Make sure all links are actual links and the CTAs are unique to each email.
 
 Output the final output in text, not a JSON object.`
   },

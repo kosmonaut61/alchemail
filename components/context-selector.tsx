@@ -176,9 +176,6 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
               Browse and select context items for your email. All items are shown by default - use filters to narrow down your selection.
             </CardDescription>
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose}>
-            <X className="h-4 w-4" />
-          </Button>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -512,9 +509,6 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
               onContextChange(suggestedItems)
             }} size="sm">
               Reset to Suggested
-            </Button>
-            <Button onClick={onClose}>
-              Done
             </Button>
           </div>
         </div>
