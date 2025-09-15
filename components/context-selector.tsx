@@ -5,8 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
-import { Loader2, Search, Filter, X } from "lucide-react"
+import { Loader2, Search, Filter, X, Plus, Save } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ContextItem } from "@/lib/context-repository"
 
@@ -27,6 +28,16 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState<string>("all")
   const [showOnlySuggested, setShowOnlySuggested] = useState(true)
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [customItem, setCustomItem] = useState({
+    title: "",
+    content: "",
+    category: "case_study" as ContextItem['category'],
+    industry: [] as string[],
+    pain_points: [] as string[],
+    keywords: [] as string[],
+    url: ""
+  })
 
   // Initialize with passed selected items
   useEffect(() => {
@@ -76,6 +87,41 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
       setSelectedItems(newSelected)
       onContextChange(newSelected)
     }
+  }
+
+  const handleAddCustomItem = () => {
+    if (!customItem.title.trim() || !customItem.content.trim()) return
+
+    const newItem: ContextItem = {
+      id: `custom_${Date.now()}`,
+      title: customItem.title,
+      content: customItem.content,
+      category: customItem.category,
+      industry: customItem.industry,
+      pain_points: customItem.pain_points,
+      keywords: customItem.keywords,
+      url: customItem.url || undefined
+    }
+
+    // Add to all items and selected items
+    const updatedAllItems = [...allItems, newItem]
+    const updatedSelectedItems = [...selectedItems, newItem]
+    
+    setAllItems(updatedAllItems)
+    setSelectedItems(updatedSelectedItems)
+    onContextChange(updatedSelectedItems)
+
+    // Reset form
+    setCustomItem({
+      title: "",
+      content: "",
+      category: "case_study",
+      industry: [],
+      pain_points: [],
+      keywords: [],
+      url: ""
+    })
+    setShowAddForm(false)
   }
 
   const filteredItems = allItems.filter(item => {
@@ -151,12 +197,90 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="flex gap-4 text-sm text-muted-foreground">
-          <span>Total: {allItems.length}</span>
-          <span>Suggested: {suggestedItems.length}</span>
-          <span>Selected: {selectedItems.length}</span>
+        {/* Stats and Add Button */}
+        <div className="flex justify-between items-center">
+          <div className="flex gap-4 text-sm text-muted-foreground">
+            <span>Total: {allItems.length}</span>
+            <span>Suggested: {suggestedItems.length}</span>
+            <span>Selected: {selectedItems.length}</span>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="border-border/50"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Add Custom Context
+          </Button>
         </div>
+
+        {/* Add Custom Context Form */}
+        {showAddForm && (
+          <Card className="border-border/50 bg-card/30">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg">Add Custom Context Item</CardTitle>
+              <CardDescription>Add a custom context item for this email campaign</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Title *</label>
+                  <Input
+                    placeholder="e.g., Custom Case Study"
+                    value={customItem.title}
+                    onChange={(e) => setCustomItem({...customItem, title: e.target.value})}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Category</label>
+                  <Select value={customItem.category} onValueChange={(value) => setCustomItem({...customItem, category: value as ContextItem['category']})}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="case_study">Case Study</SelectItem>
+                      <SelectItem value="customer">Customer</SelectItem>
+                      <SelectItem value="value_prop">Value Proposition</SelectItem>
+                      <SelectItem value="statistic">Statistic</SelectItem>
+                      <SelectItem value="quote">Quote</SelectItem>
+                      <SelectItem value="language_style">Language Style</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Content *</label>
+                <Textarea
+                  placeholder="Describe the context item..."
+                  value={customItem.content}
+                  onChange={(e) => setCustomItem({...customItem, content: e.target.value})}
+                  rows={3}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">URL (Optional)</label>
+                <Input
+                  placeholder="https://example.com"
+                  value={customItem.url}
+                  onChange={(e) => setCustomItem({...customItem, url: e.target.value})}
+                />
+              </div>
+
+              <div className="flex gap-2">
+                <Button onClick={handleAddCustomItem} disabled={!customItem.title.trim() || !customItem.content.trim()}>
+                  <Save className="h-4 w-4 mr-2" />
+                  Add Item
+                </Button>
+                <Button variant="outline" onClick={() => setShowAddForm(false)}>
+                  Cancel
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Loading State */}
         {isLoading && (
