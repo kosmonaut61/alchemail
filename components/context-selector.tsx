@@ -135,14 +135,26 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
     onContextChange([])
   }
 
-  const filteredItems = allItems.filter(item => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.content.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = categoryFilter === "all" || item.category === categoryFilter
-    const matchesSuggested = !showOnlySuggested || suggestedItems.some(s => s.id === item.id)
-    
-    return matchesSearch && matchesCategory && matchesSuggested
-  })
+  const filteredItems = allItems
+    .filter(item => {
+      const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           item.content.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesCategory = categoryFilter === "all" || item.category === categoryFilter
+      const matchesSuggested = !showOnlySuggested || suggestedItems.some(s => s.id === item.id)
+      
+      return matchesSearch && matchesCategory && matchesSuggested
+    })
+    .sort((a, b) => {
+      const aIsSuggested = suggestedItems.some(s => s.id === a.id)
+      const bIsSuggested = suggestedItems.some(s => s.id === b.id)
+      
+      // AI suggested items come first
+      if (aIsSuggested && !bIsSuggested) return -1
+      if (!aIsSuggested && bIsSuggested) return 1
+      
+      // Within each group, sort alphabetically by title
+      return a.title.localeCompare(b.title)
+    })
 
   const categoryCounts = allItems.reduce((acc, item) => {
     acc[item.category] = (acc[item.category] || 0) + 1
@@ -328,69 +340,157 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
                 <p className="text-sm">Try adjusting your search or filters.</p>
               </div>
             ) : (
-              filteredItems.map((item) => {
-                const isSelected = selectedItems.some(s => s.id === item.id)
-                const isSuggested = suggestedItems.some(s => s.id === item.id)
+              (() => {
+                const suggestedItemsList = filteredItems.filter(item => suggestedItems.some(s => s.id === item.id))
+                const otherItems = filteredItems.filter(item => !suggestedItems.some(s => s.id === item.id))
                 
                 return (
-                  <div
-                    key={item.id}
-                    className={`p-4 border rounded-lg transition-all duration-200 ${
-                      isSelected ? 'bg-primary/10 border-primary/30 shadow-lg shadow-primary/10' : 'bg-card/50 hover:bg-card border-border/50'
-                    } ${isSuggested ? 'ring-2 ring-green-500/30' : ''}`}
-                  >
-                    <div className="flex items-start space-x-3">
-                      <Checkbox
-                        checked={isSelected}
-                        onCheckedChange={(checked) => handleItemToggle(item, checked as boolean)}
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h4 className="font-medium text-sm">{item.title}</h4>
-                          <Badge variant="secondary" className="text-xs">
-                            {item.category.replace('_', ' ')}
-                          </Badge>
-                          {isSuggested && (
-                            <Badge variant="default" className="text-xs bg-green-500/20 text-green-400 border-green-500/30">
-                              AI Suggested
-                            </Badge>
-                          )}
-                          {item.url && (
-                            <Badge variant="outline" className="text-xs text-blue-400 border-blue-500/30">
-                              Has URL
-                            </Badge>
-                          )}
+                  <>
+                    {/* AI Suggested Items */}
+                    {suggestedItemsList.length > 0 && (
+                      <>
+                        <div className="flex items-center gap-2 py-2">
+                          <div className="h-px bg-green-500/30 flex-1"></div>
+                          <span className="text-xs font-medium text-green-400 px-2">AI Suggested ({suggestedItemsList.length})</span>
+                          <div className="h-px bg-green-500/30 flex-1"></div>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-2">{item.content}</p>
-                        <div className="flex flex-wrap gap-1">
-                          {item.industry?.map(industry => (
-                            <Badge key={industry} variant="outline" className="text-xs">
-                              {industry}
-                            </Badge>
-                          ))}
-                          {item.pain_points?.map(pp => (
-                            <Badge key={pp} variant="outline" className="text-xs">
-                              {pp}
-                            </Badge>
-                          ))}
-                        </div>
-                        {item.url && (
-                          <div className="mt-2">
-                            <a 
-                              href={item.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-xs text-blue-400 hover:text-blue-300 underline"
+                        {suggestedItemsList.map((item) => {
+                          const isSelected = selectedItems.some(s => s.id === item.id)
+                          const isSuggested = true
+                          
+                          return (
+                            <div
+                              key={item.id}
+                              className={`p-4 border rounded-lg transition-all duration-200 ${
+                                isSelected ? 'bg-primary/10 border-primary/30 shadow-lg shadow-primary/10' : 'bg-card/50 hover:bg-card border-border/50'
+                              } ring-2 ring-green-500/30`}
                             >
-                              View case study →
-                            </a>
+                              <div className="flex items-start space-x-3">
+                                <Checkbox
+                                  checked={isSelected}
+                                  onCheckedChange={(checked) => handleItemToggle(item, checked as boolean)}
+                                />
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <h4 className="font-medium text-sm">{item.title}</h4>
+                                    <Badge variant="secondary" className="text-xs">
+                                      {item.category.replace('_', ' ')}
+                                    </Badge>
+                                    <Badge variant="default" className="text-xs bg-green-500/20 text-green-400 border-green-500/30">
+                                      AI Suggested
+                                    </Badge>
+                                    {item.url && (
+                                      <Badge variant="outline" className="text-xs text-blue-400 border-blue-500/30">
+                                        Has URL
+                                      </Badge>
+                                    )}
+                                  </div>
+                                  <p className="text-sm text-muted-foreground mb-2">{item.content}</p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {item.industry?.map(industry => (
+                                      <Badge key={industry} variant="outline" className="text-xs">
+                                        {industry}
+                                      </Badge>
+                                    ))}
+                                    {item.pain_points?.map(pp => (
+                                      <Badge key={pp} variant="outline" className="text-xs">
+                                        {pp}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                  {item.url && (
+                                    <div className="mt-2">
+                                      <a 
+                                        href={item.url} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="text-xs text-blue-400 hover:text-blue-300 underline"
+                                      >
+                                        View case study →
+                                      </a>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </>
+                    )}
+                    
+                    {/* Other Items */}
+                    {otherItems.length > 0 && (
+                      <>
+                        {suggestedItemsList.length > 0 && (
+                          <div className="flex items-center gap-2 py-2">
+                            <div className="h-px bg-border/50 flex-1"></div>
+                            <span className="text-xs font-medium text-muted-foreground px-2">All Items ({otherItems.length})</span>
+                            <div className="h-px bg-border/50 flex-1"></div>
                           </div>
                         )}
-                      </div>
-                    </div>
-                  </div>
+                        {otherItems.map((item) => {
+                          const isSelected = selectedItems.some(s => s.id === item.id)
+                          const isSuggested = false
+                          
+                          return (
+                            <div
+                              key={item.id}
+                              className={`p-4 border rounded-lg transition-all duration-200 ${
+                                isSelected ? 'bg-primary/10 border-primary/30 shadow-lg shadow-primary/10' : 'bg-card/50 hover:bg-card border-border/50'
+                              }`}
+                            >
+                              <div className="flex items-start space-x-3">
+                                <Checkbox
+                                  checked={isSelected}
+                                  onCheckedChange={(checked) => handleItemToggle(item, checked as boolean)}
+                                />
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <h4 className="font-medium text-sm">{item.title}</h4>
+                                    <Badge variant="secondary" className="text-xs">
+                                      {item.category.replace('_', ' ')}
+                                    </Badge>
+                                    {item.url && (
+                                      <Badge variant="outline" className="text-xs text-blue-400 border-blue-500/30">
+                                        Has URL
+                                      </Badge>
+                                    )}
+                                  </div>
+                                  <p className="text-sm text-muted-foreground mb-2">{item.content}</p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {item.industry?.map(industry => (
+                                      <Badge key={industry} variant="outline" className="text-xs">
+                                        {industry}
+                                      </Badge>
+                                    ))}
+                                    {item.pain_points?.map(pp => (
+                                      <Badge key={pp} variant="outline" className="text-xs">
+                                        {pp}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                  {item.url && (
+                                    <div className="mt-2">
+                                      <a 
+                                        href={item.url} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="text-xs text-blue-400 hover:text-blue-300 underline"
+                                      >
+                                        View case study →
+                                      </a>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </>
+                    )}
+                  </>
                 )
-              })
+              })()
             )}
           </div>
         )}
