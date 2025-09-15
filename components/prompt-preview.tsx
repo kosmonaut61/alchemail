@@ -158,61 +158,61 @@ Please generate an email sequence following all the rules and guidelines provide
       if (section.includes("## RELEVANT CONTEXT FOR THIS EMAIL:")) {
         return (
           <div key={index} className="mb-6">
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-              <h3 className="font-semibold text-blue-900 mb-2">🎯 RELEVANT CONTEXT FOR THIS EMAIL</h3>
-              <div className="text-sm text-blue-800 whitespace-pre-wrap">{section.replace("## RELEVANT CONTEXT FOR THIS EMAIL:", "").trim()}</div>
+            <div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded-r-lg">
+              <h3 className="font-semibold text-blue-400 mb-2">🎯 RELEVANT CONTEXT FOR THIS EMAIL</h3>
+              <div className="text-sm text-blue-300 whitespace-pre-wrap">{section.replace("## RELEVANT CONTEXT FOR THIS EMAIL:", "").trim()}</div>
             </div>
           </div>
         )
       } else if (section.includes("## Goals")) {
         return (
           <div key={index} className="mb-6">
-            <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
-              <h3 className="font-semibold text-green-900 mb-2">🎯 Goals</h3>
-              <div className="text-sm text-green-800 whitespace-pre-wrap">{section.replace("## Goals", "").trim()}</div>
+            <div className="bg-green-500/10 border-l-4 border-green-500 p-4 rounded-r-lg">
+              <h3 className="font-semibold text-green-400 mb-2">🎯 Goals</h3>
+              <div className="text-sm text-green-300 whitespace-pre-wrap">{section.replace("## Goals", "").trim()}</div>
             </div>
           </div>
         )
       } else if (section.includes("## Return Format")) {
         return (
           <div key={index} className="mb-6">
-            <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg">
-              <h3 className="font-semibold text-purple-900 mb-2">📝 Return Format</h3>
-              <div className="text-sm text-purple-800 whitespace-pre-wrap">{section.replace("## Return Format", "").trim()}</div>
+            <div className="bg-purple-500/10 border-l-4 border-purple-500 p-4 rounded-r-lg">
+              <h3 className="font-semibold text-purple-400 mb-2">📝 Return Format</h3>
+              <div className="text-sm text-purple-300 whitespace-pre-wrap">{section.replace("## Return Format", "").trim()}</div>
             </div>
           </div>
         )
       } else if (section.includes("## Warnings")) {
         return (
           <div key={index} className="mb-6">
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-              <h3 className="font-semibold text-yellow-900 mb-2">⚠️ Warnings</h3>
-              <div className="text-sm text-yellow-800 whitespace-pre-wrap">{section.replace("## Warnings", "").trim()}</div>
+            <div className="bg-yellow-500/10 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+              <h3 className="font-semibold text-yellow-400 mb-2">⚠️ Warnings</h3>
+              <div className="text-sm text-yellow-300 whitespace-pre-wrap">{section.replace("## Warnings", "").trim()}</div>
             </div>
           </div>
         )
       } else if (section.includes("## Context Dump")) {
         return (
           <div key={index} className="mb-6">
-            <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg">
-              <h3 className="font-semibold text-orange-900 mb-2">📚 Context Dump</h3>
-              <div className="text-sm text-orange-800 whitespace-pre-wrap">{section.replace("## Context Dump", "").trim()}</div>
+            <div className="bg-orange-500/10 border-l-4 border-orange-500 p-4 rounded-r-lg">
+              <h3 className="font-semibold text-orange-400 mb-2">📚 Context Dump</h3>
+              <div className="text-sm text-orange-300 whitespace-pre-wrap">{section.replace("## Context Dump", "").trim()}</div>
             </div>
           </div>
         )
       } else if (section.includes("GENERATION REQUEST:")) {
         return (
           <div key={index} className="mb-6">
-            <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
-              <h3 className="font-semibold text-red-900 mb-2">🚀 GENERATION REQUEST</h3>
-              <div className="text-sm text-red-800 whitespace-pre-wrap">{section}</div>
+            <div className="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-r-lg">
+              <h3 className="font-semibold text-red-400 mb-2">🚀 GENERATION REQUEST</h3>
+              <div className="text-sm text-red-300 whitespace-pre-wrap">{section}</div>
             </div>
           </div>
         )
       } else {
         return (
           <div key={index} className="mb-4">
-            <div className="text-sm text-gray-700 whitespace-pre-wrap">{section}</div>
+            <div className="text-sm text-muted-foreground whitespace-pre-wrap">{section}</div>
           </div>
         )
       }
@@ -220,15 +220,17 @@ Please generate an email sequence following all the rules and guidelines provide
   }
 
   return (
-    <Card className="shadow-lg max-w-6xl mx-auto">
-      <CardHeader>
+    <Card className="border-border/50 bg-card/50 backdrop-blur-sm max-w-6xl mx-auto">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center gap-2">
-              <Eye className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-3 text-lg">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Eye className="h-5 w-5 text-primary" />
+              </div>
               ChatGPT Prompt Preview
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-muted-foreground">
               This is exactly what will be sent to ChatGPT to generate your email
             </CardDescription>
           </div>
@@ -237,11 +239,12 @@ Please generate an email sequence following all the rules and guidelines provide
               variant="outline"
               size="sm"
               onClick={() => setShowRaw(!showRaw)}
+              className="border-border/50"
             >
               {showRaw ? <Eye className="h-4 w-4 mr-2" /> : <EyeOff className="h-4 w-4 mr-2" />}
               {showRaw ? "Formatted" : "Raw"}
             </Button>
-            <Button variant="outline" size="sm" onClick={handleCopy}>
+            <Button variant="outline" size="sm" onClick={handleCopy} className="border-border/50">
               <Copy className="h-4 w-4 mr-2" />
               Copy
             </Button>
@@ -253,16 +256,16 @@ Please generate an email sequence following all the rules and guidelines provide
       </CardHeader>
       <CardContent>
         {/* Context Summary */}
-        <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-          <div className="flex items-center gap-4 text-sm">
-            <span><strong>Context Items:</strong> {selectedContextItems.length}</span>
-            <span><strong>Persona:</strong> {persona}</span>
-            <span><strong>Pain Points:</strong> {painPoints.join(", ") || "None"}</span>
+        <div className="mb-4 p-4 bg-muted/30 rounded-lg border border-border/50">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <span><strong className="text-foreground">Context Items:</strong> {selectedContextItems.length}</span>
+            <span><strong className="text-foreground">Persona:</strong> {persona}</span>
+            <span><strong className="text-foreground">Pain Points:</strong> {painPoints.join(", ") || "None"}</span>
           </div>
           {selectedContextItems.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1">
+            <div className="mt-3 flex flex-wrap gap-2">
               {selectedContextItems.map(item => (
-                <Badge key={item.id} variant="secondary" className="text-xs">
+                <Badge key={item.id} variant="secondary" className="text-xs bg-primary/10 text-primary border-primary/20">
                   {item.title}
                 </Badge>
               ))}
@@ -275,14 +278,14 @@ Please generate an email sequence following all the rules and guidelines provide
           {isLoading ? (
             <div className="flex items-center justify-center py-8">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-                <p className="text-sm text-gray-600">Generating prompt preview...</p>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
+                <p className="text-sm text-muted-foreground">Generating prompt preview...</p>
               </div>
             </div>
           ) : (
             <div className="space-y-4">
               {showRaw ? (
-                <pre className="text-xs font-mono whitespace-pre-wrap bg-gray-50 p-4 rounded-lg">
+                <pre className="text-xs font-mono whitespace-pre-wrap bg-muted/30 p-4 rounded-lg border border-border/50 text-foreground">
                   {fullPrompt}
                 </pre>
               ) : (
@@ -293,7 +296,7 @@ Please generate an email sequence following all the rules and guidelines provide
         </ScrollArea>
 
         {/* Stats */}
-        <div className="mt-4 pt-4 border-t text-xs text-gray-500">
+        <div className="mt-4 pt-4 border-t border-border/50 text-xs text-muted-foreground">
           <div className="flex justify-between">
             <span>Characters: {fullPrompt.length.toLocaleString()}</span>
             <span>Words: {fullPrompt.split(/\s+/).length.toLocaleString()}</span>
