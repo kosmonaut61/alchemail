@@ -16,6 +16,7 @@ import { ContextSelector } from "@/components/context-selector"
 import { PromptPreview } from "@/components/prompt-preview"
 import { EmailOutput } from "@/components/email-output"
 import { ContextItem } from "@/lib/context-repository"
+import { PERSONA_DEFINITIONS } from "@/lib/personas"
 
 export default function EmailGenerator() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -302,8 +303,16 @@ export default function EmailGenerator() {
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Enterprise">Enterprise</SelectItem>
-                      <SelectItem value="SMB">SMB</SelectItem>
+                      <SelectItem value="operations_c_suite">C-Suite - Operations</SelectItem>
+                      <SelectItem value="operations_upper_management">Upper Management - Operations</SelectItem>
+                      <SelectItem value="operations_middle_management">Middle Management - Operations</SelectItem>
+                      <SelectItem value="operations_entry_level">Entry Level - Operations</SelectItem>
+                      <SelectItem value="operations_intern">Intern - Operations</SelectItem>
+                      <SelectItem value="finance_c_suite">C-Suite - Finance</SelectItem>
+                      <SelectItem value="finance_upper_management">Upper Management - Finance</SelectItem>
+                      <SelectItem value="finance_middle_management">Middle Management - Finance</SelectItem>
+                      <SelectItem value="finance_entry_level">Entry Level - Finance</SelectItem>
+                      <SelectItem value="finance_intern">Intern - Finance</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

@@ -3,6 +3,7 @@ import { openai } from "@ai-sdk/openai"
 import { type NextRequest, NextResponse } from "next/server"
 import { getPreamble } from "@/lib/preamble"
 import { ContextItem } from "@/lib/context-repository"
+import { getPersonaById } from "@/lib/personas"
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,9 +26,22 @@ export async function POST(request: NextRequest) {
     console.log("Dynamic context generated:", dynamicContext)
     console.log("==================")
 
+    // Get detailed persona information
+    const selectedPersona = getPersonaById(persona)
+    const personaContext = selectedPersona ? `
+## PERSONA-SPECIFIC CONTEXT:
+- Role: ${selectedPersona.label}
+- Department: ${selectedPersona.department}
+- Seniority: ${selectedPersona.seniority}
+- Key Pain Points: ${selectedPersona.painPoints.slice(0, 5).join(', ')}
+- Tone Profile: ${selectedPersona.toneProfile}
+` : ''
+
     const prompt = `${preamble}
 
 ${dynamicContext}
+
+${personaContext}
 
 GENERATION REQUEST:
 - Persona/Role: ${persona}
