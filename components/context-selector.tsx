@@ -16,11 +16,12 @@ interface ContextSelectorProps {
   persona: string
   painPoints: string[]
   selectedContextItems: ContextItem[]
+  allContextItems: ContextItem[]
   onContextChange: (selectedItems: ContextItem[]) => void
   onClose: () => void
 }
 
-export function ContextSelector({ signal, persona, painPoints, selectedContextItems, onContextChange, onClose }: ContextSelectorProps) {
+export function ContextSelector({ signal, persona, painPoints, selectedContextItems, allContextItems, onContextChange, onClose }: ContextSelectorProps) {
   const [allItems, setAllItems] = useState<ContextItem[]>([])
   const [suggestedItems, setSuggestedItems] = useState<ContextItem[]>([])
   const [selectedItems, setSelectedItems] = useState<ContextItem[]>(selectedContextItems)
@@ -44,37 +45,12 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
     setSelectedItems(selectedContextItems)
   }, [selectedContextItems])
 
-  // Load all items when component mounts
+  // Initialize all items and suggested items from props
   useEffect(() => {
-    loadAllItems()
-  }, [])
-
-  const loadAllItems = async () => {
-    setIsLoading(true)
-    try {
-      const response = await fetch("/api/analyze-context", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          signal,
-          persona,
-          painPoints,
-        }),
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        setAllItems(data.allItems)
-        setSuggestedItems(data.suggestedItems)
-      }
-    } catch (error) {
-      console.error("Error loading context items:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+    setAllItems(allContextItems)
+    // Extract suggested items from selectedContextItems (these are the AI-suggested ones)
+    setSuggestedItems(selectedContextItems)
+  }, [allContextItems, selectedContextItems])
 
 
   const handleItemToggle = (item: ContextItem, checked: boolean) => {
