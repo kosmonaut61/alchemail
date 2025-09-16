@@ -38,7 +38,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: pressure on leadership to attract talent capable of modernizing freight procurement',
       'Talent & Organizational Pressures: need to foster cross-functional collaboration between finance, procurement, and operations'
     ],
-    toneProfile: 'Strategic, executive-level language focusing on ROI, scalability, and enterprise-wide impact. Use terms like "strategic initiatives," "enterprise-wide," "C-level visibility," and "board-level metrics." Emphasize high-level business outcomes and competitive advantage.',
+    toneProfile: 'Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.',
     keywords: ['strategic', 'enterprise', 'roi', 'scalability', 'executive', 'board', 'competitive advantage', 'enterprise-wide']
   },
   {
@@ -83,7 +83,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'External Pressures: coping with economic volatility, inflation, and fluctuating demand cycles',
       'External Pressures: maintaining competitive advantage in industries under rapid disruption'
     ],
-    toneProfile: 'Operational, execution-focused language emphasizing efficiency, standardization, and operational excellence. Use terms like "operational efficiency," "process standardization," "service reliability," and "operational metrics." Focus on execution and operational outcomes.',
+    toneProfile: 'Be pragmatic and operational – focus on execution, efficiency, and scalability. Emphasize processes and performance metrics – KPIs, throughput, productivity. Balance detail with clarity – enough to explain how the system runs without bogging down. Results-oriented tone – show how initiatives translate into smoother operations.',
     keywords: ['operational', 'efficiency', 'standardization', 'execution', 'service', 'reliability', 'process', 'operations']
   },
   {
@@ -116,7 +116,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'External Pressures: handling economic pressures such as inflation, interest rate changes, and currency fluctuations',
       'External Pressures: competing with industry peers in financial efficiency and reporting transparency'
     ],
-    toneProfile: 'Financial, analytical language emphasizing cost control, risk management, and financial performance. Use terms like "cost optimization," "financial performance," "risk mitigation," and "ROI validation." Focus on financial outcomes and stakeholder value.',
+    toneProfile: 'Be precise and evidence-based – numbers, trends, and cost-benefit clarity. Highlight financial impact – ROI, margins, savings, and risk exposure should lead. Be structured – organized, logical delivery with supporting metrics. Eliminate fluff – concise, data-heavy, and straight to financial implications.',
     keywords: ['financial', 'cost', 'optimization', 'performance', 'risk', 'roi', 'analytics', 'stakeholder']
   },
   {
@@ -145,7 +145,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: pressure to deliver measurable savings and efficiency gains quickly',
       'Talent & Organizational Pressures: high turnover in procurement roles due to competitive market'
     ],
-    toneProfile: 'Procurement-focused language emphasizing supplier relationships, cost optimization, and strategic sourcing. Use terms like "strategic sourcing," "supplier partnerships," "cost optimization," and "procurement excellence." Focus on procurement strategy and supplier management.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
     keywords: ['procurement', 'sourcing', 'supplier', 'partnerships', 'cost', 'optimization', 'strategic', 'excellence']
   },
   {
@@ -175,7 +175,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: executive pressure to deliver resilient, cost-efficient supply chains',
       'Talent & Organizational Pressures: retention challenges due to high competition for top talent'
     ],
-    toneProfile: 'Supply chain-focused language emphasizing resilience, customer service, and end-to-end optimization. Use terms like "supply chain resilience," "customer service," "end-to-end visibility," and "sustainability." Focus on supply chain strategy and customer impact.',
+    toneProfile: 'Be comprehensive but focused – cover risks, dependencies, and performance drivers. Prioritize resilience and optimization – emphasize cost efficiency, reliability, and adaptability. Speak risk-aware – highlight disruptions, mitigations, and continuity planning. Analytical and structured – rely on data, forecasts, and supply chain models.',
     keywords: ['supply chain', 'resilience', 'customer', 'service', 'visibility', 'sustainability', 'optimization', 'strategy']
   },
   {
@@ -210,7 +210,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Reputation & Legacy Concerns: ensuring long-term impact beyond short-term wins',
       'Reputation & Legacy Concerns: concerns about succession planning and company legacy'
     ],
-    toneProfile: 'Visionary, personal language emphasizing growth, innovation, and leadership. Use terms like "vision," "growth," "innovation," "leadership," and "impact." Focus on personal leadership and company vision.',
+    toneProfile: 'Be visionary and inspiring – tie messages to purpose, mission, and the "why" behind the business. Personal and passionate – show genuine belief in the product, service, or company\'s journey. Focus on long-term value – sustainability, legacy, and reputation matter alongside financials. Balance detail with narrative – data is useful, but storytelling and conviction often resonate more. Relational tone – emphasize loyalty, culture, and alignment with the founder\'s values.',
     keywords: ['vision', 'growth', 'innovation', 'leadership', 'impact', 'founder', 'entrepreneur', 'strategy']
   },
   {
@@ -245,7 +245,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: high expectations from executive leadership to deliver cost savings and efficiency improvements quickly',
       'Talent & Organizational Pressures: challenges in retaining top talent in a competitive supply chain labor market'
     ],
-    toneProfile: 'Management-focused language emphasizing operational efficiency, team leadership, and departmental impact. Use terms like "operational excellence," "team productivity," "process optimization," and "departmental metrics." Focus on practical solutions and team management challenges.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
     keywords: ['operational', 'management', 'efficiency', 'team', 'process', 'departmental', 'leadership', 'productivity']
   },
   {
@@ -292,7 +292,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Compliance & Risk: managing the risk of penalties from late deliveries or missed SLAs',
       'Compliance & Risk: difficulty aligning sourcing practices with corporate sustainability initiatives'
     ],
-    toneProfile: 'Practical, hands-on language focusing on execution, team management, and daily operations. Use terms like "day-to-day," "hands-on," "practical solutions," "team coordination," and "operational execution." Emphasize practical implementation and team management.',
+    toneProfile: 'Be actionable and tactical – focus on "what needs to happen next." Provide clarity and guidance – simplify priorities for their teams. Problem-solving tone – address bottlenecks, performance issues, and team management. Collaborative but firm – engage them in decisions while setting clear expectations.',
     keywords: ['practical', 'hands-on', 'execution', 'team', 'daily', 'coordination', 'implementation', 'management']
   },
   {
@@ -335,7 +335,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Career & Role-Specific Pain Points: lack of clear career progression paths in freight procurement',
       'Career & Role-Specific Pain Points: high stress due to constant firefighting (spot buys, urgent shipments, last-minute changes)'
     ],
-    toneProfile: 'Supportive, educational language focusing on learning, growth, and skill development. Use terms like "learning opportunity," "skill development," "career growth," "mentorship," and "professional development." Emphasize support and learning.',
+    toneProfile: 'Be instructional and clear – explain expectations and next steps in detail. Encourage learning – break down processes and why they matter. Supportive tone – constructive feedback with focus on skill development. Detail-oriented – emphasize accuracy, process adherence, and reporting quality.',
     keywords: ['learning', 'development', 'growth', 'support', 'education', 'mentorship', 'career', 'skills']
   },
   {
@@ -365,43 +365,10 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Understanding the importance of accuracy and attention to detail',
       'Learning to adapt to changing priorities and requirements'
     ],
-    toneProfile: 'Encouraging, educational language focusing on learning, exploration, and professional development. Use terms like "learning experience," "exploration," "discovery," "mentorship," and "professional growth." Emphasize learning and development opportunities.',
+    toneProfile: 'Be patient and explanatory – over-communicate to ensure understanding. Keep it simple and structured – clear tasks, step-by-step guidance. Encouraging and mentoring – foster curiosity and confidence. Positive and approachable – tone should reduce intimidation and promote engagement.',
     keywords: ['learning', 'exploration', 'discovery', 'mentorship', 'growth', 'experience', 'development', 'opportunity']
   },
   // Finance Department
-  {
-    id: 'finance_c_suite',
-    label: 'C-Suite - Finance',
-    department: 'Finance',
-    seniority: 'C-Suite',
-    painPoints: [
-      'Strategic financial planning and budgeting challenges',
-      'Limited visibility into transportation cost drivers',
-      'Difficulty forecasting freight costs accurately',
-      'Managing financial risk in volatile freight markets',
-      'Ensuring compliance with financial regulations',
-      'Optimizing working capital tied up in transportation',
-      'Managing currency fluctuations in global operations',
-      'Ensuring accurate financial reporting and controls',
-      'Managing relationships with financial stakeholders',
-      'Balancing cost control with operational requirements',
-      'Ensuring proper financial controls and audits',
-      'Managing financial performance metrics and KPIs',
-      'Ensuring compliance with accounting standards',
-      'Managing financial risk and exposure',
-      'Ensuring proper financial planning and forecasting',
-      'Managing financial relationships with carriers',
-      'Ensuring proper financial controls and processes',
-      'Managing financial performance and reporting',
-      'Ensuring compliance with financial regulations',
-      'Managing financial risk and exposure',
-      'Ensuring proper financial planning and forecasting',
-      'Managing financial relationships with stakeholders',
-      'Ensuring proper financial controls and audits'
-    ],
-    toneProfile: 'Executive financial language emphasizing ROI, financial performance, and strategic financial planning. Use terms like "financial performance," "ROI," "strategic planning," "financial controls," and "stakeholder value." Focus on high-level financial outcomes.',
-    keywords: ['financial', 'roi', 'performance', 'strategic', 'planning', 'controls', 'stakeholder', 'value']
-  },
   {
     id: 'finance_upper_management',
     label: 'Upper Management - Finance',
@@ -426,7 +393,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Issues: gaps in advanced analytics, automation, and digital finance capabilities among staff',
       'Talent & Organizational Issues: misalignment between finance priorities and operational/business unit leaders'
     ],
-    toneProfile: 'Management financial language emphasizing departmental financial performance, team management, and financial controls. Use terms like "financial management," "departmental performance," "financial controls," and "team leadership." Focus on financial management and team leadership.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
     keywords: ['financial', 'management', 'departmental', 'controls', 'team', 'leadership', 'performance', 'planning']
   },
   {
@@ -464,7 +431,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Strategic Pressures: pressure to identify cost-saving opportunities in freight without undermining service quality',
       'Strategic Pressures: challenges in quantifying the financial impact of disruptions (e.g., port congestion, strikes)'
     ],
-    toneProfile: 'Practical financial language emphasizing execution, financial analysis, and team coordination. Use terms like "financial analysis," "practical solutions," "team coordination," and "financial execution." Focus on practical financial management.',
+    toneProfile: 'Be actionable and tactical – focus on "what needs to happen next." Provide clarity and guidance – simplify priorities for their teams. Problem-solving tone – address bottlenecks, performance issues, and team management. Collaborative but firm – engage them in decisions while setting clear expectations.',
     keywords: ['financial', 'analysis', 'practical', 'execution', 'team', 'coordination', 'management', 'solutions']
   },
   {
@@ -504,7 +471,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Career & Role-Specific Pain Points: feeling like "gatekeepers" rather than strategic partners, reducing job satisfaction',
       'Career & Role-Specific Pain Points: stress from constant deadlines and last-minute requests for data from leadership'
     ],
-    toneProfile: 'Supportive financial language emphasizing learning, skill development, and professional growth. Use terms like "financial learning," "skill development," "professional growth," and "financial education." Focus on learning and development.',
+    toneProfile: 'Be instructional and clear – explain expectations and next steps in detail. Encourage learning – break down processes and why they matter. Supportive tone – constructive feedback with focus on skill development. Detail-oriented – emphasize accuracy, process adherence, and reporting quality.',
     keywords: ['financial', 'learning', 'development', 'growth', 'education', 'skills', 'professional', 'support']
   },
   {
@@ -534,7 +501,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Understanding financial compliance requirements',
       'Learning to adapt to changing financial requirements'
     ],
-    toneProfile: 'Encouraging financial language emphasizing learning, exploration, and professional development. Use terms like "financial learning," "exploration," "discovery," and "professional development." Focus on learning and exploration.',
+    toneProfile: 'Be patient and explanatory – over-communicate to ensure understanding. Keep it simple and structured – clear tasks, step-by-step guidance. Encouraging and mentoring – foster curiosity and confidence. Positive and approachable – tone should reduce intimidation and promote engagement.',
     keywords: ['financial', 'learning', 'exploration', 'discovery', 'development', 'professional', 'growth', 'opportunity']
   }
 ]
