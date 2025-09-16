@@ -23,12 +23,14 @@ export default function EmailGenerator() {
   const [persona, setPersona] = useState<string>("")
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
+  const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
   const [isAnalyzingContext, setIsAnalyzingContext] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedEmail, setGeneratedEmail] = useState("")
   const [isEditing, setIsEditing] = useState(false)
   const [editFeedback, setEditFeedback] = useState("")
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
+  const [hasAnalyzedContext, setHasAnalyzedContext] = useState(false)
   const { toast } = useToast()
 
   const steps = [
@@ -40,10 +42,10 @@ export default function EmailGenerator() {
 
   // Auto-analyze context when signal and persona are filled
   useEffect(() => {
-    if (signal && persona && currentStep >= 2) {
+    if (signal && persona && currentStep >= 2 && !hasAnalyzedContext && !isAnalyzingContext) {
       analyzeContext()
     }
-  }, [signal, persona, currentStep])
+  }, [signal, persona, painPoints, currentStep, hasAnalyzedContext, isAnalyzingContext])
 
   const analyzeContext = async () => {
     if (!signal || !persona) return
@@ -65,6 +67,8 @@ export default function EmailGenerator() {
       if (response.ok) {
         const data = await response.json()
         setSelectedContextItems(data.suggestedItems)
+        setAllContextItems(data.allItems)
+        setHasAnalyzedContext(true)
       }
     } catch (error) {
       console.error("Error analyzing context:", error)
@@ -84,6 +88,20 @@ export default function EmailGenerator() {
     } else {
       setPainPoints(painPoints.filter((p) => p !== painPoint))
     }
+    // Reset analysis flag when pain points change
+    setHasAnalyzedContext(false)
+  }
+
+  const handleSignalChange = (newSignal: string) => {
+    setSignal(newSignal)
+    // Reset analysis flag when signal changes
+    setHasAnalyzedContext(false)
+  }
+
+  const handlePersonaChange = (newPersona: string) => {
+    setPersona(newPersona)
+    // Reset analysis flag when persona changes
+    setHasAnalyzedContext(false)
   }
 
   const handleNext = () => {
@@ -271,7 +289,7 @@ export default function EmailGenerator() {
                     id="signal"
                     placeholder="Describe what the email should be about... (e.g., 'Create a personalized marketing campaign for a ENT organization. The target audience is: Food & Beverages industry Enterprise...')"
                     value={signal}
-                    onChange={(e) => setSignal(e.target.value)}
+                    onChange={(e) => handleSignalChange(e.target.value)}
                     rows={6}
                     className="resize-none"
                   />
@@ -279,7 +297,7 @@ export default function EmailGenerator() {
 
                 <div className="space-y-2">
                   <Label htmlFor="persona">Target Persona *</Label>
-                  <Select value={persona} onValueChange={setPersona}>
+                  <Select value={persona} onValueChange={handlePersonaChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
@@ -349,6 +367,7 @@ export default function EmailGenerator() {
                   persona={persona}
                   painPoints={painPoints}
                   selectedContextItems={selectedContextItems}
+                  allContextItems={allContextItems}
                   onContextChange={setSelectedContextItems}
                   onClose={() => {}} // No close button in inline flow
                 />

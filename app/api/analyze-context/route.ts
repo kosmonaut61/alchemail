@@ -40,7 +40,15 @@ Based on the signal, persona, and pain points, suggest 8-12 relevant context ite
 6. ALWAYS include at least 1-2 case studies when available, especially if the signal mentions specific companies or industries
 7. Include relevant customer quotes and statistics for social proof
 
+KEYWORD MATCHING PRIORITIES:
+- Industry keywords: retail, food, beverage, automotive, auto, car, tire, vehicle, logistics, shipping, transport, warehouse, manufacturing, production, factory, plant
+- Pain point keywords: cost, savings, spend, budget, money, price, efficiency, time, automation, streamline, faster, effort, coverage, carriers, network, lanes, capacity
+- Process keywords: rfp, tender, bid, booking, confirmation, pricing
+- Company-specific keywords: dollar tree, golden state foods, ezrack, pepsi
+
 IMPORTANT: Look for company names in the signal (like "Dollar Tree", "Golden State Foods", "EZRack", "Pepsi") and include their corresponding case studies.
+
+ALSO IMPORTANT: Look for industry keywords in the signal (like "automotive", "auto", "car", "tire", "vehicle", "retail", "food", "logistics", "manufacturing") and include relevant customer examples and case studies for those industries.
 
 Return your response as a JSON array of context item IDs that should be included, like this:
 ["item_id_1", "item_id_2", "item_id_3", ...]`
@@ -114,18 +122,82 @@ function getFallbackContextItems(signal: string, persona: string, painPoints: st
     }
   }
   
-  // Add industry-specific items based on signal keywords
-  if (signalLower.includes("retail") || signalLower.includes("grocery") || signalLower.includes("store")) {
-    suggestedIds.push("retail_customers", "dollar_tree_case_study")
+  // Comprehensive industry keyword matching
+  // Retail keywords
+  if (signalLower.includes("retail") || signalLower.includes("grocery") || signalLower.includes("store") || 
+      signalLower.includes("chain") || signalLower.includes("shopping")) {
+    suggestedIds.push("retail_customers")
+    if (!suggestedIds.includes("dollar_tree_case_study")) {
+      suggestedIds.push("dollar_tree_case_study")
+    }
   }
-  if (signalLower.includes("food") || signalLower.includes("beverage") || signalLower.includes("snack")) {
-    suggestedIds.push("food_beverage_customers", "golden_state_foods_case_study", "pepsi_case_study")
+  
+  // Food & Beverage keywords
+  if (signalLower.includes("food") || signalLower.includes("beverage") || signalLower.includes("snack") || 
+      signalLower.includes("drink") || signalLower.includes("production") || signalLower.includes("manufacturing")) {
+    suggestedIds.push("food_beverage_customers")
+    if (!suggestedIds.includes("golden_state_foods_case_study")) {
+      suggestedIds.push("golden_state_foods_case_study")
+    }
+    if (!suggestedIds.includes("pepsi_case_study")) {
+      suggestedIds.push("pepsi_case_study")
+    }
   }
-  if (signalLower.includes("logistics") || signalLower.includes("warehouse") || signalLower.includes("shipping")) {
-    suggestedIds.push("logistics_customers", "ezrack_case_study")
+  
+  // Automotive keywords
+  if (signalLower.includes("automotive") || signalLower.includes("auto") || signalLower.includes("car") || 
+      signalLower.includes("tire") || signalLower.includes("vehicle")) {
+    suggestedIds.push("automotive_customers")
   }
-  if (signalLower.includes("manufacturing") || signalLower.includes("production")) {
+  
+  // Logistics keywords
+  if (signalLower.includes("logistics") || signalLower.includes("shipping") || signalLower.includes("transport") || 
+      signalLower.includes("warehouse") || signalLower.includes("distribution")) {
+    suggestedIds.push("logistics_customers")
+    if (!suggestedIds.includes("ezrack_case_study")) {
+      suggestedIds.push("ezrack_case_study")
+    }
+  }
+  
+  // Manufacturing keywords
+  if (signalLower.includes("manufacturing") || signalLower.includes("production") || signalLower.includes("factory") || 
+      signalLower.includes("plant") || signalLower.includes("industrial")) {
     suggestedIds.push("manufacturing_customers")
+  }
+  
+  // Cost-related keywords
+  if (signalLower.includes("cost") || signalLower.includes("savings") || signalLower.includes("spend") || 
+      signalLower.includes("budget") || signalLower.includes("money") || signalLower.includes("price")) {
+    if (!suggestedIds.includes("cost_savings_value_prop")) {
+      suggestedIds.push("cost_savings_value_prop")
+    }
+    if (!suggestedIds.includes("cost_focused_language")) {
+      suggestedIds.push("cost_focused_language")
+    }
+  }
+  
+  // Efficiency-related keywords
+  if (signalLower.includes("efficiency") || signalLower.includes("time") || signalLower.includes("automation") || 
+      signalLower.includes("streamline") || signalLower.includes("faster") || signalLower.includes("effort")) {
+    if (!suggestedIds.includes("efficiency_value_prop")) {
+      suggestedIds.push("efficiency_value_prop")
+    }
+    if (!suggestedIds.includes("efficiency_focused_language")) {
+      suggestedIds.push("efficiency_focused_language")
+    }
+  }
+  
+  // Coverage/Capacity keywords
+  if (signalLower.includes("coverage") || signalLower.includes("carriers") || signalLower.includes("network") || 
+      signalLower.includes("lanes") || signalLower.includes("capacity")) {
+    suggestedIds.push("coverage_value_prop")
+  }
+  
+  // RFP-related keywords
+  if (signalLower.includes("rfp") || signalLower.includes("tender") || signalLower.includes("bid")) {
+    if (!suggestedIds.includes("golden_state_foods_case_study")) {
+      suggestedIds.push("golden_state_foods_case_study")
+    }
   }
   
   // Add some general items if we don't have enough
