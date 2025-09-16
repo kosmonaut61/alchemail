@@ -303,12 +303,16 @@ export default function EmailGenerator() {
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="operations_c_suite">C-Suite - Operations</SelectItem>
+                      <SelectItem value="ceo">CEO</SelectItem>
+                      <SelectItem value="coo">COO</SelectItem>
+                      <SelectItem value="cfo">CFO</SelectItem>
+                      <SelectItem value="cpo">CPO (Chief Procurement Officer)</SelectItem>
+                      <SelectItem value="csco">CSCO (Chief Supply Chain Officer)</SelectItem>
+                      <SelectItem value="owner_founder">Owner / Founder</SelectItem>
                       <SelectItem value="operations_upper_management">Upper Management - Operations</SelectItem>
                       <SelectItem value="operations_middle_management">Middle Management - Operations</SelectItem>
                       <SelectItem value="operations_entry_level">Entry Level - Operations</SelectItem>
                       <SelectItem value="operations_intern">Intern - Operations</SelectItem>
-                      <SelectItem value="finance_c_suite">C-Suite - Finance</SelectItem>
                       <SelectItem value="finance_upper_management">Upper Management - Finance</SelectItem>
                       <SelectItem value="finance_middle_management">Middle Management - Finance</SelectItem>
                       <SelectItem value="finance_entry_level">Entry Level - Finance</SelectItem>
@@ -317,26 +321,34 @@ export default function EmailGenerator() {
                   </Select>
                 </div>
 
-                <div className="space-y-3">
-                  <Label>Pain Points (Optional)</Label>
+                {persona && (
                   <div className="space-y-3">
-                    {["Cost", "Effort", "Efficiency"].map((painPoint) => (
-                      <div key={painPoint} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={painPoint.toLowerCase()}
-                          checked={painPoints.includes(painPoint)}
-                          onCheckedChange={(checked) => handlePainPointChange(painPoint, checked as boolean)}
-                        />
-                        <Label
-                          htmlFor={painPoint.toLowerCase()}
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          {painPoint}
-                        </Label>
-                      </div>
-                    ))}
+                    <Label>Pain Points (Optional)</Label>
+                    <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
+                      {(() => {
+                        const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
+                        if (!selectedPersona) return null
+                        
+                        return selectedPersona.painPoints.map((painPoint, index) => (
+                          <div key={index} className="flex items-start space-x-2">
+                            <Checkbox
+                              id={`pain-point-${index}`}
+                              checked={painPoints.includes(painPoint)}
+                              onCheckedChange={(checked) => handlePainPointChange(painPoint, checked as boolean)}
+                              className="mt-1"
+                            />
+                            <Label
+                              htmlFor={`pain-point-${index}`}
+                              className="text-sm font-medium leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              {painPoint}
+                            </Label>
+                          </div>
+                        ))
+                      })()}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {currentStep === 1 && (
