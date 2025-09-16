@@ -241,13 +241,12 @@ export function parsePreambleToSections(preamble: string): typeof PREAMBLE_SECTI
 }
 
 export async function getPreamble(): Promise<string> {
-  // In a real app, you might want to store this in a database
-  // For now, we'll use localStorage for persistence
+  // Always use the current DEFAULT_PREAMBLE to ensure we get the latest version
+  // Clear any old cached version from localStorage
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('email-preamble')
-    return saved || DEFAULT_PREAMBLE
+    localStorage.removeItem('email-preamble')
   }
-  return storedPreamble
+  return DEFAULT_PREAMBLE
 }
 
 export async function updatePreamble(newPreamble: string): Promise<void> {
