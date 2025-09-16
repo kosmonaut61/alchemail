@@ -124,34 +124,6 @@ Output the final output in text, not a JSON object.`
     ### General Rules
     - Never use the word Free in the emails
     - Do deep research on the person + company.
-    
-    ### Opening Lines
-    - NEVER start with "Saw you..." or "Smart move/research" patterns
-    - Use varied, natural openings
-    - Make the first sentence feel conversational and personal
-    - No two openers in a sequence should be the same
-
-    ### Language Style
-    - Use "I know how..." instead of "We understand..." or "We get it"
-    - Replace "Small businesses need..." with "I know every dollar counts when you're growing..."
-    - Use "I'd love to..." instead of "Want to..." or "Ready to..."
-    - Include empathetic phrases like "I know how tough/frustrating/overwhelming..."
-
-    ### Conversational Flow
-    - Write as if speaking to a colleague, not a prospect
-    - Use contractions naturally (I'd, you're, we've, etc.)
-    - Include transitional phrases
-    - Acknowledge their challenges with understanding before offering solutions
-
-    ### Personal Connection
-    - Use "I think you'd be interested in..." instead of "You should..."
-    - Use "I'd be happy to..." instead of "We can provide..."
-
-    ### Avoid These Patterns
-    ❌ "Saw you checked our pricing. Smart move."
-    ❌ "Small businesses need cost control. We get it."
-    ❌ "Want to see your numbers? Book a call."
-    ❌ "Ready to cut your costs? Book a call."
 
     `
   },
@@ -160,48 +132,6 @@ Output the final output in text, not a JSON object.`
     title: "Context Dump",
     content: `### General Rules
 - Never use the word Free in the emails
-
-### Opening Lines
-- NEVER start with "Saw you..." or "Smart move/research" patterns
-- Use varied, natural openings like "I noticed...", "I wanted to share...", "I hope this email finds you well"
-- Make the first sentence feel conversational and personal
-- No two openers in a sequence should be the same
-
-### Language Style
-- Use "I know how..." instead of "We understand..." or "We get it"
-- Replace "Small businesses need..." with "I know every dollar counts when you're growing..."
-- Use "I'd love to..." instead of "Want to..." or "Ready to..."
-- Include empathetic phrases like "I know how tough/frustrating/overwhelming..."
-
-### Conversational Flow
-- Write as if speaking to a colleague, not a prospect
-- Use contractions naturally (I'd, you're, we've, etc.)
-- Include transitional phrases like "That's exactly why...", "The good news is...", "What I love about..."
-- Acknowledge their challenges with understanding before offering solutions
-
-### Personal Connection
-- Use "I think you'd be interested in..." instead of "You should..."
-- Replace "Your enterprise needs..." with "I know enterprise pricing isn't one-size-fits-all..."
-- Use "I'd be happy to..." instead of "We can provide..."
-
-### Avoid These Patterns
-❌ "Saw you checked our pricing. Smart move."
-❌ "Small businesses need cost control. We get it."
-❌ "Want to see your numbers? Book a call."
-❌ "Ready to cut your costs? Book a call."
-
-### Use These Instead
-✅ "I noticed you were looking at our pricing page earlier today."
-✅ "I know every dollar counts when you're growing."
-✅ "I'd love to show you what your numbers could look like."
-✅ "I think you'd be surprised at how much you could save."
-
-### Tone Guidelines
-- Sound like a helpful friend who happens to work at Emerge
-- Be genuinely understanding of their challenges
-- Show enthusiasm about helping them succeed
-- Keep it professional but warm and approachable
-- Instead of saying "I know how frustrating it can be..." just state "It's frustrating when..."
 
 ### Context Usage
 - Use the specific context provided in the "RELEVANT CONTEXT FOR THIS EMAIL" section
@@ -311,13 +241,12 @@ export function parsePreambleToSections(preamble: string): typeof PREAMBLE_SECTI
 }
 
 export async function getPreamble(): Promise<string> {
-  // In a real app, you might want to store this in a database
-  // For now, we'll use localStorage for persistence
+  // Always use the current DEFAULT_PREAMBLE to ensure we get the latest version
+  // Clear any old cached version from localStorage
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('email-preamble')
-    return saved || DEFAULT_PREAMBLE
+    localStorage.removeItem('email-preamble')
   }
-  return storedPreamble
+  return DEFAULT_PREAMBLE
 }
 
 export async function updatePreamble(newPreamble: string): Promise<void> {

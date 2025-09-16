@@ -3,6 +3,7 @@ import { openai } from "@ai-sdk/openai"
 import { type NextRequest, NextResponse } from "next/server"
 import { getPreamble } from "@/lib/preamble"
 import { ContextItem } from "@/lib/context-repository"
+import { getPersonaById } from "@/lib/personas"
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,26 +21,48 @@ export async function POST(request: NextRequest) {
     console.log("=== DEBUG INFO ===")
     console.log("Context items received:", contextItems?.length || 0)
     if (contextItems && contextItems.length > 0) {
-      console.log("Context items details:", contextItems.map(item => ({ id: item.id, title: item.title, category: item.category })))
+      console.log("Context items details:", contextItems.map((item: ContextItem) => ({ id: item.id, title: item.title, category: item.category })))
     }
     console.log("Dynamic context generated:", dynamicContext)
     console.log("==================")
+
+    // Get detailed persona information
+    const selectedPersona = getPersonaById(persona)
+    const personaContext = selectedPersona ? `
+## PERSONA-SPECIFIC CONTEXT:
+- Role: ${selectedPersona.label}
+- Department: ${selectedPersona.department}
+- Seniority: ${selectedPersona.seniority}
+- All Pain Points: ${selectedPersona.painPoints.join(', ')}
+- Selected Pain Points: ${painPoints.join(', ')}
+- Tone Profile: ${selectedPersona.toneProfile}
+- Keywords: ${selectedPersona.keywords.join(', ')}
+` : ''
 
     const prompt = `${preamble}
 
 ${dynamicContext}
 
+${personaContext}
+
 GENERATION REQUEST:
 - Persona/Role: ${persona}
 - Signal: ${signal}
-- Pain Points: ${painPoints.join(", ")}
+- Selected Pain Points: ${painPoints.join(", ")}
 
-Please generate an email sequence following all the rules and guidelines provided in the preamble above. Use the specific context provided to create highly relevant and personalized content. Focus on the specified persona, incorporate the signal, and address the selected pain points.`
+CRITICAL INSTRUCTIONS:
+1. Use the EXACT tone profile provided for this persona: "${selectedPersona?.toneProfile || 'Professional and clear'}"
+2. Address the SPECIFIC selected pain points: ${painPoints.join(", ")}
+3. Use the persona's keywords and language style: ${selectedPersona?.keywords.join(", ") || 'professional'}
+4. Match the seniority level and department context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
+5. Incorporate the signal content naturally into the email
+6. Follow all guidelines in the preamble above
+
+Please generate an email sequence that follows the persona's tone profile exactly and addresses the selected pain points directly.`
 
     const { text } = await generateText({
       model: openai("gpt-4o"),
       prompt,
-      maxTokens: 2000,
     })
 
     return NextResponse.json({ email: text })

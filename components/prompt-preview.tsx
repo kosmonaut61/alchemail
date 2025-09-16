@@ -60,6 +60,7 @@ Please generate an email sequence following all the rules and guidelines provide
     }
   }
 
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(fullPrompt)
@@ -246,7 +247,7 @@ Please generate an email sequence following all the rules and guidelines provide
               className="border-border/50"
             >
               {showRaw ? <Eye className="h-4 w-4 mr-2" /> : <EyeOff className="h-4 w-4 mr-2" />}
-              {showRaw ? "Formatted" : "Raw"}
+              {showRaw ? "Overview" : "Raw"}
             </Button>
             <Button variant="outline" size="sm" onClick={handleCopy} className="border-border/50">
               <Copy className="h-4 w-4 mr-2" />
@@ -289,24 +290,49 @@ Please generate an email sequence following all the rules and guidelines provide
           ) : (
             <div className="space-y-4">
               {showRaw ? (
-                <pre className="text-xs font-mono whitespace-pre-wrap bg-muted/30 p-4 rounded-lg border border-border/50 text-foreground">
-                  {fullPrompt}
-                </pre>
+                <div className="space-y-4">
+                  <pre className="text-xs font-mono whitespace-pre-wrap bg-muted/30 p-4 rounded-lg border border-border/50 text-foreground">
+                    {fullPrompt}
+                  </pre>
+                </div>
               ) : (
-                formatPromptForDisplay(fullPrompt)
+                <div className="space-y-4">
+                  {/* Quick Preview */}
+                  <div className="bg-muted/30 rounded-lg p-4 border border-border/50">
+                    <h3 className="font-semibold text-foreground mb-3">Prompt Preview</h3>
+                    <div className="text-sm text-muted-foreground space-y-2">
+                      <p><strong>Target Persona:</strong> {persona}</p>
+                      <p><strong>Campaign Signal:</strong> {signal.substring(0, 150)}{signal.length > 150 ? '...' : ''}</p>
+                      <p><strong>Pain Points:</strong> {painPoints.join(', ') || 'None specified'}</p>
+                      <p><strong>Context Items:</strong> {selectedContextItems.length} selected</p>
+                    </div>
+                  </div>
+                  
+                  {/* Quick Stats Dashboard */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{selectedContextItems.length}</div>
+                      <div className="text-xs text-muted-foreground">Context Items</div>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{fullPrompt.length.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Characters</div>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{fullPrompt.split(/\s+/).length.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Words</div>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{persona}</div>
+                      <div className="text-xs text-muted-foreground">Persona</div>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           )}
         </ScrollArea>
 
-        {/* Stats */}
-        <div className="mt-4 pt-4 border-t border-border/50 text-xs text-muted-foreground">
-          <div className="flex justify-between">
-            <span>Characters: {fullPrompt.length.toLocaleString()}</span>
-            <span>Words: {fullPrompt.split(/\s+/).length.toLocaleString()}</span>
-            <span>Context Items: {selectedContextItems.length}</span>
-          </div>
-        </div>
       </CardContent>
     </Card>
   )

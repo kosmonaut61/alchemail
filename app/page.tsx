@@ -16,11 +16,13 @@ import { ContextSelector } from "@/components/context-selector"
 import { PromptPreview } from "@/components/prompt-preview"
 import { EmailOutput } from "@/components/email-output"
 import { ContextItem } from "@/lib/context-repository"
+import { PERSONA_DEFINITIONS } from "@/lib/personas"
 
 export default function EmailGenerator() {
   const [currentStep, setCurrentStep] = useState(1)
   const [signal, setSignal] = useState("")
   const [persona, setPersona] = useState<string>("")
+  const [suggestedPersona, setSuggestedPersona] = useState<string>("")
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
@@ -82,6 +84,200 @@ export default function EmailGenerator() {
     }
   }
 
+  const autoDetectPersona = (signalText: string) => {
+    const signalLower = signalText.toLowerCase()
+    
+    // Define keyword mappings for different personas
+    const personaKeywords: { [key: string]: { keywords: string[], weight: number } } = {
+      // C-Suite keywords
+      'ceo': { 
+        keywords: ['ceo', 'chief executive', 'executive', 'board', 'shareholder', 'stakeholder', 'vision', 'strategy', 'growth', 'market position', 'competitive', 'acquisition', 'merger', 'investor'], 
+        weight: 10 
+      },
+      'coo': { 
+        keywords: ['coo', 'chief operating', 'operations', 'operational', 'efficiency', 'process', 'workflow', 'execution', 'scalability', 'performance', 'kpi', 'throughput', 'productivity'], 
+        weight: 10 
+      },
+      'cfo': { 
+        keywords: ['cfo', 'chief financial', 'financial', 'finance', 'budget', 'cost', 'roi', 'investment', 'cash flow', 'profitability', 'margin', 'revenue', 'expense', 'audit'], 
+        weight: 10 
+      },
+      'cpo': { 
+        keywords: ['cpo', 'chief procurement', 'procurement', 'sourcing', 'supplier', 'vendor', 'purchasing', 'contract', 'negotiation', 'spend', 'supply'], 
+        weight: 10 
+      },
+      'csco': { 
+        keywords: ['csco', 'chief supply chain', 'supply chain', 'logistics', 'shipping', 'transport', 'freight', 'warehouse', 'distribution', 'resilience', 'disruption'], 
+        weight: 10 
+      },
+      'owner_founder': { 
+        keywords: ['founder', 'owner', 'entrepreneur', 'startup', 'start-up', 'company', 'business', 'mission', 'purpose', 'culture', 'values', 'legacy'], 
+        weight: 10 
+      },
+      
+      // Management level keywords
+      'operations_upper_management': { 
+        keywords: ['operations manager', 'operations director', 'vp operations', 'head of operations', 'operations lead', 'operations team', 'operational management'], 
+        weight: 8 
+      },
+      'finance_upper_management': { 
+        keywords: ['finance manager', 'finance director', 'vp finance', 'head of finance', 'finance lead', 'finance team', 'financial management'], 
+        weight: 8 
+      },
+      'operations_middle_management': { 
+        keywords: ['operations supervisor', 'operations coordinator', 'team lead', 'operations specialist', 'middle management', 'supervisor'], 
+        weight: 6 
+      },
+      'finance_middle_management': { 
+        keywords: ['finance supervisor', 'finance coordinator', 'finance specialist', 'accounting manager', 'financial analyst', 'middle management'], 
+        weight: 6 
+      },
+      
+      // Individual contributor keywords
+      'operations_entry_level': { 
+        keywords: ['operations analyst', 'operations coordinator', 'logistics coordinator', 'procurement specialist', 'entry level', 'junior', 'associate'], 
+        weight: 4 
+      },
+      'finance_entry_level': { 
+        keywords: ['finance analyst', 'accounting specialist', 'financial coordinator', 'entry level', 'junior', 'associate', 'financial analyst'], 
+        weight: 4 
+      },
+      'operations_intern': { 
+        keywords: ['intern', 'internship', 'trainee', 'student', 'entry level', 'learning', 'development'], 
+        weight: 2 
+      },
+      'finance_intern': { 
+        keywords: ['intern', 'internship', 'trainee', 'student', 'entry level', 'learning', 'development'], 
+        weight: 2 
+      }
+    }
+
+    // Also check for department-specific keywords
+    const departmentKeywords = {
+      'operations': ['operations', 'operational', 'logistics', 'supply chain', 'procurement', 'shipping', 'transport', 'warehouse', 'distribution', 'freight', 'carrier', 'supplier'],
+      'finance': ['finance', 'financial', 'accounting', 'budget', 'cost', 'roi', 'investment', 'cash flow', 'profitability', 'audit', 'compliance', 'spend']
+    }
+
+    let bestMatch = ''
+    let highestScore = 0
+
+    // Calculate scores for each persona
+    Object.entries(personaKeywords).forEach(([personaId, config]) => {
+      let score = 0
+      
+      // Check for direct keyword matches
+      config.keywords.forEach(keyword => {
+        if (signalLower.includes(keyword)) {
+          score += config.weight
+        }
+      })
+      
+      // Check for department-specific keywords
+      const persona = PERSONA_DEFINITIONS.find(p => p.id === personaId)
+      if (persona) {
+        const department = persona.department.toLowerCase()
+        if (departmentKeywords[department as keyof typeof departmentKeywords]) {
+          departmentKeywords[department as keyof typeof departmentKeywords].forEach(keyword => {
+            if (signalLower.includes(keyword)) {
+              score += 2 // Lower weight for department keywords
+            }
+          })
+        }
+      }
+      
+      // Check for seniority keywords
+      const seniorityKeywords = {
+        'C-Suite': ['executive', 'c-suite', 'chief', 'president', 'ceo', 'coo', 'cfo', 'cpo', 'csco', 'board', 'strategic', 'vision'],
+        'Upper Management': ['director', 'vp', 'vice president', 'head of', 'senior manager', 'upper management'],
+        'Middle Management': ['manager', 'supervisor', 'team lead', 'middle management', 'coordinator'],
+        'Entry Level': ['analyst', 'specialist', 'coordinator', 'entry level', 'junior', 'associate'],
+        'Intern': ['intern', 'internship', 'trainee', 'student']
+      }
+      
+      if (persona) {
+        const seniority = persona.seniority
+        if (seniorityKeywords[seniority as keyof typeof seniorityKeywords]) {
+          seniorityKeywords[seniority as keyof typeof seniorityKeywords].forEach(keyword => {
+            if (signalLower.includes(keyword)) {
+              score += 3 // Medium weight for seniority keywords
+            }
+          })
+        }
+      }
+      
+      if (score > highestScore) {
+        highestScore = score
+        bestMatch = personaId
+      }
+    })
+
+    return bestMatch
+  }
+
+  const autoDetectPainPoints = (signalText: string, selectedPersona: string) => {
+    const selectedPersonaData = PERSONA_DEFINITIONS.find(p => p.id === selectedPersona)
+    if (!selectedPersonaData) return
+
+    const signalLower = signalText.toLowerCase()
+    const detectedPainPoints: string[] = []
+
+    // Define keyword mappings for different pain point categories
+    const keywordMappings: { [key: string]: string[] } = {
+      // Strategic keywords
+      'strategic': ['strategy', 'strategic', 'vision', 'growth', 'expansion', 'scaling', 'transformation', 'digital transformation', 'long-term', 'short-term'],
+      'cost': ['cost', 'costs', 'budget', 'savings', 'spend', 'money', 'price', 'expensive', 'cheap', 'affordable', 'roi', 'investment'],
+      'efficiency': ['efficiency', 'efficient', 'streamline', 'optimize', 'automation', 'process', 'workflow', 'productivity', 'faster', 'speed'],
+      'risk': ['risk', 'risks', 'compliance', 'regulatory', 'audit', 'security', 'cybersecurity', 'fraud', 'disruption', 'crisis'],
+      'data': ['data', 'analytics', 'insights', 'reporting', 'visibility', 'dashboard', 'metrics', 'kpi', 'real-time', 'integration'],
+      'technology': ['technology', 'tech', 'digital', 'ai', 'automation', 'software', 'system', 'platform', 'tools', 'solutions'],
+      'talent': ['talent', 'team', 'staff', 'people', 'hiring', 'retention', 'training', 'skills', 'leadership', 'culture'],
+      'customer': ['customer', 'client', 'experience', 'service', 'quality', 'satisfaction', 'expectations', 'demand'],
+      'supply': ['supply chain', 'logistics', 'procurement', 'carrier', 'supplier', 'vendor', 'shipping', 'transport', 'freight'],
+      'financial': ['financial', 'finance', 'cash flow', 'liquidity', 'forecasting', 'capital', 'investment', 'profitability'],
+      'operational': ['operational', 'operations', 'process', 'workflow', 'execution', 'performance', 'standardization'],
+      'external': ['market', 'competition', 'economic', 'inflation', 'geopolitical', 'sustainability', 'environmental']
+    }
+
+    // Check each pain point against the signal
+    selectedPersonaData.painPoints.forEach(painPoint => {
+      const painPointLower = painPoint.toLowerCase()
+      
+      // Check for direct keyword matches
+      for (const [category, keywords] of Object.entries(keywordMappings)) {
+        if (keywords.some(keyword => signalLower.includes(keyword) && painPointLower.includes(category))) {
+          detectedPainPoints.push(painPoint)
+          break
+        }
+      }
+      
+      // Check for specific pain point keywords
+      const specificKeywords = [
+        'manual', 'automation', 'integration', 'visibility', 'real-time', 'forecasting',
+        'volatility', 'disruption', 'compliance', 'audit', 'talent', 'retention',
+        'cost', 'savings', 'efficiency', 'streamline', 'process', 'workflow',
+        'customer', 'experience', 'service', 'quality', 'demand', 'capacity',
+        'supply chain', 'logistics', 'procurement', 'carrier', 'supplier',
+        'financial', 'budget', 'cash flow', 'investment', 'roi', 'profitability',
+        'risk', 'security', 'compliance', 'regulatory', 'governance',
+        'data', 'analytics', 'insights', 'reporting', 'dashboard', 'metrics',
+        'technology', 'digital', 'ai', 'automation', 'software', 'platform',
+        'leadership', 'team', 'culture', 'change', 'transformation',
+        'market', 'competition', 'economic', 'inflation', 'sustainability'
+      ]
+      
+      if (specificKeywords.some(keyword => 
+        signalLower.includes(keyword) && painPointLower.includes(keyword)
+      )) {
+        if (!detectedPainPoints.includes(painPoint)) {
+          detectedPainPoints.push(painPoint)
+        }
+      }
+    })
+
+    // Limit to top 5 most relevant pain points to avoid overwhelming the user
+    setPainPoints(detectedPainPoints.slice(0, 5))
+  }
+
   const handlePainPointChange = (painPoint: string, checked: boolean) => {
     if (checked) {
       setPainPoints([...painPoints, painPoint])
@@ -96,12 +292,30 @@ export default function EmailGenerator() {
     setSignal(newSignal)
     // Reset analysis flag when signal changes
     setHasAnalyzedContext(false)
+    
+    // Auto-detect persona based on signal content
+    if (newSignal.trim()) {
+      const detectedPersona = autoDetectPersona(newSignal)
+      if (detectedPersona && detectedPersona !== persona) {
+        setSuggestedPersona(detectedPersona)
+      }
+      
+      // Auto-detect relevant pain points based on signal content
+      if (persona && newSignal.trim()) {
+        autoDetectPainPoints(newSignal, persona)
+      }
+    }
   }
 
   const handlePersonaChange = (newPersona: string) => {
     setPersona(newPersona)
     // Reset analysis flag when persona changes
     setHasAnalyzedContext(false)
+    
+    // Auto-detect relevant pain points based on signal content
+    if (signal.trim() && newPersona) {
+      autoDetectPainPoints(signal, newPersona)
+    }
   }
 
   const handleNext = () => {
@@ -233,7 +447,7 @@ export default function EmailGenerator() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Application Header */}
       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -263,7 +477,7 @@ export default function EmailGenerator() {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto p-6 space-y-8">
+      <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
         {/* Welcome Message */}
         <div className="text-center space-y-4">
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -296,38 +510,124 @@ export default function EmailGenerator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="persona">Target Persona *</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="persona">Target Persona *</Label>
+                    {suggestedPersona && suggestedPersona !== persona && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setPersona(suggestedPersona)
+                          setSuggestedPersona("")
+                          if (signal.trim()) {
+                            autoDetectPainPoints(signal, suggestedPersona)
+                          }
+                        }}
+                        className="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
+                      >
+                        Use Suggested: {PERSONA_DEFINITIONS.find(p => p.id === suggestedPersona)?.label}
+                      </Button>
+                    )}
+                  </div>
                   <Select value={persona} onValueChange={handlePersonaChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Enterprise">Enterprise</SelectItem>
-                      <SelectItem value="SMB">SMB</SelectItem>
+                      {/* C-Suite Level */}
+                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        C-Suite
+                      </div>
+                      <SelectItem value="ceo">CEO</SelectItem>
+                      <SelectItem value="coo">COO</SelectItem>
+                      <SelectItem value="cfo">CFO</SelectItem>
+                      <SelectItem value="cpo">CPO (Chief Procurement Officer)</SelectItem>
+                      <SelectItem value="csco">CSCO (Chief Supply Chain Officer)</SelectItem>
+                      <SelectItem value="owner_founder">Owner / Founder</SelectItem>
+                      
+                      {/* Upper Management Level */}
+                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                        Upper Management
+                      </div>
+                      <SelectItem value="operations_upper_management">Operations</SelectItem>
+                      <SelectItem value="finance_upper_management">Finance</SelectItem>
+                      
+                      {/* Middle Management Level */}
+                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                        Middle Management
+                      </div>
+                      <SelectItem value="operations_middle_management">Operations</SelectItem>
+                      <SelectItem value="finance_middle_management">Finance</SelectItem>
+                      
+                      {/* Entry Level */}
+                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                        Entry Level
+                      </div>
+                      <SelectItem value="operations_entry_level">Operations</SelectItem>
+                      <SelectItem value="finance_entry_level">Finance</SelectItem>
+                      
+                      {/* Intern Level */}
+                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                        Intern
+                      </div>
+                      <SelectItem value="operations_intern">Operations</SelectItem>
+                      <SelectItem value="finance_intern">Finance</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="space-y-3">
-                  <Label>Pain Points (Optional)</Label>
+                {persona && (
                   <div className="space-y-3">
-                    {["Cost", "Effort", "Efficiency"].map((painPoint) => (
-                      <div key={painPoint} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={painPoint.toLowerCase()}
-                          checked={painPoints.includes(painPoint)}
-                          onCheckedChange={(checked) => handlePainPointChange(painPoint, checked as boolean)}
-                        />
-                        <Label
-                          htmlFor={painPoint.toLowerCase()}
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    <div className="flex items-center justify-between">
+                      <Label>Pain Points (Optional)</Label>
+                      {painPoints.length > 0 && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setPainPoints([])}
+                          className="text-xs"
                         >
-                          {painPoint}
-                        </Label>
-                      </div>
-                    ))}
+                          Clear All
+                        </Button>
+                      )}
+                    </div>
+                    <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
+                      {(() => {
+                        const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
+                        if (!selectedPersona) return null
+                        
+                        return selectedPersona.painPoints.map((painPoint, index) => (
+                          <div key={index} className="flex items-start space-x-2">
+                            <Checkbox
+                              id={`pain-point-${index}`}
+                              checked={painPoints.includes(painPoint)}
+                              onCheckedChange={(checked) => handlePainPointChange(painPoint, checked as boolean)}
+                              className="mt-1"
+                            />
+                            <Label
+                              htmlFor={`pain-point-${index}`}
+                              className="text-sm font-medium leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              {painPoint}
+                            </Label>
+                          </div>
+                        ))
+                      })()}
+                    </div>
+                    {painPoints.length > 0 && (
+                      <p className="text-xs text-muted-foreground">
+                        {painPoints.length} pain point{painPoints.length !== 1 ? 's' : ''} selected based on your signal
+                      </p>
+                    )}
+                    {suggestedPersona && suggestedPersona !== persona && (
+                      <p className="text-xs text-blue-600">
+                        💡 We detected this might be for a {PERSONA_DEFINITIONS.find(p => p.id === suggestedPersona)?.label} - click the button above to use this suggestion
+                      </p>
+                    )}
                   </div>
-                </div>
+                )}
               </div>
 
               {currentStep === 1 && (
@@ -491,7 +791,7 @@ export default function EmailGenerator() {
           </Card>
         )}
 
-      </div>
+      </main>
 
       {/* Preamble Editor */}
       {showPreambleEditor && (
