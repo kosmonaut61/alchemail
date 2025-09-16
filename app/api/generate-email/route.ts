@@ -6,10 +6,20 @@ import { ContextItem } from "@/lib/context-repository"
 
 export async function POST(request: NextRequest) {
   try {
-    const { persona, signal, painPoints, contextItems } = await request.json()
+    const { persona, signal, painPoints, contextItems, generateOverview } = await request.json()
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })
+    }
+
+    // Handle overview generation
+    if (generateOverview) {
+      const { text } = await generateText({
+        model: openai("gpt-4o-mini"),
+        prompt: signal,
+        maxTokens: 300,
+      })
+      return NextResponse.json({ email: text })
     }
 
     const preamble = await getPreamble()

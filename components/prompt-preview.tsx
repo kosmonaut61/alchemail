@@ -20,7 +20,9 @@ interface PromptPreviewProps {
 
 export function PromptPreview({ signal, persona, painPoints, selectedContextItems, onClose }: PromptPreviewProps) {
   const [fullPrompt, setFullPrompt] = useState("")
+  const [promptOverview, setPromptOverview] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isGeneratingOverview, setIsGeneratingOverview] = useState(false)
   const [showRaw, setShowRaw] = useState(false)
   const { toast } = useToast()
 
@@ -48,6 +50,7 @@ GENERATION REQUEST:
 Please generate an email sequence following all the rules and guidelines provided in the preamble above. Use the specific context provided to create highly relevant and personalized content. Focus on the specified persona, incorporate the signal, and address the selected pain points.`
 
       setFullPrompt(prompt)
+      generateOverview(prompt)
     } catch (error) {
       console.error("Error generating prompt:", error)
       toast({
@@ -58,6 +61,70 @@ Please generate an email sequence following all the rules and guidelines provide
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const generateOverview = async (prompt: string) => {
+    setIsGeneratingOverview(true)
+    try {
+      const response = await fetch("/api/generate-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          persona: "AI Assistant",
+          signal: `Please analyze this ChatGPT prompt and provide a concise overview of what it contains. Focus on the key sections, context items, and generation requirements. Keep it under 200 words and make it easy to understand.
+
+PROMPT TO ANALYZE:
+${prompt}`,
+          painPoints: [],
+          contextItems: [],
+          generateOverview: true
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setPromptOverview(data.email)
+      } else {
+        // Fallback to a simple summary
+        setPromptOverview(createFallbackOverview(prompt))
+      }
+    } catch (error) {
+      console.error("Error generating overview:", error)
+      setPromptOverview(createFallbackOverview(prompt))
+    } finally {
+      setIsGeneratingOverview(false)
+    }
+  }
+
+  const createFallbackOverview = (prompt: string): string => {
+    const contextCount = selectedContextItems.length
+    const categories = selectedContextItems.reduce((acc, item) => {
+      acc[item.category] = (acc[item.category] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+
+    const categorySummary = Object.entries(categories)
+      .map(([category, count]) => `${count} ${category.replace('_', ' ')}${count > 1 ? 's' : ''}`)
+      .join(', ')
+
+    return `This prompt contains comprehensive instructions for generating a personalized email campaign.
+
+**Key Components:**
+• **Target Persona:** ${persona}
+• **Campaign Signal:** ${signal.substring(0, 100)}${signal.length > 100 ? '...' : ''}
+• **Pain Points:** ${painPoints.join(', ') || 'None specified'}
+• **Context Items:** ${contextCount} total (${categorySummary})
+
+**Prompt Structure:**
+• Goals and objectives for the email sequence
+• Return format specifications
+• Warnings and guidelines
+• Relevant context for personalization
+• Specific generation request with your parameters
+
+The prompt is designed to create highly targeted, personalized email content that addresses your specific business needs and audience.`
   }
 
   const handleCopy = async () => {
@@ -246,7 +313,7 @@ Please generate an email sequence following all the rules and guidelines provide
               className="border-border/50"
             >
               {showRaw ? <Eye className="h-4 w-4 mr-2" /> : <EyeOff className="h-4 w-4 mr-2" />}
-              {showRaw ? "Formatted" : "Raw"}
+              {showRaw ? "Overview" : "Raw"}
             </Button>
             <Button variant="outline" size="sm" onClick={handleCopy} className="border-border/50">
               <Copy className="h-4 w-4 mr-2" />
@@ -289,24 +356,52 @@ Please generate an email sequence following all the rules and guidelines provide
           ) : (
             <div className="space-y-4">
               {showRaw ? (
-                <pre className="text-xs font-mono whitespace-pre-wrap bg-muted/30 p-4 rounded-lg border border-border/50 text-foreground">
-                  {fullPrompt}
-                </pre>
+                <div className="space-y-4">
+                  <pre className="text-xs font-mono whitespace-pre-wrap bg-muted/30 p-4 rounded-lg border border-border/50 text-foreground">
+                    {fullPrompt}
+                  </pre>
+                </div>
               ) : (
-                formatPromptForDisplay(fullPrompt)
+                <div className="space-y-4">
+                  {/* AI Overview */}
+                  <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg p-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <h3 className="font-semibold text-blue-400">AI Overview</h3>
+                      {isGeneratingOverview && (
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                      )}
+                    </div>
+                    <div className="text-sm text-blue-300 whitespace-pre-wrap">
+                      {isGeneratingOverview ? "Generating overview..." : promptOverview}
+                    </div>
+                  </div>
+                  
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{selectedContextItems.length}</div>
+                      <div className="text-xs text-muted-foreground">Context Items</div>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{fullPrompt.length.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Characters</div>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{fullPrompt.split(/\s+/).length.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Words</div>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 text-center">
+                      <div className="text-2xl font-bold text-foreground">{persona}</div>
+                      <div className="text-xs text-muted-foreground">Persona</div>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           )}
         </ScrollArea>
 
-        {/* Stats */}
-        <div className="mt-4 pt-4 border-t border-border/50 text-xs text-muted-foreground">
-          <div className="flex justify-between">
-            <span>Characters: {fullPrompt.length.toLocaleString()}</span>
-            <span>Words: {fullPrompt.split(/\s+/).length.toLocaleString()}</span>
-            <span>Context Items: {selectedContextItems.length}</span>
-          </div>
-        </div>
       </CardContent>
     </Card>
   )
