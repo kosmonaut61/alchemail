@@ -83,6 +83,70 @@ export default function EmailGenerator() {
     }
   }
 
+  const autoDetectPainPoints = (signalText: string, selectedPersona: string) => {
+    const selectedPersonaData = PERSONA_DEFINITIONS.find(p => p.id === selectedPersona)
+    if (!selectedPersonaData) return
+
+    const signalLower = signalText.toLowerCase()
+    const detectedPainPoints: string[] = []
+
+    // Define keyword mappings for different pain point categories
+    const keywordMappings: { [key: string]: string[] } = {
+      // Strategic keywords
+      'strategic': ['strategy', 'strategic', 'vision', 'growth', 'expansion', 'scaling', 'transformation', 'digital transformation', 'long-term', 'short-term'],
+      'cost': ['cost', 'costs', 'budget', 'savings', 'spend', 'money', 'price', 'expensive', 'cheap', 'affordable', 'roi', 'investment'],
+      'efficiency': ['efficiency', 'efficient', 'streamline', 'optimize', 'automation', 'process', 'workflow', 'productivity', 'faster', 'speed'],
+      'risk': ['risk', 'risks', 'compliance', 'regulatory', 'audit', 'security', 'cybersecurity', 'fraud', 'disruption', 'crisis'],
+      'data': ['data', 'analytics', 'insights', 'reporting', 'visibility', 'dashboard', 'metrics', 'kpi', 'real-time', 'integration'],
+      'technology': ['technology', 'tech', 'digital', 'ai', 'automation', 'software', 'system', 'platform', 'tools', 'solutions'],
+      'talent': ['talent', 'team', 'staff', 'people', 'hiring', 'retention', 'training', 'skills', 'leadership', 'culture'],
+      'customer': ['customer', 'client', 'experience', 'service', 'quality', 'satisfaction', 'expectations', 'demand'],
+      'supply': ['supply chain', 'logistics', 'procurement', 'carrier', 'supplier', 'vendor', 'shipping', 'transport', 'freight'],
+      'financial': ['financial', 'finance', 'cash flow', 'liquidity', 'forecasting', 'capital', 'investment', 'profitability'],
+      'operational': ['operational', 'operations', 'process', 'workflow', 'execution', 'performance', 'standardization'],
+      'external': ['market', 'competition', 'economic', 'inflation', 'geopolitical', 'sustainability', 'environmental']
+    }
+
+    // Check each pain point against the signal
+    selectedPersonaData.painPoints.forEach(painPoint => {
+      const painPointLower = painPoint.toLowerCase()
+      
+      // Check for direct keyword matches
+      for (const [category, keywords] of Object.entries(keywordMappings)) {
+        if (keywords.some(keyword => signalLower.includes(keyword) && painPointLower.includes(category))) {
+          detectedPainPoints.push(painPoint)
+          break
+        }
+      }
+      
+      // Check for specific pain point keywords
+      const specificKeywords = [
+        'manual', 'automation', 'integration', 'visibility', 'real-time', 'forecasting',
+        'volatility', 'disruption', 'compliance', 'audit', 'talent', 'retention',
+        'cost', 'savings', 'efficiency', 'streamline', 'process', 'workflow',
+        'customer', 'experience', 'service', 'quality', 'demand', 'capacity',
+        'supply chain', 'logistics', 'procurement', 'carrier', 'supplier',
+        'financial', 'budget', 'cash flow', 'investment', 'roi', 'profitability',
+        'risk', 'security', 'compliance', 'regulatory', 'governance',
+        'data', 'analytics', 'insights', 'reporting', 'dashboard', 'metrics',
+        'technology', 'digital', 'ai', 'automation', 'software', 'platform',
+        'leadership', 'team', 'culture', 'change', 'transformation',
+        'market', 'competition', 'economic', 'inflation', 'sustainability'
+      ]
+      
+      if (specificKeywords.some(keyword => 
+        signalLower.includes(keyword) && painPointLower.includes(keyword)
+      )) {
+        if (!detectedPainPoints.includes(painPoint)) {
+          detectedPainPoints.push(painPoint)
+        }
+      }
+    })
+
+    // Limit to top 5 most relevant pain points to avoid overwhelming the user
+    setPainPoints(detectedPainPoints.slice(0, 5))
+  }
+
   const handlePainPointChange = (painPoint: string, checked: boolean) => {
     if (checked) {
       setPainPoints([...painPoints, painPoint])
@@ -97,12 +161,22 @@ export default function EmailGenerator() {
     setSignal(newSignal)
     // Reset analysis flag when signal changes
     setHasAnalyzedContext(false)
+    
+    // Auto-detect relevant pain points based on signal content
+    if (persona && newSignal.trim()) {
+      autoDetectPainPoints(newSignal, persona)
+    }
   }
 
   const handlePersonaChange = (newPersona: string) => {
     setPersona(newPersona)
     // Reset analysis flag when persona changes
     setHasAnalyzedContext(false)
+    
+    // Auto-detect relevant pain points based on signal content
+    if (signal.trim() && newPersona) {
+      autoDetectPainPoints(signal, newPersona)
+    }
   }
 
   const handleNext = () => {
@@ -323,7 +397,20 @@ export default function EmailGenerator() {
 
                 {persona && (
                   <div className="space-y-3">
-                    <Label>Pain Points (Optional)</Label>
+                    <div className="flex items-center justify-between">
+                      <Label>Pain Points (Optional)</Label>
+                      {painPoints.length > 0 && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setPainPoints([])}
+                          className="text-xs"
+                        >
+                          Clear All
+                        </Button>
+                      )}
+                    </div>
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
                       {(() => {
                         const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
@@ -347,6 +434,11 @@ export default function EmailGenerator() {
                         ))
                       })()}
                     </div>
+                    {painPoints.length > 0 && (
+                      <p className="text-xs text-muted-foreground">
+                        {painPoints.length} pain point{painPoints.length !== 1 ? 's' : ''} selected based on your signal
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
