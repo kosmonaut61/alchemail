@@ -57,7 +57,6 @@ Return your response as a JSON array of context item IDs that should be included
     const { text } = await generateText({
       model: openai("gpt-4o"),
       prompt: analysisPrompt,
-      maxTokens: 1000,
     })
 
     // Parse the JSON response
@@ -70,12 +69,8 @@ Return your response as a JSON array of context item IDs that should be included
       suggestedIds = getFallbackContextItems(signal, persona, painPoints)
     }
 
-    // Always add persona-specific context items
-    const selectedPersona = getPersonaById(persona)
-    if (selectedPersona) {
-      // Add persona-specific pain points and tone profile
-      suggestedIds.push(`${persona}_pain_points`, `${persona}_tone_profile`)
-    }
+    // Note: Persona-specific pain points and tone profile are handled directly in the email generation API
+    // No need to add them to context repository as they're passed directly to the generation prompt
 
     // Get the full context items for the suggested IDs
     const suggestedItems = CONTEXT_REPOSITORY.filter(item => suggestedIds.includes(item.id))
@@ -95,17 +90,11 @@ function getFallbackContextItems(signal: string, persona: string, painPoints: st
   const suggestedIds: string[] = []
   const signalLower = signal.toLowerCase()
   
-  // Add persona-specific context items
-  const selectedPersona = getPersonaById(persona)
-  if (selectedPersona) {
-    suggestedIds.push(`${persona}_pain_points`, `${persona}_tone_profile`)
-  } else {
-    // Fallback to old system for backward compatibility
-    if (persona === "Enterprise") {
-      suggestedIds.push("enterprise_language")
-    } else if (persona === "SMB") {
-      suggestedIds.push("smb_language")
-    }
+  // Fallback to old system for backward compatibility
+  if (persona === "Enterprise") {
+    suggestedIds.push("enterprise_language")
+  } else if (persona === "SMB") {
+    suggestedIds.push("smb_language")
   }
   
   // Check for specific company mentions in signal
