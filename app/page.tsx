@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Settings, Mail, Edit3, Eye, Loader2, RefreshCw } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PreambleEditor } from "@/components/preamble-editor"
@@ -215,40 +216,41 @@ export default function EmailGenerator() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto p-6 space-y-8">
-        {/* Header */}
-        <div className="text-center space-y-6">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="p-3 rounded-xl bg-primary/10">
-              <Mail className="h-8 w-8 text-primary" />
+      {/* Application Header */}
+      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Left: Branding */}
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Mail className="h-5 w-5 text-primary" />
+              </div>
+              <h1 className="text-2xl font-bold text-foreground tracking-tight">Alchemail</h1>
             </div>
-            <h1 className="text-5xl font-bold text-foreground tracking-tight">Alchemail</h1>
+            
+            {/* Right: Actions */}
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setShowPreambleEditor(true)}
+                className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
+              >
+                <Settings className="h-4 w-4 mr-2" />
+                Advanced Settings
+              </Button>
+            </div>
           </div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        </div>
+      </header>
+
+      <div className="max-w-6xl mx-auto p-6 space-y-8">
+        {/* Welcome Message */}
+        <div className="text-center space-y-4">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Create personalized email sequences powered by AI. Follow the steps below to craft compelling outreach campaigns.
           </p>
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="flex justify-center">
-          <div className="flex items-center space-x-6">
-            {steps.map((step, index) => (
-              <div key={step.id} className="flex items-center">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
-                  currentStep >= step.id 
-                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25' 
-                    : 'bg-muted text-muted-foreground'
-                }`}>
-                  {currentStep > step.id ? '✓' : step.id}
-                </div>
-                {index < steps.length - 1 && (
-                  <div className={`w-12 h-0.5 mx-3 rounded-full transition-colors duration-200 ${
-                    currentStep > step.id ? 'bg-primary' : 'bg-border'
-                  }`} />
-                )}
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Step 1: Campaign Signal */}
@@ -470,17 +472,6 @@ export default function EmailGenerator() {
           </Card>
         )}
 
-        {/* Settings Button */}
-        <div className="text-center">
-          <Button 
-            variant="outline" 
-            onClick={() => setShowPreambleEditor(true)}
-            className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
-          >
-            <Settings className="h-4 w-4 mr-2" />
-            Advanced Settings
-          </Button>
-        </div>
       </div>
 
       {/* Preamble Editor */}
