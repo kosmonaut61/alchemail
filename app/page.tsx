@@ -447,7 +447,7 @@ export default function EmailGenerator() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Application Header */}
       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
@@ -477,7 +477,7 @@ export default function EmailGenerator() {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto p-6 space-y-8">
+      <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
         {/* Welcome Message */}
         <div className="text-center space-y-4">
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -791,7 +791,7 @@ export default function EmailGenerator() {
           </Card>
         )}
 
-      </div>
+      </main>
 
       {/* Preamble Editor */}
       {showPreambleEditor && (

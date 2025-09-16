@@ -124,34 +124,6 @@ Output the final output in text, not a JSON object.`
     ### General Rules
     - Never use the word Free in the emails
     - Do deep research on the person + company.
-    
-    ### Opening Lines
-    - NEVER start with "Saw you..." or "Smart move/research" patterns
-    - Use varied, natural openings
-    - Make the first sentence feel conversational and personal
-    - No two openers in a sequence should be the same
-
-    ### Language Style
-    - Use "I know how..." instead of "We understand..." or "We get it"
-    - Replace "Small businesses need..." with "I know every dollar counts when you're growing..."
-    - Use "I'd love to..." instead of "Want to..." or "Ready to..."
-    - Include empathetic phrases like "I know how tough/frustrating/overwhelming..."
-
-    ### Conversational Flow
-    - Write as if speaking to a colleague, not a prospect
-    - Use contractions naturally (I'd, you're, we've, etc.)
-    - Include transitional phrases
-    - Acknowledge their challenges with understanding before offering solutions
-
-    ### Personal Connection
-    - Use "I think you'd be interested in..." instead of "You should..."
-    - Use "I'd be happy to..." instead of "We can provide..."
-
-    ### Avoid These Patterns
-    ❌ "Saw you checked our pricing. Smart move."
-    ❌ "Small businesses need cost control. We get it."
-    ❌ "Want to see your numbers? Book a call."
-    ❌ "Ready to cut your costs? Book a call."
 
     `
   },
@@ -160,13 +132,6 @@ Output the final output in text, not a JSON object.`
     title: "Context Dump",
     content: `### General Rules
 - Never use the word Free in the emails
-
-### Opening Lines
-- NEVER start with "Saw you..." or "Smart move/research" patterns
-- Use varied, natural openings like "I noticed...", "I wanted to share...", "I hope this email finds you well"
-- Make the first sentence feel conversational and personal
-- No two openers in a sequence should be the same
-
 
 ### Context Usage
 - Use the specific context provided in the "RELEVANT CONTEXT FOR THIS EMAIL" section
