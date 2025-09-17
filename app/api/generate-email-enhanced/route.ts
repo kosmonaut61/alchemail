@@ -182,14 +182,39 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
     // Generate initial email with fallback
     let initialEmail: string
     try {
+      console.log('\n🚀 ===== EMAIL GENERATION START =====')
+      console.log(`📧 Model: ${model}`)
+      console.log(`👤 Persona: ${persona}`)
+      console.log(`📝 Signal: ${signal}`)
+      console.log(`🎯 Pain Points: ${painPoints.join(', ')}`)
+      console.log(`📊 Context Items: ${contextItems?.length || 0} selected`)
+      console.log(`🔧 QA Enabled: ${enableQA}`)
+      console.log(`📏 Prompt Length: ${prompt.length} characters`)
+      console.log(`📄 Prompt Preview (first 500 chars):`)
+      console.log('─'.repeat(80))
+      console.log(prompt.substring(0, 500) + (prompt.length > 500 ? '...' : ''))
+      console.log('─'.repeat(80))
+      console.log(`\n🤖 Sending to ${model}...`)
+      
       initialEmail = await generateTextWithModel(prompt, model)
+      
+      console.log(`✅ Generation successful with ${model}`)
+      console.log(`📊 Generated content length: ${initialEmail.length} characters`)
+      console.log(`📄 Generated content preview (first 300 chars):`)
+      console.log('─'.repeat(80))
+      console.log(initialEmail.substring(0, 300) + (initialEmail.length > 300 ? '...' : ''))
+      console.log('─'.repeat(80))
+      
     } catch (error) {
-      console.error(`Error with model ${model}:`, error)
+      console.error(`❌ Error with model ${model}:`, error)
       
       // Fallback to GPT-4o if GPT-5 fails
       if (model.startsWith('gpt-5')) {
-        console.log('Falling back to GPT-4o...')
+        console.log('🔄 Falling back to GPT-4o...')
+        console.log(`🤖 Sending to GPT-4o...`)
         initialEmail = await generateTextWithModel(prompt, "gpt-4o")
+        console.log(`✅ Fallback generation successful with GPT-4o`)
+        console.log(`📊 Generated content length: ${initialEmail.length} characters`)
       } else {
         throw error // Re-throw if it's not a GPT-5 model
       }
@@ -201,10 +226,28 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
 
     // Run QA and auto-fix if enabled
     if (enableQA) {
+      console.log('\n🔍 ===== QA ANALYSIS START =====')
+      console.log(`🤖 QA Model: ${model}`)
+      console.log(`📊 Analyzing email quality...`)
+      
       qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints, model)
+      
+      console.log(`📈 Quality Score: ${qualityReport.score}/100`)
+      console.log(`✅ Passed: ${qualityReport.passed}`)
+      console.log(`📋 Issues Found: ${qualityReport.issues.length}`)
+      if (qualityReport.issues.length > 0) {
+        console.log(`🔧 Issues to fix:`)
+        qualityReport.issues.forEach((issue, index) => {
+          console.log(`  ${index + 1}. [${issue.severity.toUpperCase()}] ${issue.type}: ${issue.message}`)
+        })
+      }
       
       // Auto-fix issues if quality is below threshold
       if (!qualityReport.passed) {
+        console.log(`\n🔧 ===== AUTO-FIX START =====`)
+        console.log(`🤖 Auto-fix Model: ${model}`)
+        console.log(`📝 Applying fixes to email...`)
+        
         const { fixedEmail, fixesApplied: appliedFixes } = await autoFixEmail(
           initialEmail, 
           qualityReport, 
@@ -216,15 +259,52 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
         finalEmail = fixedEmail
         fixesApplied = appliedFixes
         
+        console.log(`✅ Auto-fix completed`)
+        console.log(`📊 Fixed content length: ${finalEmail.length} characters`)
+        console.log(`🔧 Fixes applied: ${appliedFixes.length}`)
+        appliedFixes.forEach((fix, index) => {
+          console.log(`  ${index + 1}. ${fix}`)
+        })
+        
         // Double-check the final result
+        console.log(`\n🔍 ===== DOUBLE-CHECK START =====`)
+        console.log(`🤖 Double-check Model: ${model}`)
+        console.log(`📝 Double-checking final email...`)
+        
         const doubleCheck = await doubleCheckFinalEmail(finalEmail, persona, painPoints, model)
         finalEmail = doubleCheck.finalEmail
         fixesApplied = [...fixesApplied, ...doubleCheck.additionalFixes]
         
+        console.log(`✅ Double-check completed`)
+        console.log(`📊 Final content length: ${finalEmail.length} characters`)
+        console.log(`🔧 Additional fixes: ${doubleCheck.additionalFixes.length}`)
+        
         // Get final quality report
+        console.log(`\n📈 ===== FINAL QA ANALYSIS =====`)
+        console.log(`🤖 Final QA Model: ${model}`)
+        console.log(`📝 Running final quality check...`)
+        
         qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints, model)
+        
+        console.log(`📈 Final Quality Score: ${qualityReport.score}/100`)
+        console.log(`✅ Final Passed: ${qualityReport.passed}`)
+        console.log(`📋 Final Issues: ${qualityReport.issues.length}`)
+      } else {
+        console.log(`✅ Email passed QA - no fixes needed`)
       }
     }
+
+    console.log('\n🎉 ===== EMAIL GENERATION COMPLETE =====')
+    console.log(`📧 Final Model Used: ${model}`)
+    console.log(`📊 Final Content Length: ${finalEmail.length} characters`)
+    console.log(`🔧 Total Fixes Applied: ${fixesApplied.length}`)
+    console.log(`📈 Final Quality Score: ${qualityReport?.score || 'N/A'}/100`)
+    console.log(`✅ QA Passed: ${qualityReport?.passed || 'N/A'}`)
+    console.log(`📄 Final Content Preview (first 200 chars):`)
+    console.log('─'.repeat(80))
+    console.log(finalEmail.substring(0, 200) + (finalEmail.length > 200 ? '...' : ''))
+    console.log('─'.repeat(80))
+    console.log('🚀 ===== END =====\n')
 
     return NextResponse.json({ 
       email: finalEmail,

@@ -12,31 +12,57 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       const { OpenAI } = await import('openai')
       const openaiClient = new OpenAI()
       
-      const response = await openaiClient.chat.completions.create({
+      // GPT-5 models don't support temperature parameter
+      const isGPT5 = model.startsWith('gpt-5');
+      const requestParams: any = {
         model: model,
         messages: [{ role: "user", content: prompt }],
-        max_completion_tokens: 400, // Shorter for QA responses
-        temperature: 0.1 // Lower temperature for more consistent QA
-      })
+        max_completion_tokens: 400 // Shorter for QA responses
+      };
       
-      console.log(`GPT-5 worked for QA!`)
-      return response.choices[0]?.message?.content || ""
+      // Only add temperature for non-GPT-5 models
+      if (!isGPT5) {
+        requestParams.temperature = 0.1; // Lower temperature for more consistent QA
+      }
+      
+      console.log(`🔧 QA Parameters:`, {
+        model: model,
+        max_completion_tokens: 400,
+        temperature: isGPT5 ? 'not supported' : 0.1,
+        promptLength: prompt.length,
+        messageCount: 1
+      });
+      
+      console.log(`🚀 Sending QA request to OpenAI API...`);
+      const response = await openaiClient.chat.completions.create(requestParams)
+      
+      const responseText = response.choices[0]?.message?.content || "";
+      console.log(`✅ GPT-5 QA succeeded! Response length: ${responseText.length} characters`);
+      return responseText
     } catch (error) {
       console.error(`GPT-5 failed for QA:`, error)
       console.log('Falling back to GPT-4o for QA...')
       
       // Fallback to GPT-4o using standard generateText
+      console.log(`🔄 QA Fallback to GPT-4o via AI SDK...`);
       const fallbackResult = await generateText({
         model: openai("gpt-4o"),
         prompt,
         maxTokens: 400,
         temperature: 0.1
       })
+      console.log(`✅ QA Fallback successful! Response length: ${fallbackResult.text.length} characters`);
       return fallbackResult.text
     }
   } else if (model.startsWith('o1')) {
     // For O1 models, use standard generateText with specific parameters
-    console.log(`Using O1 model for QA: ${model}`)
+    console.log(`🤖 Using O1 model for QA: ${model}`)
+    console.log(`🔧 O1 Parameters:`, {
+      model: model,
+      maxTokens: 400,
+      temperature: 0.1,
+      promptLength: prompt.length
+    });
     
     const result = await generateText({
       model: openai(model),
@@ -44,10 +70,17 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       maxTokens: 400,
       temperature: 0.1 // O1 models work better with lower temperature
     })
+    console.log(`✅ O1 QA successful! Response length: ${result.text.length} characters`);
     return result.text
   } else {
     // Use standard generateText for other models (GPT-4, GPT-3.5, etc.)
-    console.log(`Using standard model for QA: ${model}`)
+    console.log(`🤖 Using standard model for QA: ${model}`)
+    console.log(`🔧 Standard Parameters:`, {
+      model: model,
+      maxTokens: 400,
+      temperature: 0.1,
+      promptLength: prompt.length
+    });
     
     const result = await generateText({
       model: openai(model),
@@ -55,6 +88,7 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       maxTokens: 400,
       temperature: 0.1 // Lower temperature for QA consistency
     })
+    console.log(`✅ Standard QA successful! Response length: ${result.text.length} characters`);
     return result.text
   }
 }
@@ -418,11 +452,14 @@ Subject: ${sample.subject}
 Body: ${sample.body}`
 ).join('\n\n---\n\n')}` : ''
 
-    const optimizationPrompt = `You are an expert email copywriter. Fix ALL issues in this email automatically and return a perfect version that follows all the rules.
+    // Check if this is an email sequence or single email
+    const isEmailSequence = originalEmail.includes('Email 1') || originalEmail.includes('Campaign Name:') || originalEmail.includes('LinkedIn Message')
+    
+    const optimizationPrompt = `You are an expert email copywriter. Fix ALL issues in this ${isEmailSequence ? 'email sequence' : 'email'} automatically and return a perfect version that follows all the rules.
 
-IMPORTANT: If the email is under 95 words, EXPAND it by adding more detail, context, and elaboration. DO NOT make emails shorter - focus on adding value and content.
+IMPORTANT: If this is an email sequence, maintain the full sequence structure. If this is a single email and it's under 95 words, EXPAND it by adding more detail, context, and elaboration. DO NOT make emails shorter - focus on adding value and content.
 
-ORIGINAL EMAIL TO FIX:
+ORIGINAL ${isEmailSequence ? 'EMAIL SEQUENCE' : 'EMAIL'} TO FIX:
 ${originalEmail}
 
 ISSUES TO FIX:
@@ -445,14 +482,14 @@ CRITICAL FIXING REQUIREMENTS:
 3. Ensure subject line is 3-6 words, sentence case
 4. Use proper greeting: "Hey [name]," for casual/interns, "Hi [name]," for professionals
 5. Structure as 3-4 paragraphs with proper line breaks
-6. EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration
+6. ${isEmailSequence ? 'For each email in the sequence, ensure 95-150 words per email' : 'EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration'}
 7. Include Apollo link CTA that flows naturally in the sentence (can be anywhere in email): [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 8. Use 5th grade reading level or lower - simplify complex words and sentences (CRITICAL REQUIREMENT)
 9. MAXIMUM 3 ADVERBS - remove excess adverbs, keep only essential ones
 10. MAXIMUM 15 WORDS PER SENTENCE - break long sentences into shorter ones
 11. BE RESPECTFUL - never assume or disparage recipient's situation, be helpful not presumptive
 12. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
-13. No signature, no excessive formatting
+13. ${isEmailSequence ? 'No signatures in individual emails - keep the sequence format clean' : 'No signature, no excessive formatting'}
 14. Include social proof with specific companies and results
 15. Maintain the original campaign signal focus while EXPANDING content to reach proper length
 16. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
@@ -461,7 +498,7 @@ CRITICAL FIXING REQUIREMENTS:
 19. AVOID ASSUMPTIONS - don't assume specific challenges or problems the recipient has
 20. AVOID FORMAL LANGUAGE - never use words like "kindly", "please be advised", "we would love to" - keep it conversational
 
-Return ONLY the corrected email, no explanations:`
+${isEmailSequence ? 'Return the corrected email sequence in the same format (Campaign Name, Email 1, Email 2, etc.), no explanations' : 'Return ONLY the corrected email, no explanations'}:`
 
     const fixedEmail = await generateTextWithModel(optimizationPrompt, model)
 
