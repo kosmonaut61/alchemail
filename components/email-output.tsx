@@ -33,10 +33,12 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(email)
+      // Convert markdown to clean rich text for CRM compatibility
+      const cleanText = convertToCRMFriendlyText(email)
+      await navigator.clipboard.writeText(cleanText)
       toast({
         title: "Copied!",
-        description: "Email content copied to clipboard.",
+        description: "Email content copied to clipboard in CRM-friendly format.",
       })
     } catch (error) {
       toast({
@@ -45,6 +47,47 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
         variant: "destructive",
       })
     }
+  }
+
+  const convertToCRMFriendlyText = (markdownText: string): string => {
+    // Split by lines and process each line
+    const lines = markdownText.split('\n')
+    const processedLines: string[] = []
+    
+    lines.forEach(line => {
+      // Skip empty lines
+      if (line.trim() === '') {
+        processedLines.push('')
+        return
+      }
+      
+      // Process markdown links: [text](url) -> text (url)
+      let processedLine = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+        // If it's an Apollo link, include both text and URL for CRM compatibility
+        if (url.includes('app.apollo.io')) {
+          return `${text} (${url})`
+        }
+        // For other links, show as text (url)
+        return `${text} (${url})`
+      })
+      
+      // Remove markdown bold/italic markers
+      processedLine = processedLine.replace(/\*\*([^*]+)\*\*/g, '$1')
+      processedLine = processedLine.replace(/\*([^*]+)\*/g, '$1')
+      
+      // Clean up subject line markers
+      if (processedLine.startsWith('**Subject:**')) {
+        processedLine = processedLine.replace('**Subject:**', 'Subject:')
+      }
+      
+      // Remove any remaining markdown formatting
+      processedLine = processedLine.replace(/^#{1,6}\s*/, '') // Remove heading markers
+      processedLine = processedLine.replace(/`([^`]+)`/g, '$1') // Remove code backticks
+      
+      processedLines.push(processedLine)
+    })
+    
+    return processedLines.join('\n')
   }
 
   return (
@@ -107,10 +150,19 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
                   </Tooltip>
                 </div>
               </TooltipProvider>
-              <Button variant="outline" size="sm" onClick={handleCopy} className="border-border/50">
-                <Copy className="h-4 w-4 mr-2" />
-                Copy
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="sm" onClick={handleCopy} className="border-border/50">
+                      <Copy className="h-4 w-4 mr-2" />
+                      Copy for CRM
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Copies clean text format for pasting into CRM tools</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           )}
         </div>

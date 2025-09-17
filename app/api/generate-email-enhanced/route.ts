@@ -73,6 +73,7 @@ CRITICAL INSTRUCTIONS - FOLLOW IN THIS EXACT ORDER:
 5. Keep language simple and direct - avoid buzzwords like "impressive", "significant", "considerable", "enticing"
 6. Use ONE clear statistic per email, not multiple percentages
 7. Make it sound like a real person wrote it, not a marketing department
+8. EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
 
@@ -99,10 +100,12 @@ Continue pattern...
 
 CRITICAL FORMATTING REQUIREMENTS:
 - Include proper line breaks between paragraphs in emails
-- For CTAs, format as: "How about a chat to discuss some strategies?" (as a clickable link)
-- Use Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - NO EXCEPTIONS
+- Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Example CTAs: "Put some time on my calendar?", "Set up a quick chat?", "How about we hop on a call?"
 - Make output ready to paste directly into CRM/marketing tools
-- Each email should have clean paragraph breaks, not run-on text`
+- Each email should have clean paragraph breaks, not run-on text
+- NO EMAIL IS COMPLETE WITHOUT AN APOLLO LINK CTA`
 
     // Generate initial email
     const { text: initialEmail } = await generateText({
