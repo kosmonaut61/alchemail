@@ -448,3 +448,264 @@ Using GPT-5 Responses API for QA with model: gpt-5
 🚀 Sending QA request to GPT-5 Responses API...
  ✓ Compiled in 420ms (1172 modules)
  ✓ Compiled in 267ms (1172 modules)
+✅ GPT-5 Responses API QA succeeded! Response length: 2201 characters
+📈 Quality Score: 53/100
+✅ Passed: false
+📋 Issues Found: 11
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] greeting: Missing proper greeting
+  3. [HIGH] length: Email 1 total word count appears under 95.
+  4. [MEDIUM] content: Email 1 opens with assumptive claims about the recipient's issues ("Freight swings hit your brand. Claims slip. Reports lag.").
+  5. [HIGH] length: Email 2 total word count appears under 95.
+  6. [HIGH] length: Email 3 total word count appears under 95.
+  7. [HIGH] length: Email 4 total word count appears under 95.
+  8. [LOW] subject: Email 4 subject is not sentence case ("reply to thread").
+  9. [HIGH] formatting: LinkedIn Message 1 is missing an Apollo meeting link in the CTA.
+  10. [HIGH] formatting: LinkedIn Message 2 is missing an Apollo meeting link in the CTA.
+  11. [HIGH] formatting: LinkedIn Message 3 is missing an Apollo meeting link in the CTA.
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-5
+📝 Applying fixes to email...
+Using GPT-5 Responses API for QA with model: gpt-5
+🔧 GPT-5 QA Parameters: {
+  model: 'gpt-5',
+  reasoning: 'low',
+  verbosity: 'low',
+  promptLength: 7310,
+  inputFormat: 'responses_api'
+}
+🚀 Sending QA request to GPT-5 Responses API...
+✅ GPT-5 Responses API QA succeeded! Response length: 3863 characters
+✅ Auto-fix successful, fixed email length: 3863 characters
+✅ Auto-fix completed
+📊 Fixed content length: 3863 characters
+🔧 Fixes applied: 12
+  1. Fixed structure issue: Missing subject line
+  2. Fixed greeting issue: Missing proper greeting
+  3. Fixed length issue: Email 1 total word count appears under 95.
+  4. Fixed content issue: Email 1 opens with assumptive claims about the recipient's issues ("Freight swings hit your brand. Claims slip. Reports lag.").
+  5. Fixed length issue: Email 2 total word count appears under 95.
+  6. Fixed length issue: Email 3 total word count appears under 95.
+  7. Fixed length issue: Email 4 total word count appears under 95.
+  8. Fixed subject issue: Email 4 subject is not sentence case ("reply to thread").
+  9. Fixed formatting issue: LinkedIn Message 1 is missing an Apollo meeting link in the CTA.
+  10. Fixed formatting issue: LinkedIn Message 2 is missing an Apollo meeting link in the CTA.
+  11. Fixed formatting issue: LinkedIn Message 3 is missing an Apollo meeting link in the CTA.
+  12. Applied all quality improvements automatically
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-5
+📝 Double-checking final email...
+Using GPT-5 Responses API for QA with model: gpt-5
+🔧 GPT-5 QA Parameters: {
+  model: 'gpt-5',
+  reasoning: 'low',
+  verbosity: 'low',
+  promptLength: 7092,
+  inputFormat: 'responses_api'
+}
+🚀 Sending QA request to GPT-5 Responses API...
+✅ GPT-5 Responses API QA succeeded! Response length: 1717 characters
+Using GPT-5 Responses API for QA with model: gpt-5
+🔧 GPT-5 QA Parameters: {
+  model: 'gpt-5',
+  reasoning: 'low',
+  verbosity: 'low',
+  promptLength: 7770,
+  inputFormat: 'responses_api'
+}
+🚀 Sending QA request to GPT-5 Responses API...
+✅ GPT-5 Responses API QA succeeded! Response length: 3636 characters
+✅ Auto-fix successful, fixed email length: 3636 characters
+Using GPT-5 Responses API for QA with model: gpt-5
+🔧 GPT-5 QA Parameters: {
+  model: 'gpt-5',
+  reasoning: 'low',
+  verbosity: 'low',
+  promptLength: 6865,
+  inputFormat: 'responses_api'
+}
+🚀 Sending QA request to GPT-5 Responses API...
+✅ GPT-5 Responses API QA succeeded! Response length: 1453 characters
+✅ Double-check completed
+📊 Final content length: 3636 characters
+🔧 Additional fixes: 7
+
+📈 ===== FINAL QA ANALYSIS =====
+🤖 Final QA Model: gpt-5
+📝 Running final quality check...
+Using GPT-5 Responses API for QA with model: gpt-5
+🔧 GPT-5 QA Parameters: {
+  model: 'gpt-5',
+  reasoning: 'low',
+  verbosity: 'low',
+  promptLength: 6865,
+  inputFormat: 'responses_api'
+}
+🚀 Sending QA request to GPT-5 Responses API...
+✅ GPT-5 Responses API QA succeeded! Response length: 1276 characters
+📈 Final Quality Score: 78/100
+✅ Final Passed: false
+📋 Final Issues: 6
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3636 characters
+🔧 Total Fixes Applied: 19
+📈 Final Quality Score: 78/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Proof for your GPT-5 signal
+
+Email 1 (Day 0):
+Subject: Plan your GPT-5 signal
+
+Hi {{contact.first_name}},
+
+How are you tracking freight data at {{account.name}}? Are reports hard to sha...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ ○ Compiling / ...
+ ✓ Compiled / in 970ms (896 modules)
+ GET / 200 in 1427ms
+ ✓ Compiled /api/generate-email-enhanced in 137ms (1138 modules)
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: cmo
+📝 Signal: test signal for GPT-5 local
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 9112 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+Using GPT-5 Responses API for email generation with model: gpt-5
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5
+📏 Prompt Length: 9112 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5',
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 9112,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+✅ GPT-5 Responses API succeeded with gpt-5
+📊 Response length: 3507 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Local Signal Series
+
+Email 1 (Day 0):
+Subject: Your team’s blind spots
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, that test signal for GPT-5 local ...
+────────────────────────────────────────────────────────────
+🚀 ===== GPT-5 RESPONSES API END =====
+
+✅ Generation successful with gpt-5
+📊 Generated content length: 3507 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Local Signal Series
+
+Email 1 (Day 0):
+Subject: Your team’s blind spots
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, that test signal for GPT-5 local caught my eye. It points to messy freight data hurting your brand metrics. Missed ETAs and cost swin...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3507 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Local Signal Series
+
+Email 1 (Day 0):
+Subject: Your team’s blind spots
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, that test signal for GPT-5 local ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ POST /api/generate-email-enhanced 200 in 18918ms
+ ✓ Compiled in 674ms (816 modules)
+ ✓ Compiled in 217ms (816 modules)
+ ✓ Compiled in 202ms (816 modules)
+ ✓ Compiled in 228ms (816 modules)
+ ✓ Compiled in 175ms (816 modules)
+ ✓ Compiled in 55ms (802 modules)
+ ✓ Compiled in 384ms (816 modules)
+ ✓ Compiled in 173ms (816 modules)
+ ✓ Compiled in 166ms (816 modules)
+ ✓ Compiled in 145ms (816 modules)
+ ✓ Compiled in 721ms (816 modules)
+ ✓ Compiled in 212ms (816 modules)
+ ✓ Compiled in 250ms (816 modules)
+ ✓ Compiled in 651ms (816 modules)
+ ✓ Compiled in 172ms (816 modules)
+ ✓ Compiled in 180ms (816 modules)
+ ✓ Compiled in 163ms (816 modules)
+ ✓ Compiled in 161ms (816 modules)
+ ✓ Compiled in 144ms (816 modules)
+ ✓ Compiled in 169ms (816 modules)
+ ✓ Compiled in 154ms (816 modules)
+ ✓ Compiled in 145ms (816 modules)
+ ✓ Compiled in 206ms (816 modules)
+ ✓ Compiled in 159ms (816 modules)
+ ✓ Compiled in 511ms (816 modules)
+ ✓ Compiled in 174ms (816 modules)
+ ✓ Compiled in 278ms (816 modules)
+ ✓ Compiled in 211ms (816 modules)
+ ✓ Compiled in 172ms (816 modules)
+ ✓ Compiled in 152ms (816 modules)
+ ✓ Compiled in 278ms (816 modules)
+ ✓ Compiled in 283ms (816 modules)
+ ✓ Compiled in 212ms (816 modules)
+ ✓ Compiled in 315ms (816 modules)
+ ✓ Compiled in 186ms (816 modules)
+ ✓ Compiled in 265ms (816 modules)
+ ✓ Compiled in 266ms (816 modules)
+ ✓ Compiled in 274ms (816 modules)
+ ✓ Compiled in 239ms (816 modules)

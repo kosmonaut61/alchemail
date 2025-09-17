@@ -6,58 +6,49 @@ import { generateWithGPT5Responses, generateWithOpenAIDirect } from "./openai-mo
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // For GPT-5, use the Responses API for best performance
-    console.log(`Using GPT-5 Responses API for QA with model: ${model}`)
+    // For GPT-5, use the working pattern from the chatbot
+    console.log(`[GPT-5 QA] Using model: ${model}`)
+    console.log(`[GPT-5 QA] Prompt length: ${prompt.length} characters`);
     
     try {
-      // Use Responses API with lower verbosity for QA responses
-      const { OpenAI } = await import('openai')
-      const openaiClient = new OpenAI()
-      
-      const requestParams: any = {
-        model: model,
-        input: [
+      const { text, usage, finishReason } = await generateText({
+        model: openai(model),
+        messages: [
           {
             role: "user",
-            content: [
-              {
-                type: "input_text",
-                text: prompt
-              }
-            ]
-          }
+            content: prompt,
+          },
         ],
-        reasoning: { effort: "low" }, // Use low reasoning for faster QA responses
-        text: { verbosity: "low" }    // Use low verbosity for concise QA responses
-      };
-      
-      console.log(`🔧 GPT-5 QA Parameters:`, {
-        model: model,
-        reasoning: "low",
-        verbosity: "low",
-        promptLength: prompt.length,
-        inputFormat: "responses_api"
+        temperature: 0.3, // Lower temperature for more consistent QA
+        topP: 0.9,
+        frequencyPenalty: 0.1,
+        presencePenalty: 0.1,
       });
-      
-      console.log(`🚀 Sending QA request to GPT-5 Responses API...`);
-      const response = await openaiClient.responses.create(requestParams)
-      
-      const responseText = response.output_text || "";
-      console.log(`✅ GPT-5 Responses API QA succeeded! Response length: ${responseText.length} characters`);
-      
-      // If GPT-5 returns empty response, fallback to Chat Completions API
-      if (responseText.trim().length === 0) {
-        console.log('⚠️ GPT-5 Responses API returned empty response, falling back to Chat Completions API...');
-        return await generateWithOpenAIDirect(prompt, model);
-      }
-      
-      return responseText
+
+      console.log(`[GPT-5 QA] Response generated successfully, usage:`, usage);
+      return text;
     } catch (error) {
-      console.error(`GPT-5 Responses API failed for QA:`, error)
-      console.log('Falling back to Chat Completions API for QA...')
+      console.error(`[GPT-5 QA] Error with model ${model}:`, error);
       
-      // Fallback to Chat Completions API
-      return await generateWithOpenAIDirect(prompt, model)
+      // If GPT-5 fails, fallback to GPT-4o
+      console.log('[GPT-5 QA] Falling back to GPT-4o...');
+      try {
+        const { text } = await generateText({
+          model: openai("gpt-4o"),
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+          temperature: 0.3,
+        });
+        console.log(`[GPT-5 QA] Fallback successful with GPT-4o`);
+        return text;
+      } catch (fallbackError) {
+        console.error('[GPT-5 QA] Fallback also failed:', fallbackError);
+        throw new Error(`Both ${model} and fallback failed: ${fallbackError}`);
+      }
     }
   } else if (model.startsWith('o1')) {
     // For O1 models, use standard generateText with specific parameters
@@ -71,7 +62,12 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
     
     const result = await generateText({
       model: openai(model),
-      prompt,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
       temperature: 0.1 // O1 models work better with lower temperature
     })
     console.log(`✅ O1 QA successful! Response length: ${result.text.length} characters`);
@@ -88,7 +84,12 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
     
     const result = await generateText({
       model: openai(model),
-      prompt,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
       temperature: 0.1 // Lower temperature for QA consistency
     })
     console.log(`✅ Standard QA successful! Response length: ${result.text.length} characters`);

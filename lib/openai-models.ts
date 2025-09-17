@@ -14,63 +14,48 @@ export async function generateWithGPT5(prompt: string, model: string = "gpt-5") 
   const modelId = MODEL_MAP[model] || "gpt-5";
 
   try {
-    console.log(`\n🤖 ===== AI SDK GENERATION START =====`);
-    console.log(`📧 Model: ${modelId}`);
-    console.log(`📏 Prompt Length: ${prompt.length} characters`);
-    console.log(`📄 Prompt Preview (first 300 chars):`);
-    console.log('─'.repeat(60));
-    console.log(prompt.substring(0, 300) + (prompt.length > 300 ? '...' : ''));
-    console.log('─'.repeat(60));
-    
-    // GPT-5 models don't support temperature parameter in AI SDK either
-    const isGPT5 = modelId.startsWith('gpt-5');
-    const generateParams: any = {
-      model: openai(modelId),
-      prompt,
-      maxTokens: 800
-    };
-    
-    // Only add temperature for non-GPT-5 models
-    if (!isGPT5) {
-      generateParams.temperature = 0.3;
-    }
-    
-    console.log(`🔧 Parameters:`, {
-      model: modelId,
-      maxTokens: 800,
-      temperature: isGPT5 ? 'not supported' : 0.3,
-      promptLength: prompt.length
-    });
-    
-    console.log(`🚀 Sending to AI SDK...`);
-    const result = await generateText(generateParams);
+    console.log(`[GPT-5] Using model: ${modelId}`);
+    console.log(`[GPT-5] Prompt length: ${prompt.length} characters`);
 
-    console.log(`✅ AI SDK generation successful with ${modelId}`);
-    console.log(`📊 Response length: ${result.text.length} characters`);
-    console.log(`📄 Response preview (first 200 chars):`);
-    console.log('─'.repeat(60));
-    console.log(result.text.substring(0, 200) + (result.text.length > 200 ? '...' : ''));
-    console.log('─'.repeat(60));
-    console.log(`🤖 ===== AI SDK GENERATION END =====\n`);
-    
-    return result.text;
+    const { text, usage, finishReason } = await generateText({
+      model: openai(modelId),
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      maxTokens: 2000,
+      temperature: 0.7,
+      topP: 0.9,
+      frequencyPenalty: 0.1,
+      presencePenalty: 0.1,
+    });
+
+    console.log(`[GPT-5] Response generated successfully, usage:`, usage);
+    return text;
   } catch (error) {
-    console.error(`❌ Error with AI SDK model ${modelId}:`, error);
+    console.error(`[GPT-5] Error with model ${modelId}:`, error);
     
     // If GPT-5 fails, fallback to GPT-4o
     if (modelId.startsWith('gpt-5')) {
-      console.log('🔄 Falling back to GPT-4o via AI SDK...');
+      console.log('[GPT-5] Falling back to GPT-4o...');
       try {
-        const fallbackResult = await generateText({
+        const { text } = await generateText({
           model: openai("gpt-4o"),
-          prompt,
-          maxTokens: 800,
-          temperature: 0.3
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+          maxTokens: 2000,
+          temperature: 0.7,
         });
-        console.log(`✅ AI SDK fallback successful with GPT-4o`);
-        return fallbackResult.text;
+        console.log(`[GPT-5] Fallback successful with GPT-4o`);
+        return text;
       } catch (fallbackError) {
-        console.error('❌ AI SDK fallback also failed:', fallbackError);
+        console.error('[GPT-5] Fallback also failed:', fallbackError);
         throw new Error(`Both ${modelId} and fallback failed: ${fallbackError}`);
       }
     }
