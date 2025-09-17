@@ -131,14 +131,16 @@ ${samples.emails.map((sample: any, index: number) =>
 ).join('\n\n---\n\n')}
 
 ANALYSIS REQUIREMENTS:
-1. Check if the tone matches the samples (casual vs professional)
-2. Verify greeting style matches ("Hey" vs "Hi")
-3. Ensure structure follows the 3-paragraph format
-4. Check if CTA style matches (soft questions vs commands)
-5. Verify sentence length and readability
-6. Check for proper personalization
+1. Check if the tone matches the samples (casual vs professional) - be lenient, minor differences are OK
+2. Verify greeting style matches ("Hey" vs "Hi") - only flag if completely wrong
+3. Ensure structure follows 3-4 paragraph format - both are acceptable
+4. Check if CTA style matches (soft questions vs commands) - Apollo link format is key
+5. Verify sentence length and readability - flag only if very long sentences
+6. Check for proper personalization - merge tags should be present
 
-Return a JSON array of issues found:
+IMPORTANT: Only flag significant issues. Minor variations from samples are acceptable. Focus on major structural or tone problems.
+
+Return a JSON array of issues found (be conservative - only flag real problems):
 [
   {
     "type": "tone|structure|greeting|cta|formatting",
@@ -184,15 +186,17 @@ TARGET PAIN POINTS: ${painPoints.join(', ')}
 ANALYSIS CRITERIA:
 1. **Subject Line**: 3-6 words, sentence case, no excessive punctuation
 2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals, never "Dear"
-3. **Structure**: 3 paragraphs (pain point → social proof → CTA)
+3. **Structure**: 3-4 paragraphs (pain point → social proof → CTA), proper line breaks
 4. **Sentence Length**: Max 15 words per sentence
-5. **Word Count**: 80-120 words total
-6. **Tone**: 5th grade reading level, respectful but energetic
+5. **Word Count**: 70-100 words total
+6. **Tone**: 5th grade reading level, conversational (not formal/salesy)
 7. **Adverbs**: Max 2 per email
-8. **CTA**: Ends with soft question, not command
-9. **Formatting**: Plain text, no bold/italics, proper line breaks
-10. **Personalization**: Uses merge tags appropriately
-11. **Content**: Addresses specific pain points, includes social proof
+8. **CTA**: Ends with soft question formatted as Apollo link
+9. **Formatting**: Plain text, proper line breaks between paragraphs
+10. **Personalization**: Uses merge tags like {{contact.first_name}}, {{account.name}}
+11. **Content**: Addresses specific pain points, includes ONE clear statistic
+12. **Language**: NO cheesy words like "impressive," "significant," "considerable," "enticing"
+13. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 
 Return a JSON array of issues:
 [
@@ -227,18 +231,24 @@ function calculateScore(issues: QualityIssue[]): number {
   issues.forEach(issue => {
     switch (issue.severity) {
       case 'high':
-        score -= 15
+        score -= 8  // Reduced from 15
         break
       case 'medium':
-        score -= 8
+        score -= 4  // Reduced from 8
         break
       case 'low':
-        score -= 3
+        score -= 1  // Reduced from 3
         break
     }
   })
   
-  return Math.max(0, score)
+  // Bonus points for good emails (no high-priority issues)
+  const highPriorityIssues = issues.filter(i => i.severity === 'high')
+  if (highPriorityIssues.length === 0) {
+    score += 5  // Bonus for no critical issues
+  }
+  
+  return Math.max(0, Math.min(100, score))
 }
 
 // Generate improvement suggestions

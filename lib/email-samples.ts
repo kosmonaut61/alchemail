@@ -11,7 +11,7 @@ Congrats on your new role as CFO at {{account.name}}!
 
 I know you're driving impact, so I'll keep this short. Transportation costs rise during uncertain times. With Emerge, CFOs gain control of freight spend. Dollar Tree saved $3.2M+ in 6 months using our software. We had them up and running in under 2 hours.
 
-Interested in learning how we can help {{account.name}} achieve similar results?`
+[Interested in learning how we can help {{account.name}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
       },
       {
         subject: "Smarter freight reporting for Finance",
@@ -21,7 +21,7 @@ I wanted to follow up on my previous note. Many new CFOs I speak with say transp
 
 That's why Finance and Operations leaders at Albertsons, Ace Hardware, and AB InBev use Emerge. Our reporting and benchmarking tools give them real-time visibility, so they know market rates and never risk overpaying on freight.
 
-Would it make sense to connect for 20 minutes to explore if {{account.name}} could benefit too?`
+[Would it make sense to connect for 20 minutes to explore if {{account.name}} could benefit too?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
       }
     ]
   },
@@ -37,7 +37,7 @@ I saw you're growing your transportation team at {{account.name}}. Many VPs say 
 
 That's why transportation leaders use Emerge. Our platform and real-time reporting help new hires ramp up quickly while giving existing team members the support they need to hit their targets.
 
-Would it make sense to connect to explore how {{account.name}} could empower its team with the right tools?`
+[Would it make sense to connect to explore how {{account.name}} could empower its team with the right tools?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
       },
       {
         subject: "Equip your growing team",
@@ -47,7 +47,7 @@ I wanted to follow up on my note. When transportation teams are growing, leaders
 
 That's why many VPs turn to modern platforms like Emerge. Teams love the ease of use, real-time reporting, and automation – because it cuts manual work and helps them deliver faster.
 
-Would it be worth a quick chat to explore if {{account.name}} could equip its growing team with tools they'll love?`
+[Would it be worth a quick chat to explore if {{account.name}} could equip its growing team with tools they'll love?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
       }
     ]
   },
@@ -65,7 +65,7 @@ One way to stand out is by bringing your manager a solution.
 
 With Emerge's software, those manual tasks get automated. Best part? No complicated IT setup required.
 
-Should I send you a short overview to pitch to your manager?`
+[Should I send you a short overview to pitch to your manager?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
       },
       {
         subject: "reply to thread",
@@ -75,7 +75,7 @@ The best part about Emerge is that getting set up takes less than a day. That me
 
 Interns who show initiative like this often get noticed and open doors for full-time opportunities. Helping your team automate manual work could be the project that sets you apart.
 
-Would it help if I sent you a one-page overview to share with your manager?`
+[Would it help if I sent you a one-page overview to share with your manager?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
       }
     ]
   }

@@ -81,11 +81,13 @@ Campaign Name: [Name]
 
 Email 1 (Day 0):
 Subject: [subject]
-[email body]
+
+[email body with proper line breaks between paragraphs]
 
 Email 2 (Day 3):
-Subject: [subject]  
-[email body]
+Subject: [subject]
+
+[email body with proper line breaks between paragraphs]
 
 LinkedIn Message 1 (Day 1):
 [message]
@@ -93,7 +95,14 @@ LinkedIn Message 1 (Day 1):
 LinkedIn Message 2 (Day 5):
 [message]
 
-Continue pattern...`
+Continue pattern...
+
+CRITICAL FORMATTING REQUIREMENTS:
+- Include proper line breaks between paragraphs in emails
+- For CTAs, format as: "How about a chat to discuss some strategies?" (as a clickable link)
+- Use Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Make output ready to paste directly into CRM/marketing tools
+- Each email should have clean paragraph breaks, not run-on text`
 
     // Generate initial email
     const { text: initialEmail } = await generateText({

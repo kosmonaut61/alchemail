@@ -64,8 +64,10 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	"Interested in learning…?"
 •	"Would it make sense to connect…?"
 •	"Would it help if I sent…?"
+•	"How about a chat to discuss some strategies?"
 •	Never command (no "Book a demo").
-•	No links in body unless specifically offering an overview → then plain "one-page overview."
+•	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+•	No other links in body unless specifically offering an overview → then plain "one-page overview."
 •	Keep CTA on its own line at the end of the email.
 
 ### 6. Formatting & Appearance Rules
