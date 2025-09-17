@@ -191,7 +191,7 @@ ANALYSIS CRITERIA:
 5. **Word Count**: 70-100 words total
 6. **Tone**: 5th grade reading level, conversational (not formal/salesy)
 7. **Adverbs**: Max 2 per email
-8. **CTA**: Ends with soft question formatted as Apollo link
+8. **CTA**: Ends with natural, conversational question (e.g., "Put some time on my calendar?", "Set up a quick chat?") - NO generic CTAs like "Learn More", "See More", "Know More", "Find Out"
 9. **Formatting**: Plain text, proper line breaks between paragraphs
 10. **Personalization**: Uses merge tags like {{contact.first_name}}, {{account.name}}
 11. **Content**: Addresses specific pain points, includes ONE clear statistic

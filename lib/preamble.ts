@@ -59,12 +59,17 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	Sound like a real person, not marketing copy.
 
 ### 5. Call-to-Action (CTA) Rules
-•	Always end with a question.
-•	Always ask for low-friction next step:
-•	"Interested in learning…?"
-•	"Would it make sense to connect…?"
-•	"Would it help if I sent…?"
-•	"How about a chat to discuss some strategies?"
+•	Always end with a question that flows naturally from the email content.
+•	Use conversational, natural language that matches the email tone:
+•	"Put some time on my calendar?"
+•	"Set up a quick chat?"
+•	"Would it make sense to connect?"
+•	"How about we hop on a call?"
+•	"Want to explore this together?"
+•	"Think it's worth a conversation?"
+•	"Should we set up time to discuss?"
+•	"Interested in learning more?"
+•	Never use generic CTAs like "Learn More", "See More", "Know More", "Find Out".
 •	Never command (no "Book a demo").
 •	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 •	No other links in body unless specifically offering an overview → then plain "one-page overview."
@@ -91,9 +96,9 @@ Each email body is 3 short paragraphs (1–3 sentences each).
     title: "Return Format",
     content: `### Email Structure & Rules
 **Format:** Subject (3-6 words) + Body (70-100 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
-**Content:** Lead with recipient pain/observation → State why reaching out now → End with soft yes/no question
+**Content:** Lead with recipient pain/observation → State why reaching out now → End with natural conversational question
 **Personalization:** Reference industry companies Emerge works with, include case study quotes
-**CTA:** End with soft question, embed phrase like "Put some time on my calendar" (never raw URL)
+**CTA:** End with natural, conversational question that flows from content (e.g., "Put some time on my calendar?", "Set up a quick chat?") - never generic CTAs like "Learn More"
 **No signature or signoff**
 
 ### Links & CTAs
