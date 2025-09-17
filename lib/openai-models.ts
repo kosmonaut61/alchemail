@@ -98,7 +98,9 @@ export async function generateWithGPT5Responses(prompt: string, model: string = 
         }
       ],
       reasoning: { effort: "minimal" }, // Use minimal reasoning for faster responses
-      text: { verbosity: "low" }        // Use low verbosity for faster responses
+      text: { 
+        verbosity: "low"        // Use low verbosity for faster responses
+      }
     };
     
     console.log(`🔧 GPT-5 Parameters:`, {
@@ -193,8 +195,21 @@ export async function generateWithOpenAIDirect(prompt: string, model: string = "
   } catch (error) {
     console.error(`❌ Direct OpenAI client failed with model ${model}:`, error);
     
-    // Fallback to AI SDK
+    // Fallback to AI SDK with GPT-4o (avoiding circular dependency)
     console.log('🔄 Falling back to AI SDK with GPT-4o...');
-    return generateWithGPT5(prompt, "gpt-4o");
+    const { text } = await generateText({
+      model: openai("gpt-4o", {
+        apiKey: process.env.OPENAI_API_KEY,
+      }),
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      maxTokens: 2000,
+      temperature: 0.7,
+    });
+    return text;
   }
 }

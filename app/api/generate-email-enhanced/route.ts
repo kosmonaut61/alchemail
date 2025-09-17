@@ -5,23 +5,24 @@ import { getPreamble } from "@/lib/preamble"
 import { ContextItem } from "@/lib/context-repository"
 import { getPersonaById } from "@/lib/personas"
 import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "@/lib/email-samples"
-import { 
-  analyzeEmailQuality, 
-  autoFixEmail, 
-  doubleCheckFinalEmail,
-  getGenerationProgress,
-  type EmailQualityReport 
-} from "@/lib/email-qa"
+// Temporarily disabled email-qa imports to avoid circular dependencies
+// import { 
+//   analyzeEmailQuality, 
+//   autoFixEmail, 
+//   doubleCheckFinalEmail,
+//   getGenerationProgress,
+//   type EmailQualityReport 
+// } from "@/lib/email-qa"
 
-// Import the new openai-models functions
-import { generateWithGPT5, generateWithOpenAIDirect, generateWithGPT5Responses } from "@/lib/openai-models"
+// Import only the function we need to avoid circular dependencies
+import { generateWithGPT5, generateWithGPT5Responses } from "@/lib/openai-models"
 
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // Use the working GPT-5 pattern from the chatbot
-    console.log(`Using working GPT-5 pattern for email generation with model: ${model}`)
-    return await generateWithGPT5(prompt, model)
+    // Use the fixed GPT-5 Responses API for email generation
+    console.log(`Using fixed GPT-5 Responses API for email generation with model: ${model}`)
+    return await generateWithGPT5Responses(prompt, model)
   } else if (model.startsWith('o1')) {
     // For O1 models, use standard generateText with specific parameters
     console.log(`Using O1 model for email generation: ${model}`)
@@ -46,19 +47,23 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
 }
 
 export async function POST(request: NextRequest) {
+  console.log('🚀 POST handler called')
+  
   // Set a timeout for the entire operation
   const timeoutPromise = new Promise((_, reject) => {
     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
   })
   
   try {
+    console.log('🏁 About to call processRequest...')
     const result = await Promise.race([
       processRequest(request),
       timeoutPromise
     ])
+    console.log('✅ processRequest completed')
     return result
   } catch (error) {
-    console.error('API Error:', error)
+    console.error('❌ API Error:', error)
     return NextResponse.json({ 
       error: error instanceof Error ? error.message : "Unknown error occurred" 
     }, { status: 500 })
@@ -67,11 +72,15 @@ export async function POST(request: NextRequest) {
 
 async function processRequest(request: NextRequest) {
   try {
+    console.log('🚀 Starting processRequest...')
+    
     const { persona, signal, painPoints, contextItems, enableQA = false, model = "gpt-5" } = await request.json()
+    console.log('📝 Parsed request data')
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })
     }
+    console.log('✅ API key found')
 
     // Log the model being used for debugging
     console.log(`Using model: ${model}`)
@@ -81,12 +90,17 @@ async function processRequest(request: NextRequest) {
       console.log('Warning: GPT-5 model selected - this may not be available yet or may timeout')
     }
 
+    console.log('📖 Getting preamble...')
     const preamble = await getPreamble()
+    console.log('✅ Preamble loaded')
 
     // Build dynamic context from selected items
+    console.log('🔧 Building dynamic context...')
     const dynamicContext = buildDynamicContext(contextItems || [])
+    console.log('✅ Dynamic context built')
     
     // Get detailed persona information
+    console.log('👤 Getting persona info...')
     const selectedPersona = getPersonaById(persona)
     const personaContext = selectedPersona ? `
 ## PERSONA-SPECIFIC CONTEXT:
@@ -100,7 +114,11 @@ async function processRequest(request: NextRequest) {
 ` : ''
 
     // Get relevant email samples for this persona
+    console.log('📧 Getting email samples...')
     const samples = getEmailSamplesByPersona(persona)
+    console.log('✅ Email samples retrieved')
+    
+    console.log('🔧 Building samples context...')
     const samplesContext = samples ? `
 
 ## EMAIL SAMPLES TO FOLLOW:
@@ -111,7 +129,9 @@ Body: ${sample.body}`
 ).join('\n\n---\n\n')}
 
 **IMPORTANT**: Match the tone, structure, and style of these samples exactly.` : ''
+    console.log('✅ Samples context built')
 
+    console.log('📝 Building final prompt...')
     const prompt = `${preamble}
 
 ${dynamicContext}
@@ -183,6 +203,7 @@ FORMATTING REQUIREMENTS:
 - NO EMAIL IS COMPLETE WITHOUT AN APOLLO LINK CTA
 
 FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT WILL BE OPTIMIZED BY THE QA SYSTEM`
+    console.log('✅ Final prompt built')
 
     // Generate initial email with fallback
     let initialEmail: string
@@ -200,8 +221,10 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
       console.log(prompt.substring(0, 500) + (prompt.length > 500 ? '...' : ''))
       console.log('─'.repeat(80))
       console.log(`\n🤖 Sending to ${model}...`)
+      console.log('🚀 About to call generateTextWithModel...')
       
       initialEmail = await generateTextWithModel(prompt, model)
+      console.log('✅ generateTextWithModel completed')
       
       console.log(`✅ Generation successful with ${model}`)
       console.log(`📊 Generated content length: ${initialEmail.length} characters`)
@@ -226,7 +249,8 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
     }
 
     let finalEmail = initialEmail
-    let qualityReport: EmailQualityReport | null = null
+    // Temporarily disabled QA features to avoid circular dependencies
+    let qualityReport: any = null
     let fixesApplied: string[] = []
 
     // Run QA and auto-fix if enabled

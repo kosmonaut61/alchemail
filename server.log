@@ -726,3 +726,2084 @@ Subject: Your team’s blind spots
  ✓ Compiled in 145ms (816 modules)
  ✓ Compiled in 219ms (816 modules)
  ✓ Compiled in 139ms (816 modules)
+ ✓ Compiled /api/test-gpt5 in 480ms (1015 modules)
+[TEST] Using model: gpt-5
+[TEST] Prompt length: 69 characters
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[TEST] Response generated successfully, usage: {
+  inputTokens: 22,
+  outputTokens: 71,
+  totalTokens: 93,
+  reasoningTokens: 64,
+  cachedInputTokens: 0
+}
+ POST /api/test-gpt5 200 in 3342ms
+ ✓ Compiled /api/generate-email-enhanced in 257ms (358 modules)
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12504 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 12504 characters
+ POST /api/generate-email-enhanced 200 in 30006ms
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test
+🎯 Pain Points: test
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12457 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 12457 characters
+ POST /api/generate-email-enhanced 200 in 9999ms
+API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:51:28)
+  49 |   // Set a timeout for the entire operation
+  50 |   const timeoutPromise = new Promise((_, reject) => {
+> 51 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  52 |   })
+  53 |   
+  54 |   try {
+ ✓ Compiled in 606ms (1172 modules)
+ ✓ Compiled in 224ms (1172 modules)
+ ✓ Compiled in 220ms (1172 modules)
+API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:51:28)
+  49 |   // Set a timeout for the entire operation
+  50 |   const timeoutPromise = new Promise((_, reject) => {
+> 51 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  52 |   })
+  53 |   
+  54 |   try {
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12504 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 12504 characters
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2748,
+  outputTokens: 5740,
+  totalTokens: 8488,
+  reasoningTokens: 4864,
+  cachedInputTokens: 1408
+}
+✅ Generation successful with gpt-5
+📊 Generated content length: 3466 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Turning the Test Signal Into Wins
+
+Email 1 (Day 0):
+Subject: About your test signal
+
+Hi {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}},
+
+Your test signal likely shows slow tenders and rate swings. That test pain point drains time. It also clouds budgets for y...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3466 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Turning the Test Signal Into Wins
+
+Email 1 (Day 0):
+Subject: About your test signal
+
+Hi {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}},
+
+Your test signal likel...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ POST /api/generate-email-enhanced 200 in 15001ms
+ ✓ Compiled /api/test-gpt5 in 112ms (358 modules)
+[TEST] Using model: gpt-5
+[TEST] Prompt length: 4 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2740,
+  outputTokens: 4904,
+  totalTokens: 7644,
+  reasoningTokens: 4160,
+  cachedInputTokens: 1920
+}
+✅ Generation successful with gpt-5
+📊 Generated content length: 2940 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Your Freight Playbook
+
+Email 1 (Day 0):
+Subject: A simple test for {{account.name}}
+
+Your team fights rate swings and manual bids. It slows ops and clouds budgets. Leaders need clear costs and steady service.
+
+I’m reaching out to run a small test. Use ProcureOS on a few lanes thi...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 2940 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Your Freight Playbook
+
+Email 1 (Day 0):
+Subject: A simple test for {{account.name}}
+
+Your team fights rate swings and manual bids. It slows ops and clouds budgets. Leaders need cle...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[TEST] Response generated successfully, usage: {
+  inputTokens: 7,
+  outputTokens: 262,
+  totalTokens: 269,
+  reasoningTokens: 192,
+  cachedInputTokens: 0
+}
+ POST /api/test-gpt5 200 in 4252ms
+ ✓ Compiled in 606ms (1174 modules)
+ ✓ Compiled /api/test-simple in 184ms (1162 modules)
+🚀 Simple test API called
+📝 Prompt: Write a simple email about transportation
+🤖 Model: gpt-5
+✅ API key found
+🚀 Calling GPT-5...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ GPT-5 response received
+📊 Usage: {
+  inputTokens: 12,
+  outputTokens: 607,
+  totalTokens: 619,
+  reasoningTokens: 512,
+  cachedInputTokens: 0
+}
+ POST /api/test-simple 200 in 6840ms
+API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:51:28)
+  49 |   // Set a timeout for the entire operation
+  50 |   const timeoutPromise = new Promise((_, reject) => {
+> 51 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  52 |   })
+  53 |   
+  54 |   try {
+ ✓ Compiled in 234ms (1176 modules)
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2748,
+  outputTokens: 6528,
+  totalTokens: 9276,
+  reasoningTokens: 5696,
+  cachedInputTokens: 2688
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 3430 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: From Test Signal to Savings
+
+Email 1 (Day 0):
+Subject: Saw your test signal
+
+I noticed a test signal tied to your team. Are you testing freight workflows? Many ops leaders face that test pain point. Costs climb while service must stay strong.
+
+You likely juggle spot buys, bids, and ca...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3430 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: From Test Signal to Savings
+
+Email 1 (Day 0):
+Subject: Saw your test signal
+
+I noticed a test signal tied to your team. Are you testing freight workflows? Many ops leaders face that tes...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ ✓ Compiled in 327ms (1029 modules)
+ ✓ Compiled in 170ms (816 modules)
+ ✓ Compiled in 242ms (816 modules)
+ ✓ Compiled /api/generate-email-enhanced in 85ms (358 modules)
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12504 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 12504 characters
+ POST /api/generate-email-enhanced 200 in 20003ms
+ ✓ Compiled in 414ms (1172 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12504 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 12504 characters
+ POST /api/generate-email-enhanced 200 in 10009ms
+ ✓ Compiled /api/test-simple in 63ms (358 modules)
+🚀 Simple test API called
+📝 Prompt: test
+🤖 Model: gpt-5
+✅ API key found
+🚀 Calling GPT-5...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ GPT-5 response received
+📊 Usage: {
+  inputTokens: 7,
+  outputTokens: 144,
+  totalTokens: 151,
+  reasoningTokens: 64,
+  cachedInputTokens: 0
+}
+ POST /api/test-simple 200 in 3822ms
+ ✓ Compiled in 689ms (1174 modules)
+API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:52:29)
+  50 |   
+  51 |   // Set a timeout for the entire operation
+> 52 |   const timeoutPromise = new Promise((_, reject) => {
+     |                             ^
+  53 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+  54 |   })
+  55 |   
+ ✓ Compiled /api/generate-email-enhanced-minimal in 123ms (1162 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📊 Request data: {
+  persona: 'operations_upper_management',
+  signal: 'test signal',
+  painPoints: [ 'test pain point' ],
+  contextItems: [],
+  enableQA: false,
+  model: 'gpt-5'
+}
+ POST /api/generate-email-enhanced-minimal 200 in 157ms
+ ✓ Compiled in 268ms (1176 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+📊 Request data: {
+  persona: 'operations_upper_management',
+  signal: 'test signal',
+  painPoints: [ 'test pain point' ],
+  contextItems: [],
+  enableQA: false,
+  model: 'gpt-5'
+}
+📏 Preamble length: 6154
+ POST /api/generate-email-enhanced-minimal 200 in 36ms
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2748,
+  outputTokens: 4535,
+  totalTokens: 7283,
+  reasoningTokens: 3776,
+  cachedInputTokens: 2688
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 3016 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Signal, Real Savings
+
+Email 1 (Day 0):
+Subject: Your test signal, quick wins
+
+Operations leaders juggle cost and service. Manual bids and emails eat time. I saw a test signal from your team. It points to a test pain point in your lanes.
+
+Emerge runs RFPs, spot quotes, and rate ch...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3016 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Signal, Real Savings
+
+Email 1 (Day 0):
+Subject: Your test signal, quick wins
+
+Operations leaders juggle cost and service. Manual bids and emails eat time. I saw a test signal from ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+❌ API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:53:28)
+  51 |   // Set a timeout for the entire operation
+  52 |   const timeoutPromise = new Promise((_, reject) => {
+> 53 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  54 |   })
+  55 |   
+  56 |   try {
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2748,
+  outputTokens: 6642,
+  totalTokens: 9390,
+  reasoningTokens: 5760,
+  cachedInputTokens: 2688
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 3420 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Turning the Test Signal Into Wins
+
+Email 1 (Day 0):
+Subject: Making sense of test signal
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, I noticed the test signal in your ops. Many teams fight rate swings and slow tenders. Budgets slip when data is scattered...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3420 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Turning the Test Signal Into Wins
+
+Email 1 (Day 0):
+Subject: Making sense of test signal
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, I noticed the test si...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ ✓ Compiled in 403ms (816 modules)
+ ✓ Compiled in 162ms (816 modules)
+ ✓ Compiled in 148ms (816 modules)
+ ⚠ ./app/api/generate-email-enhanced-minimal/route.ts
+Attempted import error: 'buildDynamicContext' is not exported from '@/lib/context-repository' (imported as 'buildDynamicContext').
+
+Import trace for requested module:
+./app/api/generate-email-enhanced-minimal/route.ts
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+🔧 Testing buildDynamicContext...
+❌ Minimal API Error: TypeError: (0 , _lib_context_repository__WEBPACK_IMPORTED_MODULE_2__.buildDynamicContext) is not a function
+    at POST (app/api/generate-email-enhanced-minimal/route.ts:18:47)
+  16 |     
+  17 |     console.log('🔧 Testing buildDynamicContext...')
+> 18 |     const dynamicContext = buildDynamicContext(contextItems || [])
+     |                                               ^
+  19 |     console.log('✅ buildDynamicContext completed')
+  20 |     
+  21 |     console.log('📊 Request data:', { persona, signal, painPoints, contextItems, enableQA, model })
+ POST /api/generate-email-enhanced-minimal 500 in 237ms
+ ○ Compiling /api/generate-email-enhanced-minimal ...
+ ✓ Compiled /api/generate-email-enhanced-minimal in 258ms (947 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+🔧 Testing buildDynamicContext...
+✅ buildDynamicContext completed
+📊 Request data: {
+  persona: 'operations_upper_management',
+  signal: 'test signal',
+  painPoints: [ 'test pain point' ],
+  contextItems: [],
+  enableQA: false,
+  model: 'gpt-5'
+}
+📏 Preamble length: 6154
+📏 Dynamic context length: 0
+ POST /api/generate-email-enhanced-minimal 200 in 25ms
+ ✓ Compiled in 322ms (947 modules)
+ ✓ Compiled in 246ms (948 modules)
+ ✓ Compiled in 217ms (948 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+🔧 Testing buildDynamicContext...
+✅ buildDynamicContext completed
+👤 Testing getPersonaById...
+✅ getPersonaById completed
+📊 Request data: {
+  persona: 'operations_upper_management',
+  signal: 'test signal',
+  painPoints: [ 'test pain point' ],
+  contextItems: [],
+  enableQA: false,
+  model: 'gpt-5'
+}
+📏 Preamble length: 6154
+📏 Dynamic context length: 0
+👤 Persona found: true
+ POST /api/generate-email-enhanced-minimal 200 in 99ms
+ ✓ Compiled in 168ms (948 modules)
+ ✓ Compiled in 297ms (949 modules)
+ ✓ Compiled in 243ms (949 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+🔧 Testing buildDynamicContext...
+✅ buildDynamicContext completed
+👤 Testing getPersonaById...
+✅ getPersonaById completed
+📧 Testing getEmailSamplesByPersona...
+✅ getEmailSamplesByPersona completed
+📊 Request data: {
+  persona: 'operations_upper_management',
+  signal: 'test signal',
+  painPoints: [ 'test pain point' ],
+  contextItems: [],
+  enableQA: false,
+  model: 'gpt-5'
+}
+📏 Preamble length: 6154
+📏 Dynamic context length: 0
+👤 Persona found: true
+📧 Samples found: false
+ POST /api/generate-email-enhanced-minimal 200 in 28ms
+ ✓ Compiled in 186ms (949 modules)
+ ✓ Compiled in 671ms (1171 modules)
+ ✓ Compiled in 211ms (1171 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+🔧 Testing buildDynamicContext...
+✅ buildDynamicContext completed
+👤 Testing getPersonaById...
+✅ getPersonaById completed
+📧 Testing getEmailSamplesByPersona...
+✅ getEmailSamplesByPersona completed
+🤖 Testing generateWithGPT5...
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 25 characters
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 11,
+  outputTokens: 310,
+  totalTokens: 321,
+  reasoningTokens: 256,
+  cachedInputTokens: 0
+}
+✅ generateWithGPT5 completed
+📊 Request data: {
+  persona: 'operations_upper_management',
+  signal: 'test signal',
+  painPoints: [ 'test pain point' ],
+  contextItems: [],
+  enableQA: false,
+  model: 'gpt-5'
+}
+📏 Preamble length: 6154
+📏 Dynamic context length: 0
+👤 Persona found: true
+📧 Samples found: false
+🤖 GPT-5 response length: 189
+ POST /api/generate-email-enhanced-minimal 200 in 4621ms
+ ✓ Compiled in 336ms (816 modules)
+ ✓ Compiled in 181ms (816 modules)
+ ✓ Compiled /api/generate-email-enhanced in 139ms (358 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built (simplified)
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 89 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+Generate a professional email about: test signal for persona: operations_upper_management
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 89 characters
+ POST /api/generate-email-enhanced 200 in 20011ms
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 20,
+  outputTokens: 1341,
+  totalTokens: 1361,
+  reasoningTokens: 832,
+  cachedInputTokens: 0
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 2334 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Notice: Scheduled Test Signal to Validate Incident Notification and Failover – [DATE], [TIME, TIMEZONE]
+
+To: Operations Leadership Team
+Cc: NOC, Incident Management, Service Desk, SRE, Compliance
+
+Team,
+
+We will conduct a controlled test signal to validate end-to-end monitoring, alerting, a...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 2334 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Notice: Scheduled Test Signal to Validate Incident Notification and Failover – [DATE], [TIME, TIMEZONE]
+
+To: Operations Leadership Team
+Cc: NOC, Incident Management, Service Desk, SRE, Compli...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ ✓ Compiled in 620ms (1174 modules)
+ ✓ Compiled /api/generate-email-enhanced-debug in 302ms (1160 modules)
+🚀 DEBUG POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+✅ Persona info retrieved
+📧 Getting email samples...
+✅ Email samples retrieved
+📝 Building prompt...
+✅ Prompt built
+🤖 Calling GPT-5...
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 89 characters
+ POST /api/generate-email-enhanced-debug 200 in 19999ms
+ ✓ Compiled in 333ms (949 modules)
+ ✓ Compiled in 277ms (949 modules)
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 20,
+  outputTokens: 1269,
+  totalTokens: 1289,
+  reasoningTokens: 640,
+  cachedInputTokens: 0
+}
+✅ GPT-5 response received
+🚀 DEBUG POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+✅ Persona info retrieved
+📧 Getting email samples...
+✅ Email samples retrieved
+📝 Building prompt...
+✅ Prompt built
+🤖 Skipping GPT-5 call for now...
+✅ Test email created
+ POST /api/generate-email-enhanced-debug 200 in 31ms
+ ✓ Compiled in 303ms (816 modules)
+ ✓ Compiled in 248ms (935 modules)
+ ✓ Compiled /api/test-openai-import in 131ms (1020 modules)
+🚀 Testing OpenAI import...
+📝 Parsing request...
+✅ Request parsed
+🔑 Checking API key...
+✅ API key checked: true
+📦 Importing AI SDK...
+✅ AI SDK imported
+📦 Importing generateText...
+✅ generateText imported
+🤖 Testing generateText...
+✅ generateText completed
+ POST /api/test-openai-import 200 in 4067ms
+ ✓ Compiled in 296ms (816 modules)
+ ✓ Compiled in 182ms (816 modules)
+ ✓ Compiled in 265ms (1034 modules)
+ ✓ Compiled in 307ms (1173 modules)
+🚀 DEBUG POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+✅ Persona info retrieved
+📧 Getting email samples...
+✅ Email samples retrieved
+📝 Building prompt...
+✅ Prompt built
+🤖 Calling GPT-5...
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 89 characters
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 20,
+  outputTokens: 1125,
+  totalTokens: 1145,
+  reasoningTokens: 704,
+  cachedInputTokens: 0
+}
+✅ GPT-5 response received
+ POST /api/generate-email-enhanced-debug 200 in 15073ms
+ ✓ Compiled /api/generate-email-enhanced in 155ms (360 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built (simplified)
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 89 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+Generate a professional email about: test signal for persona: operations_upper_management
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 89 characters
+ POST /api/generate-email-enhanced 200 in 20003ms
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 20,
+  outputTokens: 1279,
+  totalTokens: 1299,
+  reasoningTokens: 768,
+  cachedInputTokens: 0
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 2437 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Scheduled Test Signal – Enterprise Operations Notification
+
+Dear Operations Leadership Team,
+
+We will conduct a controlled test signal to validate our enterprise alerting and escalation pathways. This exercise supports operational readiness and business continuity objectives and requires aw...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 2437 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Scheduled Test Signal – Enterprise Operations Notification
+
+Dear Operations Leadership Team,
+
+We will conduct a controlled test signal to validate our enterprise alerting and escalation pathw...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ ✓ Compiled in 392ms (1174 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built (simplified)
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 89 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+Generate a professional email about: test signal for persona: operations_upper_management
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 89 characters
+ POST /api/generate-email-enhanced 200 in 20006ms
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 20,
+  outputTokens: 1189,
+  totalTokens: 1209,
+  reasoningTokens: 704,
+  cachedInputTokens: 0
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 2257 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Scheduled Test Signal – Enterprise Alerting and Monitoring | [Date, Time, Time Zone] | No Production Impact
+
+Dear Leadership Team,
+
+We will conduct a controlled test signal across our enterprise alerting and monitoring pathways to validate end-to-end delivery, escalation, and reporting. Thi...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 2257 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Scheduled Test Signal – Enterprise Alerting and Monitoring | [Date, Time, Time Zone] | No Production Impact
+
+Dear Leadership Team,
+
+We will conduct a controlled test signal across our enterpr...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ ✓ Compiled in 938ms (1172 modules)
+ ✓ Compiled in 430ms (1172 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built (simplified)
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 89 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+Generate a professional email about: test signal for persona: operations_upper_management
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 89 characters
+ POST /api/generate-email-enhanced 200 in 20006ms
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 20,
+  outputTokens: 1411,
+  totalTokens: 1431,
+  reasoningTokens: 896,
+  cachedInputTokens: 0
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 2421 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Upcoming Test Signal to Validate Monitoring and Incident Response
+
+Hello Operations Leadership Team,
+
+We plan to execute a controlled test signal to validate end-to-end monitoring, alerting, and escalation workflows. This exercise supports our operational resilience targets and audit requir...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 2421 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Subject: Upcoming Test Signal to Validate Monitoring and Incident Response
+
+Hello Operations Leadership Team,
+
+We plan to execute a controlled test signal to validate end-to-end monitoring, alerting, ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ ✓ Compiled in 390ms (1172 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test signal
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12504 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+🚀 About to call generateTextWithModel...
+Using working GPT-5 pattern for email generation with model: gpt-5
+[GPT-5] Using model: gpt-5
+[GPT-5] Prompt length: 12504 characters
+ POST /api/generate-email-enhanced 200 in 30004ms
+ ✓ Compiled in 439ms (1171 modules)
+ ✓ Compiled in 560ms (1171 modules)
+ ✓ Compiled in 284ms (1171 modules)
+❌ API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:53:28)
+  51 |   // Set a timeout for the entire operation
+  52 |   const timeoutPromise = new Promise((_, reject) => {
+> 53 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  54 |   })
+  55 |   
+  56 |   try {
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2748,
+  outputTokens: 5458,
+  totalTokens: 8206,
+  reasoningTokens: 4608,
+  cachedInputTokens: 2688
+}
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5
+📊 Generated content length: 3369 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Signal Ops Efficiency
+
+Email 1 (Day 0):
+Subject: Cut ops waste, fast
+
+Your team juggles cost, service, and time. I’m reaching out about a test signal we see across ops leaders. It flags a test pain point: manual tenders and scattered data slow decisions. Budgets slip. Service ris...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3369 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Signal Ops Efficiency
+
+Email 1 (Day 0):
+Subject: Cut ops waste, fast
+
+Your team juggles cost, service, and time. I’m reaching out about a test signal we see across ops leaders. It ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ ✓ Compiled in 486ms (816 modules)
+ ✓ Compiled in 170ms (816 modules)
+ ✓ Compiled in 552ms (816 modules)
+ ✓ Compiled /api/test-gpt5-responses in 269ms (1154 modules)
+🚀 GPT-5 Responses API test called
+📝 Prompt: Say hello in one sentence.
+🤖 Model: gpt-5-mini
+✅ API key found
+🚀 Calling GPT-5 Responses API...
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 26 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+Say hello in one sentence.
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  modalities: [ 'text' ],
+  response_format: { type: 'text' },
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 26,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+❌ GPT-5 Responses API failed with model gpt-5-mini: Error: 400 Unsupported parameter: 'response_format'. In the Responses API, this parameter has moved to 'text.format'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create.
+    at async generateWithGPT5Responses (lib/openai-models.ts:123:21)
+    at async POST (app/api/test-gpt5-responses/route.ts:18:25)
+  121 |     });
+  122 |     
+> 123 |     const response = await Promise.race([
+      |                     ^
+  124 |       openaiClient.responses.create(requestParams),
+  125 |       timeoutPromise
+  126 |     ]); {
+  status: 400,
+  headers: [Object],
+  request_id: 'req_537ff7585b6efc0211f2540a832e0dd7',
+  error: [Object],
+  code: 'unsupported_parameter',
+  param: null,
+  type: 'invalid_request_error'
+}
+🔄 Falling back to Chat Completions API...
+
+🔗 ===== DIRECT OPENAI CLIENT START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 26 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+Say hello in one sentence.
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-5-mini',
+  max_completion_tokens: 800,
+  temperature: 'not supported',
+  promptLength: 26,
+  messageCount: 1
+}
+🚀 Sending to OpenAI API...
+✅ Direct OpenAI client succeeded with gpt-5-mini
+📊 Response length: 6 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Hello!
+────────────────────────────────────────────────────────────
+🔗 ===== DIRECT OPENAI CLIENT END =====
+
+✅ GPT-5 Responses API response received
+📊 Response length: 6 characters
+📄 Response text: "Hello!"
+ POST /api/test-gpt5-responses 200 in 5258ms
+🚀 GPT-5 Responses API test called
+📝 Prompt: Write a short email about a new product launch.
+🤖 Model: gpt-5-mini
+✅ API key found
+🚀 Calling GPT-5 Responses API...
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 47 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+Write a short email about a new product launch.
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  modalities: [ 'text' ],
+  response_format: { type: 'text' },
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 47,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+❌ GPT-5 Responses API failed with model gpt-5-mini: Error: 400 Unsupported parameter: 'response_format'. In the Responses API, this parameter has moved to 'text.format'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create.
+    at async generateWithGPT5Responses (lib/openai-models.ts:123:21)
+    at async POST (app/api/test-gpt5-responses/route.ts:18:25)
+  121 |     });
+  122 |     
+> 123 |     const response = await Promise.race([
+      |                     ^
+  124 |       openaiClient.responses.create(requestParams),
+  125 |       timeoutPromise
+  126 |     ]); {
+  status: 400,
+  headers: [Object],
+  request_id: 'req_b4fc642ce188e5f0f54393d17b14f2b3',
+  error: [Object],
+  code: 'unsupported_parameter',
+  param: null,
+  type: 'invalid_request_error'
+}
+🔄 Falling back to Chat Completions API...
+
+🔗 ===== DIRECT OPENAI CLIENT START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 47 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+Write a short email about a new product launch.
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-5-mini',
+  max_completion_tokens: 800,
+  temperature: 'not supported',
+  promptLength: 47,
+  messageCount: 1
+}
+🚀 Sending to OpenAI API...
+✅ Direct OpenAI client succeeded with gpt-5-mini
+📊 Response length: 606 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Subject: Introducing [Product Name] — Launching [Launch Date]
+
+Hi [First Name],
+
+I’m excited to announce the launch of [Product Name], a [brief description — e.g., “cloud-based tool that simplifies pr...
+────────────────────────────────────────────────────────────
+🔗 ===== DIRECT OPENAI CLIENT END =====
+
+✅ GPT-5 Responses API response received
+📊 Response length: 606 characters
+📄 Response text: "Subject: Introducing [Product Name] — Launching [Launch Date]
+
+Hi [First Name],
+
+I’m excited to announce the launch of [Product Name], a [brief description — e.g., “cloud-based tool that simplifies project tracking”]. It helps you [primary benefit — e.g., “save time, reduce errors, and keep teams aligned”].
+
+Key features:
+- [Feature 1 — e.g., real-time dashboards]
+- [Feature 2 — e.g., automated notifications]
+- [Feature 3 — e.g., one-click reporting]
+
+[Product Name] will be available on [Launch Date]. Learn more and get early access here: [link].
+
+Thanks,
+[Your Name]
+[Title]
+[Company]
+[Contact info]"
+ POST /api/test-gpt5-responses 200 in 8090ms
+ ✓ Compiled in 346ms (802 modules)
+ ✓ Compiled in 259ms (816 modules)
+ ✓ Compiled in 153ms (816 modules)
+ ✓ Compiled in 272ms (816 modules)
+ ✓ Compiled in 276ms (816 modules)
+ ✓ Compiled in 198ms (816 modules)
+ ✓ Compiled in 169ms (816 modules)
+ ✓ Compiled in 271ms (816 modules)
+ ✓ Compiled in 168ms (816 modules)
+ ✓ Compiled /api/generate-email-enhanced-minimal in 179ms (355 modules)
+🚀 MINIMAL POST handler called
+📝 Parsing request...
+✅ Request parsed successfully
+📖 Testing getPreamble...
+✅ getPreamble completed
+🔧 Testing buildDynamicContext...
+✅ buildDynamicContext completed
+👤 Testing getPersonaById...
+✅ getPersonaById completed
+📧 Testing getEmailSamplesByPersona...
+✅ getEmailSamplesByPersona completed
+🤖 Testing generateWithGPT5Responses...
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 25 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+Write a simple test email
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  modalities: [ 'text' ],
+  response_format: { type: 'text' },
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 25,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+❌ GPT-5 Responses API failed with model gpt-5-mini: Error: 400 Unsupported parameter: 'response_format'. In the Responses API, this parameter has moved to 'text.format'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create.
+    at async generateWithGPT5Responses (lib/openai-models.ts:123:21)
+    at async POST (app/api/generate-email-enhanced-minimal/route.ts:41:25)
+  121 |     });
+  122 |     
+> 123 |     const response = await Promise.race([
+      |                     ^
+  124 |       openaiClient.responses.create(requestParams),
+  125 |       timeoutPromise
+  126 |     ]); {
+  status: 400,
+  headers: [Object],
+  request_id: 'req_7b442e97441ffb75f1ca6f9fe58ddda8',
+  error: [Object],
+  code: 'unsupported_parameter',
+  param: null,
+  type: 'invalid_request_error'
+}
+🔄 Falling back to Chat Completions API...
+
+🔗 ===== DIRECT OPENAI CLIENT START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 25 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+Write a simple test email
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-5-mini',
+  max_completion_tokens: 800,
+  temperature: 'not supported',
+  promptLength: 25,
+  messageCount: 1
+}
+🚀 Sending to OpenAI API...
+✅ Direct OpenAI client succeeded with gpt-5-mini
+📊 Response length: 157 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Subject: Test Email
+
+Hi [Recipient],
+
+This is a test email to confirm the messaging system is working. Please reply if you receive this.
+
+Thanks,
+[Your Name]
+────────────────────────────────────────────────────────────
+🔗 ===== DIRECT OPENAI CLIENT END =====
+
+✅ generateWithGPT5Responses completed
+📊 Request data: {
+  persona: 'marketing_manager',
+  signal: 'New AI-powered analytics platform',
+  painPoints: [ 'Data analysis takes too long' ],
+  contextItems: undefined,
+  enableQA: false,
+  model: 'gpt-5-mini'
+}
+📏 Preamble length: 6154
+📏 Dynamic context length: 0
+👤 Persona found: false
+📧 Samples found: false
+🤖 GPT-5 response length: 157
+ POST /api/generate-email-enhanced-minimal 200 in 4428ms
+ ✓ Compiled /api/generate-email-enhanced in 210ms (357 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5-mini
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5-mini
+👤 Persona: marketing_manager
+📝 Signal: New AI-powered analytics platform
+🎯 Pain Points: Data analysis takes too long
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5-mini...
+🚀 About to call generateTextWithModel...
+Using fixed GPT-5 Responses API for email generation with model: gpt-5-mini
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  modalities: [ 'text' ],
+  response_format: { type: 'text' },
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 9164,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+❌ GPT-5 Responses API failed with model gpt-5-mini: Error: 400 Unsupported parameter: 'response_format'. In the Responses API, this parameter has moved to 'text.format'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create.
+    at async generateWithGPT5Responses (lib/openai-models.ts:123:21)
+    at async generateTextWithModel (app/api/generate-email-enhanced/route.ts:25:11)
+    at async processRequest (app/api/generate-email-enhanced/route.ts:226:21)
+    at async POST (app/api/generate-email-enhanced/route.ts:59:19)
+  121 |     });
+  122 |     
+> 123 |     const response = await Promise.race([
+      |                     ^
+  124 |       openaiClient.responses.create(requestParams),
+  125 |       timeoutPromise
+  126 |     ]); {
+  status: 400,
+  headers: [Object],
+  request_id: 'req_d17dd008f2346045b57c71b88bf9291d',
+  error: [Object],
+  code: 'unsupported_parameter',
+  param: null,
+  type: 'invalid_request_error'
+}
+🔄 Falling back to Chat Completions API...
+
+🔗 ===== DIRECT OPENAI CLIENT START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-5-mini',
+  max_completion_tokens: 800,
+  temperature: 'not supported',
+  promptLength: 9164,
+  messageCount: 1
+}
+🚀 Sending to OpenAI API...
+✅ Direct OpenAI client succeeded with gpt-5-mini
+📊 Response length: 0 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────
+🔗 ===== DIRECT OPENAI CLIENT END =====
+
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5-mini
+📊 Generated content length: 0 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5-mini
+📊 Final Content Length: 0 characters
+Error generating email: ReferenceError: fixesApplied is not defined
+    at processRequest (app/api/generate-email-enhanced/route.ts:329:43)
+    at async POST (app/api/generate-email-enhanced/route.ts:59:19)
+  327 |     console.log(`📧 Final Model Used: ${model}`)
+  328 |     console.log(`📊 Final Content Length: ${finalEmail.length} characters`)
+> 329 |     console.log(`🔧 Total Fixes Applied: ${fixesApplied.length}`)
+      |                                           ^
+  330 |     console.log(`📈 Final Quality Score: ${qualityReport?.score || 'N/A'}/100`)
+  331 |     console.log(`✅ QA Passed: ${qualityReport?.passed || 'N/A'}`)
+  332 |     console.log(`📄 Final Content Preview (first 200 chars):`)
+✅ processRequest completed
+ POST /api/generate-email-enhanced 500 in 15942ms
+ ✓ Compiled in 366ms (1173 modules)
+ ✓ Compiled in 314ms (1173 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5-mini
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5-mini
+👤 Persona: marketing_manager
+📝 Signal: New AI-powered analytics platform
+🎯 Pain Points: Data analysis takes too long
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5-mini...
+🚀 About to call generateTextWithModel...
+Using fixed GPT-5 Responses API for email generation with model: gpt-5-mini
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  modalities: [ 'text' ],
+  response_format: { type: 'text' },
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 9164,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+❌ GPT-5 Responses API failed with model gpt-5-mini: Error: 400 Unsupported parameter: 'response_format'. In the Responses API, this parameter has moved to 'text.format'. Try again with the new parameter. See the API documentation for more information: https://platform.openai.com/docs/api-reference/responses/create.
+    at async generateWithGPT5Responses (lib/openai-models.ts:123:21)
+    at async generateTextWithModel (app/api/generate-email-enhanced/route.ts:25:11)
+    at async processRequest (app/api/generate-email-enhanced/route.ts:226:21)
+    at async POST (app/api/generate-email-enhanced/route.ts:59:19)
+  121 |     });
+  122 |     
+> 123 |     const response = await Promise.race([
+      |                     ^
+  124 |       openaiClient.responses.create(requestParams),
+  125 |       timeoutPromise
+  126 |     ]); {
+  status: 400,
+  headers: [Object],
+  request_id: 'req_5908720ae2f1242b5db54d4a1836b0df',
+  error: [Object],
+  code: 'unsupported_parameter',
+  param: null,
+  type: 'invalid_request_error'
+}
+🔄 Falling back to Chat Completions API...
+
+🔗 ===== DIRECT OPENAI CLIENT START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-5-mini',
+  max_completion_tokens: 800,
+  temperature: 'not supported',
+  promptLength: 9164,
+  messageCount: 1
+}
+🚀 Sending to OpenAI API...
+✅ Direct OpenAI client succeeded with gpt-5-mini
+📊 Response length: 0 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────
+🔗 ===== DIRECT OPENAI CLIENT END =====
+
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5-mini
+📊 Generated content length: 0 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5-mini
+📊 Final Content Length: 0 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 10802ms
+ ✓ Compiled in 482ms (1173 modules)
+ ✓ Compiled in 267ms (1173 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5-mini
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5-mini
+👤 Persona: marketing_manager
+📝 Signal: New AI-powered analytics platform
+🎯 Pain Points: Data analysis takes too long
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5-mini...
+🚀 About to call generateTextWithModel...
+Using fixed GPT-5 Responses API for email generation with model: gpt-5-mini
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  modalities: [ 'text' ],
+  text_format: { type: 'text' },
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 9164,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+❌ GPT-5 Responses API failed with model gpt-5-mini: Error: 400 Unknown parameter: 'modalities'.
+    at async generateWithGPT5Responses (lib/openai-models.ts:125:21)
+    at async generateTextWithModel (app/api/generate-email-enhanced/route.ts:25:11)
+    at async processRequest (app/api/generate-email-enhanced/route.ts:226:21)
+    at async POST (app/api/generate-email-enhanced/route.ts:59:19)
+  123 |     });
+  124 |     
+> 125 |     const response = await Promise.race([
+      |                     ^
+  126 |       openaiClient.responses.create(requestParams),
+  127 |       timeoutPromise
+  128 |     ]); {
+  status: 400,
+  headers: [Object],
+  request_id: 'req_8c41c38487f4389ca16b9735c81d8de0',
+  error: [Object],
+  code: 'unknown_parameter',
+  param: 'modalities',
+  type: 'invalid_request_error'
+}
+🔄 Falling back to Chat Completions API...
+
+🔗 ===== DIRECT OPENAI CLIENT START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-5-mini',
+  max_completion_tokens: 800,
+  temperature: 'not supported',
+  promptLength: 9164,
+  messageCount: 1
+}
+🚀 Sending to OpenAI API...
+✅ Direct OpenAI client succeeded with gpt-5-mini
+📊 Response length: 0 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────
+🔗 ===== DIRECT OPENAI CLIENT END =====
+
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5-mini
+📊 Generated content length: 0 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5-mini
+📊 Final Content Length: 0 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 12551ms
+ ✓ Compiled in 397ms (1171 modules)
+ ✓ Compiled in 294ms (1171 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5-mini
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5-mini
+👤 Persona: marketing_manager
+📝 Signal: New AI-powered analytics platform
+🎯 Pain Points: Data analysis takes too long
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5-mini...
+🚀 About to call generateTextWithModel...
+Using fixed GPT-5 Responses API for email generation with model: gpt-5-mini
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 9164 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 9164,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+✅ GPT-5 Responses API succeeded with gpt-5-mini
+📊 Response length: 2194 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Campaign Name: AI analytics that speeds insights
+
+Email 1 (Day 0):
+Subject: Faster insights with AI
+
+Data analysis takes too long for marketing teams. Your campaigns slow while reports are cobbled tog...
+────────────────────────────────────────────────────────────
+🚀 ===== GPT-5 RESPONSES API END =====
+
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5-mini
+📊 Generated content length: 2194 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: AI analytics that speeds insights
+
+Email 1 (Day 0):
+Subject: Faster insights with AI
+
+Data analysis takes too long for marketing teams. Your campaigns slow while reports are cobbled together.
+
+Our new AI-powered analytics platform automates data prep and surfaces campaign insights in ...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5-mini
+📊 Final Content Length: 2194 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: AI analytics that speeds insights
+
+Email 1 (Day 0):
+Subject: Faster insights with AI
+
+Data analysis takes too long for marketing teams. Your campaigns slow while reports are cobbled tog...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 8410ms
+ ✓ Compiled in 539ms (1171 modules)
