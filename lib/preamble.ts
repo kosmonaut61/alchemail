@@ -123,7 +123,7 @@ Output the final output in text, not a JSON object.`
     content: `
     ### General Rules
     - Never use the word Free in the emails
-    - Do deep research on the person + company.
+    - Do deep research on the role this persona has, their pain points, and how Emerge might solve them.
 
     `
   },
