@@ -338,6 +338,8 @@ Body: ${sample.body}`
 
     const optimizationPrompt = `You are an expert email copywriter. Fix ALL issues in this email automatically and return a perfect version that follows all the rules.
 
+IMPORTANT: If the email is under 95 words, EXPAND it by adding more detail, context, and elaboration. DO NOT make emails shorter - focus on adding value and content.
+
 ORIGINAL EMAIL TO FIX:
 ${originalEmail}
 
@@ -345,6 +347,10 @@ ISSUES TO FIX:
 ${qualityReport.issues.map(issue => 
   `- ${issue.type} (${issue.severity}): ${issue.message}${issue.suggestion ? ` → Fix: ${issue.suggestion}` : ''}`
 ).join('\n')}
+
+CURRENT WORD COUNT: ${originalEmail.split(' ').length} words
+TARGET WORD COUNT: 95-150 words
+${originalEmail.split(' ').length < 95 ? 'ACTION NEEDED: EXPAND email by adding more detail, context, and elaboration' : ''}
 
 PERSONA: ${persona}
 PAIN POINTS: ${painPoints.join(', ')}
@@ -357,13 +363,15 @@ CRITICAL FIXING REQUIREMENTS:
 3. Ensure subject line is 3-6 words, sentence case
 4. Use proper greeting: "Hey [name]," for casual/interns, "Hi [name]," for professionals
 5. Structure as 3-4 paragraphs with proper line breaks
-6. TARGET 95-150 words total (expand or condense as needed to reach this range)
+6. EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration
 7. End with Apollo link CTA: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 8. Use 5th grade reading level, max 15 words per sentence
 9. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
 10. No signature, no excessive formatting
 11. Include social proof with specific companies and results
-12. Maintain the original campaign signal focus while optimizing word count
+12. Maintain the original campaign signal focus while EXPANDING content to reach proper length
+13. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
+14. DO NOT SHORTEN - focus on adding value and detail to reach 95-150 words
 
 Return ONLY the corrected email, no explanations:`
 
