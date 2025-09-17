@@ -184,19 +184,17 @@ PERSONA: ${persona}
 TARGET PAIN POINTS: ${painPoints.join(', ')}
 
 ANALYSIS CRITERIA:
-1. **Subject Line**: 3-6 words, sentence case, no excessive punctuation
-2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals, never "Dear"
-3. **Structure**: 3-4 paragraphs (pain point → social proof → CTA), proper line breaks
-4. **Sentence Length**: Max 15 words per sentence
-5. **Word Count**: 70-100 words total (aim for 70-80 words minimum)
-6. **Tone**: 5th grade reading level, conversational (not formal/salesy)
-7. **Adverbs**: Max 2 per email
-8. **CTA**: Ends with natural, conversational question (e.g., "Put some time on my calendar?", "Set up a quick chat?") - NO generic CTAs like "Learn More", "See More", "Know More", "Find Out", "Let's chat", "Let's discuss", "Let's connect"
-9. **Formatting**: Plain text, proper line breaks between paragraphs
-10. **Personalization**: Uses merge tags like {{contact.first_name}}, {{account.name}}
-11. **Content**: Addresses specific pain points, includes ONE clear statistic
-12. **Language**: NO cheesy words like "impressive," "significant," "considerable," "enticing," "fancy"
-13. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+**ONLY FLAG CRITICAL ISSUES - Be very conservative and lenient**
+
+1. **Subject Line**: 3-6 words, sentence case (only flag if way off)
+2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals (only flag if using "Dear")
+3. **Structure**: Basic email structure with line breaks (only flag if completely broken)
+4. **Word Count**: 50-120 words total (be lenient - only flag if extremely short/long)
+5. **Tone**: Conversational tone (only flag if very formal or salesy)
+6. **CTA**: Has some form of call-to-action (only flag if completely missing)
+7. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
+
+**IMPORTANT: Only flag major problems. Minor variations are acceptable.**
 
 Return a JSON array of issues:
 [
@@ -231,13 +229,13 @@ function calculateScore(issues: QualityIssue[]): number {
   issues.forEach(issue => {
     switch (issue.severity) {
       case 'high':
-        score -= 8  // Reduced from 15
+        score -= 5  // Further reduced - only flag critical issues
         break
       case 'medium':
-        score -= 4  // Reduced from 8
+        score -= 2  // Much more lenient
         break
       case 'low':
-        score -= 1  // Reduced from 3
+        score -= 0  // No penalty for minor issues
         break
     }
   })
@@ -245,7 +243,7 @@ function calculateScore(issues: QualityIssue[]): number {
   // Bonus points for good emails (no high-priority issues)
   const highPriorityIssues = issues.filter(i => i.severity === 'high')
   if (highPriorityIssues.length === 0) {
-    score += 5  // Bonus for no critical issues
+    score += 10  // Bigger bonus for good emails
   }
   
   return Math.max(0, Math.min(100, score))

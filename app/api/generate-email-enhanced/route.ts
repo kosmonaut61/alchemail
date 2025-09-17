@@ -85,11 +85,13 @@ Email 1 (Day 0):
 Subject: [subject]
 
 [email body with proper line breaks between paragraphs]
+[CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)]
 
 Email 2 (Day 3):
 Subject: [subject]
 
 [email body with proper line breaks between paragraphs]
+[CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)]
 
 LinkedIn Message 1 (Day 1):
 [message]

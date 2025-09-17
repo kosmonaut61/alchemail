@@ -35,6 +35,7 @@ export default function EmailGenerator() {
   const [hasAnalyzedContext, setHasAnalyzedContext] = useState(false)
   const [qualityReport, setQualityReport] = useState<any>(null)
   const [fixesApplied, setFixesApplied] = useState<string[]>([])
+  const [originalEmail, setOriginalEmail] = useState<string>("")
   const { toast } = useToast()
 
   const steps = [
@@ -208,6 +209,7 @@ export default function EmailGenerator() {
     setIsGenerating(true)
     setQualityReport(null)
     setFixesApplied([])
+    setOriginalEmail("")
     
     try {
 
@@ -237,6 +239,7 @@ export default function EmailGenerator() {
       setGeneratedEmail(data.email)
       setQualityReport(data.qualityReport)
       setFixesApplied(data.fixesApplied || [])
+      setOriginalEmail(data.originalEmail || "")
       setCurrentStep(4)
 
       // Show success message with quality info
@@ -669,7 +672,8 @@ export default function EmailGenerator() {
             </CardHeader>
             <CardContent className="space-y-6">
               <EmailOutput 
-                email={generatedEmail} 
+                email={generatedEmail}
+                originalEmail={originalEmail}
                 qualityReport={qualityReport}
                 optimized={qualityReport ? !qualityReport.passed : false}
                 fixesApplied={fixesApplied}

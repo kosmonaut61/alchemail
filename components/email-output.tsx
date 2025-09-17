@@ -12,6 +12,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 interface EmailOutputProps {
   email: string
+  originalEmail?: string
   qualityReport?: {
     score: number
     issues: Array<{
@@ -27,9 +28,10 @@ interface EmailOutputProps {
   fixesApplied?: string[]
 }
 
-export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: EmailOutputProps) {
+export function EmailOutput({ email, originalEmail, qualityReport, optimized, fixesApplied }: EmailOutputProps) {
   const { toast } = useToast()
   const [viewMode, setViewMode] = useState<'rich' | 'markdown'>('rich')
+  const [showOriginal, setShowOriginal] = useState(false)
 
   const handleCopy = async () => {
     try {
@@ -157,6 +159,26 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
                   </Tooltip>
                 </div>
               </TooltipProvider>
+              {originalEmail && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant={showOriginal ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setShowOriginal(!showOriginal)}
+                        className="border-border/50"
+                      >
+                        <FileText className="h-4 w-4 mr-2" />
+                        {showOriginal ? 'Show Optimized' : 'Show Original'}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{showOriginal ? 'View the optimized version' : 'View the original version before QA fixes'}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -257,11 +279,11 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
                       ),
                     }}
                   >
-                    {email}
+                    {showOriginal && originalEmail ? originalEmail : email}
                   </ReactMarkdown>
                 </div>
               ) : (
-                <pre className="whitespace-pre-wrap text-sm font-mono leading-relaxed">{email}</pre>
+                <pre className="whitespace-pre-wrap text-sm font-mono leading-relaxed">{showOriginal && originalEmail ? originalEmail : email}</pre>
               )}
             </div>
           </div>
