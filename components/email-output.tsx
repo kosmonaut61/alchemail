@@ -12,9 +12,21 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 interface EmailOutputProps {
   email: string
+  qualityReport?: {
+    score: number
+    issues: Array<{
+      type: string
+      severity: 'high' | 'medium' | 'low'
+      message: string
+      suggestion?: string
+    }>
+    suggestions: string[]
+    passed: boolean
+  }
+  optimized?: boolean
 }
 
-export function EmailOutput({ email }: EmailOutputProps) {
+export function EmailOutput({ email, qualityReport, optimized }: EmailOutputProps) {
   const { toast } = useToast()
   const [viewMode, setViewMode] = useState<'rich' | 'markdown'>('rich')
 
@@ -45,7 +57,18 @@ export function EmailOutput({ email }: EmailOutputProps) {
               </div>
               Generated Email
             </CardTitle>
-            <CardDescription className="text-muted-foreground">Your AI-generated email sequence</CardDescription>
+            <CardDescription className="text-muted-foreground">
+              Your AI-generated email sequence
+              {qualityReport && (
+                <span className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
+                  qualityReport.passed 
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
+                    : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                }`}>
+                  Quality: {qualityReport.score}/100{optimized ? ' (optimized)' : ''}
+                </span>
+              )}
+            </CardDescription>
           </div>
           {email && (
             <div className="flex items-center gap-2">
@@ -187,6 +210,58 @@ export function EmailOutput({ email }: EmailOutputProps) {
             <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
             <p>Generated email will appear here</p>
             <p className="text-sm">Fill out the form and click generate to get started</p>
+          </div>
+        )}
+        
+        {/* Quality Report Section */}
+        {qualityReport && qualityReport.issues.length > 0 && (
+          <div className="mt-6 pt-6 border-t border-border/50">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-1.5 rounded bg-blue-100 dark:bg-blue-900">
+                <Eye className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              </div>
+              <h4 className="font-medium text-sm">Quality Assessment</h4>
+            </div>
+            
+            <div className="space-y-2">
+              {qualityReport.issues.map((issue, index) => (
+                <div key={index} className={`flex items-start gap-2 p-2 rounded text-sm ${
+                  issue.severity === 'high' 
+                    ? 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800' 
+                    : issue.severity === 'medium'
+                    ? 'bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800'
+                    : 'bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800'
+                }`}>
+                  <div className={`w-2 h-2 rounded-full mt-1.5 ${
+                    issue.severity === 'high' 
+                      ? 'bg-red-500' 
+                      : issue.severity === 'medium'
+                      ? 'bg-yellow-500'
+                      : 'bg-blue-500'
+                  }`} />
+                  <div className="flex-1">
+                    <div className="font-medium capitalize">{issue.type} Issue</div>
+                    <div className="text-muted-foreground">{issue.message}</div>
+                    {issue.suggestion && (
+                      <div className="text-xs text-muted-foreground mt-1">
+                        💡 {issue.suggestion}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+              
+              {qualityReport.suggestions.length > 0 && (
+                <div className="mt-3 p-3 bg-muted/50 rounded text-sm">
+                  <div className="font-medium mb-2">Suggestions:</div>
+                  <ul className="space-y-1 text-muted-foreground">
+                    {qualityReport.suggestions.map((suggestion, index) => (
+                      <li key={index}>{suggestion}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </CardContent>

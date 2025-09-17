@@ -1,0 +1,186 @@
+import { generateText } from "ai"
+import { openai } from "@ai-sdk/openai"
+import { type NextRequest, NextResponse } from "next/server"
+import { getPreamble } from "@/lib/preamble"
+import { ContextItem } from "@/lib/context-repository"
+import { getPersonaById } from "@/lib/personas"
+import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "@/lib/email-samples"
+import { 
+  analyzeEmailQuality, 
+  optimizeEmail, 
+  getGenerationProgress,
+  type EmailQualityReport 
+} from "@/lib/email-qa"
+
+export async function POST(request: NextRequest) {
+  try {
+    const { persona, signal, painPoints, contextItems, enableQA = true } = await request.json()
+
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })
+    }
+
+    const preamble = await getPreamble()
+
+    // Build dynamic context from selected items
+    const dynamicContext = buildDynamicContext(contextItems || [])
+    
+    // Get detailed persona information
+    const selectedPersona = getPersonaById(persona)
+    const personaContext = selectedPersona ? `
+## PERSONA-SPECIFIC CONTEXT:
+- Role: ${selectedPersona.label}
+- Department: ${selectedPersona.department}
+- Seniority: ${selectedPersona.seniority}
+- All Pain Points: ${selectedPersona.painPoints.join(', ')}
+- Selected Pain Points: ${painPoints.join(', ')}
+- Tone Profile: ${selectedPersona.toneProfile}
+- Keywords: ${selectedPersona.keywords.join(', ')}
+` : ''
+
+    // Get relevant email samples for this persona
+    const samples = getEmailSamplesByPersona(persona)
+    const samplesContext = samples ? `
+
+## EMAIL SAMPLES TO FOLLOW:
+${samples.emails.map((sample, index) => 
+  `Sample ${index + 1}:
+Subject: ${sample.subject}
+Body: ${sample.body}`
+).join('\n\n---\n\n')}
+
+**IMPORTANT**: Match the tone, structure, and style of these samples exactly.` : ''
+
+    const prompt = `${preamble}
+
+${dynamicContext}
+
+${personaContext}
+
+${samplesContext}
+
+GENERATION REQUEST:
+- Persona/Role: ${persona}
+- Signal: ${signal}
+- Selected Pain Points: ${painPoints.join(", ")}
+
+CRITICAL INSTRUCTIONS:
+1. Use the EXACT tone profile provided for this persona: "${selectedPersona?.toneProfile || 'Professional and clear'}"
+2. Address the SPECIFIC selected pain points: ${painPoints.join(", ")}
+3. Use the persona's keywords and language style: ${selectedPersona?.keywords.join(", ") || 'professional'}
+4. Match the seniority level and department context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
+5. Incorporate the signal content naturally into the email
+6. Follow all guidelines in the preamble above
+7. ${samples ? 'Match the style and structure of the provided email samples exactly' : 'Follow the standard email format guidelines'}
+
+Please generate an email sequence that follows the persona's tone profile exactly and addresses the selected pain points directly.`
+
+    // Generate initial email
+    const { text: initialEmail } = await generateText({
+      model: openai("gpt-4"),
+      prompt,
+    })
+
+    let finalEmail = initialEmail
+    let qualityReport: EmailQualityReport | null = null
+
+    // Run QA if enabled
+    if (enableQA) {
+      qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints)
+      
+      // Optimize if quality is below threshold
+      if (!qualityReport.passed) {
+        finalEmail = await optimizeEmail(initialEmail, qualityReport, persona, painPoints)
+        
+        // Re-analyze optimized email
+        qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints)
+      }
+    }
+
+    return NextResponse.json({ 
+      email: finalEmail,
+      qualityReport,
+      originalEmail: enableQA ? initialEmail : undefined,
+      optimized: enableQA && qualityReport ? !qualityReport.passed : false
+    })
+  } catch (error) {
+    console.error("Error generating email:", error)
+    return NextResponse.json({ error: "Failed to generate email" }, { status: 500 })
+  }
+}
+
+function buildDynamicContext(contextItems: ContextItem[]): string {
+  if (!contextItems || contextItems.length === 0) {
+    return ""
+  }
+
+  const contextByCategory = contextItems.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = []
+    }
+    acc[item.category].push(item)
+    return acc
+  }, {} as Record<string, ContextItem[]>)
+
+  let context = "## RELEVANT CONTEXT FOR THIS EMAIL:\n\n"
+
+  // Add customers
+  if (contextByCategory.customer) {
+    context += "### Relevant Customers:\n"
+    contextByCategory.customer.forEach(item => {
+      context += `- ${item.content}\n`
+    })
+    context += "\n"
+  }
+
+  // Add case studies
+  if (contextByCategory.case_study) {
+    context += "### Relevant Case Studies:\n"
+    contextByCategory.case_study.forEach(item => {
+      context += `- ${item.title}: ${item.content}`
+      if (item.url) {
+        context += ` (URL: ${item.url})`
+      }
+      context += `\n`
+    })
+    context += "\n"
+  }
+
+  // Add value propositions
+  if (contextByCategory.value_prop) {
+    context += "### Relevant Value Propositions:\n"
+    contextByCategory.value_prop.forEach(item => {
+      context += `- ${item.content}\n`
+    })
+    context += "\n"
+  }
+
+  // Add statistics
+  if (contextByCategory.statistic) {
+    context += "### Relevant Statistics:\n"
+    contextByCategory.statistic.forEach(item => {
+      context += `- ${item.content}\n`
+    })
+    context += "\n"
+  }
+
+  // Add customer quotes
+  if (contextByCategory.quote) {
+    context += "### Relevant Customer Quotes:\n"
+    contextByCategory.quote.forEach(item => {
+      context += `- ${item.content}\n`
+    })
+    context += "\n"
+  }
+
+  // Add language styles
+  if (contextByCategory.language_style) {
+    context += "### Relevant Language Guidelines:\n"
+    contextByCategory.language_style.forEach(item => {
+      context += `- ${item.content}\n`
+    })
+    context += "\n"
+  }
+
+  return context
+}

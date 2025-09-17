@@ -33,6 +33,12 @@ export default function EmailGenerator() {
   const [editFeedback, setEditFeedback] = useState("")
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
   const [hasAnalyzedContext, setHasAnalyzedContext] = useState(false)
+  const [generationProgress, setGenerationProgress] = useState<{
+    step: 'analyzing' | 'generating' | 'quality-check' | 'optimizing' | 'complete'
+    message: string
+    progress: number
+  } | null>(null)
+  const [qualityReport, setQualityReport] = useState<any>(null)
   const { toast } = useToast()
 
   const steps = [
@@ -341,8 +347,24 @@ export default function EmailGenerator() {
     }
 
     setIsGenerating(true)
+    setQualityReport(null)
+    
     try {
-      const response = await fetch("/api/generate-email", {
+      // Step 1: Analyzing
+      setGenerationProgress({
+        step: 'analyzing',
+        message: 'Analyzing context and persona requirements...',
+        progress: 20
+      })
+
+      // Step 2: Generating
+      setGenerationProgress({
+        step: 'generating',
+        message: 'Generating email content...',
+        progress: 50
+      })
+
+      const response = await fetch("/api/generate-email-enhanced", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -352,6 +374,7 @@ export default function EmailGenerator() {
           signal,
           painPoints,
           contextItems: selectedContextItems,
+          enableQA: true
         }),
       })
 
@@ -360,14 +383,50 @@ export default function EmailGenerator() {
         throw new Error(errorData.error || "Failed to generate email")
       }
 
+      // Step 3: Quality Check
+      setGenerationProgress({
+        step: 'quality-check',
+        message: 'Running quality assurance checks...',
+        progress: 75
+      })
+
       const data = await response.json()
+      
+      // Step 4: Optimizing (if needed)
+      if (data.optimized) {
+        setGenerationProgress({
+          step: 'optimizing',
+          message: 'Optimizing email for best results...',
+          progress: 90
+        })
+      }
+
+      // Step 5: Complete
+      setGenerationProgress({
+        step: 'complete',
+        message: 'Email generation complete!',
+        progress: 100
+      })
+
       setGeneratedEmail(data.email)
+      setQualityReport(data.qualityReport)
       setCurrentStep(4)
+
+      // Show success message with quality info
+      const qualityMessage = data.qualityReport ? 
+        `Quality Score: ${data.qualityReport.score}/100${data.optimized ? ' (optimized)' : ''}` :
+        'Your email sequence has been generated successfully.'
 
       toast({
         title: "Email Generated!",
-        description: "Your email sequence has been generated successfully.",
+        description: qualityMessage,
       })
+
+      // Clear progress after a delay
+      setTimeout(() => {
+        setGenerationProgress(null)
+      }, 2000)
+
     } catch (error) {
       console.error("Error generating email:", error)
       toast({
@@ -375,6 +434,7 @@ export default function EmailGenerator() {
         description: error instanceof Error ? error.message : "There was an error generating your email. Please try again.",
         variant: "destructive",
       })
+      setGenerationProgress(null)
     } finally {
       setIsGenerating(false)
     }
@@ -723,7 +783,7 @@ export default function EmailGenerator() {
                     {isGenerating ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating...
+                        {generationProgress?.message || 'Generating...'}
                       </>
                     ) : (
                       <>
@@ -732,6 +792,20 @@ export default function EmailGenerator() {
                       </>
                     )}
                   </Button>
+                  {generationProgress && (
+                    <div className="mt-2 w-full">
+                      <div className="flex justify-between text-sm text-gray-600 mb-1">
+                        <span>{generationProgress.message}</span>
+                        <span>{generationProgress.progress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${generationProgress.progress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </CardContent>
@@ -749,7 +823,11 @@ export default function EmailGenerator() {
               <CardDescription className="text-base text-muted-foreground">Review your generated email sequence and request edits if needed.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <EmailOutput email={generatedEmail} />
+              <EmailOutput 
+                email={generatedEmail} 
+                qualityReport={qualityReport}
+                optimized={qualityReport ? !qualityReport.passed : false}
+              />
 
               <div className="space-y-4">
                 <div className="space-y-2">
