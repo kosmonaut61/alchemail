@@ -61,7 +61,7 @@ CRITICAL INSTRUCTIONS:
 Please generate an email sequence that follows the persona's tone profile exactly and addresses the selected pain points directly.`
 
     const { text } = await generateText({
-      model: openai("gpt-4o"),
+      model: openai("gpt-5-turbo"),
       prompt,
     })
 
