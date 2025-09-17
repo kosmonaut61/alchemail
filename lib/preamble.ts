@@ -47,7 +47,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	Max 3 sentences per paragraph.
 •	Readability target: 5th grade.
 •	Avoid jargon: No buzzwords beyond the persona's language (e.g., CFO = "control of spend," VP Ops = "team ramp up," Intern = "manual tasks").
-•	Social Proof: Always mention 1–3 recognizable companies, with quantified results if possible.
+•	Social Proof: Always mention 1–3 recognizable companies, with ONE clear quantified result per email (not multiple stats).
 •	Tone: Respectful but energetic. Not salesy, not stiff.
 
 **Style Notes**
@@ -55,6 +55,8 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	No more than 2 adverbs per email.
 •	Positive framing: "achieve similar results," "equip team," "stand out."
 •	Conciseness rule: Never restate the same concept twice in the same email.
+•	AVOID CHEESY LANGUAGE: No "impressive," "significant," "considerable," "enticing," "sounds intriguing," "don't fret," "harbored concerns," "revel in"
+•	Sound like a real person, not marketing copy.
 
 ### 5. Call-to-Action (CTA) Rules
 •	Always end with a question.

@@ -65,16 +65,35 @@ GENERATION REQUEST:
 - Signal: ${signal}
 - Selected Pain Points: ${painPoints.join(", ")}
 
-CRITICAL INSTRUCTIONS:
-1. Use the EXACT tone profile provided for this persona: "${selectedPersona?.toneProfile || 'Professional and clear'}"
+CRITICAL INSTRUCTIONS - FOLLOW IN THIS EXACT ORDER:
+1. ${samples ? 'COPY THE EXACT TONE AND STYLE OF THE PROVIDED SAMPLE EMAILS - use the same casual, conversational language, same sentence structure, same approach to statistics' : 'Use conversational, friendly tone - not formal or salesy'}
 2. Address the SPECIFIC selected pain points: ${painPoints.join(", ")}
-3. Use the persona's keywords and language style: ${selectedPersona?.keywords.join(", ") || 'professional'}
-4. Match the seniority level and department context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
-5. Incorporate the signal content naturally into the email
-6. Follow all guidelines in the preamble above
-7. ${samples ? 'Match the style and structure of the provided email samples exactly' : 'Follow the standard email format guidelines'}
+3. Match the seniority level and department context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
+4. Incorporate the signal content naturally into the email
+5. Keep language simple and direct - avoid buzzwords like "impressive", "significant", "considerable", "enticing"
+6. Use ONE clear statistic per email, not multiple percentages
+7. Make it sound like a real person wrote it, not a marketing department
 
-Please generate an email sequence that follows the persona's tone profile exactly and addresses the selected pain points directly.`
+${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
+
+Generate a campaign with 3-5 emails + 2-3 LinkedIn messages. Format as:
+Campaign Name: [Name]
+
+Email 1 (Day 0):
+Subject: [subject]
+[email body]
+
+Email 2 (Day 3):
+Subject: [subject]  
+[email body]
+
+LinkedIn Message 1 (Day 1):
+[message]
+
+LinkedIn Message 2 (Day 5):
+[message]
+
+Continue pattern...`
 
     // Generate initial email
     const { text: initialEmail } = await generateText({
