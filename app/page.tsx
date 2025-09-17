@@ -39,6 +39,7 @@ export default function EmailGenerator() {
     progress: number
   } | null>(null)
   const [qualityReport, setQualityReport] = useState<any>(null)
+  const [fixesApplied, setFixesApplied] = useState<string[]>([])
   const { toast } = useToast()
 
   const steps = [
@@ -348,6 +349,7 @@ export default function EmailGenerator() {
 
     setIsGenerating(true)
     setQualityReport(null)
+    setFixesApplied([])
     
     try {
       // Step 1: Analyzing
@@ -383,20 +385,20 @@ export default function EmailGenerator() {
         throw new Error(errorData.error || "Failed to generate email")
       }
 
-      // Step 3: Quality Check
+      // Step 3: Quality Check & Auto-Fix
       setGenerationProgress({
         step: 'quality-check',
-        message: 'Running quality assurance checks...',
+        message: 'Checking quality and fixing any issues...',
         progress: 75
       })
 
       const data = await response.json()
       
-      // Step 4: Optimizing (if needed)
+      // Step 4: Final Review (if fixes were applied)
       if (data.optimized) {
         setGenerationProgress({
           step: 'optimizing',
-          message: 'Optimizing email for best results...',
+          message: 'Applying final quality improvements...',
           progress: 90
         })
       }
@@ -410,12 +412,19 @@ export default function EmailGenerator() {
 
       setGeneratedEmail(data.email)
       setQualityReport(data.qualityReport)
+      setFixesApplied(data.fixesApplied || [])
       setCurrentStep(4)
 
       // Show success message with quality info
-      const qualityMessage = data.qualityReport ? 
-        `Quality Score: ${data.qualityReport.score}/100${data.optimized ? ' (optimized)' : ''}` :
-        'Your email sequence has been generated successfully.'
+      let qualityMessage = 'Your email sequence has been generated successfully.'
+      
+      if (data.qualityReport) {
+        if (data.optimized && data.fixesApplied) {
+          qualityMessage = `Quality Score: ${data.qualityReport.score}/100 (${data.fixesApplied.length} improvements applied automatically)`
+        } else {
+          qualityMessage = `Quality Score: ${data.qualityReport.score}/100 (meets all standards)`
+        }
+      }
 
       toast({
         title: "Email Generated!",
@@ -827,6 +836,7 @@ export default function EmailGenerator() {
                 email={generatedEmail} 
                 qualityReport={qualityReport}
                 optimized={qualityReport ? !qualityReport.passed : false}
+                fixesApplied={fixesApplied}
               />
 
               <div className="space-y-4">

@@ -7,7 +7,8 @@ import { getPersonaById } from "@/lib/personas"
 import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "@/lib/email-samples"
 import { 
   analyzeEmailQuality, 
-  optimizeEmail, 
+  autoFixEmail, 
+  doubleCheckFinalEmail,
   getGenerationProgress,
   type EmailQualityReport 
 } from "@/lib/email-qa"
@@ -83,16 +84,30 @@ Please generate an email sequence that follows the persona's tone profile exactl
 
     let finalEmail = initialEmail
     let qualityReport: EmailQualityReport | null = null
+    let fixesApplied: string[] = []
 
-    // Run QA if enabled
+    // Run QA and auto-fix if enabled
     if (enableQA) {
       qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints)
       
-      // Optimize if quality is below threshold
+      // Auto-fix issues if quality is below threshold
       if (!qualityReport.passed) {
-        finalEmail = await optimizeEmail(initialEmail, qualityReport, persona, painPoints)
+        const { fixedEmail, fixesApplied: appliedFixes } = await autoFixEmail(
+          initialEmail, 
+          qualityReport, 
+          persona, 
+          painPoints, 
+          contextItems
+        )
+        finalEmail = fixedEmail
+        fixesApplied = appliedFixes
         
-        // Re-analyze optimized email
+        // Double-check the final result
+        const doubleCheck = await doubleCheckFinalEmail(finalEmail, persona, painPoints)
+        finalEmail = doubleCheck.finalEmail
+        fixesApplied = [...fixesApplied, ...doubleCheck.additionalFixes]
+        
+        // Get final quality report
         qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints)
       }
     }
@@ -101,7 +116,8 @@ Please generate an email sequence that follows the persona's tone profile exactl
       email: finalEmail,
       qualityReport,
       originalEmail: enableQA ? initialEmail : undefined,
-      optimized: enableQA && qualityReport ? !qualityReport.passed : false
+      optimized: enableQA && fixesApplied.length > 0,
+      fixesApplied: fixesApplied
     })
   } catch (error) {
     console.error("Error generating email:", error)

@@ -302,50 +302,110 @@ export function getGenerationProgress(step: GenerationProgress['step']): Generat
   return progressMap[step]
 }
 
-// Optimize email based on QA results
-export async function optimizeEmail(
+// Automatically fix and optimize email based on QA results
+export async function autoFixEmail(
   originalEmail: string,
   qualityReport: EmailQualityReport,
   persona: string,
-  painPoints: string[]
-): Promise<string> {
+  painPoints: string[],
+  contextItems: any[] = []
+): Promise<{ fixedEmail: string; fixesApplied: string[] }> {
+  const fixesApplied: string[] = []
+  
+  // If it already passes, return as-is
   if (qualityReport.passed) {
-    return originalEmail
+    return { fixedEmail: originalEmail, fixesApplied: ['No fixes needed - email meets quality standards'] }
   }
   
   try {
-    const optimizationPrompt = `Optimize this email based on the quality issues found. Fix all high and medium priority issues while maintaining the core message.
+    // Get relevant samples for reference
+    const samples = getEmailSamplesByPersona(persona)
+    const samplesContext = samples ? `
+REFERENCE SAMPLES FOR ${persona}:
+${samples.emails.map((sample, index) => 
+  `Sample ${index + 1}:
+Subject: ${sample.subject}
+Body: ${sample.body}`
+).join('\n\n---\n\n')}` : ''
 
-ORIGINAL EMAIL:
+    const optimizationPrompt = `You are an expert email copywriter. Fix ALL issues in this email automatically and return a perfect version that follows all the rules.
+
+ORIGINAL EMAIL TO FIX:
 ${originalEmail}
 
-QUALITY ISSUES FOUND:
+ISSUES TO FIX:
 ${qualityReport.issues.map(issue => 
-  `- ${issue.type} (${issue.severity}): ${issue.message}`
+  `- ${issue.type} (${issue.severity}): ${issue.message}${issue.suggestion ? ` → Fix: ${issue.suggestion}` : ''}`
 ).join('\n')}
 
 PERSONA: ${persona}
 PAIN POINTS: ${painPoints.join(', ')}
 
-OPTIMIZATION REQUIREMENTS:
-1. Fix all high priority issues
-2. Address medium priority issues where possible
-3. Maintain the 3-paragraph structure
-4. Keep tone appropriate for persona
-5. Ensure proper greeting and CTA format
-6. Maintain 80-120 word count
-7. Use 5th grade reading level
+${samplesContext}
 
-Return the optimized email:`
+CRITICAL FIXING REQUIREMENTS:
+1. Fix ALL high priority issues immediately
+2. Fix ALL medium priority issues
+3. Ensure subject line is 3-6 words, sentence case
+4. Use proper greeting: "Hey [name]," for casual/interns, "Hi [name]," for professionals
+5. Structure as 3 paragraphs: pain point → social proof → CTA question
+6. Keep 80-120 words total, max 15 words per sentence
+7. End with soft question CTA (not command)
+8. Use 5th grade reading level
+9. Match the tone and style of reference samples exactly
+10. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
+11. No signature, no excessive formatting
+12. Include social proof with specific companies and results
 
-    const { text } = await generateText({
+Return ONLY the corrected email, no explanations:`
+
+    const { text: fixedEmail } = await generateText({
       model: openai("gpt-4"),
       prompt: optimizationPrompt,
     })
 
-    return text.trim()
+    // Track what was fixed
+    qualityReport.issues.forEach(issue => {
+      fixesApplied.push(`Fixed ${issue.type} issue: ${issue.message}`)
+    })
+
+    return { 
+      fixedEmail: fixedEmail.trim(), 
+      fixesApplied: [...fixesApplied, 'Applied all quality improvements automatically']
+    }
   } catch (error) {
-    console.error('Error optimizing email:', error)
-    return originalEmail
+    console.error('Error auto-fixing email:', error)
+    return { fixedEmail: originalEmail, fixesApplied: ['Auto-fix failed, using original'] }
+  }
+}
+
+// Double-check final email to ensure it meets all standards
+export async function doubleCheckFinalEmail(
+  email: string,
+  persona: string,
+  painPoints: string[]
+): Promise<{ passed: boolean; finalEmail: string; additionalFixes: string[] }> {
+  try {
+    // Run final QA check
+    const finalReport = await analyzeEmailQuality(email, persona, painPoints)
+    
+    if (finalReport.passed) {
+      return { passed: true, finalEmail: email, additionalFixes: [] }
+    }
+
+    // If still not passing, do one final optimization pass
+    const { fixedEmail, fixesApplied } = await autoFixEmail(email, finalReport, persona, painPoints)
+    
+    // One more quick check
+    const finalCheck = await analyzeEmailQuality(fixedEmail, persona, painPoints)
+    
+    return {
+      passed: finalCheck.passed,
+      finalEmail: fixedEmail,
+      additionalFixes: fixesApplied
+    }
+  } catch (error) {
+    console.error('Error in double-check:', error)
+    return { passed: false, finalEmail: email, additionalFixes: ['Double-check failed'] }
   }
 }

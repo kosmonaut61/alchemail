@@ -64,7 +64,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	"Would it help if I sent…?"
 •	Never command (no "Book a demo").
 •	No links in body unless specifically offering an overview → then plain "one-page overview."
-•	Keep CTA on its own line.
+•	Keep CTA on its own line at the end of the email.
 
 ### 6. Formatting & Appearance Rules
 •	Line breaks between every paragraph.
@@ -72,7 +72,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	No signature block. Emails end at the CTA.
 •	No images, logos, or banners.
 •	No links except explicit offers of an overview (sent separately).
-•	Email length: 80–120 words total.
+•	Email length: 70–100 words total.
 •	Whitespace matters: Each email should fit neatly into a phone screen without scrolling more than once.
 
 ### 7. Follow-Up Email Rules
@@ -86,10 +86,10 @@ Each email body is 3 short paragraphs (1–3 sentences each).
   returnFormat: {
     title: "Return Format",
     content: `### Email Structure & Rules
-**Format:** Subject (1-5 words) + Body (70-100 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
+**Format:** Subject (3-6 words) + Body (70-100 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
 **Content:** Lead with recipient pain/observation → State why reaching out now → End with soft yes/no question
 **Personalization:** Reference industry companies Emerge works with, include case study quotes
-**CTA:** Place near top, embed phrase like "Put some time on my calendar" (never raw URL)
+**CTA:** End with soft question, embed phrase like "Put some time on my calendar" (never raw URL)
 **No signature or signoff**
 
 ### Links & CTAs
@@ -98,13 +98,15 @@ Each email body is 3 short paragraphs (1–3 sentences each).
   - Dollar Tree: "Read their success story here"
   - Golden State Foods: "See how they reduced costs by 18%"  
   - EZRack: "Check out their 6-figure savings"
-**CTA URL:** \`https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min\`
+**CTA URL:** \`https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min\`
 
 ### Dynamic Variables
-**Basic:** {{first_name}}, {{last_name}}, {{company}}, {{company_unprocessed_name}}, {{email}}, {{domain}}, {{location_city}}, {{location_state}}, {{location_country}}, {{phone}}, {{sender_first_name}}, {{sender_last_name}}, {{sender_email}}, {{primary_intent_signal}}, {{secondary_intent_signal}}
-**Time:** {{now_day}}, {{now_month}}, {{now_time_of_day}}, {{now_weekday}}, {{now_year}}
-**Additional:** {{company_location_city}}, {{company_location_state}}, {{company_location_country}}, {{latest_funding_type}}, {{company_size}}, {{vertical}}, {{industry}}, {{title}}, {{opt_out_message}}
-**Advanced:** Conditional fallbacks ({{#if first_name}}{{first_name}}{{#else}}there{{#endif}}), letter case ({{title->lowercase}}), date operators ({{now_day->plus_X}})
+**Contact Fields:** {{contact.first_name}}, {{contact.last_name}}, {{contact.email}}, {{contact.domain}}, {{contact.location_city}}, {{contact.location_state}}, {{contact.location_country}}, {{contact.phone}}, {{contact.title}}, {{contact.opt_out_message}}
+**Account Fields:** {{account.name}}, {{account.company_unprocessed_name}}, {{account.company_location_city}}, {{account.company_location_state}}, {{account.company_location_country}}, {{account.latest_funding_type}}, {{account.company_size}}, {{account.vertical}}, {{account.industry}}
+**Sender Fields:** {{sender.first_name}}, {{sender.last_name}}, {{sender.email}}, {{sender.meeting_alias}}
+**Intent Fields:** {{primary_intent_signal}}, {{secondary_intent_signal}}
+**Time Fields:** {{now.day}}, {{now.month}}, {{now.time_of_day}}, {{now.weekday}}, {{now.year}}
+**Advanced:** Conditional fallbacks ({{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}), letter case ({{contact.title->lowercase}}), date operators ({{now.day->plus_X}})
 
 ### Campaign Structure
 **Sequences:** 3-12 emails, max 3/person/7 days, spread logically (≤2/week for 12 emails)
@@ -114,7 +116,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 **Output:** Text emails (not JSON), 11-20 touchpoints/campaign (max 3 LinkedIn), 50% of touchpoints mention $500 Visa gift card for demo
 
 ### Subject Lines
-**Format:** 30-50 chars (4-7 words), max 1 emoji (end only), personalized with company/role
+**Format:** 3-6 words, sentence case, max 1 emoji (end only), personalized with company/role
 **Content:** Clear benefit/number, no fake "Re:/Fwd:", avoid vague/cliché, front-load hook for mobile
 **Output:** 5 options with ≤90-char preheader, optimized for reply rate
 
