@@ -16,7 +16,17 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       
       const requestParams: any = {
         model: model,
-        input: prompt,
+        input: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "input_text",
+                text: prompt
+              }
+            ]
+          }
+        ],
         reasoning: { effort: "low" }, // Use low reasoning for faster QA responses
         text: { verbosity: "low" }    // Use low verbosity for concise QA responses
       };
@@ -25,7 +35,8 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
         model: model,
         reasoning: "low",
         verbosity: "low",
-        promptLength: prompt.length
+        promptLength: prompt.length,
+        inputFormat: "responses_api"
       });
       
       console.log(`🚀 Sending QA request to GPT-5 Responses API...`);

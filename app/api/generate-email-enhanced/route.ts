@@ -48,7 +48,7 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
 export async function POST(request: NextRequest) {
   // Set a timeout for the entire operation
   const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+    setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 120000) // 120 second timeout for GPT-5
   })
   
   try {

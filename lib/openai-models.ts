@@ -93,23 +93,43 @@ export async function generateWithGPT5Responses(prompt: string, model: string = 
     const { OpenAI } = await import('openai');
     const openaiClient = new OpenAI();
     
-    // Use the Responses API for GPT-5 models
+    // Use the Responses API for GPT-5 models with proper input format
     const requestParams: any = {
       model: model,
-      input: prompt,
-      reasoning: { effort: "medium" }, // Use medium reasoning for balanced performance
-      text: { verbosity: "medium" }    // Use medium verbosity for good content length
+      input: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "input_text",
+              text: prompt
+            }
+          ]
+        }
+      ],
+      reasoning: { effort: "minimal" }, // Use minimal reasoning for faster responses
+      text: { verbosity: "low" }        // Use low verbosity for faster responses
     };
     
     console.log(`🔧 GPT-5 Parameters:`, {
       model: model,
-      reasoning: "medium",
-      verbosity: "medium",
-      promptLength: prompt.length
+      reasoning: "minimal",
+      verbosity: "low",
+      promptLength: prompt.length,
+      inputFormat: "responses_api"
     });
     
     console.log(`🚀 Sending to GPT-5 Responses API...`);
-    const response = await openaiClient.responses.create(requestParams);
+    
+    // Add a timeout for the GPT-5 API call
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('GPT-5 API timeout')), 30000) // 30 second timeout
+    });
+    
+    const response = await Promise.race([
+      openaiClient.responses.create(requestParams),
+      timeoutPromise
+    ]);
     
     const responseText = response.output_text || "";
     

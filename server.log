@@ -234,4 +234,217 @@ Managing logistics can be tough, especially when aiming for efficiency. At Emerg
 ────────────────────────────────────────────────────────────────────────────────
 🚀 ===== END =====
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     [?25h
+ ○ Compiling / ...
+ ✓ Compiled / in 4s (1730 modules)
+ GET / 200 in 4440ms
+ ✓ Compiled /api/generate-email-enhanced in 305ms (1138 modules)
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: cmo
+📝 Signal: test signal for GPT-5
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 9100 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+Using GPT-5 Responses API for email generation with model: gpt-5
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5
+📏 Prompt Length: 9100 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5',
+  reasoning: 'medium',
+  verbosity: 'medium',
+  promptLength: 9100,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:51:28)
+  49 |   // Set a timeout for the entire operation
+  50 |   const timeoutPromise = new Promise((_, reject) => {
+> 51 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 120000) // 120 second timeout for GPT-5
+     |                            ^
+  52 |   })
+  53 |   
+  54 |   try {
+ POST /api/generate-email-enhanced 500 in 120554ms
+ ✓ Compiled in 552ms (816 modules)
+ ✓ Compiled in 163ms (816 modules)
+ ✓ Compiled in 149ms (816 modules)
+ ✓ Compiled /api/generate-email-enhanced in 132ms (356 modules)
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: cmo
+📝 Signal: test signal for GPT-5
+🎯 Pain Points: test pain point
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 9100 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5...
+Using GPT-5 Responses API for email generation with model: gpt-5
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5
+📏 Prompt Length: 9100 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5',
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 9100,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+✅ GPT-5 Responses API succeeded with gpt-5
+📊 Response length: 3215 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Signal: Smarter Freight Story
+
+Email 1 (Day 0):
+Subject: Turn freight into story
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, your team needs clear w...
+────────────────────────────────────────────────────────────
+🚀 ===== GPT-5 RESPONSES API END =====
+
+✅ Generation successful with gpt-5
+📊 Generated content length: 3215 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Signal: Smarter Freight Story
+
+Email 1 (Day 0):
+Subject: Turn freight into story
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, your team needs clear wins. The test signal for GPT-5 is simple: turn freight into a story your board can trust.
+
+Marketing...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3215 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Signal: Smarter Freight Story
+
+Email 1 (Day 0):
+Subject: Turn freight into story
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, your team needs clear w...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ POST /api/generate-email-enhanced 200 in 19113ms
+✅ GPT-5 Responses API succeeded with gpt-5
+📊 Response length: 3116 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Campaign Name: Proof for your GPT-5 signal
+
+Email 1 (Day 0):
+Subject: CMO plan: GPT-5 signal
+
+Freight swings hit your brand. Claims slip. Reports lag. Your test signal for GPT-5 needs proof.
+
+We turn ...
+────────────────────────────────────────────────────────────
+🚀 ===== GPT-5 RESPONSES API END =====
+
+✅ Generation successful with gpt-5
+📊 Generated content length: 3116 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Proof for your GPT-5 signal
+
+Email 1 (Day 0):
+Subject: CMO plan: GPT-5 signal
+
+Freight swings hit your brand. Claims slip. Reports lag. Your test signal for GPT-5 needs proof.
+
+We turn buys into simple stories your board trusts. Teams like Dollar Tree, Pepsi Bottling Ventures, and Gol...
+────────────────────────────────────────────────────────────────────────────────
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+Using GPT-5 Responses API for QA with model: gpt-5
+🔧 GPT-5 QA Parameters: {
+  model: 'gpt-5',
+  reasoning: 'low',
+  verbosity: 'low',
+  promptLength: 6345,
+  inputFormat: 'responses_api'
+}
+🚀 Sending QA request to GPT-5 Responses API...
+ ✓ Compiled in 420ms (1172 modules)
+ ✓ Compiled in 267ms (1172 modules)
