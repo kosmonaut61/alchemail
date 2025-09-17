@@ -17,6 +17,7 @@ export async function generateWithGPT5(prompt: string, model: string = "gpt-5") 
     console.log(`[GPT-5] Using model: ${modelId}`);
     console.log(`[GPT-5] Prompt length: ${prompt.length} characters`);
 
+    // Use the exact same pattern as the working chatbot
     const { text, usage, finishReason } = await generateText({
       model: openai(modelId),
       messages: [
