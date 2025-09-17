@@ -15,7 +15,7 @@ import {
 
 export async function POST(request: NextRequest) {
   try {
-    const { persona, signal, painPoints, contextItems, enableQA = true, model = "gpt-4o" } = await request.json()
+    const { persona, signal, painPoints, contextItems, enableQA = true, model = "gpt-5" } = await request.json()
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })

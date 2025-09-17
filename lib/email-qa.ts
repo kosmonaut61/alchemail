@@ -27,7 +27,7 @@ export async function analyzeEmailQuality(
   generatedEmail: string,
   persona: string,
   painPoints: string[],
-  model: string = "gpt-4"
+  model: string = "gpt-5"
 ): Promise<EmailQualityReport> {
   const issues: QualityIssue[] = []
   const suggestions: string[] = []
@@ -115,7 +115,7 @@ async function compareAgainstSamples(
   email: string,
   samples: any,
   persona: string,
-  model: string = "gpt-4"
+  model: string = "gpt-5"
 ): Promise<QualityIssue[]> {
   const issues: QualityIssue[] = []
   
@@ -173,7 +173,7 @@ async function analyzeContentQuality(
   email: string,
   persona: string,
   painPoints: string[],
-  model: string = "gpt-4"
+  model: string = "gpt-5"
 ): Promise<QualityIssue[]> {
   const issues: QualityIssue[] = []
   
@@ -347,7 +347,7 @@ export async function autoFixEmail(
   persona: string,
   painPoints: string[],
   contextItems: any[] = [],
-  model: string = "gpt-4"
+  model: string = "gpt-5"
 ): Promise<{ fixedEmail: string; fixesApplied: string[] }> {
   const fixesApplied: string[] = []
   
@@ -437,7 +437,7 @@ export async function doubleCheckFinalEmail(
   email: string,
   persona: string,
   painPoints: string[],
-  model: string = "gpt-4"
+  model: string = "gpt-5"
 ): Promise<{ passed: boolean; finalEmail: string; additionalFixes: string[] }> {
   try {
     // Run final QA check

@@ -36,7 +36,7 @@ export default function EmailGenerator() {
   const [qualityReport, setQualityReport] = useState<any>(null)
   const [fixesApplied, setFixesApplied] = useState<string[]>([])
   const [originalEmail, setOriginalEmail] = useState<string>("")
-  const [selectedModel, setSelectedModel] = useState<string>("gpt-4o")
+  const [selectedModel, setSelectedModel] = useState<string>("gpt-5")
   const { toast } = useToast()
 
   const steps = [
@@ -591,6 +591,9 @@ export default function EmailGenerator() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="gpt-5">GPT-5 (Latest & Most Capable)</SelectItem>
+                        <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
+                        <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
                         <SelectItem value="gpt-4o">GPT-4o (Recommended)</SelectItem>
                         <SelectItem value="gpt-4o-mini">GPT-4o Mini (Faster)</SelectItem>
                         <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
