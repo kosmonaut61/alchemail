@@ -188,14 +188,14 @@ ANALYSIS CRITERIA:
 2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals, never "Dear"
 3. **Structure**: 3-4 paragraphs (pain point → social proof → CTA), proper line breaks
 4. **Sentence Length**: Max 15 words per sentence
-5. **Word Count**: 70-100 words total
+5. **Word Count**: 70-100 words total (aim for 70-80 words minimum)
 6. **Tone**: 5th grade reading level, conversational (not formal/salesy)
 7. **Adverbs**: Max 2 per email
-8. **CTA**: Ends with natural, conversational question (e.g., "Put some time on my calendar?", "Set up a quick chat?") - NO generic CTAs like "Learn More", "See More", "Know More", "Find Out"
+8. **CTA**: Ends with natural, conversational question (e.g., "Put some time on my calendar?", "Set up a quick chat?") - NO generic CTAs like "Learn More", "See More", "Know More", "Find Out", "Let's chat", "Let's discuss", "Let's connect"
 9. **Formatting**: Plain text, proper line breaks between paragraphs
 10. **Personalization**: Uses merge tags like {{contact.first_name}}, {{account.name}}
 11. **Content**: Addresses specific pain points, includes ONE clear statistic
-12. **Language**: NO cheesy words like "impressive," "significant," "considerable," "enticing"
+12. **Language**: NO cheesy words like "impressive," "significant," "considerable," "enticing," "fancy"
 13. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 
 Return a JSON array of issues:

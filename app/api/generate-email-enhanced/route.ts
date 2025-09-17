@@ -70,10 +70,11 @@ CRITICAL INSTRUCTIONS - FOLLOW IN THIS EXACT ORDER:
 2. Address the SPECIFIC selected pain points: ${painPoints.join(", ")}
 3. Match the seniority level and department context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Incorporate the signal content naturally into the email
-5. Keep language simple and direct - avoid buzzwords like "impressive", "significant", "considerable", "enticing"
+5. Keep language simple and direct - avoid buzzwords like "impressive", "significant", "considerable", "enticing", "fancy"
 6. Use ONE clear statistic per email, not multiple percentages
 7. Make it sound like a real person wrote it, not a marketing department
 8. EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+9. Write 70-100 words per email - expand on pain points and benefits to reach target length
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
 
@@ -99,10 +100,12 @@ LinkedIn Message 2 (Day 5):
 Continue pattern...
 
 CRITICAL FORMATTING REQUIREMENTS:
-- Include proper line breaks between paragraphs in emails
+- EVERY EMAIL MUST BE 70-100 WORDS (aim for 70-80 words minimum)
+- Include proper line breaks between EVERY paragraph in emails
 - EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - NO EXCEPTIONS
 - Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Example CTAs: "Put some time on my calendar?", "Set up a quick chat?", "How about we hop on a call?"
+- NEVER use generic CTAs like "Let's chat", "Let's discuss", "Let's connect"
 - Make output ready to paste directly into CRM/marketing tools
 - Each email should have clean paragraph breaks, not run-on text
 - NO EMAIL IS COMPLETE WITHOUT AN APOLLO LINK CTA`

@@ -55,7 +55,7 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
     const processedLines: string[] = []
     
     lines.forEach(line => {
-      // Skip empty lines
+      // Preserve empty lines for paragraph breaks
       if (line.trim() === '') {
         processedLines.push('')
         return
@@ -84,10 +84,17 @@ export function EmailOutput({ email, qualityReport, optimized, fixesApplied }: E
       processedLine = processedLine.replace(/^#{1,6}\s*/, '') // Remove heading markers
       processedLine = processedLine.replace(/`([^`]+)`/g, '$1') // Remove code backticks
       
-      processedLines.push(processedLine)
+      // Remove campaign structure markers
+      processedLine = processedLine.replace(/^(Campaign Name:|Email \d+ \(Day \d+\):|LinkedIn Message \d+ \(Day \d+\):)/, '')
+      
+      processedLines.push(processedLine.trim())
     })
     
-    return processedLines.join('\n')
+    // Join with proper line breaks and clean up extra spaces
+    return processedLines
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n') // Remove excessive line breaks
+      .trim()
   }
 
   return (

@@ -55,7 +55,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	No more than 2 adverbs per email.
 •	Positive framing: "achieve similar results," "equip team," "stand out."
 •	Conciseness rule: Never restate the same concept twice in the same email.
-•	AVOID CHEESY LANGUAGE: No "impressive," "significant," "considerable," "enticing," "sounds intriguing," "don't fret," "harbored concerns," "revel in"
+•	AVOID CHEESY LANGUAGE: No "impressive," "significant," "considerable," "enticing," "sounds intriguing," "don't fret," "harbored concerns," "revel in," "fancy"
 •	Sound like a real person, not marketing copy.
 
 ### 5. Call-to-Action (CTA) Rules
@@ -81,7 +81,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	No signature block. Emails end at the CTA.
 •	No images, logos, or banners.
 •	No links except explicit offers of an overview (sent separately).
-•	Email length: 70–100 words total.
+•	Email length: 70–100 words total (aim for 70-80 words minimum).
 •	Whitespace matters: Each email should fit neatly into a phone screen without scrolling more than once.
 
 ### 7. Follow-Up Email Rules
