@@ -84,7 +84,7 @@ SUPPORTING GUIDELINES:
 2. Address pain points that align with the signal: ${painPoints.join(", ")}
 3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Make it sound like a real person wrote it, not marketing copy
-5. EVERY EMAIL MUST END WITH AN APOLLO LINK CTA that flows naturally in the sentence - format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 6. Be creative and compelling - focus on the signal story first, word count will be optimized later
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
@@ -114,9 +114,10 @@ Continue pattern...
 
 FORMATTING REQUIREMENTS:
 - Include proper line breaks between EVERY paragraph in emails
-- EVERY EMAIL MUST END WITH AN APOLLO LINK CTA that flows naturally in the sentence - NO EXCEPTIONS
+- EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - NO EXCEPTIONS
 - Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- Example CTAs that flow naturally: "[Would it make sense to connect?](link)", "[Interested in learning more?](link)", "[How about a quick chat?](link)"
+- Example CTAs that flow naturally: "[Want to chat about this?](link)", "[Sound like something that could help?](link)", "[Worth a quick call?](link)"
+- NEVER use formal language like "kindly" - keep it conversational and relaxed
 - Make output ready to paste directly into CRM/marketing tools
 - Each email should have clean paragraph breaks, not run-on text
 - NO EMAIL IS COMPLETE WITHOUT AN APOLLO LINK CTA
