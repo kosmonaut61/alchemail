@@ -189,7 +189,7 @@ ANALYSIS CRITERIA:
 1. **Subject Line**: 3-6 words, sentence case (only flag if way off)
 2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals (only flag if using "Dear")
 3. **Structure**: Basic email structure with line breaks (only flag if completely broken)
-4. **Word Count**: 100-150 words total (aim for 120-140 words - flag if under 100 or over 150)
+4. **Word Count**: 95-150 words total (aim for 120-140 words - flag if under 95 or over 150)
 5. **Tone**: Conversational tone (only flag if very formal or salesy)
 6. **CTA**: Has some form of call-to-action (only flag if completely missing)
 7. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
@@ -356,14 +356,14 @@ CRITICAL FIXING REQUIREMENTS:
 2. Fix ALL medium priority issues
 3. Ensure subject line is 3-6 words, sentence case
 4. Use proper greeting: "Hey [name]," for casual/interns, "Hi [name]," for professionals
-5. Structure as 3 paragraphs: pain point → social proof → CTA question
-6. Keep 80-120 words total, max 15 words per sentence
-7. End with soft question CTA (not command)
-8. Use 5th grade reading level
-9. Match the tone and style of reference samples exactly
-10. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
-11. No signature, no excessive formatting
-12. Include social proof with specific companies and results
+5. Structure as 3-4 paragraphs with proper line breaks
+6. TARGET 95-150 words total (expand or condense as needed to reach this range)
+7. End with Apollo link CTA: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+8. Use 5th grade reading level, max 15 words per sentence
+9. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
+10. No signature, no excessive formatting
+11. Include social proof with specific companies and results
+12. Maintain the original campaign signal focus while optimizing word count
 
 Return ONLY the corrected email, no explanations:`
 

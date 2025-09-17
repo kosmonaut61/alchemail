@@ -65,16 +65,25 @@ GENERATION REQUEST:
 - Signal: ${signal}
 - Selected Pain Points: ${painPoints.join(", ")}
 
-CRITICAL INSTRUCTIONS - FOLLOW IN THIS EXACT ORDER:
-1. ${samples ? 'COPY THE EXACT TONE AND STYLE OF THE PROVIDED SAMPLE EMAILS - use the same casual, conversational language, same sentence structure, same approach to statistics' : 'Use conversational, friendly tone - not formal or salesy'}
-2. Address the SPECIFIC selected pain points: ${painPoints.join(", ")}
-3. Match the seniority level and department context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
-4. Incorporate the signal content naturally into the email
-5. Keep language simple and direct - avoid buzzwords like "impressive", "significant", "considerable", "enticing", "fancy"
-6. Use ONE clear statistic per email, not multiple percentages
-7. Make it sound like a real person wrote it, not a marketing department
-8. EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-9. Write 100-150 words per email (aim for 120-140 words) - expand on pain points, benefits, context, and specific details to reach target length. Include more detail about the customer's situation, specific challenges, and how Emerge solves them.
+PRIMARY INSTRUCTION: The campaign signal is your main guide - use it as the foundation for everything you write.
+
+CAMPAIGN SIGNAL FOCUS:
+"${signal}"
+
+Use this signal to:
+- Determine the campaign theme and messaging
+- Guide the tone and approach
+- Shape the pain points you address
+- Influence the customer examples you use
+- Drive the overall narrative
+
+SUPPORTING GUIDELINES:
+1. ${samples ? 'Match the tone and style of sample emails when relevant to the signal' : 'Use conversational, friendly tone that fits the signal context'}
+2. Address pain points that align with the signal: ${painPoints.join(", ")}
+3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
+4. Make it sound like a real person wrote it, not marketing copy
+5. EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+6. Be creative and compelling - focus on the signal story first, word count will be optimized later
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
 
@@ -101,16 +110,16 @@ LinkedIn Message 2 (Day 5):
 
 Continue pattern...
 
-CRITICAL FORMATTING REQUIREMENTS:
-- EVERY EMAIL MUST BE 100-150 WORDS (aim for 120-140 words)
+FORMATTING REQUIREMENTS:
 - Include proper line breaks between EVERY paragraph in emails
 - EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - NO EXCEPTIONS
 - Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Example CTAs: "Put some time on my calendar?", "Set up a quick chat?", "How about we hop on a call?"
-- NEVER use generic CTAs like "Let's chat", "Let's discuss", "Let's connect"
 - Make output ready to paste directly into CRM/marketing tools
 - Each email should have clean paragraph breaks, not run-on text
-- NO EMAIL IS COMPLETE WITHOUT AN APOLLO LINK CTA`
+- NO EMAIL IS COMPLETE WITHOUT AN APOLLO LINK CTA
+
+FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT WILL BE OPTIMIZED BY THE QA SYSTEM`
 
     // Generate initial email
     const { text: initialEmail } = await generateText({

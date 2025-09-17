@@ -13,66 +13,16 @@ export const PREAMBLE_SECTIONS = {
 * ProcureOS runs RFPs, spot quoting, real-time benchmarking, streamlined comms.
 * Reduce manual work and turn logistics into a strategic asset.
 
-### 1. Subject Line Rules
-•	Length: 3–6 words max.
-•	Tone: Simple, action-oriented, or congratulatory.
-•	Capitalization: Sentence case (not ALL CAPS, not Title Case).
-•	No punctuation unless natural: Avoid "!" unless congratulatory. Avoid ellipses.
-•	Personalization: Reference persona context ("new role," "smarter reporting," "empower team").
-
-### 2. Greeting Rules
-•	Always begin with a short salutation:
-•	"Hey {{contact.first_name}}," → casual, for interns or congrats notes.
-•	"Hi {{contact.first_name}}," → standard, for professionals.
-•	Never use "Dear" (too formal).
-•	Always followed by a line break.
-
-### 3. Opening Line Rules
-•	Personal hook: Immediately tie into the recipient's context (role, company, current situation).
-•	Direct mention: Use merge tags like {{contact.first_name}}, {{account.name}}.
-•	One sentence only.
-•	If congratulating: Put congratulations upfront.
-•	If following up: Explicitly state it ("I wanted to follow up…" or "just following up here").
-
-### 4. Body Content Rules
-
-**General Structure**
-Each email body is 3-4 paragraphs (2–4 sentences each) to reach 100-150 words.
-•	Paragraph 1: Acknowledge pain point or situation in persona's words with context.
-•	Paragraph 2: Expand on the challenge and its impact on their business.
-•	Paragraph 3: Provide social proof or solution (specific companies + benefit + details).
-•	Paragraph 4: Direct CTA framed as a question with additional context.
 
 **Sentence Construction**
 •	Max 15 words per sentence.
 •	Max 4 sentences per paragraph.
 •	Readability target: 5th grade.
 •	Total: 3-4 paragraphs to reach 100-150 words.
-•	Avoid jargon: No buzzwords beyond the persona's language (e.g., CFO = "control of spend," VP Ops = "team ramp up," Intern = "manual tasks").
 •	Social Proof: Always mention 1–3 recognizable companies, with ONE clear quantified result per email (not multiple stats).
-•	Tone: Respectful but energetic. Not salesy, not stiff.
 
-**Style Notes**
-•	Use short, punchy sentences.
-•	No more than 2 adverbs per email.
-•	Positive framing: "achieve similar results," "equip team," "stand out."
-•	Conciseness rule: Never restate the same concept twice in the same email.
-•	AVOID CHEESY LANGUAGE: No "impressive," "significant," "considerable," "enticing," "sounds intriguing," "don't fret," "harbored concerns," "revel in," "fancy"
-•	Sound like a real person, not marketing copy.
 
 ### 5. Call-to-Action (CTA) Rules
-•	Always end with a question that flows naturally from the email content.
-•	Use conversational, natural language that matches the email tone:
-•	"Put some time on my calendar?"
-•	"Set up a quick chat?"
-•	"Would it make sense to connect?"
-•	"How about we hop on a call?"
-•	"Want to explore this together?"
-•	"Think it's worth a conversation?"
-•	"Should we set up time to discuss?"
-•	"Interested in learning more?"
-•	Never use generic CTAs like "Learn More", "See More", "Know More", "Find Out".
-•	Never command (no "Book a demo").
 •	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 •	No other links in body unless specifically offering an overview → then plain "one-page overview."
 •	Keep CTA on its own line at the end of the email.
@@ -122,18 +72,12 @@ Each email body is 3-4 paragraphs (2–4 sentences each) to reach 100-150 words.
 ### Campaign Structure
 **Sequences:** 3-12 emails, max 3/person/7 days, spread logically (≤2/week for 12 emails)
 **Content:** Each email different pain point/theme, every email has unique CTA, at least 1 names industry customers
-**Focus:** Always on ProcureOS platform (not just marketplace/capacity)
-**Language:** Avoid ENT/SMB terminology, use Enterprise language naturally
 **Output:** Text emails (not JSON), 11-20 touchpoints/campaign (max 3 LinkedIn), 50% of touchpoints mention $500 Visa gift card for demo
 
 ### Subject Lines
 **Format:** 3-6 words, sentence case, max 1 emoji (end only), personalized with company/role
 **Content:** Clear benefit/number, no fake "Re:/Fwd:", avoid vague/cliché, front-load hook for mobile
-**Output:** 5 options with ≤90-char preheader, optimized for reply rate
-
-### Special Rules
-**Private fleets:** Focus on backhauls through marketplace
-**Campaign output:** Campaign name + emails with day spacing + LinkedIn outreach, natural line breaks, actual links, unique CTAs`
+**Output:** 5 options with ≤90-char preheader, optimized for reply rate`
   },
 
   warnings: {
