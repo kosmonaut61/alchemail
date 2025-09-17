@@ -26,7 +26,8 @@ export interface GenerationProgress {
 export async function analyzeEmailQuality(
   generatedEmail: string,
   persona: string,
-  painPoints: string[]
+  painPoints: string[],
+  model: string = "gpt-4"
 ): Promise<EmailQualityReport> {
   const issues: QualityIssue[] = []
   const suggestions: string[] = []
@@ -39,11 +40,11 @@ export async function analyzeEmailQuality(
   
   // Compare against samples
   if (samples) {
-    issues.push(...await compareAgainstSamples(generatedEmail, samples, persona))
+    issues.push(...await compareAgainstSamples(generatedEmail, samples, persona, model))
   }
   
   // Analyze content quality
-  issues.push(...await analyzeContentQuality(generatedEmail, persona, painPoints))
+  issues.push(...await analyzeContentQuality(generatedEmail, persona, painPoints, model))
   
   // Calculate score (100 - penalty points)
   const score = calculateScore(issues)
@@ -113,7 +114,8 @@ function analyzeStructure(email: string): QualityIssue[] {
 async function compareAgainstSamples(
   email: string,
   samples: any,
-  persona: string
+  persona: string,
+  model: string = "gpt-4"
 ): Promise<QualityIssue[]> {
   const issues: QualityIssue[] = []
   
@@ -151,7 +153,7 @@ Return a JSON array of issues found (be conservative - only flag real problems):
 ]`
 
     const { text } = await generateText({
-      model: openai("gpt-4"),
+      model: openai(model),
       prompt: comparisonPrompt,
     })
 
@@ -170,7 +172,8 @@ Return a JSON array of issues found (be conservative - only flag real problems):
 async function analyzeContentQuality(
   email: string,
   persona: string,
-  painPoints: string[]
+  painPoints: string[],
+  model: string = "gpt-4"
 ): Promise<QualityIssue[]> {
   const issues: QualityIssue[] = []
   
@@ -234,7 +237,7 @@ Return a JSON array of issues:
 ]`
 
     const { text } = await generateText({
-      model: openai("gpt-4"),
+      model: openai(model),
       prompt: qualityPrompt,
     })
 
@@ -343,7 +346,8 @@ export async function autoFixEmail(
   qualityReport: EmailQualityReport,
   persona: string,
   painPoints: string[],
-  contextItems: any[] = []
+  contextItems: any[] = [],
+  model: string = "gpt-4"
 ): Promise<{ fixedEmail: string; fixesApplied: string[] }> {
   const fixesApplied: string[] = []
   
@@ -409,7 +413,7 @@ CRITICAL FIXING REQUIREMENTS:
 Return ONLY the corrected email, no explanations:`
 
     const { text: fixedEmail } = await generateText({
-      model: openai("gpt-4"),
+      model: openai(model),
       prompt: optimizationPrompt,
     })
 
@@ -432,11 +436,12 @@ Return ONLY the corrected email, no explanations:`
 export async function doubleCheckFinalEmail(
   email: string,
   persona: string,
-  painPoints: string[]
+  painPoints: string[],
+  model: string = "gpt-4"
 ): Promise<{ passed: boolean; finalEmail: string; additionalFixes: string[] }> {
   try {
     // Run final QA check
-    const finalReport = await analyzeEmailQuality(email, persona, painPoints)
+    const finalReport = await analyzeEmailQuality(email, persona, painPoints, model)
     
     if (finalReport.passed) {
       return { passed: true, finalEmail: email, additionalFixes: [] }

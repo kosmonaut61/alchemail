@@ -15,7 +15,7 @@ import {
 
 export async function POST(request: NextRequest) {
   try {
-    const { persona, signal, painPoints, contextItems, enableQA = true } = await request.json()
+    const { persona, signal, painPoints, contextItems, enableQA = true, model = "gpt-4o" } = await request.json()
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })
@@ -126,7 +126,7 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
 
     // Generate initial email
     const { text: initialEmail } = await generateText({
-      model: openai("gpt-4"),
+      model: openai(model),
       prompt,
     })
 
@@ -136,7 +136,7 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
 
     // Run QA and auto-fix if enabled
     if (enableQA) {
-      qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints)
+      qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints, model)
       
       // Auto-fix issues if quality is below threshold
       if (!qualityReport.passed) {
@@ -145,18 +145,19 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
           qualityReport, 
           persona, 
           painPoints, 
-          contextItems
+          contextItems,
+          model
         )
         finalEmail = fixedEmail
         fixesApplied = appliedFixes
         
         // Double-check the final result
-        const doubleCheck = await doubleCheckFinalEmail(finalEmail, persona, painPoints)
+        const doubleCheck = await doubleCheckFinalEmail(finalEmail, persona, painPoints, model)
         finalEmail = doubleCheck.finalEmail
         fixesApplied = [...fixesApplied, ...doubleCheck.additionalFixes]
         
         // Get final quality report
-        qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints)
+        qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints, model)
       }
     }
 

@@ -36,6 +36,7 @@ export default function EmailGenerator() {
   const [qualityReport, setQualityReport] = useState<any>(null)
   const [fixesApplied, setFixesApplied] = useState<string[]>([])
   const [originalEmail, setOriginalEmail] = useState<string>("")
+  const [selectedModel, setSelectedModel] = useState<string>("gpt-4o")
   const { toast } = useToast()
 
   const steps = [
@@ -223,7 +224,8 @@ export default function EmailGenerator() {
           signal,
           painPoints,
           contextItems: selectedContextItems,
-          enableQA: true
+          enableQA: true,
+          model: selectedModel
         }),
       })
 
@@ -258,10 +260,7 @@ export default function EmailGenerator() {
         description: qualityMessage,
       })
 
-      // Clear progress after a delay
-      setTimeout(() => {
-        setGenerationProgress(null)
-      }, 2000)
+      // Generation completed successfully
 
     } catch (error) {
       console.error("Error generating email:", error)
@@ -270,7 +269,6 @@ export default function EmailGenerator() {
         description: error instanceof Error ? error.message : "There was an error generating your email. Please try again.",
         variant: "destructive",
       })
-      setGenerationProgress(null)
     } finally {
       setIsGenerating(false)
     }
@@ -583,27 +581,46 @@ export default function EmailGenerator() {
               />
 
               {currentStep === 3 && (
-                <div className="flex justify-between mt-6">
-                  <Button variant="outline" onClick={handlePrevious}>
-                    Previous
-                  </Button>
-                  <Button 
-                    onClick={handleGenerate} 
-                    disabled={!canProceedToNext() || isGenerating}
-                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <RefreshCw className="mr-2 h-4 w-4" />
-                        Generate Email
-                      </>
-                    )}
-                  </Button>
+                <div className="mt-6 space-y-4">
+                  <div className="flex items-center gap-4">
+                    <Label htmlFor="model-select" className="text-sm font-medium">
+                      AI Model:
+                    </Label>
+                    <Select value={selectedModel} onValueChange={setSelectedModel}>
+                      <SelectTrigger id="model-select" className="w-48">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="gpt-4o">GPT-4o (Recommended)</SelectItem>
+                        <SelectItem value="gpt-4o-mini">GPT-4o Mini (Faster)</SelectItem>
+                        <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
+                        <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <Button variant="outline" onClick={handlePrevious}>
+                      Previous
+                    </Button>
+                    <Button 
+                      onClick={handleGenerate} 
+                      disabled={!canProceedToNext() || isGenerating}
+                      className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
+                    >
+                      {isGenerating ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Generating...
+                        </>
+                      ) : (
+                        <>
+                          <RefreshCw className="mr-2 h-4 w-4" />
+                          Generate Email
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               )}
             </CardContent>
