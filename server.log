@@ -1,0 +1,198 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.12.140:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1296ms
+ ○ Compiling /api/generate-email-enhanced ...
+ ✓ Compiled /api/generate-email-enhanced in 635ms (632 modules)
+Using model: gpt-4o
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-4o
+👤 Persona: cmo
+📝 Signal: test signal
+🎯 Pain Points: test pain
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 9068 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-4o...
+Using standard model for email generation: gpt-4o
+
+🤖 ===== AI SDK GENERATION START =====
+📧 Model: gpt-4o
+📏 Prompt Length: 9068 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 Parameters: {
+  model: 'gpt-4o',
+  maxTokens: 800,
+  temperature: 0.3,
+  promptLength: 9068
+}
+🚀 Sending to AI SDK...
+✅ AI SDK generation successful with gpt-4o
+📊 Response length: 1276 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Campaign Name: Test Signal Campaign
+
+Email 1 (Day 0):
+Subject: Streamline your logistics
+
+Hi {{contact.first_name}},
+
+I noticed that managing logistics can be a real headache. Emerge is here to help w...
+────────────────────────────────────────────────────────────
+🤖 ===== AI SDK GENERATION END =====
+
+✅ Generation successful with gpt-4o
+📊 Generated content length: 1276 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Signal Campaign
+
+Email 1 (Day 0):
+Subject: Streamline your logistics
+
+Hi {{contact.first_name}},
+
+I noticed that managing logistics can be a real headache. Emerge is here to help with that. Our platform, ProcureOS, turns logistics into a strategic asset. Companies like Dollar Tre...
+────────────────────────────────────────────────────────────────────────────────
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-4o
+📊 Analyzing email quality...
+🤖 Using standard model for QA: gpt-4o
+🔧 Standard Parameters: {
+  model: 'gpt-4o',
+  maxTokens: 400,
+  temperature: 0.1,
+  promptLength: 4499
+}
+✅ Standard QA successful! Response length: 1892 characters
+📈 Quality Score: 70/100
+✅ Passed: false
+📋 Issues Found: 11
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] cta: Missing question-based CTA
+  3. [LOW] subject: Subject line is not in sentence case.
+  4. [MEDIUM] word count: Email 1 is under 95 words.
+  5. [MEDIUM] word count: Email 2 is under 95 words.
+  6. [MEDIUM] sentence length: Email 1 contains sentences over 15 words.
+  7. [MEDIUM] sentence length: Email 2 contains sentences over 15 words.
+  8. [HIGH] personalization: Emails lack specific personalization related to recipient's needs.
+  9. [HIGH] campaign signal: Campaign signal is weak in both emails.
+  10. [MEDIUM] cta: CTA is a separate chunk instead of flowing naturally.
+  11. [LOW] adverbs: Emails contain more than 3 adverbs.
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-4o
+📝 Applying fixes to email...
+🤖 Using standard model for QA: gpt-4o
+🔧 Standard Parameters: {
+  model: 'gpt-4o',
+  maxTokens: 400,
+  temperature: 0.1,
+  promptLength: 5176
+}
+✅ Standard QA successful! Response length: 1659 characters
+✅ Auto-fix successful, fixed email length: 1659 characters
+✅ Auto-fix completed
+📊 Fixed content length: 1659 characters
+🔧 Fixes applied: 12
+  1. Fixed structure issue: Missing subject line
+  2. Fixed cta issue: Missing question-based CTA
+  3. Fixed subject issue: Subject line is not in sentence case.
+  4. Fixed word count issue: Email 1 is under 95 words.
+  5. Fixed word count issue: Email 2 is under 95 words.
+  6. Fixed sentence length issue: Email 1 contains sentences over 15 words.
+  7. Fixed sentence length issue: Email 2 contains sentences over 15 words.
+  8. Fixed personalization issue: Emails lack specific personalization related to recipient's needs.
+  9. Fixed campaign signal issue: Campaign signal is weak in both emails.
+  10. Fixed cta issue: CTA is a separate chunk instead of flowing naturally.
+  11. Fixed adverbs issue: Emails contain more than 3 adverbs.
+  12. Applied all quality improvements automatically
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-4o
+📝 Double-checking final email...
+🤖 Using standard model for QA: gpt-4o
+🔧 Standard Parameters: {
+  model: 'gpt-4o',
+  maxTokens: 400,
+  temperature: 0.1,
+  promptLength: 4882
+}
+✅ Standard QA successful! Response length: 1665 characters
+Attempting GPT-5 for QA with model: gpt-5
+🔧 QA Parameters: {
+  model: 'gpt-5',
+  max_completion_tokens: 400,
+  temperature: 'not supported',
+  promptLength: 5220,
+  messageCount: 1
+}
+🚀 Sending QA request to OpenAI API...
+(node:8446) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✅ GPT-5 QA succeeded! Response length: 0 characters
+⚠️ GPT-5 returned empty response, falling back to GPT-4o for QA...
+✅ GPT-4o QA fallback successful! Response length: 1716 characters
+✅ Auto-fix successful, fixed email length: 1716 characters
+Attempting GPT-5 for QA with model: gpt-5
+🔧 QA Parameters: {
+  model: 'gpt-5',
+  max_completion_tokens: 400,
+  temperature: 'not supported',
+  promptLength: 4939,
+  messageCount: 1
+}
+🚀 Sending QA request to OpenAI API...
+API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:46:28)
+  44 |   // Set a timeout for the entire operation
+  45 |   const timeoutPromise = new Promise((_, reject) => {
+> 46 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  47 |   })
+  48 |   
+  49 |   try {
+ POST /api/generate-email-enhanced 500 in 60843ms
+✅ GPT-5 QA succeeded! Response length: 0 characters
+⚠️ GPT-5 returned empty response, falling back to GPT-4o for QA...
+ ✓ Compiled in 56ms
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      [?25h

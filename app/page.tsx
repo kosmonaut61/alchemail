@@ -198,7 +198,11 @@ export default function EmailGenerator() {
   }
 
   const handleGenerate = async () => {
+    console.log('🚀 ===== FRONTEND GENERATION START =====')
+    console.log('📝 Form data:', { persona, signal, painPoints, selectedContextItems, selectedModel })
+    
     if (!persona || !signal) {
+      console.log('❌ Missing required fields')
       toast({
         title: "Missing Information",
         description: "Please complete all required fields.",
@@ -207,42 +211,55 @@ export default function EmailGenerator() {
       return
     }
 
+    console.log('✅ All required fields present, starting generation...')
     setIsGenerating(true)
     setQualityReport(null)
     setFixesApplied([])
     setOriginalEmail("")
     
     try {
+      console.log('🌐 Making API call to /api/generate-email-enhanced...')
+      const requestBody = {
+        persona,
+        signal,
+        painPoints,
+        contextItems: selectedContextItems,
+        enableQA: true,
+        model: selectedModel
+      }
+      console.log('📤 Request body:', requestBody)
 
       const response = await fetch("/api/generate-email-enhanced", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          persona,
-          signal,
-          painPoints,
-          contextItems: selectedContextItems,
-          enableQA: true,
-          model: selectedModel
-        }),
+        body: JSON.stringify(requestBody),
       })
 
+      console.log('📥 Response status:', response.status)
+      console.log('📥 Response ok:', response.ok)
+
       if (!response.ok) {
+        console.log('❌ Response not ok, parsing error...')
         const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
+        console.log('❌ Error data:', errorData)
         throw new Error(errorData.error || "Failed to generate email")
       }
 
-
+      console.log('✅ Response ok, parsing JSON...')
       const data = await response.json()
-      
+      console.log('📥 Response data:', data)
+      console.log('📧 Email content length:', data.email?.length || 0)
+      console.log('📧 Email preview:', data.email?.substring(0, 200) || 'No email content')
 
       setGeneratedEmail(data.email)
       setQualityReport(data.qualityReport)
       setFixesApplied(data.fixesApplied || [])
       setOriginalEmail(data.originalEmail || "")
       setCurrentStep(4)
+      
+      console.log('✅ Frontend state updated, moving to step 4')
 
       // Show success message with quality info
       let qualityMessage = 'Your email sequence has been generated successfully.'
@@ -263,13 +280,20 @@ export default function EmailGenerator() {
       // Generation completed successfully
 
     } catch (error) {
-      console.error("Error generating email:", error)
+      console.error("❌ ===== FRONTEND ERROR ======")
+      console.error("❌ Error generating email:", error)
+      console.error("❌ Error type:", typeof error)
+      console.error("❌ Error message:", error instanceof Error ? error.message : "Unknown error")
+      console.error("❌ Error stack:", error instanceof Error ? error.stack : "No stack trace")
+      console.error("❌ ===== END ERROR ======")
+      
       toast({
         title: "Generation Failed",
         description: error instanceof Error ? error.message : "There was an error generating your email. Please try again.",
         variant: "destructive",
       })
     } finally {
+      console.log('🏁 Generation process finished, setting isGenerating to false')
       setIsGenerating(false)
     }
   }

@@ -38,6 +38,19 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       
       const responseText = response.choices[0]?.message?.content || "";
       console.log(`✅ GPT-5 QA succeeded! Response length: ${responseText.length} characters`);
+      
+      // If GPT-5 returns empty response, fallback to GPT-4o
+      if (responseText.trim().length === 0) {
+        console.log('⚠️ GPT-5 returned empty response, falling back to GPT-4o for QA...');
+        const fallbackResult = await generateText({
+          model: openai("gpt-4o"),
+          prompt,
+          temperature: 0.1
+        });
+        console.log(`✅ GPT-4o QA fallback successful! Response length: ${fallbackResult.text.length} characters`);
+        return fallbackResult.text;
+      }
+      
       return responseText
     } catch (error) {
       console.error(`GPT-5 failed for QA:`, error)
@@ -48,7 +61,6 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       const fallbackResult = await generateText({
         model: openai("gpt-4o"),
         prompt,
-        maxTokens: 400,
         temperature: 0.1
       })
       console.log(`✅ QA Fallback successful! Response length: ${fallbackResult.text.length} characters`);
@@ -67,7 +79,6 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
     const result = await generateText({
       model: openai(model),
       prompt,
-      maxTokens: 400,
       temperature: 0.1 // O1 models work better with lower temperature
     })
     console.log(`✅ O1 QA successful! Response length: ${result.text.length} characters`);
@@ -85,7 +96,6 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
     const result = await generateText({
       model: openai(model),
       prompt,
-      maxTokens: 400,
       temperature: 0.1 // Lower temperature for QA consistency
     })
     console.log(`✅ Standard QA successful! Response length: ${result.text.length} characters`);
@@ -245,9 +255,29 @@ Return a JSON array of issues found (be conservative - only flag real problems):
 
     const text = await generateTextWithModel(comparisonPrompt, model)
 
-    const parsedIssues = JSON.parse(text)
-    if (Array.isArray(parsedIssues)) {
-      issues.push(...parsedIssues)
+    // Handle empty or invalid responses
+    if (!text || text.trim().length === 0) {
+      console.log('⚠️ Empty response from QA model, skipping sample comparison')
+      return issues
+    }
+
+    try {
+      // Try to extract JSON from the response if it's wrapped in markdown
+      let jsonText = text.trim()
+      if (jsonText.includes('```json')) {
+        jsonText = jsonText.split('```json')[1].split('```')[0].trim()
+      } else if (jsonText.includes('```')) {
+        jsonText = jsonText.split('```')[1].split('```')[0].trim()
+      }
+
+      const parsedIssues = JSON.parse(jsonText)
+      if (Array.isArray(parsedIssues)) {
+        issues.push(...parsedIssues)
+      }
+    } catch (parseError) {
+      console.log('⚠️ Failed to parse sample comparison response as JSON:', parseError.message)
+      console.log('📄 Raw response:', text.substring(0, 200) + '...')
+      // Don't throw error, just continue without this analysis
     }
   } catch (error) {
     console.error('Error comparing against samples:', error)
@@ -326,9 +356,29 @@ Return a JSON array of issues:
 
     const text = await generateTextWithModel(qualityPrompt, model)
 
-    const parsedIssues = JSON.parse(text)
-    if (Array.isArray(parsedIssues)) {
-      issues.push(...parsedIssues)
+    // Handle empty or invalid responses
+    if (!text || text.trim().length === 0) {
+      console.log('⚠️ Empty response from QA model, skipping content quality analysis')
+      return issues
+    }
+
+    try {
+      // Try to extract JSON from the response if it's wrapped in markdown
+      let jsonText = text.trim()
+      if (jsonText.includes('```json')) {
+        jsonText = jsonText.split('```json')[1].split('```')[0].trim()
+      } else if (jsonText.includes('```')) {
+        jsonText = jsonText.split('```')[1].split('```')[0].trim()
+      }
+
+      const parsedIssues = JSON.parse(jsonText)
+      if (Array.isArray(parsedIssues)) {
+        issues.push(...parsedIssues)
+      }
+    } catch (parseError) {
+      console.log('⚠️ Failed to parse QA response as JSON:', parseError.message)
+      console.log('📄 Raw response:', text.substring(0, 200) + '...')
+      // Don't throw error, just continue without this analysis
     }
   } catch (error) {
     console.error('Error analyzing content quality:', error)
@@ -502,10 +552,21 @@ ${isEmailSequence ? 'Return the corrected email sequence in the same format (Cam
 
     const fixedEmail = await generateTextWithModel(optimizationPrompt, model)
 
+    // Handle empty or invalid responses
+    if (!fixedEmail || fixedEmail.trim().length === 0) {
+      console.log('⚠️ Auto-fix returned empty response, using original email')
+      return { 
+        fixedEmail: originalEmail, 
+        fixesApplied: ['Auto-fix failed - using original email']
+      }
+    }
+
     // Track what was fixed
     qualityReport.issues.forEach(issue => {
       fixesApplied.push(`Fixed ${issue.type} issue: ${issue.message}`)
     })
+
+    console.log(`✅ Auto-fix successful, fixed email length: ${fixedEmail.trim().length} characters`)
 
     return { 
       fixedEmail: fixedEmail.trim(), 
