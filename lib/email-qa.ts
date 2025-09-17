@@ -189,7 +189,7 @@ ANALYSIS CRITERIA:
 1. **Subject Line**: 3-6 words, sentence case (only flag if way off)
 2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals (only flag if using "Dear")
 3. **Structure**: Basic email structure with line breaks (only flag if completely broken)
-4. **Word Count**: 50-120 words total (be lenient - only flag if extremely short/long)
+4. **Word Count**: 100-150 words total (aim for 120-140 words - flag if under 100 or over 150)
 5. **Tone**: Conversational tone (only flag if very formal or salesy)
 6. **CTA**: Has some form of call-to-action (only flag if completely missing)
 7. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)

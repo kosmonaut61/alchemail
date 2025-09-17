@@ -74,7 +74,7 @@ CRITICAL INSTRUCTIONS - FOLLOW IN THIS EXACT ORDER:
 6. Use ONE clear statistic per email, not multiple percentages
 7. Make it sound like a real person wrote it, not a marketing department
 8. EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-9. Write 70-100 words per email - expand on pain points and benefits to reach target length
+9. Write 100-150 words per email (aim for 120-140 words) - expand on pain points, benefits, context, and specific details to reach target length. Include more detail about the customer's situation, specific challenges, and how Emerge solves them.
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
 
@@ -102,7 +102,7 @@ LinkedIn Message 2 (Day 5):
 Continue pattern...
 
 CRITICAL FORMATTING REQUIREMENTS:
-- EVERY EMAIL MUST BE 70-100 WORDS (aim for 70-80 words minimum)
+- EVERY EMAIL MUST BE 100-150 WORDS (aim for 120-140 words)
 - Include proper line breaks between EVERY paragraph in emails
 - EVERY EMAIL MUST END WITH AN APOLLO LINK CTA - NO EXCEPTIONS
 - Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)

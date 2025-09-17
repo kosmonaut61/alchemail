@@ -37,15 +37,17 @@ export const PREAMBLE_SECTIONS = {
 ### 4. Body Content Rules
 
 **General Structure**
-Each email body is 3 short paragraphs (1–3 sentences each).
-•	Paragraph 1: Acknowledge pain point or situation in persona's words.
-•	Paragraph 2: Provide social proof or solution (specific companies + benefit).
-•	Paragraph 3: Direct CTA framed as a question.
+Each email body is 3-4 paragraphs (2–4 sentences each) to reach 100-150 words.
+•	Paragraph 1: Acknowledge pain point or situation in persona's words with context.
+•	Paragraph 2: Expand on the challenge and its impact on their business.
+•	Paragraph 3: Provide social proof or solution (specific companies + benefit + details).
+•	Paragraph 4: Direct CTA framed as a question with additional context.
 
 **Sentence Construction**
 •	Max 15 words per sentence.
-•	Max 3 sentences per paragraph.
+•	Max 4 sentences per paragraph.
 •	Readability target: 5th grade.
+•	Total: 3-4 paragraphs to reach 100-150 words.
 •	Avoid jargon: No buzzwords beyond the persona's language (e.g., CFO = "control of spend," VP Ops = "team ramp up," Intern = "manual tasks").
 •	Social Proof: Always mention 1–3 recognizable companies, with ONE clear quantified result per email (not multiple stats).
 •	Tone: Respectful but energetic. Not salesy, not stiff.
@@ -81,7 +83,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
 •	No signature block. Emails end at the CTA.
 •	No images, logos, or banners.
 •	No links except explicit offers of an overview (sent separately).
-•	Email length: 70–100 words total (aim for 70-80 words minimum).
+•	Email length: 100–150 words total (aim for 120-140 words).
 •	Whitespace matters: Each email should fit neatly into a phone screen without scrolling more than once.
 
 ### 7. Follow-Up Email Rules
@@ -95,7 +97,7 @@ Each email body is 3 short paragraphs (1–3 sentences each).
   returnFormat: {
     title: "Return Format",
     content: `### Email Structure & Rules
-**Format:** Subject (3-6 words) + Body (70-100 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
+**Format:** Subject (3-6 words) + Body (100-150 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
 **Content:** Lead with recipient pain/observation → State why reaching out now → End with natural conversational question
 **Personalization:** Reference industry companies Emerge works with, include case study quotes
 **CTA:** End with natural, conversational question that flows from content (e.g., "Put some time on my calendar?", "Set up a quick chat?") - never generic CTAs like "Learn More"
