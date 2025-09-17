@@ -2,6 +2,41 @@ import { generateText } from "ai"
 import { openai } from "@ai-sdk/openai"
 import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "./email-samples"
 
+// Helper function to generate text with proper API for each model
+async function generateTextWithModel(prompt: string, model: string): Promise<string> {
+  if (model.startsWith('gpt-5')) {
+    // For GPT-5, try the responses API first, then fallback
+    console.log(`Attempting GPT-5 for QA with model: ${model}`)
+    
+    // Try GPT-5 first, but fallback immediately if it fails
+    try {
+      const result = await generateText({
+        model: openai(model),
+        prompt,
+      })
+      console.log(`GPT-5 worked for QA!`)
+      return result.text
+    } catch (error) {
+      console.error(`GPT-5 failed for QA:`, error)
+      console.log('Falling back to GPT-4o for QA...')
+      
+      // Fallback to GPT-4o
+      const fallbackResult = await generateText({
+        model: openai("gpt-4o"),
+        prompt,
+      })
+      return fallbackResult.text
+    }
+  } else {
+    // Use standard generateText for other models
+    const result = await generateText({
+      model: openai(model),
+      prompt,
+    })
+    return result.text
+  }
+}
+
 export interface EmailQualityReport {
   score: number // 0-100
   issues: QualityIssue[]
@@ -152,10 +187,7 @@ Return a JSON array of issues found (be conservative - only flag real problems):
   }
 ]`
 
-    const { text } = await generateText({
-      model: openai(model),
-      prompt: comparisonPrompt,
-    })
+    const text = await generateTextWithModel(comparisonPrompt, model)
 
     const parsedIssues = JSON.parse(text)
     if (Array.isArray(parsedIssues)) {
@@ -236,10 +268,7 @@ Return a JSON array of issues:
   }
 ]`
 
-    const { text } = await generateText({
-      model: openai(model),
-      prompt: qualityPrompt,
-    })
+    const text = await generateTextWithModel(qualityPrompt, model)
 
     const parsedIssues = JSON.parse(text)
     if (Array.isArray(parsedIssues)) {
@@ -412,10 +441,7 @@ CRITICAL FIXING REQUIREMENTS:
 
 Return ONLY the corrected email, no explanations:`
 
-    const { text: fixedEmail } = await generateText({
-      model: openai(model),
-      prompt: optimizationPrompt,
-    })
+    const fixedEmail = await generateTextWithModel(optimizationPrompt, model)
 
     // Track what was fixed
     qualityReport.issues.forEach(issue => {

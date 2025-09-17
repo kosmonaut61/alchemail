@@ -13,12 +13,75 @@ import {
   type EmailQualityReport 
 } from "@/lib/email-qa"
 
+// Helper function to generate text with proper API for each model
+async function generateTextWithModel(prompt: string, model: string): Promise<string> {
+  if (model.startsWith('gpt-5')) {
+    // For GPT-5, try it first, then fallback
+    console.log(`Attempting GPT-5 for email generation with model: ${model}`)
+    
+    // Try GPT-5 first, but fallback immediately if it fails
+    try {
+      const result = await generateText({
+        model: openai(model),
+        prompt,
+      })
+      console.log(`GPT-5 worked for email generation!`)
+      return result.text
+    } catch (error) {
+      console.error(`GPT-5 failed for email generation:`, error)
+      console.log('Falling back to GPT-4o for email generation...')
+      
+      // Fallback to GPT-4o
+      const fallbackResult = await generateText({
+        model: openai("gpt-4o"),
+        prompt,
+      })
+      return fallbackResult.text
+    }
+  } else {
+    // Use standard generateText for other models
+    const result = await generateText({
+      model: openai(model),
+      prompt,
+    })
+    return result.text
+  }
+}
+
 export async function POST(request: NextRequest) {
+  // Set a timeout for the entire operation
+  const timeoutPromise = new Promise((_, reject) => {
+    setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+  })
+  
+  try {
+    const result = await Promise.race([
+      processRequest(request),
+      timeoutPromise
+    ])
+    return result
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ 
+      error: error instanceof Error ? error.message : "Unknown error occurred" 
+    }, { status: 500 })
+  }
+}
+
+async function processRequest(request: NextRequest) {
   try {
     const { persona, signal, painPoints, contextItems, enableQA = true, model = "gpt-5" } = await request.json()
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })
+    }
+
+    // Log the model being used for debugging
+    console.log(`Using model: ${model}`)
+    
+    // Check if model is GPT-5 and log potential issues
+    if (model.startsWith('gpt-5')) {
+      console.log('Warning: GPT-5 model selected - this may not be available yet or may timeout')
     }
 
     const preamble = await getPreamble()
@@ -124,11 +187,21 @@ FORMATTING REQUIREMENTS:
 
 FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT WILL BE OPTIMIZED BY THE QA SYSTEM`
 
-    // Generate initial email
-    const { text: initialEmail } = await generateText({
-      model: openai(model),
-      prompt,
-    })
+    // Generate initial email with fallback
+    let initialEmail: string
+    try {
+      initialEmail = await generateTextWithModel(prompt, model)
+    } catch (error) {
+      console.error(`Error with model ${model}:`, error)
+      
+      // Fallback to GPT-4o if GPT-5 fails
+      if (model.startsWith('gpt-5')) {
+        console.log('Falling back to GPT-4o...')
+        initialEmail = await generateTextWithModel(prompt, "gpt-4o")
+      } else {
+        throw error // Re-throw if it's not a GPT-5 model
+      }
+    }
 
     let finalEmail = initialEmail
     let qualityReport: EmailQualityReport | null = null
