@@ -19,7 +19,9 @@ export async function generateWithGPT5(prompt: string, model: string = "gpt-5") 
 
     // Use the exact same pattern as the working chatbot
     const { text, usage, finishReason } = await generateText({
-      model: openai(modelId),
+      model: openai(modelId, {
+        apiKey: process.env.OPENAI_API_KEY,
+      }),
       messages: [
         {
           role: "user",
@@ -43,7 +45,9 @@ export async function generateWithGPT5(prompt: string, model: string = "gpt-5") 
       console.log('[GPT-5] Falling back to GPT-4o...');
       try {
         const { text } = await generateText({
-          model: openai("gpt-4o"),
+          model: openai("gpt-4o", {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
           messages: [
             {
               role: "user",
