@@ -13,38 +13,30 @@ import {
   type EmailQualityReport 
 } from "@/lib/email-qa"
 
+// Import the new openai-models functions
+import { generateWithGPT5, generateWithOpenAIDirect } from "@/lib/openai-models"
+
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // For GPT-5, try it first, then fallback
-    console.log(`Attempting GPT-5 for email generation with model: ${model}`)
+    // Use the new GPT-5 function with proper parameter handling
+    console.log(`Using GPT-5 for email generation with model: ${model}`)
+    return await generateWithOpenAIDirect(prompt, model)
+  } else if (model.startsWith('o1')) {
+    // For O1 models, use standard generateText with specific parameters
+    console.log(`Using O1 model for email generation: ${model}`)
     
-    // Try GPT-5 first, but fallback immediately if it fails
-    try {
-      const result = await generateText({
-        model: openai(model),
-        prompt,
-      })
-      console.log(`GPT-5 worked for email generation!`)
-      return result.text
-    } catch (error) {
-      console.error(`GPT-5 failed for email generation:`, error)
-      console.log('Falling back to GPT-4o for email generation...')
-      
-      // Fallback to GPT-4o
-      const fallbackResult = await generateText({
-        model: openai("gpt-4o"),
-        prompt,
-      })
-      return fallbackResult.text
-    }
-  } else {
-    // Use standard generateText for other models
     const result = await generateText({
       model: openai(model),
       prompt,
+      maxTokens: 800,
+      temperature: 0.1 // O1 models work better with lower temperature
     })
     return result.text
+  } else {
+    // Use the new function for other models (GPT-4, GPT-3.5, etc.)
+    console.log(`Using standard model for email generation: ${model}`)
+    return await generateWithGPT5(prompt, model)
   }
 }
 

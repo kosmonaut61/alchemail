@@ -594,9 +594,14 @@ export default function EmailGenerator() {
                         <SelectItem value="gpt-5">GPT-5 (Latest & Most Capable)</SelectItem>
                         <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
                         <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
+                        <SelectItem value="gpt-4.1">GPT-4.1 (Enhanced)</SelectItem>
+                        <SelectItem value="gpt-4.1-mini">GPT-4.1 Mini (Fast & Cheap)</SelectItem>
+                        <SelectItem value="gpt-4.1-nano">GPT-4.1 Nano (Ultra Fast)</SelectItem>
                         <SelectItem value="gpt-4o">GPT-4o (Recommended)</SelectItem>
                         <SelectItem value="gpt-4o-mini">GPT-4o Mini (Faster)</SelectItem>
                         <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
+                        <SelectItem value="o1-pro">O1 Pro (Reasoning)</SelectItem>
+                        <SelectItem value="o1-mini">O1 Mini (Fast Reasoning)</SelectItem>
                         <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
                       </SelectContent>
                     </Select>

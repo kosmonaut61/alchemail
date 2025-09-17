@@ -5,33 +5,55 @@ import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "./email-samples"
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // For GPT-5, try the responses API first, then fallback
+    // For GPT-5, use the chat.completions API with proper parameters
     console.log(`Attempting GPT-5 for QA with model: ${model}`)
     
-    // Try GPT-5 first, but fallback immediately if it fails
     try {
-      const result = await generateText({
-        model: openai(model),
-        prompt,
+      const { OpenAI } = await import('openai')
+      const openaiClient = new OpenAI()
+      
+      const response = await openaiClient.chat.completions.create({
+        model: model,
+        messages: [{ role: "user", content: prompt }],
+        max_completion_tokens: 400, // Shorter for QA responses
+        temperature: 0.1 // Lower temperature for more consistent QA
       })
+      
       console.log(`GPT-5 worked for QA!`)
-      return result.text
+      return response.choices[0]?.message?.content || ""
     } catch (error) {
       console.error(`GPT-5 failed for QA:`, error)
       console.log('Falling back to GPT-4o for QA...')
       
-      // Fallback to GPT-4o
+      // Fallback to GPT-4o using standard generateText
       const fallbackResult = await generateText({
         model: openai("gpt-4o"),
         prompt,
+        maxTokens: 400,
+        temperature: 0.1
       })
       return fallbackResult.text
     }
-  } else {
-    // Use standard generateText for other models
+  } else if (model.startsWith('o1')) {
+    // For O1 models, use standard generateText with specific parameters
+    console.log(`Using O1 model for QA: ${model}`)
+    
     const result = await generateText({
       model: openai(model),
       prompt,
+      maxTokens: 400,
+      temperature: 0.1 // O1 models work better with lower temperature
+    })
+    return result.text
+  } else {
+    // Use standard generateText for other models (GPT-4, GPT-3.5, etc.)
+    console.log(`Using standard model for QA: ${model}`)
+    
+    const result = await generateText({
+      model: openai(model),
+      prompt,
+      maxTokens: 400,
+      temperature: 0.1 // Lower temperature for QA consistency
     })
     return result.text
   }
