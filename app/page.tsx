@@ -94,129 +94,120 @@ export default function EmailGenerator() {
   const autoDetectPersona = (signalText: string) => {
     const signalLower = signalText.toLowerCase()
     
-    // Define keyword mappings for different personas
+    // Define exact keyword mappings - prioritize exact matches
     const personaKeywords: { [key: string]: { keywords: string[], weight: number } } = {
-      // C-Suite keywords
+      // C-Suite keywords - exact titles first
       'ceo': { 
-        keywords: ['ceo', 'chief executive', 'executive', 'board', 'shareholder', 'stakeholder', 'vision', 'strategy', 'growth', 'market position', 'competitive', 'acquisition', 'merger', 'investor'], 
-        weight: 10 
+        keywords: ['ceo', 'chief executive officer'], 
+        weight: 20 
       },
       'coo': { 
-        keywords: ['coo', 'chief operating', 'operations', 'operational', 'efficiency', 'process', 'workflow', 'execution', 'scalability', 'performance', 'kpi', 'throughput', 'productivity'], 
-        weight: 10 
+        keywords: ['coo', 'chief operating officer'], 
+        weight: 20 
       },
       'cfo': { 
-        keywords: ['cfo', 'chief financial', 'financial', 'finance', 'budget', 'cost', 'roi', 'investment', 'cash flow', 'profitability', 'margin', 'revenue', 'expense', 'audit'], 
-        weight: 10 
+        keywords: ['cfo', 'chief financial officer'], 
+        weight: 20 
       },
       'cpo': { 
-        keywords: ['cpo', 'chief procurement', 'procurement', 'sourcing', 'supplier', 'vendor', 'purchasing', 'contract', 'negotiation', 'spend', 'supply'], 
-        weight: 10 
+        keywords: ['cpo', 'chief procurement officer'], 
+        weight: 20 
       },
       'csco': { 
-        keywords: ['csco', 'chief supply chain', 'supply chain', 'logistics', 'shipping', 'transport', 'freight', 'warehouse', 'distribution', 'resilience', 'disruption'], 
-        weight: 10 
+        keywords: ['csco', 'chief supply chain officer'], 
+        weight: 20 
       },
       'owner_founder': { 
-        keywords: ['founder', 'owner', 'entrepreneur', 'startup', 'start-up', 'company', 'business', 'mission', 'purpose', 'culture', 'values', 'legacy'], 
-        weight: 10 
+        keywords: ['founder', 'owner', 'entrepreneur'], 
+        weight: 15 
       },
       
-      // Management level keywords
+      // Exact management titles
+      'first_logistics_manager': { 
+        keywords: ['first-ever logistics manager', 'first logistics manager', 'new logistics manager'], 
+        weight: 25 
+      },
       'operations_upper_management': { 
-        keywords: ['operations manager', 'operations director', 'vp operations', 'head of operations', 'operations lead', 'operations team', 'operational management'], 
-        weight: 8 
+        keywords: ['operations manager', 'operations director', 'vp operations', 'vice president operations', 'head of operations'], 
+        weight: 15 
       },
       'finance_upper_management': { 
-        keywords: ['finance manager', 'finance director', 'vp finance', 'head of finance', 'finance lead', 'finance team', 'financial management'], 
-        weight: 8 
+        keywords: ['finance manager', 'finance director', 'vp finance', 'vice president finance', 'head of finance'], 
+        weight: 15 
       },
       'operations_middle_management': { 
-        keywords: ['operations supervisor', 'operations coordinator', 'team lead', 'operations specialist', 'middle management', 'supervisor'], 
-        weight: 6 
+        keywords: ['operations supervisor', 'logistics supervisor', 'procurement supervisor', 'team lead', 'operations coordinator'], 
+        weight: 12 
       },
       'finance_middle_management': { 
-        keywords: ['finance supervisor', 'finance coordinator', 'finance specialist', 'accounting manager', 'financial analyst', 'middle management'], 
-        weight: 6 
+        keywords: ['finance supervisor', 'accounting manager', 'financial analyst', 'finance coordinator'], 
+        weight: 12 
       },
       
-      // Individual contributor keywords
+      // Individual contributor titles
       'operations_entry_level': { 
-        keywords: ['operations analyst', 'operations coordinator', 'logistics coordinator', 'procurement specialist', 'entry level', 'junior', 'associate'], 
-        weight: 4 
+        keywords: ['operations analyst', 'logistics analyst', 'procurement analyst', 'operations specialist', 'logistics specialist', 'procurement specialist'], 
+        weight: 10 
       },
       'finance_entry_level': { 
-        keywords: ['finance analyst', 'accounting specialist', 'financial coordinator', 'entry level', 'junior', 'associate', 'financial analyst'], 
-        weight: 4 
+        keywords: ['finance analyst', 'accounting specialist', 'financial coordinator', 'finance specialist'], 
+        weight: 10 
       },
       'operations_intern': { 
-        keywords: ['intern', 'internship', 'trainee', 'student', 'entry level', 'learning', 'development'], 
-        weight: 2 
+        keywords: ['operations intern', 'logistics intern', 'procurement intern', 'intern'], 
+        weight: 8 
       },
       'finance_intern': { 
-        keywords: ['intern', 'internship', 'trainee', 'student', 'entry level', 'learning', 'development'], 
-        weight: 2 
+        keywords: ['finance intern', 'accounting intern', 'intern'], 
+        weight: 8 
       }
-    }
-
-    // Also check for department-specific keywords
-    const departmentKeywords = {
-      'operations': ['operations', 'operational', 'logistics', 'supply chain', 'procurement', 'shipping', 'transport', 'warehouse', 'distribution', 'freight', 'carrier', 'supplier'],
-      'finance': ['finance', 'financial', 'accounting', 'budget', 'cost', 'roi', 'investment', 'cash flow', 'profitability', 'audit', 'compliance', 'spend']
     }
 
     let bestMatch = ''
     let highestScore = 0
 
-    // Calculate scores for each persona
+    // Calculate scores for each persona - exact matches only
     Object.entries(personaKeywords).forEach(([personaId, config]) => {
       let score = 0
       
-      // Check for direct keyword matches
+      // Check for exact keyword matches only
       config.keywords.forEach(keyword => {
         if (signalLower.includes(keyword)) {
           score += config.weight
         }
       })
       
-      // Check for department-specific keywords
-      const persona = PERSONA_DEFINITIONS.find(p => p.id === personaId)
-      if (persona) {
-        const department = persona.department.toLowerCase()
-        if (departmentKeywords[department as keyof typeof departmentKeywords]) {
-          departmentKeywords[department as keyof typeof departmentKeywords].forEach(keyword => {
-            if (signalLower.includes(keyword)) {
-              score += 2 // Lower weight for department keywords
-            }
-          })
-        }
-      }
-      
-      // Check for seniority keywords
-      const seniorityKeywords = {
-        'C-Suite': ['executive', 'c-suite', 'chief', 'president', 'ceo', 'coo', 'cfo', 'cpo', 'csco', 'board', 'strategic', 'vision'],
-        'Upper Management': ['director', 'vp', 'vice president', 'head of', 'senior manager', 'upper management'],
-        'Middle Management': ['manager', 'supervisor', 'team lead', 'middle management', 'coordinator'],
-        'Entry Level': ['analyst', 'specialist', 'coordinator', 'entry level', 'junior', 'associate'],
-        'Intern': ['intern', 'internship', 'trainee', 'student']
-      }
-      
-      if (persona) {
-        const seniority = persona.seniority
-        if (seniorityKeywords[seniority as keyof typeof seniorityKeywords]) {
-          seniorityKeywords[seniority as keyof typeof seniorityKeywords].forEach(keyword => {
-            if (signalLower.includes(keyword)) {
-              score += 3 // Medium weight for seniority keywords
-            }
-          })
-        }
-      }
-      
       if (score > highestScore) {
         highestScore = score
         bestMatch = personaId
       }
     })
+
+    // If no exact match found, try broader department-based matching as fallback
+    if (!bestMatch) {
+      const departmentKeywords = {
+        'operations': ['logistics', 'operations', 'procurement', 'shipping', 'transport', 'freight'],
+        'finance': ['finance', 'accounting', 'budget', 'cost', 'roi']
+      }
+
+      Object.entries(personaKeywords).forEach(([personaId, config]) => {
+        const persona = PERSONA_DEFINITIONS.find(p => p.id === personaId)
+        if (persona) {
+          const department = persona.department.toLowerCase()
+          if (departmentKeywords[department as keyof typeof departmentKeywords]) {
+            departmentKeywords[department as keyof typeof departmentKeywords].forEach(keyword => {
+              if (signalLower.includes(keyword)) {
+                const fallbackScore = 5 // Lower weight for fallback matches
+                if (fallbackScore > highestScore) {
+                  highestScore = fallbackScore
+                  bestMatch = personaId
+                }
+              }
+            })
+          }
+        }
+      })
+    }
 
     return bestMatch
   }

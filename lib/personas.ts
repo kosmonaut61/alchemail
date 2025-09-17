@@ -296,6 +296,38 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
     keywords: ['practical', 'hands-on', 'execution', 'team', 'daily', 'coordination', 'implementation', 'management']
   },
   {
+    id: 'first_logistics_manager',
+    label: 'First-ever Logistics Manager',
+    department: 'Operations',
+    seniority: 'Middle Management',
+    painPoints: [
+      'Building from Scratch: establishing processes and systems where none existed before',
+      'Building from Scratch: creating logistics infrastructure for a growing company',
+      'Building from Scratch: defining roles and responsibilities for the new logistics function',
+      'Building from Scratch: setting up carrier relationships and vendor management processes',
+      'Resource Constraints: limited budget for logistics technology and tools',
+      'Resource Constraints: need to prove ROI of logistics investments to leadership',
+      'Resource Constraints: balancing cost control with service quality as the company scales',
+      'Learning Curve: understanding best practices in logistics and supply chain management',
+      'Learning Curve: navigating different transportation modes and carrier options',
+      'Learning Curve: learning to negotiate with carriers and manage contracts',
+      'Technology Gaps: lack of integrated systems for freight procurement and tracking',
+      'Technology Gaps: need for visibility tools to monitor shipments and performance',
+      'Technology Gaps: manual processes that don\'t scale with company growth',
+      'Team Building: hiring and training logistics staff as the function grows',
+      'Team Building: establishing processes for cross-functional collaboration',
+      'Team Building: creating performance metrics and KPIs for the logistics function',
+      'Strategic Alignment: aligning logistics strategy with overall business growth plans',
+      'Strategic Alignment: balancing cost optimization with customer service requirements',
+      'Strategic Alignment: building scalable processes that can handle future growth',
+      'External Pressures: managing increasing shipping volumes and complexity',
+      'External Pressures: dealing with supply chain disruptions and market volatility',
+      'External Pressures: keeping up with industry best practices and technology trends'
+    ],
+    toneProfile: 'Be supportive and educational – acknowledge they\'re building something new. Focus on practical, actionable solutions – show how to establish processes and systems. Emphasize growth and scalability – help them build for the future. Use encouraging language – recognize the challenge and opportunity of creating something from scratch.',
+    keywords: ['logistics', 'first-ever', 'startup', 'growing', 'building', 'establishing', 'processes', 'systems', 'infrastructure', 'scalable', 'foundation']
+  },
+  {
     id: 'operations_entry_level',
     label: 'Entry Level - Operations',
     department: 'Operations',
