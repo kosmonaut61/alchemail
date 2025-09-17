@@ -199,12 +199,22 @@ ANALYSIS CRITERIA:
 
 **IMPORTANT: Flag these specific issues to improve CRM compatibility and readability.**
 
+**AVOID THESE PROBLEMS:**
+- Don't assume specific challenges: "It's evident from your challenges in maintaining flexibility..."
+- Don't be presumptive: "you might be trying to overcome some of the same hurdles"
+- Don't use overly complex language: "substantially enhancing workflow efficiency"
+- Don't be condescending: "Remarkable, isn't it..."
+- Keep language simple and respectful
+
 SPECIFIC THINGS TO CHECK:
 - Count adverbs (words ending in -ly like "quickly", "significantly", "easily") - flag if more than 3
 - Count words per sentence - flag sentences with more than 15 words
 - Check reading level - flag if using complex words or sentence structures
 - Check personalization - flag if not referencing recipient's specific situation/needs
 - Look for merge tags like {{contact.first_name}}, {{account.name}} for personalization
+- AVOID ASSUMPTIONS - flag if assuming specific problems or challenges
+- BE RESPECTFUL - flag if language is presumptive, condescending, or disparaging
+- KEEP IT SIMPLE - flag if language is overly verbose or complex
 
 Return a JSON array of issues:
 [
@@ -378,13 +388,14 @@ CRITICAL FIXING REQUIREMENTS:
 8. Use 5th grade reading level or lower - simplify complex words and sentences
 9. MAXIMUM 3 ADVERBS - remove excess adverbs, keep only essential ones
 10. MAXIMUM 15 WORDS PER SENTENCE - break long sentences into shorter ones
-11. PERSONALIZE CONTENT - reference recipient's specific needs, interests, and situation
+11. BE RESPECTFUL - never assume or disparage recipient's situation, be helpful not presumptive
 12. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
 13. No signature, no excessive formatting
 14. Include social proof with specific companies and results
 15. Maintain the original campaign signal focus while EXPANDING content to reach proper length
 16. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
 17. DO NOT SHORTEN - focus on adding value and detail to reach 95-150 words
+18. AVOID ASSUMPTIONS - don't assume specific challenges or problems the recipient has
 
 Return ONLY the corrected email, no explanations:`
 
