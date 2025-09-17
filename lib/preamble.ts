@@ -25,7 +25,7 @@ export const PREAMBLE_SECTIONS = {
 ### 5. Call-to-Action (CTA) Rules
 •	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 •	No other links in body unless specifically offering an overview → then plain "one-page overview."
-•	Keep CTA on its own line at the end of the email.
+•	Keep CTA that flows naturally in the sentence, not as a separate chunk.
 
 ### 6. Formatting & Appearance Rules
 •	Line breaks between every paragraph.
@@ -50,7 +50,7 @@ export const PREAMBLE_SECTIONS = {
 **Format:** Subject (3-6 words) + Body (100-150 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
 **Content:** Lead with recipient pain/observation → State why reaching out now → End with natural conversational question
 **Personalization:** Reference industry companies Emerge works with, include case study quotes
-**CTA:** End with natural, conversational question that flows from content (e.g., "Put some time on my calendar?", "Set up a quick chat?") - never generic CTAs like "Learn More"
+**CTA:** End with natural, conversational question that flows from content (e.g., "[Put some time on my calendar?](link)", "[Set up a quick chat?](link)") - never generic CTAs like "Learn More"
 **No signature or signoff**
 
 ### Links & CTAs

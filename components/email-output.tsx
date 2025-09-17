@@ -31,7 +31,7 @@ interface EmailOutputProps {
 export function EmailOutput({ email, originalEmail, qualityReport, optimized, fixesApplied }: EmailOutputProps) {
   const { toast } = useToast()
   const [viewMode, setViewMode] = useState<'rich' | 'markdown'>('rich')
-  const [showOriginal, setShowOriginal] = useState(false)
+  const [showOriginal, setShowOriginal] = useState(false) // Default to showing optimized version
 
   const handleCopy = async () => {
     try {
@@ -164,7 +164,7 @@ export function EmailOutput({ email, originalEmail, qualityReport, optimized, fi
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
-                        variant={showOriginal ? 'default' : 'outline'}
+                        variant={showOriginal ? 'outline' : 'default'}
                         size="sm"
                         onClick={() => setShowOriginal(!showOriginal)}
                         className="border-border/50"

@@ -205,6 +205,7 @@ ANALYSIS CRITERIA:
 - Don't use overly complex language: "substantially enhancing workflow efficiency"
 - Don't be condescending: "Remarkable, isn't it..."
 - Keep language simple and respectful
+- CTA should flow naturally: "[Would it make sense to connect?](link)" NOT separate blue chunk
 
 SPECIFIC THINGS TO CHECK:
 - Count adverbs (words ending in -ly like "quickly", "significantly", "easily") - flag if more than 3
@@ -215,6 +216,7 @@ SPECIFIC THINGS TO CHECK:
 - AVOID ASSUMPTIONS - flag if assuming specific problems or challenges
 - BE RESPECTFUL - flag if language is presumptive, condescending, or disparaging
 - KEEP IT SIMPLE - flag if language is overly verbose or complex
+- CTA FLOW - flag if CTA is a separate chunk instead of flowing naturally in the sentence
 
 Return a JSON array of issues:
 [
@@ -384,7 +386,7 @@ CRITICAL FIXING REQUIREMENTS:
 4. Use proper greeting: "Hey [name]," for casual/interns, "Hi [name]," for professionals
 5. Structure as 3-4 paragraphs with proper line breaks
 6. EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration
-7. End with Apollo link CTA: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+7. End with Apollo link CTA that flows naturally in the sentence: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 8. Use 5th grade reading level or lower - simplify complex words and sentences
 9. MAXIMUM 3 ADVERBS - remove excess adverbs, keep only essential ones
 10. MAXIMUM 15 WORDS PER SENTENCE - break long sentences into shorter ones
