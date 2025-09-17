@@ -194,8 +194,9 @@ ANALYSIS CRITERIA:
 6. **Adverbs**: 3 or fewer adverbs (flag if more than 3 adverbs)
 7. **Sentence Length**: 15 words or less per sentence (flag sentences over 15 words)
 8. **Personalization**: Must reference recipient's needs/interests (flag if not personalized)
-9. **CTA**: Has some form of call-to-action (only flag if completely missing)
-10. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
+9. **Campaign Signal**: Must reference and build on the campaign signal (flag if signal is missing or weak)
+10. **CTA**: Has some form of call-to-action (only flag if completely missing)
+11. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
 
 **IMPORTANT: Flag these specific issues to improve CRM compatibility and readability.**
 
@@ -210,13 +211,14 @@ ANALYSIS CRITERIA:
 SPECIFIC THINGS TO CHECK:
 - Count adverbs (words ending in -ly like "quickly", "significantly", "easily") - flag if more than 3
 - Count words per sentence - flag sentences with more than 15 words
-- Check reading level - flag if using complex words or sentence structures
+- Check reading level - flag if using complex words or sentence structures (MUST be 5th grade or lower)
 - Check personalization - flag if not referencing recipient's specific situation/needs
 - Look for merge tags like {{contact.first_name}}, {{account.name}} for personalization
 - AVOID ASSUMPTIONS - flag if assuming specific problems or challenges
 - BE RESPECTFUL - flag if language is presumptive, condescending, or disparaging
 - KEEP IT SIMPLE - flag if language is overly verbose or complex
 - CTA FLOW - flag if CTA is a separate chunk instead of flowing naturally in the sentence
+- CAMPAIGN SIGNAL - flag if the campaign signal is not referenced or is weak in the email
 
 Return a JSON array of issues:
 [
@@ -387,7 +389,7 @@ CRITICAL FIXING REQUIREMENTS:
 5. Structure as 3-4 paragraphs with proper line breaks
 6. EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration
 7. End with Apollo link CTA that flows naturally in the sentence: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-8. Use 5th grade reading level or lower - simplify complex words and sentences
+8. Use 5th grade reading level or lower - simplify complex words and sentences (CRITICAL REQUIREMENT)
 9. MAXIMUM 3 ADVERBS - remove excess adverbs, keep only essential ones
 10. MAXIMUM 15 WORDS PER SENTENCE - break long sentences into shorter ones
 11. BE RESPECTFUL - never assume or disparage recipient's situation, be helpful not presumptive
@@ -397,7 +399,8 @@ CRITICAL FIXING REQUIREMENTS:
 15. Maintain the original campaign signal focus while EXPANDING content to reach proper length
 16. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
 17. DO NOT SHORTEN - focus on adding value and detail to reach 95-150 words
-18. AVOID ASSUMPTIONS - don't assume specific challenges or problems the recipient has
+18. MAINTAIN CAMPAIGN SIGNAL - ensure the campaign signal is referenced and builds the narrative throughout all emails
+19. AVOID ASSUMPTIONS - don't assume specific challenges or problems the recipient has
 
 Return ONLY the corrected email, no explanations:`
 

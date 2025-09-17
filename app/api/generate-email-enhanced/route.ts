@@ -75,7 +75,9 @@ Use this signal to:
 - Guide the tone and approach
 - Shape the pain points you address
 - Influence the customer examples you use
-- Drive the overall narrative
+- Drive the overall narrative across ALL emails and messages
+
+CRITICAL: EVERY email and LinkedIn message must reference and build on this signal. Create a cohesive story arc where the signal is the connecting thread throughout the entire campaign. Don't let the signal fade after the first email - it should be the reason you're reaching out in every communication.
 
 SUPPORTING GUIDELINES:
 1. ${samples ? 'Match the tone and style of sample emails when relevant to the signal' : 'Use conversational, friendly tone that fits the signal context'}
@@ -87,7 +89,7 @@ SUPPORTING GUIDELINES:
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
 
-Generate a campaign with 3-5 emails + 2-3 LinkedIn messages. Format as:
+Generate a campaign with 3-5 emails + 2-3 LinkedIn messages where EVERY communication references the campaign signal. Format as:
 Campaign Name: [Name]
 
 Email 1 (Day 0):

@@ -47,7 +47,7 @@ export const PREAMBLE_SECTIONS = {
   returnFormat: {
     title: "Return Format",
     content: `### Email Structure & Rules
-**Format:** Subject (3-6 words) + Body (100-150 words, 5th grade, ≤3 adverbs, ≤15 words/sentence)
+**Format:** Subject (3-6 words) + Body (100-150 words, 5th grade reading level CRITICAL, ≤3 adverbs, ≤15 words/sentence)
 **Content:** Lead with recipient pain/observation → State why reaching out now → End with natural conversational question
 **Personalization:** Reference industry companies Emerge works with, include case study quotes
 **CTA:** End with natural, conversational question that flows from content (e.g., "[Put some time on my calendar?](link)", "[Set up a quick chat?](link)") - never generic CTAs like "Learn More"
@@ -72,6 +72,7 @@ export const PREAMBLE_SECTIONS = {
 ### Campaign Structure
 **Sequences:** 3-12 emails, max 3/person/7 days, spread logically (≤2/week for 12 emails)
 **Content:** Each email different pain point/theme, every email has unique CTA, at least 1 names industry customers
+**Campaign Signal:** EVERY email and message must reference and build on the campaign signal - it's the connecting thread throughout the entire campaign
 **Output:** Text emails (not JSON), 11-20 touchpoints/campaign (max 3 LinkedIn), 50% of touchpoints mention $500 Visa gift card for demo
 
 ### Subject Lines
