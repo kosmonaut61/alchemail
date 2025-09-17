@@ -19,21 +19,21 @@ import { generateWithGPT5, generateWithOpenAIDirect, generateWithGPT5Responses }
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // Use the new GPT-5 Responses API for best performance
-    console.log(`Using GPT-5 Responses API for email generation with model: ${model}`)
-    try {
-      return await generateWithGPT5Responses(prompt, model)
-    } catch (error) {
-      console.log('GPT-5 Responses API failed, falling back to Chat Completions API...')
-      return await generateWithOpenAIDirect(prompt, model)
-    }
+    // Use the working GPT-5 pattern from the chatbot
+    console.log(`Using working GPT-5 pattern for email generation with model: ${model}`)
+    return await generateWithGPT5(prompt, model)
   } else if (model.startsWith('o1')) {
     // For O1 models, use standard generateText with specific parameters
     console.log(`Using O1 model for email generation: ${model}`)
     
     const result = await generateText({
       model: openai(model),
-      prompt,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
       maxTokens: 800,
       temperature: 0.1 // O1 models work better with lower temperature
     })
@@ -48,7 +48,7 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
 export async function POST(request: NextRequest) {
   // Set a timeout for the entire operation
   const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 120000) // 120 second timeout for GPT-5
+    setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
   })
   
   try {
