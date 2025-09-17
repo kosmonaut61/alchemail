@@ -184,17 +184,27 @@ PERSONA: ${persona}
 TARGET PAIN POINTS: ${painPoints.join(', ')}
 
 ANALYSIS CRITERIA:
-**ONLY FLAG CRITICAL ISSUES - Be very conservative and lenient**
+**FLAG THESE SPECIFIC ISSUES FOR BETTER CRM COMPATIBILITY**
 
 1. **Subject Line**: 3-6 words, sentence case (only flag if way off)
 2. **Greeting**: "Hey" for casual/interns, "Hi" for professionals (only flag if using "Dear")
 3. **Structure**: Basic email structure with line breaks (only flag if completely broken)
 4. **Word Count**: 95-150 words total (aim for 120-140 words - flag if under 95 or over 150)
-5. **Tone**: Conversational tone (only flag if very formal or salesy)
-6. **CTA**: Has some form of call-to-action (only flag if completely missing)
-7. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
+5. **Reading Level**: 5th grade or lower (flag if too complex/high reading level)
+6. **Adverbs**: 3 or fewer adverbs (flag if more than 3 adverbs)
+7. **Sentence Length**: 15 words or less per sentence (flag sentences over 15 words)
+8. **Personalization**: Must reference recipient's needs/interests (flag if not personalized)
+9. **CTA**: Has some form of call-to-action (only flag if completely missing)
+10. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
 
-**IMPORTANT: Only flag major problems. Minor variations are acceptable.**
+**IMPORTANT: Flag these specific issues to improve CRM compatibility and readability.**
+
+SPECIFIC THINGS TO CHECK:
+- Count adverbs (words ending in -ly like "quickly", "significantly", "easily") - flag if more than 3
+- Count words per sentence - flag sentences with more than 15 words
+- Check reading level - flag if using complex words or sentence structures
+- Check personalization - flag if not referencing recipient's specific situation/needs
+- Look for merge tags like {{contact.first_name}}, {{account.name}} for personalization
 
 Return a JSON array of issues:
 [
@@ -365,13 +375,16 @@ CRITICAL FIXING REQUIREMENTS:
 5. Structure as 3-4 paragraphs with proper line breaks
 6. EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration
 7. End with Apollo link CTA: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-8. Use 5th grade reading level, max 15 words per sentence
-9. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
-10. No signature, no excessive formatting
-11. Include social proof with specific companies and results
-12. Maintain the original campaign signal focus while EXPANDING content to reach proper length
-13. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
-14. DO NOT SHORTEN - focus on adding value and detail to reach 95-150 words
+8. Use 5th grade reading level or lower - simplify complex words and sentences
+9. MAXIMUM 3 ADVERBS - remove excess adverbs, keep only essential ones
+10. MAXIMUM 15 WORDS PER SENTENCE - break long sentences into shorter ones
+11. PERSONALIZE CONTENT - reference recipient's specific needs, interests, and situation
+12. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
+13. No signature, no excessive formatting
+14. Include social proof with specific companies and results
+15. Maintain the original campaign signal focus while EXPANDING content to reach proper length
+16. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
+17. DO NOT SHORTEN - focus on adding value and detail to reach 95-150 words
 
 Return ONLY the corrected email, no explanations:`
 
