@@ -5,7 +5,7 @@ import { generateText } from "ai";
 const MODEL_MAP: Record<string, string> = {
   "gpt-5": "gpt-5",            // latest, most capable
   "gpt-5-mini": "gpt-5-mini",  // balanced
-  "gpt-5-nano": "gpt-5o-nano", // fastest (must use gpt-5o-nano, not gpt-5-nano)
+  "gpt-5-nano": "gpt-5-nano",  // fastest
   "gpt-4o": "gpt-4o",          // fallback
   "gpt-4o-mini": "gpt-4o-mini", // fallback mini
 };
@@ -79,7 +79,59 @@ export async function generateWithGPT5(prompt: string, model: string = "gpt-5") 
   }
 }
 
-// Alternative function using direct OpenAI client for GPT-5
+// GPT-5 specific function using the Responses API
+export async function generateWithGPT5Responses(prompt: string, model: string = "gpt-5") {
+  try {
+    console.log(`\n🚀 ===== GPT-5 RESPONSES API START =====`);
+    console.log(`📧 Model: ${model}`);
+    console.log(`📏 Prompt Length: ${prompt.length} characters`);
+    console.log(`📄 Prompt Preview (first 300 chars):`);
+    console.log('─'.repeat(60));
+    console.log(prompt.substring(0, 300) + (prompt.length > 300 ? '...' : ''));
+    console.log('─'.repeat(60));
+    
+    const { OpenAI } = await import('openai');
+    const openaiClient = new OpenAI();
+    
+    // Use the Responses API for GPT-5 models
+    const requestParams: any = {
+      model: model,
+      input: prompt,
+      reasoning: { effort: "medium" }, // Use medium reasoning for balanced performance
+      text: { verbosity: "medium" }    // Use medium verbosity for good content length
+    };
+    
+    console.log(`🔧 GPT-5 Parameters:`, {
+      model: model,
+      reasoning: "medium",
+      verbosity: "medium",
+      promptLength: prompt.length
+    });
+    
+    console.log(`🚀 Sending to GPT-5 Responses API...`);
+    const response = await openaiClient.responses.create(requestParams);
+    
+    const responseText = response.output_text || "";
+    
+    console.log(`✅ GPT-5 Responses API succeeded with ${model}`);
+    console.log(`📊 Response length: ${responseText.length} characters`);
+    console.log(`📄 Response preview (first 200 chars):`);
+    console.log('─'.repeat(60));
+    console.log(responseText.substring(0, 200) + (responseText.length > 200 ? '...' : ''));
+    console.log('─'.repeat(60));
+    console.log(`🚀 ===== GPT-5 RESPONSES API END =====\n`);
+    
+    return responseText;
+  } catch (error) {
+    console.error(`❌ GPT-5 Responses API failed with model ${model}:`, error);
+    
+    // Fallback to Chat Completions API
+    console.log('🔄 Falling back to Chat Completions API...');
+    return generateWithOpenAIDirect(prompt, model);
+  }
+}
+
+// Alternative function using direct OpenAI client for GPT-5 (Chat Completions API)
 export async function generateWithOpenAIDirect(prompt: string, model: string = "gpt-5") {
   try {
     console.log(`\n🔗 ===== DIRECT OPENAI CLIENT START =====`);

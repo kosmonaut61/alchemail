@@ -14,14 +14,19 @@ import {
 } from "@/lib/email-qa"
 
 // Import the new openai-models functions
-import { generateWithGPT5, generateWithOpenAIDirect } from "@/lib/openai-models"
+import { generateWithGPT5, generateWithOpenAIDirect, generateWithGPT5Responses } from "@/lib/openai-models"
 
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // Use the new GPT-5 function with proper parameter handling
-    console.log(`Using GPT-5 for email generation with model: ${model}`)
-    return await generateWithOpenAIDirect(prompt, model)
+    // Use the new GPT-5 Responses API for best performance
+    console.log(`Using GPT-5 Responses API for email generation with model: ${model}`)
+    try {
+      return await generateWithGPT5Responses(prompt, model)
+    } catch (error) {
+      console.log('GPT-5 Responses API failed, falling back to Chat Completions API...')
+      return await generateWithOpenAIDirect(prompt, model)
+    }
   } else if (model.startsWith('o1')) {
     // For O1 models, use standard generateText with specific parameters
     console.log(`Using O1 model for email generation: ${model}`)

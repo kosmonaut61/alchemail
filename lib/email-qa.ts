@@ -1,70 +1,52 @@
 import { generateText } from "ai"
 import { openai } from "@ai-sdk/openai"
 import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "./email-samples"
+import { generateWithGPT5Responses, generateWithOpenAIDirect } from "./openai-models"
 
 // Helper function to generate text with proper API for each model
 async function generateTextWithModel(prompt: string, model: string): Promise<string> {
   if (model.startsWith('gpt-5')) {
-    // For GPT-5, use the chat.completions API with proper parameters
-    console.log(`Attempting GPT-5 for QA with model: ${model}`)
+    // For GPT-5, use the Responses API for best performance
+    console.log(`Using GPT-5 Responses API for QA with model: ${model}`)
     
     try {
+      // Use Responses API with lower verbosity for QA responses
       const { OpenAI } = await import('openai')
       const openaiClient = new OpenAI()
       
-      // GPT-5 models don't support temperature parameter
-      const isGPT5 = model.startsWith('gpt-5');
       const requestParams: any = {
         model: model,
-        messages: [{ role: "user", content: prompt }],
-        max_completion_tokens: 400 // Shorter for QA responses
+        input: prompt,
+        reasoning: { effort: "low" }, // Use low reasoning for faster QA responses
+        text: { verbosity: "low" }    // Use low verbosity for concise QA responses
       };
       
-      // Only add temperature for non-GPT-5 models
-      if (!isGPT5) {
-        requestParams.temperature = 0.1; // Lower temperature for more consistent QA
-      }
-      
-      console.log(`🔧 QA Parameters:`, {
+      console.log(`🔧 GPT-5 QA Parameters:`, {
         model: model,
-        max_completion_tokens: 400,
-        temperature: isGPT5 ? 'not supported' : 0.1,
-        promptLength: prompt.length,
-        messageCount: 1
+        reasoning: "low",
+        verbosity: "low",
+        promptLength: prompt.length
       });
       
-      console.log(`🚀 Sending QA request to OpenAI API...`);
-      const response = await openaiClient.chat.completions.create(requestParams)
+      console.log(`🚀 Sending QA request to GPT-5 Responses API...`);
+      const response = await openaiClient.responses.create(requestParams)
       
-      const responseText = response.choices[0]?.message?.content || "";
-      console.log(`✅ GPT-5 QA succeeded! Response length: ${responseText.length} characters`);
+      const responseText = response.output_text || "";
+      console.log(`✅ GPT-5 Responses API QA succeeded! Response length: ${responseText.length} characters`);
       
-      // If GPT-5 returns empty response, fallback to GPT-4o
+      // If GPT-5 returns empty response, fallback to Chat Completions API
       if (responseText.trim().length === 0) {
-        console.log('⚠️ GPT-5 returned empty response, falling back to GPT-4o for QA...');
-        const fallbackResult = await generateText({
-          model: openai("gpt-4o"),
-          prompt,
-          temperature: 0.1
-        });
-        console.log(`✅ GPT-4o QA fallback successful! Response length: ${fallbackResult.text.length} characters`);
-        return fallbackResult.text;
+        console.log('⚠️ GPT-5 Responses API returned empty response, falling back to Chat Completions API...');
+        return await generateWithOpenAIDirect(prompt, model);
       }
       
       return responseText
     } catch (error) {
-      console.error(`GPT-5 failed for QA:`, error)
-      console.log('Falling back to GPT-4o for QA...')
+      console.error(`GPT-5 Responses API failed for QA:`, error)
+      console.log('Falling back to Chat Completions API for QA...')
       
-      // Fallback to GPT-4o using standard generateText
-      console.log(`🔄 QA Fallback to GPT-4o via AI SDK...`);
-      const fallbackResult = await generateText({
-        model: openai("gpt-4o"),
-        prompt,
-        temperature: 0.1
-      })
-      console.log(`✅ QA Fallback successful! Response length: ${fallbackResult.text.length} characters`);
-      return fallbackResult.text
+      // Fallback to Chat Completions API
+      return await generateWithOpenAIDirect(prompt, model)
     }
   } else if (model.startsWith('o1')) {
     // For O1 models, use standard generateText with specific parameters
@@ -275,7 +257,7 @@ Return a JSON array of issues found (be conservative - only flag real problems):
         issues.push(...parsedIssues)
       }
     } catch (parseError) {
-      console.log('⚠️ Failed to parse sample comparison response as JSON:', parseError.message)
+      console.log('⚠️ Failed to parse sample comparison response as JSON:', parseError instanceof Error ? parseError.message : 'Unknown error')
       console.log('📄 Raw response:', text.substring(0, 200) + '...')
       // Don't throw error, just continue without this analysis
     }
@@ -376,7 +358,7 @@ Return a JSON array of issues:
         issues.push(...parsedIssues)
       }
     } catch (parseError) {
-      console.log('⚠️ Failed to parse QA response as JSON:', parseError.message)
+      console.log('⚠️ Failed to parse QA response as JSON:', parseError instanceof Error ? parseError.message : 'Unknown error')
       console.log('📄 Raw response:', text.substring(0, 200) + '...')
       // Don't throw error, just continue without this analysis
     }
