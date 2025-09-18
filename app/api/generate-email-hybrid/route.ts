@@ -148,7 +148,15 @@ Generate the first email and LinkedIn message for this sequence:
 EMAIL 1 (Day 0):
 Subject: [Subject line that references the signal]
 
-[Write the actual email content here - not advice about how to write it. Make it conversational, address their pain points, include social proof, and end with a natural Apollo CTA link]
+[Write the actual email content here following these STRICT rules:
+- 100-150 words total (aim for 120-140)
+- Max 15 words per sentence
+- Max 4 sentences per paragraph  
+- 3-4 paragraphs total
+- ONE clear quantified result only (not multiple stats)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- No signature block - email ends at CTA
+- Plain text only, no formatting]
 
 LINKEDIN MESSAGE 1 (Day 1):
 [Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]`
@@ -236,17 +244,41 @@ Generate emails 2, 3, 4 and the second LinkedIn message for this sequence:
 EMAIL 2 (Day 3):
 Subject: [Subject line that references the signal]
 
-[Write the actual email content here - follow-up on the first email, different angle on pain point, include social proof, natural Apollo CTA]
+[Write the actual email content here following these STRICT rules:
+- 100-150 words total (aim for 120-140)
+- Max 15 words per sentence
+- Max 4 sentences per paragraph  
+- 3-4 paragraphs total
+- ONE clear quantified result only (not multiple stats)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- No signature block - email ends at CTA
+- Plain text only, no formatting]
 
 EMAIL 3 (Day 7):
 Subject: [Subject line that references the signal]
 
-[Write the actual email content here - address objections, deeper value proposition, case study, natural Apollo CTA]
+[Write the actual email content here following these STRICT rules:
+- 100-150 words total (aim for 120-140)
+- Max 15 words per sentence
+- Max 4 sentences per paragraph  
+- 3-4 paragraphs total
+- ONE clear quantified result only (not multiple stats)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- No signature block - email ends at CTA
+- Plain text only, no formatting]
 
 EMAIL 4 (Day 11):
 Subject: [Subject line that references the signal]
 
-[Write the actual email content here - final follow-up, urgency/next steps, clear action item, strong Apollo CTA]
+[Write the actual email content here following these STRICT rules:
+- 100-150 words total (aim for 120-140)
+- Max 15 words per sentence
+- Max 4 sentences per paragraph  
+- 3-4 paragraphs total
+- ONE clear quantified result only (not multiple stats)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- No signature block - email ends at CTA
+- Plain text only, no formatting]
 
 LINKEDIN MESSAGE 2 (Day 5):
 [Write the actual LinkedIn message content here - brief follow-up, reference previous touchpoints, soft CTA]`

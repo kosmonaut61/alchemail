@@ -6180,3 +6180,31 @@ Import trace for requested module:
  POST /api/generate-email-hybrid 200 in 68172ms
  ✓ Compiled in 663ms (1116 modules)
  ✓ Compiled in 357ms (1061 modules)
+ ✓ Compiled in 584ms (1061 modules)
+ ✓ Compiled in 403ms (1061 modules)
+ ○ Compiling /api/generate-email-hybrid ...
+ ✓ Compiled /api/generate-email-hybrid in 707ms (402 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test strict word count rules',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 115229ms
+ ✓ Compiled in 782ms (1116 modules)
