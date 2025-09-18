@@ -88,8 +88,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
           content: prompt
         }
       ],
-      temperature: 0.7,
-      maxTokens: 2000
+      temperature: 0.7
     })
 
     if (!text) {

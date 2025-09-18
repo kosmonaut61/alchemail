@@ -6599,3 +6599,34 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
  ✓ Compiled in 486ms (1102 modules)
  ✓ Compiled in 462ms (1061 modules)
  ✓ Compiled in 395ms (1061 modules)
+ ✓ Compiled in 828ms (1061 modules)
+ ✓ Compiled in 290ms (1061 modules)
+ ✓ Compiled in 231ms (1061 modules)
+ ✓ Compiled in 187ms (1061 modules)
+ ✓ Compiled in 375ms (1061 modules)
+ ✓ Compiled in 289ms (1061 modules)
+ ✓ Compiled in 844ms (1061 modules)
+ ✓ Compiled in 282ms (1061 modules)
+ ✓ Compiled in 454ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 371ms (261 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: We helped a similar company reduce freight costs by 18%...
+👤 Persona: CEO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Strategic Cost Savings for Your Operations",
+      "purpose": "Introduce our expertise in freight cost optimization and establish credibi...
+ POST /api/generate-sequence-plan 200 in 3790ms
+ ✓ Compiled /api/generate-messages in 410ms (1310 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We helped a similar company reduce freight costs by 18%...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4732ms
+ ✓ Compiled in 583ms (1324 modules)

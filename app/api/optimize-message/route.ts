@@ -88,7 +88,6 @@ Return the optimized message with the same format as the original. Focus on impr
           }
         ],
         temperature: 0.7,
-        maxTokens: 1000,
         topP: 0.9,
         frequencyPenalty: 0.1,
         presencePenalty: 0.1
@@ -113,8 +112,7 @@ Return the optimized message with the same format as the original. Focus on impr
             content: optimizationPrompt
           }
         ],
-        temperature: 0.7,
-        maxTokens: 800
+        temperature: 0.7
       })
       
       optimizedContent = text
