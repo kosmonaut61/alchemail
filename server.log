@@ -4937,3 +4937,127 @@ I’m following up on the GPT-5-nano final signal test. Cost visibility in freig
  ✓ Compiled in 412ms (820 modules)
  ✓ Compiled in 172ms (820 modules)
  ✓ Compiled in 243ms (820 modules)
+ ✓ Compiled in 582ms (820 modules)
+ ✓ Compiled in 305ms (820 modules)
+ ✓ Compiled in 164ms (820 modules)
+ ✓ Compiled in 436ms (820 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+📊 STATUS UPDATE: initializing (5%) - Preparing email generation...
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+📊 STATUS UPDATE: building_context (15%) - Building email context and structure...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+📊 STATUS UPDATE: generating (25%) - Generating initial email sequence...
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test frontend fix
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12483 characters
+🤖 Using GPT-5-nano for fast generation...
+✅ Successfully used gpt-5-nano
+✅ Generation successful with gpt-5
+📊 Generated content length: 2816 characters
+🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====
+📊 STATUS UPDATE: initial_complete (50%) - Initial sequence generated successfully!
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+📊 STATUS UPDATE: qa_analysis (60%) - Verifying initial sequence quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 3529 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+📈 Quality Score: 72/100
+✅ Passed: false
+📋 Issues Found: 10
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] subject: Subject line includes a placeholder that may not render ({{account.name}}). If not replaced, it looks unpersonalized and unprofessional.
+  3. [HIGH] greeting: LinkedIn messages and emails use placeholders ({{contact.first_name}}) in greetings; if not replaced, messages appear impersonal or broken.
+  4. [HIGH] formatting: No unsubscribe option or physical mailing address is included; this risks non-compliance with CAN-SPAM and GDPR requirements for marketing emails.
+  5. [MEDIUM] length: Email is relatively long for an initial cold outreach, with several claims and benefits; this may reduce readability and response.
+  6. [MEDIUM] structure: Content could be structured more scannably: intro, 2-3 bulleted benefits, social proof, and a single CTA.
+  7. [MEDIUM] cta: CTAs vary and can be weak (e.g., 'Would a quick intro help?'); there's not always a direct scheduling action.
+  8. [MEDIUM] content: Claims such as 'Dollar Tree saved $3.2M' may feel overstated without context or verifiable references.
+  9. [LOW] formatting: Links are presented using Markdown-style [text](URL), which may not render in all clients.
+  10. [LOW] tone: Overall tone is promotional; could feel pushy to operations leaders at risk of budget constraints.
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-5
+📝 Applying fixes to email...
+📊 STATUS UPDATE: auto_fixing (75%) - Applying quality improvements...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4172 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+✅ Auto-fix successful, fixed email length: 3469 characters
+✅ Auto-fix completed
+📊 Fixed content length: 3469 characters
+🔧 Fixes applied: 6
+  1. Fixed structure: Missing subject line
+  2. Fixed subject: Subject line includes a placeholder that may not render ({{account.name}}). If not replaced, it looks unpersonalized and unprofessional.
+  3. Fixed greeting: LinkedIn messages and emails use placeholders ({{contact.first_name}}) in greetings; if not replaced, messages appear impersonal or broken.
+  4. Fixed formatting: No unsubscribe option or physical mailing address is included; this risks non-compliance with CAN-SPAM and GDPR requirements for marketing emails.
+  5. Fixed length: Email is relatively long for an initial cold outreach, with several claims and benefits; this may reduce readability and response.
+  6. Applied quality improvements
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-5
+📝 Double-checking final email...
+✅ Double-check completed
+📊 Final content length: 3469 characters
+🔧 Additional fixes: 0
+
+📈 ===== FINAL QA ANALYSIS =====
+🤖 Final QA Model: gpt-5
+📝 Running final quality check...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4182 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+📈 Final Quality Score: 71/100
+✅ Final Passed: false
+📋 Final Issues: 9
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3469 characters
+🔧 Total Fixes Applied: 6
+📈 Final Quality Score: 71/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Frontend Fix for Cost Visibility
+
+Email 1 (Day 0):
+Subject: Smarter freight costs, faster decisions
+
+Hi there,
+Freight costs are rising and data is scattered.
+Your teams juggle regions,...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+📊 STATUS UPDATE: complete (100%) - Email sequence ready!
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 204006ms
+ ✓ Compiled in 460ms (820 modules)

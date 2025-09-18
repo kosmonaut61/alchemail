@@ -50,13 +50,16 @@ export default function EmailGenerator() {
   // Simple progress simulation (since status API causes timeouts)
   const startProgressSimulation = () => {
     const phases = [
-      { progress: 10, message: 'Preparing email generation...' },
-      { progress: 25, message: 'Building email context and structure...' },
-      { progress: 40, message: 'Generating initial email sequence...' },
-      { progress: 60, message: 'Initial sequence generated successfully!' },
-      { progress: 75, message: 'Verifying initial sequence quality...' },
-      { progress: 90, message: 'Applying quality improvements...' },
-      { progress: 100, message: 'Email sequence ready!' }
+      { progress: 5, message: 'Preparing email generation...' },
+      { progress: 15, message: 'Building email context and structure...' },
+      { progress: 25, message: 'Generating initial email sequence...' },
+      { progress: 35, message: 'Initial sequence generated successfully!' },
+      { progress: 45, message: 'Verifying initial sequence quality...' },
+      { progress: 55, message: 'Applying quality improvements...' },
+      { progress: 65, message: 'Finalizing email content...' },
+      { progress: 75, message: 'Almost ready...' },
+      { progress: 85, message: 'Processing final touches...' },
+      { progress: 95, message: 'Email sequence ready!' }
     ]
     
     let currentPhase = 0
@@ -65,9 +68,10 @@ export default function EmailGenerator() {
         setGenerationStatus(phases[currentPhase])
         currentPhase++
       } else {
-        clearInterval(interval)
+        // Don't clear the interval, keep showing 95% until we get the actual response
+        setGenerationStatus({ progress: 95, message: 'Email sequence ready!' })
       }
-    }, 8000) // Update every 8 seconds
+    }, 10000) // Update every 10 seconds
     
     return interval
   }
@@ -298,8 +302,15 @@ export default function EmailGenerator() {
       const data = await response.json()
       console.log('📥 Response data:', data)
       
-      // Clear progress when generation completes
-      setGenerationStatus(null)
+      // Clear progress interval and show completion
+      clearInterval(progressInterval)
+      setGenerationStatus({ progress: 100, message: 'Email sequence complete!' })
+      
+      // Clear progress after a brief moment to show completion
+      setTimeout(() => {
+        setGenerationStatus(null)
+      }, 2000)
+      
       console.log('📧 Email content length:', data.email?.length || 0)
       console.log('📧 Email preview:', data.email?.substring(0, 200) || 'No email content')
 
@@ -346,6 +357,7 @@ export default function EmailGenerator() {
       console.error("❌ ===== END ERROR ======")
       
       // Clear progress on error
+      clearInterval(progressInterval)
       setGenerationStatus(null)
       
       toast({
