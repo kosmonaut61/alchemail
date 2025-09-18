@@ -2815,3 +2815,4 @@ Data analysis takes too long for marketing teams. Your campaigns slow while repo
  ✓ Compiled /api/debug-vercel in 461ms (1070 modules)
 🔍 Vercel Debug API called
  POST /api/debug-vercel 200 in 2695ms
+ ✓ Compiled in 324ms (1084 modules)
