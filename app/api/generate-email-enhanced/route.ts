@@ -12,6 +12,7 @@ import {
   getGenerationProgress,
   type EmailQualityReport 
 } from "@/lib/email-qa"
+import { runWithGpt5 } from "@/lib/cursor-gpt5-switcher"
 
 // Import only the function we need to avoid circular dependencies
 import { generateWithGPT5, generateWithGPT5Responses } from "@/lib/openai-models"
@@ -34,7 +35,6 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
           content: prompt,
         },
       ],
-      maxTokens: 800,
       temperature: 0.1 // O1 models work better with lower temperature
     })
     return result.text
@@ -232,22 +232,11 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
     let initialEmail: string
     try {
       if (model.startsWith('gpt-5')) {
-        // For GPT-5, use the direct approach like the working chatbot
-        console.log(`🤖 Using GPT-5 direct approach...`)
-        const { text } = await generateText({
-          model: openai(model, {
-            apiKey: process.env.OPENAI_API_KEY,
-          }),
-          messages: [
-            {
-              role: "user",
-              content: prompt,
-            },
-          ],
-          maxTokens: 2000,
-          temperature: 0.7,
-        })
-        initialEmail = text
+        // Force GPT-5-nano for fastest, most reliable generation
+        console.log(`🤖 Using GPT-5-nano for fast generation...`)
+        const result = await runWithGpt5(prompt)
+        console.log(`✅ Successfully used ${result.model}`)
+        initialEmail = result.text
       } else {
         // For other models, use the existing function
         console.log(`🤖 Using standard model approach...`)
@@ -267,7 +256,6 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
               content: prompt,
             },
           ],
-          maxTokens: 2000,
           temperature: 0.7,
         })
         initialEmail = text

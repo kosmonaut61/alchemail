@@ -4622,3 +4622,318 @@ Subject: Cut freight cost drift
  ✓ Compiled in 407ms (820 modules)
  ✓ Compiled in 614ms (820 modules)
  ✓ Compiled in 174ms (820 modules)
+ ✓ Compiled in 1036ms (820 modules)
+ ✓ Compiled in 188ms (820 modules)
+ ✓ Compiled in 978ms (820 modules)
+ ✓ Compiled in 574ms (820 modules)
+ ✓ Compiled in 503ms (820 modules)
+ ✓ Compiled in 519ms (820 modules)
+ ✓ Compiled in 455ms (820 modules)
+ ✓ Compiled /api/generate-email-enhanced in 342ms (357 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+📊 STATUS UPDATE: initializing (5%) - Preparing email generation...
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+📊 STATUS UPDATE: building_context (15%) - Building email context and structure...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+📊 STATUS UPDATE: generating (25%) - Generating initial email sequence...
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test GPT-5 fallback system
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12501 characters
+🤖 Using GPT-5 fallback system...
+✅ Successfully used gpt-5
+✅ Generation successful with gpt-5
+📊 Generated content length: 3687 characters
+🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====
+📊 STATUS UPDATE: initial_complete (50%) - Initial sequence generated successfully!
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3687 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Fallback Cost Shield
+
+Email 1 (Day 0):
+Subject: Your GPT-5 fallback plan
+
+Saw you plan to test a GPT-5 fallback system. When systems fail, costs spike. Ops feels it first. How are...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+📊 STATUS UPDATE: complete (100%) - Email sequence ready!
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 145045ms
+ ✓ Compiled in 903ms (820 modules)
+ ✓ Compiled in 1444ms (820 modules)
+ ✓ Compiled in 241ms (820 modules)
+ ✓ Compiled in 284ms (820 modules)
+ ✓ Compiled in 205ms (820 modules)
+ ✓ Compiled /api/generate-email-enhanced in 252ms (357 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+📊 STATUS UPDATE: initializing (5%) - Preparing email generation...
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+📊 STATUS UPDATE: building_context (15%) - Building email context and structure...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+📊 STATUS UPDATE: generating (25%) - Generating initial email sequence...
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test GPT-5-nano for both phases
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12511 characters
+🤖 Using GPT-5-nano for fast generation...
+✅ Successfully used gpt-5-nano
+✅ Generation successful with gpt-5
+📊 Generated content length: 4327 characters
+🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====
+📊 STATUS UPDATE: initial_complete (50%) - Initial sequence generated successfully!
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+📊 STATUS UPDATE: qa_analysis (60%) - Verifying initial sequence quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 5040 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+📈 Quality Score: 80/100
+✅ Passed: false
+📋 Issues Found: 9
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] greeting: Emails largely omit a personalized greeting, risking a cold, impersonal tone for executive readers.
+  3. [MEDIUM] subject: Subject lines are occasionally aggressive or vague and may fail to set expectations about the GPT-5-nano test context.
+  4. [MEDIUM] structure: Long blocks of text with multiple ideas reduce readability for busy executives.
+  5. [MEDIUM] tone: Tone leans toward sales rhetoric; a more consultative, data-driven approach may build credibility with operations leaders.
+  6. [MEDIUM] cta: CTAs exist but are not consistently prominent and are sometimes repetitive across emails.
+  7. [LOW] formatting: Use of inline HTML links may render inconsistently across clients; no plain-text fallback provided.
+  8. [MEDIUM] length: Some emails are lengthy, which can deter engagement from busy executives.
+  9. [MEDIUM-HIGH] content: Case-study references are valuable but lack context and may raise credibility questions if not properly attributed.
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-5
+📝 Applying fixes to email...
+📊 STATUS UPDATE: auto_fixing (75%) - Applying quality improvements...
+[QA] Using model: gpt-5
+[QA] Prompt length: 5551 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+✅ Auto-fix successful, fixed email length: 4193 characters
+✅ Auto-fix completed
+📊 Fixed content length: 4193 characters
+🔧 Fixes applied: 6
+  1. Fixed structure: Missing subject line
+  2. Fixed greeting: Emails largely omit a personalized greeting, risking a cold, impersonal tone for executive readers.
+  3. Fixed subject: Subject lines are occasionally aggressive or vague and may fail to set expectations about the GPT-5-nano test context.
+  4. Fixed structure: Long blocks of text with multiple ideas reduce readability for busy executives.
+  5. Fixed tone: Tone leans toward sales rhetoric; a more consultative, data-driven approach may build credibility with operations leaders.
+  6. Applied quality improvements
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-5
+📝 Double-checking final email...
+✅ Double-check completed
+📊 Final content length: 4193 characters
+🔧 Additional fixes: 0
+
+📈 ===== FINAL QA ANALYSIS =====
+🤖 Final QA Model: gpt-5
+📝 Running final quality check...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4906 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+📈 Final Quality Score: 76/100
+✅ Final Passed: false
+📋 Final Issues: 7
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 4193 characters
+🔧 Total Fixes Applied: 6
+📈 Final Quality Score: 76/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5-nano Cost Test Campaign
+
+Email 1 (Day 0):
+Subject: Phase 1: See clearer freight costs with GPT-5-nano
+
+Hi {{contact.first_name}},
+
+Cost pressures hit ops teams. Fuel, lane changes...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+📊 STATUS UPDATE: complete (100%) - Email sequence ready!
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 234881ms
+ ✓ Compiled in 613ms (820 modules)
+ ✓ Compiled in 277ms (820 modules)
+ ✓ Compiled in 193ms (820 modules)
+ ✓ Compiled in 205ms (820 modules)
+ ✓ Compiled in 193ms (820 modules)
+ ✓ Compiled in 342ms (820 modules)
+ ✓ Compiled in 218ms (820 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+📊 STATUS UPDATE: initializing (5%) - Preparing email generation...
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+📊 STATUS UPDATE: building_context (15%) - Building email context and structure...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+📊 STATUS UPDATE: generating (25%) - Generating initial email sequence...
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test GPT-5-nano final
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12491 characters
+🤖 Using GPT-5-nano for fast generation...
+✅ Successfully used gpt-5-nano
+✅ Generation successful with gpt-5
+📊 Generated content length: 3252 characters
+🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====
+📊 STATUS UPDATE: initial_complete (50%) - Initial sequence generated successfully!
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+📊 STATUS UPDATE: qa_analysis (60%) - Verifying initial sequence quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 3965 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+📈 Quality Score: 71/100
+✅ Passed: false
+📋 Issues Found: 9
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] cta: Missing question-based CTA
+  3. [HIGH] greeting: Emails begin without a personal greeting, missing the standard salutation that builds rapport with an executive audience.
+  4. [HIGH] formatting: Inconsistent formatting: some links use HTML anchors while others appear as Markdown-style links; there are internal meta headers (e.g., 'Email 1 (Day 0)') mixed into customer-facing copy.
+  5. [HIGH] content: Claims such as 'Dollar Tree saved $3.2 million' and 'EZRack saved six-figure savings' may be unverified or out of context; plus a $500 Visa gift card incentive raises compliance concerns.
+  6. [MEDIUM] cta: Multiple CTAs and links clutter the message, causing potential confusion about the next step.
+  7. [MEDIUM] structure: The emails try to cover several benefits and social proof in one message, which can overwhelm readers.
+  8. [LOW] subject: Subject lines are clear but could be stronger by highlighting a tangible benefit or time sensitivity.
+  9. [LOW] tone: Tone is sales-forward and promotional; for a procurement-savvy audience, a more concise, data-driven tone may be preferred.
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-5
+📝 Applying fixes to email...
+📊 STATUS UPDATE: auto_fixing (75%) - Applying quality improvements...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4574 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+✅ Auto-fix successful, fixed email length: 3309 characters
+✅ Auto-fix completed
+📊 Fixed content length: 3309 characters
+🔧 Fixes applied: 6
+  1. Fixed structure: Missing subject line
+  2. Fixed cta: Missing question-based CTA
+  3. Fixed greeting: Emails begin without a personal greeting, missing the standard salutation that builds rapport with an executive audience.
+  4. Fixed formatting: Inconsistent formatting: some links use HTML anchors while others appear as Markdown-style links; there are internal meta headers (e.g., 'Email 1 (Day 0)') mixed into customer-facing copy.
+  5. Fixed content: Claims such as 'Dollar Tree saved $3.2 million' and 'EZRack saved six-figure savings' may be unverified or out of context; plus a $500 Visa gift card incentive raises compliance concerns.
+  6. Applied quality improvements
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-5
+📝 Double-checking final email...
+✅ Double-check completed
+📊 Final content length: 3309 characters
+🔧 Additional fixes: 0
+
+📈 ===== FINAL QA ANALYSIS =====
+🤖 Final QA Model: gpt-5
+📝 Running final quality check...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4022 characters
+[QA] Using GPT-5-nano for fast QA...
+[QA] Successfully used gpt-5-nano
+📈 Final Quality Score: 63/100
+✅ Final Passed: false
+📋 Final Issues: 13
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3309 characters
+🔧 Total Fixes Applied: 6
+📈 Final Quality Score: 63/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: test GPT-5-nano final
+
+Subject: Cut freight costs faster
+Hi {{contact.first_name}},
+
+I’m following up on the GPT-5-nano final signal test. Cost visibility in freight is a top pain for o...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+📊 STATUS UPDATE: complete (100%) - Email sequence ready!
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 210865ms
+ ✓ Compiled in 412ms (820 modules)
+ ✓ Compiled in 172ms (820 modules)
+ ✓ Compiled in 243ms (820 modules)

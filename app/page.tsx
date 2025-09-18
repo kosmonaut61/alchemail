@@ -286,7 +286,7 @@ export default function EmailGenerator() {
         if (response.status === 500) {
           errorMessage = `Server error: ${errorMessage}. The system will automatically retry with a fallback model.`
         } else if (response.status === 408 || errorMessage.includes('timeout')) {
-          errorMessage = "The request took longer than expected. GPT-5 models can take several minutes to respond - please try again."
+          errorMessage = "The request took longer than expected. GPT-5-nano is being used for speed - please try again."
         } else if (errorMessage.includes('gpt-5')) {
           errorMessage = "GPT-5 model may be experiencing issues. The system will automatically fall back to GPT-4o."
         }
@@ -674,7 +674,7 @@ export default function EmailGenerator() {
                       </Label>
                       {selectedModel.startsWith('gpt-5') && (
                         <div className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 px-2 py-1 rounded-md">
-                          ⏱️ GPT-5 may take 2-5 minutes to respond
+                          ⚡ GPT-5-nano for fastest response
                         </div>
                       )}
                       <Select value={selectedModel} onValueChange={setSelectedModel}>
@@ -682,7 +682,7 @@ export default function EmailGenerator() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="gpt-5">GPT-5 (Latest & Most Capable)</SelectItem>
+                        <SelectItem value="gpt-5">GPT-5 (Auto-selects Nano for Speed)</SelectItem>
                         <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
                         <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
                         <SelectItem value="gpt-4o">GPT-4o (Reliable Fallback)</SelectItem>
@@ -727,7 +727,7 @@ export default function EmailGenerator() {
                       {isGenerating ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          {selectedModel.startsWith('gpt-5') ? 'Generating with GPT-5 (this may take several minutes)...' : 'Generating...'}
+                          {selectedModel.startsWith('gpt-5') ? 'Generating with GPT-5-nano (fastest)...' : 'Generating...'}
                         </>
                       ) : (
                         <>
@@ -753,7 +753,7 @@ export default function EmailGenerator() {
               </CardTitle>
               <CardDescription className="text-base text-muted-foreground">
                 {selectedModel.startsWith('gpt-5') 
-                  ? 'Generating your personalized email sequence with GPT-5... This may take several minutes as GPT-5 processes your request.' 
+                  ? 'Generating your personalized email sequence with GPT-5-nano (fastest model)...' 
                   : 'Generating your personalized email sequence...'}
               </CardDescription>
             </CardHeader>

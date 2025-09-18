@@ -1,5 +1,6 @@
 import { generateText } from "ai"
 import { openai } from "@ai-sdk/openai"
+import { runWithGpt5 } from "@/lib/cursor-gpt5-switcher"
 import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "./email-samples"
 
 // Helper function to generate text with proper API for each model
@@ -9,24 +10,32 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
   console.log(`[QA] Prompt length: ${prompt.length} characters`);
   
   try {
-    const { text, usage, finishReason } = await generateText({
-      model: openai(model, {
-        apiKey: process.env.OPENAI_API_KEY,
-      }),
-      messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      temperature: 0.3, // Lower temperature for more consistent QA
-      topP: 0.9,
-      frequencyPenalty: 0.1,
-      presencePenalty: 0.1,
-    });
+    if (model.startsWith('gpt-5')) {
+      // Force GPT-5-nano for fastest, most reliable QA
+      console.log(`[QA] Using GPT-5-nano for fast QA...`)
+      const result = await runWithGpt5(prompt)
+      console.log(`[QA] Successfully used ${result.model}`)
+      return result.text
+    } else {
+      const { text, usage, finishReason } = await generateText({
+        model: openai(model, {
+          apiKey: process.env.OPENAI_API_KEY,
+        }),
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        temperature: 0.3, // Lower temperature for more consistent QA
+        topP: 0.9,
+        frequencyPenalty: 0.1,
+        presencePenalty: 0.1,
+      });
 
-    console.log(`[QA] Response generated successfully, usage:`, usage);
-    return text;
+      console.log(`[QA] Response generated successfully, usage:`, usage);
+      return text;
+    }
   } catch (error) {
     console.error(`[QA] Error with model ${model}:`, error);
     
