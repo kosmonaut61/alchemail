@@ -6017,3 +6017,134 @@ Hi {{contact.first_name}}, cost pressure is real for ops teams. End-to-end freig
 📊 STATUS UPDATE: complete (100%) - Email sequence ready!
 ✅ processRequest completed
  POST /api/generate-email-enhanced 200 in 182210ms
+ ✓ Compiled in 1570ms (1116 modules)
+ ✓ Compiled in 474ms (1061 modules)
+ ✓ Compiled in 504ms (1061 modules)
+ ✓ Compiled in 213ms (1061 modules)
+ ✓ Compiled in 215ms (1061 modules)
+ ✓ Compiled in 172ms (1061 modules)
+ ✓ Compiled in 484ms (1061 modules)
+ ✓ Compiled in 205ms (1061 modules)
+ ✓ Compiled in 605ms (1061 modules)
+ ✓ Compiled in 211ms (1061 modules)
+ ⚠ ./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'buildDynamicContext' is not exported from '@/lib/context-repository' (imported as 'buildDynamicContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+
+./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'getPersonaContext' is not exported from '@/lib/personas' (imported as 'getPersonaContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+❌ ===== HYBRID GENERATION ERROR ======
+❌ Error: TypeError: (0 , _lib_context_repository__WEBPACK_IMPORTED_MODULE_3__.buildDynamicContext) is not a function
+    at POST (app/api/generate-email-hybrid/route.ts:19:53)
+  17 |
+  18 |     // Build context and persona info
+> 19 |     const dynamicContext = await buildDynamicContext(contextItems || [])
+     |                                                     ^
+  20 |     const personaContext = getPersonaContext(persona)
+  21 |     const preamble = getPreamble()
+  22 |
+ POST /api/generate-email-hybrid 500 in 581ms
+ ○ Compiling /api/generate-email-hybrid ...
+ ⚠ ./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'getPersonaContext' is not exported from '@/lib/personas' (imported as 'getPersonaContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+ ⚠ ./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'getPersonaContext' is not exported from '@/lib/personas' (imported as 'getPersonaContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+❌ ===== HYBRID GENERATION ERROR ======
+❌ Error: TypeError: (0 , _lib_personas__WEBPACK_IMPORTED_MODULE_3__.getPersonaContext) is not a function
+    at POST (app/api/generate-email-hybrid/route.ts:20:45)
+  18 |     // Build context and persona info
+  19 |     const dynamicContext = await buildDynamicContext(contextItems || [])
+> 20 |     const personaContext = getPersonaContext(persona)
+     |                                             ^
+  21 |     const preamble = getPreamble()
+  22 |
+  23 |     // Batch 1: Generate Email 1 + LinkedIn Message 1
+ POST /api/generate-email-hybrid 500 in 147ms
+ ✓ Compiled /api/generate-email-hybrid in 395ms (1462 modules)
+ ✓ Compiled in 290ms (1463 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 38935ms
+ ✓ Compiled in 519ms (1463 modules)
+ ✓ Compiled in 649ms (1061 modules)
+ ✓ Compiled in 194ms (1061 modules)
+ ✓ Compiled in 383ms (1061 modules)
+ ✓ Compiled in 345ms (1061 modules)
+ ✓ Compiled in 482ms (1061 modules)
+ ✓ Compiled in 314ms (1061 modules)
+ ✓ Compiled in 272ms (1061 modules)
+ ✓ Compiled in 429ms (1061 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'implementing hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 45414ms
+ ✓ Compiled in 430ms (1061 modules)
+ ✓ Compiled in 421ms (1061 modules)
