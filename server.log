@@ -6397,3 +6397,66 @@ Import trace for requested module:
 🎉 ===== PARALLEL GENERATION COMPLETE =====
  POST /api/generate-email-parallel 200 in 242861ms
  ✓ Compiled in 582ms (1116 modules)
+ ✓ Compiled in 1182ms (1116 modules)
+ ✓ Compiled in 405ms (1061 modules)
+ ✓ Compiled in 180ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled in 182ms (1061 modules)
+ ✓ Compiled in 437ms (1061 modules)
+ ✓ Compiled in 781ms (1061 modules)
+ ✓ Compiled in 198ms (1061 modules)
+ ✓ Compiled in 369ms (1061 modules)
+ ✓ Compiled in 189ms (1061 modules)
+ ✓ Compiled in 389ms (1061 modules)
+ ✓ Compiled in 162ms (1061 modules)
+ ✓ Compiled /api/generate-email-strategic in 290ms (1449 modules)
+🚀 ===== STRATEGIC GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Phase 1: Creating Strategic Sequence Plan...
+📋 Creating strategic sequence plan...
+✅ Sequence plan created
+✅ Phase 1 Complete: Sequence plan created
+🎯 Phase 2: Generating Initial Messages...
+📧 Generating initial email1...
+✅ Initial email1 generated
+📧 Generating initial email2...
+✅ Initial email2 generated
+📧 Generating initial email3...
+✅ Initial email3 generated
+📧 Generating initial email4...
+✅ Initial email4 generated
+📧 Generating initial linkedin1...
+✅ Initial linkedin1 generated
+📧 Generating initial linkedin2...
+✅ Initial linkedin2 generated
+✅ Phase 2 Complete: All initial messages generated
+🎯 Phase 3: QA & Polish with gpt-5-mini...
+🔍 QA'ing and polishing Email 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 polished (score: 90)
+🔍 QA'ing and polishing Email 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 2 polished (score: 90)
+🔍 QA'ing and polishing Email 3...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 3 polished (score: 90)
+🔍 QA'ing and polishing Email 4...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 4 polished (score: 90)
+🔍 QA'ing and polishing LinkedIn 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ LinkedIn 1 polished (score: 90)
+🔍 QA'ing and polishing LinkedIn 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ LinkedIn 2 polished (score: 90)
+✅ Phase 3 Complete: All messages QA'd and polished
+🎉 ===== STRATEGIC GENERATION COMPLETE =====
+ POST /api/generate-email-strategic 200 in 383838ms
+ ✓ Compiled in 724ms (1116 modules)
