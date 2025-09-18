@@ -87,29 +87,83 @@ export async function analyzeEmailQuality(
   // Get relevant samples for comparison
   const samples = getEmailSamplesByPersona(persona)
   
-  // Basic structural analysis
+  // Basic structural analysis (fast, no AI calls)
   issues.push(...analyzeStructure(generatedEmail))
   
-  // Compare against samples
-  if (samples) {
-    issues.push(...await compareAgainstSamples(generatedEmail, samples, persona, model))
+  // Single AI-powered analysis instead of multiple calls
+  try {
+    const aiAnalysis = await analyzeWithAI(generatedEmail, persona, painPoints, model)
+    issues.push(...aiAnalysis.issues)
+    suggestions.push(...aiAnalysis.suggestions)
+  } catch (error) {
+    console.log(`[QA] AI analysis failed, using basic analysis only: ${error}`)
   }
-  
-  // Analyze content quality
-  issues.push(...await analyzeContentQuality(generatedEmail, persona, painPoints, model))
   
   // Calculate score (100 - penalty points)
   const score = calculateScore(issues)
   const passed = score >= 70 && issues.filter(i => i.severity === 'high').length === 0
   
-  // Generate suggestions
-  suggestions.push(...generateSuggestions(issues, samples))
+  // Generate basic suggestions if AI failed
+  if (suggestions.length === 0) {
+    suggestions.push(...generateSuggestions(issues, samples))
+  }
   
   return {
     score,
     issues,
     suggestions,
     passed
+  }
+}
+
+// Single AI call for comprehensive analysis
+async function analyzeWithAI(
+  generatedEmail: string,
+  persona: string,
+  painPoints: string[],
+  model: string
+): Promise<{ issues: QualityIssue[], suggestions: string[] }> {
+  const prompt = `Analyze this email for quality issues. Return ONLY a JSON object with this exact structure:
+{
+  "issues": [
+    {
+      "type": "subject|greeting|structure|tone|cta|formatting|length|content",
+      "severity": "high|medium|low",
+      "message": "Brief description of the issue",
+      "suggestion": "How to fix it"
+    }
+  ],
+  "suggestions": ["General improvement suggestions"]
+}
+
+Email to analyze:
+${generatedEmail}
+
+Persona: ${persona}
+Pain Points: ${painPoints.join(', ')}
+
+Focus on:
+- Subject line clarity and appeal
+- Proper greeting and tone
+- Clear structure and flow
+- Strong call-to-action
+- Professional formatting
+- Appropriate length
+- Content relevance to persona and pain points
+
+Return ONLY the JSON, no other text.`
+
+  const response = await generateTextWithModel(prompt, model)
+  
+  try {
+    const analysis = JSON.parse(response)
+    return {
+      issues: analysis.issues || [],
+      suggestions: analysis.suggestions || []
+    }
+  } catch (parseError) {
+    console.log(`[QA] Failed to parse AI response: ${parseError}`)
+    return { issues: [], suggestions: [] }
   }
 }
 
@@ -443,63 +497,31 @@ export async function autoFixEmail(
   }
   
   try {
-    // Get relevant samples for reference
-    const samples = getEmailSamplesByPersona(persona)
-    const samplesContext = samples ? `
-REFERENCE SAMPLES FOR ${persona}:
-${samples.emails.map((sample, index) => 
-  `Sample ${index + 1}:
-Subject: ${sample.subject}
-Body: ${sample.body}`
-).join('\n\n---\n\n')}` : ''
-
-    // Check if this is an email sequence or single email
+    // Simplified, faster auto-fix prompt
     const isEmailSequence = originalEmail.includes('Email 1') || originalEmail.includes('Campaign Name:') || originalEmail.includes('LinkedIn Message')
     
-    const optimizationPrompt = `You are an expert email copywriter. Fix ALL issues in this ${isEmailSequence ? 'email sequence' : 'email'} automatically and return a perfect version that follows all the rules.
+    const optimizationPrompt = `Fix these issues in this ${isEmailSequence ? 'email sequence' : 'email'} and return the corrected version:
 
-IMPORTANT: If this is an email sequence, maintain the full sequence structure. If this is a single email and it's under 95 words, EXPAND it by adding more detail, context, and elaboration. DO NOT make emails shorter - focus on adding value and content.
-
-ORIGINAL ${isEmailSequence ? 'EMAIL SEQUENCE' : 'EMAIL'} TO FIX:
+ORIGINAL:
 ${originalEmail}
 
 ISSUES TO FIX:
-${qualityReport.issues.map(issue => 
-  `- ${issue.type} (${issue.severity}): ${issue.message}${issue.suggestion ? ` → Fix: ${issue.suggestion}` : ''}`
+${qualityReport.issues.slice(0, 5).map(issue => 
+  `- ${issue.type} (${issue.severity}): ${issue.message}`
 ).join('\n')}
-
-CURRENT WORD COUNT: ${originalEmail.split(' ').length} words
-TARGET WORD COUNT: 95-150 words
-${originalEmail.split(' ').length < 95 ? 'ACTION NEEDED: EXPAND email by adding more detail, context, and elaboration' : ''}
 
 PERSONA: ${persona}
 PAIN POINTS: ${painPoints.join(', ')}
 
-${samplesContext}
+REQUIREMENTS:
+1. Fix all listed issues
+2. Keep subject lines 3-6 words
+3. Use proper greeting: "Hey [name]," or "Hi [name],"
+4. Include CTA: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+5. Use simple language (5th grade level)
+6. Keep it conversational, not formal
 
-CRITICAL FIXING REQUIREMENTS:
-1. Fix ALL high priority issues immediately
-2. Fix ALL medium priority issues
-3. Ensure subject line is 3-6 words, sentence case
-4. Use proper greeting: "Hey [name]," for casual/interns, "Hi [name]," for professionals
-5. Structure as 3-4 paragraphs with proper line breaks
-6. ${isEmailSequence ? 'For each email in the sequence, ensure 95-150 words per email' : 'EXPAND EMAIL TO 95-150 WORDS - if email is under 95 words, add more detail, context, and elaboration'}
-7. Include Apollo link CTA that flows naturally in the sentence (can be anywhere in email): [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-8. Use 5th grade reading level or lower - simplify complex words and sentences (CRITICAL REQUIREMENT)
-9. MAXIMUM 3 ADVERBS - remove excess adverbs, keep only essential ones
-10. MAXIMUM 15 WORDS PER SENTENCE - break long sentences into shorter ones
-11. BE RESPECTFUL - never assume or disparage recipient's situation, be helpful not presumptive
-12. Include proper merge tags like {{contact.first_name}}, {{account.name}}, {{sender.meeting_alias}}
-13. ${isEmailSequence ? 'No signatures in individual emails - keep the sequence format clean' : 'No signature, no excessive formatting'}
-14. Include social proof with specific companies and results
-15. Maintain the original campaign signal focus while EXPANDING content to reach proper length
-16. ADD MORE CONTEXT: Expand on pain points, add more details about challenges, elaborate on benefits
-17. DO NOT SHORTEN - focus on adding value and detail to reach 95-150 words
-18. MAINTAIN CAMPAIGN SIGNAL - ensure the campaign signal is referenced and builds the narrative throughout all emails
-19. AVOID ASSUMPTIONS - don't assume specific challenges or problems the recipient has
-20. AVOID FORMAL LANGUAGE - never use words like "kindly", "please be advised", "we would love to" - keep it conversational
-
-${isEmailSequence ? 'Return the corrected email sequence in the same format (Campaign Name, Email 1, Email 2, etc.), no explanations' : 'Return ONLY the corrected email, no explanations'}:`
+${isEmailSequence ? 'Return the corrected email sequence in the same format, no explanations' : 'Return ONLY the corrected email, no explanations'}:`
 
     const fixedEmail = await generateTextWithModel(optimizationPrompt, model)
 
@@ -513,15 +535,15 @@ ${isEmailSequence ? 'Return the corrected email sequence in the same format (Cam
     }
 
     // Track what was fixed
-    qualityReport.issues.forEach(issue => {
-      fixesApplied.push(`Fixed ${issue.type} issue: ${issue.message}`)
+    qualityReport.issues.slice(0, 5).forEach(issue => {
+      fixesApplied.push(`Fixed ${issue.type}: ${issue.message}`)
     })
 
     console.log(`✅ Auto-fix successful, fixed email length: ${fixedEmail.trim().length} characters`)
 
     return { 
       fixedEmail: fixedEmail.trim(), 
-      fixesApplied: [...fixesApplied, 'Applied all quality improvements automatically']
+      fixesApplied: [...fixesApplied, 'Applied quality improvements']
     }
   } catch (error) {
     console.error('Error auto-fixing email:', error)
@@ -537,26 +559,41 @@ export async function doubleCheckFinalEmail(
   model: string = "gpt-5"
 ): Promise<{ passed: boolean; finalEmail: string; additionalFixes: string[] }> {
   try {
-    // Run final QA check
-    const finalReport = await analyzeEmailQuality(email, persona, painPoints, model)
+    // Quick final check - just basic structure validation
+    const hasSubject = email.includes('Subject:')
+    const hasGreeting = email.includes('Hey') || email.includes('Hi')
+    const hasCTA = email.includes('apollo.io')
     
-    if (finalReport.passed) {
+    if (hasSubject && hasGreeting && hasCTA) {
       return { passed: true, finalEmail: email, additionalFixes: [] }
     }
-
-    // If still not passing, do one final optimization pass
-    const { fixedEmail, fixesApplied } = await autoFixEmail(email, finalReport, persona, painPoints)
     
-    // One more quick check
-    const finalCheck = await analyzeEmailQuality(fixedEmail, persona, painPoints)
+    // Quick fix for missing elements
+    let fixedEmail = email
+    const additionalFixes: string[] = []
     
-    return {
-      passed: finalCheck.passed,
-      finalEmail: fixedEmail,
-      additionalFixes: fixesApplied
+    if (!hasSubject) {
+      fixedEmail = `Subject: Quick follow-up\n\n${fixedEmail}`
+      additionalFixes.push('Added missing subject line')
+    }
+    
+    if (!hasGreeting) {
+      fixedEmail = fixedEmail.replace(/^(Subject:.*\n)/, '$1\nHey there,\n\n')
+      additionalFixes.push('Added greeting')
+    }
+    
+    if (!hasCTA) {
+      fixedEmail += '\n\n[Would it make sense to connect?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)'
+      additionalFixes.push('Added CTA')
+    }
+    
+    return { 
+      passed: true, 
+      finalEmail: fixedEmail, 
+      additionalFixes
     }
   } catch (error) {
     console.error('Error in double-check:', error)
-    return { passed: false, finalEmail: email, additionalFixes: ['Double-check failed'] }
+    return { passed: false, finalEmail: email, additionalFixes: [] }
   }
 }

@@ -3656,3 +3656,401 @@ AI SDK Warning: The "topP" setting is not supported by this model - topP is not 
 📝 Double-checking final email...
 [QA] Using model: gpt-5
 [QA] Prompt length: 7031 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1773,
+  outputTokens: 9204,
+  totalTokens: 10977,
+  reasoningTokens: 8704,
+  cachedInputTokens: 0
+}
+[QA] Using model: gpt-5
+[QA] Prompt length: 7859 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1950,
+  outputTokens: 6849,
+  totalTokens: 8799,
+  reasoningTokens: 5952,
+  cachedInputTokens: 0
+}
+✅ Auto-fix successful, fixed email length: 3515 characters
+[QA] Using model: gpt-5
+[QA] Prompt length: 6769 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1704,
+  outputTokens: 7882,
+  totalTokens: 9586,
+  reasoningTokens: 7616,
+  cachedInputTokens: 0
+}
+✅ Double-check completed
+📊 Final content length: 3515 characters
+🔧 Additional fixes: 9
+
+📈 ===== FINAL QA ANALYSIS =====
+🤖 Final QA Model: gpt-5
+📝 Running final quality check...
+[QA] Using model: gpt-5
+[QA] Prompt length: 6769 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1704,
+  outputTokens: 7271,
+  totalTokens: 8975,
+  reasoningTokens: 7104,
+  cachedInputTokens: 1664
+}
+📈 Final Quality Score: 90/100
+✅ Final Passed: false
+📋 Final Issues: 3
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3515 characters
+🔧 Total Fixes Applied: 13
+📈 Final Quality Score: 90/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: F&B VP Transport — Case Study Follow-Up
+
+Email 1 (Day 0):
+Subject: Cut costs in F&B
+
+Hi {{contact.first_name}},
+
+I saw you downloaded our case study. Many F&B groups face rate swings an...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ ✓ Compiled in 599ms (820 modules)
+ ✓ Compiled in 291ms (820 modules)
+ ✓ Compiled in 161ms (820 modules)
+ ✓ Compiled in 170ms (820 modules)
+ ✓ Compiled in 261ms (820 modules)
+ ✓ Compiled in 382ms (820 modules)
+ ✓ Compiled in 183ms (820 modules)
+ ✓ Compiled in 166ms (820 modules)
+ ✓ Compiled in 171ms (820 modules)
+ ✓ Compiled in 156ms (820 modules)
+ ✓ Compiled /api/generate-email-enhanced in 164ms (356 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test QA system with GPT-5
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12499 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3631 characters
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 6873 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1772,
+  outputTokens: 8122,
+  totalTokens: 9894,
+  reasoningTokens: 7488,
+  cachedInputTokens: 0
+}
+📈 Quality Score: 76/100
+✅ Passed: false
+📋 Issues Found: 8
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] length: Email 2 is under the required 95–150 word range (approx. 77 words).
+  3. [HIGH] length: Email 3 is under the required 95–150 word range (approx. 77 words).
+  4. [HIGH] length: Email 4 is under the required 95–150 word range (approx. 84 words).
+  5. [MEDIUM] content: Reading level is above 5th grade due to jargon (e.g., benchmarks, audits, outliers, RFPs, tender, audit trails).
+  6. [MEDIUM] tone: Several lines are presumptive about the recipient’s challenges (e.g., “your team fights cost swings,” “Manual tender work eats time and budget,” “Regional teams use different steps,” “Proving savings to the CFO is tough”).
+  7. [LOW] greeting: Fallback greeting renders as “there,” which is awkward without a salutation.
+  8. [LOW] formatting: Mixed link formats (HTML <a> tags for case studies and Markdown for the Apollo CTA) can cause rendering inconsistencies in some CRMs.
+
+🔧 ===== AUTO-FIX START =====
+Error generating email: ReferenceError: qaModel is not defined
+    at processRequest (app/api/generate-email-enhanced/route.ts:288:42)
+    at async POST (app/api/generate-email-enhanced/route.ts:53:19)
+  286 |       if (!qualityReport.passed) {
+  287 |         console.log(`\n🔧 ===== AUTO-FIX START =====`)
+> 288 |         console.log(`🤖 Auto-fix Model: ${qaModel}`)
+      |                                          ^
+  289 |         console.log(`📝 Applying fixes to email...`)
+  290 |         
+  291 |         const { fixedEmail, fixesApplied: appliedFixes } = await autoFixEmail(
+✅ processRequest completed
+ POST /api/generate-email-enhanced 500 in 177247ms
+ ✓ Compiled in 369ms (820 modules)
+ ✓ Compiled in 174ms (820 modules)
+ ✓ Compiled in 297ms (820 modules)
+ ✓ Compiled in 310ms (820 modules)
+ ✓ Compiled /api/generate-email-enhanced in 146ms (356 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test QA system with timeout protection
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12525 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3337 characters
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 6579 characters
+⚠️ QA timeout or error: QA timeout
+🔄 Skipping QA analysis due to timeout constraints
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3337 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: QA Timeouts → Cost Guardrails
+
+Email 1 (Day 0):
+Subject: QA timeouts, lower costs
+
+I saw your team testing a QA system with timeout protection. Smart move by your team. Timeouts in frei...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 246868ms
+ ✓ Compiled in 685ms (820 modules)
+ ✓ Compiled in 191ms (820 modules)
+ ✓ Compiled in 378ms (820 modules)
+ ✓ Compiled in 413ms (820 modules)
+ ✓ Compiled in 203ms (820 modules)
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1626,
+  outputTokens: 6654,
+  totalTokens: 8280,
+  reasoningTokens: 6208,
+  cachedInputTokens: 0
+}
+ ✓ Compiled in 476ms (820 modules)
+ ✓ Compiled in 165ms (820 modules)
+ ✓ Compiled /api/generate-email-enhanced in 363ms (356 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test optimized QA system
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12497 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3083 characters
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 3796 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 950,
+  outputTokens: 3604,
+  totalTokens: 4554,
+  reasoningTokens: 2176,
+  cachedInputTokens: 0
+}
+📈 Quality Score: 64/100
+✅ Passed: false
+📋 Issues Found: 16
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [HIGH] content: Inconsistent product/brand naming (Emerge vs ProcureOS) and unclear jargon ('test optimized QA system') create confusion about what is being offered
+  3. [HIGH] cta: Offering a $500 Visa gift card for a 30‑minute demo can appear unethical, trigger spam/compliance issues, and undermine credibility
+  4. [HIGH] formatting: Emails lack a professional signature, company details, and an unsubscribe/compliance footer, which can violate email regulations
+  5. [MEDIUM] greeting: No personalized greeting in emails may feel abrupt or impersonal to senior operations leaders
+  6. [MEDIUM] subject: Subject lines are vague and benefit-light (e.g., 'Rate QA that sticks', 'Last pass on QA')
+  7. [MEDIUM] cta: CTAs are embedded as questions in links and rely on a single 30‑minute meeting ask
+  8. [MEDIUM] formatting: Long, non-branded tracking links (Apollo domain) can hurt deliverability and trust
+  9. [MEDIUM] tone: Tone leans transactional and fear-based, amplified by monetary incentive and repeated urgency
+  10. [MEDIUM] content: Savings claims (18%, $3.2M, '6‑figure') lack context, timeframe, or methodology
+  11. [MEDIUM] structure: Messages repeat the same value props and case studies without a narrative progression
+  12. [MEDIUM] content: Case studies span different industries and may not match the recipient’s context
+  13. [LOW] length: LinkedIn Message 2 is long and includes the gift card, which can reduce acceptance
+  14. [LOW] formatting: Minor style issues (missing hyphens: 'test-optimized', 'apples-to-apples') and lack of light scannability aids
+  15. [LOW] cta: Standard 30‑minute demo ask may be too heavy for executives
+  16. [LOW] content: Personalization is minimal beyond names; little tie-in to the account’s operations
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-5
+📝 Applying fixes to email...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4252 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1062,
+  outputTokens: 2798,
+  totalTokens: 3860,
+  reasoningTokens: 1856,
+  cachedInputTokens: 0
+}
+✅ Auto-fix successful, fixed email length: 3665 characters
+✅ Auto-fix completed
+📊 Fixed content length: 3665 characters
+🔧 Fixes applied: 6
+  1. Fixed structure: Missing subject line
+  2. Fixed content: Inconsistent product/brand naming (Emerge vs ProcureOS) and unclear jargon ('test optimized QA system') create confusion about what is being offered
+  3. Fixed cta: Offering a $500 Visa gift card for a 30‑minute demo can appear unethical, trigger spam/compliance issues, and undermine credibility
+  4. Fixed formatting: Emails lack a professional signature, company details, and an unsubscribe/compliance footer, which can violate email regulations
+  5. Fixed greeting: No personalized greeting in emails may feel abrupt or impersonal to senior operations leaders
+  6. Applied quality improvements
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-5
+📝 Double-checking final email...
+✅ Double-check completed
+📊 Final content length: 3665 characters
+🔧 Additional fixes: 0
+
+📈 ===== FINAL QA ANALYSIS =====
+🤖 Final QA Model: gpt-5
+📝 Running final quality check...
+[QA] Using model: gpt-5
+[QA] Prompt length: 4378 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1107,
+  outputTokens: 4449,
+  totalTokens: 5556,
+  reasoningTokens: 2752,
+  cachedInputTokens: 0
+}
+📈 Final Quality Score: 49/100
+✅ Final Passed: false
+📋 Final Issues: 19
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3665 characters
+🔧 Total Fixes Applied: 6
+📈 Final Quality Score: 49/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: QA Cost Control Signal
+
+Email 1 (Day 0):
+Subject: Rate QA that sticks
+
+Hi {{contact.first_name}},
+
+Rate swings and spot spikes hurt budgets. Manual checks miss errors. That burns time a...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 256349ms
+ ✓ Compiled in 501ms (820 modules)

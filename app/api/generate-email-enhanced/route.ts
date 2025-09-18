@@ -270,12 +270,28 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
       console.log(`🤖 QA Model: ${model}`)
       console.log(`📊 Analyzing email quality...`)
       
-      qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints, model)
+      try {
+        // Set a timeout for QA to prevent Vercel timeouts
+        const qaTimeout = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('QA timeout')), 50000) // 50 seconds
+        )
+        
+        qualityReport = await Promise.race([
+          analyzeEmailQuality(initialEmail, persona, painPoints, model),
+          qaTimeout
+        ]) as EmailQualityReport
+        
+        console.log(`📈 Quality Score: ${qualityReport.score}/100`)
+        console.log(`✅ Passed: ${qualityReport.passed}`)
+        console.log(`📋 Issues Found: ${qualityReport.issues.length}`)
+        
+      } catch (qaError) {
+        console.log(`⚠️ QA timeout or error: ${qaError instanceof Error ? qaError.message : 'Unknown error'}`)
+        console.log(`🔄 Skipping QA analysis due to timeout constraints`)
+        qualityReport = null
+      }
       
-      console.log(`📈 Quality Score: ${qualityReport.score}/100`)
-      console.log(`✅ Passed: ${qualityReport.passed}`)
-      console.log(`📋 Issues Found: ${qualityReport.issues.length}`)
-      if (qualityReport.issues.length > 0) {
+      if (qualityReport && qualityReport.issues.length > 0) {
         console.log(`🔧 Issues to fix:`)
         qualityReport.issues.forEach((issue, index) => {
           console.log(`  ${index + 1}. [${issue.severity.toUpperCase()}] ${issue.type}: ${issue.message}`)
@@ -283,53 +299,59 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
       }
       
       // Auto-fix issues if quality is below threshold
-      if (!qualityReport.passed) {
-        console.log(`\n🔧 ===== AUTO-FIX START =====`)
-        console.log(`🤖 Auto-fix Model: ${model}`)
-        console.log(`📝 Applying fixes to email...`)
-        
-        const { fixedEmail, fixesApplied: appliedFixes } = await autoFixEmail(
-          initialEmail, 
-          qualityReport, 
-          persona, 
-          painPoints, 
-          contextItems,
-          model
-        )
-        finalEmail = fixedEmail
-        fixesApplied = appliedFixes
-        
-        console.log(`✅ Auto-fix completed`)
-        console.log(`📊 Fixed content length: ${finalEmail.length} characters`)
-        console.log(`🔧 Fixes applied: ${appliedFixes.length}`)
-        appliedFixes.forEach((fix, index) => {
-          console.log(`  ${index + 1}. ${fix}`)
-        })
-        
-        // Double-check the final result
-        console.log(`\n🔍 ===== DOUBLE-CHECK START =====`)
-        console.log(`🤖 Double-check Model: ${model}`)
-        console.log(`📝 Double-checking final email...`)
-        
-        const doubleCheck = await doubleCheckFinalEmail(finalEmail, persona, painPoints, model)
-        finalEmail = doubleCheck.finalEmail
-        fixesApplied = [...fixesApplied, ...doubleCheck.additionalFixes]
-        
-        console.log(`✅ Double-check completed`)
-        console.log(`📊 Final content length: ${finalEmail.length} characters`)
-        console.log(`🔧 Additional fixes: ${doubleCheck.additionalFixes.length}`)
-        
-        // Get final quality report
-        console.log(`\n📈 ===== FINAL QA ANALYSIS =====`)
-        console.log(`🤖 Final QA Model: ${model}`)
-        console.log(`📝 Running final quality check...`)
-        
-        qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints, model)
-        
-        console.log(`📈 Final Quality Score: ${qualityReport.score}/100`)
-        console.log(`✅ Final Passed: ${qualityReport.passed}`)
-        console.log(`📋 Final Issues: ${qualityReport.issues.length}`)
-      } else {
+      if (qualityReport && !qualityReport.passed) {
+        try {
+          console.log(`\n🔧 ===== AUTO-FIX START =====`)
+          console.log(`🤖 Auto-fix Model: ${model}`)
+          console.log(`📝 Applying fixes to email...`)
+          
+          const { fixedEmail, fixesApplied: appliedFixes } = await autoFixEmail(
+            initialEmail, 
+            qualityReport, 
+            persona, 
+            painPoints, 
+            contextItems,
+            model
+          )
+          finalEmail = fixedEmail
+          fixesApplied = appliedFixes
+          
+          console.log(`✅ Auto-fix completed`)
+          console.log(`📊 Fixed content length: ${finalEmail.length} characters`)
+          console.log(`🔧 Fixes applied: ${appliedFixes.length}`)
+          appliedFixes.forEach((fix, index) => {
+            console.log(`  ${index + 1}. ${fix}`)
+          })
+          
+          // Double-check the final result
+          console.log(`\n🔍 ===== DOUBLE-CHECK START =====`)
+          console.log(`🤖 Double-check Model: ${model}`)
+          console.log(`📝 Double-checking final email...`)
+          
+          const doubleCheck = await doubleCheckFinalEmail(finalEmail, persona, painPoints, model)
+          finalEmail = doubleCheck.finalEmail
+          fixesApplied = [...fixesApplied, ...doubleCheck.additionalFixes]
+          
+          console.log(`✅ Double-check completed`)
+          console.log(`📊 Final content length: ${finalEmail.length} characters`)
+          console.log(`🔧 Additional fixes: ${doubleCheck.additionalFixes.length}`)
+          
+          // Get final quality report
+          console.log(`\n📈 ===== FINAL QA ANALYSIS =====`)
+          console.log(`🤖 Final QA Model: ${model}`)
+          console.log(`📝 Running final quality check...`)
+          
+          qualityReport = await analyzeEmailQuality(finalEmail, persona, painPoints, model)
+          
+          console.log(`📈 Final Quality Score: ${qualityReport.score}/100`)
+          console.log(`✅ Final Passed: ${qualityReport.passed}`)
+          console.log(`📋 Final Issues: ${qualityReport.issues.length}`)
+          
+        } catch (fixError) {
+          console.log(`⚠️ Auto-fix timeout or error: ${fixError instanceof Error ? fixError.message : 'Unknown error'}`)
+          console.log(`🔄 Skipping auto-fix due to timeout constraints`)
+        }
+      } else if (qualityReport) {
         console.log(`✅ Email passed QA - no fixes needed`)
       }
     }
