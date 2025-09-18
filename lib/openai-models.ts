@@ -113,15 +113,7 @@ export async function generateWithGPT5Responses(prompt: string, model: string = 
     
     console.log(`🚀 Sending to GPT-5 Responses API...`);
     
-    // Add a timeout for the GPT-5 API call
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('GPT-5 API timeout')), 30000) // 30 second timeout
-    });
-    
-    const response = await Promise.race([
-      openaiClient.responses.create(requestParams),
-      timeoutPromise
-    ]);
+    const response = await openaiClient.responses.create(requestParams);
     
     const responseText = response.output_text || "";
     

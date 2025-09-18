@@ -49,17 +49,9 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
 export async function POST(request: NextRequest) {
   console.log('🚀 POST handler called')
   
-  // Set a timeout for the entire operation
-  const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
-  })
-  
   try {
     console.log('🏁 About to call processRequest...')
-    const result = await Promise.race([
-      processRequest(request),
-      timeoutPromise
-    ])
+    const result = await processRequest(request)
     console.log('✅ processRequest completed')
     return result
   } catch (error) {
@@ -205,48 +197,69 @@ FORMATTING REQUIREMENTS:
 FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT WILL BE OPTIMIZED BY THE QA SYSTEM`
     console.log('✅ Final prompt built')
 
-    // Generate initial email with fallback
+    // Generate initial email with simplified approach
+    console.log('\n🚀 ===== EMAIL GENERATION START =====')
+    console.log(`📧 Model: ${model}`)
+    console.log(`👤 Persona: ${persona}`)
+    console.log(`📝 Signal: ${signal}`)
+    console.log(`🎯 Pain Points: ${painPoints.join(', ')}`)
+    console.log(`📊 Context Items: ${contextItems?.length || 0} selected`)
+    console.log(`🔧 QA Enabled: ${enableQA}`)
+    console.log(`📏 Prompt Length: ${prompt.length} characters`)
+    
+    // Use the working chatbot approach for reliability
     let initialEmail: string
     try {
-      console.log('\n🚀 ===== EMAIL GENERATION START =====')
-      console.log(`📧 Model: ${model}`)
-      console.log(`👤 Persona: ${persona}`)
-      console.log(`📝 Signal: ${signal}`)
-      console.log(`🎯 Pain Points: ${painPoints.join(', ')}`)
-      console.log(`📊 Context Items: ${contextItems?.length || 0} selected`)
-      console.log(`🔧 QA Enabled: ${enableQA}`)
-      console.log(`📏 Prompt Length: ${prompt.length} characters`)
-      console.log(`📄 Prompt Preview (first 500 chars):`)
-      console.log('─'.repeat(80))
-      console.log(prompt.substring(0, 500) + (prompt.length > 500 ? '...' : ''))
-      console.log('─'.repeat(80))
-      console.log(`\n🤖 Sending to ${model}...`)
-      console.log('🚀 About to call generateTextWithModel...')
-      
-      initialEmail = await generateTextWithModel(prompt, model)
-      console.log('✅ generateTextWithModel completed')
-      
-      console.log(`✅ Generation successful with ${model}`)
-      console.log(`📊 Generated content length: ${initialEmail.length} characters`)
-      console.log(`📄 Generated content preview (first 300 chars):`)
-      console.log('─'.repeat(80))
-      console.log(initialEmail.substring(0, 300) + (initialEmail.length > 300 ? '...' : ''))
-      console.log('─'.repeat(80))
-      
+      if (model.startsWith('gpt-5')) {
+        // For GPT-5, use the direct approach like the working chatbot
+        console.log(`🤖 Using GPT-5 direct approach...`)
+        const { text } = await generateText({
+          model: openai(model, {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+          maxTokens: 2000,
+          temperature: 0.7,
+        })
+        initialEmail = text
+      } else {
+        // For other models, use the existing function
+        console.log(`🤖 Using standard model approach...`)
+        initialEmail = await generateTextWithModel(prompt, model)
+      }
     } catch (error) {
       console.error(`❌ Error with model ${model}:`, error)
       
-      // Fallback to GPT-4o if GPT-5 fails
-      if (model.startsWith('gpt-5')) {
+      // Fallback to GPT-4o if any model fails
+      if (model !== 'gpt-4o') {
         console.log('🔄 Falling back to GPT-4o...')
-        console.log(`🤖 Sending to GPT-4o...`)
-        initialEmail = await generateTextWithModel(prompt, "gpt-4o")
-        console.log(`✅ Fallback generation successful with GPT-4o`)
-        console.log(`📊 Generated content length: ${initialEmail.length} characters`)
+        const { text } = await generateText({
+          model: openai('gpt-4o', {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+          maxTokens: 2000,
+          temperature: 0.7,
+        })
+        initialEmail = text
+        console.log(`✅ Fallback successful with GPT-4o`)
       } else {
-        throw error // Re-throw if it's not a GPT-5 model
+        throw error
       }
     }
+    
+    console.log(`✅ Generation successful with ${model}`)
+    console.log(`📊 Generated content length: ${initialEmail.length} characters`)
 
     let finalEmail = initialEmail
     // Temporarily disabled QA features to avoid circular dependencies

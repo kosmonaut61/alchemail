@@ -2816,3 +2816,728 @@ Data analysis takes too long for marketing teams. Your campaigns slow while repo
 🔍 Vercel Debug API called
  POST /api/debug-vercel 200 in 2695ms
  ✓ Compiled in 324ms (1084 modules)
+ ✓ Compiled /api/test-simple in 488ms (213 modules)
+🚀 Simple test API called
+📝 Prompt: Write a simple test email
+🤖 Model: gpt-5
+✅ API key found
+🚀 Calling GPT-5...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ GPT-5 response received
+📊 Usage: {
+  inputTokens: 11,
+  outputTokens: 314,
+  totalTokens: 325,
+  reasoningTokens: 256,
+  cachedInputTokens: 0
+}
+ POST /api/test-simple 200 in 5497ms
+ ✓ Compiled /api/generate-email-enhanced in 131ms (357 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5-mini
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5-mini
+👤 Persona: ceo
+📝 Signal: Test email generation
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 11671 characters
+📄 Prompt Preview (first 500 chars):
+────────────────────────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    ### Emerge Overview
+* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* $30B+ platform transacti...
+────────────────────────────────────────────────────────────────────────────────
+
+🤖 Sending to gpt-5-mini...
+🚀 About to call generateTextWithModel...
+Using fixed GPT-5 Responses API for email generation with model: gpt-5-mini
+
+🚀 ===== GPT-5 RESPONSES API START =====
+📧 Model: gpt-5-mini
+📏 Prompt Length: 11671 characters
+📄 Prompt Preview (first 300 chars):
+────────────────────────────────────────────────────────────
+# Master Rules for Emerge Email Generation
+
+## Goals
+
+
+    You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level.
+    1. Overall Goal
+	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
+    
+    #...
+────────────────────────────────────────────────────────────
+🔧 GPT-5 Parameters: {
+  model: 'gpt-5-mini',
+  reasoning: 'minimal',
+  verbosity: 'low',
+  promptLength: 11671,
+  inputFormat: 'responses_api'
+}
+🚀 Sending to GPT-5 Responses API...
+✅ GPT-5 Responses API succeeded with gpt-5-mini
+📊 Response length: 2136 characters
+📄 Response preview (first 200 chars):
+────────────────────────────────────────────────────────────
+Campaign Name: Test email generation — cost focus
+
+Email 1 (Day 0):
+Subject: Cut freight cost volatility
+
+We hear CEOs worry about freight cost swings eroding margins. The test email generation signal...
+────────────────────────────────────────────────────────────
+🚀 ===== GPT-5 RESPONSES API END =====
+
+✅ generateTextWithModel completed
+✅ Generation successful with gpt-5-mini
+📊 Generated content length: 2136 characters
+📄 Generated content preview (first 300 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test email generation — cost focus
+
+Email 1 (Day 0):
+Subject: Cut freight cost volatility
+
+We hear CEOs worry about freight cost swings eroding margins. The test email generation signal pushed me to ask: how are you proving savings to the board?
+
+Emerge helped Dollar Tree and Pepsi Bo...
+────────────────────────────────────────────────────────────────────────────────
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5-mini
+📊 Final Content Length: 2136 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test email generation — cost focus
+
+Email 1 (Day 0):
+Subject: Cut freight cost volatility
+
+We hear CEOs worry about freight cost swings eroding margins. The test email generation signal...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 14183ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1384ms (1139 modules)
+ GET / 200 in 1882ms
+ ✓ Compiled in 820ms (1955 modules)
+ ✓ Compiled in 573ms (1955 modules)
+ ✓ Compiled in 690ms (1955 modules)
+ ✓ Compiled in 517ms (1955 modules)
+ ✓ Compiled in 437ms (1953 modules)
+ ✓ Compiled in 327ms (1712 modules)
+ ✓ Compiled /api/generate-email-enhanced in 167ms (1137 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-4o
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-4o
+👤 Persona: ceo
+📝 Signal: Test the fixed email generation system
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 11705 characters
+🤖 Using standard model approach...
+Using standard model for email generation: gpt-4o
+[GPT-5] Using model: gpt-4o
+[GPT-5] Prompt length: 11705 characters
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2624,
+  outputTokens: 502,
+  totalTokens: 3126,
+  reasoningTokens: 0,
+  cachedInputTokens: 0
+}
+✅ Generation successful with gpt-4o
+📊 Generated content length: 2153 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-4o
+📊 Final Content Length: 2153 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Certainly! Here's a campaign focused on the signal "Test the fixed email generation system" with the selected pain point of cost.
+
+---
+
+**Campaign Name: Cost Optimization for CEOs**
+
+---
+
+**Email 1 (D...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 20532ms
+ ✓ Compiled in 710ms (1171 modules)
+ ✓ Compiled in 315ms (816 modules)
+ ✓ Compiled in 214ms (816 modules)
+ ✓ Compiled in 257ms (816 modules)
+ ✓ Compiled in 152ms (816 modules)
+ ✓ Compiled in 249ms (816 modules)
+ ✓ Compiled in 161ms (816 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: ceo
+📝 Signal: Test email generation with GPT-5
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 11693 characters
+🤖 Using GPT-5 direct approach...
+❌ API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:54:28)
+  52 |   // Set a timeout for the entire operation
+  53 |   const timeoutPromise = new Promise((_, reject) => {
+> 54 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  55 |   })
+  56 |   
+  57 |   try {
+ POST /api/generate-email-enhanced 500 in 60167ms
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: ceo
+📝 Signal: Test fallback to GPT-4o when GPT-5 times out
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 11717 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3183 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3183 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Cost Clarity for CEOs
+
+Email 1 (Day 0):
+Subject: Cost clarity for CEOs
+
+Freight swings hit margin. Forecasts break. Your board expects profit and control. Cash stays protected.
+
+I...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+❌ API Error: Error: Request timeout - model may be unavailable
+    at Timeout.eval [as _onTimeout] (app/api/generate-email-enhanced/route.ts:54:28)
+  52 |   // Set a timeout for the entire operation
+  53 |   const timeoutPromise = new Promise((_, reject) => {
+> 54 |     setTimeout(() => reject(new Error('Request timeout - model may be unavailable')), 60000) // 60 second timeout
+     |                            ^
+  55 |   })
+  56 |   
+  57 |   try {
+ POST /api/generate-email-enhanced 500 in 60013ms
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3410 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3410 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Cost Failover for Freight
+
+Email 1 (Day 0):
+Subject: Cost control failover
+
+Board wants steady freight spend. Markets spike and plans stall. When GPT-5 times out, you test fallback to G...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+ ✓ Compiled in 382ms (816 modules)
+ ✓ Compiled in 265ms (816 modules)
+ ✓ Compiled in 295ms (816 modules)
+ ✓ Compiled in 179ms (816 modules)
+ ✓ Compiled in 163ms (816 modules)
+ ✓ Compiled in 457ms (816 modules)
+ ✓ Compiled in 286ms (816 modules)
+ ✓ Compiled in 288ms (816 modules)
+ ✓ Compiled in 162ms (816 modules)
+ ✓ Compiled in 523ms (816 modules)
+ ✓ Compiled in 359ms (816 modules)
+ ✓ Compiled /api/generate-email-enhanced in 280ms (355 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-4o
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-4o
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using standard model approach...
+Using standard model for email generation: gpt-4o
+[GPT-5] Using model: gpt-4o
+[GPT-5] Prompt length: 12709 characters
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+[GPT-5] Response generated successfully, usage: {
+  inputTokens: 2785,
+  outputTokens: 494,
+  totalTokens: 3279,
+  reasoningTokens: 0,
+  cachedInputTokens: 0
+}
+✅ Generation successful with gpt-4o
+📊 Generated content length: 2090 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-4o
+📊 Final Content Length: 2090 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Certainly! Here's a campaign tailored to a VP of Transportation in the food and beverage industry, focusing on cost and efficiency.
+
+---
+
+**Campaign Name: Efficiency in Food & Beverage**
+
+**Email 1 (D...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 16906ms
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3219 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3219 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Food & Beverage VP Download Follow-Up
+
+Email 1 (Day 0):
+Subject: For {{account.name}}: lower costs
+
+I saw you downloaded our food and beverage case study. Are rates rising while service...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 40754ms
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3165 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3165 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: F&B VP Transport — Case Study Follow-Up
+
+Email 1 (Day 0):
+Subject: Lower costs, fewer clicks
+
+I saw you downloaded our food and beverage case study. Many VPs tell me costs rise while te...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 61992ms
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3389 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3389 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Food & Beverage Cost + Speed
+
+Email 1 (Day 0):
+Subject: After your download
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, I saw you downloaded our case stud...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 153607ms
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3365 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3365 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: From download to action
+
+Email 1 (Day 0):
+Subject: Your case study takeaways 🍎
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, I saw you downloaded our case ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 65607ms
+ ○ Compiling / ...
+ ✓ Compiled / in 849ms (896 modules)
+ GET / 200 in 1198ms
+ ✓ Compiled /api/generate-email-enhanced in 221ms (1137 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3306 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3306 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: F&B VP Download — Cost + Efficiency
+
+Email 1 (Day 0):
+Subject: Your F&B transport costs
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, I saw you downloaded o...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 112457ms
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3208 characters
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3208 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: F&B Case Study Follow-Up
+
+Email 1 (Day 0):
+Subject: After your case study
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, I saw you downloaded our case study ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 68185ms
