@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
 import { Settings, Mail, Edit3, Eye, Loader2, RefreshCw } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
@@ -37,6 +38,7 @@ export default function EmailGenerator() {
   const [fixesApplied, setFixesApplied] = useState<string[]>([])
   const [originalEmail, setOriginalEmail] = useState<string>("")
   const [selectedModel, setSelectedModel] = useState<string>("gpt-5")
+  const [enableQA, setEnableQA] = useState<boolean>(true)
   const { toast } = useToast()
 
   const steps = [
@@ -224,7 +226,7 @@ export default function EmailGenerator() {
         signal,
         painPoints,
         contextItems: selectedContextItems,
-        enableQA: false,
+        enableQA: enableQA,
         model: selectedModel
       }
       console.log('📤 Request body:', requestBody)
@@ -617,16 +619,17 @@ export default function EmailGenerator() {
 
               {currentStep === 3 && (
                 <div className="mt-6 space-y-4">
-                  <div className="flex items-center gap-4">
-                    <Label htmlFor="model-select" className="text-sm font-medium">
-                      AI Model:
-                    </Label>
-                    {selectedModel.startsWith('gpt-5') && (
-                      <div className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 px-2 py-1 rounded-md">
-                        ⏱️ GPT-5 may take 2-5 minutes to respond
-                      </div>
-                    )}
-                    <Select value={selectedModel} onValueChange={setSelectedModel}>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <Label htmlFor="model-select" className="text-sm font-medium">
+                        AI Model:
+                      </Label>
+                      {selectedModel.startsWith('gpt-5') && (
+                        <div className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 px-2 py-1 rounded-md">
+                          ⏱️ GPT-5 may take 2-5 minutes to respond
+                        </div>
+                      )}
+                      <Select value={selectedModel} onValueChange={setSelectedModel}>
                       <SelectTrigger id="model-select" className="w-48">
                         <SelectValue />
                       </SelectTrigger>
@@ -640,6 +643,28 @@ export default function EmailGenerator() {
                         <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
                       </SelectContent>
                     </Select>
+                    </div>
+                    
+                    <div className="flex items-center gap-4">
+                      <Label htmlFor="qa-toggle" className="text-sm font-medium">
+                        Quality Assurance:
+                      </Label>
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          id="qa-toggle"
+                          checked={enableQA}
+                          onCheckedChange={setEnableQA}
+                        />
+                        <Label htmlFor="qa-toggle" className="text-sm text-muted-foreground">
+                          {enableQA ? 'Enabled (auto-optimize emails)' : 'Disabled (faster generation)'}
+                        </Label>
+                      </div>
+                      {enableQA && (
+                        <div className="text-xs text-blue-600 bg-blue-50 dark:bg-blue-950 dark:text-blue-400 px-2 py-1 rounded-md">
+                          🔍 QA will analyze and auto-fix email quality
+                        </div>
+                      )}
+                    </div>
                   </div>
                   
                   <div className="flex justify-between">

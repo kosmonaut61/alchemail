@@ -5,14 +5,13 @@ import { getPreamble } from "@/lib/preamble"
 import { ContextItem } from "@/lib/context-repository"
 import { getPersonaById } from "@/lib/personas"
 import { EMAIL_SAMPLES, getEmailSamplesByPersona } from "@/lib/email-samples"
-// Temporarily disabled email-qa imports to avoid circular dependencies
-// import { 
-//   analyzeEmailQuality, 
-//   autoFixEmail, 
-//   doubleCheckFinalEmail,
-//   getGenerationProgress,
-//   type EmailQualityReport 
-// } from "@/lib/email-qa"
+import { 
+  analyzeEmailQuality, 
+  autoFixEmail, 
+  doubleCheckFinalEmail,
+  getGenerationProgress,
+  type EmailQualityReport 
+} from "@/lib/email-qa"
 
 // Import only the function we need to avoid circular dependencies
 import { generateWithGPT5, generateWithGPT5Responses } from "@/lib/openai-models"
@@ -262,8 +261,7 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
     console.log(`📊 Generated content length: ${initialEmail.length} characters`)
 
     let finalEmail = initialEmail
-    // Temporarily disabled QA features to avoid circular dependencies
-    let qualityReport: any = null
+    let qualityReport: EmailQualityReport | null = null
     let fixesApplied: string[] = []
 
     // Run QA and auto-fix if enabled

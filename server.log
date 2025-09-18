@@ -3541,3 +3541,118 @@ Subject: After your case study
 
 ✅ processRequest completed
  POST /api/generate-email-enhanced 200 in 68185ms
+ ✓ Compiled in 870ms (816 modules)
+ ✓ Compiled in 294ms (816 modules)
+ ✓ Compiled in 364ms (816 modules)
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:381:1]
+ [2m378[0m |   }
+ [2m379[0m | 
+ [2m380[0m |   return (
+ [2m381[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m382[0m |       {/* Application Header */}
+ [2m383[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m384[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ✓ Compiled in 525ms (820 modules)
+ ✓ Compiled in 253ms (820 modules)
+ ✓ Compiled in 389ms (820 modules)
+ ○ Compiling /api/generate-email-enhanced ...
+ ✓ Compiled /api/generate-email-enhanced in 526ms (356 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently.
+🎯 Pain Points: cost, efficiency
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12709 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3578 characters
+
+🔍 ===== QA ANALYSIS START =====
+🤖 QA Model: gpt-5
+📊 Analyzing email quality...
+[QA] Using model: gpt-5
+[QA] Prompt length: 6832 characters
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1702,
+  outputTokens: 7023,
+  totalTokens: 8725,
+  reasoningTokens: 6848,
+  cachedInputTokens: 0
+}
+📈 Quality Score: 91/100
+✅ Passed: false
+📋 Issues Found: 3
+🔧 Issues to fix:
+  1. [HIGH] structure: Missing subject line
+  2. [MEDIUM] content: Email 2 reading level likely above 5th grade due to jargon ('tendering', 'guardrails', 'audits').
+  3. [MEDIUM] content: Email 4 reading level likely above 5th grade ('standardizes', 'audit trails').
+
+🔧 ===== AUTO-FIX START =====
+🤖 Auto-fix Model: gpt-5
+📝 Applying fixes to email...
+[QA] Using model: gpt-5
+[QA] Prompt length: 6664 characters
+ POST /api/generate-email-enhanced 200 in 337516ms
+ ✓ Compiled in 403ms (820 modules)
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+[QA] Response generated successfully, usage: {
+  inputTokens: 1621,
+  outputTokens: 5638,
+  totalTokens: 7259,
+  reasoningTokens: 4672,
+  cachedInputTokens: 0
+}
+✅ Auto-fix successful, fixed email length: 3777 characters
+✅ Auto-fix completed
+📊 Fixed content length: 3777 characters
+🔧 Fixes applied: 4
+  1. Fixed structure issue: Missing subject line
+  2. Fixed content issue: Email 2 reading level likely above 5th grade due to jargon ('tendering', 'guardrails', 'audits').
+  3. Fixed content issue: Email 4 reading level likely above 5th grade ('standardizes', 'audit trails').
+  4. Applied all quality improvements automatically
+
+🔍 ===== DOUBLE-CHECK START =====
+🤖 Double-check Model: gpt-5
+📝 Double-checking final email...
+[QA] Using model: gpt-5
+[QA] Prompt length: 7031 characters
