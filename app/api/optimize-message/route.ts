@@ -55,6 +55,10 @@ OPTIMIZATION GUIDELINES:
 13. Apply persuasion techniques appropriate for the persona
 14. Enhance credibility and trust signals
 15. Improve urgency and scarcity elements where appropriate
+16. Make sure there is less than 3 adverbs in the message
+17. Make sure there is less than 15 words per sentance
+18. Make sure there are natural line breaks in the message
+19. Make sure the message is at a 5th grade reading level
 
 Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
@@ -73,14 +77,19 @@ For emails:
 - Use proper email formatting with clear sections
 - Include strong value proposition early
 - End with clear, specific call-to-action
+- Keep emails concise (100-150 words max)
+- Do NOT add signatures, sign-offs, or contact information
+- Do NOT make messages longer than the original
 
 For LinkedIn messages:
 - Keep under 100 words
 - Start with personal connection or value
 - Be conversational but professional
 - End with clear next steps
+- Do NOT add signatures, sign-offs, or contact information
+- Do NOT make messages longer than the original
 
-Return the optimized message with the same format as the original. Focus on improvements that will increase open rates, response rates, and engagement.`
+CRITICAL: Do NOT add signatures, contact information, or make messages longer. Keep the same length or shorter than the original. Return the optimized message with the same format as the original. Focus on improvements that will increase open rates, response rates, and engagement.`
 
     // Custom GPT-5 nano optimization with fallback
     let optimizedContent: string
@@ -93,7 +102,7 @@ Return the optimized message with the same format as the original. Focus on impr
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided.'
+            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',
@@ -118,7 +127,7 @@ Return the optimized message with the same format as the original. Focus on impr
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided.'
+            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',

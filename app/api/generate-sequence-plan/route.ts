@@ -120,6 +120,8 @@ Create a strategic sequence plan that:
 4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn)
 5. Has clear purposes for each touchpoint
 6. Integrates the signal naturally without being repetitive
+7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
+8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 
@@ -130,14 +132,16 @@ Return your response as a JSON object with this exact structure:
       "day": 1,
       "subject": "Subject line here",
       "purpose": "Purpose of this email",
-      "signalIntegration": "How the signal is integrated"
+      "signalIntegration": "How the signal is integrated",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)"
     }
   ],
   "linkedInMessages": [
     {
       "day": 3,
       "purpose": "Purpose of this LinkedIn message",
-      "signalIntegration": "How the signal is integrated"
+      "signalIntegration": "How the signal is integrated",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)"
     }
   ],
   "totalDays": 8

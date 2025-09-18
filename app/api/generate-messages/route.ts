@@ -21,8 +21,12 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     'established', 'multinational', 'global', 'regional', 'local'
   ]
   
+  // Extract company names and specific keywords from the signal
+  const companyNames = ['golden state foods', 'dollar tree', 'frito lay', 'molson coors', 'pepsi', 'walmart', 'honda', 'toyota']
+  const specificKeywords = companyNames.filter(name => signalLower.includes(name))
+  
   // Find context items that match signal keywords
-  const signalKeywords = [...industryKeywords, ...companyKeywords]
+  const signalKeywords = [...industryKeywords, ...companyKeywords, ...specificKeywords]
   const keywordMatches = getContextItemsByKeywords(signalKeywords.filter(keyword => 
     signalLower.includes(keyword)
   ))
@@ -31,6 +35,14 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   const industryMatches = industryKeywords
     .filter(industry => signalLower.includes(industry))
     .flatMap(industry => getContextItemsByIndustry(industry))
+  
+  // Also find context items by checking if any context item keywords appear in the signal
+  const directMatches = CONTEXT_REPOSITORY.filter(item => {
+    if (item.keywords) {
+      return item.keywords.some(keyword => signalLower.includes(keyword.toLowerCase()))
+    }
+    return false
+  })
   
   // Add customer context items (most important for social proof)
   const customerItems = CONTEXT_REPOSITORY.filter(item => 
@@ -69,7 +81,8 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     ...customerItems,
     ...caseStudyItems, 
     ...statisticItems,
-    ...quoteItems
+    ...quoteItems,
+    ...directMatches
   ]
   
   // Remove duplicates and limit to top 5 most relevant
@@ -138,6 +151,7 @@ EMAIL SPECIFICATIONS:
 - Subject: ${emailPlan.subject}
 - Purpose: ${emailPlan.purpose}
 - Signal Integration: ${emailPlan.signalIntegration}
+- Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
 
 Write a complete email that:
 1. Uses the exact subject line provided
@@ -148,13 +162,14 @@ Write a complete email that:
 6. Includes a clear call-to-action
 7. Is concise but compelling (100-150 words)
 8. Does NOT include a signature or sign-off
-9. ALWAYS use specific stats and quantified results from the VERIFIED CONTEXT - this is crucial for credibility
+9. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
 10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
 11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
 12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
 13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
 14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
-15. Use specific numbers and results to make the email compelling and credible
+15. Use the specific stats mentioned in the plan to make the email compelling and credible
+16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
 
 CRITICAL RULES:
 - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
@@ -242,6 +257,7 @@ LINKEDIN MESSAGE SPECIFICATIONS:
 - Day: ${linkedInPlan.day}
 - Purpose: ${linkedInPlan.purpose}
 - Signal Integration: ${linkedInPlan.signalIntegration}
+- Specific Stats to Feature: ${linkedInPlan.specificStats || 'Use relevant stats from context'}
 
 Write a LinkedIn message that:
 1. Follows the purpose and signal integration guidelines
@@ -253,12 +269,12 @@ Write a LinkedIn message that:
 7. Includes a clear call-to-action
 8. Feels natural and builds on previous messages
 9. Does NOT include a signature or sign-off
-10. ALWAYS use specific stats and quantified results from the VERIFIED CONTEXT - this is crucial for credibility
+10. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1 specific quantified result from the VERIFIED CONTEXT
 11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
 12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
 13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
 14. Make each message unique and different - avoid generic phrases
-15. Use specific numbers and results to make the message compelling and credible
+15. Use the specific stat mentioned in the plan to make the message compelling and credible
 
 CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any. NEVER assume what the recipient downloaded or their specific business situation.
 

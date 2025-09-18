@@ -7053,3 +7053,123 @@ As...
       "si...
  POST /api/generate-sequence-plan 200 in 5587ms
  ✓ Compiled in 827ms (1325 modules)
+ ✓ Compiled /api/generate-messages in 239ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 7513ms
+ ✓ Compiled in 592ms (1323 modules)
+ ✓ Compiled in 328ms (1323 modules)
+ ✓ Compiled in 534ms (1323 modules)
+ ✓ Compiled in 402ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 1877ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods expanded their carrier pool from 35 to 55 carriers and increased RFP quantity to ...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Manufacturing Customers, Dollar Tree Case Study, Golden State Foods Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4063ms
+🚀 Generating messages for sequence...
+📝 Signal: Dollar Tree saved $3.2 million in freight spend within 6 months and achieved 2% below market average...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Dollar Tree Case Study, Dollar Tree Statistics, Dollar Tree Quote, Cost Savings Value Prop, Cost-Focused Language Style
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4797ms
+ ✓ Compiled in 739ms (1323 modules)
+ ✓ Compiled in 462ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled in 486ms (1061 modules)
+ ✓ Compiled in 282ms (1116 modules)
+ ✓ Compiled in 294ms (1061 modules)
+ ✓ Compiled in 285ms (1061 modules)
+ ✓ Compiled in 578ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 109ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency: A Proven Approach",
+      "purpose": "Introduce our solution and highlight the potential for cost savings.",
+    ...
+ POST /api/generate-sequence-plan 200 in 9707ms
+ ✓ Compiled /api/generate-messages in 150ms (264 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3734ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 4
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3970ms
+ ✓ Compiled in 635ms (1325 modules)
+ ✓ Compiled in 902ms (1061 modules)
+ ✓ Compiled in 538ms (1061 modules)
+ ✓ Compiled in 521ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 217ms (265 modules)
+🔍 Optimizing email message with GPT-5 nano: test-no-signature-1
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 291
+📄 Optimized content preview: Subject: GSF: 18% Transport Cost Reduction
+
+Hey there,
+
+Golden State Foods cut transportation costs by 18%—a proof point for efficiency. Explore similar gains for {{account.name}}? [Chat about impact]...
+ POST /api/optimize-message 200 in 40654ms
+🔍 Optimizing email message with GPT-5 nano: test-length-control-1
+👤 Persona: CEO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 725
+📄 Optimized content preview: Subject: Dollar Tree Freight Savings Success
+
+Hey {{contact.first_name}},
+
+Dollar Tree recently saved $3.2 million in freight spend in six months and is projected to save $6 million in 2024 with Procu...
+ POST /api/optimize-message 200 in 20553ms
+ ✓ Compiled in 640ms (1323 modules)
