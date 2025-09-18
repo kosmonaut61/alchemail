@@ -751,8 +751,8 @@ export default function AlchemailApp20() {
                                   ))
                                   
                                   toast({
-                                    title: "Message Optimized!",
-                                    description: "Your message has been enhanced for better engagement.",
+                                    title: "Message Optimized with GPT-5 Nano!",
+                                    description: "Your message has been enhanced using advanced AI for better engagement.",
                                   })
                                 } catch (error) {
                                   console.error('Error optimizing message:', error)

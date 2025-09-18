@@ -6578,3 +6578,24 @@ Import trace for requested module:
  POST /api/generate-sequence-plan 200 in 5313ms
  ✓ Compiled in 554ms (1308 modules)
  ✓ Compiled in 607ms (1322 modules)
+ ✓ Compiled in 619ms (1061 modules)
+ ✓ Compiled in 215ms (1061 modules)
+ ✓ Compiled in 261ms (1061 modules)
+ ✓ Compiled in 321ms (1061 modules)
+ ✓ Compiled in 187ms (1061 modules)
+ ✓ Compiled in 209ms (1061 modules)
+ ✓ Compiled in 599ms (1061 modules)
+ ✓ Compiled in 328ms (1061 modules)
+ ✓ Compiled in 265ms (1061 modules)
+ ✓ Compiled in 221ms (1061 modules)
+ ✓ Compiled in 332ms (1061 modules)
+ ✓ Compiled in 759ms (1116 modules)
+ ✓ Compiled /api/test-gpt5-optimization in 277ms (1307 modules)
+🧪 Testing GPT-5 nano optimization...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ GPT-5 nano test successful
+ POST /api/test-gpt5-optimization 200 in 16577ms
+ ✓ Compiled in 486ms (1102 modules)
+ ✓ Compiled in 462ms (1061 modules)
+ ✓ Compiled in 395ms (1061 modules)
