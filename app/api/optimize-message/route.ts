@@ -60,6 +60,17 @@ OPTIMIZATION GUIDELINES:
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
 
+STRUCTURE & TONE OPTIMIZATION:
+- Convert formal language to conversational tone
+- Replace corporate jargon with direct, simple language
+- Ensure proper merge field formatting ({{contact.first_name}}, {{account.name}}, etc.)
+- Create short, punchy sentences (under 15 words each)
+- Add natural line breaks for readability
+- Use active voice throughout
+- Remove unnecessary words and phrases
+- Make the opening more engaging and direct
+- Ensure the CTA is hyperlinked and naturally integrated
+
 Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end

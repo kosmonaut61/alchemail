@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
 import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry, ContextItem } from "@/lib/context-repository"
+import { PERSONA_DEFINITIONS } from "@/lib/personas"
+import { formatSamplesForPrompt } from "@/lib/email-samples"
 
 // Function to dynamically select relevant context based on signal
 function getRelevantContext(signal: string, personaData: any, painPoints: string[]): ContextItem[] {
@@ -143,33 +145,46 @@ TARGET PERSONA:
 - Selected Pain Points: ${painPoints.join(', ') || 'Not specified'}
 - All Available Pain Points: ${personaData.painPoints.join('; ')}
 
-VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
-${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
+      VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
+      ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
-EMAIL SPECIFICATIONS:
+      EMAIL STRUCTURE EXAMPLES (follow this tone and structure):
+      ${formatSamplesForPrompt(personaData.label)}
+
+      EMAIL SPECIFICATIONS:
 - Day: ${emailPlan.day}
 - Subject: ${emailPlan.subject}
 - Purpose: ${emailPlan.purpose}
 - Signal Integration: ${emailPlan.signalIntegration}
 - Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
 
-Write a complete email that:
-1. Uses the exact subject line provided
-2. Follows the purpose and signal integration guidelines
-3. Matches the persona's tone profile and uses their keywords
-4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
-5. Sounds conversational and human (like talking to a friend)
-6. Includes a clear call-to-action
-7. Is concise but compelling (100-150 words)
-8. Does NOT include a signature or sign-off
-9. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
-10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
-11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
-12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
-13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
-14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
-15. Use the specific stats mentioned in the plan to make the email compelling and credible
-16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
+      Write a complete email that:
+      1. Uses the exact subject line provided
+      2. Follows the purpose and signal integration guidelines
+      3. Matches the persona's tone profile and uses their keywords
+      4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
+      5. Sounds conversational and human (like talking to a friend)
+      6. Includes a clear call-to-action
+      7. Is concise but compelling (100-150 words)
+      8. Does NOT include a signature or sign-off
+      9. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
+      10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
+      11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+      12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+      13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+      14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
+      15. Use the specific stats mentioned in the plan to make the email compelling and credible
+      16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
+
+      STRUCTURE GUIDELINES:
+      - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
+      - Open with signal acknowledgment (if applicable)
+      - State the challenge/opportunity in 1-2 short sentences
+      - Present the specific stat/result in context
+      - End with clear, hyperlinked CTA
+      - Keep sentences short and punchy
+      - Use active voice and direct language
+      - Avoid corporate jargon and formal phrases
 
 CRITICAL RULES:
 - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.

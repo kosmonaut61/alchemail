@@ -7207,3 +7207,40 @@ Dollar Tree recently saved $3.2 million in freight spend in six months and is pr
  POST /api/generate-messages 200 in 3943ms
  ✓ Compiled in 353ms (1323 modules)
  ✓ Compiled in 505ms (1323 modules)
+ ✓ Compiled in 596ms (1116 modules)
+ ✓ Compiled in 862ms (1061 modules)
+ ✓ Compiled in 242ms (1061 modules)
+ ✓ Compiled in 257ms (1061 modules)
+ ✓ Compiled in 496ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 230ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: New enterprise COO – mandate to optimize operations and achieve efficiency targets across divisions...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Efficiency Value Prop, Enterprise Language Style, Efficiency-Focused Language Style, Operations C-Suite Tone Profile, Operations Upper Management Tone Profile
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4076ms
+ ✓ Compiled /api/optimize-message in 123ms (266 modules)
+🔍 Optimizing email message with GPT-5 nano: test-coo-optimization
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 644
+📄 Optimized content preview: Subject: Boost ops efficiency under your COO mandate
+
+Hi {{contact.first_name}},
+
+Congrats on becoming COO. Your mandate to boost operations is huge. We can improve efficiency across divisions.
+
+Many ...
+ POST /api/optimize-message 200 in 21374ms
+ ✓ Compiled in 404ms (1327 modules)
+ ✓ Compiled in 447ms (1327 modules)
