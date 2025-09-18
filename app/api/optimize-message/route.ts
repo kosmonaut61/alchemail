@@ -64,6 +64,16 @@ OPTIMIZATION GUIDELINES:
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
 
+MESSAGE UNIQUENESS & VARIATION:
+- Make each message completely unique and different from others
+- Use different opening approaches (question, statement, story, direct value)
+- Vary the structure and flow - don't follow the same template
+- Use different stats, examples, and customer stories
+- Change the tone and approach for each message
+- Avoid repetitive phrases like "I noticed you checked out" in every message
+- Create distinct value propositions for each message
+- Use different psychological triggers and persuasion techniques
+
 STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone
 - Replace corporate jargon with direct, simple language
@@ -101,6 +111,16 @@ SIGNAL INTEGRATION:
 - Don't over-analyze or comment on what they did - just acknowledge it naturally
 - Avoid forced phrases like "ROI is top of mind" or "That's a great sign"
 - Keep signal integration conversational and human, not analytical or robotic
+
+VARIED OPENING APPROACHES:
+- Message 1: "Thanks for checking our pricing page"
+- Message 2: "Quick question about freight costs..."
+- Message 3: "Dollar Tree just saved $6M - here's how"
+- Message 4: "What if you could cut freight spend by 20%?"
+- Message 5: "Most ops leaders I talk to struggle with..."
+- LinkedIn 1: "Quick thought on freight optimization"
+- LinkedIn 2: "Saw your team's focus on efficiency"
+- LinkedIn 3: "One question about your freight processes"
 
 Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)

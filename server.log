@@ -7446,3 +7446,137 @@ Hi {{contact.first_name}},
 I noticed you checked our pricing page. Real-time visibility boosts efficiency and trims costs. Our customers cut freight spend 12–20...
  POST /api/optimize-message 200 in 26987ms
  ✓ Compiled in 551ms (1324 modules)
+ ✓ Compiled in 975ms (1116 modules)
+ ✓ Compiled in 547ms (1061 modules)
+ ✓ Compiled in 256ms (1061 modules)
+ ✓ Compiled in 250ms (1061 modules)
+ ✓ Compiled in 300ms (1061 modules)
+ ✓ Compiled in 259ms (1061 modules)
+ ✓ Compiled in 260ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 414ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: You checked our pricing page...
+👤 Persona: COO
+📧 Emails: 2
+💼 LinkedIn: 1
+🎯 Selected context items: Operations Intern Pain Points
+✅ Generated email for day 1
+✅ Generated email for day 3
+✅ Generated LinkedIn message for day 2
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 11206ms
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:210:1]
+ [2m207[0m | 
+ [2m208[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m209[0m | 
+ [2m210[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m211[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m212[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m213[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ✓ Compiled in 486ms (1061 modules)
+ ✓ Compiled in 452ms (1061 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ○ Compiling /_not-found ...
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ POST /api/generate-sequence-plan 500 in 1613ms
+ ✓ Compiled /_error in 482ms (1655 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our pricing page...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight potential cost savings.",
+      "signalIntegration"...
+ POST /api/generate-sequence-plan 200 in 8872ms
+ ✓ Compiled in 561ms (1655 modules)
+ ✓ Compiled in 759ms (1655 modules)

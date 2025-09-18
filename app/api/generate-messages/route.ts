@@ -186,6 +186,34 @@ TARGET PERSONA:
       - Use active voice and direct language
       - Avoid corporate jargon and formal phrases
 
+      MESSAGE TYPE VARIATION BY DAY:
+      - Day 1: Direct value proposition with specific stats (start with stat, not signal)
+      - Day 3: Question-based approach focusing on challenges (start with question)
+      - Day 5: Story-driven with customer success focus (start with story/customer name)
+      - Day 7: Urgency-driven with clear next steps (start with urgency/time)
+      - LinkedIn: More casual, personal, and conversational (start with personal note)
+
+      DAY-SPECIFIC INSTRUCTIONS:
+      - Day 1: Start with the specific stat from the plan, not the signal
+      - Day 3: Start with a question about their challenges
+      - Day 5: Start with a customer story or success example
+      - Day 7: Start with urgency or time-sensitive language
+      - LinkedIn: Start with personal/casual language, avoid formal openings
+
+      VARIED OPENING EXAMPLES (USE DIFFERENT ONES):
+      - Direct: "Quick question about your freight costs..."
+      - Story: "Dollar Tree just saved $6M - here's what happened"
+      - Question: "What if you could cut freight spend by 20%?"
+      - Challenge: "Most ops leaders struggle with this..."
+      - Value: "Thanks for checking our pricing - here's what we found"
+      - Personal: "I've been thinking about your team's efficiency challenges"
+      - Problem: "Freight costs are killing budgets everywhere..."
+      - Solution: "Here's how we helped Pepsi cut RFP time by 20%"
+      - Urgency: "Time-sensitive question about your freight spend"
+      - Insight: "Interesting trend I'm seeing in freight optimization"
+
+      CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.
+
 CRITICAL RULES:
 - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
 - NEVER assume what the recipient downloaded or their specific business situation
@@ -207,12 +235,20 @@ NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
 
 IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 
-CORE PRINCIPLES:
-- Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
-- Focus on the recipient's potential challenges, not assumptions about their current situation
-- Use different approaches and stats for each email to avoid repetition
-- Be conversational and authentic - write like you're talking to a colleague
-- Let your creativity flow while staying within these boundaries`
+      CORE PRINCIPLES:
+      - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
+      - Focus on the recipient's potential challenges, not assumptions about their current situation
+      - Use different approaches and stats for each email to avoid repetition
+      - Be conversational and authentic - write like you're talking to a colleague
+      - Let your creativity flow while staying within these boundaries
+
+      MESSAGE VARIATION RULES:
+      - Each email must be COMPLETELY UNIQUE - no repetitive phrases or structures
+      - Use different opening approaches: questions, statements, stories, direct value props
+      - Vary the signal integration - don't always start with "I noticed you checked out"
+      - Use different stats and customer examples for each email
+      - Change the tone and approach - some direct, some conversational, some story-driven
+      - Avoid template-style writing - make each message feel fresh and different`
 
       try {
         const { text: emailContent } = await generateText({
@@ -303,12 +339,20 @@ NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
 
 IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 
-CORE PRINCIPLES:
-- Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
-- Focus on the recipient's potential challenges, not assumptions about their current situation
-- Use different approaches and stats for each message to avoid repetition
-- Be conversational and authentic - write like you're talking to a colleague
-- Let your creativity flow while staying within these boundaries`
+      CORE PRINCIPLES:
+      - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
+      - Focus on the recipient's potential challenges, not assumptions about their current situation
+      - Use different approaches and stats for each message to avoid repetition
+      - Be conversational and authentic - write like you're talking to a colleague
+      - Let your creativity flow while staying within these boundaries
+
+      LINKEDIN VARIATION RULES:
+      - Each LinkedIn message must be COMPLETELY UNIQUE and different from emails
+      - Use casual, personal tone - more like a colleague reaching out
+      - Vary openings: questions, thoughts, insights, personal notes
+      - Keep it conversational and less formal than emails
+      - Use different stats and examples than the emails
+      - Avoid repetitive signal integration - be more creative`
 
       try {
         const { text: linkedInContent } = await generateText({

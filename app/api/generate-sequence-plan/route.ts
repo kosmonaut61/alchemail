@@ -127,14 +127,22 @@ SEQUENCE REQUIREMENTS:
 - LinkedIn Messages: ${linkedInCount}
 
 Create a strategic sequence plan that:
-1. Naturally introduces the signal in each message
+1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
 3. Addresses the target persona's pain points
 4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn)
 5. Has clear purposes for each touchpoint
-6. Integrates the signal naturally without being repetitive
+6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
 8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
+9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
+
+SIGNAL INTEGRATION EXAMPLES (use different approaches):
+- Day 1: Start with the stat/result, weave signal in naturally later
+- Day 3: Start with a question about their challenges, reference signal contextually
+- Day 5: Start with customer story, connect to signal subtly
+- Day 7: Start with urgency/time, mention signal as supporting context
+- LinkedIn: Use casual, personal tone with creative signal integration
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 
@@ -145,7 +153,7 @@ Return your response as a JSON object with this exact structure:
       "day": 1,
       "subject": "Subject line here",
       "purpose": "Purpose of this email",
-      "signalIntegration": "How the signal is integrated",
+      "signalIntegration": "Specific, unique approach to integrate the signal (avoid 'I noticed you' patterns)",
       "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)"
     }
   ],
@@ -153,7 +161,7 @@ Return your response as a JSON object with this exact structure:
     {
       "day": 3,
       "purpose": "Purpose of this LinkedIn message",
-      "signalIntegration": "How the signal is integrated",
+      "signalIntegration": "Specific, unique approach to integrate the signal (avoid 'I noticed you' patterns)",
       "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)"
     }
   ],
