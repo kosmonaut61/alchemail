@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
 
     // Generate emails
     for (const emailPlan of sequencePlan.emails) {
-      const emailPrompt = `You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level. Do not include signatures, sign-offs, or contact information - just the email content.
+      const emailPrompt = `You are a friendly, conversational B2B email writer for Emerge. Write like you're talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon.
 
 SIGNAL (Primary Reason for Outreach):
 ${signal}
@@ -130,7 +130,7 @@ TARGET PERSONA:
 - Selected Pain Points: ${painPoints.join(', ') || 'Not specified'}
 - All Available Pain Points: ${personaData.painPoints.join('; ')}
 
-RELEVANT CONTEXT (use these for social proof and credibility):
+VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
 EMAIL SPECIFICATIONS:
@@ -144,18 +144,22 @@ Write a complete email that:
 2. Follows the purpose and signal integration guidelines
 3. Matches the persona's tone profile and uses their keywords
 4. Addresses the selected pain points naturally
-5. Feels personal and casual
+5. Sounds conversational and human (like talking to a friend)
 6. Includes a clear call-to-action
 7. Is concise but compelling (100-150 words)
 8. Does NOT include a signature or sign-off
-9. Always mention 1–3 recognizable companies, with ONE clear quantified result per email (not multiple stats).
+9. ONLY mentions companies and results from the VERIFIED CONTEXT above - do not make up any claims
+10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
+11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+
+CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any.
 
 Format your response as:
 Subject: [subject line]
 
 [email body]
 
-Make sure the email feels natural and builds on previous messages in the sequence. Use the tone profile to guide your writing style and incorporate the persona's keywords naturally.`
+Write like you're having a genuine conversation, not sending a formal business proposal.`
 
       try {
         const { text: emailContent } = await generateText({
@@ -163,7 +167,7 @@ Make sure the email feels natural and builds on previous messages in the sequenc
           messages: [
             {
               role: 'system',
-              content: ' You are a friendly but professional b2b email writer for Emerge. You are brief and like to write at a 5th grade level. Do not include signatures, sign-offs, or contact information - just the email content.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Do not include signatures, sign-offs, or contact information - just the email content.'
             },
             {
               role: 'user',
@@ -194,7 +198,7 @@ Make sure the email feels natural and builds on previous messages in the sequenc
 
     // Generate LinkedIn messages
     for (const linkedInPlan of sequencePlan.linkedInMessages) {
-      const linkedInPrompt = `You are a friendly but professional LinkedIn message writer for Emerge. You are brief and like to write at a 5th grade level. Do not include signatures, sign-offs, or contact information - just the message content.
+      const linkedInPrompt = `You are a friendly, conversational LinkedIn message writer for Emerge. Write like you're talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Do not include signatures, sign-offs, or contact information - just the message content.
 
 SIGNAL (Primary Reason for Outreach):
 ${signal}
@@ -208,7 +212,7 @@ TARGET PERSONA:
 - Selected Pain Points: ${painPoints.join(', ') || 'Not specified'}
 - All Available Pain Points: ${personaData.painPoints.join('; ')}
 
-RELEVANT CONTEXT (use these for social proof and credibility):
+VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
 LINKEDIN MESSAGE SPECIFICATIONS:
@@ -226,6 +230,10 @@ Write a LinkedIn message that:
 7. Includes a clear call-to-action
 8. Feels natural and builds on previous messages
 9. Does NOT include a signature or sign-off
+10. ONLY mentions companies and results from the VERIFIED CONTEXT above - do not make up any claims
+11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+
+CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any.
 
 Make sure the message is engaging and drives the conversation forward. Use the tone profile to guide your writing style and incorporate the persona's keywords naturally.`
 
@@ -235,7 +243,7 @@ Make sure the message is engaging and drives the conversation forward. Use the t
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly but professional LinkedIn message writer for Emerge. You are brief and like to write at a 5th grade level. Do not include signatures, sign-offs, or contact information - just the message content.'
+              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Do not include signatures, sign-offs, or contact information - just the message content.'
             },
             {
               role: 'user',

@@ -6722,3 +6722,57 @@ Hi there,
 I wanted to share a tangible result from our work with Honda: an 18% reduction in freight costs achieved through strategic cost optimizatio...
  POST /api/optimize-message 200 in 18161ms
  ✓ Compiled in 524ms (1322 modules)
+ ✓ Compiled in 623ms (1116 modules)
+ ✓ Compiled in 929ms (1061 modules)
+ ✓ Compiled in 456ms (1061 modules)
+ ✓ Compiled in 250ms (1061 modules)
+ ✓ Compiled in 482ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 311ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We helped food and beverage companies optimize their transportation processes...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3622ms
+🚀 Generating messages for sequence...
+📝 Signal: We helped Golden State Foods achieve 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2980ms
+🚀 Generating messages for sequence...
+📝 Signal: We work with food companies like Frito Lay and Molson Coors to optimize their supply chains...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Manufacturing Customers, Dollar Tree Case Study, Golden State Foods Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3532ms
+ ✓ Compiled in 598ms (1323 modules)
+ ✓ Compiled in 294ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We work with food companies like Frito Lay and Molson Coors to optimize their supply chains...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Manufacturing Customers, Dollar Tree Case Study, Golden State Foods Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3111ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs and expanded their carrier pool fr...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2712ms
+ ✓ Compiled in 586ms (1323 modules)
