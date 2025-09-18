@@ -40,7 +40,8 @@ export async function POST(request: NextRequest) {
       personaContext,
       preamble,
       enableQA,
-      model
+      model,
+      selectedPersona
     })
 
     // Batch 2: Generate Emails 2-4 + LinkedIn Message 2 (parallel)
@@ -53,7 +54,8 @@ export async function POST(request: NextRequest) {
       personaContext,
       preamble,
       enableQA,
-      model
+      model,
+      selectedPersona
     })
 
     // Combine results
@@ -118,7 +120,8 @@ async function generateBatch1({
   personaContext,
   preamble,
   enableQA,
-  model
+  model,
+  selectedPersona
 }: any) {
   const prompt = `${preamble}
 
@@ -130,22 +133,25 @@ SIGNAL: ${signal}
 
 PAIN POINTS: ${painPoints?.join(', ') || 'Not specified'}
 
-Generate ONLY the first email and first LinkedIn message for this sequence:
+CRITICAL: EVERY email and LinkedIn message must reference and build on this signal. Create a cohesive story arc where the signal is the connecting thread throughout the entire campaign. Don't let the signal fade after the first email - it should be the reason you're reaching out in every communication.
+
+SUPPORTING GUIDELINES:
+1. Use conversational, friendly tone that fits the signal context
+2. Address pain points that align with the signal: ${painPoints.join(", ")}
+3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
+4. Make it sound like a real person wrote it, not marketing copy
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+6. Be creative and compelling - focus on the signal story first, word count will be optimized later
+
+Generate the first email and LinkedIn message for this sequence:
 
 EMAIL 1 (Day 0):
-- Subject line
-- Opening that acknowledges their pain point
-- Value proposition
-- Social proof (case study)
-- Single, clear CTA
-- Professional closing
+Subject: [Subject line that references the signal]
+
+[Write the actual email content here - not advice about how to write it. Make it conversational, address their pain points, include social proof, and end with a natural Apollo CTA link]
 
 LINKEDIN MESSAGE 1 (Day 1):
-- Brief, personalized message
-- Reference to the signal
-- Soft CTA for connection
-
-Make this email focused, concise, and directly address their pain points.`
+[Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]`
 
   console.log('🤖 Generating Batch 1 with model:', model)
   
@@ -202,7 +208,8 @@ async function generateBatch2({
   personaContext,
   preamble,
   enableQA,
-  model
+  model,
+  selectedPersona
 }: any) {
   const prompt = `${preamble}
 
@@ -214,32 +221,35 @@ SIGNAL: ${signal}
 
 PAIN POINTS: ${painPoints?.join(', ') || 'Not specified'}
 
+CRITICAL: EVERY email and LinkedIn message must reference and build on this signal. Create a cohesive story arc where the signal is the connecting thread throughout the entire campaign. Don't let the signal fade after the first email - it should be the reason you're reaching out in every communication.
+
+SUPPORTING GUIDELINES:
+1. Use conversational, friendly tone that fits the signal context
+2. Address pain points that align with the signal: ${painPoints.join(", ")}
+3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
+4. Make it sound like a real person wrote it, not marketing copy
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+6. Be creative and compelling - focus on the signal story first, word count will be optimized later
+
 Generate emails 2, 3, 4 and the second LinkedIn message for this sequence:
 
 EMAIL 2 (Day 3):
-- Follow-up on the first email
-- Different angle on the pain point
-- Additional social proof
-- Clear CTA
+Subject: [Subject line that references the signal]
+
+[Write the actual email content here - follow-up on the first email, different angle on pain point, include social proof, natural Apollo CTA]
 
 EMAIL 3 (Day 7):
-- Address objections or concerns
-- Deeper value proposition
-- Case study or example
-- Soft CTA
+Subject: [Subject line that references the signal]
+
+[Write the actual email content here - address objections, deeper value proposition, case study, natural Apollo CTA]
 
 EMAIL 4 (Day 11):
-- Final follow-up
-- Urgency or next steps
-- Clear action item
-- Strong CTA
+Subject: [Subject line that references the signal]
+
+[Write the actual email content here - final follow-up, urgency/next steps, clear action item, strong Apollo CTA]
 
 LINKEDIN MESSAGE 2 (Day 5):
-- Brief follow-up message
-- Reference to previous touchpoints
-- Soft CTA
-
-Make each email distinct but cohesive with the overall sequence.`
+[Write the actual LinkedIn message content here - brief follow-up, reference previous touchpoints, soft CTA]`
 
   console.log('🤖 Generating Batch 2 with model:', model)
   
