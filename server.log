@@ -6658,3 +6658,4 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
 ✅ All messages generated successfully
  POST /api/generate-messages 200 in 3708ms
  ✓ Compiled in 512ms (1323 modules)
+ ✓ Compiled in 355ms (1116 modules)
