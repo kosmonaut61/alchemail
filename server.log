@@ -6460,3 +6460,80 @@ Import trace for requested module:
 🎉 ===== STRATEGIC GENERATION COMPLETE =====
  POST /api/generate-email-strategic 200 in 383838ms
  ✓ Compiled in 724ms (1116 modules)
+ ✓ Compiled in 1511ms (1061 modules)
+ ✓ Compiled /api/generate-email-strategic in 181ms (402 modules)
+🚀 ===== STRATEGIC GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test strategic endpoint',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: false,
+  model: 'gpt-5'
+}
+🎯 Phase 1: Creating Strategic Sequence Plan...
+📋 Creating strategic sequence plan...
+✅ Sequence plan created
+✅ Phase 1 Complete: Sequence plan created
+🎯 Phase 2: Generating Initial Messages...
+📧 Generating initial email1...
+ POST /api/generate-email-strategic 200 in 30092ms
+ ✓ Compiled in 1075ms (1463 modules)
+ ✓ Compiled in 330ms (1061 modules)
+ ✓ Compiled in 574ms (1061 modules)
+ ✓ Compiled in 298ms (1061 modules)
+ ✓ Compiled in 184ms (1061 modules)
+ ✓ Compiled in 442ms (1061 modules)
+ ✓ Compiled in 197ms (1061 modules)
+ ✓ Compiled in 294ms (1061 modules)
+ ✓ Compiled in 186ms (1061 modules)
+ ✓ Compiled in 184ms (1061 modules)
+ ✓ Compiled in 163ms (1061 modules)
+✅ Initial email1 generated
+📧 Generating initial email2...
+ ✓ Compiled in 233ms (1061 modules)
+ ✓ Compiled in 189ms (1061 modules)
+ ✓ Compiled /api/generate-email-fast in 203ms (1364 modules)
+🚀 ===== FAST GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test fast endpoint',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: false,
+  model: 'gpt-5'
+}
+📧 Generating complete sequence with gpt-5-nano...
+✅ Initial email2 generated
+📧 Generating initial email3...
+ POST /api/generate-email-fast 200 in 60008ms
+ ✓ Compiled in 464ms (1061 modules)
+ ✓ Compiled in 340ms (1061 modules)
+ ✓ Compiled in 466ms (1116 modules)
+✅ Sequence generated successfully
+🎉 ===== FAST GENERATION COMPLETE =====
+✅ Initial email3 generated
+📧 Generating initial email4...
+✅ Initial email4 generated
+📧 Generating initial linkedin1...
+✅ Initial linkedin1 generated
+📧 Generating initial linkedin2...
+✅ Initial linkedin2 generated
+✅ Phase 2 Complete: All initial messages generated
+🎉 ===== STRATEGIC GENERATION COMPLETE =====
+ ✓ Compiled in 604ms (1061 modules)
+ ✓ Compiled in 882ms (1116 modules)
+ ✓ Compiled in 192ms (1061 modules)
+ ✓ Compiled in 306ms (1102 modules)
+ ✓ Compiled in 342ms (1061 modules)
+ ✓ Compiled in 334ms (1102 modules)
+ ✓ Compiled in 190ms (1061 modules)
+ ✓ Compiled in 332ms (1102 modules)
+ ✓ Compiled in 268ms (1061 modules)
+ ✓ Compiled in 274ms (1061 modules)
+ ✓ Compiled in 196ms (1061 modules)
+ ✓ Compiled in 331ms (1061 modules)
+ ✓ Compiled in 304ms (1061 modules)
+ ✓ Compiled in 257ms (1061 modules)
+ ✓ Compiled in 825ms (1061 modules)
+ ✓ Compiled in 191ms (1061 modules)

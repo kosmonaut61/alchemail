@@ -50,16 +50,11 @@ export default function EmailGenerator() {
   // Simple progress simulation (since status API causes timeouts)
   const startProgressSimulation = () => {
         const phases = [
-          { progress: 10, message: 'Preparing strategic generation...' },
-          { progress: 20, message: 'Building email context and structure...' },
-          { progress: 30, message: 'Phase 1: Creating strategic sequence plan...' },
-          { progress: 40, message: 'Phase 2: Generating Email 1...' },
-          { progress: 50, message: 'Phase 2: Generating Email 2...' },
-          { progress: 60, message: 'Phase 2: Generating Email 3...' },
-          { progress: 70, message: 'Phase 2: Generating Email 4...' },
-          { progress: 80, message: 'Phase 2: Generating LinkedIn messages...' },
-          { progress: 90, message: 'Phase 3: QA & polishing messages...' },
-          { progress: 100, message: 'Strategic sequence ready!' }
+          { progress: 10, message: 'Preparing fast generation...' },
+          { progress: 30, message: 'Building email context and structure...' },
+          { progress: 50, message: 'Generating complete sequence with gpt-5-nano...' },
+          { progress: 80, message: 'Finalizing email sequence...' },
+          { progress: 100, message: 'Fast sequence ready!' }
         ]
     
     let currentPhase = 0
@@ -254,7 +249,7 @@ export default function EmailGenerator() {
     setOriginalEmail("")
     
     try {
-      console.log('🌐 Making API call to /api/generate-email-hybrid (hybrid approach)...')
+      console.log('🌐 Making API call to /api/generate-email-enhanced (enhanced approach)...')
       const requestBody = {
         persona,
         signal,
@@ -268,7 +263,7 @@ export default function EmailGenerator() {
       // Start progress simulation
       const progressInterval = startProgressSimulation()
 
-        const response = await fetch("/api/generate-email-strategic", {
+        const response = await fetch("/api/generate-email-enhanced", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -323,10 +318,10 @@ export default function EmailGenerator() {
       console.log('✅ Frontend state updated, moving to step 4')
 
        // Show success message with quality info
-        let qualityMessage = 'Your email sequence has been generated successfully with strategic approach!'
+        let qualityMessage = 'Your email sequence has been generated successfully with fast approach!'
         
-        if (data.strategic) {
-          qualityMessage = `Strategic generation complete! Created story-driven sequence plan, generated personalized messages with GPT-5-nano, then QA'd and polished with GPT-5-mini.`
+        if (data.fast) {
+          qualityMessage = `Fast generation complete! Generated complete sequence in single call with GPT-5-nano for maximum speed and reliability.`
         }
         
         if (data.qaResults) {
@@ -338,7 +333,7 @@ export default function EmailGenerator() {
         }
 
        toast({
-         title: "Strategic Generation Complete!",
+         title: "Fast Generation Complete!",
          description: qualityMessage,
        })
 
@@ -449,6 +444,15 @@ export default function EmailGenerator() {
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
               <ThemeToggle />
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => window.open('/app-2-0', '_blank')}
+                className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
+              >
+                <span className="mr-2">🚀</span>
+                2.0
+              </Button>
               <Button 
                 variant="outline" 
                 size="sm"
@@ -689,7 +693,7 @@ export default function EmailGenerator() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="gpt-5">GPT-5 (Strategic Approach - Story-Driven)</SelectItem>
+                        <SelectItem value="gpt-5">GPT-5 (Fast Approach - Single Call)</SelectItem>
                         <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
                         <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
                         <SelectItem value="gpt-4o">GPT-4o (Reliable Fallback)</SelectItem>
@@ -716,7 +720,7 @@ export default function EmailGenerator() {
                       </div>
                       {enableQA && (
                         <div className="text-xs text-blue-600 bg-blue-50 dark:bg-blue-950 dark:text-blue-400 px-2 py-1 rounded-md">
-                           🔍 QA will analyze and auto-fix email quality (strategic + story-driven QA)
+                           🔍 QA will analyze and auto-fix email quality (fast + single call)
                         </div>
                       )}
                     </div>

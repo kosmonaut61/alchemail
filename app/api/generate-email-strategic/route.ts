@@ -266,21 +266,22 @@ CRITICAL REQUIREMENTS:
 6. Create a cohesive story that builds on the sequence plan
 
 Generate ${messageType.toUpperCase()} following these rules:
-- 20-100 words total
+- 95-100 words total
 - Max 15 words per sentence
 - Max 3 sentences per paragraph
 - 2-3 paragraphs total
 - Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - No signature block - email ends at CTA
-- Plain text only, no formatting
+- Plain text only, no formatting except for the Apollo CTA link
 - Subject line: 1-5 words, under 40 characters, mobile-friendly
 - Grade 5 reading level or lower
 - Create curiosity and engagement
 - NO duplicate CTAs
+- Call to action should be in the middle of a sentence, not at the end and a blue hyperlink to the Apollo Link
 
 Subject: [1-5 words, under 40 chars, mobile-friendly]
 
-[Write the actual message content here - SOLELY FOCUSED on the signal, natural and personalized, includes the specific social proof, ends with natural Apollo CTA]`;
+[Write the actual message content here - Focus on the signal, natural and personalized, includes the specific social proof, ends with natural Apollo CTA]`;
 
   console.log(`📧 Generating initial ${messageType}...`);
   const result = await runWithGpt5(prompt);
