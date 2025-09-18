@@ -6555,3 +6555,26 @@ Import trace for requested module:
  ✓ Compiled in 528ms (1061 modules)
  ✓ Compiled in 189ms (1061 modules)
  ✓ Compiled in 689ms (1322 modules)
+ ✓ Compiled in 638ms (1116 modules)
+ ✓ Compiled in 386ms (1061 modules)
+ ✓ Compiled in 287ms (1061 modules)
+ ✓ Compiled in 325ms (1061 modules)
+ ✓ Compiled in 260ms (1061 modules)
+ ✓ Compiled in 391ms (1102 modules)
+ ✓ Compiled /api/test-2-0 in 183ms (1224 modules)
+ GET /api/test-2-0 200 in 231ms
+ POST /api/test-2-0 200 in 4ms
+ ✓ Compiled /api/generate-sequence-plan in 71ms (263 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: test signal...
+👤 Persona: CEO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Exploring Opportunities for Operational Efficiency",
+      "purpose": "Introduce our solution and how it can enhance operational efficiency for ...
+ POST /api/generate-sequence-plan 200 in 5313ms
+ ✓ Compiled in 554ms (1308 modules)
+ ✓ Compiled in 607ms (1322 modules)

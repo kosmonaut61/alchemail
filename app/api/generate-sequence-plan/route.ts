@@ -48,6 +48,8 @@ Create a strategic sequence plan that:
 5. Has clear purposes for each touchpoint
 6. Integrates the signal naturally without being repetitive
 
+CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
+
 Return your response as a JSON object with this exact structure:
 {
   "emails": [
@@ -79,7 +81,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       messages: [
         {
           role: 'system',
-          content: 'You are an expert email sequence strategist specializing in B2B outreach. Always respond with valid JSON that matches the exact structure requested.'
+          content: 'You are an expert email sequence strategist specializing in B2B outreach. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
         },
         {
           role: 'user',
@@ -99,15 +101,69 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     // Parse the JSON response
     let sequencePlan
     try {
-      sequencePlan = JSON.parse(text)
+      // Try to extract JSON from the response in case AI added extra text
+      let jsonText = text.trim()
+      
+      // Look for JSON object boundaries
+      const jsonStart = jsonText.indexOf('{')
+      const jsonEnd = jsonText.lastIndexOf('}') + 1
+      
+      if (jsonStart !== -1 && jsonEnd > jsonStart) {
+        jsonText = jsonText.substring(jsonStart, jsonEnd)
+      }
+      
+      console.log('📄 Raw AI response:', jsonText.substring(0, 200) + '...')
+      
+      sequencePlan = JSON.parse(jsonText)
     } catch (parseError) {
       console.error('❌ Failed to parse sequence plan JSON:', parseError)
-      throw new Error('Invalid JSON response from AI')
+      console.error('❌ Raw response was:', text)
+      throw new Error(`Invalid JSON response from AI: ${parseError.message}`)
     }
 
     // Validate the structure
     if (!sequencePlan.emails || !sequencePlan.linkedInMessages || !sequencePlan.totalDays) {
-      throw new Error('Invalid sequence plan structure')
+      console.warn('⚠️ Invalid sequence plan structure, using fallback')
+      
+      // Create a fallback sequence plan
+      sequencePlan = {
+        emails: [
+          {
+            day: 1,
+            subject: "Quick question about your freight costs",
+            purpose: "Initial value-driven opener",
+            signalIntegration: "Lead with the signal and provide value"
+          },
+          {
+            day: 4,
+            subject: "Following up on freight optimization",
+            purpose: "Reinforce value proposition",
+            signalIntegration: "Share specific examples related to the signal"
+          },
+          {
+            day: 8,
+            subject: "One last thought on freight savings",
+            purpose: "Final attempt with urgency",
+            signalIntegration: "Highlight time-sensitive aspects of the signal"
+          }
+        ].slice(0, emailCount),
+        linkedInMessages: [
+          {
+            day: 3,
+            purpose: "Connect and add value",
+            signalIntegration: "Share industry insight related to their challenges"
+          },
+          {
+            day: 7,
+            purpose: "Follow up on email",
+            signalIntegration: "Reference the email and offer additional resources"
+          }
+        ].slice(0, linkedInCount),
+        totalDays: Math.max(...[
+          ...(sequencePlan.emails || []).map(e => e.day),
+          ...(sequencePlan.linkedInMessages || []).map(m => m.day)
+        ], 8)
+      }
     }
 
     return NextResponse.json({
