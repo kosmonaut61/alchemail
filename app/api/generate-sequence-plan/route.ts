@@ -139,6 +139,13 @@ Create a strategic sequence plan that:
 8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
 9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
 
+MESSAGE VARIATION REQUIREMENTS:
+- Each message must have a DISTINCTLY different approach and tone
+- Use different opening styles: questions, statements, stories, direct value props
+- Vary the signal integration style for each message
+- Ensure each message feels unique and different from the others
+- Make the differences obvious in the signalIntegration field
+
 SIGNAL INTEGRATION REQUIREMENTS:
 - Keep signal integration instructions SIMPLE and DIRECT
 - Use single-action instructions, not complex multi-part directions
@@ -155,7 +162,7 @@ Return your response as a JSON object with this exact structure:
       "day": 1,
       "subject": "Subject line here",
       "purpose": "Purpose of this email",
-      "signalIntegration": "Specific, unique approach to integrate the signal (avoid 'I noticed you' patterns)",
+      "signalIntegration": "Unique approach for this message (question/story/direct value)",
       "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)"
     }
   ],
@@ -163,7 +170,7 @@ Return your response as a JSON object with this exact structure:
     {
       "day": 3,
       "purpose": "Purpose of this LinkedIn message",
-      "signalIntegration": "Specific, unique approach to integrate the signal (avoid 'I noticed you' patterns)",
+      "signalIntegration": "Unique approach for this message (question/story/direct value)",
       "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)"
     }
   ],

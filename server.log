@@ -7703,3 +7703,32 @@ Import trace for requested module:
       "purpose": "Introduce ProcureOS and highlight the benefits for cost optimization.",
       "signal...
  POST /api/generate-sequence-plan 200 in 10776ms
+ ✓ Compiled in 786ms (1323 modules)
+ ✓ Compiled /api/generate-messages in 78ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+ ✓ Compiled in 286ms (1326 modules)
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 5492ms
+ ✓ Compiled in 761ms (1326 modules)
+ ✓ Compiled in 647ms (1116 modules)
+ ✓ Compiled in 598ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 54ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings with Our Proven Solution",
+      "purpose": "Introduce our solution and highlight its impact on cost optimization.",
+      "...
+ POST /api/generate-sequence-plan 200 in 9814ms
+ ✓ Compiled in 461ms (1323 modules)
