@@ -58,21 +58,28 @@ export async function POST(request: NextRequest) {
     // Get preamble
     const preamble = getPreamble();
 
-    console.log('🎯 Starting Phase 1: Parallel Generation of All Messages...');
+    console.log('🎯 Starting Phase 1: Sequential Generation of Messages...');
 
-    // PHASE 1: Generate all messages in parallel with gpt-5-nano (fastest)
-    const generationPromises = [
-      generateEmail1({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona }),
-      generateEmail2({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona }),
-      generateEmail3({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona }),
-      generateEmail4({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona }),
-      generateLinkedIn1({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona }),
-      generateLinkedIn2({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona })
-    ];
+    // PHASE 1: Generate messages sequentially to avoid timeouts
+    console.log('📧 Generating Email 1...');
+    const email1 = await generateEmail1({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    
+    console.log('📧 Generating Email 2...');
+    const email2 = await generateEmail2({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    
+    console.log('📧 Generating Email 3...');
+    const email3 = await generateEmail3({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    
+    console.log('📧 Generating Email 4...');
+    const email4 = await generateEmail4({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    
+    console.log('💼 Generating LinkedIn 1...');
+    const linkedin1 = await generateLinkedIn1({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    
+    console.log('💼 Generating LinkedIn 2...');
+    const linkedin2 = await generateLinkedIn2({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
 
-    const [email1, email2, email3, email4, linkedin1, linkedin2] = await Promise.all(generationPromises);
-
-    console.log('✅ Phase 1 Complete: All messages generated in parallel');
+    console.log('✅ Phase 1 Complete: All messages generated sequentially');
 
     // PHASE 2: Create sequence flow plan
     console.log('🎯 Starting Phase 2: Creating Sequence Flow Plan...');
@@ -83,29 +90,36 @@ export async function POST(request: NextRequest) {
     // PHASE 3: QA each message individually with gpt-5-mini (if enabled)
     let qaResults = {};
     if (enableQA) {
-      console.log('🎯 Starting Phase 3: Individual QA with gpt-5-mini...');
+      console.log('🎯 Starting Phase 3: Sequential QA with gpt-5-mini...');
       
-      const qaPromises = [
-        qaMessage("Email 1", email1),
-        qaMessage("Email 2", email2), 
-        qaMessage("Email 3", email3),
-        qaMessage("Email 4", email4),
-        qaMessage("LinkedIn 1", linkedin1),
-        qaMessage("LinkedIn 2", linkedin2)
-      ];
-
-      const qaResultsArray = await Promise.all(qaPromises);
+      console.log('🔍 QA\'ing Email 1...');
+      const qa1 = await qaMessage("Email 1", email1);
+      
+      console.log('🔍 QA\'ing Email 2...');
+      const qa2 = await qaMessage("Email 2", email2);
+      
+      console.log('🔍 QA\'ing Email 3...');
+      const qa3 = await qaMessage("Email 3", email3);
+      
+      console.log('🔍 QA\'ing Email 4...');
+      const qa4 = await qaMessage("Email 4", email4);
+      
+      console.log('🔍 QA\'ing LinkedIn 1...');
+      const qa5 = await qaMessage("LinkedIn 1", linkedin1);
+      
+      console.log('🔍 QA\'ing LinkedIn 2...');
+      const qa6 = await qaMessage("LinkedIn 2", linkedin2);
       
       qaResults = {
-        email1: qaResultsArray[0],
-        email2: qaResultsArray[1],
-        email3: qaResultsArray[2],
-        email4: qaResultsArray[3],
-        linkedin1: qaResultsArray[4],
-        linkedin2: qaResultsArray[5]
+        email1: qa1,
+        email2: qa2,
+        email3: qa3,
+        email4: qa4,
+        linkedin1: qa5,
+        linkedin2: qa6
       };
 
-      console.log('✅ Phase 3 Complete: All messages QA\'d individually');
+      console.log('✅ Phase 3 Complete: All messages QA\'d sequentially');
     }
 
     // Combine results
@@ -127,9 +141,9 @@ LinkedIn Message 2: ${linkedin2}`;
       email: fullSequence,
       parallel: true,
       phases: {
-        phase1: "Parallel generation with gpt-5-nano",
+        phase1: "Sequential generation with gpt-5-nano",
         phase2: "Sequence flow planning", 
-        phase3: enableQA ? "Individual QA with gpt-5-mini" : "QA skipped"
+        phase3: enableQA ? "Sequential QA with gpt-5-mini" : "QA skipped"
       },
       flowPlan,
       qaResults,

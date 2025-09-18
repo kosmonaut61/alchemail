@@ -50,12 +50,16 @@ export default function EmailGenerator() {
   // Simple progress simulation (since status API causes timeouts)
   const startProgressSimulation = () => {
         const phases = [
-          { progress: 10, message: 'Preparing parallel generation...' },
-          { progress: 25, message: 'Building email context and structure...' },
-          { progress: 40, message: 'Phase 1: Generating all messages in parallel...' },
-          { progress: 60, message: 'Phase 2: Creating sequence flow plan...' },
-          { progress: 80, message: 'Phase 3: QA\'ing each message individually...' },
-          { progress: 100, message: 'Parallel sequence ready!' }
+          { progress: 10, message: 'Preparing sequential generation...' },
+          { progress: 20, message: 'Building email context and structure...' },
+          { progress: 30, message: 'Phase 1: Generating Email 1...' },
+          { progress: 40, message: 'Phase 1: Generating Email 2...' },
+          { progress: 50, message: 'Phase 1: Generating Email 3...' },
+          { progress: 60, message: 'Phase 1: Generating Email 4...' },
+          { progress: 70, message: 'Phase 1: Generating LinkedIn messages...' },
+          { progress: 80, message: 'Phase 2: Creating sequence flow plan...' },
+          { progress: 90, message: 'Phase 3: QA\'ing messages sequentially...' },
+          { progress: 100, message: 'Sequential sequence ready!' }
         ]
     
     let currentPhase = 0
@@ -319,10 +323,10 @@ export default function EmailGenerator() {
       console.log('✅ Frontend state updated, moving to step 4')
 
        // Show success message with quality info
-        let qualityMessage = 'Your email sequence has been generated successfully with parallel approach!'
+        let qualityMessage = 'Your email sequence has been generated successfully with sequential approach!'
         
         if (data.parallel) {
-          qualityMessage = `Parallel generation complete! Generated all messages simultaneously with GPT-5-nano, then QA'd individually with GPT-5-mini.`
+          qualityMessage = `Sequential generation complete! Generated all messages one by one with GPT-5-nano, then QA'd sequentially with GPT-5-mini.`
         }
         
         if (data.qaResults) {
@@ -334,7 +338,7 @@ export default function EmailGenerator() {
         }
 
        toast({
-         title: "Parallel Generation Complete!",
+         title: "Sequential Generation Complete!",
          description: qualityMessage,
        })
 
@@ -685,7 +689,7 @@ export default function EmailGenerator() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="gpt-5">GPT-5 (Parallel Approach - 3x Faster)</SelectItem>
+                        <SelectItem value="gpt-5">GPT-5 (Sequential Approach - Reliable)</SelectItem>
                         <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
                         <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
                         <SelectItem value="gpt-4o">GPT-4o (Reliable Fallback)</SelectItem>
@@ -712,7 +716,7 @@ export default function EmailGenerator() {
                       </div>
                       {enableQA && (
                         <div className="text-xs text-blue-600 bg-blue-50 dark:bg-blue-950 dark:text-blue-400 px-2 py-1 rounded-md">
-                           🔍 QA will analyze and auto-fix email quality (parallel + individual QA)
+                           🔍 QA will analyze and auto-fix email quality (sequential + individual QA)
                         </div>
                       )}
                     </div>
