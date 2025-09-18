@@ -360,7 +360,8 @@ export default function AlchemailApp20() {
                         })
 
                         if (!response.ok) {
-                          throw new Error('Failed to generate sequence plan')
+                          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                          throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate sequence plan`)
                         }
 
                         const data = await response.json()
@@ -468,7 +469,8 @@ export default function AlchemailApp20() {
                             })
 
                             if (!response.ok) {
-                              throw new Error('Failed to generate sequence plan')
+                              const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                              throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate sequence plan`)
                             }
 
                             const data = await response.json()
@@ -544,7 +546,8 @@ export default function AlchemailApp20() {
                         })
 
                         if (!response.ok) {
-                          throw new Error('Failed to generate messages')
+                          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                          throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate messages`)
                         }
 
                         const data = await response.json()
@@ -656,7 +659,8 @@ export default function AlchemailApp20() {
                             })
 
                             if (!response.ok) {
-                              throw new Error('Failed to generate messages')
+                              const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                              throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate messages`)
                             }
 
                             const data = await response.json()
@@ -731,7 +735,8 @@ export default function AlchemailApp20() {
                                   })
 
                                   if (!response.ok) {
-                                    throw new Error('Failed to optimize message')
+                                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                                    throw new Error(errorData.error || `HTTP ${response.status}: Failed to optimize message`)
                                   }
 
                                   const data = await response.json()

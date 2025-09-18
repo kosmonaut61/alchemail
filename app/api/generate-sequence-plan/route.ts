@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+import { openai } from "@ai-sdk/openai"
+import { generateText } from "ai"
 
 export async function POST(request: NextRequest) {
   try {
@@ -77,8 +74,8 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     console.log('📝 Signal:', signal.substring(0, 100) + '...')
     console.log('👤 Persona:', personaData.label)
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', // Using GPT-4o-mini for speed and reliability
+    const { text } = await generateText({
+      model: openai('gpt-4o-mini'),
       messages: [
         {
           role: 'system',
@@ -90,11 +87,10 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
         }
       ],
       temperature: 0.7,
-      max_tokens: 2000
+      maxTokens: 2000
     })
 
-    const content = response.choices[0]?.message?.content
-    if (!content) {
+    if (!text) {
       throw new Error('No content received from OpenAI')
     }
 
@@ -103,7 +99,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     // Parse the JSON response
     let sequencePlan
     try {
-      sequencePlan = JSON.parse(content)
+      sequencePlan = JSON.parse(text)
     } catch (parseError) {
       console.error('❌ Failed to parse sequence plan JSON:', parseError)
       throw new Error('Invalid JSON response from AI')

@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+import { openai } from "@ai-sdk/openai"
+import { generateText } from "ai"
 
 export async function POST(request: NextRequest) {
   try {
@@ -70,8 +67,8 @@ Subject: [subject line]
 Make sure the email feels natural and builds on previous messages in the sequence.`
 
       try {
-        const emailResponse = await openai.chat.completions.create({
-          model: 'gpt-4o-mini',
+        const { text: emailContent } = await generateText({
+          model: openai('gpt-4o-mini'),
           messages: [
             {
               role: 'system',
@@ -83,10 +80,8 @@ Make sure the email feels natural and builds on previous messages in the sequenc
             }
           ],
           temperature: 0.8,
-          max_tokens: 500
+          maxTokens: 500
         })
-
-        const emailContent = emailResponse.choices[0]?.message?.content || ''
         
         generatedMessages.push({
           id: `email-${emailPlan.day}`,
@@ -136,8 +131,8 @@ Write a LinkedIn message that:
 Make sure the message is engaging and drives the conversation forward.`
 
       try {
-        const linkedInResponse = await openai.chat.completions.create({
-          model: 'gpt-4o-mini',
+        const { text: linkedInContent } = await generateText({
+          model: openai('gpt-4o-mini'),
           messages: [
             {
               role: 'system',
@@ -149,10 +144,8 @@ Make sure the message is engaging and drives the conversation forward.`
             }
           ],
           temperature: 0.8,
-          max_tokens: 300
+          maxTokens: 300
         })
-
-        const linkedInContent = linkedInResponse.choices[0]?.message?.content || ''
         
         generatedMessages.push({
           id: `linkedin-${linkedInPlan.day}`,

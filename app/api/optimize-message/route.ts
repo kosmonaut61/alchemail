@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+import { openai } from "@ai-sdk/openai"
+import { generateText } from "ai"
 
 export async function POST(request: NextRequest) {
   try {
@@ -67,8 +64,8 @@ For LinkedIn messages:
 
 Return the optimized message with the same format as the original. Focus on improvements that will increase open rates, response rates, and engagement.`
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+    const { text: optimizedContent } = await generateText({
+      model: openai('gpt-4o-mini'),
       messages: [
         {
           role: 'system',
@@ -80,10 +77,8 @@ Return the optimized message with the same format as the original. Focus on impr
         }
       ],
       temperature: 0.7,
-      max_tokens: 800
+      maxTokens: 800
     })
-
-    const optimizedContent = response.choices[0]?.message?.content || ''
     
     if (!optimizedContent) {
       throw new Error('No optimized content received from OpenAI')
