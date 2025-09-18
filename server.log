@@ -4054,3 +4054,33 @@ Rate swings and spot spikes hurt budgets. Manual checks miss errors. That burns 
 ✅ processRequest completed
  POST /api/generate-email-enhanced 200 in 256349ms
  ✓ Compiled in 501ms (820 modules)
+ ○ Compiling /api/generate-email-enhanced ...
+ ✓ Compiled /api/generate-email-enhanced in 907ms (356 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test original vs optimized display
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: true
+📏 Prompt Length: 12517 characters
+🤖 Using GPT-5 direct approach...
