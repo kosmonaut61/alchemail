@@ -184,13 +184,13 @@ Subject: [subject line]
 
 Write like you're having a genuine conversation, not sending a formal business proposal.
 
-NEVER ASSUME OR MENTION:
-- "I noticed you downloaded..." (NEVER say this)
-- "I saw you downloaded..." (NEVER say this)
-- What the recipient downloaded or viewed
-- Their specific business situation
-- What challenges they're currently facing
-- Any assumptions about their company or role
+NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
+- Making up what the recipient downloaded or viewed
+- Their specific business situation (unless mentioned in signal)
+- What challenges they're currently facing (unless mentioned in signal)
+- Any assumptions about their company or role (unless mentioned in signal)
+
+IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 
 CORE PRINCIPLES:
 - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
@@ -205,7 +205,7 @@ CORE PRINCIPLES:
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. Do not include signatures, sign-offs, or contact information - just the email content.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content.'
             },
             {
               role: 'user',
@@ -280,13 +280,13 @@ CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up custom
 
 Make sure the message is engaging and drives the conversation forward. Use the tone profile to guide your writing style and incorporate the persona's keywords naturally.
 
-NEVER ASSUME OR MENTION:
-- "I noticed you downloaded..." (NEVER say this)
-- "I saw you downloaded..." (NEVER say this)
-- What the recipient downloaded or viewed
-- Their specific business situation
-- What challenges they're currently facing
-- Any assumptions about their company or role
+NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
+- Making up what the recipient downloaded or viewed
+- Their specific business situation (unless mentioned in signal)
+- What challenges they're currently facing (unless mentioned in signal)
+- Any assumptions about their company or role (unless mentioned in signal)
+
+IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 
 CORE PRINCIPLES:
 - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
@@ -301,7 +301,7 @@ CORE PRINCIPLES:
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. Do not include signatures, sign-offs, or contact information - just the message content.'
+              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the message content.'
             },
             {
               role: 'user',

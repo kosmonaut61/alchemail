@@ -7175,3 +7175,35 @@ Dollar Tree recently saved $3.2 million in freight spend in six months and is pr
  ✓ Compiled in 640ms (1323 modules)
  ✓ Compiled in 941ms (1116 modules)
  ✓ Compiled in 205ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 280ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency in Transportation",
+      "purpose": "Introduce our solution and establish relevance.",
+      "signalIntegration":...
+ POST /api/generate-sequence-plan 200 in 14087ms
+ ✓ Compiled in 813ms (1061 modules)
+ ✓ Compiled in 258ms (1061 modules)
+ ✓ Compiled in 271ms (1061 modules)
+ ✓ Compiled in 266ms (1061 modules)
+ ✓ Compiled in 521ms (1061 modules)
+ ✓ Compiled in 263ms (1061 modules)
+ ✓ Compiled in 503ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 220ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3943ms
+ ✓ Compiled in 353ms (1323 modules)
+ ✓ Compiled in 505ms (1323 modules)
