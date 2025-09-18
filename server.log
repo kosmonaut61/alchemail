@@ -6776,3 +6776,125 @@ I wanted to share a tangible result from our work with Honda: an 18% reduction i
 ✅ All messages generated successfully
  POST /api/generate-messages 200 in 2712ms
  ✓ Compiled in 586ms (1323 modules)
+ ✓ Compiled in 589ms (1323 modules)
+ ✓ Compiled in 1078ms (1061 modules)
+ ✓ Compiled in 539ms (1061 modules)
+ ✓ Compiled in 476ms (1061 modules)
+ ✓ Compiled in 743ms (1061 modules)
+ ✓ Compiled in 315ms (1061 modules)
+ ✓ Compiled in 500ms (1061 modules)
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ ○ Compiling /_not-found ...
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ POST /api/optimize-message 500 in 1394ms
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ GET /api/test-simple 500 in 248ms
+ POST /api/optimize-message 500 in 7ms
+ GET /api/test-simple 500 in 11ms
+ ✓ Compiled /api/test-simple in 524ms (1657 modules)
+🔍 Optimizing email message with GPT-5 nano: test-merge-fields-1
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 765
+📄 Optimized content preview: Subject: Hi {{contact.first_name}}, quick chat?
+
+Hi {{contact.first_name}},
+
+As a COO, you’re focused on margins, service reliability, and scalable operations. I help teams at {{account.name}} optimiz...
+ POST /api/optimize-message 200 in 24674ms
+🔍 Optimizing email message with GPT-5 nano: test-conditional-fields-1
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 837
+📄 Optimized content preview: Subject: {{#if contact.first_name}}Hi {{contact.first_name}}{{#else}}Hello there{{#endif}} — Quick note on costs
+
+{{#if contact.first_name}}Hi {{contact.first_name}}{{#else}}Hello there{{#endif}},
+
+As...
+ POST /api/optimize-message 200 in 32498ms

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
+import { formatVariablesForPrompt } from '@/lib/dynamic-variables'
 
 export async function POST(request: NextRequest) {
   try {
@@ -59,6 +60,14 @@ Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
 
+MERGE FIELD FORMATTING:
+- Use dynamic variables for personalization (see list below)
+- Always preserve merge field syntax exactly: {{variable.name}}
+- Do NOT modify or break merge field formatting
+- You can add new merge fields for personalization where appropriate
+
+${formatVariablesForPrompt()}
+
 For emails:
 - Keep subject lines under 50 characters
 - Use proper email formatting with clear sections
@@ -84,7 +93,7 @@ Return the optimized message with the same format as the original. Focus on impr
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions.'
+            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided.'
           },
           {
             role: 'user',
@@ -109,7 +118,7 @@ Return the optimized message with the same format as the original. Focus on impr
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism.'
+            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided.'
           },
           {
             role: 'user',
