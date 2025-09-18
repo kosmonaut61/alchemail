@@ -2807,3 +2807,11 @@ Data analysis takes too long for marketing teams. Your campaigns slow while repo
 ✅ processRequest completed
  POST /api/generate-email-enhanced 200 in 8410ms
  ✓ Compiled in 539ms (1171 modules)
+ ✓ Compiled in 1399ms (816 modules)
+ ✓ Compiled /api/test-env in 169ms (932 modules)
+ GET /api/test-env 200 in 209ms
+ ✓ Compiled in 758ms (816 modules)
+ ✓ Compiled in 799ms (816 modules)
+ ✓ Compiled /api/debug-vercel in 461ms (1070 modules)
+🔍 Vercel Debug API called
+ POST /api/debug-vercel 200 in 2695ms
