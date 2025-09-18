@@ -55,7 +55,7 @@ Return your response as a JSON array of context item IDs that should be included
 ["item_id_1", "item_id_2", "item_id_3", ...]`
 
     const { text } = await generateText({
-      model: openai("gpt-5"),
+      model: openai("gpt-4o-mini"),
       prompt: analysisPrompt,
     })
 

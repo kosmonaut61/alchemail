@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
 import { Settings, Mail, Edit3, Eye, Loader2, RefreshCw } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
@@ -15,6 +16,7 @@ import { PreambleEditor } from "@/components/preamble-editor"
 import { ContextSelector } from "@/components/context-selector"
 import { PromptPreview } from "@/components/prompt-preview"
 import { EmailOutput } from "@/components/email-output"
+import { Skeleton } from "@/components/ui/skeleton"
 import { ContextItem } from "@/lib/context-repository"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
 
@@ -22,7 +24,6 @@ export default function EmailGenerator() {
   const [currentStep, setCurrentStep] = useState(1)
   const [signal, setSignal] = useState("")
   const [persona, setPersona] = useState<string>("")
-  const [suggestedPersona, setSuggestedPersona] = useState<string>("")
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
@@ -33,7 +34,43 @@ export default function EmailGenerator() {
   const [editFeedback, setEditFeedback] = useState("")
   const [showPreambleEditor, setShowPreambleEditor] = useState(false)
   const [hasAnalyzedContext, setHasAnalyzedContext] = useState(false)
+  const [qualityReport, setQualityReport] = useState<any>(null)
+  const [fixesApplied, setFixesApplied] = useState<string[]>([])
+  const [originalEmail, setOriginalEmail] = useState<string>("")
+  const [selectedModel, setSelectedModel] = useState<string>("gpt-5")
+  const [enableQA, setEnableQA] = useState<boolean>(true)
+  const [generationStatus, setGenerationStatus] = useState<{
+    status: string
+    progress: number
+    message: string
+  } | null>(null)
+  const [sessionId, setSessionId] = useState<string | null>(null)
   const { toast } = useToast()
+
+  // Simple progress simulation (since status API causes timeouts)
+  const startProgressSimulation = () => {
+    const phases = [
+      { progress: 10, message: 'Preparing email generation...' },
+      { progress: 25, message: 'Building email context and structure...' },
+      { progress: 40, message: 'Generating initial email sequence...' },
+      { progress: 60, message: 'Initial sequence generated successfully!' },
+      { progress: 75, message: 'Verifying initial sequence quality...' },
+      { progress: 90, message: 'Applying quality improvements...' },
+      { progress: 100, message: 'Email sequence ready!' }
+    ]
+    
+    let currentPhase = 0
+    const interval = setInterval(() => {
+      if (currentPhase < phases.length) {
+        setGenerationStatus(phases[currentPhase])
+        currentPhase++
+      } else {
+        clearInterval(interval)
+      }
+    }, 8000) // Update every 8 seconds
+    
+    return interval
+  }
 
   const steps = [
     { id: 1, title: "Campaign Signal", description: "Describe your email campaign context" },
@@ -84,135 +121,6 @@ export default function EmailGenerator() {
     }
   }
 
-  const autoDetectPersona = (signalText: string) => {
-    const signalLower = signalText.toLowerCase()
-    
-    // Define keyword mappings for different personas
-    const personaKeywords: { [key: string]: { keywords: string[], weight: number } } = {
-      // C-Suite keywords
-      'ceo': { 
-        keywords: ['ceo', 'chief executive', 'executive', 'board', 'shareholder', 'stakeholder', 'vision', 'strategy', 'growth', 'market position', 'competitive', 'acquisition', 'merger', 'investor'], 
-        weight: 10 
-      },
-      'coo': { 
-        keywords: ['coo', 'chief operating', 'operations', 'operational', 'efficiency', 'process', 'workflow', 'execution', 'scalability', 'performance', 'kpi', 'throughput', 'productivity'], 
-        weight: 10 
-      },
-      'cfo': { 
-        keywords: ['cfo', 'chief financial', 'financial', 'finance', 'budget', 'cost', 'roi', 'investment', 'cash flow', 'profitability', 'margin', 'revenue', 'expense', 'audit'], 
-        weight: 10 
-      },
-      'cpo': { 
-        keywords: ['cpo', 'chief procurement', 'procurement', 'sourcing', 'supplier', 'vendor', 'purchasing', 'contract', 'negotiation', 'spend', 'supply'], 
-        weight: 10 
-      },
-      'csco': { 
-        keywords: ['csco', 'chief supply chain', 'supply chain', 'logistics', 'shipping', 'transport', 'freight', 'warehouse', 'distribution', 'resilience', 'disruption'], 
-        weight: 10 
-      },
-      'owner_founder': { 
-        keywords: ['founder', 'owner', 'entrepreneur', 'startup', 'start-up', 'company', 'business', 'mission', 'purpose', 'culture', 'values', 'legacy'], 
-        weight: 10 
-      },
-      
-      // Management level keywords
-      'operations_upper_management': { 
-        keywords: ['operations manager', 'operations director', 'vp operations', 'head of operations', 'operations lead', 'operations team', 'operational management'], 
-        weight: 8 
-      },
-      'finance_upper_management': { 
-        keywords: ['finance manager', 'finance director', 'vp finance', 'head of finance', 'finance lead', 'finance team', 'financial management'], 
-        weight: 8 
-      },
-      'operations_middle_management': { 
-        keywords: ['operations supervisor', 'operations coordinator', 'team lead', 'operations specialist', 'middle management', 'supervisor'], 
-        weight: 6 
-      },
-      'finance_middle_management': { 
-        keywords: ['finance supervisor', 'finance coordinator', 'finance specialist', 'accounting manager', 'financial analyst', 'middle management'], 
-        weight: 6 
-      },
-      
-      // Individual contributor keywords
-      'operations_entry_level': { 
-        keywords: ['operations analyst', 'operations coordinator', 'logistics coordinator', 'procurement specialist', 'entry level', 'junior', 'associate'], 
-        weight: 4 
-      },
-      'finance_entry_level': { 
-        keywords: ['finance analyst', 'accounting specialist', 'financial coordinator', 'entry level', 'junior', 'associate', 'financial analyst'], 
-        weight: 4 
-      },
-      'operations_intern': { 
-        keywords: ['intern', 'internship', 'trainee', 'student', 'entry level', 'learning', 'development'], 
-        weight: 2 
-      },
-      'finance_intern': { 
-        keywords: ['intern', 'internship', 'trainee', 'student', 'entry level', 'learning', 'development'], 
-        weight: 2 
-      }
-    }
-
-    // Also check for department-specific keywords
-    const departmentKeywords = {
-      'operations': ['operations', 'operational', 'logistics', 'supply chain', 'procurement', 'shipping', 'transport', 'warehouse', 'distribution', 'freight', 'carrier', 'supplier'],
-      'finance': ['finance', 'financial', 'accounting', 'budget', 'cost', 'roi', 'investment', 'cash flow', 'profitability', 'audit', 'compliance', 'spend']
-    }
-
-    let bestMatch = ''
-    let highestScore = 0
-
-    // Calculate scores for each persona
-    Object.entries(personaKeywords).forEach(([personaId, config]) => {
-      let score = 0
-      
-      // Check for direct keyword matches
-      config.keywords.forEach(keyword => {
-        if (signalLower.includes(keyword)) {
-          score += config.weight
-        }
-      })
-      
-      // Check for department-specific keywords
-      const persona = PERSONA_DEFINITIONS.find(p => p.id === personaId)
-      if (persona) {
-        const department = persona.department.toLowerCase()
-        if (departmentKeywords[department as keyof typeof departmentKeywords]) {
-          departmentKeywords[department as keyof typeof departmentKeywords].forEach(keyword => {
-            if (signalLower.includes(keyword)) {
-              score += 2 // Lower weight for department keywords
-            }
-          })
-        }
-      }
-      
-      // Check for seniority keywords
-      const seniorityKeywords = {
-        'C-Suite': ['executive', 'c-suite', 'chief', 'president', 'ceo', 'coo', 'cfo', 'cpo', 'csco', 'board', 'strategic', 'vision'],
-        'Upper Management': ['director', 'vp', 'vice president', 'head of', 'senior manager', 'upper management'],
-        'Middle Management': ['manager', 'supervisor', 'team lead', 'middle management', 'coordinator'],
-        'Entry Level': ['analyst', 'specialist', 'coordinator', 'entry level', 'junior', 'associate'],
-        'Intern': ['intern', 'internship', 'trainee', 'student']
-      }
-      
-      if (persona) {
-        const seniority = persona.seniority
-        if (seniorityKeywords[seniority as keyof typeof seniorityKeywords]) {
-          seniorityKeywords[seniority as keyof typeof seniorityKeywords].forEach(keyword => {
-            if (signalLower.includes(keyword)) {
-              score += 3 // Medium weight for seniority keywords
-            }
-          })
-        }
-      }
-      
-      if (score > highestScore) {
-        highestScore = score
-        bestMatch = personaId
-      }
-    })
-
-    return bestMatch
-  }
 
   const autoDetectPainPoints = (signalText: string, selectedPersona: string) => {
     const selectedPersonaData = PERSONA_DEFINITIONS.find(p => p.id === selectedPersona)
@@ -293,17 +201,9 @@ export default function EmailGenerator() {
     // Reset analysis flag when signal changes
     setHasAnalyzedContext(false)
     
-    // Auto-detect persona based on signal content
-    if (newSignal.trim()) {
-      const detectedPersona = autoDetectPersona(newSignal)
-      if (detectedPersona && detectedPersona !== persona) {
-        setSuggestedPersona(detectedPersona)
-      }
-      
-      // Auto-detect relevant pain points based on signal content
-      if (persona && newSignal.trim()) {
-        autoDetectPainPoints(newSignal, persona)
-      }
+    // Auto-detect relevant pain points based on signal content
+    if (persona && newSignal.trim()) {
+      autoDetectPainPoints(newSignal, persona)
     }
   }
 
@@ -331,7 +231,11 @@ export default function EmailGenerator() {
   }
 
   const handleGenerate = async () => {
+    console.log('🚀 ===== FRONTEND GENERATION START =====')
+    console.log('📝 Form data:', { persona, signal, painPoints, selectedContextItems, selectedModel })
+    
     if (!persona || !signal) {
+      console.log('❌ Missing required fields')
       toast({
         title: "Missing Information",
         description: "Please complete all required fields.",
@@ -340,42 +244,117 @@ export default function EmailGenerator() {
       return
     }
 
+    console.log('✅ All required fields present, starting generation...')
     setIsGenerating(true)
+    setQualityReport(null)
+    setFixesApplied([])
+    setOriginalEmail("")
+    
     try {
-      const response = await fetch("/api/generate-email", {
+      console.log('🌐 Making API call to /api/generate-email-enhanced...')
+      const requestBody = {
+        persona,
+        signal,
+        painPoints,
+        contextItems: selectedContextItems,
+        enableQA: enableQA,
+        model: selectedModel
+      }
+      console.log('📤 Request body:', requestBody)
+      
+      // Start progress simulation
+      const progressInterval = startProgressSimulation()
+
+      const response = await fetch("/api/generate-email-enhanced", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          persona,
-          signal,
-          painPoints,
-          contextItems: selectedContextItems,
-        }),
+        body: JSON.stringify(requestBody),
       })
 
+      console.log('📥 Response status:', response.status)
+      console.log('📥 Response ok:', response.ok)
+
       if (!response.ok) {
+        console.log('❌ Response not ok, parsing error...')
         const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
-        throw new Error(errorData.error || "Failed to generate email")
+        console.log('❌ Error data:', errorData)
+        
+        // Provide more specific error messages
+        let errorMessage = errorData.error || "Failed to generate email"
+        if (response.status === 500) {
+          errorMessage = `Server error: ${errorMessage}. The system will automatically retry with a fallback model.`
+        } else if (response.status === 408 || errorMessage.includes('timeout')) {
+          errorMessage = "The request took longer than expected. GPT-5-nano is being used for speed - please try again."
+        } else if (errorMessage.includes('gpt-5')) {
+          errorMessage = "GPT-5 model may be experiencing issues. The system will automatically fall back to GPT-4o."
+        }
+        
+        throw new Error(errorMessage)
       }
 
+      console.log('✅ Response ok, parsing JSON...')
       const data = await response.json()
+      console.log('📥 Response data:', data)
+      
+      // Clear progress when generation completes
+      setGenerationStatus(null)
+      console.log('📧 Email content length:', data.email?.length || 0)
+      console.log('📧 Email preview:', data.email?.substring(0, 200) || 'No email content')
+
       setGeneratedEmail(data.email)
+      setQualityReport(data.qualityReport)
+      setFixesApplied(data.fixesApplied || [])
+      setOriginalEmail(data.originalEmail || "")
       setCurrentStep(4)
+      
+      // Debug logging
+      console.log('🔍 Frontend Debug:')
+      console.log('📧 Generated Email Length:', data.email?.length)
+      console.log('📧 Original Email Length:', data.originalEmail?.length)
+      console.log('🔧 Fixes Applied:', data.fixesApplied?.length)
+      console.log('📊 Quality Report:', data.qualityReport?.score)
+      console.log('✅ Optimized:', data.optimized)
+      
+      console.log('✅ Frontend state updated, moving to step 4')
+
+      // Show success message with quality info
+      let qualityMessage = 'Your email sequence has been generated successfully.'
+      
+      if (data.qualityReport) {
+        if (data.optimized && data.fixesApplied) {
+          qualityMessage = `Quality Score: ${data.qualityReport.score}/100 (${data.fixesApplied.length} improvements applied automatically)`
+        } else {
+          qualityMessage = `Quality Score: ${data.qualityReport.score}/100 (meets all standards)`
+        }
+      }
 
       toast({
         title: "Email Generated!",
-        description: "Your email sequence has been generated successfully.",
+        description: qualityMessage,
       })
+
+      // Generation completed successfully
+
     } catch (error) {
-      console.error("Error generating email:", error)
+      console.error("❌ ===== FRONTEND ERROR ======")
+      console.error("❌ Error generating email:", error)
+      console.error("❌ Error type:", typeof error)
+      console.error("❌ Error message:", error instanceof Error ? error.message : "Unknown error")
+      console.error("❌ Error stack:", error instanceof Error ? error.stack : "No stack trace")
+      console.error("❌ ===== END ERROR ======")
+      
+      // Clear progress on error
+      setGenerationStatus(null)
+      
       toast({
         title: "Generation Failed",
         description: error instanceof Error ? error.message : "There was an error generating your email. Please try again.",
         variant: "destructive",
       })
     } finally {
+      console.log('🏁 Generation process finished, setting isGenerating to false')
       setIsGenerating(false)
     }
   }
@@ -510,26 +489,7 @@ export default function EmailGenerator() {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="persona">Target Persona *</Label>
-                    {suggestedPersona && suggestedPersona !== persona && (
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setPersona(suggestedPersona)
-                          setSuggestedPersona("")
-                          if (signal.trim()) {
-                            autoDetectPainPoints(signal, suggestedPersona)
-                          }
-                        }}
-                        className="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200"
-                      >
-                        Use Suggested: {PERSONA_DEFINITIONS.find(p => p.id === suggestedPersona)?.label}
-                      </Button>
-                    )}
-                  </div>
+                  <Label htmlFor="persona">Target Persona *</Label>
                   <Select value={persona} onValueChange={handlePersonaChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select target persona" />
@@ -621,11 +581,6 @@ export default function EmailGenerator() {
                         {painPoints.length} pain point{painPoints.length !== 1 ? 's' : ''} selected based on your signal
                       </p>
                     )}
-                    {suggestedPersona && suggestedPersona !== persona && (
-                      <p className="text-xs text-blue-600">
-                        💡 We detected this might be for a {PERSONA_DEFINITIONS.find(p => p.id === suggestedPersona)?.label} - click the button above to use this suggestion
-                      </p>
-                    )}
                   </div>
                 )}
               </div>
@@ -711,29 +666,152 @@ export default function EmailGenerator() {
               />
 
               {currentStep === 3 && (
-                <div className="flex justify-between mt-6">
-                  <Button variant="outline" onClick={handlePrevious}>
-                    Previous
-                  </Button>
-                  <Button 
-                    onClick={handleGenerate} 
-                    disabled={!canProceedToNext() || isGenerating}
-                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
-                  >
-                    {isGenerating ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <RefreshCw className="mr-2 h-4 w-4" />
-                        Generate Email
-                      </>
-                    )}
-                  </Button>
+                <div className="mt-6 space-y-4">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <Label htmlFor="model-select" className="text-sm font-medium">
+                        AI Model:
+                      </Label>
+                      {selectedModel.startsWith('gpt-5') && (
+                        <div className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 px-2 py-1 rounded-md">
+                          ⚡ GPT-5-nano for fastest response (2-phase process)
+                        </div>
+                      )}
+                      <Select value={selectedModel} onValueChange={setSelectedModel}>
+                      <SelectTrigger id="model-select" className="w-48">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="gpt-5">GPT-5 (Auto-selects Nano for Speed)</SelectItem>
+                        <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
+                        <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
+                        <SelectItem value="gpt-4o">GPT-4o (Reliable Fallback)</SelectItem>
+                        <SelectItem value="gpt-4o-mini">GPT-4o Mini (Fast & Reliable)</SelectItem>
+                        <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
+                        <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    </div>
+                    
+                    <div className="flex items-center gap-4">
+                      <Label htmlFor="qa-toggle" className="text-sm font-medium">
+                        Quality Assurance:
+                      </Label>
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          id="qa-toggle"
+                          checked={enableQA}
+                          onCheckedChange={setEnableQA}
+                        />
+                        <Label htmlFor="qa-toggle" className="text-sm text-muted-foreground">
+                          {enableQA ? 'Enabled (auto-optimize emails)' : 'Disabled (faster generation)'}
+                        </Label>
+                      </div>
+                      {enableQA && (
+                        <div className="text-xs text-blue-600 bg-blue-50 dark:bg-blue-950 dark:text-blue-400 px-2 py-1 rounded-md">
+                          🔍 QA will analyze and auto-fix email quality
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <Button variant="outline" onClick={handlePrevious}>
+                      Previous
+                    </Button>
+                    <Button 
+                      onClick={handleGenerate} 
+                      disabled={!canProceedToNext() || isGenerating}
+                      className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
+                    >
+                      {isGenerating ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          {selectedModel.startsWith('gpt-5') ? 'Generating with GPT-5-nano (fastest)...' : 'Generating...'}
+                        </>
+                      ) : (
+                        <>
+                          <RefreshCw className="mr-2 h-4 w-4" />
+                          Generate Email
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Skeleton UI for Step 4 when generating */}
+        {isGenerating && (
+          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-6">
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-orange-600/25">4</div>
+                Output & Edit
+              </CardTitle>
+              <CardDescription className="text-base text-muted-foreground">
+                {selectedModel.startsWith('gpt-5') 
+                  ? 'Generating your personalized email sequence with GPT-5-nano (fastest model)...' 
+                  : 'Generating your personalized email sequence...'}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Status Display */}
+              {generationStatus && (
+                <div className="p-4 bg-muted/50 rounded-lg border mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">Progress</span>
+                    <span className="text-sm text-muted-foreground">{generationStatus.progress}%</span>
+                  </div>
+                  <div className="w-full bg-muted rounded-full h-2 mb-3">
+                    <div 
+                      className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
+                      style={{ width: `${generationStatus.progress}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {generationStatus.message}
+                  </p>
+                </div>
+              )}
+              
+              {/* Email skeleton */}
+              <div className="space-y-3">
+                <Skeleton className="h-6 w-3/4" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-4 w-4/5" />
+                </div>
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
+                </div>
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-4 w-2/3" />
+                </div>
+                <Skeleton className="h-8 w-1/3" />
+              </div>
+              
+              {/* LinkedIn message skeleton */}
+              <div className="space-y-3 pt-4 border-t">
+                <Skeleton className="h-5 w-1/2" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-4/5" />
+                </div>
+              </div>
+              
+              {/* Quality score skeleton */}
+              <div className="space-y-3 pt-4 border-t">
+                <Skeleton className="h-5 w-1/3" />
+                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-3 w-2/3" />
+              </div>
             </CardContent>
           </Card>
         )}
@@ -749,7 +827,13 @@ export default function EmailGenerator() {
               <CardDescription className="text-base text-muted-foreground">Review your generated email sequence and request edits if needed.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <EmailOutput email={generatedEmail} />
+              <EmailOutput 
+                email={generatedEmail}
+                originalEmail={originalEmail}
+                qualityReport={qualityReport}
+                optimized={qualityReport ? !qualityReport.passed : false}
+                fixesApplied={fixesApplied}
+              />
 
               <div className="space-y-4">
                 <div className="space-y-2">
