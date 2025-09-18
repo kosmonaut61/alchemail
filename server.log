@@ -4547,3 +4547,78 @@ Late or missed updates add fees. Manual notes get mess...
  DELETE /api/generation-status?sessionId=gen_1758209353184_zd2f4zva2 200 in 3ms
  POST /api/generate-email-enhanced 200 in 420410ms
  ✓ Compiled in 647ms (950 modules)
+ ✓ Compiled in 541ms (820 modules)
+ ✓ Compiled in 424ms (820 modules)
+ ✓ Compiled in 495ms (820 modules)
+ GET /api/generation-status?sessionId=test123 200 in 40ms
+ ✓ Compiled in 861ms (820 modules)
+ ✓ Compiled in 331ms (820 modules)
+ ✓ Compiled in 397ms (820 modules)
+ ✓ Compiled /api/generate-email-enhanced in 244ms (358 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+📊 STATUS UPDATE: initializing (5%) - Preparing email generation...
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+📊 STATUS UPDATE: building_context (15%) - Building email context and structure...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+📊 STATUS UPDATE: generating (25%) - Generating initial email sequence...
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test GPT-5 connection fix
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12499 characters
+🤖 Using GPT-5 direct approach...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Generation successful with gpt-5
+📊 Generated content length: 3552 characters
+🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====
+📊 STATUS UPDATE: initial_complete (50%) - Initial sequence generated successfully!
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3552 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: GPT-5 Connection Fix | Cost Control
+
+Email 1 (Day 0):
+Subject: Cut freight cost drift
+
+{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}, cost targets slip when r...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+📊 STATUS UPDATE: complete (100%) - Email sequence ready!
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 114904ms
+ ✓ Compiled in 668ms (820 modules)
+ ✓ Compiled in 181ms (820 modules)
+ ✓ Compiled in 514ms (820 modules)
+ ✓ Compiled in 402ms (820 modules)
+ ✓ Compiled in 175ms (820 modules)
+ ✓ Compiled in 404ms (820 modules)
+ ✓ Compiled in 407ms (820 modules)
+ ✓ Compiled in 614ms (820 modules)
+ ✓ Compiled in 174ms (820 modules)

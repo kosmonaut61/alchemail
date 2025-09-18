@@ -34,6 +34,7 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
           content: prompt,
         },
       ],
+      maxTokens: 800,
       temperature: 0.1 // O1 models work better with lower temperature
     })
     return result.text
@@ -55,19 +56,13 @@ export async function POST(request: NextRequest) {
     const result = await processRequest(request, sessionId)
     console.log('✅ processRequest completed')
     
-    // Clean up status when done
-    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/generation-status?sessionId=${sessionId}`, {
-      method: 'DELETE'
-    })
+    // Status cleanup disabled to prevent fetch issues
     
     return result
   } catch (error) {
     console.error('❌ API Error:', error)
     
-    // Clean up status on error
-    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/generation-status?sessionId=${sessionId}`, {
-      method: 'DELETE'
-    })
+    // Status cleanup disabled to prevent fetch issues
     
     return NextResponse.json({ 
       error: error instanceof Error ? error.message : "Unknown error occurred" 
@@ -79,17 +74,11 @@ async function processRequest(request: NextRequest, sessionId: string) {
   try {
     console.log('🚀 Starting processRequest...')
     
-    // Helper function to update status
+    // Helper function to update status (simplified to avoid fetch issues)
     const updateStatus = async (status: string, progress: number, message: string) => {
-      try {
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/generation-status`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId, status, progress, message })
-        })
-      } catch (error) {
-        console.log('Failed to update status:', error)
-      }
+      console.log(`📊 STATUS UPDATE: ${status} (${progress}%) - ${message}`)
+      // Note: Status updates disabled to prevent 504 timeouts
+      // The frontend will show progress based on the generation process
     }
     
     const { persona, signal, painPoints, contextItems, enableQA = false, model = "gpt-5" } = await request.json()
@@ -246,13 +235,16 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
         // For GPT-5, use the direct approach like the working chatbot
         console.log(`🤖 Using GPT-5 direct approach...`)
         const { text } = await generateText({
-          model: openai(model),
+          model: openai(model, {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
           messages: [
             {
               role: "user",
               content: prompt,
             },
           ],
+          maxTokens: 2000,
           temperature: 0.7,
         })
         initialEmail = text
@@ -275,6 +267,7 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
               content: prompt,
             },
           ],
+          maxTokens: 2000,
           temperature: 0.7,
         })
         initialEmail = text

@@ -47,23 +47,29 @@ export default function EmailGenerator() {
   const [sessionId, setSessionId] = useState<string | null>(null)
   const { toast } = useToast()
 
-  // Status polling function
-  const pollStatus = async (sessionId: string) => {
-    try {
-      const response = await fetch(`/api/generation-status?sessionId=${sessionId}`)
-      const status = await response.json()
-      
-      if (status.status !== 'not_found') {
-        setGenerationStatus(status)
-        
-        // Continue polling if not complete
-        if (status.status !== 'complete' && status.status !== 'error') {
-          setTimeout(() => pollStatus(sessionId), 15000) // Poll every 15 seconds
-        }
+  // Simple progress simulation (since status API causes timeouts)
+  const startProgressSimulation = () => {
+    const phases = [
+      { progress: 10, message: 'Preparing email generation...' },
+      { progress: 25, message: 'Building email context and structure...' },
+      { progress: 40, message: 'Generating initial email sequence...' },
+      { progress: 60, message: 'Initial sequence generated successfully!' },
+      { progress: 75, message: 'Verifying initial sequence quality...' },
+      { progress: 90, message: 'Applying quality improvements...' },
+      { progress: 100, message: 'Email sequence ready!' }
+    ]
+    
+    let currentPhase = 0
+    const interval = setInterval(() => {
+      if (currentPhase < phases.length) {
+        setGenerationStatus(phases[currentPhase])
+        currentPhase++
+      } else {
+        clearInterval(interval)
       }
-    } catch (error) {
-      console.error('Status polling error:', error)
-    }
+    }, 8000) // Update every 8 seconds
+    
+    return interval
   }
 
   const steps = [
@@ -256,12 +262,8 @@ export default function EmailGenerator() {
       }
       console.log('📤 Request body:', requestBody)
       
-      // Generate a session ID for status tracking
-      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      setSessionId(newSessionId)
-      
-      // Start status polling
-      setTimeout(() => pollStatus(newSessionId), 2000) // Start polling after 2 seconds
+      // Start progress simulation
+      const progressInterval = startProgressSimulation()
 
       const response = await fetch("/api/generate-email-enhanced", {
         method: "POST",
@@ -296,9 +298,8 @@ export default function EmailGenerator() {
       const data = await response.json()
       console.log('📥 Response data:', data)
       
-      // Clear status when generation completes
+      // Clear progress when generation completes
       setGenerationStatus(null)
-      setSessionId(null)
       console.log('📧 Email content length:', data.email?.length || 0)
       console.log('📧 Email preview:', data.email?.substring(0, 200) || 'No email content')
 
@@ -344,9 +345,8 @@ export default function EmailGenerator() {
       console.error("❌ Error stack:", error instanceof Error ? error.stack : "No stack trace")
       console.error("❌ ===== END ERROR ======")
       
-      // Clear status on error
+      // Clear progress on error
       setGenerationStatus(null)
-      setSessionId(null)
       
       toast({
         title: "Generation Failed",
