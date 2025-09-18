@@ -32,6 +32,15 @@ export function EmailOutput({ email, originalEmail, qualityReport, optimized, fi
   const { toast } = useToast()
   const [viewMode, setViewMode] = useState<'rich' | 'markdown'>('rich')
   const [showOriginal, setShowOriginal] = useState(false) // Default to showing optimized version
+  
+  // Debug logging
+  console.log('🔍 EmailOutput Debug:')
+  console.log('📧 Email Length:', email?.length)
+  console.log('📧 Original Email Length:', originalEmail?.length)
+  console.log('🔧 Fixes Applied:', fixesApplied?.length)
+  console.log('📊 Quality Report Score:', qualityReport?.score)
+  console.log('✅ Optimized:', optimized)
+  console.log('👁️ Show Original:', showOriginal)
 
   const handleCopy = async () => {
     try {

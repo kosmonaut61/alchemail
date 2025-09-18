@@ -500,7 +500,7 @@ export async function autoFixEmail(
     // Simplified, faster auto-fix prompt
     const isEmailSequence = originalEmail.includes('Email 1') || originalEmail.includes('Campaign Name:') || originalEmail.includes('LinkedIn Message')
     
-    const optimizationPrompt = `Fix these issues in this ${isEmailSequence ? 'email sequence' : 'email'} and return the corrected version:
+    const optimizationPrompt = `Fix these issues in this ${isEmailSequence ? 'email sequence' : 'email'} and return the corrected version. Make the improvements OBVIOUS and clear:
 
 ORIGINAL:
 ${originalEmail}
@@ -514,12 +514,13 @@ PERSONA: ${persona}
 PAIN POINTS: ${painPoints.join(', ')}
 
 REQUIREMENTS:
-1. Fix all listed issues
-2. Keep subject lines 3-6 words
-3. Use proper greeting: "Hey [name]," or "Hi [name],"
-4. Include CTA: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+1. Fix all listed issues with CLEAR, OBVIOUS improvements
+2. Add proper subject lines if missing
+3. Add proper greeting: "Hey [name]," or "Hi [name],"
+4. Add clear CTA: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 5. Use simple language (5th grade level)
 6. Keep it conversational, not formal
+7. Make the improvements DRAMATIC and EASY TO SEE
 
 ${isEmailSequence ? 'Return the corrected email sequence in the same format, no explanations' : 'Return ONLY the corrected email, no explanations'}:`
 

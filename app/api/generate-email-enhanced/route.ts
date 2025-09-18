@@ -34,7 +34,6 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
           content: prompt,
         },
       ],
-      maxTokens: 800,
       temperature: 0.1 // O1 models work better with lower temperature
     })
     return result.text
@@ -48,25 +47,56 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
 export async function POST(request: NextRequest) {
   console.log('🚀 POST handler called')
   
+  // Generate a unique session ID for this generation
+  const sessionId = `gen_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+  
   try {
     console.log('🏁 About to call processRequest...')
-    const result = await processRequest(request)
+    const result = await processRequest(request, sessionId)
     console.log('✅ processRequest completed')
+    
+    // Clean up status when done
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/generation-status?sessionId=${sessionId}`, {
+      method: 'DELETE'
+    })
+    
     return result
   } catch (error) {
     console.error('❌ API Error:', error)
+    
+    // Clean up status on error
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/generation-status?sessionId=${sessionId}`, {
+      method: 'DELETE'
+    })
+    
     return NextResponse.json({ 
       error: error instanceof Error ? error.message : "Unknown error occurred" 
     }, { status: 500 })
   }
 }
 
-async function processRequest(request: NextRequest) {
+async function processRequest(request: NextRequest, sessionId: string) {
   try {
     console.log('🚀 Starting processRequest...')
     
+    // Helper function to update status
+    const updateStatus = async (status: string, progress: number, message: string) => {
+      try {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/generation-status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, status, progress, message })
+        })
+      } catch (error) {
+        console.log('Failed to update status:', error)
+      }
+    }
+    
     const { persona, signal, painPoints, contextItems, enableQA = false, model = "gpt-5" } = await request.json()
     console.log('📝 Parsed request data')
+    
+    // Update status: Starting generation
+    await updateStatus('initializing', 5, 'Preparing email generation...')
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json({ error: "OpenAI API key not configured" }, { status: 500 })
@@ -82,6 +112,7 @@ async function processRequest(request: NextRequest) {
     }
 
     console.log('📖 Getting preamble...')
+    await updateStatus('building_context', 15, 'Building email context and structure...')
     const preamble = await getPreamble()
     console.log('✅ Preamble loaded')
 
@@ -89,6 +120,8 @@ async function processRequest(request: NextRequest) {
     console.log('🔧 Building dynamic context...')
     const dynamicContext = buildDynamicContext(contextItems || [])
     console.log('✅ Dynamic context built')
+    
+    await updateStatus('generating', 25, 'Generating initial email sequence...')
     
     // Get detailed persona information
     console.log('👤 Getting persona info...')
@@ -213,16 +246,13 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
         // For GPT-5, use the direct approach like the working chatbot
         console.log(`🤖 Using GPT-5 direct approach...`)
         const { text } = await generateText({
-          model: openai(model, {
-            apiKey: process.env.OPENAI_API_KEY,
-          }),
+          model: openai(model),
           messages: [
             {
               role: "user",
               content: prompt,
             },
           ],
-          maxTokens: 2000,
           temperature: 0.7,
         })
         initialEmail = text
@@ -238,16 +268,13 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
       if (model !== 'gpt-4o') {
         console.log('🔄 Falling back to GPT-4o...')
         const { text } = await generateText({
-          model: openai('gpt-4o', {
-            apiKey: process.env.OPENAI_API_KEY,
-          }),
+          model: openai('gpt-4o'),
           messages: [
             {
               role: "user",
               content: prompt,
             },
           ],
-          maxTokens: 2000,
           temperature: 0.7,
         })
         initialEmail = text
@@ -259,6 +286,9 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
     
     console.log(`✅ Generation successful with ${model}`)
     console.log(`📊 Generated content length: ${initialEmail.length} characters`)
+    console.log(`🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====`)
+    
+    await updateStatus('initial_complete', 50, 'Initial sequence generated successfully!')
 
     let finalEmail = initialEmail
     let qualityReport: EmailQualityReport | null = null
@@ -270,24 +300,19 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
       console.log(`🤖 QA Model: ${model}`)
       console.log(`📊 Analyzing email quality...`)
       
+      await updateStatus('qa_analysis', 60, 'Verifying initial sequence quality...')
+      
       try {
-        // Set a timeout for QA to prevent Vercel timeouts
-        const qaTimeout = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('QA timeout')), 50000) // 50 seconds
-        )
-        
-        qualityReport = await Promise.race([
-          analyzeEmailQuality(initialEmail, persona, painPoints, model),
-          qaTimeout
-        ]) as EmailQualityReport
+        // No timeout - let QA take as long as it needs
+        qualityReport = await analyzeEmailQuality(initialEmail, persona, painPoints, model)
         
         console.log(`📈 Quality Score: ${qualityReport.score}/100`)
         console.log(`✅ Passed: ${qualityReport.passed}`)
         console.log(`📋 Issues Found: ${qualityReport.issues.length}`)
         
       } catch (qaError) {
-        console.log(`⚠️ QA timeout or error: ${qaError instanceof Error ? qaError.message : 'Unknown error'}`)
-        console.log(`🔄 Skipping QA analysis due to timeout constraints`)
+        console.log(`⚠️ QA error: ${qaError instanceof Error ? qaError.message : 'Unknown error'}`)
+        console.log(`🔄 Skipping QA analysis due to error`)
         qualityReport = null
       }
       
@@ -304,6 +329,8 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
           console.log(`\n🔧 ===== AUTO-FIX START =====`)
           console.log(`🤖 Auto-fix Model: ${model}`)
           console.log(`📝 Applying fixes to email...`)
+          
+          await updateStatus('auto_fixing', 75, 'Applying quality improvements...')
           
           const { fixedEmail, fixesApplied: appliedFixes } = await autoFixEmail(
             initialEmail, 
@@ -348,8 +375,8 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
           console.log(`📋 Final Issues: ${qualityReport.issues.length}`)
           
         } catch (fixError) {
-          console.log(`⚠️ Auto-fix timeout or error: ${fixError instanceof Error ? fixError.message : 'Unknown error'}`)
-          console.log(`🔄 Skipping auto-fix due to timeout constraints`)
+          console.log(`⚠️ Auto-fix error: ${fixError instanceof Error ? fixError.message : 'Unknown error'}`)
+          console.log(`🔄 Skipping auto-fix due to error`)
         }
       } else if (qualityReport) {
         console.log(`✅ Email passed QA - no fixes needed`)
@@ -367,11 +394,13 @@ FOCUS ON CREATING COMPELLING CONTENT BASED ON THE CAMPAIGN SIGNAL - WORD COUNT W
     console.log(finalEmail.substring(0, 200) + (finalEmail.length > 200 ? '...' : ''))
     console.log('─'.repeat(80))
     console.log('🚀 ===== END =====\n')
+    
+    await updateStatus('complete', 100, 'Email sequence ready!')
 
     return NextResponse.json({ 
       email: finalEmail,
       qualityReport,
-      originalEmail: enableQA ? initialEmail : undefined,
+      originalEmail: initialEmail, // Always return the original email for comparison
       optimized: enableQA && fixesApplied.length > 0,
       fixesApplied: fixesApplied
     })

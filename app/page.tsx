@@ -39,7 +39,32 @@ export default function EmailGenerator() {
   const [originalEmail, setOriginalEmail] = useState<string>("")
   const [selectedModel, setSelectedModel] = useState<string>("gpt-5")
   const [enableQA, setEnableQA] = useState<boolean>(true)
+  const [generationStatus, setGenerationStatus] = useState<{
+    status: string
+    progress: number
+    message: string
+  } | null>(null)
+  const [sessionId, setSessionId] = useState<string | null>(null)
   const { toast } = useToast()
+
+  // Status polling function
+  const pollStatus = async (sessionId: string) => {
+    try {
+      const response = await fetch(`/api/generation-status?sessionId=${sessionId}`)
+      const status = await response.json()
+      
+      if (status.status !== 'not_found') {
+        setGenerationStatus(status)
+        
+        // Continue polling if not complete
+        if (status.status !== 'complete' && status.status !== 'error') {
+          setTimeout(() => pollStatus(sessionId), 15000) // Poll every 15 seconds
+        }
+      }
+    } catch (error) {
+      console.error('Status polling error:', error)
+    }
+  }
 
   const steps = [
     { id: 1, title: "Campaign Signal", description: "Describe your email campaign context" },
@@ -230,6 +255,13 @@ export default function EmailGenerator() {
         model: selectedModel
       }
       console.log('📤 Request body:', requestBody)
+      
+      // Generate a session ID for status tracking
+      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      setSessionId(newSessionId)
+      
+      // Start status polling
+      setTimeout(() => pollStatus(newSessionId), 2000) // Start polling after 2 seconds
 
       const response = await fetch("/api/generate-email-enhanced", {
         method: "POST",
@@ -263,6 +295,10 @@ export default function EmailGenerator() {
       console.log('✅ Response ok, parsing JSON...')
       const data = await response.json()
       console.log('📥 Response data:', data)
+      
+      // Clear status when generation completes
+      setGenerationStatus(null)
+      setSessionId(null)
       console.log('📧 Email content length:', data.email?.length || 0)
       console.log('📧 Email preview:', data.email?.substring(0, 200) || 'No email content')
 
@@ -271,6 +307,14 @@ export default function EmailGenerator() {
       setFixesApplied(data.fixesApplied || [])
       setOriginalEmail(data.originalEmail || "")
       setCurrentStep(4)
+      
+      // Debug logging
+      console.log('🔍 Frontend Debug:')
+      console.log('📧 Generated Email Length:', data.email?.length)
+      console.log('📧 Original Email Length:', data.originalEmail?.length)
+      console.log('🔧 Fixes Applied:', data.fixesApplied?.length)
+      console.log('📊 Quality Report:', data.qualityReport?.score)
+      console.log('✅ Optimized:', data.optimized)
       
       console.log('✅ Frontend state updated, moving to step 4')
 
@@ -299,6 +343,10 @@ export default function EmailGenerator() {
       console.error("❌ Error message:", error instanceof Error ? error.message : "Unknown error")
       console.error("❌ Error stack:", error instanceof Error ? error.stack : "No stack trace")
       console.error("❌ ===== END ERROR ======")
+      
+      // Clear status on error
+      setGenerationStatus(null)
+      setSessionId(null)
       
       toast({
         title: "Generation Failed",
@@ -710,6 +758,25 @@ export default function EmailGenerator() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* Status Display */}
+              {generationStatus && (
+                <div className="p-4 bg-muted/50 rounded-lg border mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">Progress</span>
+                    <span className="text-sm text-muted-foreground">{generationStatus.progress}%</span>
+                  </div>
+                  <div className="w-full bg-muted rounded-full h-2 mb-3">
+                    <div 
+                      className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
+                      style={{ width: `${generationStatus.progress}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {generationStatus.message}
+                  </p>
+                </div>
+              )}
+              
               {/* Email skeleton */}
               <div className="space-y-3">
                 <Skeleton className="h-6 w-3/4" />
