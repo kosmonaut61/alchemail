@@ -6947,3 +6947,49 @@ As...
 ✅ All messages generated successfully
  POST /api/generate-messages 200 in 3165ms
  ✓ Compiled in 702ms (1323 modules)
+ ✓ Compiled in 556ms (1323 modules)
+ ✓ Compiled in 676ms (1116 modules)
+ ✓ Compiled in 678ms (1061 modules)
+ ✓ Compiled in 491ms (1061 modules)
+ ✓ Compiled in 549ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 59ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3110ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3538ms
+ ✓ Compiled in 516ms (1323 modules)
+ ✓ Compiled in 573ms (1323 modules)
+ ✓ Compiled in 357ms (1323 modules)
+ ✓ Compiled in 380ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3076ms
+🚀 Generating messages for sequence...
+📝 Signal: Dollar Tree saved $3.2 million in freight spend within 6 months...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3145ms

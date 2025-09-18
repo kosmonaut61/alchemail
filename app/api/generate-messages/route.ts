@@ -148,11 +148,13 @@ Write a complete email that:
 6. Includes a clear call-to-action
 7. Is concise but compelling (100-150 words)
 8. Does NOT include a signature or sign-off
-9. ONLY mentions companies and results from the VERIFIED CONTEXT above - do not make up any claims
+9. ALWAYS use specific stats and quantified results from the VERIFIED CONTEXT - this is crucial for credibility
 10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
 11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
 12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
 13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
+15. Use specific numbers and results to make the email compelling and credible
 
 CRITICAL RULES:
 - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
@@ -175,17 +177,12 @@ NEVER ASSUME OR MENTION:
 - What challenges they're currently facing
 - Any assumptions about their company or role
 
-EXAMPLES OF WHAT NOT TO SAY:
-❌ "I noticed you downloaded our case study recently"
-❌ "I saw you viewed our Dollar Tree case study"
-❌ "Since you downloaded our content about..."
-
-EXAMPLES OF WHAT TO SAY INSTEAD:
-✅ "Many [role] in [industry] deal with..."
-✅ "If you're facing challenges with..."
-✅ "Companies like yours often..."
-✅ "Many transportation leaders in food and beverage..."
-✅ Focus on potential challenges they MIGHT face based on their role`
+CORE PRINCIPLES:
+- Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
+- Focus on the recipient's potential challenges, not assumptions about their current situation
+- Use different approaches and stats for each email to avoid repetition
+- Be conversational and authentic - write like you're talking to a colleague
+- Let your creativity flow while staying within these boundaries`
 
       try {
         const { text: emailContent } = await generateText({
@@ -193,7 +190,7 @@ EXAMPLES OF WHAT TO SAY INSTEAD:
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. NEVER assume what the recipient downloaded or their specific business situation. Focus on their potential challenges and goals based on their role. Do not include signatures, sign-offs, or contact information - just the email content.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. Do not include signatures, sign-offs, or contact information - just the email content.'
             },
             {
               role: 'user',
@@ -256,10 +253,12 @@ Write a LinkedIn message that:
 7. Includes a clear call-to-action
 8. Feels natural and builds on previous messages
 9. Does NOT include a signature or sign-off
-10. ONLY mentions companies and results from the VERIFIED CONTEXT above - do not make up any claims
+10. ALWAYS use specific stats and quantified results from the VERIFIED CONTEXT - this is crucial for credibility
 11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
 12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
 13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+14. Make each message unique and different - avoid generic phrases
+15. Use specific numbers and results to make the message compelling and credible
 
 CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any. NEVER assume what the recipient downloaded or their specific business situation.
 
@@ -273,17 +272,12 @@ NEVER ASSUME OR MENTION:
 - What challenges they're currently facing
 - Any assumptions about their company or role
 
-EXAMPLES OF WHAT NOT TO SAY:
-❌ "I noticed you downloaded our case study recently"
-❌ "I saw you viewed our Dollar Tree case study"
-❌ "Since you downloaded our content about..."
-
-EXAMPLES OF WHAT TO SAY INSTEAD:
-✅ "Many [role] in [industry] deal with..."
-✅ "If you're facing challenges with..."
-✅ "Companies like yours often..."
-✅ "Many transportation leaders in food and beverage..."
-✅ Focus on potential challenges they MIGHT face based on their role`
+CORE PRINCIPLES:
+- Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
+- Focus on the recipient's potential challenges, not assumptions about their current situation
+- Use different approaches and stats for each message to avoid repetition
+- Be conversational and authentic - write like you're talking to a colleague
+- Let your creativity flow while staying within these boundaries`
 
       try {
         const { text: linkedInContent } = await generateText({
@@ -291,7 +285,7 @@ EXAMPLES OF WHAT TO SAY INSTEAD:
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. NEVER assume what the recipient downloaded or their specific business situation. Focus on their potential challenges and goals based on their role. Do not include signatures, sign-offs, or contact information - just the message content.'
+              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. Do not include signatures, sign-offs, or contact information - just the message content.'
             },
             {
               role: 'user',
