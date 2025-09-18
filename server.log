@@ -6630,3 +6630,31 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
 ✅ All messages generated successfully
  POST /api/generate-messages 200 in 4732ms
  ✓ Compiled in 583ms (1324 modules)
+ ✓ Compiled in 813ms (1324 modules)
+ ✓ Compiled in 664ms (1116 modules)
+ ✓ Compiled in 282ms (1061 modules)
+ ✓ Compiled in 410ms (1061 modules)
+ ✓ Compiled in 364ms (1061 modules)
+ ✓ Compiled in 467ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled in 404ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 147ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We helped automotive companies like Honda reduce freight costs by 18%...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Automotive Customers
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4408ms
+🚀 Generating messages for sequence...
+📝 Signal: We helped retail companies like Dollar Tree save millions in freight costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Dollar Tree Case Study, Dollar Tree Statistics, Dollar Tree Quote
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3708ms
+ ✓ Compiled in 512ms (1323 modules)
