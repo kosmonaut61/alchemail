@@ -110,7 +110,9 @@ export async function POST(request: NextRequest) {
     // Create the prompt for sequence plan generation
     const prompt = `You are an expert email sequence strategist. Create a strategic sequence plan for B2B outreach.
 
-SIGNAL (Primary Reason for Outreach):
+CRITICAL: The signal below is the PRIMARY REASON for outreach and MUST be integrated into every message in some way.
+
+SIGNAL (Primary Reason for Outreach - MUST BE INTEGRATED):
 ${signal}
 
 TARGET PERSONA:
@@ -137,12 +139,12 @@ Create a strategic sequence plan that:
 8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
 9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
 
-SIGNAL INTEGRATION EXAMPLES (use different approaches):
-- Day 1: Start with the stat/result, weave signal in naturally later
-- Day 3: Start with a question about their challenges, reference signal contextually
-- Day 5: Start with customer story, connect to signal subtly
-- Day 7: Start with urgency/time, mention signal as supporting context
-- LinkedIn: Use casual, personal tone with creative signal integration
+SIGNAL INTEGRATION REQUIREMENTS:
+- Keep signal integration instructions SIMPLE and DIRECT
+- Use single-action instructions, not complex multi-part directions
+- Focus on one clear action
+- Avoid complex instructions that combine multiple actions
+- Make each instruction specific to the signal provided
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 

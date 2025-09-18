@@ -7580,3 +7580,126 @@ Import trace for requested module:
  POST /api/generate-sequence-plan 200 in 8872ms
  ✓ Compiled in 561ms (1655 modules)
  ✓ Compiled in 759ms (1655 modules)
+ ✓ Compiled in 403ms (1655 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Freight Savings Like Dollar Tree",
+      "purpose": "Introduce value proposition focused on cost optimization.",
+      "signa...
+ POST /api/generate-sequence-plan 200 in 9373ms
+ ✓ Compiled in 767ms (1323 modules)
+ ✓ Compiled in 806ms (1323 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Freight Savings",
+      "purpose": "Introduce our solution and highlight potential savings.",
+      "signalIntegration": "Sta...
+ POST /api/generate-sequence-plan 200 in 9689ms
+ ✓ Compiled /api/generate-messages in 333ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4249ms
+ ✓ Compiled in 366ms (1326 modules)
+ ✓ Compiled in 397ms (1326 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4235ms
+ ✓ Compiled in 595ms (1324 modules)
+ ✓ Compiled in 520ms (1324 modules)
+ ✓ Compiled in 597ms (1116 modules)
+ ✓ Compiled in 263ms (1061 modules)
+ ✓ Compiled in 287ms (1061 modules)
+ ✓ Compiled in 273ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 67ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 5434ms
+ ✓ Compiled in 495ms (1324 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4343ms
+ ✓ Compiled in 453ms (1324 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3976ms
+ ✓ Compiled in 429ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 135ms (265 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Discover Cost Optimization Strategies",
+      "purpose": "Introduce ProcureOS and its benefits to the prospect.",
+      "signalIntegration": "Me...
+ POST /api/generate-sequence-plan 200 in 11076ms
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3408ms
+ ✓ Compiled in 594ms (1326 modules)
+ ✓ Compiled in 387ms (1326 modules)
+ ✓ Compiled in 581ms (1324 modules)
+ ✓ Compiled /api/generate-sequence-plan in 52ms (265 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight the benefits for cost optimization.",
+      "signal...
+ POST /api/generate-sequence-plan 200 in 10776ms

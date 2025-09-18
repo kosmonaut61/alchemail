@@ -128,3 +128,16 @@ export function formatSamplesForPrompt(personaName?: string) {
     ).join('\n---\n\n')
   ).join('\n')
 }
+
+// Helper function to get a single example email for a persona
+export function getPersonaExampleEmail(personaName: string): string {
+  const samples = getEmailSamplesByPersona(personaName)
+  if (samples && samples.emails.length > 0) {
+    // Return the first email as an example
+    const exampleEmail = samples.emails[0]
+    return `Subject: ${exampleEmail.subject}\n\n${exampleEmail.body}`
+  }
+  
+  // Fallback to a generic example if no specific persona found
+  return `Subject: Quick question about your freight costs\n\nHi {{contact.first_name}},\n\nQuick question about freight costs. Many leaders are looking to optimize spend while maintaining service reliability.\n\n[Interested in learning more?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
+}

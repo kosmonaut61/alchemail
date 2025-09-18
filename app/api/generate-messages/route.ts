@@ -3,7 +3,7 @@ import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
 import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry, ContextItem } from "@/lib/context-repository"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
-import { formatSamplesForPrompt } from "@/lib/email-samples"
+import { formatSamplesForPrompt, getPersonaExampleEmail } from "@/lib/email-samples"
 
 // Function to dynamically select relevant context based on signal
 function getRelevantContext(signal: string, personaData: any, painPoints: string[]): ContextItem[] {
@@ -151,16 +151,27 @@ TARGET PERSONA:
       EMAIL STRUCTURE EXAMPLES (follow this tone and structure):
       ${formatSamplesForPrompt(personaData.label)}
 
+      EXAMPLE EMAIL FOR THIS PERSONA (use as a template):
+      ${getPersonaExampleEmail(personaData.label)}
+
       EMAIL SPECIFICATIONS:
-- Day: ${emailPlan.day}
-- Subject: ${emailPlan.subject}
-- Purpose: ${emailPlan.purpose}
-- Signal Integration: ${emailPlan.signalIntegration}
-- Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
+      - Day: ${emailPlan.day}
+      - Subject: ${emailPlan.subject}
+      - Purpose: ${emailPlan.purpose}
+      - Signal Integration: ${emailPlan.signalIntegration}
+      - Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
+
+      CRITICAL SIGNAL INTEGRATION REQUIREMENT:
+      The signalIntegration field tells you EXACTLY how to integrate the signal. You MUST follow it precisely.
+      
+      SIGNAL TO INTEGRATE: "${signal}"
+      SIGNAL INTEGRATION INSTRUCTION: "${emailPlan.signalIntegration}"
+      
+      You MUST include the signal in the email exactly as specified in the signalIntegration instruction above.
 
       Write a complete email that:
       1. Uses the exact subject line provided
-      2. Follows the purpose and signal integration guidelines
+      2. Follows the purpose and signal integration guidelines EXACTLY as specified
       3. Matches the persona's tone profile and uses their keywords
       4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
       5. Sounds conversational and human (like talking to a friend)
@@ -175,6 +186,7 @@ TARGET PERSONA:
       14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
       15. Use the specific stats mentioned in the plan to make the email compelling and credible
       16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
+      17. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
 
       STRUCTURE GUIDELINES:
       - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
@@ -256,7 +268,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content. CRITICAL: You MUST integrate the signal exactly as specified in the signalIntegration instruction provided.'
             },
             {
               role: 'user',
@@ -304,11 +316,16 @@ TARGET PERSONA:
 VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
+EXAMPLE EMAIL FOR THIS PERSONA (use as a template for tone and structure):
+${getPersonaExampleEmail(personaData.label)}
+
 LINKEDIN MESSAGE SPECIFICATIONS:
-- Day: ${linkedInPlan.day}
-- Purpose: ${linkedInPlan.purpose}
-- Signal Integration: ${linkedInPlan.signalIntegration}
-- Specific Stats to Feature: ${linkedInPlan.specificStats || 'Use relevant stats from context'}
+      - Day: ${linkedInPlan.day}
+      - Purpose: ${linkedInPlan.purpose}
+      - Signal Integration: ${linkedInPlan.signalIntegration}
+      - Specific Stats to Feature: ${linkedInPlan.specificStats || 'Use relevant stats from context'}
+
+      CRITICAL: You MUST follow the Signal Integration instructions exactly. The signalIntegration field tells you exactly how to integrate the signal - follow it precisely.
 
 Write a LinkedIn message that:
 1. Follows the purpose and signal integration guidelines
