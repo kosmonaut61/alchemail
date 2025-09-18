@@ -49,15 +49,14 @@ export default function EmailGenerator() {
 
   // Simple progress simulation (since status API causes timeouts)
   const startProgressSimulation = () => {
-    const phases = [
-      { progress: 10, message: 'Preparing hybrid generation...' },
-      { progress: 25, message: 'Building email context and structure...' },
-      { progress: 40, message: 'Generating Batch 1 (Email 1 + LinkedIn)...' },
-      { progress: 55, message: 'Batch 1 complete! Starting Batch 2...' },
-      { progress: 70, message: 'Generating Batch 2 (Emails 2-4 + LinkedIn)...' },
-      { progress: 85, message: 'Running quality assurance...' },
-      { progress: 100, message: 'Hybrid sequence ready!' }
-    ]
+        const phases = [
+          { progress: 10, message: 'Preparing parallel generation...' },
+          { progress: 25, message: 'Building email context and structure...' },
+          { progress: 40, message: 'Phase 1: Generating all messages in parallel...' },
+          { progress: 60, message: 'Phase 2: Creating sequence flow plan...' },
+          { progress: 80, message: 'Phase 3: QA\'ing each message individually...' },
+          { progress: 100, message: 'Parallel sequence ready!' }
+        ]
     
     let currentPhase = 0
     const interval = setInterval(() => {
@@ -265,13 +264,13 @@ export default function EmailGenerator() {
       // Start progress simulation
       const progressInterval = startProgressSimulation()
 
-      const response = await fetch("/api/generate-email-hybrid", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      })
+        const response = await fetch("/api/generate-email-parallel", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        })
 
       console.log('📥 Response status:', response.status)
       console.log('📥 Response ok:', response.ok)
@@ -320,21 +319,22 @@ export default function EmailGenerator() {
       console.log('✅ Frontend state updated, moving to step 4')
 
        // Show success message with quality info
-       let qualityMessage = 'Your email sequence has been generated successfully with hybrid approach!'
-       
-       if (data.hybrid) {
-         qualityMessage = `Hybrid generation complete! Generated ${data.totalBatches || 2} batches with GPT-5-nano.`
-       }
-       
-       if (data.batch1?.qualityReport1 || data.batch2?.qualityReport2) {
-         const batch1Score = data.batch1?.qualityReport1?.score || 0
-         const batch2Score = data.batch2?.qualityReport2?.score || 0
-         const avgScore = Math.round((batch1Score + batch2Score) / 2)
-         qualityMessage += ` Quality scores: Batch 1 (${batch1Score}/100), Batch 2 (${batch2Score}/100).`
-       }
+        let qualityMessage = 'Your email sequence has been generated successfully with parallel approach!'
+        
+        if (data.parallel) {
+          qualityMessage = `Parallel generation complete! Generated all messages simultaneously with GPT-5-nano, then QA'd individually with GPT-5-mini.`
+        }
+        
+        if (data.qaResults) {
+          const scores = Object.values(data.qaResults).map((qa: any) => qa.score || 0).filter(score => score > 0)
+          if (scores.length > 0) {
+            const avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+            qualityMessage += ` Average QA score: ${avgScore}/100.`
+          }
+        }
 
        toast({
-         title: "Hybrid Generation Complete!",
+         title: "Parallel Generation Complete!",
          description: qualityMessage,
        })
 
@@ -685,7 +685,7 @@ export default function EmailGenerator() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="gpt-5">GPT-5 (Hybrid Approach - 2x Faster)</SelectItem>
+                        <SelectItem value="gpt-5">GPT-5 (Parallel Approach - 3x Faster)</SelectItem>
                         <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
                         <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
                         <SelectItem value="gpt-4o">GPT-4o (Reliable Fallback)</SelectItem>
@@ -712,7 +712,7 @@ export default function EmailGenerator() {
                       </div>
                       {enableQA && (
                         <div className="text-xs text-blue-600 bg-blue-50 dark:bg-blue-950 dark:text-blue-400 px-2 py-1 rounded-md">
-                           🔍 QA will analyze and auto-fix email quality (hybrid batches)
+                           🔍 QA will analyze and auto-fix email quality (parallel + individual QA)
                         </div>
                       )}
                     </div>

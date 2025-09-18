@@ -6208,3 +6208,119 @@ Import trace for requested module:
 📊 LinkedIn messages generated: 2
  POST /api/generate-email-hybrid 200 in 115229ms
  ✓ Compiled in 782ms (1116 modules)
+ ✓ Compiled in 1728ms (1102 modules)
+ ✓ Compiled in 374ms (1061 modules)
+ ✓ Compiled in 186ms (1061 modules)
+ ✓ Compiled in 543ms (1061 modules)
+ ✓ Compiled in 559ms (1061 modules)
+ ✓ Compiled in 221ms (1061 modules)
+ ✓ Compiled in 247ms (1061 modules)
+ ✓ Compiled in 453ms (1061 modules)
+ ✓ Compiled in 202ms (1061 modules)
+ ✓ Compiled in 670ms (1061 modules)
+ ✓ Compiled /api/generate-email-parallel in 233ms (1449 modules)
+🚀 ===== PARALLEL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test parallel approach with strict rules',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Starting Phase 1: Parallel Generation of All Messages...
+📧 Generating Email 1 with gpt-5-nano...
+📧 Generating Email 2 with gpt-5-nano...
+📧 Generating Email 3 with gpt-5-nano...
+📧 Generating Email 4 with gpt-5-nano...
+💼 Generating LinkedIn 1 with gpt-5-nano...
+💼 Generating LinkedIn 2 with gpt-5-nano...
+✅ LinkedIn 2 generated successfully
+✅ LinkedIn 1 generated successfully
+✅ Email 2 generated successfully
+✅ Email 4 generated successfully
+✅ Email 1 generated successfully
+✅ Email 3 generated successfully
+✅ Phase 1 Complete: All messages generated in parallel
+🎯 Starting Phase 2: Creating Sequence Flow Plan...
+📋 Creating sequence flow plan...
+✅ Sequence flow plan created
+✅ Phase 2 Complete: Sequence flow plan created
+🎯 Starting Phase 3: Individual QA with gpt-5-mini...
+🔍 QA'ing Email 1 with gpt-5-mini...
+🔍 QA'ing Email 2 with gpt-5-mini...
+🔍 QA'ing Email 3 with gpt-5-mini...
+🔍 QA'ing Email 4 with gpt-5-mini...
+🔍 QA'ing LinkedIn 1 with gpt-5-mini...
+🔍 QA'ing LinkedIn 2 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 QA complete (score: 95)
+✅ Email 2 QA complete (score: 90)
+✅ Email 3 QA complete (score: 90)
+✅ Email 4 QA complete (score: 90)
+✅ LinkedIn 1 QA complete (score: 90)
+✅ LinkedIn 2 QA complete (score: 90)
+✅ Phase 3 Complete: All messages QA'd individually
+🎉 ===== PARALLEL GENERATION COMPLETE =====
+ POST /api/generate-email-parallel 200 in 77352ms
+ ✓ Compiled in 616ms (1116 modules)
+ ✓ Compiled in 801ms (1061 modules)
+ ✓ Compiled in 335ms (1061 modules)
+ ✓ Compiled in 383ms (1061 modules)
+ ✓ Compiled in 395ms (1061 modules)
+ ✓ Compiled /api/generate-email-parallel in 175ms (402 modules)
+🚀 ===== PARALLEL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test 95-150 word range',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Starting Phase 1: Parallel Generation of All Messages...
+📧 Generating Email 1 with gpt-5-nano...
+📧 Generating Email 2 with gpt-5-nano...
+📧 Generating Email 3 with gpt-5-nano...
+📧 Generating Email 4 with gpt-5-nano...
+💼 Generating LinkedIn 1 with gpt-5-nano...
+💼 Generating LinkedIn 2 with gpt-5-nano...
+✅ LinkedIn 2 generated successfully
+✅ LinkedIn 1 generated successfully
+✅ Email 4 generated successfully
+✅ Email 1 generated successfully
+✅ Email 2 generated successfully
+✅ Email 3 generated successfully
+✅ Phase 1 Complete: All messages generated in parallel
+🎯 Starting Phase 2: Creating Sequence Flow Plan...
+📋 Creating sequence flow plan...
+✅ Sequence flow plan created
+✅ Phase 2 Complete: Sequence flow plan created
+🎯 Starting Phase 3: Individual QA with gpt-5-mini...
+🔍 QA'ing Email 1 with gpt-5-mini...
+🔍 QA'ing Email 2 with gpt-5-mini...
+🔍 QA'ing Email 3 with gpt-5-mini...
+🔍 QA'ing Email 4 with gpt-5-mini...
+🔍 QA'ing LinkedIn 1 with gpt-5-mini...
+🔍 QA'ing LinkedIn 2 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 QA complete (score: 90)
+✅ Email 2 QA complete (score: 90)
+✅ Email 3 QA complete (score: 90)
+✅ Email 4 QA complete (score: 90)
+✅ LinkedIn 1 QA complete (score: 90)
+✅ LinkedIn 2 QA complete (score: 90)
+✅ Phase 3 Complete: All messages QA'd individually
+🎉 ===== PARALLEL GENERATION COMPLETE =====
+ POST /api/generate-email-parallel 200 in 106236ms
+ ✓ Compiled in 497ms (1116 modules)
