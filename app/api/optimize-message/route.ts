@@ -55,6 +55,10 @@ OPTIMIZATION GUIDELINES:
 14. Enhance credibility and trust signals
 15. Improve urgency and scarcity elements where appropriate
 
+Call-to-Action (CTA) Rules:
+- Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
+
 For emails:
 - Keep subject lines under 50 characters
 - Use proper email formatting with clear sections

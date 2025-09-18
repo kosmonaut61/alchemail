@@ -701,17 +701,31 @@ export default function AlchemailApp20() {
                           }`}>
                             {message.type === 'email' ? 'Email' : 'LinkedIn'}
                           </span>
+                          {message.isOptimized && (
+                            <span className="px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                              Optimized
+                            </span>
+                          )}
                         </div>
                         <div className="flex gap-2">
                           <Button 
-                            variant="outline" 
+                            variant={message.isOptimized ? "default" : "outline"} 
                             size="sm"
                             onClick={async () => {
                               if (message.isOptimized) {
                                 // Show original content
                                 setGeneratedMessages(prev => prev.map(m => 
-                                  m.id === message.id ? { ...m, isOptimized: false } : m
+                                  m.id === message.id ? { 
+                                    ...m, 
+                                    isOptimized: false,
+                                    content: m.originalContent || m.content
+                                  } : m
                                 ))
+                                
+                                toast({
+                                  title: "Showing Original",
+                                  description: "Now displaying the original version of this message.",
+                                })
                               } else {
                                 // Optimize the message
                                 setGeneratedMessages(prev => prev.map(m => 
@@ -775,9 +789,15 @@ export default function AlchemailApp20() {
                                 Optimizing...
                               </>
                             ) : message.isOptimized ? (
-                              'Show Original'
+                              <>
+                                <RefreshCw className="mr-2 h-3 w-3" />
+                                Show Original
+                              </>
                             ) : (
-                              'Optimize'
+                              <>
+                                <Sparkles className="mr-2 h-3 w-3" />
+                                Optimize
+                              </>
                             )}
                           </Button>
                         </div>
