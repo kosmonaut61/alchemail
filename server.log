@@ -6898,3 +6898,52 @@ AI SDK Warning: The "topP" setting is not supported by this model - topP is not 
 
 As...
  POST /api/optimize-message 200 in 32498ms
+ ✓ Compiled in 762ms (1323 modules)
+ ✓ Compiled in 285ms (1323 modules)
+ ✓ Compiled in 744ms (1061 modules)
+ ✓ Compiled in 656ms (1061 modules)
+ ✓ Compiled in 890ms (1061 modules)
+ ✓ Compiled in 453ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 177ms (262 modules)
+ POST /api/generate-messages 400 in 289ms
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3401ms
+ ✓ Compiled in 502ms (1323 modules)
+ ✓ Compiled in 305ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2911ms
+ ✓ Compiled in 600ms (1323 modules)
+ ✓ Compiled in 300ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2614ms
+🚀 Generating messages for sequence...
+📝 Signal: CTO at a tech startup who recently viewed our pricing page...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3165ms
+ ✓ Compiled in 702ms (1323 modules)

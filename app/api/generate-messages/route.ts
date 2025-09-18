@@ -143,7 +143,7 @@ Write a complete email that:
 1. Uses the exact subject line provided
 2. Follows the purpose and signal integration guidelines
 3. Matches the persona's tone profile and uses their keywords
-4. Addresses the selected pain points naturally
+4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
 5. Sounds conversational and human (like talking to a friend)
 6. Includes a clear call-to-action
 7. Is concise but compelling (100-150 words)
@@ -151,15 +151,41 @@ Write a complete email that:
 9. ONLY mentions companies and results from the VERIFIED CONTEXT above - do not make up any claims
 10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
 11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
 
-CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any.
+CRITICAL RULES:
+- Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+- NEVER assume what the recipient downloaded or their specific business situation
+- Focus on their potential challenges and goals based on their role, not assumptions about their current state
+- Use phrases like "if you're facing..." or "many [role] deal with..." instead of assuming their situation
 
 Format your response as:
 Subject: [subject line]
 
 [email body]
 
-Write like you're having a genuine conversation, not sending a formal business proposal.`
+Write like you're having a genuine conversation, not sending a formal business proposal.
+
+NEVER ASSUME OR MENTION:
+- "I noticed you downloaded..." (NEVER say this)
+- "I saw you downloaded..." (NEVER say this)
+- What the recipient downloaded or viewed
+- Their specific business situation
+- What challenges they're currently facing
+- Any assumptions about their company or role
+
+EXAMPLES OF WHAT NOT TO SAY:
+❌ "I noticed you downloaded our case study recently"
+❌ "I saw you viewed our Dollar Tree case study"
+❌ "Since you downloaded our content about..."
+
+EXAMPLES OF WHAT TO SAY INSTEAD:
+✅ "Many [role] in [industry] deal with..."
+✅ "If you're facing challenges with..."
+✅ "Companies like yours often..."
+✅ "Many transportation leaders in food and beverage..."
+✅ Focus on potential challenges they MIGHT face based on their role`
 
       try {
         const { text: emailContent } = await generateText({
@@ -167,7 +193,7 @@ Write like you're having a genuine conversation, not sending a formal business p
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Do not include signatures, sign-offs, or contact information - just the email content.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. NEVER assume what the recipient downloaded or their specific business situation. Focus on their potential challenges and goals based on their role. Do not include signatures, sign-offs, or contact information - just the email content.'
             },
             {
               role: 'user',
@@ -223,7 +249,7 @@ LINKEDIN MESSAGE SPECIFICATIONS:
 Write a LinkedIn message that:
 1. Follows the purpose and signal integration guidelines
 2. Matches the persona's tone profile and uses their keywords
-3. Addresses the selected pain points naturally
+3. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
 4. Is appropriate for the target persona's seniority level
 5. Feels personal and professional and only uses 5th grade level language
 6. Is concise (50-100 words)
@@ -232,10 +258,32 @@ Write a LinkedIn message that:
 9. Does NOT include a signature or sign-off
 10. ONLY mentions companies and results from the VERIFIED CONTEXT above - do not make up any claims
 11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
 
-CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any.
+CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any. NEVER assume what the recipient downloaded or their specific business situation.
 
-Make sure the message is engaging and drives the conversation forward. Use the tone profile to guide your writing style and incorporate the persona's keywords naturally.`
+Make sure the message is engaging and drives the conversation forward. Use the tone profile to guide your writing style and incorporate the persona's keywords naturally.
+
+NEVER ASSUME OR MENTION:
+- "I noticed you downloaded..." (NEVER say this)
+- "I saw you downloaded..." (NEVER say this)
+- What the recipient downloaded or viewed
+- Their specific business situation
+- What challenges they're currently facing
+- Any assumptions about their company or role
+
+EXAMPLES OF WHAT NOT TO SAY:
+❌ "I noticed you downloaded our case study recently"
+❌ "I saw you viewed our Dollar Tree case study"
+❌ "Since you downloaded our content about..."
+
+EXAMPLES OF WHAT TO SAY INSTEAD:
+✅ "Many [role] in [industry] deal with..."
+✅ "If you're facing challenges with..."
+✅ "Companies like yours often..."
+✅ "Many transportation leaders in food and beverage..."
+✅ Focus on potential challenges they MIGHT face based on their role`
 
       try {
         const { text: linkedInContent } = await generateText({
@@ -243,7 +291,7 @@ Make sure the message is engaging and drives the conversation forward. Use the t
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Do not include signatures, sign-offs, or contact information - just the message content.'
+              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. NEVER assume what the recipient downloaded or their specific business situation. Focus on their potential challenges and goals based on their role. Do not include signatures, sign-offs, or contact information - just the message content.'
             },
             {
               role: 'user',
