@@ -6993,3 +6993,63 @@ As...
 ✅ Generated email for day 1
 ✅ All messages generated successfully
  POST /api/generate-messages 200 in 3145ms
+ ✓ Compiled in 557ms (1323 modules)
+ ✓ Compiled in 346ms (1323 modules)
+ ✓ Compiled in 233ms (1323 modules)
+ ✓ Compiled in 669ms (1061 modules)
+ ✓ Compiled in 391ms (1061 modules)
+ ✓ Compiled in 238ms (1061 modules)
+ ✓ Compiled in 244ms (1061 modules)
+ ✓ Compiled in 560ms (1061 modules)
+ ✓ Compiled in 264ms (1061 modules)
+ ✓ Compiled in 348ms (1061 modules)
+ ✓ Compiled in 372ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 210ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency Like Golden State Foods",
+      "purpose": "Introduce our solution and highlight its potential to reduce transport...
+ POST /api/generate-sequence-plan 200 in 7566ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency Like Golden State Foods",
+      "purpose": "Introduce our services and establish credibility by mentioning Golden ...
+ POST /api/generate-sequence-plan 200 in 7164ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Operational Efficiency in Transportation",
+      "purpose": "Introduce our solution and establish relevance to the COO's focus on oper...
+ POST /api/generate-sequence-plan 200 in 5802ms
+ ✓ Compiled /api/test-simple in 203ms (264 modules)
+ GET /api/test-simple 405 in 319ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Dollar Tree saved $3.2 million in freight spend within 6 months...
+👤 Persona: CEO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight the potential for cost optimization.",
+      "si...
+ POST /api/generate-sequence-plan 200 in 5587ms
+ ✓ Compiled in 827ms (1325 modules)

@@ -53,6 +53,7 @@ export default function AlchemailApp20() {
   const [emailCount, setEmailCount] = useState(3)
   const [linkedInCount, setLinkedInCount] = useState(2)
   const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
+  const [contextItems, setContextItems] = useState<any[]>([])
   const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
@@ -366,6 +367,7 @@ export default function AlchemailApp20() {
 
                         const data = await response.json()
                         setSequencePlan(data.sequencePlan)
+                        setContextItems(data.contextItems || [])
                         
                         toast({
                           title: "Sequence Plan Generated!",
@@ -406,6 +408,34 @@ export default function AlchemailApp20() {
                       Total sequence length: {sequencePlan.totalDays} days
                     </p>
                   </div>
+
+                  {contextItems.length > 0 && (
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">Selected Context Items</h3>
+                      <div className="grid gap-3">
+                        {contextItems.map((item, index) => (
+                          <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                                {item.title}
+                              </span>
+                              <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">
+                                {item.category}
+                              </span>
+                            </div>
+                            <p className="text-sm text-blue-700 dark:text-blue-300">
+                              {item.content}
+                            </p>
+                            {item.industry && item.industry.length > 0 && (
+                              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                Industries: {item.industry.join(', ')}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
@@ -475,6 +505,7 @@ export default function AlchemailApp20() {
 
                             const data = await response.json()
                             setSequencePlan(data.sequencePlan)
+                            setContextItems(data.contextItems || [])
                             
                             toast({
                               title: "Sequence Plan Regenerated!",

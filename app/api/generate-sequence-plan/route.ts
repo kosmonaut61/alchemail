@@ -1,6 +1,73 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
+import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry } from '@/lib/context-repository'
+
+// Helper function to get relevant context items
+function getRelevantContext(signal: string, personaData: any, painPoints: string[]) {
+  const signalLower = signal.toLowerCase()
+  const relevantItems: any[] = []
+  
+  // Extract keywords from signal
+  const keywords = signalLower.split(/\s+/).filter(word => word.length > 3)
+  
+  // Find context items that match keywords
+  const keywordMatches = keywords
+    .flatMap(keyword => getContextItemsByKeywords([keyword]))
+  
+  // Find context items that match industry mentions
+  const industryKeywords = ['retail', 'food', 'beverage', 'automotive', 'manufacturing', 'technology', 'healthcare']
+  const industryMatches = industryKeywords
+    .filter(industry => signalLower.includes(industry))
+    .flatMap(industry => getContextItemsByIndustry(industry))
+  
+  // Add customer context items (most important for social proof)
+  const customerItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'customer' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item)
+    )
+  )
+  
+  // Add case studies that match
+  const caseStudyItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'case_study' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item)
+    )
+  )
+  
+  // Add statistics that match
+  const statisticItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'statistic' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item)
+    )
+  )
+  
+  // Add quotes that match
+  const quoteItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'quote' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item)
+    )
+  )
+  
+  // Combine and deduplicate
+  const allRelevant = [
+    ...customerItems,
+    ...caseStudyItems, 
+    ...statisticItems,
+    ...quoteItems
+  ]
+  
+  // Remove duplicates and limit to top 5 most relevant
+  const uniqueItems = allRelevant.filter((item, index, self) => 
+    index === self.findIndex(t => t.id === item.id)
+  )
+  
+  return uniqueItems.slice(0, 5)
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,6 +91,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Get relevant context items for this signal and persona
+    const relevantContext = getRelevantContext(signal, personaData, painPoints)
+
     // Create the prompt for sequence plan generation
     const prompt = `You are an expert email sequence strategist. Create a strategic sequence plan for B2B outreach.
 
@@ -35,6 +105,9 @@ TARGET PERSONA:
 - Department: ${personaData.department}
 - Seniority: ${personaData.seniority}
 - Key Pain Points: ${painPoints.join(', ') || 'Not specified'}
+
+RELEVANT CONTEXT ITEMS (use these for social proof and credibility):
+${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
 SEQUENCE REQUIREMENTS:
 - Emails: ${emailCount}
@@ -169,7 +242,15 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       success: true,
       sequencePlan,
       persona: personaData.label,
-      signal: signal.substring(0, 100) + '...'
+      signal: signal.substring(0, 100) + '...',
+      contextItems: relevantContext.map(item => ({
+        id: item.id,
+        title: item.title,
+        category: item.category,
+        content: item.content,
+        industry: item.industry,
+        keywords: item.keywords
+      }))
     })
 
   } catch (error) {
