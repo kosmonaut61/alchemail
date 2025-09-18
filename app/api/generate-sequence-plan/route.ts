@@ -8,11 +8,18 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   const signalLower = signal.toLowerCase()
   const relevantItems: any[] = []
   
-  // Extract keywords from signal
+  // Extract keywords from signal and add broad matching terms
   const keywords = signalLower.split(/\s+/).filter(word => word.length > 3)
+  const broadKeywords = [
+    'demo', 'pricing', 'savings', 'cost', 'efficiency', 'roi', 'results', 'performance', 'metrics',
+    'operations', 'logistics', 'transportation', 'freight', 'shipping', 'supply chain',
+    'automation', 'optimization', 'productivity', 'revenue', 'growth', 'scalability',
+    'visibility', 'control', 'management', 'process', 'workflow', 'streamline'
+  ]
+  const allKeywords = [...keywords, ...broadKeywords]
   
-  // Find context items that match keywords
-  const keywordMatches = keywords
+  // Find context items that match keywords (broader matching)
+  const keywordMatches = allKeywords
     .flatMap(keyword => getContextItemsByKeywords([keyword]))
   
   // Find context items that match industry mentions
@@ -53,20 +60,26 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     )
   )
   
-  // Combine and deduplicate
+  // Add some general high-value context items that are always relevant
+  const generalHighValue = CONTEXT_REPOSITORY.filter(item => 
+    ['dollar_tree_stats', 'golden_state_foods_stats', 'pepsi_case_study'].includes(item.id)
+  )
+  
+  // Prioritize statistics first (most important for credibility), then case studies, then customers, then quotes
   const allRelevant = [
-    ...customerItems,
+    ...statisticItems,  // Prioritize statistics first
     ...caseStudyItems, 
-    ...statisticItems,
-    ...quoteItems
+    ...customerItems,
+    ...quoteItems,
+    ...generalHighValue  // Add some general high-value items
   ]
   
-  // Remove duplicates and limit to top 5 most relevant
+  // Remove duplicates and limit to top 8 most relevant (more options for user to choose from)
   const uniqueItems = allRelevant.filter((item, index, self) => 
     index === self.findIndex(t => t.id === item.id)
   )
   
-  return uniqueItems.slice(0, 5)
+  return uniqueItems.slice(0, 8)
 }
 
 export async function POST(request: NextRequest) {

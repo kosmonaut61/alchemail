@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
 import { formatVariablesForPrompt } from '@/lib/dynamic-variables'
+import { formatSamplesForPrompt } from '@/lib/email-samples'
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,8 +40,11 @@ CONTEXT:
 - Signal: ${signal}
 - Pain Points: ${painPoints.join(', ') || 'Not specified'}
 
+SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
+${formatSamplesForPrompt(personaData.label)}
+
 OPTIMIZATION GUIDELINES:
-1. Improve clarity and readability
+1. Improve focus on campaign signal with focus on the recipient's pain points, goals, or problems
 2. Enhance the value proposition
 3. Strengthen the call-to-action
 4. Ensure appropriate tone for the persona's seniority level
@@ -71,6 +75,15 @@ STRUCTURE & TONE OPTIMIZATION:
 - Make the opening more engaging and direct
 - Ensure the CTA is hyperlinked and naturally integrated
 
+SPECIFIC IMPROVEMENTS TO MATCH SAMPLE QUALITY:
+- Make the opening more direct and impactful 
+- Add urgency and time sensitivity
+- Include implementation details with stats
+- Make CTAs more specific and benefit-focused
+- Use more confident, assertive language ("I know", "We can", "That's why")
+- Add credibility markers 
+- Include company name in CTA for personalization ("help {{account.name}} achieve similar results")
+
 Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
@@ -100,7 +113,9 @@ For LinkedIn messages:
 - Do NOT add signatures, sign-offs, or contact information
 - Do NOT make messages longer than the original
 
-CRITICAL: Do NOT add signatures, contact information, or make messages longer. Keep the same length or shorter than the original. Return the optimized message with the same format as the original. Focus on improvements that will increase open rates, response rates, and engagement.`
+CRITICAL: Do NOT add signatures, contact information, or make messages longer. Keep the same length or shorter than the original. Return the optimized message with the same format as the original. Focus on improvements that will increase open rates, response rates, and engagement.
+
+QUALITY TARGET: Match the tone, confidence, and impact of the successful email examples provided. Use the same direct, confident language patterns. Make the message feel as polished and compelling as the sample emails.`
 
     // Custom GPT-5 nano optimization with fallback
     let optimizedContent: string

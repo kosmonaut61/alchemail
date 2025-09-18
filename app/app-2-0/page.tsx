@@ -9,7 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
@@ -414,14 +414,31 @@ export default function AlchemailApp20() {
                       <h3 className="font-semibold">Selected Context Items</h3>
                       <div className="grid gap-3">
                         {contextItems.map((item, index) => (
-                          <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950">
+                          <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950 relative">
                             <div className="flex items-center justify-between mb-2">
                               <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
                                 {item.title}
                               </span>
-                              <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">
-                                {item.category}
-                              </span>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">
+                                  {item.category}
+                                </span>
+                                <Button
+                                  type="button"
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => {
+                                    setContextItems(prev => prev.filter((_, i) => i !== index))
+                                    toast({
+                                      title: "Context Item Removed",
+                                      description: `${item.title} has been removed from the sequence.`,
+                                    })
+                                  }}
+                                  className="h-6 w-6 p-0 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
+                                >
+                                  <X className="h-3 w-3" />
+                                </Button>
+                              </div>
                             </div>
                             <p className="text-sm text-blue-700 dark:text-blue-300">
                               {item.content}
