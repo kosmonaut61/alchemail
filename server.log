@@ -5061,3 +5061,959 @@ Your teams juggle regions,...
 ✅ processRequest completed
  POST /api/generate-email-enhanced 200 in 204006ms
  ✓ Compiled in 460ms (820 modules)
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ○ Compiling /_error ...
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-email-enhanced 500 in 2420ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:375:1]
+ [2m372[0m |       setIsGenerating(false)
+ [2m373[0m |     }
+ [2m374[0m |     }
+ [2m375[0m |   }
+     : [35;1m  ^[0m
+ [2m376[0m | 
+ [2m377[0m |   const handleEditRequest = async () => {
+ [2m378[0m |     if (!editFeedback.trim()) {
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-email-enhanced 500 in 13ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-email-enhanced 500 in 8ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-email-enhanced 500 in 28ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-single-email 500 in 521ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:376:1]
+ [2m373[0m |     }
+ [2m374[0m |   }
+ [2m375[0m | 
+ [2m376[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m377[0m |     if (!editFeedback.trim()) {
+ [2m378[0m |       toast({
+ [2m379[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:902:1]
+ [2m899[0m |       <Toaster />
+ [2m900[0m |     </div>
+ [2m901[0m |   )
+ [2m902[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-single-email 500 in 9ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:354:1]
+ [2m351[0m |         // Generation completed successfully
+ [2m352[0m |       }
+ [2m353[0m | 
+ [2m354[0m |     } catch (error) {
+     : [35;1m    ^[0m
+ [2m355[0m |       console.error("❌ ===== FRONTEND ERROR ======")
+ [2m356[0m |       console.error("❌ Error generating email:", error)
+ [2m357[0m |       console.error("❌ Error type:", typeof error)
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:354:1]
+ [2m351[0m |         // Generation completed successfully
+ [2m352[0m |       }
+ [2m353[0m | 
+ [2m354[0m |     } catch (error) {
+     : [35;1m    ^[0m
+ [2m355[0m |       console.error("❌ ===== FRONTEND ERROR ======")
+ [2m356[0m |       console.error("❌ Error generating email:", error)
+ [2m357[0m |       console.error("❌ Error type:", typeof error)
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-single-email 500 in 10ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:354:1]
+ [2m351[0m |         // Generation completed successfully
+ [2m352[0m |       }
+ [2m353[0m | 
+ [2m354[0m |     } catch (error) {
+     : [35;1m    ^[0m
+ [2m355[0m |       console.error("❌ ===== FRONTEND ERROR ======")
+ [2m356[0m |       console.error("❌ Error generating email:", error)
+ [2m357[0m |       console.error("❌ Error type:", typeof error)
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ GET /refactored 500 in 1037ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected a semicolon
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:375:1]
+ [2m372[0m |     }
+ [2m373[0m |   }
+ [2m374[0m | 
+ [2m375[0m |   const handleEditRequest = async () => {
+     : [35;1m  ^[0m
+ [2m376[0m |     if (!editFeedback.trim()) {
+ [2m377[0m |       toast({
+ [2m378[0m |         title: "Feedback Required",
+     `----
+  [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:901:1]
+ [2m898[0m |       <Toaster />
+ [2m899[0m |     </div>
+ [2m900[0m |   )
+ [2m901[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ POST /api/generate-single-email 500 in 33ms
+ POST /api/generate-single-email 500 in 51ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:452:1]
+ [2m449[0m |       return (
+ [2m450[0m |         <div className="min-h-screen bg-background flex flex-col">
+ [2m451[0m |           {/* Application Header */}
+ [2m452[0m | [35;1m,[0m[35;1m-[0m[35;1m>[0m       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m453[0m | [35;1m|[0m           <div className="max-w-6xl mx-auto px-6 py-4">
+ [2m454[0m | [35;1m|[0m             <div className="flex items-center justify-between">
+ [2m455[0m | [35;1m|[0m               {/* Left: Branding */}
+ [2m456[0m | [35;1m|[0m               <div className="flex items-center gap-3">
+ [2m457[0m | [35;1m|[0m                 <div className="p-2 rounded-lg bg-primary/10">
+ [2m458[0m | [35;1m|[0m                   <Mail className="h-5 w-5 text-primary" />
+ [2m459[0m | [35;1m|[0m                 </div>
+ [2m460[0m | [35;1m|[0m                 <h1 className="text-2xl font-bold text-foreground tracking-tight">Alchemail</h1>
+ [2m461[0m | [35;1m|[0m               </div>
+ [2m462[0m | [35;1m|[0m               
+ [2m463[0m | [35;1m|[0m               {/* Right: Actions */}
+ [2m464[0m | [35;1m|[0m               <div className="flex items-center gap-3">
+ [2m465[0m | [35;1m|[0m                 <ThemeToggle />
+ [2m466[0m | [35;1m|[0m                 <Button 
+ [2m467[0m | [35;1m|[0m                   variant="outline" 
+ [2m468[0m | [35;1m|[0m                   size="sm"
+ [2m469[0m | [35;1m|[0m                   onClick={() => setShowPreambleEditor(true)}
+ [2m470[0m | [35;1m|[0m                   className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
+ [2m471[0m | [35;1m|[0m                 >
+ [2m472[0m | [35;1m|[0m                   <Settings className="h-4 w-4 mr-2" />
+ [2m473[0m | [35;1m|[0m                   Advanced Settings
+ [2m474[0m | [35;1m|[0m                 </Button>
+ [2m475[0m | [35;1m|[0m               </div>
+ [2m476[0m | [35;1m|[0m             </div>
+ [2m477[0m | [35;1m|[0m           </div>
+ [2m478[0m | [35;1m|[0m         </header>
+ [2m479[0m | [35;1m|[0m   
+ [2m480[0m | [35;1m|[0m[35;1m-[0m[35;1m>[0m       <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
+     : [35;1m`[0m[35;1m---[0m[33;1m            ^^^^^^^^^[0m
+     : [35;1m`[0m[35;1m---[0m[35;1m-[0m [35;1mThis is the expression part of an expression statement[0m
+ [2m481[0m |             {/* Welcome Message */}
+ [2m482[0m |             <div className="text-center space-y-4">
+ [2m483[0m |               <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:910:1]
+ [2m907[0m |       <Toaster />
+ [2m908[0m |     </div>
+ [2m909[0m |   )
+ [2m910[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:910:1]
+ [2m907[0m |       <Toaster />
+ [2m908[0m |     </div>
+ [2m909[0m |   )
+ [2m910[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:910:1]
+ [2m907[0m |       <Toaster />
+ [2m908[0m |     </div>
+ [2m909[0m |   )
+ [2m910[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ GET / 500 in 672ms
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Expected '}', got '<eof>'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:910:1]
+ [2m907[0m |       <Toaster />
+ [2m908[0m |     </div>
+ [2m909[0m |   )
+ [2m910[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ✓ Compiled /_not-found in 2s (2054 modules)
+ ✓ Compiled (2040 modules)
+ ✓ Compiled in 647ms (1116 modules)
+ ✓ Compiled /api/test-simple in 63ms (260 modules)
+ GET /api/test-simple 405 in 213ms
+ ✓ Compiled /api/generate-email-enhanced in 271ms (405 modules)
+🚀 POST handler called
+🏁 About to call processRequest...
+🚀 Starting processRequest...
+📝 Parsed request data
+📊 STATUS UPDATE: initializing (5%) - Preparing email generation...
+✅ API key found
+Using model: gpt-5
+Warning: GPT-5 model selected - this may not be available yet or may timeout
+📖 Getting preamble...
+📊 STATUS UPDATE: building_context (15%) - Building email context and structure...
+✅ Preamble loaded
+🔧 Building dynamic context...
+✅ Dynamic context built
+📊 STATUS UPDATE: generating (25%) - Generating initial email sequence...
+👤 Getting persona info...
+📧 Getting email samples...
+✅ Email samples retrieved
+🔧 Building samples context...
+✅ Samples context built
+📝 Building final prompt...
+✅ Final prompt built
+
+🚀 ===== EMAIL GENERATION START =====
+📧 Model: gpt-5
+👤 Persona: operations_upper_management
+📝 Signal: test build
+🎯 Pain Points: cost
+📊 Context Items: 0 selected
+🔧 QA Enabled: false
+📏 Prompt Length: 12469 characters
+🤖 Using GPT-5-nano for fast generation...
+✅ Successfully used gpt-5-nano
+✅ Generation successful with gpt-5
+📊 Generated content length: 3912 characters
+🎯 ===== INITIAL SEQUENCE GENERATION COMPLETE =====
+📊 STATUS UPDATE: initial_complete (50%) - Initial sequence generated successfully!
+
+🎉 ===== EMAIL GENERATION COMPLETE =====
+📧 Final Model Used: gpt-5
+📊 Final Content Length: 3912 characters
+🔧 Total Fixes Applied: 0
+📈 Final Quality Score: N/A/100
+✅ QA Passed: N/A
+📄 Final Content Preview (first 200 chars):
+────────────────────────────────────────────────────────────────────────────────
+Campaign Name: Test Build for Cost Control
+
+Email 1 (Day 0):
+Subject: Test build for cost control
+
+Hi {{contact.first_name}}, cost pressure is real for ops teams. End-to-end freight costs stay hidden ...
+────────────────────────────────────────────────────────────────────────────────
+🚀 ===== END =====
+
+📊 STATUS UPDATE: complete (100%) - Email sequence ready!
+✅ processRequest completed
+ POST /api/generate-email-enhanced 200 in 182210ms
