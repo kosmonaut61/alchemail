@@ -44,7 +44,7 @@ SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
 OPTIMIZATION GUIDELINES:
-1. Improve focus on campaign signal with focus on the recipient's pain points, goals, or problems
+1. Subtly integrate the signal naturally - don't make it obvious or forced
 2. Enhance the value proposition
 3. Strengthen the call-to-action
 4. Ensure appropriate tone for the persona's seniority level
@@ -96,6 +96,12 @@ TONE PRESERVATION:
 - Preserve warm phrases like "great to see your interest" instead of making them cold or direct
 - Maintain the supportive, helpful tone rather than being pushy or overly sales-focused
 
+SIGNAL INTEGRATION:
+- Make signal references subtle and natural - avoid obvious statements like "That's a great sign you're exploring ROI"
+- Don't over-analyze or comment on what they did - just acknowledge it naturally
+- Avoid forced phrases like "ROI is top of mind" or "That's a great sign"
+- Keep signal integration conversational and human, not analytical or robotic
+
 Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
@@ -115,7 +121,7 @@ For emails:
 - End with clear, specific call-to-action
 - Keep emails concise (100-150 words max)
 - Do NOT add signatures, sign-offs, or contact information
-- Do NOT make messages longer than the original
+- Make messages longer if they need to be to be between 100-150 words
 
 For LinkedIn messages:
 - Keep under 100 words

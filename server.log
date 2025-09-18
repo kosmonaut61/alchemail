@@ -7407,3 +7407,42 @@ If balancing reliability with bu...
  POST /api/optimize-message 200 in 11056ms
  ✓ Compiled in 499ms (1324 modules)
  ✓ Compiled in 554ms (1324 modules)
+ ✓ Compiled in 339ms (1324 modules)
+ ✓ Compiled in 657ms (1116 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ✓ Compiled in 412ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 56ms (263 modules)
+🔍 Optimizing email message with GPT-5 nano: test-natural-signal
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 550
+📄 Optimized content preview: Subject: Cut freight costs for {{account.name}}
+
+Hi {{contact.first_name}},
+
+Nice to see you checked out our demo and pricing pages. It shows you’re weighing freight spend against reliability in today...
+ POST /api/optimize-message 200 in 15423ms
+🔍 Optimizing email message with GPT-5 nano: test-natural-signal-2
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 370
+📄 Optimized content preview: Subject: Real-Time Freight Management
+
+Hi {{contact.first_name}},
+
+I noticed you checked our pricing page. Real-time visibility boosts efficiency and trims costs. Our customers cut freight spend 12–20...
+ POST /api/optimize-message 200 in 26987ms
+ ✓ Compiled in 551ms (1324 modules)
