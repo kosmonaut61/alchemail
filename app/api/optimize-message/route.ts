@@ -60,7 +60,7 @@ OPTIMIZATION GUIDELINES:
 14. Enhance credibility and trust signals
 15. Improve urgency and scarcity elements where appropriate
 16. Make sure there is less than 3 adverbs in the message
-17. Make sure there is less than 15 words per sentance
+17. Keep sentences reasonably short but don't make them too choppy - maintain natural flow
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
 
@@ -68,12 +68,15 @@ STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone
 - Replace corporate jargon with direct, simple language
 - Ensure proper merge field formatting ({{contact.first_name}}, {{account.name}}, etc.)
-- Create short, punchy sentences (under 15 words each)
+- Create short easy to read sentences (under 15 words each)
 - Add natural line breaks for readability
 - Use active voice throughout
 - Remove unnecessary words and phrases
 - Make the opening more engaging and direct
 - Ensure the CTA is hyperlinked and naturally integrated
+- PRESERVE natural conversational flow - don't make sentences too choppy
+- MAINTAIN the warm, friendly tone of the original
+- Keep the human, approachable feel - avoid being too sales-y or aggressive
 
 SPECIFIC IMPROVEMENTS TO MATCH SAMPLE QUALITY:
 - Make the opening more direct and impactful 
@@ -83,6 +86,15 @@ SPECIFIC IMPROVEMENTS TO MATCH SAMPLE QUALITY:
 - Use more confident, assertive language ("I know", "We can", "That's why")
 - Add credibility markers 
 - Include company name in CTA for personalization ("help {{account.name}} achieve similar results")
+
+TONE PRESERVATION:
+- MAINTAIN the warm, conversational tone of the original
+- Keep natural, flowing language - don't make it too aggressive or sales-y
+- Preserve the friendly, approachable feel
+- Don't shorten too much - maintain substance and warmth
+- Keep the "human" element - write like you're talking to a colleague, not selling
+- Preserve warm phrases like "great to see your interest" instead of making them cold or direct
+- Maintain the supportive, helpful tone rather than being pushy or overly sales-focused
 
 Call-to-Action (CTA) Rules:
 - Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
@@ -115,7 +127,9 @@ For LinkedIn messages:
 
 CRITICAL: Do NOT add signatures, contact information, or make messages longer. Keep the same length or shorter than the original. Return the optimized message with the same format as the original. Focus on improvements that will increase open rates, response rates, and engagement.
 
-QUALITY TARGET: Match the tone, confidence, and impact of the successful email examples provided. Use the same direct, confident language patterns. Make the message feel as polished and compelling as the sample emails.`
+QUALITY TARGET: Match the tone, confidence, and impact of the successful email examples provided. Use the same direct, confident language patterns. Make the message feel as polished and compelling as the sample emails.
+
+IMPORTANT: Preserve the warm, conversational tone of the original. Don't make emails too short or aggressive. Maintain the friendly, human element while improving structure and flow.`
 
     // Custom GPT-5 nano optimization with fallback
     let optimizedContent: string
