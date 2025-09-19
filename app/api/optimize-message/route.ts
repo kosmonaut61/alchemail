@@ -28,7 +28,7 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
     ...relevantItems.filter(item => item.category === 'quote'),
     ...relevantItems.filter(item => item.category === 'case_study'),
     ...relevantItems.filter(item => item.category === 'customer')
-  ].slice(0, 10) // Limit to top 10 most relevant
+  ].slice(0, 6) // Limit to top 6 most relevant to avoid overwhelming
   
   return prioritizedItems.map(item => 
     `- ${item.title}: ${item.content}`
@@ -101,6 +101,8 @@ OPTIMIZATION GUIDELINES:
 21. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
 22. VARY the content structure - don't use the same pattern as other messages
 23. INCORPORATE different statistics and examples from the context repository
+24. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
+25. KEEP messages concise and scannable - don't overwhelm with too many numbers
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -117,6 +119,9 @@ MESSAGE UNIQUENESS & VARIATION:
 - USE CUSTOMER QUOTES to add credibility and emotional connection
 - AVOID repetitive phrases like "building an internal case" - find different ways to say this
 - INCORPORATE different customer examples and success stories from the context
+- BE SELECTIVE - use 1-2 key elements from context per message, not everything
+- DON'T overwhelm with multiple statistics in one paragraph
+- Choose the most relevant stat/quote for the message purpose
 
 STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone

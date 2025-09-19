@@ -8035,3 +8035,26 @@ Hi {{contact.first_name}}, I hope your week is going well!
 You're reviewing several case studies, and you're building an internal case. Dollar Tre...
  POST /api/optimize-message 200 in 17786ms
  ✓ Compiled in 574ms (1325 modules)
+ ✓ Compiled in 544ms (1325 modules)
+ ✓ Compiled in 694ms (1116 modules)
+ ✓ Compiled in 263ms (1061 modules)
+ ✓ Compiled in 305ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 60ms (264 modules)
+🔍 Optimizing email message with GPT-5 nano: test-4
+👤 Persona: Upper Management - Operations
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 723
+📄 Optimized content preview: Subject: Dollar Tree-style savings for {{account.name}}
+
+Hi {{contact.first_name}},
+
+Nice to see you exploring our case studies—sounds like you're building a solid internal case for smarter freight de...
+ POST /api/optimize-message 200 in 25719ms
+ ✓ Compiled in 536ms (1325 modules)
