@@ -60,9 +60,10 @@ OPTIMIZATION GUIDELINES:
 14. Enhance credibility and trust signals
 15. Improve urgency and scarcity elements where appropriate
 16. Make sure there is less than 3 adverbs in the message
-17. Keep sentences reasonably short but don't make them too choppy - maintain natural flow
+17. Keep sentences naturally flowing - don't force them to be too short if it makes them choppy
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
+20. PRESERVE the original's personality and warmth - don't strip out human elements
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -73,20 +74,26 @@ MESSAGE UNIQUENESS & VARIATION:
 - Avoid repetitive phrases like "I noticed you checked out" in every message
 - Create distinct value propositions for each message
 - Use different psychological triggers and persuasion techniques
+- AVOID overused phrases like "great step", "smart move", "exactly what you need"
+- Vary signal acknowledgments - use different ways to show appreciation
+- Don't use the same connector phrases repeatedly - mix it up
 
 STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone
 - Replace corporate jargon with direct, simple language
 - Ensure proper merge field formatting ({{contact.first_name}}, {{account.name}}, etc.)
-- Create short easy to read sentences (under 15 words each)
+- Create naturally flowing sentences (don't force them to be too short)
 - Add natural line breaks for readability
 - Use active voice throughout
-- Remove unnecessary words and phrases
-- Make the opening more engaging and direct
+- Remove unnecessary words and phrases while preserving warmth
+- Make the opening engaging but maintain conversational flow
 - Ensure the CTA is hyperlinked and naturally integrated
-- PRESERVE natural conversational flow - don't make sentences too choppy
+- PRESERVE natural conversational flow - don't make sentences choppy or robotic
 - MAINTAIN the warm, friendly tone of the original
 - Keep the human, approachable feel - avoid being too sales-y or aggressive
+- PRESERVE personality and warmth - don't strip out the human element
+- PRESERVE the original's conversational connectors and natural flow
+- Don't make the message too direct or choppy - keep it conversational
 
 SPECIFIC IMPROVEMENTS TO MATCH SAMPLE QUALITY:
 - Make the opening more direct and impactful 
@@ -97,14 +104,17 @@ SPECIFIC IMPROVEMENTS TO MATCH SAMPLE QUALITY:
 - Add credibility markers 
 - Include company name in CTA for personalization ("help {{account.name}} achieve similar results")
 
-TONE PRESERVATION:
-- MAINTAIN the warm, conversational tone of the original
+TONE PRESERVATION (CRITICAL):
+- MAINTAIN the warm, conversational tone of the original - this is the #1 priority
 - Keep natural, flowing language - don't make it too aggressive or sales-y
-- Preserve the friendly, approachable feel
+- Preserve the friendly, approachable feel - don't strip out personality
 - Don't shorten too much - maintain substance and warmth
 - Keep the "human" element - write like you're talking to a colleague, not selling
-- Preserve warm phrases like "great to see your interest" instead of making them cold or direct
 - Maintain the supportive, helpful tone rather than being pushy or overly sales-focused
+- PRESERVE personal touches and conversational connectors that create natural flow
+- DON'T make emails choppy or robotic - maintain the original's personality and warmth
+- AVOID repetitive phrases like "great step" - vary the language to keep it fresh
+- Use different ways to acknowledge signals and show appreciation
 
 SIGNAL INTEGRATION:
 - Make signal references subtle and natural - avoid obvious statements like "That's a great sign you're exploring ROI"
