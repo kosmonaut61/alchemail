@@ -236,10 +236,11 @@ TARGET PERSONA:
       - Open with signal acknowledgment (if applicable)
       - State the challenge/opportunity in 1-2 short sentences
       - Present the specific stat/result in context
-      - End with clear, hyperlinked CTA
+      - End with clear, hyperlinked CTA using markdown format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
       - Keep sentences short and punchy
       - Use active voice and direct language
       - Avoid corporate jargon and formal phrases
+      - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
 
       MESSAGE TYPE VARIATION BY DAY:
       - Day 1: Follow the signalIntegration instruction from the sequence plan
@@ -461,7 +462,9 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - Vary openings: questions, thoughts, insights, personal notes
       - Keep it conversational and less formal than emails
       - Use different stats and examples than the emails
-      - Avoid repetitive signal integration - be more creative`
+      - Avoid repetitive signal integration - be more creative
+      - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
+      - Include CTAs as hyperlinked markdown: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
 
       // Log the complete prompt for auditing
       console.log('\n' + '='.repeat(80))

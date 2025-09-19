@@ -197,8 +197,13 @@ VARIED OPENING APPROACHES:
 - LinkedIn 3: "One question about your freight processes"
 
 Call-to-Action (CTA) Rules:
-- Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- ALWAYS format CTAs as clickable hyperlinks using markdown format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Never show URLs as plain text - always wrap them in markdown link format [text](url)
 - Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
+- Examples of CORRECT formatting:
+  * [Schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+  * [Let's connect](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+  * [Book a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 
 MERGE FIELD FORMATTING:
 - Use dynamic variables for personalization (see list below)
