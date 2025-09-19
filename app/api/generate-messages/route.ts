@@ -161,14 +161,16 @@ TARGET PERSONA:
       - Signal Integration: ${emailPlan.signalIntegration}
       - Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
 
-      DETAILED MESSAGE OUTLINE (FOLLOW EXACTLY):
+      DETAILED MESSAGE OUTLINE (FOLLOW NATURALLY):
       ${emailPlan.messageOutline ? `
       - Opening: ${emailPlan.messageOutline.opening}
-      - Signal Mention: ${emailPlan.messageOutline.signalMention}
+      - Signal Mention: ${emailPlan.messageOutline.signalMention} (mention the signal naturally and conversationally)
       - Stat Usage: ${emailPlan.messageOutline.statUsage}
       - Value Prop: ${emailPlan.messageOutline.valueProp}
       - CTA: ${emailPlan.messageOutline.cta}
       ` : 'No detailed outline provided - use general guidelines'}
+      
+      IMPORTANT: Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page" or "I noticed you were looking at our demo page." Make it feel friendly and human, not robotic or analytical.
 
       CRITICAL SIGNAL INTEGRATION REQUIREMENT:
       The signalIntegration field tells you EXACTLY how to integrate the signal. You MUST follow it precisely.
@@ -334,14 +336,16 @@ LINKEDIN MESSAGE SPECIFICATIONS:
       - Signal Integration: ${linkedInPlan.signalIntegration}
       - Specific Stats to Feature: ${linkedInPlan.specificStats || 'Use relevant stats from context'}
 
-      DETAILED MESSAGE OUTLINE (FOLLOW EXACTLY):
+      DETAILED MESSAGE OUTLINE (FOLLOW NATURALLY):
       ${linkedInPlan.messageOutline ? `
       - Opening: ${linkedInPlan.messageOutline.opening}
-      - Signal Mention: ${linkedInPlan.messageOutline.signalMention}
+      - Signal Mention: ${linkedInPlan.messageOutline.signalMention} (mention the signal naturally and conversationally)
       - Stat Usage: ${linkedInPlan.messageOutline.statUsage}
       - Value Prop: ${linkedInPlan.messageOutline.valueProp}
       - CTA: ${linkedInPlan.messageOutline.cta}
       ` : 'No detailed outline provided - use general guidelines'}
+      
+      IMPORTANT: Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page" or "I noticed you were looking at our demo page." Make it feel friendly and human, not robotic or analytical.
 
       CRITICAL: You MUST follow the Signal Integration instructions exactly. The signalIntegration field tells you exactly how to integrate the signal - follow it precisely.
 

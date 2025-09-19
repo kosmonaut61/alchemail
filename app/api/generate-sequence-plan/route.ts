@@ -148,23 +148,24 @@ MESSAGE VARIATION REQUIREMENTS:
 
 DETAILED MESSAGE OUTLINES REQUIRED:
 - Create a comprehensive messageOutline for each email and LinkedIn message
-- Each outline must include exact opening lines, signal mentions, stat usage, value props, and CTAs
-- The signalMention field should contain the EXACT phrase to reference the signal
-- The opening field should contain the EXACT first line or approach for the message
-- The statUsage field should specify HOW to incorporate the specific statistics
+- Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
+- The signalMention field should contain NATURAL, CONVERSATIONAL phrases to reference the signal (like "Nice to see you checking our integrations page")
+- The opening field should contain natural opening approaches that feel timely and relevant based on the signal
+- The statUsage field should specify HOW to incorporate the specific statistics naturally
 - The valueProp field should define the core value proposition for that specific message
 - The cta field should specify the call-to-action approach
 - Each message outline should be unique and build upon the previous message in the sequence
+- Focus on natural, human-like language that flows conversationally
+- The signal should be mentioned casually and naturally, leading into relevant value propositions
 
 SIGNAL INTEGRATION REQUIREMENTS:
-- Keep signal integration instructions SIMPLE and DIRECT
-- Use single-action instructions, not complex multi-part directions
-- Focus on one clear action
-- Avoid complex instructions that combine multiple actions
-- Make each instruction specific to the signal provided
-- ALWAYS include the signal in the instruction (e.g., "Lead with statistic while mentioning their case study download")
-- The instruction must explicitly reference the signal being integrated
-- Use the actual signal content in the instruction
+- Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page"
+- Use casual, human language to reference the signal - avoid formal or robotic phrases
+- Focus on the VALUE or OPPORTUNITY the signal represents
+- Make the signal mention feel natural and conversational, not analytical
+- Create approaches that acknowledge the signal in a friendly, human way
+- Use phrases like "Nice to see you checking" or "I noticed you were looking at" - natural and conversational
+- The signal should be mentioned casually and lead into relevant value propositions
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 
