@@ -101,6 +101,28 @@ export default function AlchemailApp20() {
   // Get the selected persona data
   const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
 
+  // Get color for context item categories
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'customer':
+        return 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-700'
+      case 'case_study':
+        return 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-700'
+      case 'statistic':
+        return 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200 dark:border-purple-700'
+      case 'quote':
+        return 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-200 dark:border-orange-700'
+      case 'value_prop':
+        return 'bg-pink-100 text-pink-800 border-pink-200 dark:bg-pink-900 dark:text-pink-200 dark:border-pink-700'
+      case 'language_style':
+        return 'bg-cyan-100 text-cyan-800 border-cyan-200 dark:bg-cyan-900 dark:text-cyan-200 dark:border-cyan-700'
+      case 'pain_points':
+        return 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900 dark:text-red-200 dark:border-red-700'
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700'
+    }
+  }
+
   // Auto-detect pain points based on signal text
   const autoDetectPainPoints = (signalText: string, personaData: any) => {
     if (!signalText || !personaData?.painPoints) return []
@@ -487,49 +509,42 @@ export default function AlchemailApp20() {
                 </div>
 
                   {contextItems.length > 0 && (
-                    <div className="space-y-4">
-                      <h3 className="font-semibold">Selected Context Items</h3>
-                      <div className="grid gap-3">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold">Selected Context Items</h3>
+                        <span className="text-xs text-muted-foreground">
+                          {contextItems.length} items
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
                         {contextItems.map((item, index) => (
-                          <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950 relative">
-                  <div className="flex items-center justify-between mb-2">
-                              <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                                {item.title}
-                              </span>
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">
-                                  {item.category}
-                                </span>
-                                <Button
-                                  type="button"
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => {
-                                    setContextItems(prev => prev.filter((_, i) => i !== index))
-                                    toast({
-                                      title: "Context Item Removed",
-                                      description: `${item.title} has been removed from the sequence.`,
-                                    })
-                                  }}
-                                  className="h-6 w-6 p-0 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
-                                >
-                                  <X className="h-3 w-3" />
-                                </Button>
-                  </div>
-                  </div>
-                            <p className="text-sm text-blue-700 dark:text-blue-300">
-                              {item.content}
-                            </p>
-                            {item.industry && item.industry.length > 0 && (
-                              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
-                                Industries: {item.industry.join(', ')}
-                              </p>
-                            )}
+                          <div
+                            key={index}
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
+                          >
+                            <span className="font-medium truncate max-w-[200px]" title={item.title}>
+                              {item.title}
+                            </span>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                setContextItems(prev => prev.filter((_, i) => i !== index))
+                                toast({
+                                  title: "Context Item Removed",
+                                  description: `${item.title} has been removed from the sequence.`,
+                                })
+                              }}
+                              className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
                           </div>
                         ))}
                       </div>
-                </div>
-              )}
+                    </div>
+                  )}
               
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
