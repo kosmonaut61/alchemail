@@ -8455,3 +8455,22 @@ Import trace for requested module:
       "signalIntegration...
  POST /api/generate-sequence-plan 200 in 13678ms
  ✓ Compiled in 550ms (971 modules)
+ ✓ Compiled in 674ms (764 modules)
+ ✓ Compiled in 235ms (709 modules)
+ ✓ Compiled in 228ms (709 modules)
+ ✓ Compiled in 242ms (709 modules)
+ ✓ Compiled /api/generate-sequence-plan in 139ms (262 modules)
+🚀 Generating sequence plan with GPT-5-mini...
+📝 Signal: write me a campaign for leaders of operations in automotive...
+👤 Persona: Upper Management - Operations
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Operational efficiency for leaders of operations in automotive — a $3.2M freight example",
+      "purpose": "Open the conversation with a benchm...
+ POST /api/generate-sequence-plan 200 in 45536ms
+ ✓ Compiled in 613ms (971 modules)
