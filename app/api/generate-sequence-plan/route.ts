@@ -140,10 +140,10 @@ Create a strategic sequence plan that:
 9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
 
 MESSAGE VARIATION REQUIREMENTS:
-- Each message must have a DISTINCTLY different approach and tone
+- Each message must have a DISTINCTLY different approach
 - Use different opening styles: questions, statements, stories, direct value props
 - Vary the signal integration style for each message
-- Ensure each message feels unique and different from the others
+- Ensure each message feels unique and different from the others with a cohesive story arc
 - Make the differences obvious in the signalIntegration field
 
 SIGNAL INTEGRATION REQUIREMENTS:
@@ -152,6 +152,9 @@ SIGNAL INTEGRATION REQUIREMENTS:
 - Focus on one clear action
 - Avoid complex instructions that combine multiple actions
 - Make each instruction specific to the signal provided
+- ALWAYS include the signal in the instruction (e.g., "Lead with statistic while mentioning their case study download")
+- The instruction must explicitly reference the signal being integrated
+- Use the actual signal content in the instruction
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 

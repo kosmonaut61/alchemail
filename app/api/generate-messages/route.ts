@@ -199,14 +199,14 @@ TARGET PERSONA:
       - Avoid corporate jargon and formal phrases
 
       MESSAGE TYPE VARIATION BY DAY:
-      - Day 1: Direct value proposition with specific stats (start with stat, not signal)
+      - Day 1: Follow the signalIntegration instruction from the sequence plan
       - Day 3: Question-based approach focusing on challenges (start with question)
       - Day 5: Story-driven with customer success focus (start with story/customer name)
       - Day 7: Urgency-driven with clear next steps (start with urgency/time)
       - LinkedIn: More casual, personal, and conversational (start with personal note)
 
       DAY-SPECIFIC INSTRUCTIONS:
-      - Day 1: Start with the specific stat from the plan, not the signal
+      - Day 1: Follow the signalIntegration instruction from the sequence plan
       - Day 3: Start with a question about their challenges
       - Day 5: Start with a customer story or success example
       - Day 7: Start with urgency or time-sensitive language

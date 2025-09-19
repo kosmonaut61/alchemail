@@ -7732,3 +7732,89 @@ Import trace for requested module:
       "...
  POST /api/generate-sequence-plan 200 in 9814ms
  ✓ Compiled in 461ms (1323 modules)
+ ✓ Compiled in 742ms (1323 modules)
+ ✓ Compiled in 606ms (1116 modules)
+ ✓ Compiled /api/generate-sequence-plan in 60ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings Like Dollar Tree",
+      "purpose": "Introduce ProcureOS and highlight cost optimization.",
+      "signalIntegration": "Lead...
+ POST /api/generate-sequence-plan 200 in 9069ms
+ ✓ Compiled /api/generate-messages in 255ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4695ms
+ ✓ Compiled in 470ms (1326 modules)
+ ✓ Compiled in 610ms (1116 modules)
+ ✓ Compiled /api/generate-sequence-plan in 51ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Freight Savings",
+      "purpose": "Introduce our freight optimization solutions and highlight potential savings.",
+      "si...
+ POST /api/generate-sequence-plan 200 in 6614ms
+ ✓ Compiled /api/generate-messages in 91ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Upper Management Tone Profile, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance C-Suite Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4510ms
+ ✓ Compiled in 409ms (1326 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Freight Savings Like Dollar Tree",
+      "purpose": "Introduce our freight optimization solutions and highlight the case study.",
+      "...
+ POST /api/generate-sequence-plan 200 in 7925ms
+🚀 Generating messages for sequence...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Upper Management Tone Profile, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance C-Suite Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4263ms
+ ✓ Compiled in 454ms (1326 modules)
+ ✓ Compiled in 336ms (1326 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Upper Management Tone Profile, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance C-Suite Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 7834ms
+ ✓ Compiled in 370ms (1326 modules)
+ ✓ Compiled in 465ms (1116 modules)
+ ✓ Compiled in 467ms (1061 modules)
