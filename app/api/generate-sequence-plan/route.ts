@@ -287,7 +287,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       messages: [
         {
           role: 'system',
-          content: 'You are an expert email sequence strategist specializing in B2B outreach. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
+          content: 'You are an expert email sequence strategist specializing in B2B outreach. Create a sequence plan around the signal provided that weaves the signal throughout each interaction. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
         },
         {
           role: 'user',
