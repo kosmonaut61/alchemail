@@ -137,6 +137,31 @@ export default function AlchemailApp20() {
     return categories.sort()
   }
 
+  // Check if a context item is selected
+  const isContextItemSelected = (item: ContextItem) => {
+    return contextItems.some(selected => selected.id === item.id)
+  }
+
+  // Add context item to sequence
+  const addContextItemToSequence = (item: ContextItem) => {
+    if (!isContextItemSelected(item)) {
+      setContextItems(prev => [...prev, item])
+      toast({
+        title: "Context Item Added",
+        description: `${item.title} has been added to the sequence.`,
+      })
+    }
+  }
+
+  // Remove context item from sequence
+  const removeContextItemFromSequence = (item: ContextItem) => {
+    setContextItems(prev => prev.filter(selected => selected.id !== item.id))
+    toast({
+      title: "Context Item Removed",
+      description: `${item.title} has been removed from the sequence.`,
+    })
+  }
+
   // Auto-detect pain points based on signal text
   const autoDetectPainPoints = (signalText: string, personaData: any) => {
     if (!signalText || !personaData?.painPoints) return []
@@ -561,53 +586,88 @@ export default function AlchemailApp20() {
                                   </TabsList>
                                   {getAllCategories().map((category) => (
                                     <TabsContent key={category} value={category} className="mt-0">
-                                      <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
-                                        {getContextItemsByCategory(category).map((item, index) => (
-                                          <div 
-                                            key={index} 
-                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
-                                          >
-                                            <div className="flex items-start justify-between mb-4">
-                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
-                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
-                                                {item.category === 'language_style' ? 'style' : item.category}
-                                              </span>
-                                            </div>
-                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
-                                            {item.industry && item.industry.length > 0 && (
-                                              <div className="mb-4">
-                                                <p className="text-xs opacity-75 mb-2 font-medium">
-                                                  Industries:
-                                                </p>
-                                                <p className="text-xs opacity-75">
-                                                  {item.industry.join(', ')}
-                                                </p>
-                                              </div>
-                                            )}
-                                            {item.keywords && item.keywords.length > 0 && (
-                                              <div>
-                                                <p className="text-xs opacity-75 mb-3 font-medium">
-                                                  Keywords:
-                                                </p>
-                                                <div className="flex flex-wrap gap-2">
-                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
-                                                    <span 
-                                                      key={idx} 
-                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
+                                      <div className="space-y-3 max-h-[65vh] overflow-y-auto pr-4">
+                                        {getContextItemsByCategory(category).map((item, index) => {
+                                          const isSelected = isContextItemSelected(item)
+                                          return (
+                                            <div 
+                                              key={index} 
+                                              className={`p-4 rounded-lg border ${getCategoryColor(category)} ${isSelected ? 'ring-2 ring-blue-500 dark:ring-blue-400' : ''}`}
+                                            >
+                                              <div className="flex items-start justify-between mb-2">
+                                                <div className="flex-1">
+                                                  <div className="flex items-center gap-2 mb-1">
+                                                    <h4 className="font-semibold text-sm leading-tight">{item.title}</h4>
+                                                    {isSelected && (
+                                                      <span className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-2 py-0.5 rounded-full font-medium">
+                                                        Selected
+                                                      </span>
+                                                    )}
+                                                  </div>
+                                                  <span className="text-xs opacity-75 bg-white/20 dark:bg-black/20 px-2 py-0.5 rounded-full">
+                                                    {item.category === 'language_style' ? 'style' : item.category}
+                                                  </span>
+                                                </div>
+                                                <div className="ml-3">
+                                                  {isSelected ? (
+                                                    <Button
+                                                      type="button"
+                                                      variant="outline"
+                                                      size="sm"
+                                                      onClick={() => removeContextItemFromSequence(item)}
+                                                      className="text-xs h-7 px-3 bg-red-50 hover:bg-red-100 text-red-700 border-red-200 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-300 dark:border-red-700"
                                                     >
-                                                      {keyword}
-                                                    </span>
-                                                  ))}
-                                                  {item.keywords.length > 5 && (
-                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
-                                                      +{item.keywords.length - 5} more
-                                                    </span>
+                                                      Remove from Sequence
+                                                    </Button>
+                                                  ) : (
+                                                    <Button
+                                                      type="button"
+                                                      variant="outline"
+                                                      size="sm"
+                                                      onClick={() => addContextItemToSequence(item)}
+                                                      className="text-xs h-7 px-3 bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 dark:text-blue-300 dark:border-blue-700"
+                                                    >
+                                                      Add to Sequence
+                                                    </Button>
                                                   )}
                                                 </div>
                                               </div>
-                                            )}
-                                          </div>
-                                        ))}
+                                              <p className="text-sm mb-2 leading-relaxed">{item.content}</p>
+                                              {item.industry && item.industry.length > 0 && (
+                                                <div className="mb-2">
+                                                  <p className="text-xs opacity-75 mb-1 font-medium">
+                                                    Industries:
+                                                  </p>
+                                                  <p className="text-xs opacity-75">
+                                                    {item.industry.join(', ')}
+                                                  </p>
+                                                </div>
+                                              )}
+                                              {item.keywords && item.keywords.length > 0 && (
+                                                <div>
+                                                  <p className="text-xs opacity-75 mb-1 font-medium">
+                                                    Keywords:
+                                                  </p>
+                                                  <div className="flex flex-wrap gap-1">
+                                                    {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                      <span 
+                                                        key={idx} 
+                                                        className="text-xs px-2 py-0.5 rounded-full bg-white/30 dark:bg-black/30"
+                                                      >
+                                                        {keyword}
+                                                      </span>
+                                                    ))}
+                                                    {item.keywords.length > 5 && (
+                                                      <span className="text-xs px-2 py-0.5 rounded-full bg-white/30 dark:bg-black/30">
+                                                        +{item.keywords.length - 5} more
+                                                      </span>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              )}
+                                            </div>
+                                          )
+                                        })}
                                       </div>
                                     </TabsContent>
                                   ))}
