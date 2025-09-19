@@ -938,10 +938,30 @@ export default function AlchemailApp20() {
                 <div 
                   className="text-sm whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{
-                    __html: message.content
-                      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>')
-                      .replace(/{{([^}]+)}}/g, '<span class="bg-yellow-100 text-yellow-800 px-1 py-0.5 rounded text-xs font-mono">{{$1}}</span>')
-                      .replace(/\n/g, '<br>')
+                    __html: (() => {
+                      // First, convert markdown links to HTML
+                      let processed = message.content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                      
+                      // Then, replace merge fields that are NOT inside href attributes
+                      processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
+                        // Check if this merge field is inside an href attribute
+                        const beforeMatch = processed.substring(0, processed.indexOf(match));
+                        const lastHref = beforeMatch.lastIndexOf('href=');
+                        const lastQuote = beforeMatch.lastIndexOf('"', lastHref);
+                        const nextQuote = processed.indexOf('"', lastHref);
+                        
+                        // If we're inside an href attribute, don't replace
+                        if (lastHref > lastQuote && lastHref < nextQuote) {
+                          return match; // Keep original merge field
+                        }
+                        
+                        // Otherwise, replace with highlighted version
+                        return `<span class="bg-yellow-100 text-yellow-800 px-1 py-0.5 rounded text-xs font-mono">${match}</span>`;
+                      });
+                      
+                      // Finally, replace newlines
+                      return processed.replace(/\n/g, '<br>');
+                    })()
                   }}
                 />
               </div>
