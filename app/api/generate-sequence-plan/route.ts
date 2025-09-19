@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
 import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry } from '@/lib/context-repository'
+import { formatVariablesForPrompt } from '@/lib/dynamic-variables'
 
 // Helper function to get relevant context items
 function getRelevantContext(signal: string, personaData: any, painPoints: string[]) {
@@ -60,17 +61,44 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     )
   )
   
+  // Add pain point context items
+  const painPointMatches = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'pain_points' && (
+      item.persona?.includes(personaData.id) ||
+      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+    )
+  )
+  
+  // Add value propositions and language styles
+  const valuePropItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'value_prop' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item) ||
+      painPointMatches.includes(item)
+    )
+  )
+  
+  const languageStyleItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'language_style' && (
+      personaData.id === item.persona?.[0] ||
+      painPointMatches.includes(item)
+    )
+  )
+  
   // Add some general high-value context items that are always relevant
   const generalHighValue = CONTEXT_REPOSITORY.filter(item => 
     ['dollar_tree_stats', 'golden_state_foods_stats', 'pepsi_case_study'].includes(item.id)
   )
   
-  // Prioritize statistics first (most important for credibility), then case studies, then customers, then quotes
+  // Prioritize statistics first (most important for credibility), then case studies, then customers, then quotes, then value props, pain points, and language styles
   const allRelevant = [
     ...statisticItems,  // Prioritize statistics first
     ...caseStudyItems, 
     ...customerItems,
     ...quoteItems,
+    ...valuePropItems,  // Add value propositions
+    ...painPointMatches,  // Add pain point context
+    ...languageStyleItems,  // Add language styles
     ...generalHighValue  // Add some general high-value items
   ]
   
@@ -125,6 +153,9 @@ TARGET PERSONA:
 
 RELEVANT CONTEXT ITEMS (use these for social proof and credibility):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
+
+AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+${formatVariablesForPrompt()}
 
 SEQUENCE REQUIREMENTS:
 - Emails: ${emailCount}

@@ -4,6 +4,7 @@ import { generateText } from "ai"
 import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry, ContextItem } from "@/lib/context-repository"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
 import { formatSamplesForPrompt, getPersonaExampleEmail } from "@/lib/email-samples"
+import { formatVariablesForPrompt } from "@/lib/dynamic-variables"
 
 // Function to dynamically select relevant context based on signal
 function getRelevantContext(signal: string, personaData: any, painPoints: string[]): ContextItem[] {
@@ -78,12 +79,39 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     )
   )
   
-  // Combine and deduplicate
+  // Add value propositions and language styles
+  const valuePropItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'value_prop' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item) ||
+      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+    )
+  )
+  
+  const languageStyleItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'language_style' && (
+      personaData.id === item.persona?.[0] ||
+      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+    )
+  )
+  
+  // Add pain point context items
+  const painPointMatches = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'pain_points' && (
+      item.persona?.includes(personaData.id) ||
+      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+    )
+  )
+  
+  // Combine and deduplicate with prioritization
   const allRelevant = [
     ...customerItems,
     ...caseStudyItems, 
     ...statisticItems,
     ...quoteItems,
+    ...valuePropItems,
+    ...painPointMatches,
+    ...languageStyleItems,
     ...directMatches
   ]
   
@@ -148,6 +176,9 @@ TARGET PERSONA:
       VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
       ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
+      AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+      ${formatVariablesForPrompt()}
+
       EMAIL STRUCTURE EXAMPLES (follow this tone and structure):
       ${formatSamplesForPrompt(personaData.label)}
 
@@ -166,6 +197,7 @@ TARGET PERSONA:
       - Opening: ${emailPlan.messageOutline.opening}
       - Signal Mention: ${emailPlan.messageOutline.signalMention} (mention the signal naturally and conversationally)
       - Stat Usage: ${emailPlan.messageOutline.statUsage}
+      - Customer Mention: ${emailPlan.messageOutline.customerMention} (mention these specific customers naturally)
       - Value Prop: ${emailPlan.messageOutline.valueProp}
       - CTA: ${emailPlan.messageOutline.cta}
       ` : 'No detailed outline provided - use general guidelines'}
@@ -335,6 +367,9 @@ TARGET PERSONA:
 VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
+AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+${formatVariablesForPrompt()}
+
 EXAMPLE EMAIL FOR THIS PERSONA (use as a template for tone and structure):
 ${getPersonaExampleEmail(personaData.label)}
 
@@ -349,6 +384,7 @@ LINKEDIN MESSAGE SPECIFICATIONS:
       - Opening: ${linkedInPlan.messageOutline.opening}
       - Signal Mention: ${linkedInPlan.messageOutline.signalMention} (mention the signal naturally and conversationally)
       - Stat Usage: ${linkedInPlan.messageOutline.statUsage}
+      - Customer Mention: ${linkedInPlan.messageOutline.customerMention} (mention these specific customers naturally)
       - Value Prop: ${linkedInPlan.messageOutline.valueProp}
       - CTA: ${linkedInPlan.messageOutline.cta}
       ` : 'No detailed outline provided - use general guidelines'}

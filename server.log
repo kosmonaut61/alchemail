@@ -8474,3 +8474,56 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
       "purpose": "Open the conversation with a benchm...
  POST /api/generate-sequence-plan 200 in 45536ms
  ✓ Compiled in 613ms (971 modules)
+🚀 Generating sequence plan with GPT-5-mini...
+📝 Signal: write a campaign congratulating a new CEO of an automotive company on their new role and inform them...
+👤 Persona: CEO
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Congrats on the CEO role — strategic savings for operations",
+      "purpose": "Introduce emerge, congratulate the new CEO, establish enterprise...
+ POST /api/generate-sequence-plan 200 in 50040ms
+🚀 Generating sequence plan with GPT-5-mini...
+📝 Signal: write a campaign congratulating a new CEO of an automotive company on their new role and inform them...
+👤 Persona: CEO
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Congrats on becoming CEO — strategic freight savings for enterprise ROI",
+      "purpose": "Open with a congratulations, establish credibility w...
+ POST /api/generate-sequence-plan 200 in 47248ms
+ ✓ Compiled in 569ms (709 modules)
+ ✓ Compiled in 235ms (709 modules)
+ ✓ Compiled in 422ms (709 modules)
+ ✓ Compiled in 602ms (764 modules)
+ ✓ Compiled in 225ms (709 modules)
+ ✓ Compiled in 251ms (709 modules)
+ ✓ Compiled in 331ms (709 modules)
+ ✓ Compiled in 283ms (709 modules)
+ ✓ Compiled in 305ms (709 modules)
+ ✓ Compiled in 241ms (709 modules)
+ ✓ Compiled in 172ms (709 modules)
+ ✓ Compiled in 254ms (709 modules)
+ ✓ Compiled in 329ms (709 modules)
+ ✓ Compiled /api/generate-sequence-plan in 236ms (263 modules)
+🚀 Generating sequence plan with GPT-5-mini...
+📝 Signal: write a campaign congratulating a new CEO of an automotive company on their new role and inform them...
+👤 Persona: CEO
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Congrats {{contact.first_name}} — enterprise ROI opportunity for operations",
+      "purpose": "Congratulate the new CEO and open with a high-im...
+ POST /api/generate-sequence-plan 200 in 55351ms
+ ✓ Compiled in 440ms (764 modules)
