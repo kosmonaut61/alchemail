@@ -8059,3 +8059,33 @@ Nice to see you exploring our case studies—sounds like you're building a solid
  POST /api/optimize-message 200 in 25719ms
  ✓ Compiled in 536ms (1325 modules)
  ✓ Compiled in 401ms (1325 modules)
+ ✓ Compiled in 603ms (1061 modules)
+ ✓ Compiled in 539ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 300ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings Like Dollar Tree",
+      "purpose": "Introduce value proposition related to cost optimization.",
+      "signalIntegration": ...
+ POST /api/generate-sequence-plan 200 in 10795ms
+ ✓ Compiled /api/generate-messages in 140ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4122ms
+ ✓ Compiled in 980ms (1326 modules)
+ ✓ Compiled in 489ms (1061 modules)
+ ✓ Compiled in 587ms (1326 modules)
+ ✓ Compiled in 483ms (1326 modules)
+ ✓ Compiled in 511ms (1324 modules)

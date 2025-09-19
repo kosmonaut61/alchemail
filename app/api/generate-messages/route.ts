@@ -255,6 +255,10 @@ NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
 - Their specific business situation (unless mentioned in signal)
 - What challenges they're currently facing (unless mentioned in signal)
 - Any assumptions about their company or role (unless mentioned in signal)
+- LinkedIn posts, social media activity, or other online behavior not in the signal
+- What they're "considering" or "thinking about" unless explicitly mentioned
+- Their internal processes, strategies, or decision-making unless stated in the signal
+- Overused phrases like "smart move", "great step", "exactly what you need"
 
 IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 

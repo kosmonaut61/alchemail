@@ -113,7 +113,7 @@ MESSAGE UNIQUENESS & VARIATION:
 - Avoid repetitive phrases like "I noticed you checked out" in every message
 - Create distinct value propositions for each message
 - Use different psychological triggers and persuasion techniques
-- AVOID overused phrases like "great step", "smart move", "exactly what you need"
+- AVOID overused phrases like "great step", "smart move", "exactly what you need", "sounds like a smart move"
 - Vary signal acknowledgments - use different ways to show appreciation
 - Don't use the same connector phrases repeatedly - mix it up
 - USE CUSTOMER QUOTES to add credibility and emotional connection

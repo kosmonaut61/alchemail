@@ -166,6 +166,10 @@ SIGNAL INTEGRATION REQUIREMENTS:
 - Create approaches that acknowledge the signal in a friendly, human way
 - Use phrases like "Nice to see you checking" or "I noticed you were looking at" - natural and conversational
 - The signal should be mentioned casually and lead into relevant value propositions
+- NEVER make presumptive statements about things not mentioned in the signal
+- ONLY reference what the signal explicitly states - don't assume additional context
+- Avoid phrases like "I saw your post" or "I noticed you were considering" unless the signal explicitly mentions these
+- AVOID overused phrases like "smart move", "great step", "exactly what you need"
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 
