@@ -1,223 +1,72 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
-import { Settings, Mail, Edit3, Eye, Loader2, RefreshCw } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
-import { PreambleEditor } from "@/components/preamble-editor"
-import { ContextSelector } from "@/components/context-selector"
-import { PromptPreview } from "@/components/prompt-preview"
-import { EmailOutput } from "@/components/email-output"
-import { Skeleton } from "@/components/ui/skeleton"
-import { ContextItem } from "@/lib/context-repository"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
+import { ContextItem } from "@/lib/context-repository"
 
-export default function EmailGenerator() {
+// Types for the 2.0 app
+interface SequencePlan {
+  emails: Array<{
+    day: number
+    subject: string
+    purpose: string
+    signalIntegration: string
+  }>
+  linkedInMessages: Array<{
+    day: number
+    purpose: string
+    signalIntegration: string
+  }>
+  totalDays: number
+}
+
+interface GeneratedMessage {
+  id: string
+  type: 'email' | 'linkedin'
+  day: number
+  content: string
+  originalContent?: string
+  isOptimized?: boolean
+  isGenerating?: boolean
+  isOptimizing?: boolean
+}
+
+export default function AlchemailApp20() {
   const [currentStep, setCurrentStep] = useState(1)
   const [signal, setSignal] = useState("")
   const [persona, setPersona] = useState<string>("")
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
-  const [isAnalyzingContext, setIsAnalyzingContext] = useState(false)
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedEmail, setGeneratedEmail] = useState("")
-  const [isEditing, setIsEditing] = useState(false)
-  const [editFeedback, setEditFeedback] = useState("")
-  const [showPreambleEditor, setShowPreambleEditor] = useState(false)
-  const [hasAnalyzedContext, setHasAnalyzedContext] = useState(false)
-  const [qualityReport, setQualityReport] = useState<any>(null)
-  const [fixesApplied, setFixesApplied] = useState<string[]>([])
-  const [originalEmail, setOriginalEmail] = useState<string>("")
-  const [selectedModel, setSelectedModel] = useState<string>("gpt-5")
-  const [enableQA, setEnableQA] = useState<boolean>(true)
-  const [generationStatus, setGenerationStatus] = useState<{
-    status: string
-    progress: number
-    message: string
-  } | null>(null)
-  const [sessionId, setSessionId] = useState<string | null>(null)
+  const [emailCount, setEmailCount] = useState(3)
+  const [linkedInCount, setLinkedInCount] = useState(2)
+  const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
+  const [contextItems, setContextItems] = useState<any[]>([])
+  const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
+  const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
+  const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const { toast } = useToast()
 
-  // Simple progress simulation (since status API causes timeouts)
-  const startProgressSimulation = () => {
-        const phases = [
-          { progress: 10, message: 'Preparing fast generation...' },
-          { progress: 30, message: 'Building email context and structure...' },
-          { progress: 50, message: 'Generating complete sequence with gpt-5-nano...' },
-          { progress: 80, message: 'Finalizing email sequence...' },
-          { progress: 100, message: 'Fast sequence ready!' }
-        ]
-    
-    let currentPhase = 0
-    const interval = setInterval(() => {
-      if (currentPhase < phases.length) {
-        setGenerationStatus(phases[currentPhase])
-        currentPhase++
-      } else {
-        clearInterval(interval)
-      }
-    }, 8000) // Update every 8 seconds
-    
-    return interval
-  }
-
   const steps = [
-    { id: 1, title: "Campaign Signal", description: "Describe your email campaign context" },
-    { id: 2, title: "Context Review", description: "Review and customize AI-suggested context" },
-    { id: 3, title: "Prompt Review", description: "Review the final ChatGPT prompt" },
-    { id: 4, title: "Output & Edit", description: "View results and request edits" }
+    { id: 1, title: "Signal", description: "Define your outreach signal and target persona" },
+    { id: 2, title: "Sequence Plan", description: "Review context and generate sequence plan" },
+    { id: 3, title: "Generate", description: "Generate and optimize your sequence" }
   ]
 
-  // Auto-analyze context when signal and persona are filled
-  useEffect(() => {
-    if (signal && persona && currentStep >= 2 && !hasAnalyzedContext && !isAnalyzingContext) {
-      analyzeContext()
-    }
-  }, [signal, persona, painPoints, currentStep, hasAnalyzedContext, isAnalyzingContext])
-
-  const analyzeContext = async () => {
-    if (!signal || !persona) return
-
-    setIsAnalyzingContext(true)
-    try {
-      const response = await fetch("/api/analyze-context", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          signal,
-          persona,
-          painPoints,
-        }),
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        setSelectedContextItems(data.suggestedItems)
-        setAllContextItems(data.allItems)
-        setHasAnalyzedContext(true)
-      }
-    } catch (error) {
-      console.error("Error analyzing context:", error)
-      toast({
-        title: "Context Analysis Failed",
-        description: "Failed to analyze context. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsAnalyzingContext(false)
-    }
-  }
-
-
-  const autoDetectPainPoints = (signalText: string, selectedPersona: string) => {
-    const selectedPersonaData = PERSONA_DEFINITIONS.find(p => p.id === selectedPersona)
-    if (!selectedPersonaData) return
-
-    const signalLower = signalText.toLowerCase()
-    const detectedPainPoints: string[] = []
-
-    // Define keyword mappings for different pain point categories
-    const keywordMappings: { [key: string]: string[] } = {
-      // Strategic keywords
-      'strategic': ['strategy', 'strategic', 'vision', 'growth', 'expansion', 'scaling', 'transformation', 'digital transformation', 'long-term', 'short-term'],
-      'cost': ['cost', 'costs', 'budget', 'savings', 'spend', 'money', 'price', 'expensive', 'cheap', 'affordable', 'roi', 'investment'],
-      'efficiency': ['efficiency', 'efficient', 'streamline', 'optimize', 'automation', 'process', 'workflow', 'productivity', 'faster', 'speed'],
-      'risk': ['risk', 'risks', 'compliance', 'regulatory', 'audit', 'security', 'cybersecurity', 'fraud', 'disruption', 'crisis'],
-      'data': ['data', 'analytics', 'insights', 'reporting', 'visibility', 'dashboard', 'metrics', 'kpi', 'real-time', 'integration'],
-      'technology': ['technology', 'tech', 'digital', 'ai', 'automation', 'software', 'system', 'platform', 'tools', 'solutions'],
-      'talent': ['talent', 'team', 'staff', 'people', 'hiring', 'retention', 'training', 'skills', 'leadership', 'culture'],
-      'customer': ['customer', 'client', 'experience', 'service', 'quality', 'satisfaction', 'expectations', 'demand'],
-      'supply': ['supply chain', 'logistics', 'procurement', 'carrier', 'supplier', 'vendor', 'shipping', 'transport', 'freight'],
-      'financial': ['financial', 'finance', 'cash flow', 'liquidity', 'forecasting', 'capital', 'investment', 'profitability'],
-      'operational': ['operational', 'operations', 'process', 'workflow', 'execution', 'performance', 'standardization'],
-      'external': ['market', 'competition', 'economic', 'inflation', 'geopolitical', 'sustainability', 'environmental']
-    }
-
-    // Check each pain point against the signal
-    selectedPersonaData.painPoints.forEach(painPoint => {
-      const painPointLower = painPoint.toLowerCase()
-      
-      // Check for direct keyword matches
-      for (const [category, keywords] of Object.entries(keywordMappings)) {
-        if (keywords.some(keyword => signalLower.includes(keyword) && painPointLower.includes(category))) {
-          detectedPainPoints.push(painPoint)
-          break
-        }
-      }
-      
-      // Check for specific pain point keywords
-      const specificKeywords = [
-        'manual', 'automation', 'integration', 'visibility', 'real-time', 'forecasting',
-        'volatility', 'disruption', 'compliance', 'audit', 'talent', 'retention',
-        'cost', 'savings', 'efficiency', 'streamline', 'process', 'workflow',
-        'customer', 'experience', 'service', 'quality', 'demand', 'capacity',
-        'supply chain', 'logistics', 'procurement', 'carrier', 'supplier',
-        'financial', 'budget', 'cash flow', 'investment', 'roi', 'profitability',
-        'risk', 'security', 'compliance', 'regulatory', 'governance',
-        'data', 'analytics', 'insights', 'reporting', 'dashboard', 'metrics',
-        'technology', 'digital', 'ai', 'automation', 'software', 'platform',
-        'leadership', 'team', 'culture', 'change', 'transformation',
-        'market', 'competition', 'economic', 'inflation', 'sustainability'
-      ]
-      
-      if (specificKeywords.some(keyword => 
-        signalLower.includes(keyword) && painPointLower.includes(keyword)
-      )) {
-        if (!detectedPainPoints.includes(painPoint)) {
-          detectedPainPoints.push(painPoint)
-        }
-      }
-    })
-
-    // Limit to top 5 most relevant pain points to avoid overwhelming the user
-    setPainPoints(detectedPainPoints.slice(0, 5))
-  }
-
-  const handlePainPointChange = (painPoint: string, checked: boolean) => {
-    if (checked) {
-      setPainPoints([...painPoints, painPoint])
-    } else {
-      setPainPoints(painPoints.filter((p) => p !== painPoint))
-    }
-    // Reset analysis flag when pain points change
-    setHasAnalyzedContext(false)
-  }
-
-  const handleSignalChange = (newSignal: string) => {
-    setSignal(newSignal)
-    // Reset analysis flag when signal changes
-    setHasAnalyzedContext(false)
-    
-    // Auto-detect relevant pain points based on signal content
-    if (persona && newSignal.trim()) {
-      autoDetectPainPoints(newSignal, persona)
-    }
-  }
-
-  const handlePersonaChange = (newPersona: string) => {
-    setPersona(newPersona)
-    // Reset analysis flag when persona changes
-    setHasAnalyzedContext(false)
-    
-    // Auto-detect relevant pain points based on signal content
-    if (signal.trim() && newPersona) {
-      autoDetectPainPoints(signal, newPersona)
-    }
-  }
-
   const handleNext = () => {
-    if (currentStep < 4) {
+    if (currentStep < 3) {
       setCurrentStep(currentStep + 1)
     }
   }
@@ -228,202 +77,24 @@ export default function EmailGenerator() {
     }
   }
 
-  const handleGenerate = async () => {
-    console.log('🚀 ===== FRONTEND HYBRID GENERATION START =====')
-    console.log('📝 Form data:', { persona, signal, painPoints, selectedContextItems, selectedModel })
-    
-    if (!persona || !signal) {
-      console.log('❌ Missing required fields')
-      toast({
-        title: "Missing Information",
-        description: "Please complete all required fields.",
-        variant: "destructive",
-      })
-      return
-    }
-
-    console.log('✅ All required fields present, starting hybrid generation...')
-    setIsGenerating(true)
-    setQualityReport(null)
-    setFixesApplied([])
-    setOriginalEmail("")
-    
-    try {
-      console.log('🌐 Making API call to /api/generate-email-enhanced (enhanced approach)...')
-      const requestBody = {
-        persona,
-        signal,
-        painPoints,
-        contextItems: selectedContextItems,
-        enableQA: enableQA,
-        model: selectedModel
-      }
-      console.log('📤 Request body:', requestBody)
-      
-      // Start progress simulation
-      const progressInterval = startProgressSimulation()
-
-        const response = await fetch("/api/generate-email-enhanced", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        })
-
-      console.log('📥 Response status:', response.status)
-      console.log('📥 Response ok:', response.ok)
-
-      if (!response.ok) {
-        console.log('❌ Response not ok, parsing error...')
-        const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
-        console.log('❌ Error data:', errorData)
-        
-        // Provide more specific error messages
-        let errorMessage = errorData.error || "Failed to generate email"
-        if (response.status === 500) {
-          errorMessage = `Server error: ${errorMessage}. The system will automatically retry with a fallback model.`
-        } else if (response.status === 408 || errorMessage.includes('timeout')) {
-          errorMessage = "The request took longer than expected. GPT-5-nano is being used for speed - please try again."
-        } else if (errorMessage.includes('gpt-5')) {
-          errorMessage = "GPT-5 model may be experiencing issues. The system will automatically fall back to GPT-4o."
-        }
-        
-        throw new Error(errorMessage)
-      }
-
-      console.log('✅ Response ok, parsing JSON...')
-      const data = await response.json()
-      console.log('📥 Response data:', data)
-      
-      // Clear progress when generation completes
-      setGenerationStatus(null)
-      console.log('📧 Email content length:', data.email?.length || 0)
-      console.log('📧 Email preview:', data.email?.substring(0, 200) || 'No email content')
-
-      setGeneratedEmail(data.email)
-      setQualityReport(data.qualityReport)
-      setFixesApplied(data.fixesApplied || [])
-      setOriginalEmail(data.originalEmail || "")
-      setCurrentStep(4)
-      
-      // Debug logging
-      console.log('🔍 Frontend Debug:')
-      console.log('📧 Generated Email Length:', data.email?.length)
-      console.log('📧 Original Email Length:', data.originalEmail?.length)
-      console.log('🔧 Fixes Applied:', data.fixesApplied?.length)
-      console.log('📊 Quality Report:', data.qualityReport?.score)
-      console.log('✅ Optimized:', data.optimized)
-      
-      console.log('✅ Frontend state updated, moving to step 4')
-
-       // Show success message with quality info
-        let qualityMessage = 'Your email sequence has been generated successfully with fast approach!'
-        
-        if (data.fast) {
-          qualityMessage = `Fast generation complete! Generated complete sequence in single call with GPT-5-nano for maximum speed and reliability.`
-        }
-        
-        if (data.qaResults) {
-          const scores = Object.values(data.qaResults).map((qa: any) => qa.score || 0).filter(score => score > 0)
-          if (scores.length > 0) {
-            const avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
-            qualityMessage += ` Average QA score: ${avgScore}/100.`
-          }
-        }
-
-       toast({
-         title: "Fast Generation Complete!",
-         description: qualityMessage,
-       })
-
-      // Generation completed successfully
-
-    } catch (error) {
-      console.error("❌ ===== FRONTEND ERROR ======")
-      console.error("❌ Error generating email:", error)
-      console.error("❌ Error type:", typeof error)
-      console.error("❌ Error message:", error instanceof Error ? error.message : "Unknown error")
-      console.error("❌ Error stack:", error instanceof Error ? error.stack : "No stack trace")
-      console.error("❌ ===== END ERROR ======")
-      
-      // Clear progress on error
-      setGenerationStatus(null)
-      
-      toast({
-        title: "Generation Failed",
-        description: error instanceof Error ? error.message : "There was an error generating your email. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
-      console.log('🏁 Generation process finished, setting isGenerating to false')
-      setIsGenerating(false)
-    }
-  }
-
-  const handleEditRequest = async () => {
-    if (!editFeedback.trim()) {
-      toast({
-        title: "Feedback Required",
-        description: "Please provide feedback for the edit request.",
-        variant: "destructive",
-      })
-      return
-    }
-
-    setIsEditing(true)
-    try {
-      const response = await fetch("/api/generate-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          persona,
-          signal,
-          painPoints,
-          contextItems: selectedContextItems,
-          editFeedback: editFeedback,
-        }),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: "Unknown error" }))
-        throw new Error(errorData.error || "Failed to edit email")
-      }
-
-      const data = await response.json()
-      setGeneratedEmail(data.email)
-      setEditFeedback("")
-
-      toast({
-        title: "Email Updated!",
-        description: "Your email has been updated based on your feedback.",
-      })
-    } catch (error) {
-      console.error("Error editing email:", error)
-      toast({
-        title: "Edit Failed",
-        description: error instanceof Error ? error.message : "There was an error editing your email. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsEditing(false)
-    }
-  }
-
   const canProceedToNext = () => {
     switch (currentStep) {
       case 1:
         return signal.trim().length > 0 && persona.length > 0
       case 2:
-        return selectedContextItems.length > 0
+        return sequencePlan !== null
       case 3:
-        return true
-      case 4:
-        return true
+        return generatedMessages.length > 0
       default:
         return false
+    }
+  }
+
+  const handlePainPointChange = (painPoint: string, checked: boolean) => {
+    if (checked) {
+      setPainPoints([...painPoints, painPoint])
+    } else {
+      setPainPoints(painPoints.filter((p) => p !== painPoint))
     }
   }
 
@@ -438,7 +109,10 @@ export default function EmailGenerator() {
               <div className="p-2 rounded-lg bg-primary/10">
                 <Mail className="h-5 w-5 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold text-foreground tracking-tight">Alchemail</h1>
+              <div>
+                <h1 className="text-2xl font-bold text-foreground tracking-tight">Alchemail 2.0</h1>
+                <p className="text-xs text-muted-foreground">Next-generation email sequence generator</p>
+              </div>
             </div>
             
             {/* Right: Actions */}
@@ -447,53 +121,73 @@ export default function EmailGenerator() {
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => window.open('/app-2-0', '_blank')}
+                onClick={() => window.open('/legacy', '_blank')}
                 className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
               >
-                <span className="mr-2">🚀</span>
-                2.0
-              </Button>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => setShowPreambleEditor(true)}
-                className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
-              >
-                <Settings className="h-4 w-4 mr-2" />
-                Advanced Settings
+                <span className="mr-2">📧</span>
+                Legacy
               </Button>
             </div>
           </div>
         </div>
-      </header>
-
       <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
         {/* Welcome Message */}
         <div className="text-center space-y-4">
+          <h2 className="text-3xl font-bold text-foreground">Create Your Outreach Sequence</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Create personalized email sequences powered by AI. Follow the steps below to craft compelling outreach campaigns.
+            Build powerful, personalized email and LinkedIn sequences that drive results. 
+            Start with your signal and let AI craft the perfect outreach strategy.
           </p>
         </div>
 
-        {/* Step 1: Campaign Signal */}
+        {/* Progress Indicator */}
+        <div className="flex items-center justify-center space-x-4">
+          {steps.map((step, index) => (
+            <div key={step.id} className="flex items-center">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
+                currentStep >= step.id 
+                  ? 'bg-primary text-primary-foreground' 
+                  : 'bg-muted text-muted-foreground'
+              }`}>
+                {step.id}
+              </div>
+              <div className="ml-3 text-left">
+                <p className={`text-sm font-medium ${
+                  currentStep >= step.id ? 'text-foreground' : 'text-muted-foreground'
+                }`}>
+                  {step.title}
+                </p>
+                <p className="text-xs text-muted-foreground">{step.description}</p>
+              </div>
+              {index < steps.length - 1 && (
+                <ArrowRight className="h-4 w-4 text-muted-foreground mx-4" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Step 1: Signal */}
         {currentStep >= 1 && (
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-xl">
                 <div className="w-10 h-10 bg-primary text-primary-foreground rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">1</div>
-                Campaign Signal
+                <Target className="h-5 w-5 text-primary" />
+                Signal
               </CardTitle>
-              <CardDescription className="text-base text-muted-foreground">Describe your email campaign context and target audience</CardDescription>
+              <CardDescription className="text-base text-muted-foreground">
+                Define the primary reason for your outreach and select your target persona
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signal">Campaign Signal *</Label>
+                  <Label htmlFor="signal">Signal - Primary Reason for Outreach *</Label>
                   <Textarea
                     id="signal"
-                    placeholder="Describe what the email should be about... (e.g., 'Create a personalized marketing campaign for a ENT organization. The target audience is: Food & Beverages industry Enterprise...')"
+                    placeholder="What's the main reason you're reaching out? (e.g., 'We just helped a similar company reduce freight costs by 18% and I think you'd benefit from the same approach...')"
                     value={signal}
-                    onChange={(e) => handleSignalChange(e.target.value)}
+                    onChange={(e) => setSignal(e.target.value)}
                     rows={6}
                     className="resize-none"
                   />
@@ -501,7 +195,7 @@ export default function EmailGenerator() {
 
                 <div className="space-y-2">
                   <Label htmlFor="persona">Target Persona *</Label>
-                  <Select value={persona} onValueChange={handlePersonaChange}>
+                  <Select value={persona} onValueChange={setPersona}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
@@ -589,7 +283,7 @@ export default function EmailGenerator() {
                     </div>
                     {painPoints.length > 0 && (
                       <p className="text-xs text-muted-foreground">
-                        {painPoints.length} pain point{painPoints.length !== 1 ? 's' : ''} selected based on your signal
+                        {painPoints.length} pain point{painPoints.length !== 1 ? 's' : ''} selected
                       </p>
                     )}
                   </div>
@@ -603,7 +297,8 @@ export default function EmailGenerator() {
                     disabled={!canProceedToNext()}
                     className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/25"
                   >
-                    Next: Review Context
+                    Next: Sequence Plan
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               )}
@@ -611,287 +306,525 @@ export default function EmailGenerator() {
           </Card>
         )}
 
-        {/* Step 2: Context Review */}
+        {/* Step 2: Sequence Plan */}
         {currentStep >= 2 && (
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-xl">
                 <div className="w-10 h-10 bg-green-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-green-600/25">2</div>
-                Context Review
+                <Users className="h-5 w-5 text-green-600" />
+                Sequence Plan
               </CardTitle>
-              <CardDescription className="text-base text-muted-foreground">The AI has analyzed your signal and suggested relevant context items. Review and customize the selection.</CardDescription>
+              <CardDescription className="text-base text-muted-foreground">
+                Configure your sequence and let AI create a strategic plan
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              {isAnalyzingContext ? (
-                <div className="flex items-center justify-center py-8">
-                  <Loader2 className="h-6 w-6 animate-spin mr-2" />
-                  Analyzing context...
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="emailCount">Number of Emails</Label>
+                  <Input
+                    id="emailCount"
+                    type="number"
+                    min="1"
+                    max="10"
+                    value={emailCount}
+                    onChange={(e) => setEmailCount(parseInt(e.target.value) || 1)}
+                    className="w-full"
+                  />
                 </div>
-              ) : (
-                <ContextSelector
-                  signal={signal}
-                  persona={persona}
-                  painPoints={painPoints}
-                  selectedContextItems={selectedContextItems}
-                  allContextItems={allContextItems}
-                  onContextChange={setSelectedContextItems}
-                  onClose={() => {}} // No close button in inline flow
-                />
-              )}
+                <div className="space-y-2">
+                  <Label htmlFor="linkedInCount">Number of LinkedIn Messages</Label>
+                  <Input
+                    id="linkedInCount"
+                    type="number"
+                    min="0"
+                    max="5"
+                    value={linkedInCount}
+                    onChange={(e) => setLinkedInCount(parseInt(e.target.value) || 0)}
+                    className="w-full"
+                  />
+                </div>
+              </div>
 
-              {currentStep === 2 && (
-                <div className="flex justify-between mt-6">
-                  <Button variant="outline" onClick={handlePrevious}>
-                    Previous
-                  </Button>
+              {!sequencePlan ? (
+                <div className="text-center py-8">
                   <Button 
-                    onClick={handleNext} 
-                    disabled={!canProceedToNext()}
+                    onClick={async () => {
+                      setIsGeneratingPlan(true)
+                      try {
+                        const response = await fetch('/api/generate-sequence-plan', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({
+                            signal,
+                            persona,
+                            painPoints,
+                            emailCount,
+                            linkedInCount
+                          }),
+                        })
+
+                        if (!response.ok) {
+                          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                          throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate sequence plan`)
+                        }
+
+                        const data = await response.json()
+                        setSequencePlan(data.sequencePlan)
+                        setContextItems(data.contextItems || [])
+                        
+                        toast({
+                          title: "Sequence Plan Generated!",
+                          description: `Created ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
+                        })
+                      } catch (error) {
+                        console.error('Error generating sequence plan:', error)
+                        toast({
+                          title: "Generation Failed",
+                          description: "Failed to generate sequence plan. Please try again.",
+                          variant: "destructive",
+                        })
+                      } finally {
+                        setIsGeneratingPlan(false)
+                      }
+                    }}
+                    disabled={isGeneratingPlan}
                     className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
                   >
-                    Next: Review Prompt
+                    {isGeneratingPlan ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Generating Plan...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Generate Sequence Plan
+                      </>
+                    )}
                   </Button>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="p-4 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+                    <h3 className="font-semibold text-green-800 dark:text-green-200 mb-2">Sequence Overview</h3>
+                    <p className="text-sm text-green-700 dark:text-green-300">
+                      Total sequence length: {sequencePlan.totalDays} days
+                    </p>
+                  </div>
+
+                  {contextItems.length > 0 && (
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">Selected Context Items</h3>
+                      <div className="grid gap-3">
+                        {contextItems.map((item, index) => (
+                          <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950 relative">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                                {item.title}
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">
+                                  {item.category}
+                                </span>
+                                <Button
+                                  type="button"
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => {
+                                    setContextItems(prev => prev.filter((_, i) => i !== index))
+                                    toast({
+                                      title: "Context Item Removed",
+                                      description: `${item.title} has been removed from the sequence.`,
+                                    })
+                                  }}
+                                  className="h-6 w-6 p-0 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
+                                >
+                                  <X className="h-3 w-3" />
+                                </Button>
+                              </div>
+                            </div>
+                            <p className="text-sm text-blue-700 dark:text-blue-300">
+                              {item.content}
+                            </p>
+                            {item.industry && item.industry.length > 0 && (
+                              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                Industries: {item.industry.join(', ')}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <h3 className="font-semibold">Email Sequence</h3>
+                    {sequencePlan.emails.map((email, index) => (
+                      <div key={index} className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-medium">Day {email.day}</span>
+                          <span className="text-xs text-muted-foreground">Email {index + 1}</span>
+                        </div>
+                        <h4 className="font-medium">{email.subject}</h4>
+                        <p className="text-sm text-muted-foreground mt-1">{email.purpose}</p>
+                        <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
+                          <strong>Signal Integration:</strong> {email.signalIntegration}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {sequencePlan.linkedInMessages.length > 0 && (
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">LinkedIn Messages</h3>
+                      {sequencePlan.linkedInMessages.map((message, index) => (
+                        <div key={index} className="p-4 border rounded-lg bg-blue-50 dark:bg-blue-950">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium">Day {message.day}</span>
+                            <span className="text-xs text-muted-foreground">LinkedIn {index + 1}</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground">{message.purpose}</p>
+                          <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
+                            <strong>Signal Integration:</strong> {message.signalIntegration}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex justify-between">
+                    <Button variant="outline" onClick={handlePrevious}>
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Previous
+                    </Button>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        onClick={async () => {
+                          setSequencePlan(null)
+                          setIsGeneratingPlan(true)
+                          try {
+                            const response = await fetch('/api/generate-sequence-plan', {
+                              method: 'POST',
+                              headers: {
+                                'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({
+                                signal,
+                                persona,
+                                painPoints,
+                                emailCount,
+                                linkedInCount
+                              }),
+                            })
+
+                            if (!response.ok) {
+                              const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                              throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate sequence plan`)
+                            }
+
+                            const data = await response.json()
+                            setSequencePlan(data.sequencePlan)
+                            setContextItems(data.contextItems || [])
+                            
+                            toast({
+                              title: "Sequence Plan Regenerated!",
+                              description: `Created new ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
+                            })
+                          } catch (error) {
+                            console.error('Error regenerating sequence plan:', error)
+                            toast({
+                              title: "Regeneration Failed",
+                              description: "Failed to regenerate sequence plan. Please try again.",
+                              variant: "destructive",
+                            })
+                          } finally {
+                            setIsGeneratingPlan(false)
+                          }
+                        }}
+                        disabled={isGeneratingPlan}
+                      >
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Retry
+                      </Button>
+                      <Button 
+                        onClick={handleNext} 
+                        disabled={!canProceedToNext()}
+                        className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
+                      >
+                        Next: Generate
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               )}
             </CardContent>
           </Card>
         )}
 
-        {/* Step 3: Prompt Review */}
+        {/* Step 3: Generate */}
         {currentStep >= 3 && (
           <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-xl">
                 <div className="w-10 h-10 bg-purple-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-purple-600/25">3</div>
-                Prompt Review
-              </CardTitle>
-              <CardDescription className="text-base text-muted-foreground">This is exactly what will be sent to ChatGPT to generate your email sequence.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <PromptPreview
-                signal={signal}
-                persona={persona}
-                painPoints={painPoints}
-                selectedContextItems={selectedContextItems}
-                onClose={() => {}} // No close button in inline flow
-              />
-
-              {currentStep === 3 && (
-                <div className="mt-6 space-y-4">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <Label htmlFor="model-select" className="text-sm font-medium">
-                        AI Model:
-                      </Label>
-                      {selectedModel.startsWith('gpt-5') && (
-                        <div className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 px-2 py-1 rounded-md">
-                          ⚡ GPT-5-nano hybrid approach (2x faster)
-                        </div>
-                      )}
-                      <Select value={selectedModel} onValueChange={setSelectedModel}>
-                      <SelectTrigger id="model-select" className="w-48">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="gpt-5">GPT-5 (Fast Approach - Single Call)</SelectItem>
-                        <SelectItem value="gpt-5-mini">GPT-5 Mini (Balanced)</SelectItem>
-                        <SelectItem value="gpt-5-nano">GPT-5 Nano (Fastest)</SelectItem>
-                        <SelectItem value="gpt-4o">GPT-4o (Reliable Fallback)</SelectItem>
-                        <SelectItem value="gpt-4o-mini">GPT-4o Mini (Fast & Reliable)</SelectItem>
-                        <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
-                        <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    </div>
-                    
-                    <div className="flex items-center gap-4">
-                      <Label htmlFor="qa-toggle" className="text-sm font-medium">
-                        Quality Assurance:
-                      </Label>
-                      <div className="flex items-center gap-2">
-                        <Switch
-                          id="qa-toggle"
-                          checked={enableQA}
-                          onCheckedChange={setEnableQA}
-                        />
-                        <Label htmlFor="qa-toggle" className="text-sm text-muted-foreground">
-                          {enableQA ? 'Enabled (auto-optimize emails)' : 'Disabled (faster generation)'}
-                        </Label>
-                      </div>
-                      {enableQA && (
-                        <div className="text-xs text-blue-600 bg-blue-50 dark:bg-blue-950 dark:text-blue-400 px-2 py-1 rounded-md">
-                           🔍 QA will analyze and auto-fix email quality (fast + single call)
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-between">
-                    <Button variant="outline" onClick={handlePrevious}>
-                      Previous
-                    </Button>
-                    <Button 
-                      onClick={handleGenerate} 
-                      disabled={!canProceedToNext() || isGenerating}
-                      className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
-                    >
-                      {isGenerating ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          {selectedModel.startsWith('gpt-5') ? 'Generating with hybrid approach...' : 'Generating...'}
-                        </>
-                      ) : (
-                        <>
-                          <RefreshCw className="mr-2 h-4 w-4" />
-                          Generate Email
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Skeleton UI for Step 4 when generating */}
-        {isGenerating && (
-          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-xl">
-                <div className="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-orange-600/25">4</div>
-                Output & Edit
+                <Calendar className="h-5 w-5 text-purple-600" />
+                Generate
               </CardTitle>
               <CardDescription className="text-base text-muted-foreground">
-                {selectedModel.startsWith('gpt-5') 
-                  ? 'Generating your email sequence with hybrid approach (2x faster)...' 
-                  : 'Generating your email sequence...'}
+                Generate your complete sequence with AI optimization
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Status Display */}
-              {generationStatus && (
-                <div className="p-4 bg-muted/50 rounded-lg border mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">Progress</span>
-                    <span className="text-sm text-muted-foreground">{generationStatus.progress}%</span>
-                  </div>
-                  <div className="w-full bg-muted rounded-full h-2 mb-3">
-                    <div 
-                      className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
-                      style={{ width: `${generationStatus.progress}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {generationStatus.message}
-                  </p>
-                </div>
-              )}
-              
-              {/* Email skeleton */}
-              <div className="space-y-3">
-                <Skeleton className="h-6 w-3/4" />
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-5/6" />
-                  <Skeleton className="h-4 w-4/5" />
-                </div>
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
-                </div>
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-5/6" />
-                  <Skeleton className="h-4 w-2/3" />
-                </div>
-                <Skeleton className="h-8 w-1/3" />
-              </div>
-              
-              {/* LinkedIn message skeleton */}
-              <div className="space-y-3 pt-4 border-t">
-                <Skeleton className="h-5 w-1/2" />
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-4/5" />
-                </div>
-              </div>
-              
-              {/* Quality score skeleton */}
-              <div className="space-y-3 pt-4 border-t">
-                <Skeleton className="h-5 w-1/3" />
-                <Skeleton className="h-3 w-full" />
-                <Skeleton className="h-3 w-2/3" />
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Step 4: Output & Edit */}
-        {currentStep >= 4 && (
-          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-xl">
-                <div className="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-orange-600/25">4</div>
-                Output & Edit
-              </CardTitle>
-              <CardDescription className="text-base text-muted-foreground">Review your generated email sequence and request edits if needed.</CardDescription>
-            </CardHeader>
             <CardContent className="space-y-6">
-              <EmailOutput 
-                email={generatedEmail}
-                originalEmail={originalEmail}
-                qualityReport={qualityReport}
-                optimized={qualityReport ? !qualityReport.passed : false}
-                fixesApplied={fixesApplied}
-              />
-
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="editFeedback">Request Changes (Optional)</Label>
-                  <Textarea
-                    id="editFeedback"
-                    placeholder="Describe what you'd like to change about the email sequence..."
-                    value={editFeedback}
-                    onChange={(e) => setEditFeedback(e.target.value)}
-                    rows={3}
-                    className="resize-none"
-                  />
-                </div>
-
-                <div className="flex justify-between">
-                  <Button variant="outline" onClick={handlePrevious}>
-                    Previous
-                  </Button>
+              {generatedMessages.length === 0 ? (
+                <div className="text-center py-8">
                   <Button 
-                    onClick={handleEditRequest} 
-                    disabled={isEditing || !editFeedback.trim()}
-                    className="bg-orange-600 hover:bg-orange-700 text-white shadow-lg shadow-orange-600/25"
+                    onClick={async () => {
+                      setIsGeneratingMessages(true)
+                      try {
+                        const response = await fetch('/api/generate-messages', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({
+                            signal,
+                            persona,
+                            painPoints,
+                            sequencePlan
+                          }),
+                        })
+
+                        if (!response.ok) {
+                          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                          throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate messages`)
+                        }
+
+                        const data = await response.json()
+                        setGeneratedMessages(data.messages)
+                        
+                        toast({
+                          title: "Messages Generated!",
+                          description: `Created ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages.`,
+                        })
+                      } catch (error) {
+                        console.error('Error generating messages:', error)
+                        toast({
+                          title: "Generation Failed",
+                          description: "Failed to generate messages. Please try again.",
+                          variant: "destructive",
+                        })
+                      } finally {
+                        setIsGeneratingMessages(false)
+                      }
+                    }}
+                    disabled={isGeneratingMessages}
+                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
                   >
-                    {isEditing ? (
+                    {isGeneratingMessages ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Updating...
+                        Generating Messages...
                       </>
                     ) : (
                       <>
-                        <Edit3 className="mr-2 h-4 w-4" />
-                        Request Changes
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        Generate Complete Sequence
                       </>
                     )}
                   </Button>
                 </div>
-              </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-semibold">Generated Messages</h3>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" onClick={handlePrevious}>
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Previous
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={async () => {
+                          setIsGeneratingMessages(true)
+                          setGeneratedMessages([])
+                          try {
+                            const response = await fetch('/api/generate-messages', {
+                              method: 'POST',
+                              headers: {
+                                'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({
+                                signal,
+                                persona,
+                                painPoints,
+                                sequencePlan
+                              }),
+                            })
+
+                            if (!response.ok) {
+                              const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                              throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate messages`)
+                            }
+
+                            const data = await response.json()
+                            setGeneratedMessages(data.messages)
+                            
+                            toast({
+                              title: "Messages Regenerated!",
+                              description: `Created new ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages.`,
+                            })
+                          } catch (error) {
+                            console.error('Error regenerating messages:', error)
+                            toast({
+                              title: "Regeneration Failed",
+                              description: "Failed to regenerate messages. Please try again.",
+                              variant: "destructive",
+                            })
+                          } finally {
+                            setIsGeneratingMessages(false)
+                          }
+                        }}
+                        disabled={isGeneratingMessages}
+                      >
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        Regenerate
+                      </Button>
+                    </div>
+                  </div>
+
+                  {generatedMessages.map((message) => (
+                    <div key={message.id} className="p-4 border rounded-lg">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium">Day {message.day}</span>
+                          <span className={`px-2 py-1 rounded-full text-xs ${
+                            message.type === 'email' 
+                              ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
+                              : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          }`}>
+                            {message.type === 'email' ? 'Email' : 'LinkedIn'}
+                          </span>
+                          {message.isOptimized && (
+                            <span className="px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                              Optimized
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex gap-2">
+                          <Button 
+                            variant={message.isOptimized ? "default" : "outline"} 
+                            size="sm"
+                            onClick={async () => {
+                              if (message.isOptimized) {
+                                // Show original content
+                                setGeneratedMessages(prev => prev.map(m => 
+                                  m.id === message.id ? { 
+                                    ...m, 
+                                    isOptimized: false,
+                                    content: m.originalContent || m.content
+                                  } : m
+                                ))
+                                
+                                toast({
+                                  title: "Showing Original",
+                                  description: "Now displaying the original version of this message.",
+                                })
+                              } else {
+                                // Optimize the message
+                                setGeneratedMessages(prev => prev.map(m => 
+                                  m.id === message.id ? { ...m, isOptimizing: true } : m
+                                ))
+                                
+                                try {
+                                  const response = await fetch('/api/optimize-message', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                      messageId: message.id,
+                                      originalContent: message.originalContent,
+                                      type: message.type,
+                                      signal,
+                                      persona,
+                                      painPoints
+                                    }),
+                                  })
+
+                                  if (!response.ok) {
+                                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+                                    throw new Error(errorData.error || `HTTP ${response.status}: Failed to optimize message`)
+                                  }
+
+                                  const data = await response.json()
+                                  
+                                  setGeneratedMessages(prev => prev.map(m => 
+                                    m.id === message.id ? { 
+                                      ...m, 
+                                      content: data.optimizedContent,
+                                      isOptimized: true,
+                                      isOptimizing: false
+                                    } : m
+                                  ))
+                                  
+                                  toast({
+                                    title: "Message Optimized with GPT-5 Nano!",
+                                    description: "Your message has been enhanced using advanced AI for better engagement.",
+                                  })
+                                } catch (error) {
+                                  console.error('Error optimizing message:', error)
+                                  setGeneratedMessages(prev => prev.map(m => 
+                                    m.id === message.id ? { ...m, isOptimizing: false } : m
+                                  ))
+                                  toast({
+                                    title: "Optimization Failed",
+                                    description: "Failed to optimize message. Please try again.",
+                                    variant: "destructive",
+                                  })
+                                }
+                              }
+                            }}
+                            disabled={message.isOptimizing}
+                          >
+                            {message.isOptimizing ? (
+                              <>
+                                <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+                                Optimizing...
+                              </>
+                            ) : message.isOptimized ? (
+                              <>
+                                <RefreshCw className="mr-2 h-3 w-3" />
+                                Show Original
+                              </>
+                            ) : (
+                              <>
+                                <Sparkles className="mr-2 h-3 w-3" />
+                                Optimize
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="bg-muted/50 rounded-md p-3">
+                        <pre className="text-sm whitespace-pre-wrap font-mono">
+                          {message.content}
+                        </pre>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         )}
-
       </main>
-
-      {/* Preamble Editor */}
-      {showPreambleEditor && (
-        <PreambleEditor onClose={() => setShowPreambleEditor(false)} />
-      )}
 
       <Toaster />
     </div>

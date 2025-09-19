@@ -8160,3 +8160,234 @@ Nice to see you exploring our case studies—sounds like you're building a solid
       "purpose": "Introduce value and share a success story that resonates with the target's pa...
  POST /api/generate-sequence-plan 200 in 11647ms
  ✓ Compiled in 572ms (1323 modules)
+ ✓ Compiled in 719ms (703 modules)
+ ✓ Compiled in 154ms (703 modules)
+ ✓ Compiled in 267ms (703 modules)
+ ✓ Compiled in 362ms (703 modules)
+ ✓ Compiled in 160ms (703 modules)
+ ⨯ ./app/page.tsx
+Module parse failed: Identifier 'handlePainPointChange' has already been declared (341:10)
+|         setPainPoints(detectedPainPoints.slice(0, 5));
+|     };
+>     const handlePainPointChange = (painPoint, checked)=>{
+|         if (checked) {
+|             setPainPoints([
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+ ⨯ ./app/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/page.tsx[0m:102:1]
+ [2m 99[0m |   }
+ [2m100[0m | 
+ [2m101[0m |   return (
+ [2m102[0m |     <div className="min-h-screen bg-background flex flex-col">
+     : [35;1m     ^^^[0m
+ [2m103[0m |       {/* Application Header */}
+ [2m104[0m |       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+ [2m105[0m |         <div className="max-w-6xl mx-auto px-6 py-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
