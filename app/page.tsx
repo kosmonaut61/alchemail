@@ -98,6 +98,9 @@ export default function AlchemailApp20() {
     }
   }
 
+  // Get the selected persona data
+  const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
+
   // Auto-detect pain points based on signal text
   const autoDetectPainPoints = (signalText: string, personaData: any) => {
     if (!signalText || !personaData?.painPoints) return []
@@ -305,7 +308,6 @@ export default function AlchemailApp20() {
                     </div>
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
                       {(() => {
-                        const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
                         if (!selectedPersona) return null
                         
                         return selectedPersona.painPoints.map((painPoint, index) => (
