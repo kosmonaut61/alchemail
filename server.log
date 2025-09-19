@@ -8395,3 +8395,63 @@ Import trace for requested module:
  ✓ Compiled in 147ms (709 modules)
  ✓ Compiled in 256ms (709 modules)
  ✓ Compiled in 186ms (709 modules)
+ ✓ Compiled in 709ms (764 modules)
+ ✓ Compiled in 247ms (709 modules)
+ ✓ Compiled in 181ms (709 modules)
+ ✓ Compiled /api/generate-sequence-plan in 260ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: write me a campaign for leaders of operations in automotive...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Boosting Operational Efficiency in Automotive",
+      "purpose": "Introduce the value of ProcureOS for cost optimization",
+      "signalIntegrat...
+ POST /api/generate-sequence-plan 200 in 9401ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: write me a campaign for leaders of operations in automotive...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings for Your Operations Team",
+      "purpose": "Introduce the value of ProcureOS for cost optimization in operations.",
+      "...
+ POST /api/generate-sequence-plan 200 in 13773ms
+ ✓ Compiled in 466ms (764 modules)
+ ✓ Compiled in 245ms (709 modules)
+ ✓ Compiled in 236ms (709 modules)
+ ✓ Compiled /api/generate-sequence-plan in 135ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: write me a campaign for leaders of operations in automotive...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Operations",
+      "purpose": "Introduce value proposition and relevant case studies",
+      "signalIntegration": "I'm re...
+ POST /api/generate-sequence-plan 200 in 11837ms
+ ✓ Compiled in 385ms (971 modules)
+ ✓ Compiled in 669ms (764 modules)
+ ✓ Compiled /api/generate-sequence-plan in 127ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: write me a campaign for leaders of operations in automotive...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Savings in Operations",
+      "purpose": "Introduce the value of ProcureOS for operations leaders.",
+      "signalIntegration...
+ POST /api/generate-sequence-plan 200 in 13678ms
+ ✓ Compiled in 550ms (971 modules)
