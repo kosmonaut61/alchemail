@@ -146,6 +146,16 @@ MESSAGE VARIATION REQUIREMENTS:
 - Ensure each message feels unique and different from the others with a cohesive story arc
 - Make the differences obvious in the signalIntegration field
 
+DETAILED MESSAGE OUTLINES REQUIRED:
+- Create a comprehensive messageOutline for each email and LinkedIn message
+- Each outline must include exact opening lines, signal mentions, stat usage, value props, and CTAs
+- The signalMention field should contain the EXACT phrase to reference the signal
+- The opening field should contain the EXACT first line or approach for the message
+- The statUsage field should specify HOW to incorporate the specific statistics
+- The valueProp field should define the core value proposition for that specific message
+- The cta field should specify the call-to-action approach
+- Each message outline should be unique and build upon the previous message in the sequence
+
 SIGNAL INTEGRATION REQUIREMENTS:
 - Keep signal integration instructions SIMPLE and DIRECT
 - Use single-action instructions, not complex multi-part directions
@@ -165,16 +175,30 @@ Return your response as a JSON object with this exact structure:
       "day": 1,
       "subject": "Subject line here",
       "purpose": "Purpose of this email",
-      "signalIntegration": "Unique approach for this message (question/story/direct value)",
-      "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)"
+      "signalIntegration": "Exactly how to mention the signal in this message",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)",
+      "messageOutline": {
+        "opening": "Exact opening line or approach",
+        "signalMention": "Exact phrase to reference the signal",
+        "statUsage": "How to incorporate the specific stats",
+        "valueProp": "Core value proposition for this message",
+        "cta": "Call to action approach"
+      }
     }
   ],
   "linkedInMessages": [
     {
       "day": 3,
       "purpose": "Purpose of this LinkedIn message",
-      "signalIntegration": "Unique approach for this message (question/story/direct value)",
-      "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)"
+      "signalIntegration": "Exactly how to mention the signal in this message",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)",
+      "messageOutline": {
+        "opening": "Exact opening line or approach",
+        "signalMention": "Exact phrase to reference the signal",
+        "statUsage": "How to incorporate the specific stats",
+        "valueProp": "Core value proposition for this message",
+        "cta": "Call to action approach"
+      }
     }
   ],
   "totalDays": 8

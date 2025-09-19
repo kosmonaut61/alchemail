@@ -7818,3 +7818,66 @@ Import trace for requested module:
  ✓ Compiled in 370ms (1326 modules)
  ✓ Compiled in 465ms (1116 modules)
  ✓ Compiled in 467ms (1061 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ✓ Compiled in 756ms (1061 modules)
+ ✓ Compiled in 577ms (1061 modules)
+ ✓ Compiled in 822ms (1061 modules)
+ ✓ Compiled in 272ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 333ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: New CEO at a large firm – likely to drive major transformations and seek immediate performance impro...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Transforming Operations in a New Era",
+      "purpose": "Introduce the value of ProcureOS in light of the new CEO's potential changes.",
+      "...
+ POST /api/generate-sequence-plan 200 in 11399ms
+ ✓ Compiled in 792ms (1116 modules)
+ ✓ Compiled /api/generate-messages in 243ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: New CEO at a large firm – likely to drive major transformations and seek immediate performance impro...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Finance C-Suite Tone Profile, Finance Upper Management Pain Points, Finance Upper Management Tone Profile, Finance Middle Management Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3395ms
+ ✓ Compiled /api/generate-sequence-plan in 141ms (265 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Savings in Your Operations",
+      "purpose": "Introduce our solution and its impact on cost optimization.",
+      "signalInt...
+ POST /api/generate-sequence-plan 200 in 14895ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings for Your Operations",
+      "purpose": "Introduce ProcureOS and highlight potential savings.",
+      "signalIntegration": "M...
+ POST /api/generate-sequence-plan 200 in 11087ms
+🚀 Generating messages for sequence...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance Entry Level Pain Points, Finance Intern Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 8058ms

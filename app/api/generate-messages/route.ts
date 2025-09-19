@@ -161,6 +161,15 @@ TARGET PERSONA:
       - Signal Integration: ${emailPlan.signalIntegration}
       - Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
 
+      DETAILED MESSAGE OUTLINE (FOLLOW EXACTLY):
+      ${emailPlan.messageOutline ? `
+      - Opening: ${emailPlan.messageOutline.opening}
+      - Signal Mention: ${emailPlan.messageOutline.signalMention}
+      - Stat Usage: ${emailPlan.messageOutline.statUsage}
+      - Value Prop: ${emailPlan.messageOutline.valueProp}
+      - CTA: ${emailPlan.messageOutline.cta}
+      ` : 'No detailed outline provided - use general guidelines'}
+
       CRITICAL SIGNAL INTEGRATION REQUIREMENT:
       The signalIntegration field tells you EXACTLY how to integrate the signal. You MUST follow it precisely.
       
@@ -324,6 +333,15 @@ LINKEDIN MESSAGE SPECIFICATIONS:
       - Purpose: ${linkedInPlan.purpose}
       - Signal Integration: ${linkedInPlan.signalIntegration}
       - Specific Stats to Feature: ${linkedInPlan.specificStats || 'Use relevant stats from context'}
+
+      DETAILED MESSAGE OUTLINE (FOLLOW EXACTLY):
+      ${linkedInPlan.messageOutline ? `
+      - Opening: ${linkedInPlan.messageOutline.opening}
+      - Signal Mention: ${linkedInPlan.messageOutline.signalMention}
+      - Stat Usage: ${linkedInPlan.messageOutline.statUsage}
+      - Value Prop: ${linkedInPlan.messageOutline.valueProp}
+      - CTA: ${linkedInPlan.messageOutline.cta}
+      ` : 'No detailed outline provided - use general guidelines'}
 
       CRITICAL: You MUST follow the Signal Integration instructions exactly. The signalIntegration field tells you exactly how to integrate the signal - follow it precisely.
 
