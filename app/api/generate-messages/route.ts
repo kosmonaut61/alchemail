@@ -236,7 +236,9 @@ TARGET PERSONA:
       - Open with signal acknowledgment (if applicable)
       - State the challenge/opportunity in 1-2 short sentences
       - Present the specific stat/result in context
-      - End with clear, hyperlinked CTA using markdown format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+      - End with clear, hyperlinked CTA using NATURAL link integration
+      - Weave links into sentences naturally (2-4 key words), not entire sentence links
+      - Examples: "Would you be open to a [quick chat](url) to explore this?" or "Want to [schedule a call](url) this week?"
       - Keep sentences short and punchy
       - Use active voice and direct language
       - Avoid corporate jargon and formal phrases
@@ -464,7 +466,8 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - Use different stats and examples than the emails
       - Avoid repetitive signal integration - be more creative
       - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
-      - Include CTAs as hyperlinked markdown: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)`
+      - Use NATURAL link integration: weave links into sentences (2-4 key words)
+      - Examples: "Want to [jump on a call](url) this week?" or "Should we [connect](url) to discuss?"`
 
       // Log the complete prompt for auditing
       console.log('\n' + '='.repeat(80))

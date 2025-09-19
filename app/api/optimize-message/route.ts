@@ -197,13 +197,16 @@ VARIED OPENING APPROACHES:
 - LinkedIn 3: "One question about your freight processes"
 
 Call-to-Action (CTA) Rules:
-- ALWAYS format CTAs as clickable hyperlinks using markdown format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- NATURAL LINK INTEGRATION: Weave links naturally into sentences, not as entire sentence links
+- Link only 2-4 key words in the middle of sentences, not entire phrases
+- Make the link feel like a natural part of the conversation flow
 - CRITICAL: Never show URLs as plain text - always wrap them in markdown link format [text](url)
-- Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
-- Examples of CORRECT formatting:
-  * [Schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-  * [Let's connect](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-  * [Book a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Examples of NATURAL link integration:
+  * "Would you be open to a [quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
+  * "I'd love to [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) and walk through this with you."
+  * "Want to [jump on a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) this week?"
+  * "Should we [connect this week](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to discuss?"
+- AVOID: Entire sentence links like "[Would you be open to a quick chat to explore this further?](url)"
 
 MERGE FIELD FORMATTING:
 - Use dynamic variables for personalization (see list below)
