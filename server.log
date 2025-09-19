@@ -6017,3 +6017,2146 @@ Hi {{contact.first_name}}, cost pressure is real for ops teams. End-to-end freig
 📊 STATUS UPDATE: complete (100%) - Email sequence ready!
 ✅ processRequest completed
  POST /api/generate-email-enhanced 200 in 182210ms
+ ✓ Compiled in 1570ms (1116 modules)
+ ✓ Compiled in 474ms (1061 modules)
+ ✓ Compiled in 504ms (1061 modules)
+ ✓ Compiled in 213ms (1061 modules)
+ ✓ Compiled in 215ms (1061 modules)
+ ✓ Compiled in 172ms (1061 modules)
+ ✓ Compiled in 484ms (1061 modules)
+ ✓ Compiled in 205ms (1061 modules)
+ ✓ Compiled in 605ms (1061 modules)
+ ✓ Compiled in 211ms (1061 modules)
+ ⚠ ./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'buildDynamicContext' is not exported from '@/lib/context-repository' (imported as 'buildDynamicContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+
+./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'getPersonaContext' is not exported from '@/lib/personas' (imported as 'getPersonaContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+❌ ===== HYBRID GENERATION ERROR ======
+❌ Error: TypeError: (0 , _lib_context_repository__WEBPACK_IMPORTED_MODULE_3__.buildDynamicContext) is not a function
+    at POST (app/api/generate-email-hybrid/route.ts:19:53)
+  17 |
+  18 |     // Build context and persona info
+> 19 |     const dynamicContext = await buildDynamicContext(contextItems || [])
+     |                                                     ^
+  20 |     const personaContext = getPersonaContext(persona)
+  21 |     const preamble = getPreamble()
+  22 |
+ POST /api/generate-email-hybrid 500 in 581ms
+ ○ Compiling /api/generate-email-hybrid ...
+ ⚠ ./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'getPersonaContext' is not exported from '@/lib/personas' (imported as 'getPersonaContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+ ⚠ ./app/api/generate-email-hybrid/route.ts
+Attempted import error: 'getPersonaContext' is not exported from '@/lib/personas' (imported as 'getPersonaContext').
+
+Import trace for requested module:
+./app/api/generate-email-hybrid/route.ts
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+❌ ===== HYBRID GENERATION ERROR ======
+❌ Error: TypeError: (0 , _lib_personas__WEBPACK_IMPORTED_MODULE_3__.getPersonaContext) is not a function
+    at POST (app/api/generate-email-hybrid/route.ts:20:45)
+  18 |     // Build context and persona info
+  19 |     const dynamicContext = await buildDynamicContext(contextItems || [])
+> 20 |     const personaContext = getPersonaContext(persona)
+     |                                             ^
+  21 |     const preamble = getPreamble()
+  22 |
+  23 |     // Batch 1: Generate Email 1 + LinkedIn Message 1
+ POST /api/generate-email-hybrid 500 in 147ms
+ ✓ Compiled /api/generate-email-hybrid in 395ms (1462 modules)
+ ✓ Compiled in 290ms (1463 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 38935ms
+ ✓ Compiled in 519ms (1463 modules)
+ ✓ Compiled in 649ms (1061 modules)
+ ✓ Compiled in 194ms (1061 modules)
+ ✓ Compiled in 383ms (1061 modules)
+ ✓ Compiled in 345ms (1061 modules)
+ ✓ Compiled in 482ms (1061 modules)
+ ✓ Compiled in 314ms (1061 modules)
+ ✓ Compiled in 272ms (1061 modules)
+ ✓ Compiled in 429ms (1061 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'implementing hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 45414ms
+ ✓ Compiled in 430ms (1061 modules)
+ ✓ Compiled in 421ms (1061 modules)
+ ✓ Compiled in 1670ms (1116 modules)
+ ✓ Compiled in 409ms (1061 modules)
+ ✓ Compiled in 191ms (1061 modules)
+ ✓ Compiled in 331ms (1061 modules)
+ ✓ Compiled in 227ms (1061 modules)
+ ✓ Compiled in 247ms (1061 modules)
+ ✓ Compiled /api/generate-email-hybrid in 194ms (402 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test fixed hybrid approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 68172ms
+ ✓ Compiled in 663ms (1116 modules)
+ ✓ Compiled in 357ms (1061 modules)
+ ✓ Compiled in 584ms (1061 modules)
+ ✓ Compiled in 403ms (1061 modules)
+ ○ Compiling /api/generate-email-hybrid ...
+ ✓ Compiled /api/generate-email-hybrid in 707ms (402 modules)
+🚀 ===== HYBRID EMAIL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test strict word count rules',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+📧 Starting Batch 1: Email 1 + LinkedIn Message 1
+🤖 Generating Batch 1 with model: gpt-5
+✅ Batch 1 generated with gpt-5-nano
+🔍 Running QA for Batch 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2
+🤖 Generating Batch 2 with model: gpt-5
+✅ Batch 2 generated with gpt-5-nano
+🔍 Running QA for Batch 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Hybrid generation complete!
+📊 Total emails generated: 4
+📊 LinkedIn messages generated: 2
+ POST /api/generate-email-hybrid 200 in 115229ms
+ ✓ Compiled in 782ms (1116 modules)
+ ✓ Compiled in 1728ms (1102 modules)
+ ✓ Compiled in 374ms (1061 modules)
+ ✓ Compiled in 186ms (1061 modules)
+ ✓ Compiled in 543ms (1061 modules)
+ ✓ Compiled in 559ms (1061 modules)
+ ✓ Compiled in 221ms (1061 modules)
+ ✓ Compiled in 247ms (1061 modules)
+ ✓ Compiled in 453ms (1061 modules)
+ ✓ Compiled in 202ms (1061 modules)
+ ✓ Compiled in 670ms (1061 modules)
+ ✓ Compiled /api/generate-email-parallel in 233ms (1449 modules)
+🚀 ===== PARALLEL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test parallel approach with strict rules',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Starting Phase 1: Parallel Generation of All Messages...
+📧 Generating Email 1 with gpt-5-nano...
+📧 Generating Email 2 with gpt-5-nano...
+📧 Generating Email 3 with gpt-5-nano...
+📧 Generating Email 4 with gpt-5-nano...
+💼 Generating LinkedIn 1 with gpt-5-nano...
+💼 Generating LinkedIn 2 with gpt-5-nano...
+✅ LinkedIn 2 generated successfully
+✅ LinkedIn 1 generated successfully
+✅ Email 2 generated successfully
+✅ Email 4 generated successfully
+✅ Email 1 generated successfully
+✅ Email 3 generated successfully
+✅ Phase 1 Complete: All messages generated in parallel
+🎯 Starting Phase 2: Creating Sequence Flow Plan...
+📋 Creating sequence flow plan...
+✅ Sequence flow plan created
+✅ Phase 2 Complete: Sequence flow plan created
+🎯 Starting Phase 3: Individual QA with gpt-5-mini...
+🔍 QA'ing Email 1 with gpt-5-mini...
+🔍 QA'ing Email 2 with gpt-5-mini...
+🔍 QA'ing Email 3 with gpt-5-mini...
+🔍 QA'ing Email 4 with gpt-5-mini...
+🔍 QA'ing LinkedIn 1 with gpt-5-mini...
+🔍 QA'ing LinkedIn 2 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 QA complete (score: 95)
+✅ Email 2 QA complete (score: 90)
+✅ Email 3 QA complete (score: 90)
+✅ Email 4 QA complete (score: 90)
+✅ LinkedIn 1 QA complete (score: 90)
+✅ LinkedIn 2 QA complete (score: 90)
+✅ Phase 3 Complete: All messages QA'd individually
+🎉 ===== PARALLEL GENERATION COMPLETE =====
+ POST /api/generate-email-parallel 200 in 77352ms
+ ✓ Compiled in 616ms (1116 modules)
+ ✓ Compiled in 801ms (1061 modules)
+ ✓ Compiled in 335ms (1061 modules)
+ ✓ Compiled in 383ms (1061 modules)
+ ✓ Compiled in 395ms (1061 modules)
+ ✓ Compiled /api/generate-email-parallel in 175ms (402 modules)
+🚀 ===== PARALLEL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test 95-150 word range',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Starting Phase 1: Parallel Generation of All Messages...
+📧 Generating Email 1 with gpt-5-nano...
+📧 Generating Email 2 with gpt-5-nano...
+📧 Generating Email 3 with gpt-5-nano...
+📧 Generating Email 4 with gpt-5-nano...
+💼 Generating LinkedIn 1 with gpt-5-nano...
+💼 Generating LinkedIn 2 with gpt-5-nano...
+✅ LinkedIn 2 generated successfully
+✅ LinkedIn 1 generated successfully
+✅ Email 4 generated successfully
+✅ Email 1 generated successfully
+✅ Email 2 generated successfully
+✅ Email 3 generated successfully
+✅ Phase 1 Complete: All messages generated in parallel
+🎯 Starting Phase 2: Creating Sequence Flow Plan...
+📋 Creating sequence flow plan...
+✅ Sequence flow plan created
+✅ Phase 2 Complete: Sequence flow plan created
+🎯 Starting Phase 3: Individual QA with gpt-5-mini...
+🔍 QA'ing Email 1 with gpt-5-mini...
+🔍 QA'ing Email 2 with gpt-5-mini...
+🔍 QA'ing Email 3 with gpt-5-mini...
+🔍 QA'ing Email 4 with gpt-5-mini...
+🔍 QA'ing LinkedIn 1 with gpt-5-mini...
+🔍 QA'ing LinkedIn 2 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 QA complete (score: 90)
+✅ Email 2 QA complete (score: 90)
+✅ Email 3 QA complete (score: 90)
+✅ Email 4 QA complete (score: 90)
+✅ LinkedIn 1 QA complete (score: 90)
+✅ LinkedIn 2 QA complete (score: 90)
+✅ Phase 3 Complete: All messages QA'd individually
+🎉 ===== PARALLEL GENERATION COMPLETE =====
+ POST /api/generate-email-parallel 200 in 106236ms
+ ✓ Compiled in 497ms (1116 modules)
+ ✓ Compiled in 670ms (1061 modules)
+ ✓ Compiled in 185ms (1061 modules)
+ ✓ Compiled in 472ms (1061 modules)
+ ✓ Compiled in 330ms (1061 modules)
+ ✓ Compiled in 180ms (1061 modules)
+ ✓ Compiled in 471ms (1061 modules)
+ ✓ Compiled in 484ms (1061 modules)
+ ✓ Compiled in 280ms (1061 modules)
+ ✓ Compiled in 421ms (1061 modules)
+ ✓ Compiled in 185ms (1061 modules)
+ ✓ Compiled /api/generate-email-parallel in 178ms (402 modules)
+🚀 ===== PARALLEL GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test sequential approach',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Starting Phase 1: Sequential Generation of Messages...
+📧 Generating Email 1...
+📧 Generating Email 1 with gpt-5-nano...
+✅ Email 1 generated successfully
+📧 Generating Email 2...
+📧 Generating Email 2 with gpt-5-nano...
+✅ Email 2 generated successfully
+📧 Generating Email 3...
+📧 Generating Email 3 with gpt-5-nano...
+✅ Email 3 generated successfully
+📧 Generating Email 4...
+📧 Generating Email 4 with gpt-5-nano...
+✅ Email 4 generated successfully
+💼 Generating LinkedIn 1...
+💼 Generating LinkedIn 1 with gpt-5-nano...
+✅ LinkedIn 1 generated successfully
+💼 Generating LinkedIn 2...
+💼 Generating LinkedIn 2 with gpt-5-nano...
+✅ LinkedIn 2 generated successfully
+✅ Phase 1 Complete: All messages generated sequentially
+🎯 Starting Phase 2: Creating Sequence Flow Plan...
+📋 Creating sequence flow plan...
+✅ Sequence flow plan created
+✅ Phase 2 Complete: Sequence flow plan created
+🎯 Starting Phase 3: Sequential QA with gpt-5-mini...
+🔍 QA'ing Email 1...
+🔍 QA'ing Email 1 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 QA complete (score: 90)
+🔍 QA'ing Email 2...
+🔍 QA'ing Email 2 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 2 QA complete (score: 90)
+🔍 QA'ing Email 3...
+🔍 QA'ing Email 3 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 3 QA complete (score: 90)
+🔍 QA'ing Email 4...
+🔍 QA'ing Email 4 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 4 QA complete (score: 95)
+🔍 QA'ing LinkedIn 1...
+🔍 QA'ing LinkedIn 1 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ LinkedIn 1 QA complete (score: 90)
+🔍 QA'ing LinkedIn 2...
+🔍 QA'ing LinkedIn 2 with gpt-5-mini...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ LinkedIn 2 QA complete (score: 90)
+✅ Phase 3 Complete: All messages QA'd sequentially
+🎉 ===== PARALLEL GENERATION COMPLETE =====
+ POST /api/generate-email-parallel 200 in 242861ms
+ ✓ Compiled in 582ms (1116 modules)
+ ✓ Compiled in 1182ms (1116 modules)
+ ✓ Compiled in 405ms (1061 modules)
+ ✓ Compiled in 180ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled in 182ms (1061 modules)
+ ✓ Compiled in 437ms (1061 modules)
+ ✓ Compiled in 781ms (1061 modules)
+ ✓ Compiled in 198ms (1061 modules)
+ ✓ Compiled in 369ms (1061 modules)
+ ✓ Compiled in 189ms (1061 modules)
+ ✓ Compiled in 389ms (1061 modules)
+ ✓ Compiled in 162ms (1061 modules)
+ ✓ Compiled /api/generate-email-strategic in 290ms (1449 modules)
+🚀 ===== STRATEGIC GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'write a campaign to a vp of transportation in food and beverage who downloaded one of our case studies recently',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: true,
+  model: 'gpt-5'
+}
+🎯 Phase 1: Creating Strategic Sequence Plan...
+📋 Creating strategic sequence plan...
+✅ Sequence plan created
+✅ Phase 1 Complete: Sequence plan created
+🎯 Phase 2: Generating Initial Messages...
+📧 Generating initial email1...
+✅ Initial email1 generated
+📧 Generating initial email2...
+✅ Initial email2 generated
+📧 Generating initial email3...
+✅ Initial email3 generated
+📧 Generating initial email4...
+✅ Initial email4 generated
+📧 Generating initial linkedin1...
+✅ Initial linkedin1 generated
+📧 Generating initial linkedin2...
+✅ Initial linkedin2 generated
+✅ Phase 2 Complete: All initial messages generated
+🎯 Phase 3: QA & Polish with gpt-5-mini...
+🔍 QA'ing and polishing Email 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 1 polished (score: 90)
+🔍 QA'ing and polishing Email 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 2 polished (score: 90)
+🔍 QA'ing and polishing Email 3...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 3 polished (score: 90)
+🔍 QA'ing and polishing Email 4...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ Email 4 polished (score: 90)
+🔍 QA'ing and polishing LinkedIn 1...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ LinkedIn 1 polished (score: 90)
+🔍 QA'ing and polishing LinkedIn 2...
+[QA] AI analysis failed, using basic analysis only: TypeError: Cannot read properties of undefined (reading 'join')
+✅ LinkedIn 2 polished (score: 90)
+✅ Phase 3 Complete: All messages QA'd and polished
+🎉 ===== STRATEGIC GENERATION COMPLETE =====
+ POST /api/generate-email-strategic 200 in 383838ms
+ ✓ Compiled in 724ms (1116 modules)
+ ✓ Compiled in 1511ms (1061 modules)
+ ✓ Compiled /api/generate-email-strategic in 181ms (402 modules)
+🚀 ===== STRATEGIC GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test strategic endpoint',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: false,
+  model: 'gpt-5'
+}
+🎯 Phase 1: Creating Strategic Sequence Plan...
+📋 Creating strategic sequence plan...
+✅ Sequence plan created
+✅ Phase 1 Complete: Sequence plan created
+🎯 Phase 2: Generating Initial Messages...
+📧 Generating initial email1...
+ POST /api/generate-email-strategic 200 in 30092ms
+ ✓ Compiled in 1075ms (1463 modules)
+ ✓ Compiled in 330ms (1061 modules)
+ ✓ Compiled in 574ms (1061 modules)
+ ✓ Compiled in 298ms (1061 modules)
+ ✓ Compiled in 184ms (1061 modules)
+ ✓ Compiled in 442ms (1061 modules)
+ ✓ Compiled in 197ms (1061 modules)
+ ✓ Compiled in 294ms (1061 modules)
+ ✓ Compiled in 186ms (1061 modules)
+ ✓ Compiled in 184ms (1061 modules)
+ ✓ Compiled in 163ms (1061 modules)
+✅ Initial email1 generated
+📧 Generating initial email2...
+ ✓ Compiled in 233ms (1061 modules)
+ ✓ Compiled in 189ms (1061 modules)
+ ✓ Compiled /api/generate-email-fast in 203ms (1364 modules)
+🚀 ===== FAST GENERATION START =====
+📝 Request: {
+  persona: 'operations_upper_management',
+  signal: 'test fast endpoint',
+  painPoints: 1,
+  contextItems: 0,
+  enableQA: false,
+  model: 'gpt-5'
+}
+📧 Generating complete sequence with gpt-5-nano...
+✅ Initial email2 generated
+📧 Generating initial email3...
+ POST /api/generate-email-fast 200 in 60008ms
+ ✓ Compiled in 464ms (1061 modules)
+ ✓ Compiled in 340ms (1061 modules)
+ ✓ Compiled in 466ms (1116 modules)
+✅ Sequence generated successfully
+🎉 ===== FAST GENERATION COMPLETE =====
+✅ Initial email3 generated
+📧 Generating initial email4...
+✅ Initial email4 generated
+📧 Generating initial linkedin1...
+✅ Initial linkedin1 generated
+📧 Generating initial linkedin2...
+✅ Initial linkedin2 generated
+✅ Phase 2 Complete: All initial messages generated
+🎉 ===== STRATEGIC GENERATION COMPLETE =====
+ ✓ Compiled in 604ms (1061 modules)
+ ✓ Compiled in 882ms (1116 modules)
+ ✓ Compiled in 192ms (1061 modules)
+ ✓ Compiled in 306ms (1102 modules)
+ ✓ Compiled in 342ms (1061 modules)
+ ✓ Compiled in 334ms (1102 modules)
+ ✓ Compiled in 190ms (1061 modules)
+ ✓ Compiled in 332ms (1102 modules)
+ ✓ Compiled in 268ms (1061 modules)
+ ✓ Compiled in 274ms (1061 modules)
+ ✓ Compiled in 196ms (1061 modules)
+ ✓ Compiled in 331ms (1061 modules)
+ ✓ Compiled in 304ms (1061 modules)
+ ✓ Compiled in 257ms (1061 modules)
+ ✓ Compiled in 825ms (1061 modules)
+ ✓ Compiled in 191ms (1061 modules)
+ ✓ Compiled in 559ms (1061 modules)
+ ✓ Compiled in 570ms (1061 modules)
+ ✓ Compiled in 177ms (1061 modules)
+ ✓ Compiled in 339ms (1061 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ✓ Compiled in 177ms (1061 modules)
+ ✓ Compiled in 226ms (1061 modules)
+ ✓ Compiled in 250ms (1061 modules)
+ ✓ Compiled in 274ms (1061 modules)
+ ○ Compiling /api/generate-sequence-plan ...
+ ✓ Compiled /api/generate-sequence-plan in 610ms (1308 modules)
+ GET /api/generate-sequence-plan 405 in 832ms
+ ✓ Compiled in 233ms (1061 modules)
+ ✓ Compiled in 193ms (1061 modules)
+ ✓ Compiled in 177ms (1061 modules)
+ ✓ Compiled in 528ms (1061 modules)
+ ✓ Compiled in 189ms (1061 modules)
+ ✓ Compiled in 689ms (1322 modules)
+ ✓ Compiled in 638ms (1116 modules)
+ ✓ Compiled in 386ms (1061 modules)
+ ✓ Compiled in 287ms (1061 modules)
+ ✓ Compiled in 325ms (1061 modules)
+ ✓ Compiled in 260ms (1061 modules)
+ ✓ Compiled in 391ms (1102 modules)
+ ✓ Compiled /api/test-2-0 in 183ms (1224 modules)
+ GET /api/test-2-0 200 in 231ms
+ POST /api/test-2-0 200 in 4ms
+ ✓ Compiled /api/generate-sequence-plan in 71ms (263 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: test signal...
+👤 Persona: CEO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Exploring Opportunities for Operational Efficiency",
+      "purpose": "Introduce our solution and how it can enhance operational efficiency for ...
+ POST /api/generate-sequence-plan 200 in 5313ms
+ ✓ Compiled in 554ms (1308 modules)
+ ✓ Compiled in 607ms (1322 modules)
+ ✓ Compiled in 619ms (1061 modules)
+ ✓ Compiled in 215ms (1061 modules)
+ ✓ Compiled in 261ms (1061 modules)
+ ✓ Compiled in 321ms (1061 modules)
+ ✓ Compiled in 187ms (1061 modules)
+ ✓ Compiled in 209ms (1061 modules)
+ ✓ Compiled in 599ms (1061 modules)
+ ✓ Compiled in 328ms (1061 modules)
+ ✓ Compiled in 265ms (1061 modules)
+ ✓ Compiled in 221ms (1061 modules)
+ ✓ Compiled in 332ms (1061 modules)
+ ✓ Compiled in 759ms (1116 modules)
+ ✓ Compiled /api/test-gpt5-optimization in 277ms (1307 modules)
+🧪 Testing GPT-5 nano optimization...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+✅ GPT-5 nano test successful
+ POST /api/test-gpt5-optimization 200 in 16577ms
+ ✓ Compiled in 486ms (1102 modules)
+ ✓ Compiled in 462ms (1061 modules)
+ ✓ Compiled in 395ms (1061 modules)
+ ✓ Compiled in 828ms (1061 modules)
+ ✓ Compiled in 290ms (1061 modules)
+ ✓ Compiled in 231ms (1061 modules)
+ ✓ Compiled in 187ms (1061 modules)
+ ✓ Compiled in 375ms (1061 modules)
+ ✓ Compiled in 289ms (1061 modules)
+ ✓ Compiled in 844ms (1061 modules)
+ ✓ Compiled in 282ms (1061 modules)
+ ✓ Compiled in 454ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 371ms (261 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: We helped a similar company reduce freight costs by 18%...
+👤 Persona: CEO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Strategic Cost Savings for Your Operations",
+      "purpose": "Introduce our expertise in freight cost optimization and establish credibi...
+ POST /api/generate-sequence-plan 200 in 3790ms
+ ✓ Compiled /api/generate-messages in 410ms (1310 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We helped a similar company reduce freight costs by 18%...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4732ms
+ ✓ Compiled in 583ms (1324 modules)
+ ✓ Compiled in 813ms (1324 modules)
+ ✓ Compiled in 664ms (1116 modules)
+ ✓ Compiled in 282ms (1061 modules)
+ ✓ Compiled in 410ms (1061 modules)
+ ✓ Compiled in 364ms (1061 modules)
+ ✓ Compiled in 467ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled in 404ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 147ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We helped automotive companies like Honda reduce freight costs by 18%...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Automotive Customers
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4408ms
+🚀 Generating messages for sequence...
+📝 Signal: We helped retail companies like Dollar Tree save millions in freight costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Dollar Tree Case Study, Dollar Tree Statistics, Dollar Tree Quote
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3708ms
+ ✓ Compiled in 512ms (1323 modules)
+ ✓ Compiled in 355ms (1116 modules)
+ ✓ Compiled in 579ms (1061 modules)
+ ✓ Compiled in 452ms (1061 modules)
+ ✓ Compiled in 505ms (1061 modules)
+ ✓ Compiled in 468ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 342ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Test signal for toggle functionality...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3562ms
+🚀 Generating messages for sequence...
+📝 Signal: Test signal for toggle functionality...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 6784ms
+ ✓ Compiled /api/optimize-message in 475ms (1311 modules)
+🔍 Optimizing email message with GPT-5 nano: test-email-1
+👤 Persona: CEO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 1136
+📄 Optimized content preview: Subject: Honda freight costs cut 18% — scalable optimization
+
+Hi there,
+
+We recently helped Honda achieve an 18% reduction in freight costs through a data-driven optimization program. The initiative c...
+ POST /api/optimize-message 200 in 38317ms
+ ✓ Compiled in 588ms (1061 modules)
+ ✓ Compiled in 462ms (1061 modules)
+ ✓ Compiled in 627ms (1116 modules)
+ ✓ Compiled /api/optimize-message in 262ms (261 modules)
+🔍 Optimizing email message with GPT-5 nano: test-cta-1
+👤 Persona: CEO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 836
+📄 Optimized content preview: Subject: 18% Freight Cost Reduction — Honda Case
+
+Hi there,
+
+I wanted to share a tangible result from our work with Honda: an 18% reduction in freight costs achieved through strategic cost optimizatio...
+ POST /api/optimize-message 200 in 18161ms
+ ✓ Compiled in 524ms (1322 modules)
+ ✓ Compiled in 623ms (1116 modules)
+ ✓ Compiled in 929ms (1061 modules)
+ ✓ Compiled in 456ms (1061 modules)
+ ✓ Compiled in 250ms (1061 modules)
+ ✓ Compiled in 482ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 311ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We helped food and beverage companies optimize their transportation processes...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3622ms
+🚀 Generating messages for sequence...
+📝 Signal: We helped Golden State Foods achieve 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2980ms
+🚀 Generating messages for sequence...
+📝 Signal: We work with food companies like Frito Lay and Molson Coors to optimize their supply chains...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Manufacturing Customers, Dollar Tree Case Study, Golden State Foods Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3532ms
+ ✓ Compiled in 598ms (1323 modules)
+ ✓ Compiled in 294ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: We work with food companies like Frito Lay and Molson Coors to optimize their supply chains...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Manufacturing Customers, Dollar Tree Case Study, Golden State Foods Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3111ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs and expanded their carrier pool fr...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2712ms
+ ✓ Compiled in 586ms (1323 modules)
+ ✓ Compiled in 589ms (1323 modules)
+ ✓ Compiled in 1078ms (1061 modules)
+ ✓ Compiled in 539ms (1061 modules)
+ ✓ Compiled in 476ms (1061 modules)
+ ✓ Compiled in 743ms (1061 modules)
+ ✓ Compiled in 315ms (1061 modules)
+ ✓ Compiled in 500ms (1061 modules)
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ ○ Compiling /_not-found ...
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ POST /api/optimize-message 500 in 1394ms
+ ⨯ ./lib/dynamic-variables.ts
+Error:   [31mx[0m Expected ',', got 'or'
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/lib/dynamic-variables.ts[0m:209:1]
+ [2m206[0m |     category: 'Advanced',
+ [2m207[0m |     name: '{{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}',
+ [2m208[0m |     description: 'Conditional fallback for contact name',
+ [2m209[0m |     example: 'John' or 'there'
+     : [35;1m                    ^^[0m
+ [2m210[0m |   },
+ [2m211[0m |   {
+ [2m212[0m |     category: 'Advanced',
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/dynamic-variables.ts
+./app/api/optimize-message/route.ts
+ GET /api/test-simple 500 in 248ms
+ POST /api/optimize-message 500 in 7ms
+ GET /api/test-simple 500 in 11ms
+ ✓ Compiled /api/test-simple in 524ms (1657 modules)
+🔍 Optimizing email message with GPT-5 nano: test-merge-fields-1
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 765
+📄 Optimized content preview: Subject: Hi {{contact.first_name}}, quick chat?
+
+Hi {{contact.first_name}},
+
+As a COO, you’re focused on margins, service reliability, and scalable operations. I help teams at {{account.name}} optimiz...
+ POST /api/optimize-message 200 in 24674ms
+🔍 Optimizing email message with GPT-5 nano: test-conditional-fields-1
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 837
+📄 Optimized content preview: Subject: {{#if contact.first_name}}Hi {{contact.first_name}}{{#else}}Hello there{{#endif}} — Quick note on costs
+
+{{#if contact.first_name}}Hi {{contact.first_name}}{{#else}}Hello there{{#endif}},
+
+As...
+ POST /api/optimize-message 200 in 32498ms
+ ✓ Compiled in 762ms (1323 modules)
+ ✓ Compiled in 285ms (1323 modules)
+ ✓ Compiled in 744ms (1061 modules)
+ ✓ Compiled in 656ms (1061 modules)
+ ✓ Compiled in 890ms (1061 modules)
+ ✓ Compiled in 453ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 177ms (262 modules)
+ POST /api/generate-messages 400 in 289ms
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3401ms
+ ✓ Compiled in 502ms (1323 modules)
+ ✓ Compiled in 305ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2911ms
+ ✓ Compiled in 600ms (1323 modules)
+ ✓ Compiled in 300ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2614ms
+🚀 Generating messages for sequence...
+📝 Signal: CTO at a tech startup who recently viewed our pricing page...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3165ms
+ ✓ Compiled in 702ms (1323 modules)
+ ✓ Compiled in 556ms (1323 modules)
+ ✓ Compiled in 676ms (1116 modules)
+ ✓ Compiled in 678ms (1061 modules)
+ ✓ Compiled in 491ms (1061 modules)
+ ✓ Compiled in 549ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 59ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3110ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3538ms
+ ✓ Compiled in 516ms (1323 modules)
+ ✓ Compiled in 573ms (1323 modules)
+ ✓ Compiled in 357ms (1323 modules)
+ ✓ Compiled in 380ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3076ms
+🚀 Generating messages for sequence...
+📝 Signal: Dollar Tree saved $3.2 million in freight spend within 6 months...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3145ms
+ ✓ Compiled in 557ms (1323 modules)
+ ✓ Compiled in 346ms (1323 modules)
+ ✓ Compiled in 233ms (1323 modules)
+ ✓ Compiled in 669ms (1061 modules)
+ ✓ Compiled in 391ms (1061 modules)
+ ✓ Compiled in 238ms (1061 modules)
+ ✓ Compiled in 244ms (1061 modules)
+ ✓ Compiled in 560ms (1061 modules)
+ ✓ Compiled in 264ms (1061 modules)
+ ✓ Compiled in 348ms (1061 modules)
+ ✓ Compiled in 372ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 210ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency Like Golden State Foods",
+      "purpose": "Introduce our solution and highlight its potential to reduce transport...
+ POST /api/generate-sequence-plan 200 in 7566ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency Like Golden State Foods",
+      "purpose": "Introduce our services and establish credibility by mentioning Golden ...
+ POST /api/generate-sequence-plan 200 in 7164ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Operational Efficiency in Transportation",
+      "purpose": "Introduce our solution and establish relevance to the COO's focus on oper...
+ POST /api/generate-sequence-plan 200 in 5802ms
+ ✓ Compiled /api/test-simple in 203ms (264 modules)
+ GET /api/test-simple 405 in 319ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Dollar Tree saved $3.2 million in freight spend within 6 months...
+👤 Persona: CEO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight the potential for cost optimization.",
+      "si...
+ POST /api/generate-sequence-plan 200 in 5587ms
+ ✓ Compiled in 827ms (1325 modules)
+ ✓ Compiled /api/generate-messages in 239ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 7513ms
+ ✓ Compiled in 592ms (1323 modules)
+ ✓ Compiled in 328ms (1323 modules)
+ ✓ Compiled in 534ms (1323 modules)
+ ✓ Compiled in 402ms (1323 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 1877ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods expanded their carrier pool from 35 to 55 carriers and increased RFP quantity to ...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Manufacturing Customers, Dollar Tree Case Study, Golden State Foods Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4063ms
+🚀 Generating messages for sequence...
+📝 Signal: Dollar Tree saved $3.2 million in freight spend within 6 months and achieved 2% below market average...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Dollar Tree Case Study, Dollar Tree Statistics, Dollar Tree Quote, Cost Savings Value Prop, Cost-Focused Language Style
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4797ms
+ ✓ Compiled in 739ms (1323 modules)
+ ✓ Compiled in 462ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled in 486ms (1061 modules)
+ ✓ Compiled in 282ms (1116 modules)
+ ✓ Compiled in 294ms (1061 modules)
+ ✓ Compiled in 285ms (1061 modules)
+ ✓ Compiled in 578ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 109ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency: A Proven Approach",
+      "purpose": "Introduce our solution and highlight the potential for cost savings.",
+    ...
+ POST /api/generate-sequence-plan 200 in 9707ms
+ ✓ Compiled /api/generate-messages in 150ms (264 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3734ms
+🚀 Generating messages for sequence...
+📝 Signal: Golden State Foods achieved 18% reduction in transportation costs...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 4
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3970ms
+ ✓ Compiled in 635ms (1325 modules)
+ ✓ Compiled in 902ms (1061 modules)
+ ✓ Compiled in 538ms (1061 modules)
+ ✓ Compiled in 521ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 217ms (265 modules)
+🔍 Optimizing email message with GPT-5 nano: test-no-signature-1
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 291
+📄 Optimized content preview: Subject: GSF: 18% Transport Cost Reduction
+
+Hey there,
+
+Golden State Foods cut transportation costs by 18%—a proof point for efficiency. Explore similar gains for {{account.name}}? [Chat about impact]...
+ POST /api/optimize-message 200 in 40654ms
+🔍 Optimizing email message with GPT-5 nano: test-length-control-1
+👤 Persona: CEO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 725
+📄 Optimized content preview: Subject: Dollar Tree Freight Savings Success
+
+Hey {{contact.first_name}},
+
+Dollar Tree recently saved $3.2 million in freight spend in six months and is projected to save $6 million in 2024 with Procu...
+ POST /api/optimize-message 200 in 20553ms
+ ✓ Compiled in 640ms (1323 modules)
+ ✓ Compiled in 941ms (1116 modules)
+ ✓ Compiled in 205ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 280ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency in Transportation",
+      "purpose": "Introduce our solution and establish relevance.",
+      "signalIntegration":...
+ POST /api/generate-sequence-plan 200 in 14087ms
+ ✓ Compiled in 813ms (1061 modules)
+ ✓ Compiled in 258ms (1061 modules)
+ ✓ Compiled in 271ms (1061 modules)
+ ✓ Compiled in 266ms (1061 modules)
+ ✓ Compiled in 521ms (1061 modules)
+ ✓ Compiled in 263ms (1061 modules)
+ ✓ Compiled in 503ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 220ms (262 modules)
+🚀 Generating messages for sequence...
+📝 Signal: VP of transportation in food and beverage who downloaded one of our case studies recently...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Retail Customers, Food & Beverage Customers, Logistics Customers, Manufacturing Customers, Dollar Tree Case Study
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3943ms
+ ✓ Compiled in 353ms (1323 modules)
+ ✓ Compiled in 505ms (1323 modules)
+ ✓ Compiled in 596ms (1116 modules)
+ ✓ Compiled in 862ms (1061 modules)
+ ✓ Compiled in 242ms (1061 modules)
+ ✓ Compiled in 257ms (1061 modules)
+ ✓ Compiled in 496ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 230ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: New enterprise COO – mandate to optimize operations and achieve efficiency targets across divisions...
+👤 Persona: COO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Efficiency Value Prop, Enterprise Language Style, Efficiency-Focused Language Style, Operations C-Suite Tone Profile, Operations Upper Management Tone Profile
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4076ms
+ ✓ Compiled /api/optimize-message in 123ms (266 modules)
+🔍 Optimizing email message with GPT-5 nano: test-coo-optimization
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 644
+📄 Optimized content preview: Subject: Boost ops efficiency under your COO mandate
+
+Hi {{contact.first_name}},
+
+Congrats on becoming COO. Your mandate to boost operations is huge. We can improve efficiency across divisions.
+
+Many ...
+ POST /api/optimize-message 200 in 21374ms
+ ✓ Compiled in 404ms (1327 modules)
+ ✓ Compiled in 447ms (1327 modules)
+ ✓ Compiled in 405ms (1327 modules)
+ ✓ Compiled in 698ms (1116 modules)
+ ✓ Compiled in 265ms (1061 modules)
+ ✓ Compiled in 405ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 60ms (263 modules)
+🔍 Optimizing email message with GPT-5 nano: test-sample-quality
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 577
+📄 Optimized content preview: Subject: Quick ROI boost for {{account.name}} ops
+
+Hi {{contact.first_name}},
+
+You checked our demo and pricing pages—great step toward faster, cheaper operations.
+
+If you wrestle with last-minute shi...
+ POST /api/optimize-message 200 in 22322ms
+ ✓ Compiled in 510ms (1324 modules)
+ ✓ Compiled in 382ms (1324 modules)
+ ✓ Compiled in 568ms (1061 modules)
+ ✓ Compiled in 257ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 173ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our demo and pricing pages...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Operational Efficiency for Your Team",
+      "purpose": "Introduce our solution and relate it to operational efficiency.",
+      "sign...
+ POST /api/generate-sequence-plan 200 in 10437ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our demo and pricing pages...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency with ProcureOS",
+      "purpose": "Introduce ProcureOS and its benefits for operational efficiency.",
+      "signa...
+ POST /api/generate-sequence-plan 200 in 16478ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our demo and pricing pages...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency in Your Organization",
+      "purpose": "Introduce our solution and relate to the COO's role in enhancing operatio...
+ POST /api/generate-sequence-plan 200 in 12607ms
+ ✓ Compiled in 439ms (1323 modules)
+ ✓ Compiled in 768ms (1323 modules)
+ ✓ Compiled in 541ms (1323 modules)
+ ✓ Compiled in 536ms (1061 modules)
+ ✓ Compiled in 265ms (1061 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our demo and pricing pages...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency Like Dollar Tree",
+      "purpose": "Introduce ProcureOS and its benefits for operational efficiency.",
+      "sig...
+ POST /api/generate-sequence-plan 200 in 12812ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our demo and pricing pages...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Operational Efficiency with ProcureOS",
+      "purpose": "Introduce ProcureOS and highlight its impact on operational efficiency.",
+     ...
+ POST /api/generate-sequence-plan 200 in 10495ms
+ ✓ Compiled in 622ms (1323 modules)
+ ✓ Compiled in 779ms (1061 modules)
+ ✓ Compiled in 221ms (1061 modules)
+ ✓ Compiled in 645ms (1061 modules)
+ ✓ Compiled in 463ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 280ms (263 modules)
+🔍 Optimizing email message with GPT-5 nano: test-warmth-preservation
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 491
+📄 Optimized content preview: Subject: Slash freight costs with proven results
+
+Hi {{contact.first_name}},
+
+Nice to see you checked our pricing page.
+
+If you’re balancing reliability with a tight budget, Emerge helps.
+
+Dollar Tree...
+ POST /api/optimize-message 200 in 21258ms
+ ✓ Compiled in 433ms (1324 modules)
+ ✓ Compiled in 361ms (1324 modules)
+🔍 Optimizing email message with GPT-5 nano: test-warmth-v2
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 495
+📄 Optimized content preview: Subject: Cut freight costs with proven results
+
+Hi {{contact.first_name}},
+
+You checked our pricing page—great sign you’re focused on costs.
+
+If you’re balancing reliability with budget, Emerge can he...
+ POST /api/optimize-message 200 in 17384ms
+ ✓ Compiled in 493ms (1324 modules)
+🔍 Optimizing email message with GPT-5 nano: test-warmth-v3
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 697
+📄 Optimized content preview: Subject: Unlock Cost Savings with Our Proven Solutions
+
+Hi {{contact.first_name}},
+
+Noticed you checked our pricing page—great to see your focus on cost optimization.
+
+If balancing reliability with bu...
+ POST /api/optimize-message 200 in 11056ms
+ ✓ Compiled in 499ms (1324 modules)
+ ✓ Compiled in 554ms (1324 modules)
+ ✓ Compiled in 339ms (1324 modules)
+ ✓ Compiled in 657ms (1116 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ✓ Compiled in 412ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 56ms (263 modules)
+🔍 Optimizing email message with GPT-5 nano: test-natural-signal
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 550
+📄 Optimized content preview: Subject: Cut freight costs for {{account.name}}
+
+Hi {{contact.first_name}},
+
+Nice to see you checked out our demo and pricing pages. It shows you’re weighing freight spend against reliability in today...
+ POST /api/optimize-message 200 in 15423ms
+🔍 Optimizing email message with GPT-5 nano: test-natural-signal-2
+👤 Persona: COO
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 370
+📄 Optimized content preview: Subject: Real-Time Freight Management
+
+Hi {{contact.first_name}},
+
+I noticed you checked our pricing page. Real-time visibility boosts efficiency and trims costs. Our customers cut freight spend 12–20...
+ POST /api/optimize-message 200 in 26987ms
+ ✓ Compiled in 551ms (1324 modules)
+ ✓ Compiled in 975ms (1116 modules)
+ ✓ Compiled in 547ms (1061 modules)
+ ✓ Compiled in 256ms (1061 modules)
+ ✓ Compiled in 250ms (1061 modules)
+ ✓ Compiled in 300ms (1061 modules)
+ ✓ Compiled in 259ms (1061 modules)
+ ✓ Compiled in 260ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 414ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: You checked our pricing page...
+👤 Persona: COO
+📧 Emails: 2
+💼 LinkedIn: 1
+🎯 Selected context items: Operations Intern Pain Points
+✅ Generated email for day 1
+✅ Generated email for day 3
+✅ Generated LinkedIn message for day 2
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 11206ms
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:210:1]
+ [2m207[0m | 
+ [2m208[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m209[0m | 
+ [2m210[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m211[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m212[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m213[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ✓ Compiled in 486ms (1061 modules)
+ ✓ Compiled in 452ms (1061 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ○ Compiling /_not-found ...
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ ⨯ ./app/api/generate-messages/route.ts
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4m/Users/holdenhays/Documents/GitHub/alchemail/app/api/generate-messages/route.ts[0m:217:1]
+ [2m214[0m | 
+ [2m215[0m |       CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.`
+ [2m216[0m | 
+ [2m217[0m | CRITICAL RULES:
+     : [35;1m^^^^|^^^[0m[33;1m ^^^^^[0m
+     :     [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m218[0m | - Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+ [2m219[0m | - NEVER assume what the recipient downloaded or their specific business situation
+ [2m220[0m | - Focus on their potential challenges and goals based on their role, not assumptions about their current state
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/api/generate-messages/route.ts
+ POST /api/generate-sequence-plan 500 in 1613ms
+ ✓ Compiled /_error in 482ms (1655 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: You checked our pricing page...
+👤 Persona: COO
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight potential cost savings.",
+      "signalIntegration"...
+ POST /api/generate-sequence-plan 200 in 8872ms
+ ✓ Compiled in 561ms (1655 modules)
+ ✓ Compiled in 759ms (1655 modules)
+ ✓ Compiled in 403ms (1655 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Freight Savings Like Dollar Tree",
+      "purpose": "Introduce value proposition focused on cost optimization.",
+      "signa...
+ POST /api/generate-sequence-plan 200 in 9373ms
+ ✓ Compiled in 767ms (1323 modules)
+ ✓ Compiled in 806ms (1323 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Freight Savings",
+      "purpose": "Introduce our solution and highlight potential savings.",
+      "signalIntegration": "Sta...
+ POST /api/generate-sequence-plan 200 in 9689ms
+ ✓ Compiled /api/generate-messages in 333ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4249ms
+ ✓ Compiled in 366ms (1326 modules)
+ ✓ Compiled in 397ms (1326 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4235ms
+ ✓ Compiled in 595ms (1324 modules)
+ ✓ Compiled in 520ms (1324 modules)
+ ✓ Compiled in 597ms (1116 modules)
+ ✓ Compiled in 263ms (1061 modules)
+ ✓ Compiled in 287ms (1061 modules)
+ ✓ Compiled in 273ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 67ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 5434ms
+ ✓ Compiled in 495ms (1324 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4343ms
+ ✓ Compiled in 453ms (1324 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3976ms
+ ✓ Compiled in 429ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 135ms (265 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Discover Cost Optimization Strategies",
+      "purpose": "Introduce ProcureOS and its benefits to the prospect.",
+      "signalIntegration": "Me...
+ POST /api/generate-sequence-plan 200 in 11076ms
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3408ms
+ ✓ Compiled in 594ms (1326 modules)
+ ✓ Compiled in 387ms (1326 modules)
+ ✓ Compiled in 581ms (1324 modules)
+ ✓ Compiled /api/generate-sequence-plan in 52ms (265 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight the benefits for cost optimization.",
+      "signal...
+ POST /api/generate-sequence-plan 200 in 10776ms
+ ✓ Compiled in 786ms (1323 modules)
+ ✓ Compiled /api/generate-messages in 78ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+ ✓ Compiled in 286ms (1326 modules)
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 5492ms
+ ✓ Compiled in 761ms (1326 modules)
+ ✓ Compiled in 647ms (1116 modules)
+ ✓ Compiled in 598ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 54ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings with Our Proven Solution",
+      "purpose": "Introduce our solution and highlight its impact on cost optimization.",
+      "...
+ POST /api/generate-sequence-plan 200 in 9814ms
+ ✓ Compiled in 461ms (1323 modules)
+ ✓ Compiled in 742ms (1323 modules)
+ ✓ Compiled in 606ms (1116 modules)
+ ✓ Compiled /api/generate-sequence-plan in 60ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings Like Dollar Tree",
+      "purpose": "Introduce ProcureOS and highlight cost optimization.",
+      "signalIntegration": "Lead...
+ POST /api/generate-sequence-plan 200 in 9069ms
+ ✓ Compiled /api/generate-messages in 255ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Prospect visited the demo page...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4695ms
+ ✓ Compiled in 470ms (1326 modules)
+ ✓ Compiled in 610ms (1116 modules)
+ ✓ Compiled /api/generate-sequence-plan in 51ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Freight Savings",
+      "purpose": "Introduce our freight optimization solutions and highlight potential savings.",
+      "si...
+ POST /api/generate-sequence-plan 200 in 6614ms
+ ✓ Compiled /api/generate-messages in 91ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Upper Management Tone Profile, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance C-Suite Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4510ms
+ ✓ Compiled in 409ms (1326 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Freight Savings Like Dollar Tree",
+      "purpose": "Introduce our freight optimization solutions and highlight the case study.",
+      "...
+ POST /api/generate-sequence-plan 200 in 7925ms
+🚀 Generating messages for sequence...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Upper Management Tone Profile, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance C-Suite Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4263ms
+ ✓ Compiled in 454ms (1326 modules)
+ ✓ Compiled in 336ms (1326 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Downloaded our freight optimization case study...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Upper Management Tone Profile, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance C-Suite Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 7834ms
+ ✓ Compiled in 370ms (1326 modules)
+ ✓ Compiled in 465ms (1116 modules)
+ ✓ Compiled in 467ms (1061 modules)
+ ✓ Compiled in 255ms (1061 modules)
+ ✓ Compiled in 756ms (1061 modules)
+ ✓ Compiled in 577ms (1061 modules)
+ ✓ Compiled in 822ms (1061 modules)
+ ✓ Compiled in 272ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 333ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: New CEO at a large firm – likely to drive major transformations and seek immediate performance impro...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Transforming Operations in a New Era",
+      "purpose": "Introduce the value of ProcureOS in light of the new CEO's potential changes.",
+      "...
+ POST /api/generate-sequence-plan 200 in 11399ms
+ ✓ Compiled in 792ms (1116 modules)
+ ✓ Compiled /api/generate-messages in 243ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: New CEO at a large firm – likely to drive major transformations and seek immediate performance impro...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Finance C-Suite Tone Profile, Finance Upper Management Pain Points, Finance Upper Management Tone Profile, Finance Middle Management Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3395ms
+ ✓ Compiled /api/generate-sequence-plan in 141ms (265 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Savings in Your Operations",
+      "purpose": "Introduce our solution and its impact on cost optimization.",
+      "signalInt...
+ POST /api/generate-sequence-plan 200 in 14895ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings for Your Operations",
+      "purpose": "Introduce ProcureOS and highlight potential savings.",
+      "signalIntegration": "M...
+ POST /api/generate-sequence-plan 200 in 11087ms
+🚀 Generating messages for sequence...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance Entry Level Pain Points, Finance Intern Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 8058ms
+ ✓ Compiled in 625ms (1326 modules)
+ ✓ Compiled in 1182ms (1116 modules)
+ ✓ Compiled in 290ms (1061 modules)
+ ✓ Compiled in 269ms (1061 modules)
+ ✓ Compiled in 269ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 131ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Significant Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and highlight its impact on cost optimization.",
+      "si...
+ POST /api/generate-sequence-plan 200 in 11889ms
+ ✓ Compiled /api/generate-messages in 202ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance Entry Level Pain Points, Finance Intern Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3889ms
+ ✓ Compiled in 354ms (1326 modules)
+ ✓ Compiled in 389ms (1326 modules)
+ ✓ Compiled in 448ms (1326 modules)
+ ✓ Compiled in 372ms (1326 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce value proposition and establish credibility",
+      "signalIntegration": "H...
+ POST /api/generate-sequence-plan 200 in 11735ms
+🚀 Generating messages for sequence...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance Entry Level Pain Points, Finance Intern Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 2951ms
+ ✓ Compiled in 568ms (1326 modules)
+ ✓ Compiled in 290ms (1326 modules)
+ ✓ Compiled in 433ms (1116 modules)
+ ✓ Compiled in 237ms (1061 modules)
+ ✓ Compiled in 305ms (1061 modules)
+ ✓ Compiled in 548ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 63ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Transform Your Freight Management",
+      "purpose": "Introduce ProcureOS and how it can help optimize costs",
+      "signalIntegration": "I not...
+ POST /api/generate-sequence-plan 200 in 10108ms
+ ✓ Compiled /api/generate-messages in 177ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Viewed integrations page – signals IT/ops evaluating fit with current systems...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations Middle Management Pain Points, Operations Entry Level Pain Points, Operations Intern Pain Points, Finance Entry Level Pain Points, Finance Intern Pain Points
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3216ms
+ ✓ Compiled in 843ms (1326 modules)
+ ✓ Compiled in 553ms (1326 modules)
+ ✓ Compiled in 654ms (1061 modules)
+ ✓ Compiled in 249ms (1061 modules)
+ ✓ Compiled in 397ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 244ms (263 modules)
+ POST /api/optimize-message 400 in 353ms
+ POST /api/optimize-message 400 in 4ms
+🔍 Optimizing email message with GPT-5 nano: test-1
+👤 Persona: Upper Management - Operations
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 685
+📄 Optimized content preview: Subject: Unlock Savings Tailored to Your Operations
+
+Hi {{contact.first_name}},
+
+I hope you're having a productive week! I saw you checking our case studies—great step toward building your internal ca...
+ POST /api/optimize-message 200 in 22501ms
+ ✓ Compiled in 532ms (1324 modules)
+ ✓ Compiled in 489ms (1116 modules)
+ ✓ Compiled in 272ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 220ms (263 modules)
+🔍 Optimizing email message with GPT-5 nano: test-2
+👤 Persona: Upper Management - Operations
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 814
+📄 Optimized content preview: Subject: Freight savings tailored to your ops
+
+Hi {{contact.first_name}},
+
+Saw you checking out our case studies—great way to build a solid plan. Many operations leaders are cutting costs while keepin...
+ POST /api/optimize-message 200 in 24919ms
+ ✓ Compiled in 423ms (1324 modules)
+ ✓ Compiled in 505ms (1324 modules)
+ ✓ Compiled in 539ms (1324 modules)
+ ✓ Compiled in 846ms (1116 modules)
+ ✓ Compiled in 310ms (1061 modules)
+ ✓ Compiled in 292ms (1061 modules)
+ ✓ Compiled in 354ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 285ms (264 modules)
+🔍 Optimizing email message with GPT-5 nano: test-3
+👤 Persona: Upper Management - Operations
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 849
+📄 Optimized content preview: Subject: Slash Freight Spend with a Proven Playbook
+
+Hi {{contact.first_name}}, I hope your week is going well!
+
+You're reviewing several case studies, and you're building an internal case. Dollar Tre...
+ POST /api/optimize-message 200 in 17786ms
+ ✓ Compiled in 574ms (1325 modules)
+ ✓ Compiled in 544ms (1325 modules)
+ ✓ Compiled in 694ms (1116 modules)
+ ✓ Compiled in 263ms (1061 modules)
+ ✓ Compiled in 305ms (1061 modules)
+ ✓ Compiled /api/optimize-message in 60ms (264 modules)
+🔍 Optimizing email message with GPT-5 nano: test-4
+👤 Persona: Upper Management - Operations
+🚀 Attempting optimization with GPT-5 nano...
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "presencePenalty" setting is not supported by this model
+AI SDK Warning: The "frequencyPenalty" setting is not supported by this model
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+AI SDK Warning: The "topP" setting is not supported by this model - topP is not supported for reasoning models
+✅ GPT-5 nano optimization successful
+✅ Message optimized successfully
+📄 Optimized content length: 723
+📄 Optimized content preview: Subject: Dollar Tree-style savings for {{account.name}}
+
+Hi {{contact.first_name}},
+
+Nice to see you exploring our case studies—sounds like you're building a solid internal case for smarter freight de...
+ POST /api/optimize-message 200 in 25719ms
+ ✓ Compiled in 536ms (1325 modules)
+ ✓ Compiled in 401ms (1325 modules)
+ ✓ Compiled in 603ms (1061 modules)
+ ✓ Compiled in 539ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 300ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings Like Dollar Tree",
+      "purpose": "Introduce value proposition related to cost optimization.",
+      "signalIntegration": ...
+ POST /api/generate-sequence-plan 200 in 10795ms
+ ✓ Compiled /api/generate-messages in 140ms (265 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: 
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4122ms
+ ✓ Compiled in 980ms (1326 modules)
+ ✓ Compiled in 489ms (1061 modules)
+ ✓ Compiled in 587ms (1326 modules)
+ ✓ Compiled in 483ms (1326 modules)
+ ✓ Compiled in 511ms (1324 modules)
+ ✓ Compiled in 470ms (1116 modules)
+ ✓ Compiled in 766ms (1061 modules)
+ ✓ Compiled in 284ms (1061 modules)
+ ✓ Compiled in 285ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 224ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Viewed logistics optimization content...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Logistics Customers, EZRack Case Study, Premier Carrier Program Case Study, DBIN Case Study, EZRack Quote
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3175ms
+ ✓ Compiled in 533ms (1324 modules)
+ ✓ Compiled in 1287ms (1116 modules)
+ ✓ Compiled in 574ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 242ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Curious about your case study insights",
+      "purpose": "Initiate a conversation about cost optimization based on case studies",
+      "signal...
+ POST /api/generate-sequence-plan 200 in 17730ms
+ ✓ Compiled in 551ms (1323 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings Like Dollar Tree",
+      "purpose": "Introduce ProcureOS and highlight its benefits.",
+      "signalIntegration": "Are you c...
+ POST /api/generate-sequence-plan 200 in 17875ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and its benefits for cost optimization.",
+      "signalIntegratio...
+ POST /api/generate-sequence-plan 200 in 15810ms
+ ✓ Compiled in 615ms (1116 modules)
+ ✓ Compiled in 329ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 58ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Significant Savings in Freight Spend",
+      "purpose": "Introduce value and share a success story that resonates with the target's pa...
+ POST /api/generate-sequence-plan 200 in 11647ms
+ ✓ Compiled in 572ms (1323 modules)
