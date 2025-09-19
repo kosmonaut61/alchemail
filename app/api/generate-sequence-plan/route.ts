@@ -170,6 +170,8 @@ SIGNAL INTEGRATION REQUIREMENTS:
 - ONLY reference what the signal explicitly states - don't assume additional context
 - Avoid phrases like "I saw your post" or "I noticed you were considering" unless the signal explicitly mentions these
 - AVOID overused phrases like "smart move", "great step", "exactly what you need"
+- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of assuming what they're doing, ask questions about it
+- Use question-based approaches instead of presumptive statements
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 

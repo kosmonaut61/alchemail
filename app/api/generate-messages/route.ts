@@ -242,6 +242,10 @@ CRITICAL RULES:
 - NEVER assume what the recipient downloaded or their specific business situation
 - Focus on their potential challenges and goals based on their role, not assumptions about their current state
 - Use phrases like "if you're facing..." or "many [role] deal with..." instead of assuming their situation
+- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+- Instead of "It looks like you're looking for..." say "Are you looking for...?"
+- Instead of "I noticed TOMS is focusing on..." say "Is TOMS focusing on...?"
+- Turn all presumptive statements into questions
 
 Format your response as:
 Subject: [subject line]

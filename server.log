@@ -8090,3 +8090,18 @@ Nice to see you exploring our case studies—sounds like you're building a solid
  ✓ Compiled in 483ms (1326 modules)
  ✓ Compiled in 511ms (1324 modules)
  ✓ Compiled in 470ms (1116 modules)
+ ✓ Compiled in 766ms (1061 modules)
+ ✓ Compiled in 284ms (1061 modules)
+ ✓ Compiled in 285ms (1061 modules)
+ ✓ Compiled /api/generate-messages in 224ms (263 modules)
+🚀 Generating messages for sequence...
+📝 Signal: Viewed logistics optimization content...
+👤 Persona: Upper Management - Operations
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Logistics Customers, EZRack Case Study, Premier Carrier Program Case Study, DBIN Case Study, EZRack Quote
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3175ms
+ ✓ Compiled in 533ms (1324 modules)
+ ✓ Compiled in 1287ms (1116 modules)

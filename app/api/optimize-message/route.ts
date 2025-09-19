@@ -103,6 +103,8 @@ OPTIMIZATION GUIDELINES:
 23. INCORPORATE different statistics and examples from the context repository
 24. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
 25. KEEP messages concise and scannable - don't overwhelm with too many numbers
+26. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+27. Turn presumptive statements into questions to avoid assumptions
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
