@@ -8058,3 +8058,4 @@ Hi {{contact.first_name}},
 Nice to see you exploring our case studies—sounds like you're building a solid internal case for smarter freight de...
  POST /api/optimize-message 200 in 25719ms
  ✓ Compiled in 536ms (1325 modules)
+ ✓ Compiled in 401ms (1325 modules)
