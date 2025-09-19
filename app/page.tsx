@@ -918,36 +918,30 @@ export default function AlchemailApp20() {
                       </>
                     )}
                   </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(message.content)
+                      toast({
+                        title: "Copied to clipboard!",
+                        description: "Message content copied - ready to paste into your CRM.",
+                      })
+                    }}
+                  >
+                    Copy
+                  </Button>
                 </div>
-              </div>
-              
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs text-muted-foreground">
-                  Copy this content directly to your CRM
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    navigator.clipboard.writeText(message.content)
-                    toast({
-                      title: "Copied to clipboard!",
-                      description: "Message content copied - ready to paste into your CRM.",
-                    })
-                  }}
-                  className="text-xs"
-                >
-                  📋 Copy Content
-                </Button>
               </div>
               
               <div className="bg-muted/50 rounded-md p-3">
                 <div 
-                  className="text-sm whitespace-pre-wrap prose prose-sm max-w-none"
+                  className="text-sm whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{
                     __html: message.content
-                      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium">$1</a>')
+                      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>')
                       .replace(/{{([^}]+)}}/g, '<span class="bg-yellow-100 text-yellow-800 px-1 py-0.5 rounded text-xs font-mono">{{$1}}</span>')
+                      .replace(/\n/g, '<br>')
                   }}
                 />
               </div>

@@ -9631,3 +9631,920 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
  ✓ Compiled in 257ms (709 modules)
  ✓ Compiled in 432ms (709 modules)
  ✓ Compiled in 188ms (709 modules)
+ ✓ Compiled in 565ms (709 modules)
+ ✓ Compiled in 195ms (709 modules)
+ ✓ Compiled in 292ms (709 modules)
+🚀 Generating sequence plan with GPT-5-mini...
+📝 Signal: test hyperlink generation...
+👤 Persona: CEO
+
+================================================================================
+🤖 OPENAI API CALL - SEQUENCE PLAN GENERATION
+================================================================================
+📧 MODEL: gpt-5-mini
+🎯 PURPOSE: Generate strategic sequence plan
+📏 PROMPT LENGTH: 10829 characters
+
+📝 COMPLETE PROMPT:
+------------------------------------------------------------
+You are an expert email sequence strategist. Create a strategic sequence plan for B2B outreach.
+
+CRITICAL: The signal below is the PRIMARY REASON for outreach and MUST be integrated into every message in some way.
+
+SIGNAL (Primary Reason for Outreach - MUST BE INTEGRATED):
+test hyperlink generation
+
+TARGET PERSONA:
+- Role: CEO
+- Department: Operations
+- Seniority: C-Suite
+- Tone Profile: Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.
+- Keywords: strategic, enterprise, roi, scalability, executive, board, competitive advantage, enterprise-wide
+- Key Pain Points: Cost optimization
+
+RELEVANT CONTEXT ITEMS (use these for social proof and credibility):
+- Dollar Tree Statistics: Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using ProcureOS. Average lane was ~2% below market average.
+- Dollar Tree Case Study: Dollar Tree saved $3.2 million in freight spend within 6 months, and $6M in 2024 using ProcureOS. Average lane was ~2% below market average.
+- EZRack Case Study: Realized 6 figure savings in less than a year, saves countless man hours in manual work.
+- Pepsi Co. Case Study: Reduced the time to run RFP's by 20%.
+- DBIN Case Study: Dynamic Book It Now (DBIN) enables instant freight booking with real-time pricing and immediate carrier confirmation.
+- Logistics Customers: DHL, EZRack, ArcBest, Roadrunner, US Cold Storage, Allen Dist.
+- Dollar Tree Quote: "Emerge is baked into our savings"
+- Cost Savings Value Prop: Benchmark rates vs live market data → avoid overspend. Results in ↓ costs through better rate visibility and negotiation.
+
+AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+AVAILABLE DYNAMIC VARIABLES:
+
+Contact Fields:
+- {{contact.first_name}}: Contact's first name
+- {{contact.last_name}}: Contact's last name
+- {{contact.email}}: Contact's email address
+- {{contact.domain}}: Contact's company domain
+- {{contact.location_city}}: Contact's city
+- {{contact.location_state}}: Contact's state/province
+- {{contact.location_country}}: Contact's country
+- {{contact.phone}}: Contact's phone number
+- {{contact.title}}: Contact's job title
+- {{contact.opt_out_message}}: Contact's opt-out message
+
+Account Fields:
+- {{account.name}}: Account/company name
+- {{account.company_unprocessed_name}}: Raw company name (unprocessed)
+- {{account.company_location_city}}: Company's city
+- {{account.company_location_state}}: Company's state/province
+- {{account.company_location_country}}: Company's country
+- {{account.latest_funding_type}}: Latest funding round type
+- {{account.company_size}}: Company size (employees)
+- {{account.vertical}}: Company vertical/industry
+- {{account.industry}}: Company industry
+
+Sender Fields:
+- {{sender.first_name}}: Sender's first name
+- {{sender.last_name}}: Sender's last name
+- {{sender.email}}: Sender's email address
+- {{sender.meeting_alias}}: Sender's meeting booking alias
+
+Intent Fields:
+- {{primary_intent_signal}}: Primary intent/signal for outreach
+- {{secondary_intent_signal}}: Secondary intent/signal for outreach
+
+Time Fields:
+- {{now.day}}: Current day of month
+- {{now.month}}: Current month name
+- {{now.time_of_day}}: Current time of day
+- {{now.weekday}}: Current day of week
+- {{now.year}}: Current year
+
+Advanced:
+- {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}: Conditional fallback for contact name
+- {{contact.title->lowercase}}: Convert to lowercase
+- {{now.day->plus_X}}: Add days to current date
+
+
+
+SEQUENCE REQUIREMENTS:
+- Emails: 1
+- LinkedIn Messages: 0
+
+Create a strategic sequence plan that:
+1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
+2. Builds value and trust progressively
+3. Addresses the target persona's pain points using their specific tone profile and keywords
+4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn)
+5. Has clear purposes for each touchpoint
+6. Varies signal integration: some messages lead with stats, others with questions, others with stories
+7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
+8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
+9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
+10. PRIORITIZE industry-relevant customers and social proof - if targeting automotive, mention automotive customers like Honda, Bridgestone, etc.
+11. Use customer names and industry-specific examples to build immediate credibility and relevance
+12. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
+13. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
+
+MESSAGE VARIATION REQUIREMENTS:
+- Each message must have a DISTINCTLY different approach
+- Use different opening styles: questions, statements, stories, direct value props
+- Vary the signal integration style for each message
+- Ensure each message feels unique and different from the others with a cohesive story arc
+- Make the differences obvious in the signalIntegration field
+
+DETAILED MESSAGE OUTLINES REQUIRED:
+- Create a comprehensive messageOutline for each email and LinkedIn message
+- Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
+- The signalMention field should contain NATURAL, CASUAL phrases that reference ONLY the actual signal provided above
+- The opening field should contain natural opening approaches that feel timely and relevant based on the actual signal
+- The statUsage field should specify HOW to incorporate the specific statistics naturally
+- The customerMention field should specify which industry-relevant customers to mention (e.g., "Honda, Bridgestone" for automotive)
+- The valueProp field should define the core value proposition for that specific message
+- The cta field should specify the call-to-action approach
+- Each message outline should be unique and build upon the previous message in the sequence
+- Focus on natural, human-like language that flows conversationally like the sample emails
+- The signal should flow naturally into relevant questions and value propositions
+- Follow the conversational style of the sample emails - direct, friendly, and engaging
+- Use casual language like "Hey", "Hi", "Quick question", etc.
+- Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
+- CRITICAL: Only reference the actual signal provided - do not make up or assume additional context
+
+SIGNAL INTEGRATION REQUIREMENTS:
+- Use natural, casual language that flows like the sample emails
+- Focus on the VALUE or OPPORTUNITY the signal represents through natural conversation
+- Make the signal mention feel natural and conversational, not analytical or corporate
+- Create approaches that acknowledge the signal in a friendly, human way
+- The signal should flow naturally into relevant questions and value propositions
+- NEVER make presumptive statements about things not mentioned in the signal
+- ONLY reference what the signal explicitly states - don't assume additional context
+- NEVER fabricate engagement like "I saw you checked out..." or "Nice to see you looking at..." unless the signal explicitly mentions this
+- AVOID overused phrases like "smart move", "great step", "exactly what you need"
+- Follow the conversational style of the sample emails - direct, friendly, and engaging
+- Turn corporate speak into natural, casual conversations
+- Use casual language like "Hey", "Hi", "Quick question", etc.
+- Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
+- CRITICAL: Only work with the actual signal provided - do not invent or assume additional context
+
+SIGNAL INTERPRETATION RULES:
+- If signal mentions "write a campaign" or "campaign for [industry]", this means you're HELPING create outreach TO that industry - don't reference a "campaign"
+- If signal mentions specific actions like "downloaded case study", "visited demo page", "checked pricing" - reference those actual actions naturally
+- If signal is vague like "write me a campaign for automotive leaders" - focus on the TARGET AUDIENCE (automotive leaders) not the campaign creation aspect
+- NEVER say things like "I noticed a campaign" - this makes no sense in outreach context
+- Focus on the INDUSTRY or PERSONA being targeted, not the campaign creation process
+
+CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
+
+Return your response as a JSON object with this exact structure:
+{
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Subject line here",
+      "purpose": "Purpose of this email",
+      "signalIntegration": "Exactly how to mention the signal in this message",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)",
+      "messageOutline": {
+        "opening": "Exact opening line or approach",
+        "signalMention": "Exact phrase to reference the signal",
+        "statUsage": "How to incorporate the specific stats",
+        "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
+        "valueProp": "Core value proposition for this message",
+        "cta": "Call to action approach"
+      }
+    }
+  ],
+  "linkedInMessages": [
+    {
+      "day": 3,
+      "purpose": "Purpose of this LinkedIn message",
+      "signalIntegration": "Exactly how to mention the signal in this message",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)",
+      "messageOutline": {
+        "opening": "Exact opening line or approach",
+        "signalMention": "Exact phrase to reference the signal",
+        "statUsage": "How to incorporate the specific stats",
+        "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
+        "valueProp": "Core value proposition for this message",
+        "cta": "Call to action approach"
+      }
+    }
+  ],
+  "totalDays": 8
+}
+
+Make sure the sequence feels natural and builds momentum. Each message should advance the conversation and provide value.
+------------------------------------------------------------
+================================================================================
+
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+
+================================================================================
+✅ OPENAI API RESPONSE - SEQUENCE PLAN GENERATION
+================================================================================
+📧 MODEL: gpt-5-mini
+📏 RESPONSE LENGTH: 1509 characters
+
+📝 COMPLETE RESPONSE:
+------------------------------------------------------------
+{
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Strategic, enterprise ROI — test hyperlink generation + $3.2M example",
+      "purpose": "Open an executive-level conversation tying a quick 'test hyperlink generation' proof to enterprise cost optimization and board-level ROI.",
+      "signalIntegration": "Quick ask about running a short test on test hyperlink generation to demonstrate measurable enterprise ROI.",
+      "specificStats": "Dollar Tree saved $3.2M in freight spend within 6 months; average lane ~2% below market average",
+      "messageOutline": {
+        "opening": "Hey {{contact.first_name}}, quick question for your exec team — can you spare 15 minutes to see a rapid ROI test?",
+        "signalMention": "test hyperlink generation",
+        "statUsage": "Lead with Dollar Tree's result: \"They captured $3.2M in freight savings in 6 months\" and frame the average lane being ~2% below market as a benchmark we can test quickly for your enterprise.",
+        "customerMention": "Dollar Tree, Pepsi Co., DHL, ArcBest",
+        "valueProp": "Enterprise-grade benchmarking vs live market data to eliminate overspend, deliver scalable cost savings, and present clear ROI to the board — fast proof via a short test.",
+        "cta": "Suggest a 15-minute exec briefing to run a brief test (test hyperlink generation) and show projected enterprise savings; ask them to reply with a day/time or 'yes' to get on the calendar."
+      }
+    }
+  ],
+  "linkedInMessages": [],
+  "totalDays": 8
+}
+------------------------------------------------------------
+================================================================================
+
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Strategic, enterprise ROI — test hyperlink generation + $3.2M example",
+      "purpose": "Open an executive-level conversation tying a quick 'te...
+ POST /api/generate-sequence-plan 200 in 55408ms
+ ✓ Compiled /api/generate-messages in 315ms (264 modules)
+🚀 Generating messages for sequence...
+📝 Signal: test hyperlink generation...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations C-Suite Pain Points, Operations Upper Management Pain Points
+
+================================================================================
+🤖 OPENAI API CALL - EMAIL GENERATION
+================================================================================
+📧 MODEL: gpt-4o-mini
+🎯 PURPOSE: Generate email content
+📅 DAY: 1
+📏 PROMPT LENGTH: 18555 characters
+
+📝 COMPLETE PROMPT:
+------------------------------------------------------------
+You are a friendly, conversational B2B email writer for Emerge. Write like you're talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon.
+
+SIGNAL (Primary Reason for Outreach):
+test hyperlink generation
+
+TARGET PERSONA:
+- Role: CEO
+- Department: Operations
+- Seniority: C-Suite
+- Tone Profile: Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.
+- Keywords to Use: strategic, enterprise, roi, scalability, executive, board, competitive advantage, enterprise-wide
+- Selected Pain Points: Cost optimization
+- All Available Pain Points: Strategic Challenges: balancing shareholder demands for profitability with resilient, sustainable freight procurement; Strategic Challenges: limited visibility into how freight costs impact overall corporate strategy; Strategic Challenges: difficulty aligning freight procurement with growth goals; Operational Pain Points: fragmented procurement practices across business units reducing efficiency; Operational Pain Points: over-reliance on outdated procurement models that limit agility; Operational Pain Points: inefficient communication between freight procurement and other strategic functions (finance, sales, operations); Cost & Budget Concerns: freight spend volatility creating uncertainty for earnings forecasts; Cost & Budget Concerns: difficulty ensuring procurement cost savings flow through to P&L results; Cost & Budget Concerns: unpredictable global freight markets affecting long-term financial planning; Risk & Compliance: exposure to high-profile disruptions (geopolitical, climate, regulatory); Risk & Compliance: insufficient processes to safeguard against fraud or weak carrier vetting; Technology & Data Gaps: lack of enterprise-wide freight visibility tools tied to executive dashboards; Technology & Data Gaps: disparate systems that limit a single view of procurement impact; Technology & Data Gaps: slow adoption of modern freight procurement technologies across regions; Carrier & Supplier Management: difficulty balancing reliance on strategic partners with need for diversification; Carrier & Supplier Management: limited visibility into supplier/carrier health and performance at board level; Carrier & Supplier Management: tensions between cost-driven decisions and long-term relationship building; Talent & Organizational Pressures: pressure on leadership to attract talent capable of modernizing freight procurement; Talent & Organizational Pressures: need to foster cross-functional collaboration between finance, procurement, and operations
+
+      VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
+      - Operations C-Suite Pain Points: Strategic cost optimization vs service reliability balance, limited visibility into end-to-end freight costs, difficulty maintaining flexibility with long-term contracts, fragmented processes across regions and business units, manual time-consuming procurement processes, high administrative overhead managing multiple carriers, lack of real-time visibility into disruptions, volatile freight rates and market cycles, limited ability to benchmark carrier rates effectively, difficulty proving cost savings to stakeholders.
+- Operations Upper Management Pain Points: Strategic Challenges: balancing cost optimization with service reliability and customer expectations, limited visibility into end-to-end freight costs making it hard to forecast and budget accurately, difficulty in maintaining flexibility while also committing to long-term carrier contracts. Operational Pain Points: fragmented processes across regions, modes, and business units that hinder standardization, manual time-consuming tendering and carrier selection processes, high administrative overhead due to managing multiple carriers, freight forwarders, and brokers, lack of real-time visibility into shipment status, exceptions, and disruptions.
+
+      AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+      AVAILABLE DYNAMIC VARIABLES:
+
+Contact Fields:
+- {{contact.first_name}}: Contact's first name
+- {{contact.last_name}}: Contact's last name
+- {{contact.email}}: Contact's email address
+- {{contact.domain}}: Contact's company domain
+- {{contact.location_city}}: Contact's city
+- {{contact.location_state}}: Contact's state/province
+- {{contact.location_country}}: Contact's country
+- {{contact.phone}}: Contact's phone number
+- {{contact.title}}: Contact's job title
+- {{contact.opt_out_message}}: Contact's opt-out message
+
+Account Fields:
+- {{account.name}}: Account/company name
+- {{account.company_unprocessed_name}}: Raw company name (unprocessed)
+- {{account.company_location_city}}: Company's city
+- {{account.company_location_state}}: Company's state/province
+- {{account.company_location_country}}: Company's country
+- {{account.latest_funding_type}}: Latest funding round type
+- {{account.company_size}}: Company size (employees)
+- {{account.vertical}}: Company vertical/industry
+- {{account.industry}}: Company industry
+
+Sender Fields:
+- {{sender.first_name}}: Sender's first name
+- {{sender.last_name}}: Sender's last name
+- {{sender.email}}: Sender's email address
+- {{sender.meeting_alias}}: Sender's meeting booking alias
+
+Intent Fields:
+- {{primary_intent_signal}}: Primary intent/signal for outreach
+- {{secondary_intent_signal}}: Secondary intent/signal for outreach
+
+Time Fields:
+- {{now.day}}: Current day of month
+- {{now.month}}: Current month name
+- {{now.time_of_day}}: Current time of day
+- {{now.weekday}}: Current day of week
+- {{now.year}}: Current year
+
+Advanced:
+- {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}: Conditional fallback for contact name
+- {{contact.title->lowercase}}: Convert to lowercase
+- {{now.day->plus_X}}: Add days to current date
+
+
+
+      EMAIL STRUCTURE EXAMPLES (follow this tone and structure):
+      ## New CFOs looking to make an impact
+
+**Email 1**
+Subject: Congrats on your new role!
+
+Hey {{contact.first_name}},
+
+Congrats on your new role as CFO at {{account.name}}!
+
+I know you're driving impact, so I'll keep this short. Transportation costs rise during uncertain times. With Emerge, CFOs gain control of freight spend. Dollar Tree saved $3.2M+ in 6 months using our software. We had them up and running in under 2 hours.
+
+[Interested in learning how we can help {{account.name}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+---
+
+**Email 2**
+Subject: Smarter freight reporting for Finance
+
+Hi {{contact.first_name}},
+
+I wanted to follow up on my previous note. Many new CFOs I speak with say transportation costs can feel like a black box – difficult to compare and impossible to control.
+
+That's why Finance and Operations leaders at Albertsons, Ace Hardware, and AB InBev use Emerge. Our reporting and benchmarking tools give them real-time visibility, so they know market rates and never risk overpaying on freight.
+
+[Would it make sense to connect for 20 minutes to explore if {{account.name}} could benefit too?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+## VP of Transportation that's growing their team
+
+**Email 1**
+Subject: Empower your growing team
+
+Hi {{contact.first_name}},
+
+I saw you're growing your transportation team at {{account.name}}. Many VPs say the real challenge isn't hiring – it's finding the right people and keeping them engaged under pressure to deliver fast.
+
+That's why transportation leaders use Emerge. Our platform and real-time reporting help new hires ramp up quickly while giving existing team members the support they need to hit their targets.
+
+[Would it make sense to connect to explore how {{account.name}} could empower its team with the right tools?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+---
+
+**Email 2**
+Subject: Equip your growing team
+
+Hi {{contact.first_name}},
+
+I wanted to follow up on my note. When transportation teams are growing, leaders tell me their biggest hurdle is making sure new hires ramp up quick and existing staff stay engaged.
+
+That's why many VPs turn to modern platforms like Emerge. Teams love the ease of use, real-time reporting, and automation – because it cuts manual work and helps them deliver faster.
+
+[Would it be worth a quick chat to explore if {{account.name}} could equip its growing team with tools they'll love?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+## Intern in logistics department
+
+**Email 1**
+Subject: Stand out during your internship
+
+Hey {{contact.first_name}}, congrats on the internship at {{account.name}}!
+
+Internships are a chance to show initiative. Many interns I meet say it's tough to prove impact when most of their work is manual tasks like rate entry, shipment tracking, or invoice matching.
+
+One way to stand out is by bringing your manager a solution.
+
+With Emerge's software, those manual tasks get automated. Best part? No complicated IT setup required.
+
+[Should I send you a short overview to pitch to your manager?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+---
+
+**Email 2**
+Subject: reply to thread
+
+Hi {{contact.first_name}}, just following up here.
+
+The best part about Emerge is that getting set up takes less than a day. That means you could bring your manager a ready-to-go project idea without waiting on IT resources.
+
+Interns who show initiative like this often get noticed and open doors for full-time opportunities. Helping your team automate manual work could be the project that sets you apart.
+
+[Would it help if I sent you a one-page overview to share with your manager?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+
+      EXAMPLE EMAIL FOR THIS PERSONA (use as a template):
+      Subject: Quick question about your freight costs
+
+Hi {{contact.first_name}},
+
+Quick question about freight costs. Many leaders are looking to optimize spend while maintaining service reliability.
+
+[Interested in learning more?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+      EMAIL SPECIFICATIONS:
+      - Day: 1
+      - Subject: Test
+      - Purpose: Test
+      - Signal Integration: Test
+      - Specific Stats to Feature: Dollar Tree saved $3.2M
+
+      DETAILED MESSAGE OUTLINE (FOLLOW NATURALLY):
+      
+      - Opening: Hi
+      - Signal Mention: test (mention the signal naturally and conversationally)
+      - Stat Usage: Dollar Tree saved $3.2M
+      - Customer Mention: Dollar Tree (mention these specific customers naturally)
+      - Value Prop: Cost savings
+      - CTA: Schedule a call
+      
+      
+      IMPORTANT: Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page" or "I noticed you were looking at our demo page." Make it feel friendly and human, not robotic or analytical.
+
+      CRITICAL SIGNAL INTEGRATION REQUIREMENT:
+      The signalIntegration field tells you EXACTLY how to integrate the signal. You MUST follow it precisely.
+      
+      SIGNAL TO INTEGRATE: "test hyperlink generation"
+      SIGNAL INTEGRATION INSTRUCTION: "Test"
+      
+      You MUST include the signal in the email exactly as specified in the signalIntegration instruction above.
+
+      Write a complete email that:
+      1. Uses the exact subject line provided
+      2. Follows the purpose and signal integration guidelines EXACTLY as specified
+      3. Matches the persona's tone profile and uses their keywords
+      4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
+      5. Sounds conversational and human (like talking to a friend)
+      6. Includes a clear call-to-action
+      7. Is concise but compelling (100-150 words)
+      8. Does NOT include a signature or sign-off
+      9. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
+      10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
+      11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+      12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+      13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+      14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
+      15. Use the specific stats mentioned in the plan to make the email compelling and credible
+      16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
+      17. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
+
+      STRUCTURE GUIDELINES:
+      - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
+      - Open with signal acknowledgment (if applicable)
+      - State the challenge/opportunity in 1-2 short sentences
+      - Present the specific stat/result in context
+      - End with clear, hyperlinked CTA using markdown format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+      - Keep sentences short and punchy
+      - Use active voice and direct language
+      - Avoid corporate jargon and formal phrases
+      - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
+
+      MESSAGE TYPE VARIATION BY DAY:
+      - Day 1: Follow the signalIntegration instruction from the sequence plan
+      - Day 3: Question-based approach focusing on challenges (start with question)
+      - Day 5: Story-driven with customer success focus (start with story/customer name)
+      - Day 7: Urgency-driven with clear next steps (start with urgency/time)
+      - LinkedIn: More casual, personal, and conversational (start with personal note)
+
+      DAY-SPECIFIC INSTRUCTIONS:
+      - Day 1: Follow the signalIntegration instruction from the sequence plan
+      - Day 3: Start with a question about their challenges
+      - Day 5: Start with a customer story or success example
+      - Day 7: Start with urgency or time-sensitive language
+      - LinkedIn: Start with personal/casual language, avoid formal openings
+
+      VARIED OPENING EXAMPLES (USE DIFFERENT ONES):
+      - Direct: "Quick question about your freight costs..."
+      - Story: "Dollar Tree just saved $6M - here's what happened"
+      - Question: "What if you could cut freight spend by 20%?"
+      - Challenge: "Most ops leaders struggle with this..."
+      - Value: "Thanks for checking our pricing - here's what we found"
+      - Personal: "I've been thinking about your team's efficiency challenges"
+      - Problem: "Freight costs are killing budgets everywhere..."
+      - Solution: "Here's how we helped Pepsi cut RFP time by 20%"
+      - Urgency: "Time-sensitive question about your freight spend"
+      - Insight: "Interesting trend I'm seeing in freight optimization"
+
+      CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.
+
+CRITICAL RULES:
+- Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+- NEVER assume what the recipient downloaded or their specific business situation
+- Focus on their potential challenges and goals based on their role, not assumptions about their current state
+- Use phrases like "if you're facing..." or "many [role] deal with..." instead of assuming their situation
+- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+- Instead of "It looks like you're looking for..." say "Are you looking for...?"
+- Instead of "I noticed TOMS is focusing on..." say "Is TOMS focusing on...?"
+- Turn all presumptive statements into questions
+
+Format your response as:
+Subject: [subject line]
+
+[email body]
+
+Write like you're having a genuine conversation, not sending a formal business proposal.
+
+NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
+- Making up what the recipient downloaded or viewed
+- Their specific business situation (unless mentioned in signal)
+- What challenges they're currently facing (unless mentioned in signal)
+- Any assumptions about their company or role (unless mentioned in signal)
+- LinkedIn posts, social media activity, or other online behavior not in the signal
+- What they're "considering" or "thinking about" unless explicitly mentioned
+- Their internal processes, strategies, or decision-making unless stated in the signal
+- Overused phrases like "smart move", "great step", "exactly what you need"
+
+IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
+
+      CORE PRINCIPLES:
+      - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
+      - Focus on the recipient's potential challenges, not assumptions about their current situation
+      - Use different approaches and stats for each email to avoid repetition
+      - Be conversational and authentic - write like you're talking to a colleague
+      - Let your creativity flow while staying within these boundaries
+
+      MESSAGE VARIATION RULES:
+      - Each email must be COMPLETELY UNIQUE - no repetitive phrases or structures
+      - Use different opening approaches: questions, statements, stories, direct value props
+      - Vary the signal integration - don't always start with "I noticed you checked out"
+      - Use different stats and customer examples for each email
+      - Change the tone and approach - some direct, some conversational, some story-driven
+      - Avoid template-style writing - make each message feel fresh and different
+------------------------------------------------------------
+================================================================================
+
+
+================================================================================
+✅ OPENAI API RESPONSE - EMAIL GENERATION
+================================================================================
+📧 MODEL: gpt-4o-mini
+📅 DAY: 1
+📏 RESPONSE LENGTH: 670 characters
+
+📝 COMPLETE RESPONSE:
+------------------------------------------------------------
+Subject: Test
+
+Hi {{contact.first_name}},
+
+Test! I wanted to reach out because many leaders in operations are facing challenges with freight costs. Balancing cost optimization with service reliability is no small feat.
+
+For instance, Dollar Tree saved $3.2M by leveraging modern procurement strategies. It’s a clear win when cost savings translate to stronger financial performance.
+
+If you're looking to enhance your competitive advantage through strategic freight management, let’s connect. 
+
+[Interested in discussing how we can help {{account.name}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+------------------------------------------------------------
+================================================================================
+
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 4827ms
+🚀 Generating messages for sequence...
+📝 Signal: test hyperlink generation...
+👤 Persona: CEO
+📧 Emails: 1
+💼 LinkedIn: 0
+🎯 Selected context items: Operations C-Suite Pain Points, Operations Upper Management Pain Points
+
+================================================================================
+🤖 OPENAI API CALL - EMAIL GENERATION
+================================================================================
+📧 MODEL: gpt-4o-mini
+🎯 PURPOSE: Generate email content
+📅 DAY: 1
+📏 PROMPT LENGTH: 18555 characters
+
+📝 COMPLETE PROMPT:
+------------------------------------------------------------
+You are a friendly, conversational B2B email writer for Emerge. Write like you're talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon.
+
+SIGNAL (Primary Reason for Outreach):
+test hyperlink generation
+
+TARGET PERSONA:
+- Role: CEO
+- Department: Operations
+- Seniority: C-Suite
+- Tone Profile: Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.
+- Keywords to Use: strategic, enterprise, roi, scalability, executive, board, competitive advantage, enterprise-wide
+- Selected Pain Points: Cost optimization
+- All Available Pain Points: Strategic Challenges: balancing shareholder demands for profitability with resilient, sustainable freight procurement; Strategic Challenges: limited visibility into how freight costs impact overall corporate strategy; Strategic Challenges: difficulty aligning freight procurement with growth goals; Operational Pain Points: fragmented procurement practices across business units reducing efficiency; Operational Pain Points: over-reliance on outdated procurement models that limit agility; Operational Pain Points: inefficient communication between freight procurement and other strategic functions (finance, sales, operations); Cost & Budget Concerns: freight spend volatility creating uncertainty for earnings forecasts; Cost & Budget Concerns: difficulty ensuring procurement cost savings flow through to P&L results; Cost & Budget Concerns: unpredictable global freight markets affecting long-term financial planning; Risk & Compliance: exposure to high-profile disruptions (geopolitical, climate, regulatory); Risk & Compliance: insufficient processes to safeguard against fraud or weak carrier vetting; Technology & Data Gaps: lack of enterprise-wide freight visibility tools tied to executive dashboards; Technology & Data Gaps: disparate systems that limit a single view of procurement impact; Technology & Data Gaps: slow adoption of modern freight procurement technologies across regions; Carrier & Supplier Management: difficulty balancing reliance on strategic partners with need for diversification; Carrier & Supplier Management: limited visibility into supplier/carrier health and performance at board level; Carrier & Supplier Management: tensions between cost-driven decisions and long-term relationship building; Talent & Organizational Pressures: pressure on leadership to attract talent capable of modernizing freight procurement; Talent & Organizational Pressures: need to foster cross-functional collaboration between finance, procurement, and operations
+
+      VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
+      - Operations C-Suite Pain Points: Strategic cost optimization vs service reliability balance, limited visibility into end-to-end freight costs, difficulty maintaining flexibility with long-term contracts, fragmented processes across regions and business units, manual time-consuming procurement processes, high administrative overhead managing multiple carriers, lack of real-time visibility into disruptions, volatile freight rates and market cycles, limited ability to benchmark carrier rates effectively, difficulty proving cost savings to stakeholders.
+- Operations Upper Management Pain Points: Strategic Challenges: balancing cost optimization with service reliability and customer expectations, limited visibility into end-to-end freight costs making it hard to forecast and budget accurately, difficulty in maintaining flexibility while also committing to long-term carrier contracts. Operational Pain Points: fragmented processes across regions, modes, and business units that hinder standardization, manual time-consuming tendering and carrier selection processes, high administrative overhead due to managing multiple carriers, freight forwarders, and brokers, lack of real-time visibility into shipment status, exceptions, and disruptions.
+
+      AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+      AVAILABLE DYNAMIC VARIABLES:
+
+Contact Fields:
+- {{contact.first_name}}: Contact's first name
+- {{contact.last_name}}: Contact's last name
+- {{contact.email}}: Contact's email address
+- {{contact.domain}}: Contact's company domain
+- {{contact.location_city}}: Contact's city
+- {{contact.location_state}}: Contact's state/province
+- {{contact.location_country}}: Contact's country
+- {{contact.phone}}: Contact's phone number
+- {{contact.title}}: Contact's job title
+- {{contact.opt_out_message}}: Contact's opt-out message
+
+Account Fields:
+- {{account.name}}: Account/company name
+- {{account.company_unprocessed_name}}: Raw company name (unprocessed)
+- {{account.company_location_city}}: Company's city
+- {{account.company_location_state}}: Company's state/province
+- {{account.company_location_country}}: Company's country
+- {{account.latest_funding_type}}: Latest funding round type
+- {{account.company_size}}: Company size (employees)
+- {{account.vertical}}: Company vertical/industry
+- {{account.industry}}: Company industry
+
+Sender Fields:
+- {{sender.first_name}}: Sender's first name
+- {{sender.last_name}}: Sender's last name
+- {{sender.email}}: Sender's email address
+- {{sender.meeting_alias}}: Sender's meeting booking alias
+
+Intent Fields:
+- {{primary_intent_signal}}: Primary intent/signal for outreach
+- {{secondary_intent_signal}}: Secondary intent/signal for outreach
+
+Time Fields:
+- {{now.day}}: Current day of month
+- {{now.month}}: Current month name
+- {{now.time_of_day}}: Current time of day
+- {{now.weekday}}: Current day of week
+- {{now.year}}: Current year
+
+Advanced:
+- {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}: Conditional fallback for contact name
+- {{contact.title->lowercase}}: Convert to lowercase
+- {{now.day->plus_X}}: Add days to current date
+
+
+
+      EMAIL STRUCTURE EXAMPLES (follow this tone and structure):
+      ## New CFOs looking to make an impact
+
+**Email 1**
+Subject: Congrats on your new role!
+
+Hey {{contact.first_name}},
+
+Congrats on your new role as CFO at {{account.name}}!
+
+I know you're driving impact, so I'll keep this short. Transportation costs rise during uncertain times. With Emerge, CFOs gain control of freight spend. Dollar Tree saved $3.2M+ in 6 months using our software. We had them up and running in under 2 hours.
+
+[Interested in learning how we can help {{account.name}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+---
+
+**Email 2**
+Subject: Smarter freight reporting for Finance
+
+Hi {{contact.first_name}},
+
+I wanted to follow up on my previous note. Many new CFOs I speak with say transportation costs can feel like a black box – difficult to compare and impossible to control.
+
+That's why Finance and Operations leaders at Albertsons, Ace Hardware, and AB InBev use Emerge. Our reporting and benchmarking tools give them real-time visibility, so they know market rates and never risk overpaying on freight.
+
+[Would it make sense to connect for 20 minutes to explore if {{account.name}} could benefit too?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+## VP of Transportation that's growing their team
+
+**Email 1**
+Subject: Empower your growing team
+
+Hi {{contact.first_name}},
+
+I saw you're growing your transportation team at {{account.name}}. Many VPs say the real challenge isn't hiring – it's finding the right people and keeping them engaged under pressure to deliver fast.
+
+That's why transportation leaders use Emerge. Our platform and real-time reporting help new hires ramp up quickly while giving existing team members the support they need to hit their targets.
+
+[Would it make sense to connect to explore how {{account.name}} could empower its team with the right tools?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+---
+
+**Email 2**
+Subject: Equip your growing team
+
+Hi {{contact.first_name}},
+
+I wanted to follow up on my note. When transportation teams are growing, leaders tell me their biggest hurdle is making sure new hires ramp up quick and existing staff stay engaged.
+
+That's why many VPs turn to modern platforms like Emerge. Teams love the ease of use, real-time reporting, and automation – because it cuts manual work and helps them deliver faster.
+
+[Would it be worth a quick chat to explore if {{account.name}} could equip its growing team with tools they'll love?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+## Intern in logistics department
+
+**Email 1**
+Subject: Stand out during your internship
+
+Hey {{contact.first_name}}, congrats on the internship at {{account.name}}!
+
+Internships are a chance to show initiative. Many interns I meet say it's tough to prove impact when most of their work is manual tasks like rate entry, shipment tracking, or invoice matching.
+
+One way to stand out is by bringing your manager a solution.
+
+With Emerge's software, those manual tasks get automated. Best part? No complicated IT setup required.
+
+[Should I send you a short overview to pitch to your manager?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+---
+
+**Email 2**
+Subject: reply to thread
+
+Hi {{contact.first_name}}, just following up here.
+
+The best part about Emerge is that getting set up takes less than a day. That means you could bring your manager a ready-to-go project idea without waiting on IT resources.
+
+Interns who show initiative like this often get noticed and open doors for full-time opportunities. Helping your team automate manual work could be the project that sets you apart.
+
+[Would it help if I sent you a one-page overview to share with your manager?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+
+      EXAMPLE EMAIL FOR THIS PERSONA (use as a template):
+      Subject: Quick question about your freight costs
+
+Hi {{contact.first_name}},
+
+Quick question about freight costs. Many leaders are looking to optimize spend while maintaining service reliability.
+
+[Interested in learning more?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+
+      EMAIL SPECIFICATIONS:
+      - Day: 1
+      - Subject: Test
+      - Purpose: Test
+      - Signal Integration: Test
+      - Specific Stats to Feature: Dollar Tree saved $3.2M
+
+      DETAILED MESSAGE OUTLINE (FOLLOW NATURALLY):
+      
+      - Opening: Hi
+      - Signal Mention: test (mention the signal naturally and conversationally)
+      - Stat Usage: Dollar Tree saved $3.2M
+      - Customer Mention: Dollar Tree (mention these specific customers naturally)
+      - Value Prop: Cost savings
+      - CTA: Schedule a call
+      
+      
+      IMPORTANT: Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page" or "I noticed you were looking at our demo page." Make it feel friendly and human, not robotic or analytical.
+
+      CRITICAL SIGNAL INTEGRATION REQUIREMENT:
+      The signalIntegration field tells you EXACTLY how to integrate the signal. You MUST follow it precisely.
+      
+      SIGNAL TO INTEGRATE: "test hyperlink generation"
+      SIGNAL INTEGRATION INSTRUCTION: "Test"
+      
+      You MUST include the signal in the email exactly as specified in the signalIntegration instruction above.
+
+      Write a complete email that:
+      1. Uses the exact subject line provided
+      2. Follows the purpose and signal integration guidelines EXACTLY as specified
+      3. Matches the persona's tone profile and uses their keywords
+      4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
+      5. Sounds conversational and human (like talking to a friend)
+      6. Includes a clear call-to-action
+      7. Is concise but compelling (100-150 words)
+      8. Does NOT include a signature or sign-off
+      9. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
+      10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
+      11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+      12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+      13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+      14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
+      15. Use the specific stats mentioned in the plan to make the email compelling and credible
+      16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
+      17. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
+
+      STRUCTURE GUIDELINES:
+      - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
+      - Open with signal acknowledgment (if applicable)
+      - State the challenge/opportunity in 1-2 short sentences
+      - Present the specific stat/result in context
+      - End with clear, hyperlinked CTA using markdown format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+      - Keep sentences short and punchy
+      - Use active voice and direct language
+      - Avoid corporate jargon and formal phrases
+      - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
+
+      MESSAGE TYPE VARIATION BY DAY:
+      - Day 1: Follow the signalIntegration instruction from the sequence plan
+      - Day 3: Question-based approach focusing on challenges (start with question)
+      - Day 5: Story-driven with customer success focus (start with story/customer name)
+      - Day 7: Urgency-driven with clear next steps (start with urgency/time)
+      - LinkedIn: More casual, personal, and conversational (start with personal note)
+
+      DAY-SPECIFIC INSTRUCTIONS:
+      - Day 1: Follow the signalIntegration instruction from the sequence plan
+      - Day 3: Start with a question about their challenges
+      - Day 5: Start with a customer story or success example
+      - Day 7: Start with urgency or time-sensitive language
+      - LinkedIn: Start with personal/casual language, avoid formal openings
+
+      VARIED OPENING EXAMPLES (USE DIFFERENT ONES):
+      - Direct: "Quick question about your freight costs..."
+      - Story: "Dollar Tree just saved $6M - here's what happened"
+      - Question: "What if you could cut freight spend by 20%?"
+      - Challenge: "Most ops leaders struggle with this..."
+      - Value: "Thanks for checking our pricing - here's what we found"
+      - Personal: "I've been thinking about your team's efficiency challenges"
+      - Problem: "Freight costs are killing budgets everywhere..."
+      - Solution: "Here's how we helped Pepsi cut RFP time by 20%"
+      - Urgency: "Time-sensitive question about your freight spend"
+      - Insight: "Interesting trend I'm seeing in freight optimization"
+
+      CRITICAL: Do NOT use "I saw you checked out" or "I noticed you" in every message. Vary your openings completely.
+
+CRITICAL RULES:
+- Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided.
+- NEVER assume what the recipient downloaded or their specific business situation
+- Focus on their potential challenges and goals based on their role, not assumptions about their current state
+- Use phrases like "if you're facing..." or "many [role] deal with..." instead of assuming their situation
+- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+- Instead of "It looks like you're looking for..." say "Are you looking for...?"
+- Instead of "I noticed TOMS is focusing on..." say "Is TOMS focusing on...?"
+- Turn all presumptive statements into questions
+
+Format your response as:
+Subject: [subject line]
+
+[email body]
+
+Write like you're having a genuine conversation, not sending a formal business proposal.
+
+NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
+- Making up what the recipient downloaded or viewed
+- Their specific business situation (unless mentioned in signal)
+- What challenges they're currently facing (unless mentioned in signal)
+- Any assumptions about their company or role (unless mentioned in signal)
+- LinkedIn posts, social media activity, or other online behavior not in the signal
+- What they're "considering" or "thinking about" unless explicitly mentioned
+- Their internal processes, strategies, or decision-making unless stated in the signal
+- Overused phrases like "smart move", "great step", "exactly what you need"
+
+IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
+
+      CORE PRINCIPLES:
+      - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
+      - Focus on the recipient's potential challenges, not assumptions about their current situation
+      - Use different approaches and stats for each email to avoid repetition
+      - Be conversational and authentic - write like you're talking to a colleague
+      - Let your creativity flow while staying within these boundaries
+
+      MESSAGE VARIATION RULES:
+      - Each email must be COMPLETELY UNIQUE - no repetitive phrases or structures
+      - Use different opening approaches: questions, statements, stories, direct value props
+      - Vary the signal integration - don't always start with "I noticed you checked out"
+      - Use different stats and customer examples for each email
+      - Change the tone and approach - some direct, some conversational, some story-driven
+      - Avoid template-style writing - make each message feel fresh and different
+------------------------------------------------------------
+================================================================================
+
+
+================================================================================
+✅ OPENAI API RESPONSE - EMAIL GENERATION
+================================================================================
+📧 MODEL: gpt-4o-mini
+📅 DAY: 1
+📏 RESPONSE LENGTH: 679 characters
+
+📝 COMPLETE RESPONSE:
+------------------------------------------------------------
+Subject: Test
+
+Hi {{contact.first_name}},
+
+Test! Just a quick note to reach out about freight costs. Many operations leaders struggle to balance cost optimization with service reliability, and it’s a tightrope walk.
+
+Take Dollar Tree, for instance. They saved over $3.2M by optimizing their freight spend. It’s a great example of how strategic decisions can lead to significant ROI.
+
+If you're looking to enhance your enterprise-wide operations and gain a competitive edge, we should chat.
+
+[Interested in a quick call to explore how we can help {{account.name}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+------------------------------------------------------------
+================================================================================
+
+✅ Generated email for day 1
+✅ All messages generated successfully
+ POST /api/generate-messages 200 in 3203ms
+ ✓ Compiled in 433ms (709 modules)
+ ✓ Compiled in 219ms (709 modules)
+ ✓ Compiled in 230ms (709 modules)
+ ✓ Compiled in 356ms (709 modules)
+ ✓ Compiled in 198ms (709 modules)
