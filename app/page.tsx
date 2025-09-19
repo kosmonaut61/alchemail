@@ -542,18 +542,18 @@ export default function AlchemailApp20() {
                                 Browse All
                               </Button>
                             </SheetTrigger>
-                            <SheetContent className="w-[700px] sm:max-w-[700px]">
-                              <SheetHeader className="pb-6">
-                                <SheetTitle>Context Repository</SheetTitle>
+                            <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
+                              <SheetHeader className="pb-8">
+                                <SheetTitle className="text-xl">Context Repository</SheetTitle>
                               </SheetHeader>
-                              <div className="mt-2">
+                              <div className="mt-4">
                                 <Tabs defaultValue="customer" className="w-full">
-                                  <TabsList className="grid w-full grid-cols-7 mb-6">
+                                  <TabsList className="grid w-full grid-cols-7 mb-8 h-10">
                                     {getAllCategories().map((category) => (
                                       <TabsTrigger 
                                         key={category} 
                                         value={category}
-                                        className="text-xs px-3 py-2"
+                                        className="text-sm px-4 py-2"
                                       >
                                         {category === 'language_style' ? 'Style' : category.replace('_', ' ')}
                                       </TabsTrigger>
@@ -561,22 +561,22 @@ export default function AlchemailApp20() {
                                   </TabsList>
                                   {getAllCategories().map((category) => (
                                     <TabsContent key={category} value={category} className="mt-0">
-                                      <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+                                      <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
                                         {getContextItemsByCategory(category).map((item, index) => (
                                           <div 
                                             key={index} 
-                                            className={`p-5 rounded-lg border ${getCategoryColor(category)}`}
+                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
                                           >
-                                            <div className="flex items-start justify-between mb-3">
-                                              <h4 className="font-semibold text-sm leading-tight">{item.title}</h4>
-                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0">
+                                            <div className="flex items-start justify-between mb-4">
+                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
+                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
                                                 {item.category === 'language_style' ? 'style' : item.category}
                                               </span>
                                             </div>
-                                            <p className="text-sm mb-3 leading-relaxed">{item.content}</p>
+                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
                                             {item.industry && item.industry.length > 0 && (
-                                              <div className="mb-3">
-                                                <p className="text-xs opacity-75 mb-1 font-medium">
+                                              <div className="mb-4">
+                                                <p className="text-xs opacity-75 mb-2 font-medium">
                                                   Industries:
                                                 </p>
                                                 <p className="text-xs opacity-75">
@@ -586,20 +586,20 @@ export default function AlchemailApp20() {
                                             )}
                                             {item.keywords && item.keywords.length > 0 && (
                                               <div>
-                                                <p className="text-xs opacity-75 mb-2 font-medium">
+                                                <p className="text-xs opacity-75 mb-3 font-medium">
                                                   Keywords:
                                                 </p>
-                                                <div className="flex flex-wrap gap-1.5">
+                                                <div className="flex flex-wrap gap-2">
                                                   {item.keywords.slice(0, 5).map((keyword, idx) => (
                                                     <span 
                                                       key={idx} 
-                                                      className="text-xs px-2 py-1 rounded-full bg-white/30 dark:bg-black/30"
+                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
                                                     >
                                                       {keyword}
                                                     </span>
                                                   ))}
                                                   {item.keywords.length > 5 && (
-                                                    <span className="text-xs px-2 py-1 rounded-full bg-white/30 dark:bg-black/30">
+                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
                                                       +{item.keywords.length - 5} more
                                                     </span>
                                                   )}
