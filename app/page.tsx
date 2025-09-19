@@ -542,58 +542,68 @@ export default function AlchemailApp20() {
                                 Browse All
                               </Button>
                             </SheetTrigger>
-                            <SheetContent className="w-[600px] sm:max-w-[600px]">
-                              <SheetHeader>
+                            <SheetContent className="w-[700px] sm:max-w-[700px]">
+                              <SheetHeader className="pb-6">
                                 <SheetTitle>Context Repository</SheetTitle>
                               </SheetHeader>
-                              <div className="mt-6">
+                              <div className="mt-2">
                                 <Tabs defaultValue="customer" className="w-full">
-                                  <TabsList className="grid w-full grid-cols-7">
+                                  <TabsList className="grid w-full grid-cols-7 mb-6">
                                     {getAllCategories().map((category) => (
                                       <TabsTrigger 
                                         key={category} 
                                         value={category}
-                                        className="text-xs"
+                                        className="text-xs px-3 py-2"
                                       >
-                                        {category.replace('_', ' ')}
+                                        {category === 'language_style' ? 'Style' : category.replace('_', ' ')}
                                       </TabsTrigger>
                                     ))}
                                   </TabsList>
                                   {getAllCategories().map((category) => (
-                                    <TabsContent key={category} value={category} className="mt-4">
-                                      <div className="space-y-3 max-h-[600px] overflow-y-auto">
+                                    <TabsContent key={category} value={category} className="mt-0">
+                                      <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
                                         {getContextItemsByCategory(category).map((item, index) => (
                                           <div 
                                             key={index} 
-                                            className={`p-4 rounded-lg border ${getCategoryColor(category)}`}
+                                            className={`p-5 rounded-lg border ${getCategoryColor(category)}`}
                                           >
-                                            <div className="flex items-start justify-between mb-2">
-                                              <h4 className="font-semibold text-sm">{item.title}</h4>
-                                              <span className="text-xs opacity-75">
-                                                {item.category}
+                                            <div className="flex items-start justify-between mb-3">
+                                              <h4 className="font-semibold text-sm leading-tight">{item.title}</h4>
+                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0">
+                                                {item.category === 'language_style' ? 'style' : item.category}
                                               </span>
                                             </div>
-                                            <p className="text-sm mb-2">{item.content}</p>
+                                            <p className="text-sm mb-3 leading-relaxed">{item.content}</p>
                                             {item.industry && item.industry.length > 0 && (
-                                              <p className="text-xs opacity-75 mb-2">
-                                                <strong>Industries:</strong> {item.industry.join(', ')}
-                                              </p>
+                                              <div className="mb-3">
+                                                <p className="text-xs opacity-75 mb-1 font-medium">
+                                                  Industries:
+                                                </p>
+                                                <p className="text-xs opacity-75">
+                                                  {item.industry.join(', ')}
+                                                </p>
+                                              </div>
                                             )}
                                             {item.keywords && item.keywords.length > 0 && (
-                                              <div className="flex flex-wrap gap-1">
-                                                {item.keywords.slice(0, 5).map((keyword, idx) => (
-                                                  <span 
-                                                    key={idx} 
-                                                    className="text-xs px-2 py-1 rounded-full bg-white/20 dark:bg-black/20"
-                                                  >
-                                                    {keyword}
-                                                  </span>
-                                                ))}
-                                                {item.keywords.length > 5 && (
-                                                  <span className="text-xs px-2 py-1 rounded-full bg-white/20 dark:bg-black/20">
-                                                    +{item.keywords.length - 5} more
-                                                  </span>
-                                                )}
+                                              <div>
+                                                <p className="text-xs opacity-75 mb-2 font-medium">
+                                                  Keywords:
+                                                </p>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                    <span 
+                                                      key={idx} 
+                                                      className="text-xs px-2 py-1 rounded-full bg-white/30 dark:bg-black/30"
+                                                    >
+                                                      {keyword}
+                                                    </span>
+                                                  ))}
+                                                  {item.keywords.length > 5 && (
+                                                    <span className="text-xs px-2 py-1 rounded-full bg-white/30 dark:bg-black/30">
+                                                      +{item.keywords.length - 5} more
+                                                    </span>
+                                                  )}
+                                                </div>
                                               </div>
                                             )}
                                           </div>
