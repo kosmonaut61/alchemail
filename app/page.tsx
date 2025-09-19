@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -97,6 +97,46 @@ export default function AlchemailApp20() {
       setPainPoints(painPoints.filter((p) => p !== painPoint))
     }
   }
+
+  // Auto-detect pain points based on signal text
+  const autoDetectPainPoints = (signalText: string, personaData: any) => {
+    if (!signalText || !personaData?.painPoints) return []
+    
+    const detectedPoints: string[] = []
+    const signalLower = signalText.toLowerCase()
+    
+    personaData.painPoints.forEach((painPoint: string) => {
+      const painPointLower = painPoint.toLowerCase()
+      // Check if any key words from pain point appear in signal
+      const keyWords = painPointLower.split(/[:\s,]+/).filter(word => word.length > 3)
+      const hasMatch = keyWords.some(word => signalLower.includes(word))
+      
+      if (hasMatch) {
+        detectedPoints.push(painPoint)
+      }
+    })
+    
+    return detectedPoints
+  }
+
+  // Random pain point selector
+  const selectRandomPainPoints = () => {
+    if (!selectedPersona?.painPoints) return
+    
+    const shuffled = [...selectedPersona.painPoints].sort(() => 0.5 - Math.random())
+    const randomSelection = shuffled.slice(0, 5)
+    setPainPoints(randomSelection)
+  }
+
+  // Auto-detect pain points when signal or persona changes
+  useEffect(() => {
+    if (signal && selectedPersona) {
+      const detectedPoints = autoDetectPainPoints(signal, selectedPersona)
+      if (detectedPoints.length > 0) {
+        setPainPoints(detectedPoints)
+      }
+    }
+  }, [signal, selectedPersona])
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -239,17 +279,29 @@ export default function AlchemailApp20() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <Label>Pain Points (Optional)</Label>
-                      {painPoints.length > 0 && (
+                      <div className="flex gap-2">
                         <Button
                           type="button"
                           variant="outline"
                           size="sm"
-                          onClick={() => setPainPoints([])}
+                          onClick={selectRandomPainPoints}
                           className="text-xs"
+                          disabled={!selectedPersona}
                         >
-                          Clear All
+                          Random 5
                         </Button>
-                      )}
+                        {painPoints.length > 0 && (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setPainPoints([])}
+                            className="text-xs"
+                          >
+                            Clear All
+                          </Button>
+                        )}
+                      </div>
                     </div>
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
                       {(() => {

@@ -219,6 +219,16 @@ Call-to-Action (CTA) Rules:
   * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a walkthrough](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)?"
 - AVOID: Entire sentence links like "[Would you be open to a quick chat to explore this further?](url)"
 
+FINAL FLOW REVIEW (CRITICAL):
+After optimizing, do a final pass to ensure:
+- Links flow naturally within sentences, not randomly placed
+- Case study links are integrated contextually
+- No orphaned links at the end of sentences without context
+- Smooth transitions between ideas and paragraphs
+- Natural conversation flow from start to finish
+- Links feel intentional and purposeful, not tacked on
+
+
 MERGE FIELD FORMATTING:
 - Use dynamic variables for personalization (see list below)
 - Always preserve merge field syntax exactly: {{variable.name}}
