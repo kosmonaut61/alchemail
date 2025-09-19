@@ -238,7 +238,17 @@ TARGET PERSONA:
       - Present the specific stat/result in context
       - End with clear, hyperlinked CTA using NATURAL link integration
       - Weave links into sentences naturally (2-4 key words), not entire sentence links
-      - Examples: "Would you be open to a [quick chat](url) to explore this?" or "Want to [schedule a call](url) this week?"
+      - LINK TYPE RULES:
+        * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+        * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
+          - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
+          - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
+          - [EZRack case study](https://www.emergemarket.com/resource/ezrack-case-study)
+          - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
+          - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
+          - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
+        * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+      - Examples: "Would you be open to a [quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
       - Keep sentences short and punchy
       - Use active voice and direct language
       - Avoid corporate jargon and formal phrases
@@ -467,7 +477,16 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - Avoid repetitive signal integration - be more creative
       - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
       - Use NATURAL link integration: weave links into sentences (2-4 key words)
-      - Examples: "Want to [jump on a call](url) this week?" or "Should we [connect](url) to discuss?"`
+      - LINK TYPE RULES:
+        * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+        * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
+          - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
+          - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
+          - [EZRack case study](https://www.emergemarket.com/resource/ezrack-case-study)
+          - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
+          - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
+          - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
+      - Examples: "Want to [jump on a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) this week?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."`
 
       // Log the complete prompt for auditing
       console.log('\n' + '='.repeat(80))
