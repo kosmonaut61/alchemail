@@ -8795,3 +8795,17 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
       "purpose": "Executive intro: position test logging as a board-level lever to reduc...
  POST /api/generate-sequence-plan 200 in 39706ms
  ✓ Compiled in 493ms (972 modules)
+ ✓ Compiled in 1374ms (709 modules)
+ ✓ Compiled in 512ms (709 modules)
+ ✓ Compiled in 231ms (709 modules)
+ ✓ Compiled in 679ms (709 modules)
+ ✓ Compiled in 719ms (709 modules)
+ ✓ Compiled in 861ms (709 modules)
+ ✓ Compiled in 199ms (709 modules)
+ ✓ Compiled in 461ms (709 modules)
+ ✓ Compiled in 213ms (709 modules)
+ ✓ Compiled in 478ms (709 modules)
+ ✓ Compiled in 290ms (709 modules)
+ ✓ Compiled in 342ms (709 modules)
+ ✓ Compiled in 197ms (709 modules)
+ ✓ Compiled in 575ms (709 modules)
