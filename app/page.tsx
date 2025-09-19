@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -9,12 +9,14 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X } from "lucide-react"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
-import { ContextItem } from "@/lib/context-repository"
+import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
 
 // Types for the 2.0 app
 interface SequencePlan {
@@ -57,6 +59,7 @@ export default function AlchemailApp20() {
   const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
+  const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
   const { toast } = useToast()
 
   const steps = [
@@ -97,6 +100,82 @@ export default function AlchemailApp20() {
       setPainPoints(painPoints.filter((p) => p !== painPoint))
     }
   }
+
+  // Get the selected persona data
+  const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
+
+  // Get color for context item categories
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'customer':
+        return 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-700'
+      case 'case_study':
+        return 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-700'
+      case 'statistic':
+        return 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200 dark:border-purple-700'
+      case 'quote':
+        return 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-200 dark:border-orange-700'
+      case 'value_prop':
+        return 'bg-pink-100 text-pink-800 border-pink-200 dark:bg-pink-900 dark:text-pink-200 dark:border-pink-700'
+      case 'language_style':
+        return 'bg-cyan-100 text-cyan-800 border-cyan-200 dark:bg-cyan-900 dark:text-cyan-200 dark:border-cyan-700'
+      case 'pain_points':
+        return 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900 dark:text-red-200 dark:border-red-700'
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700'
+    }
+  }
+
+  // Get context items by category
+  const getContextItemsByCategory = (category: string) => {
+    return CONTEXT_REPOSITORY.filter(item => item.category === category)
+  }
+
+  // Get all unique categories
+  const getAllCategories = () => {
+    const categories = [...new Set(CONTEXT_REPOSITORY.map(item => item.category))]
+    return categories.sort()
+  }
+
+  // Auto-detect pain points based on signal text
+  const autoDetectPainPoints = (signalText: string, personaData: any) => {
+    if (!signalText || !personaData?.painPoints) return []
+    
+    const detectedPoints: string[] = []
+    const signalLower = signalText.toLowerCase()
+    
+    personaData.painPoints.forEach((painPoint: string) => {
+      const painPointLower = painPoint.toLowerCase()
+      // Check if any key words from pain point appear in signal
+      const keyWords = painPointLower.split(/[:\s,]+/).filter(word => word.length > 3)
+      const hasMatch = keyWords.some(word => signalLower.includes(word))
+      
+      if (hasMatch) {
+        detectedPoints.push(painPoint)
+      }
+    })
+    
+    return detectedPoints
+  }
+
+  // Random pain point selector
+  const selectRandomPainPoints = () => {
+    if (!selectedPersona?.painPoints) return
+    
+    const shuffled = [...selectedPersona.painPoints].sort(() => 0.5 - Math.random())
+    const randomSelection = shuffled.slice(0, 5)
+    setPainPoints(randomSelection)
+  }
+
+  // Auto-detect pain points when signal or persona changes
+  useEffect(() => {
+    if (signal && selectedPersona) {
+      const detectedPoints = autoDetectPainPoints(signal, selectedPersona)
+      if (detectedPoints.length > 0) {
+        setPainPoints(detectedPoints)
+      }
+    }
+  }, [signal, selectedPersona])
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -239,6 +318,17 @@ export default function AlchemailApp20() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <Label>Pain Points (Optional)</Label>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={selectRandomPainPoints}
+                          className="text-xs"
+                          disabled={!selectedPersona}
+                        >
+                          Random 5
+                        </Button>
                       {painPoints.length > 0 && (
                         <Button
                           type="button"
@@ -250,10 +340,10 @@ export default function AlchemailApp20() {
                           Clear All
                         </Button>
                       )}
+                      </div>
                     </div>
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
                       {(() => {
-                        const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
                         if (!selectedPersona) return null
                         
                         return selectedPersona.painPoints.map((painPoint, index) => (
@@ -433,49 +523,129 @@ export default function AlchemailApp20() {
                 </div>
 
                   {contextItems.length > 0 && (
-                    <div className="space-y-4">
-                      <h3 className="font-semibold">Selected Context Items</h3>
-                      <div className="grid gap-3">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold">Selected Context Items</h3>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-muted-foreground">
+                            {contextItems.length} items
+                          </span>
+                          <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
+                            <SheetTrigger asChild>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="text-xs"
+                              >
+                                <Eye className="h-3 w-3 mr-1" />
+                                Browse All
+                              </Button>
+                            </SheetTrigger>
+                            <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
+                              <SheetHeader className="pb-8">
+                                <SheetTitle className="text-xl">Context Repository</SheetTitle>
+                              </SheetHeader>
+                              <div className="mt-4">
+                                <Tabs defaultValue="customer" className="w-full">
+                                  <TabsList className="grid w-full grid-cols-7 mb-8 h-10">
+                                    {getAllCategories().map((category) => (
+                                      <TabsTrigger 
+                                        key={category} 
+                                        value={category}
+                                        className="text-sm px-4 py-2"
+                                      >
+                                        {category === 'language_style' ? 'Style' : category.replace('_', ' ')}
+                                      </TabsTrigger>
+                                    ))}
+                                  </TabsList>
+                                  {getAllCategories().map((category) => (
+                                    <TabsContent key={category} value={category} className="mt-0">
+                                      <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
+                                        {getContextItemsByCategory(category).map((item, index) => (
+                                          <div 
+                                            key={index} 
+                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
+                                          >
+                                            <div className="flex items-start justify-between mb-4">
+                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
+                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
+                                                {item.category === 'language_style' ? 'style' : item.category}
+                                              </span>
+                                            </div>
+                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
+                                            {item.industry && item.industry.length > 0 && (
+                                              <div className="mb-4">
+                                                <p className="text-xs opacity-75 mb-2 font-medium">
+                                                  Industries:
+                                                </p>
+                                                <p className="text-xs opacity-75">
+                                                  {item.industry.join(', ')}
+                                                </p>
+                                              </div>
+                                            )}
+                                            {item.keywords && item.keywords.length > 0 && (
+                                              <div>
+                                                <p className="text-xs opacity-75 mb-3 font-medium">
+                                                  Keywords:
+                                                </p>
+                                                <div className="flex flex-wrap gap-2">
+                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                    <span 
+                                                      key={idx} 
+                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
+                                                    >
+                                                      {keyword}
+                                                    </span>
+                                                  ))}
+                                                  {item.keywords.length > 5 && (
+                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
+                                                      +{item.keywords.length - 5} more
+                                                    </span>
+                                                  )}
+                                                </div>
+                                              </div>
+                                            )}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </TabsContent>
+                                  ))}
+                                </Tabs>
+                              </div>
+                            </SheetContent>
+                          </Sheet>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
                         {contextItems.map((item, index) => (
-                          <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950 relative">
-                  <div className="flex items-center justify-between mb-2">
-                              <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                                {item.title}
-                              </span>
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">
-                                  {item.category}
-                                </span>
-                                <Button
-                                  type="button"
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => {
-                                    setContextItems(prev => prev.filter((_, i) => i !== index))
-                                    toast({
-                                      title: "Context Item Removed",
-                                      description: `${item.title} has been removed from the sequence.`,
-                                    })
-                                  }}
-                                  className="h-6 w-6 p-0 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
-                                >
-                                  <X className="h-3 w-3" />
-                                </Button>
-                  </div>
-                  </div>
-                            <p className="text-sm text-blue-700 dark:text-blue-300">
-                              {item.content}
-                            </p>
-                            {item.industry && item.industry.length > 0 && (
-                              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
-                                Industries: {item.industry.join(', ')}
-                              </p>
-                            )}
+                          <div
+                            key={index}
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
+                          >
+                            <span className="font-medium truncate max-w-[200px]" title={item.title}>
+                              {item.title}
+                            </span>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                setContextItems(prev => prev.filter((_, i) => i !== index))
+                                toast({
+                                  title: "Context Item Removed",
+                                  description: `${item.title} has been removed from the sequence.`,
+                                })
+                              }}
+                              className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
                           </div>
                         ))}
                       </div>
-                </div>
-              )}
+                    </div>
+                  )}
               
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
@@ -513,9 +683,9 @@ export default function AlchemailApp20() {
                   )}
 
                   <div className="flex justify-between">
-                    <Button variant="outline" onClick={handlePrevious}>
+                  <Button variant="outline" onClick={handlePrevious}>
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Previous
+                    Previous
                     </Button>
                     <div className="flex gap-2">
                       <Button 
@@ -580,15 +750,15 @@ export default function AlchemailApp20() {
                       >
                         <Sparkles className="mr-2 h-4 w-4" />
                         Retry
-                      </Button>
-                      <Button 
-                        onClick={handleNext} 
-                        disabled={!canProceedToNext()}
-                        className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
-                      >
+                  </Button>
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={!canProceedToNext()}
+                    className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
+                  >
                         Next: Generate
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                  </Button>
               </div>
                   </div>
                 </div>
@@ -680,21 +850,21 @@ export default function AlchemailApp20() {
                       }
                     }}
                     disabled={isGeneratingMessages}
-                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
-                  >
+                      className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
+                    >
                     {isGeneratingMessages ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Generating Messages...
-                      </>
-                    ) : (
-                      <>
+                        </>
+                      ) : (
+                        <>
                         <Sparkles className="mr-2 h-4 w-4" />
                         Generate Complete Sequence
-                      </>
-                    )}
-                  </Button>
-                </div>
+                        </>
+                      )}
+                    </Button>
+                  </div>
               ) : (
                 <div className="space-y-6">
                   <div className="flex justify-between items-center">
@@ -778,9 +948,9 @@ export default function AlchemailApp20() {
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Regenerate
                       </Button>
-                    </div>
-                  </div>
-
+                </div>
+              </div>
+              
                   {generatedMessages.map((message) => (
                     <div key={message.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
@@ -918,13 +1088,53 @@ export default function AlchemailApp20() {
                       </>
                     )}
                   </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(message.content)
+                      toast({
+                        title: "Copied to clipboard!",
+                        description: "Message content copied - ready to paste into your CRM.",
+                      })
+                    }}
+                  >
+                    Copy
+                  </Button>
                 </div>
               </div>
-                      <div className="bg-muted/50 rounded-md p-3">
-                        <pre className="text-sm whitespace-pre-wrap font-mono">
-                          {message.content}
-                        </pre>
-                      </div>
+              
+              <div className="bg-muted/50 rounded-md p-3">
+                <div 
+                  className="text-sm whitespace-pre-wrap"
+                  dangerouslySetInnerHTML={{
+                    __html: (() => {
+                      // First, convert markdown links to HTML
+                      let processed = message.content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                      
+                      // Then, replace merge fields that are NOT inside href attributes
+                      processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
+                        // Check if this merge field is inside an href attribute
+                        const beforeMatch = processed.substring(0, processed.indexOf(match));
+                        const lastHref = beforeMatch.lastIndexOf('href=');
+                        const lastQuote = beforeMatch.lastIndexOf('"', lastHref);
+                        const nextQuote = processed.indexOf('"', lastHref);
+                        
+                        // If we're inside an href attribute, don't replace
+                        if (lastHref > lastQuote && lastHref < nextQuote) {
+                          return match; // Keep original merge field
+                        }
+                        
+                        // Otherwise, replace with highlighted version
+                        return `<span class="bg-yellow-100 text-yellow-800 px-1 py-0.5 rounded text-xs font-mono">${match}</span>`;
+                      });
+                      
+                      // Finally, replace newlines
+                      return processed.replace(/\n/g, '<br>');
+                    })()
+                  }}
+                />
+              </div>
                     </div>
                   ))}
                 </div>

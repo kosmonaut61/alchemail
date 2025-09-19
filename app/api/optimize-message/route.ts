@@ -132,7 +132,9 @@ MESSAGE UNIQUENESS & VARIATION:
 - Avoid repetitive phrases like "I noticed you checked out" in every message
 - Create distinct value propositions for each message
 - Use different psychological triggers and persuasion techniques
-- AVOID overused phrases like "great step", "smart move", "exactly what you need", "sounds like a smart move"
+- NEVER use these overused phrases: "smart move", "simple move", "good move", "solid move", "right move", "great step", "exactly what you need"
+- BANNED WORDS: "move", "moves" - find completely different ways to express these concepts
+- Use varied, creative language - avoid repetitive phrases entirely
 - Vary signal acknowledgments - use different ways to show appreciation
 - Don't use the same connector phrases repeatedly - mix it up
 - USE CUSTOMER QUOTES to add credibility and emotional connection
@@ -197,8 +199,35 @@ VARIED OPENING APPROACHES:
 - LinkedIn 3: "One question about your freight processes"
 
 Call-to-Action (CTA) Rules:
-- Format CTAs as clickable hyperlinks: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end
+- NATURAL LINK INTEGRATION: Weave links naturally into sentences, not as entire sentence links
+- Link only 2-4 key words in the middle of sentences, not entire phrases
+- Make the link feel like a natural part of the conversation flow
+- CRITICAL: Never show URLs as plain text - always wrap them in markdown link format [text](url)
+- LINK TYPE RULES:
+  * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+  * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
+    - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
+    - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
+    - [EZRack case study](https://www.emergemarket.com/resource/ezrack-case-study)
+    - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
+    - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
+    - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
+  * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Examples of NATURAL link integration with correct URLs:
+  * "Want to [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
+  * "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
+  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a walkthrough](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)?"
+- AVOID: Entire sentence links like "[Would you be open to a quick chat to explore this further?](url)"
+
+FINAL FLOW REVIEW (CRITICAL):
+After optimizing, do a final pass to ensure:
+- Links flow naturally within sentences, not randomly placed
+- Case study links are integrated contextually
+- No orphaned links at the end of sentences without context
+- Smooth transitions between ideas and paragraphs
+- Natural conversation flow from start to finish
+- Links feel intentional and purposeful, not tacked on
+
 
 MERGE FIELD FORMATTING:
 - Use dynamic variables for personalization (see list below)
