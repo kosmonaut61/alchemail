@@ -4,6 +4,37 @@ import { generateText } from "ai"
 import { formatVariablesForPrompt } from '@/lib/dynamic-variables'
 import { formatSamplesForPrompt } from '@/lib/email-samples'
 
+async function getContextForOptimizer(signal: string, personaData: any, painPoints: string[]) {
+  const { CONTEXT_REPOSITORY } = await import('@/lib/context-repository')
+  
+  // Get relevant context based on signal and persona
+  const signalLower = signal.toLowerCase()
+  const keywords = signalLower.split(/\s+/).filter(word => word.length > 3)
+  
+  // Find relevant context items
+  const relevantItems = CONTEXT_REPOSITORY.filter(item => {
+    const itemKeywords = item.keywords.map(k => k.toLowerCase())
+    const itemContent = item.content.toLowerCase()
+    
+    return keywords.some(keyword => 
+      itemKeywords.includes(keyword) || 
+      itemContent.includes(keyword)
+    ) || item.category === 'statistic' || item.category === 'quote'
+  })
+  
+  // Prioritize statistics and quotes
+  const prioritizedItems = [
+    ...relevantItems.filter(item => item.category === 'statistic'),
+    ...relevantItems.filter(item => item.category === 'quote'),
+    ...relevantItems.filter(item => item.category === 'case_study'),
+    ...relevantItems.filter(item => item.category === 'customer')
+  ].slice(0, 10) // Limit to top 10 most relevant
+  
+  return prioritizedItems.map(item => 
+    `- ${item.title}: ${item.content}`
+  ).join('\n')
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { messageId, originalContent, type, signal, persona, painPoints } = await request.json()
@@ -43,9 +74,12 @@ CONTEXT:
 SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
+AVAILABLE CONTEXT FOR ENHANCEMENT:
+${await getContextForOptimizer(signal, personaData, painPoints)}
+
 OPTIMIZATION GUIDELINES:
 1. Subtly integrate the signal naturally - don't make it obvious or forced
-2. Enhance the value proposition
+2. Enhance the value proposition using available context (quotes, statistics, case studies)
 3. Strengthen the call-to-action
 4. Ensure appropriate tone for the persona's seniority level
 5. Better integrate the signal naturally
@@ -64,12 +98,15 @@ OPTIMIZATION GUIDELINES:
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
 20. PRESERVE the original's personality and warmth - don't strip out human elements
+21. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
+22. VARY the content structure - don't use the same pattern as other messages
+23. INCORPORATE different statistics and examples from the context repository
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
 - Use different opening approaches (question, statement, story, direct value)
 - Vary the structure and flow - don't follow the same template
-- Use different stats, examples, and customer stories
+- Use different stats, examples, and customer stories from the context repository
 - Change the tone and approach for each message
 - Avoid repetitive phrases like "I noticed you checked out" in every message
 - Create distinct value propositions for each message
@@ -77,6 +114,9 @@ MESSAGE UNIQUENESS & VARIATION:
 - AVOID overused phrases like "great step", "smart move", "exactly what you need"
 - Vary signal acknowledgments - use different ways to show appreciation
 - Don't use the same connector phrases repeatedly - mix it up
+- USE CUSTOMER QUOTES to add credibility and emotional connection
+- AVOID repetitive phrases like "building an internal case" - find different ways to say this
+- INCORPORATE different customer examples and success stories from the context
 
 STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone
