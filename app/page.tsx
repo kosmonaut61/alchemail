@@ -9,12 +9,14 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X } from "lucide-react"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
-import { ContextItem } from "@/lib/context-repository"
+import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
 
 // Types for the 2.0 app
 interface SequencePlan {
@@ -57,6 +59,7 @@ export default function AlchemailApp20() {
   const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
+  const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
   const { toast } = useToast()
 
   const steps = [
@@ -121,6 +124,17 @@ export default function AlchemailApp20() {
       default:
         return 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700'
     }
+  }
+
+  // Get context items by category
+  const getContextItemsByCategory = (category: string) => {
+    return CONTEXT_REPOSITORY.filter(item => item.category === category)
+  }
+
+  // Get all unique categories
+  const getAllCategories = () => {
+    const categories = [...new Set(CONTEXT_REPOSITORY.map(item => item.category))]
+    return categories.sort()
   }
 
   // Auto-detect pain points based on signal text
@@ -315,17 +329,17 @@ export default function AlchemailApp20() {
                         >
                           Random 5
                         </Button>
-                        {painPoints.length > 0 && (
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setPainPoints([])}
-                            className="text-xs"
-                          >
-                            Clear All
-                          </Button>
-                        )}
+                      {painPoints.length > 0 && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setPainPoints([])}
+                          className="text-xs"
+                        >
+                          Clear All
+                        </Button>
+                      )}
                       </div>
                     </div>
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
@@ -512,9 +526,86 @@ export default function AlchemailApp20() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <h3 className="font-semibold">Selected Context Items</h3>
-                        <span className="text-xs text-muted-foreground">
-                          {contextItems.length} items
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-muted-foreground">
+                            {contextItems.length} items
+                          </span>
+                          <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
+                            <SheetTrigger asChild>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="text-xs"
+                              >
+                                <Eye className="h-3 w-3 mr-1" />
+                                Browse All
+                              </Button>
+                            </SheetTrigger>
+                            <SheetContent className="w-[600px] sm:max-w-[600px]">
+                              <SheetHeader>
+                                <SheetTitle>Context Repository</SheetTitle>
+                              </SheetHeader>
+                              <div className="mt-6">
+                                <Tabs defaultValue="customer" className="w-full">
+                                  <TabsList className="grid w-full grid-cols-7">
+                                    {getAllCategories().map((category) => (
+                                      <TabsTrigger 
+                                        key={category} 
+                                        value={category}
+                                        className="text-xs"
+                                      >
+                                        {category.replace('_', ' ')}
+                                      </TabsTrigger>
+                                    ))}
+                                  </TabsList>
+                                  {getAllCategories().map((category) => (
+                                    <TabsContent key={category} value={category} className="mt-4">
+                                      <div className="space-y-3 max-h-[600px] overflow-y-auto">
+                                        {getContextItemsByCategory(category).map((item, index) => (
+                                          <div 
+                                            key={index} 
+                                            className={`p-4 rounded-lg border ${getCategoryColor(category)}`}
+                                          >
+                                            <div className="flex items-start justify-between mb-2">
+                                              <h4 className="font-semibold text-sm">{item.title}</h4>
+                                              <span className="text-xs opacity-75">
+                                                {item.category}
+                                              </span>
+                                            </div>
+                                            <p className="text-sm mb-2">{item.content}</p>
+                                            {item.industry && item.industry.length > 0 && (
+                                              <p className="text-xs opacity-75 mb-2">
+                                                <strong>Industries:</strong> {item.industry.join(', ')}
+                                              </p>
+                                            )}
+                                            {item.keywords && item.keywords.length > 0 && (
+                                              <div className="flex flex-wrap gap-1">
+                                                {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                  <span 
+                                                    key={idx} 
+                                                    className="text-xs px-2 py-1 rounded-full bg-white/20 dark:bg-black/20"
+                                                  >
+                                                    {keyword}
+                                                  </span>
+                                                ))}
+                                                {item.keywords.length > 5 && (
+                                                  <span className="text-xs px-2 py-1 rounded-full bg-white/20 dark:bg-black/20">
+                                                    +{item.keywords.length - 5} more
+                                                  </span>
+                                                )}
+                                              </div>
+                                            )}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </TabsContent>
+                                  ))}
+                                </Tabs>
+                              </div>
+                            </SheetContent>
+                          </Sheet>
+                        </div>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {contextItems.map((item, index) => (
@@ -582,9 +673,9 @@ export default function AlchemailApp20() {
                   )}
 
                   <div className="flex justify-between">
-                    <Button variant="outline" onClick={handlePrevious}>
+                  <Button variant="outline" onClick={handlePrevious}>
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Previous
+                    Previous
                     </Button>
                     <div className="flex gap-2">
                       <Button 
@@ -649,15 +740,15 @@ export default function AlchemailApp20() {
                       >
                         <Sparkles className="mr-2 h-4 w-4" />
                         Retry
-                      </Button>
-                      <Button 
-                        onClick={handleNext} 
-                        disabled={!canProceedToNext()}
-                        className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
-                      >
+                  </Button>
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={!canProceedToNext()}
+                    className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
+                  >
                         Next: Generate
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                  </Button>
               </div>
                   </div>
                 </div>
@@ -749,21 +840,21 @@ export default function AlchemailApp20() {
                       }
                     }}
                     disabled={isGeneratingMessages}
-                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
-                  >
+                      className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
+                    >
                     {isGeneratingMessages ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Generating Messages...
-                      </>
-                    ) : (
-                      <>
+                        </>
+                      ) : (
+                        <>
                         <Sparkles className="mr-2 h-4 w-4" />
                         Generate Complete Sequence
-                      </>
-                    )}
-                  </Button>
-                </div>
+                        </>
+                      )}
+                    </Button>
+                  </div>
               ) : (
                 <div className="space-y-6">
                   <div className="flex justify-between items-center">
@@ -847,9 +938,9 @@ export default function AlchemailApp20() {
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Regenerate
                       </Button>
-                    </div>
-                  </div>
-
+                </div>
+              </div>
+              
                   {generatedMessages.map((message) => (
                     <div key={message.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
