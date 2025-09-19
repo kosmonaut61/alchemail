@@ -149,29 +149,29 @@ MESSAGE VARIATION REQUIREMENTS:
 DETAILED MESSAGE OUTLINES REQUIRED:
 - Create a comprehensive messageOutline for each email and LinkedIn message
 - Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
-- The signalMention field should contain NATURAL, CONVERSATIONAL phrases to reference the signal (like "Nice to see you checking our integrations page")
+- The signalMention field should contain QUESTION-BASED phrases to reference the signal (like "Are you exploring our integrations?")
 - The opening field should contain natural opening approaches that feel timely and relevant based on the signal
 - The statUsage field should specify HOW to incorporate the specific statistics naturally
 - The valueProp field should define the core value proposition for that specific message
 - The cta field should specify the call-to-action approach
 - Each message outline should be unique and build upon the previous message in the sequence
-- Focus on natural, human-like language that flows conversationally
-- The signal should be mentioned casually and naturally, leading into relevant value propositions
+- Focus on natural, human-like language that flows conversationally like the sample emails
+- The signal should flow naturally into relevant questions and value propositions
+- Follow the conversational style of the sample emails - direct, friendly, and engaging
 
 SIGNAL INTEGRATION REQUIREMENTS:
-- Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page"
-- Use casual, human language to reference the signal - avoid formal or robotic phrases
-- Focus on the VALUE or OPPORTUNITY the signal represents
-- Make the signal mention feel natural and conversational, not analytical
-- Create approaches that acknowledge the signal in a friendly, human way
-- Use phrases like "Nice to see you checking" or "I noticed you were looking at" - natural and conversational
-- The signal should be mentioned casually and lead into relevant value propositions
+- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+- Use natural, conversational language that flows like the sample emails
+- Focus on the VALUE or OPPORTUNITY the signal represents through questions
+- Make the signal mention feel natural and conversational, not analytical or corporate
+- Create approaches that acknowledge the signal in a friendly, human way through questions
+- Use question-based approaches: "Are you looking at...?" "Is your team exploring...?" "Are you considering...?"
+- The signal should flow naturally into relevant questions and value propositions
 - NEVER make presumptive statements about things not mentioned in the signal
 - ONLY reference what the signal explicitly states - don't assume additional context
-- Avoid phrases like "I saw your post" or "I noticed you were considering" unless the signal explicitly mentions these
 - AVOID overused phrases like "smart move", "great step", "exactly what you need"
-- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of assuming what they're doing, ask questions about it
-- Use question-based approaches instead of presumptive statements
+- Follow the conversational style of the sample emails - direct, friendly, and engaging
+- Turn corporate speak into natural questions and conversations
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 

@@ -8105,3 +8105,19 @@ Nice to see you exploring our case studies—sounds like you're building a solid
  POST /api/generate-messages 200 in 3175ms
  ✓ Compiled in 533ms (1324 modules)
  ✓ Compiled in 1287ms (1116 modules)
+ ✓ Compiled in 574ms (1061 modules)
+ ✓ Compiled in 262ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 242ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Curious about your case study insights",
+      "purpose": "Initiate a conversation about cost optimization based on case studies",
+      "signal...
+ POST /api/generate-sequence-plan 200 in 17730ms
+ ✓ Compiled in 551ms (1323 modules)
