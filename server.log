@@ -8391,3 +8391,7 @@ Caused by:
 
 Import trace for requested module:
 ./app/page.tsx
+ ✓ Compiled in 829ms (709 modules)
+ ✓ Compiled in 147ms (709 modules)
+ ✓ Compiled in 256ms (709 modules)
+ ✓ Compiled in 186ms (709 modules)

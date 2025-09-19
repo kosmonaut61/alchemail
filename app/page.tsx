@@ -118,18 +118,11 @@ export default function AlchemailApp20() {
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => window.open('/legacy', '_blank')}
-                className="border-border/50 bg-card/50 hover:bg-card text-muted-foreground hover:text-foreground"
-              >
-                <span className="mr-2">📧</span>
-                Legacy
-              </Button>
             </div>
           </div>
         </div>
+      </header>
+
       <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
         {/* Welcome Message */}
         <div className="text-center space-y-4">
