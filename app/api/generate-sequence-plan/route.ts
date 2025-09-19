@@ -149,7 +149,7 @@ MESSAGE VARIATION REQUIREMENTS:
 DETAILED MESSAGE OUTLINES REQUIRED:
 - Create a comprehensive messageOutline for each email and LinkedIn message
 - Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
-- The signalMention field should contain QUESTION-BASED phrases to reference the signal (like "Are you exploring our integrations?")
+- The signalMention field should contain NATURAL, CASUAL phrases to reference the signal (like "I saw you checked out our case studies" or "Nice to see you looking at our demo")
 - The opening field should contain natural opening approaches that feel timely and relevant based on the signal
 - The statUsage field should specify HOW to incorporate the specific statistics naturally
 - The valueProp field should define the core value proposition for that specific message
@@ -158,20 +158,23 @@ DETAILED MESSAGE OUTLINES REQUIRED:
 - Focus on natural, human-like language that flows conversationally like the sample emails
 - The signal should flow naturally into relevant questions and value propositions
 - Follow the conversational style of the sample emails - direct, friendly, and engaging
+- Use casual language like "Hey", "Hi", "I saw", "Nice to see", "Quick question", etc.
+- Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
 
 SIGNAL INTEGRATION REQUIREMENTS:
-- REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
-- Use natural, conversational language that flows like the sample emails
-- Focus on the VALUE or OPPORTUNITY the signal represents through questions
+- Use natural, casual language that flows like the sample emails
+- Focus on the VALUE or OPPORTUNITY the signal represents through natural conversation
 - Make the signal mention feel natural and conversational, not analytical or corporate
-- Create approaches that acknowledge the signal in a friendly, human way through questions
-- Use question-based approaches: "Are you looking at...?" "Is your team exploring...?" "Are you considering...?"
+- Create approaches that acknowledge the signal in a friendly, human way
+- Use natural approaches: "I saw you checked out...", "Nice to see you looking at...", "Quick question about..."
 - The signal should flow naturally into relevant questions and value propositions
 - NEVER make presumptive statements about things not mentioned in the signal
 - ONLY reference what the signal explicitly states - don't assume additional context
 - AVOID overused phrases like "smart move", "great step", "exactly what you need"
 - Follow the conversational style of the sample emails - direct, friendly, and engaging
-- Turn corporate speak into natural questions and conversations
+- Turn corporate speak into natural, casual conversations
+- Use casual language like "Hey", "Hi", "I saw", "Nice to see", "Quick question", etc.
+- Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 

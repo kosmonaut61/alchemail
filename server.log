@@ -8121,3 +8121,42 @@ Nice to see you exploring our case studies—sounds like you're building a solid
       "signal...
  POST /api/generate-sequence-plan 200 in 17730ms
  ✓ Compiled in 551ms (1323 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings Like Dollar Tree",
+      "purpose": "Introduce ProcureOS and highlight its benefits.",
+      "signalIntegration": "Are you c...
+ POST /api/generate-sequence-plan 200 in 17875ms
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlock Cost Savings in Your Operations",
+      "purpose": "Introduce ProcureOS and its benefits for cost optimization.",
+      "signalIntegratio...
+ POST /api/generate-sequence-plan 200 in 15810ms
+ ✓ Compiled in 615ms (1116 modules)
+ ✓ Compiled in 329ms (1061 modules)
+ ✓ Compiled /api/generate-sequence-plan in 58ms (262 modules)
+🚀 Generating sequence plan with GPT-5-nano...
+📝 Signal: Viewed case studies...
+👤 Persona: Upper Management - Operations
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Unlocking Significant Savings in Freight Spend",
+      "purpose": "Introduce value and share a success story that resonates with the target's pa...
+ POST /api/generate-sequence-plan 200 in 11647ms
+ ✓ Compiled in 572ms (1323 modules)
