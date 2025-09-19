@@ -345,6 +345,20 @@ export default function AlchemailApp20() {
                   <Button 
                     onClick={async () => {
                       setIsGeneratingPlan(true)
+                      
+                      // Log API call details to browser console
+                      const requestPayload = {
+                        signal,
+                        persona,
+                        painPoints,
+                        emailCount,
+                        linkedInCount
+                      }
+                      console.log('🚀 CLIENT: Making API call to generate-sequence-plan')
+                      console.log('📧 MODEL: gpt-5-mini')
+                      console.log('📝 REQUEST PAYLOAD:', requestPayload)
+                      console.log('⏰ TIMESTAMP:', new Date().toISOString())
+                      
                       try {
                         const response = await fetch('/api/generate-sequence-plan', {
                           method: 'POST',
@@ -366,6 +380,15 @@ export default function AlchemailApp20() {
                         }
 
                         const data = await response.json()
+                        
+                        // Log response details to browser console
+                        console.log('✅ CLIENT: Received response from generate-sequence-plan')
+                        console.log('📧 MODEL: gpt-5-mini')
+                        console.log('📊 RESPONSE DATA:', data)
+                        console.log('📏 SEQUENCE PLAN:', data.sequencePlan)
+                        console.log('🎯 CONTEXT ITEMS:', data.contextItems)
+                        console.log('⏰ RESPONSE TIMESTAMP:', new Date().toISOString())
+                        
                         setSequencePlan(data.sequencePlan)
                         setContextItems(data.contextItems || [])
                         
@@ -388,18 +411,18 @@ export default function AlchemailApp20() {
                     className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25"
                   >
                     {isGeneratingPlan ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Generating Plan...
-                      </>
-                    ) : (
-                      <>
+                        </>
+                      ) : (
+                        <>
                         <Sparkles className="mr-2 h-4 w-4" />
                         Generate Sequence Plan
-                      </>
-                    )}
-                  </Button>
-                </div>
+                        </>
+                      )}
+                    </Button>
+                  </div>
               ) : (
                 <div className="space-y-6">
                   <div className="p-4 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
@@ -407,7 +430,7 @@ export default function AlchemailApp20() {
                     <p className="text-sm text-green-700 dark:text-green-300">
                       Total sequence length: {sequencePlan.totalDays} days
                     </p>
-                  </div>
+                </div>
 
                   {contextItems.length > 0 && (
                     <div className="space-y-4">
@@ -415,7 +438,7 @@ export default function AlchemailApp20() {
                       <div className="grid gap-3">
                         {contextItems.map((item, index) => (
                           <div key={index} className="p-3 border rounded-lg bg-blue-50 dark:bg-blue-950 relative">
-                            <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-2">
                               <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
                                 {item.title}
                               </span>
@@ -438,8 +461,8 @@ export default function AlchemailApp20() {
                                 >
                                   <X className="h-3 w-3" />
                                 </Button>
-                              </div>
-                            </div>
+                  </div>
+                  </div>
                             <p className="text-sm text-blue-700 dark:text-blue-300">
                               {item.content}
                             </p>
@@ -451,9 +474,9 @@ export default function AlchemailApp20() {
                           </div>
                         ))}
                       </div>
-                    </div>
-                  )}
-
+                </div>
+              )}
+              
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
                     {sequencePlan.emails.map((email, index) => (
@@ -461,16 +484,16 @@ export default function AlchemailApp20() {
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-sm font-medium">Day {email.day}</span>
                           <span className="text-xs text-muted-foreground">Email {index + 1}</span>
-                        </div>
+                </div>
                         <h4 className="font-medium">{email.subject}</h4>
                         <p className="text-sm text-muted-foreground mt-1">{email.purpose}</p>
                         <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
                           <strong>Signal Integration:</strong> {email.signalIntegration}
                         </p>
-                      </div>
+                </div>
                     ))}
-                  </div>
-
+              </div>
+              
                   {sequencePlan.linkedInMessages.length > 0 && (
                     <div className="space-y-4">
                       <h3 className="font-semibold">LinkedIn Messages</h3>
@@ -479,12 +502,12 @@ export default function AlchemailApp20() {
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-sm font-medium">Day {message.day}</span>
                             <span className="text-xs text-muted-foreground">LinkedIn {index + 1}</span>
-                          </div>
+                </div>
                           <p className="text-sm text-muted-foreground">{message.purpose}</p>
                           <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
                             <strong>Signal Integration:</strong> {message.signalIntegration}
                           </p>
-                        </div>
+              </div>
                       ))}
                     </div>
                   )}
@@ -500,6 +523,20 @@ export default function AlchemailApp20() {
                         onClick={async () => {
                           setSequencePlan(null)
                           setIsGeneratingPlan(true)
+                          
+                          // Log retry API call details to browser console
+                          const requestPayload = {
+                            signal,
+                            persona,
+                            painPoints,
+                            emailCount,
+                            linkedInCount
+                          }
+                          console.log('🔄 CLIENT: Retrying API call to generate-sequence-plan')
+                          console.log('📧 MODEL: gpt-5-mini')
+                          console.log('📝 REQUEST PAYLOAD:', requestPayload)
+                          console.log('⏰ TIMESTAMP:', new Date().toISOString())
+                          
                           try {
                             const response = await fetch('/api/generate-sequence-plan', {
                               method: 'POST',
@@ -552,7 +589,7 @@ export default function AlchemailApp20() {
                         Next: Generate
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
-                    </div>
+              </div>
                   </div>
                 </div>
               )}
@@ -579,6 +616,20 @@ export default function AlchemailApp20() {
                   <Button 
                     onClick={async () => {
                       setIsGeneratingMessages(true)
+                      
+                      // Log message generation API call details to browser console
+                      const requestPayload = {
+                        signal,
+                        persona,
+                        painPoints,
+                        sequencePlan
+                      }
+                      console.log('🚀 CLIENT: Making API call to generate-messages')
+                      console.log('📧 MODEL: gpt-4o-mini')
+                      console.log('📝 REQUEST PAYLOAD:', requestPayload)
+                      console.log('📏 SEQUENCE PLAN:', sequencePlan)
+                      console.log('⏰ TIMESTAMP:', new Date().toISOString())
+                      
                       try {
                         const response = await fetch('/api/generate-messages', {
                           method: 'POST',
@@ -599,6 +650,18 @@ export default function AlchemailApp20() {
                         }
 
                         const data = await response.json()
+                        
+                        // Log response details to browser console
+                        console.log('✅ CLIENT: Received response from generate-messages')
+                        console.log('📧 MODEL: gpt-4o-mini')
+                        console.log('📊 RESPONSE DATA:', data)
+                        console.log('📧 GENERATED MESSAGES:', data.messages)
+                        console.log('📊 STATS:', {
+                          emailsGenerated: data.emailsGenerated,
+                          linkedInGenerated: data.linkedInGenerated
+                        })
+                        console.log('⏰ RESPONSE TIMESTAMP:', new Date().toISOString())
+                        
                         setGeneratedMessages(data.messages)
                         
                         toast({
@@ -639,14 +702,28 @@ export default function AlchemailApp20() {
                     <div className="flex gap-2">
                       <Button variant="outline" size="sm" onClick={handlePrevious}>
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Previous
-                      </Button>
-                      <Button 
+                    Previous
+                  </Button>
+                  <Button 
                         variant="outline" 
                         size="sm"
                         onClick={async () => {
                           setIsGeneratingMessages(true)
                           setGeneratedMessages([])
+                          
+                          // Log regenerate API call details to browser console
+                          const requestPayload = {
+                            signal,
+                            persona,
+                            painPoints,
+                            sequencePlan
+                          }
+                          console.log('🔄 CLIENT: Regenerating messages via API call to generate-messages')
+                          console.log('📧 MODEL: gpt-4o-mini')
+                          console.log('📝 REQUEST PAYLOAD:', requestPayload)
+                          console.log('📏 SEQUENCE PLAN:', sequencePlan)
+                          console.log('⏰ TIMESTAMP:', new Date().toISOString())
+                          
                           try {
                             const response = await fetch('/api/generate-messages', {
                               method: 'POST',
@@ -667,6 +744,18 @@ export default function AlchemailApp20() {
                             }
 
                             const data = await response.json()
+                            
+                            // Log regenerate response details to browser console
+                            console.log('✅ CLIENT: Received regenerate response from generate-messages')
+                            console.log('📧 MODEL: gpt-4o-mini')
+                            console.log('📊 RESPONSE DATA:', data)
+                            console.log('📧 REGENERATED MESSAGES:', data.messages)
+                            console.log('📊 STATS:', {
+                              emailsGenerated: data.emailsGenerated,
+                              linkedInGenerated: data.linkedInGenerated
+                            })
+                            console.log('⏰ RESPONSE TIMESTAMP:', new Date().toISOString())
+                            
                             setGeneratedMessages(data.messages)
                             
                             toast({
@@ -735,6 +824,22 @@ export default function AlchemailApp20() {
                                   m.id === message.id ? { ...m, isOptimizing: true } : m
                                 ))
                                 
+                                // Log optimization API call details to browser console
+                                const requestPayload = {
+                                  messageId: message.id,
+                                  originalContent: message.originalContent,
+                                  type: message.type,
+                                  signal,
+                                  persona,
+                                  painPoints
+                                }
+                                console.log('🚀 CLIENT: Making API call to optimize-message')
+                                console.log('📧 MODEL: gpt-5-nano (with gpt-4o-mini fallback)')
+                                console.log('📝 MESSAGE ID:', message.id)
+                                console.log('📝 MESSAGE TYPE:', message.type)
+                                console.log('📝 REQUEST PAYLOAD:', requestPayload)
+                                console.log('⏰ TIMESTAMP:', new Date().toISOString())
+                                
                                 try {
                                   const response = await fetch('/api/optimize-message', {
                                     method: 'POST',
@@ -757,6 +862,16 @@ export default function AlchemailApp20() {
                                   }
 
                                   const data = await response.json()
+                                  
+                                  // Log optimization response details to browser console
+                                  console.log('✅ CLIENT: Received response from optimize-message')
+                                  console.log('📧 MODEL: gpt-5-nano (or gpt-4o-mini fallback)')
+                                  console.log('📝 MESSAGE ID:', message.id)
+                                  console.log('📝 MESSAGE TYPE:', message.type)
+                                  console.log('📊 RESPONSE DATA:', data)
+                                  console.log('📝 ORIGINAL CONTENT:', message.originalContent)
+                                  console.log('📝 OPTIMIZED CONTENT:', data.optimizedContent)
+                                  console.log('⏰ RESPONSE TIMESTAMP:', new Date().toISOString())
                                   
                                   setGeneratedMessages(prev => prev.map(m => 
                                     m.id === message.id ? { 
@@ -795,16 +910,16 @@ export default function AlchemailApp20() {
                               <>
                                 <RefreshCw className="mr-2 h-3 w-3" />
                                 Show Original
-                              </>
-                            ) : (
-                              <>
+                      </>
+                    ) : (
+                      <>
                                 <Sparkles className="mr-2 h-3 w-3" />
                                 Optimize
-                              </>
-                            )}
-                          </Button>
-                        </div>
-                      </div>
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
                       <div className="bg-muted/50 rounded-md p-3">
                         <pre className="text-sm whitespace-pre-wrap font-mono">
                           {message.content}

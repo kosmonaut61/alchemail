@@ -8527,3 +8527,286 @@ AI SDK Warning: The "temperature" setting is not supported by this model - tempe
       "purpose": "Congratulate the new CEO and open with a high-im...
  POST /api/generate-sequence-plan 200 in 55351ms
  ✓ Compiled in 440ms (764 modules)
+ ✓ Compiled in 1320ms (709 modules)
+ ✓ Compiled in 415ms (709 modules)
+ ✓ Compiled in 167ms (709 modules)
+ ✓ Compiled in 324ms (709 modules)
+ ✓ Compiled in 394ms (709 modules)
+ ✓ Compiled in 279ms (709 modules)
+ ✓ Compiled in 468ms (709 modules)
+ ✓ Compiled in 308ms (709 modules)
+ ✓ Compiled in 217ms (709 modules)
+ ✓ Compiled in 356ms (709 modules)
+ ✓ Compiled /api/generate-sequence-plan in 247ms (263 modules)
+🚀 Generating sequence plan with GPT-5-mini...
+📝 Signal: test logging...
+👤 Persona: CEO
+
+================================================================================
+🤖 OPENAI API CALL - SEQUENCE PLAN GENERATION
+================================================================================
+📧 MODEL: gpt-5-mini
+🎯 PURPOSE: Generate strategic sequence plan
+📏 PROMPT LENGTH: 10816 characters
+
+📝 COMPLETE PROMPT:
+------------------------------------------------------------
+You are an expert email sequence strategist. Create a strategic sequence plan for B2B outreach.
+
+CRITICAL: The signal below is the PRIMARY REASON for outreach and MUST be integrated into every message in some way.
+
+SIGNAL (Primary Reason for Outreach - MUST BE INTEGRATED):
+test logging
+
+TARGET PERSONA:
+- Role: CEO
+- Department: Operations
+- Seniority: C-Suite
+- Tone Profile: Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.
+- Keywords: strategic, enterprise, roi, scalability, executive, board, competitive advantage, enterprise-wide
+- Key Pain Points: Cost optimization
+
+RELEVANT CONTEXT ITEMS (use these for social proof and credibility):
+- Dollar Tree Statistics: Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using ProcureOS. Average lane was ~2% below market average.
+- Dollar Tree Case Study: Dollar Tree saved $3.2 million in freight spend within 6 months, and $6M in 2024 using ProcureOS. Average lane was ~2% below market average.
+- EZRack Case Study: Realized 6 figure savings in less than a year, saves countless man hours in manual work.
+- Pepsi Co. Case Study: Reduced the time to run RFP's by 20%.
+- DBIN Case Study: Dynamic Book It Now (DBIN) enables instant freight booking with real-time pricing and immediate carrier confirmation.
+- Logistics Customers: DHL, EZRack, ArcBest, Roadrunner, US Cold Storage, Allen Dist.
+- Dollar Tree Quote: "Emerge is baked into our savings"
+- Cost Savings Value Prop: Benchmark rates vs live market data → avoid overspend. Results in ↓ costs through better rate visibility and negotiation.
+
+AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+AVAILABLE DYNAMIC VARIABLES:
+
+Contact Fields:
+- {{contact.first_name}}: Contact's first name
+- {{contact.last_name}}: Contact's last name
+- {{contact.email}}: Contact's email address
+- {{contact.domain}}: Contact's company domain
+- {{contact.location_city}}: Contact's city
+- {{contact.location_state}}: Contact's state/province
+- {{contact.location_country}}: Contact's country
+- {{contact.phone}}: Contact's phone number
+- {{contact.title}}: Contact's job title
+- {{contact.opt_out_message}}: Contact's opt-out message
+
+Account Fields:
+- {{account.name}}: Account/company name
+- {{account.company_unprocessed_name}}: Raw company name (unprocessed)
+- {{account.company_location_city}}: Company's city
+- {{account.company_location_state}}: Company's state/province
+- {{account.company_location_country}}: Company's country
+- {{account.latest_funding_type}}: Latest funding round type
+- {{account.company_size}}: Company size (employees)
+- {{account.vertical}}: Company vertical/industry
+- {{account.industry}}: Company industry
+
+Sender Fields:
+- {{sender.first_name}}: Sender's first name
+- {{sender.last_name}}: Sender's last name
+- {{sender.email}}: Sender's email address
+- {{sender.meeting_alias}}: Sender's meeting booking alias
+
+Intent Fields:
+- {{primary_intent_signal}}: Primary intent/signal for outreach
+- {{secondary_intent_signal}}: Secondary intent/signal for outreach
+
+Time Fields:
+- {{now.day}}: Current day of month
+- {{now.month}}: Current month name
+- {{now.time_of_day}}: Current time of day
+- {{now.weekday}}: Current day of week
+- {{now.year}}: Current year
+
+Advanced:
+- {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}: Conditional fallback for contact name
+- {{contact.title->lowercase}}: Convert to lowercase
+- {{now.day->plus_X}}: Add days to current date
+
+
+
+SEQUENCE REQUIREMENTS:
+- Emails: 1
+- LinkedIn Messages: 1
+
+Create a strategic sequence plan that:
+1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
+2. Builds value and trust progressively
+3. Addresses the target persona's pain points using their specific tone profile and keywords
+4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn)
+5. Has clear purposes for each touchpoint
+6. Varies signal integration: some messages lead with stats, others with questions, others with stories
+7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
+8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
+9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
+10. PRIORITIZE industry-relevant customers and social proof - if targeting automotive, mention automotive customers like Honda, Bridgestone, etc.
+11. Use customer names and industry-specific examples to build immediate credibility and relevance
+12. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
+13. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
+
+MESSAGE VARIATION REQUIREMENTS:
+- Each message must have a DISTINCTLY different approach
+- Use different opening styles: questions, statements, stories, direct value props
+- Vary the signal integration style for each message
+- Ensure each message feels unique and different from the others with a cohesive story arc
+- Make the differences obvious in the signalIntegration field
+
+DETAILED MESSAGE OUTLINES REQUIRED:
+- Create a comprehensive messageOutline for each email and LinkedIn message
+- Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
+- The signalMention field should contain NATURAL, CASUAL phrases that reference ONLY the actual signal provided above
+- The opening field should contain natural opening approaches that feel timely and relevant based on the actual signal
+- The statUsage field should specify HOW to incorporate the specific statistics naturally
+- The customerMention field should specify which industry-relevant customers to mention (e.g., "Honda, Bridgestone" for automotive)
+- The valueProp field should define the core value proposition for that specific message
+- The cta field should specify the call-to-action approach
+- Each message outline should be unique and build upon the previous message in the sequence
+- Focus on natural, human-like language that flows conversationally like the sample emails
+- The signal should flow naturally into relevant questions and value propositions
+- Follow the conversational style of the sample emails - direct, friendly, and engaging
+- Use casual language like "Hey", "Hi", "Quick question", etc.
+- Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
+- CRITICAL: Only reference the actual signal provided - do not make up or assume additional context
+
+SIGNAL INTEGRATION REQUIREMENTS:
+- Use natural, casual language that flows like the sample emails
+- Focus on the VALUE or OPPORTUNITY the signal represents through natural conversation
+- Make the signal mention feel natural and conversational, not analytical or corporate
+- Create approaches that acknowledge the signal in a friendly, human way
+- The signal should flow naturally into relevant questions and value propositions
+- NEVER make presumptive statements about things not mentioned in the signal
+- ONLY reference what the signal explicitly states - don't assume additional context
+- NEVER fabricate engagement like "I saw you checked out..." or "Nice to see you looking at..." unless the signal explicitly mentions this
+- AVOID overused phrases like "smart move", "great step", "exactly what you need"
+- Follow the conversational style of the sample emails - direct, friendly, and engaging
+- Turn corporate speak into natural, casual conversations
+- Use casual language like "Hey", "Hi", "Quick question", etc.
+- Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
+- CRITICAL: Only work with the actual signal provided - do not invent or assume additional context
+
+SIGNAL INTERPRETATION RULES:
+- If signal mentions "write a campaign" or "campaign for [industry]", this means you're HELPING create outreach TO that industry - don't reference a "campaign"
+- If signal mentions specific actions like "downloaded case study", "visited demo page", "checked pricing" - reference those actual actions naturally
+- If signal is vague like "write me a campaign for automotive leaders" - focus on the TARGET AUDIENCE (automotive leaders) not the campaign creation aspect
+- NEVER say things like "I noticed a campaign" - this makes no sense in outreach context
+- Focus on the INDUSTRY or PERSONA being targeted, not the campaign creation process
+
+CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
+
+Return your response as a JSON object with this exact structure:
+{
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Subject line here",
+      "purpose": "Purpose of this email",
+      "signalIntegration": "Exactly how to mention the signal in this message",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this email (1-2 stats max)",
+      "messageOutline": {
+        "opening": "Exact opening line or approach",
+        "signalMention": "Exact phrase to reference the signal",
+        "statUsage": "How to incorporate the specific stats",
+        "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
+        "valueProp": "Core value proposition for this message",
+        "cta": "Call to action approach"
+      }
+    }
+  ],
+  "linkedInMessages": [
+    {
+      "day": 3,
+      "purpose": "Purpose of this LinkedIn message",
+      "signalIntegration": "Exactly how to mention the signal in this message",
+      "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)",
+      "messageOutline": {
+        "opening": "Exact opening line or approach",
+        "signalMention": "Exact phrase to reference the signal",
+        "statUsage": "How to incorporate the specific stats",
+        "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
+        "valueProp": "Core value proposition for this message",
+        "cta": "Call to action approach"
+      }
+    }
+  ],
+  "totalDays": 8
+}
+
+Make sure the sequence feels natural and builds momentum. Each message should advance the conversation and provide value.
+------------------------------------------------------------
+================================================================================
+
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+AI SDK Warning: The "temperature" setting is not supported by this model - temperature is not supported for reasoning models
+
+================================================================================
+✅ OPENAI API RESPONSE - SEQUENCE PLAN GENERATION
+================================================================================
+📧 MODEL: gpt-5-mini
+📏 RESPONSE LENGTH: 3066 characters
+
+📝 COMPLETE RESPONSE:
+------------------------------------------------------------
+{
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Test logging — enterprise ROI and $3M+ freight impact",
+      "purpose": "Executive intro: position test logging as a board-level lever to reduce freight spend and drive enterprise-scale ROI; request a short exec briefing.",
+      "signalIntegration": "Open the note with a direct line: \"Quick strategic note on test logging —\" and immediately tie that to enterprise benchmarking and cost optimization.",
+      "specificStats": "Dollar Tree saved $3.2M in freight spend within 6 months; PepsiCo reduced time to run RFPs by 20%",
+      "messageOutline": {
+        "opening": "Hey {{contact.first_name}}, Quick strategic note on test logging —",
+        "signalMention": "Quick strategic note on test logging —",
+        "statUsage": "Lead with Dollar Tree's result: \"For context, Dollar Tree captured $3.2M in freight savings in six months when they baked these insights into procurement.\" Then transition: \"We also see process gains — PepsiCo cut RFP time by ~20% when they used live benchmarking.\" Use the two stats as executive proof points that test logging translates to measurable cost and speed wins.",
+        "customerMention": "Dollar Tree, PepsiCo, DHL",
+        "valueProp": "Use test logging to benchmark lanes vs live market data, surface negotiation leverage enterprise‑wide, and convert visibility into board-ready ROI — scalable, measurable savings and improved procurement velocity.",
+        "cta": "Ask for a 15-minute exec brief framed for the board: \"Can I share a 15-minute exec brief next week showing modeled savings and enterprise rollout options for {{account.name}}?\""
+      }
+    }
+  ],
+  "linkedInMessages": [
+    {
+      "day": 3,
+      "purpose": "Short, direct follow-up that asks a challenge question about test logging and offers a quick, high-value deliverable to advance the conversation.",
+      "signalIntegration": "Start with a concise question: \"Quick question on test logging —\" then challenge the status quo and offer a one-page board slide.",
+      "specificStats": "EZRack realized 6-figure savings in less than a year",
+      "messageOutline": {
+        "opening": "Hey {{contact.first_name}}, Quick question on test logging —",
+        "signalMention": "Quick question on test logging —",
+        "statUsage": "Reference EZRack as a compact credibility point: \"EZRack turned test logging into six-figure savings in under a year and reclaimed heavy manual hours.\" Use that stat to make the ask tangible: small investment in logging → scalable savings.",
+        "customerMention": "EZRack, ArcBest, US Cold Storage",
+        "valueProp": "Position test logging as a fast, executive-level diagnostic that surfaces enterprise-wide overspend and negotiation wins — a strategic lever for cost optimization and competitive advantage.",
+        "cta": "Offer a low-friction next step: \"If you want, I’ll send a one-page board slide modeling potential savings for {{account.name}} — reply 'yes' and I’ll send it over.\""
+      }
+    }
+  ],
+  "totalDays": 8
+}
+------------------------------------------------------------
+================================================================================
+
+✅ Sequence plan generated successfully
+📄 Raw AI response: {
+  "emails": [
+    {
+      "day": 1,
+      "subject": "Test logging — enterprise ROI and $3M+ freight impact",
+      "purpose": "Executive intro: position test logging as a board-level lever to reduc...
+ POST /api/generate-sequence-plan 200 in 39706ms
+ ✓ Compiled in 493ms (972 modules)
+ ✓ Compiled in 1374ms (709 modules)
+ ✓ Compiled in 512ms (709 modules)
+ ✓ Compiled in 231ms (709 modules)
+ ✓ Compiled in 679ms (709 modules)
+ ✓ Compiled in 719ms (709 modules)
+ ✓ Compiled in 861ms (709 modules)
+ ✓ Compiled in 199ms (709 modules)
+ ✓ Compiled in 461ms (709 modules)
+ ✓ Compiled in 213ms (709 modules)
+ ✓ Compiled in 478ms (709 modules)
+ ✓ Compiled in 290ms (709 modules)
+ ✓ Compiled in 342ms (709 modules)
+ ✓ Compiled in 197ms (709 modules)
+ ✓ Compiled in 575ms (709 modules)
+ ✓ Compiled in 1431ms (764 modules)

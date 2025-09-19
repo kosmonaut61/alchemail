@@ -237,6 +237,20 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
     try {
       console.log('🚀 Attempting optimization with GPT-5 nano...')
       
+      // Log the complete prompt for auditing
+      console.log('\n' + '='.repeat(80))
+      console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION')
+      console.log('='.repeat(80))
+      console.log('📧 MODEL: gpt-5-nano')
+      console.log('🎯 PURPOSE: Optimize message for engagement')
+      console.log('📝 MESSAGE ID:', messageId)
+      console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
+      console.log('\n📝 COMPLETE PROMPT:')
+      console.log('-'.repeat(60))
+      console.log(optimizationPrompt)
+      console.log('-'.repeat(60))
+      console.log('='.repeat(80) + '\n')
+      
       const { text } = await generateText({
         model: openai('gpt-5-nano'),
         messages: [
@@ -254,6 +268,18 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         frequencyPenalty: 0.1,
         presencePenalty: 0.1
       })
+
+      console.log('\n' + '='.repeat(80))
+      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5 NANO)')
+      console.log('='.repeat(80))
+      console.log('📧 MODEL: gpt-5-nano')
+      console.log('📝 MESSAGE ID:', messageId)
+      console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
+      console.log('\n📝 COMPLETE RESPONSE:')
+      console.log('-'.repeat(60))
+      console.log(text)
+      console.log('-'.repeat(60))
+      console.log('='.repeat(80) + '\n')
       
       optimizedContent = text
       console.log('✅ GPT-5 nano optimization successful')
@@ -262,6 +288,19 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.warn('⚠️ GPT-5 nano failed, falling back to GPT-4o-mini:', gpt5Error)
       
       // Fallback to GPT-4o-mini
+      console.log('\n' + '='.repeat(80))
+      console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION (FALLBACK)')
+      console.log('='.repeat(80))
+      console.log('📧 MODEL: gpt-4o-mini')
+      console.log('🎯 PURPOSE: Optimize message for engagement (fallback)')
+      console.log('📝 MESSAGE ID:', messageId)
+      console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
+      console.log('\n📝 COMPLETE PROMPT:')
+      console.log('-'.repeat(60))
+      console.log(optimizationPrompt)
+      console.log('-'.repeat(60))
+      console.log('='.repeat(80) + '\n')
+      
       const { text } = await generateText({
         model: openai('gpt-4o-mini'),
         messages: [
@@ -276,6 +315,18 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         ],
         temperature: 0.7
       })
+
+      console.log('\n' + '='.repeat(80))
+      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-4O-MINI FALLBACK)')
+      console.log('='.repeat(80))
+      console.log('📧 MODEL: gpt-4o-mini')
+      console.log('📝 MESSAGE ID:', messageId)
+      console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
+      console.log('\n📝 COMPLETE RESPONSE:')
+      console.log('-'.repeat(60))
+      console.log(text)
+      console.log('-'.repeat(60))
+      console.log('='.repeat(80) + '\n')
       
       optimizedContent = text
       console.log('✅ Fallback optimization with GPT-4o-mini successful')

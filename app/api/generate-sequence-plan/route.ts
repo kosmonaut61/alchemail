@@ -268,13 +268,26 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     console.log('🚀 Generating sequence plan with GPT-5-mini...')
     console.log('📝 Signal:', signal.substring(0, 100) + '...')
     console.log('👤 Persona:', personaData.label)
+    
+    // Log the complete prompt for auditing
+    console.log('\n' + '='.repeat(80))
+    console.log('🤖 OPENAI API CALL - SEQUENCE PLAN GENERATION')
+    console.log('='.repeat(80))
+    console.log('📧 MODEL: gpt-5-mini')
+    console.log('🎯 PURPOSE: Generate strategic sequence plan')
+    console.log('📏 PROMPT LENGTH:', prompt.length, 'characters')
+    console.log('\n📝 COMPLETE PROMPT:')
+    console.log('-'.repeat(60))
+    console.log(prompt)
+    console.log('-'.repeat(60))
+    console.log('='.repeat(80) + '\n')
 
     const { text } = await generateText({
       model: openai('gpt-5-mini'),
       messages: [
         {
           role: 'system',
-          content: 'You are an expert email sequence strategist specializing in B2B outreach. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
+          content: 'You are an expert email sequence strategist specializing in B2B outreach. Create a sequence plan around the signal provided that weaves the signal throughout each interaction. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
         },
         {
           role: 'user',
@@ -283,6 +296,17 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       ],
       temperature: 0.7
     })
+
+    console.log('\n' + '='.repeat(80))
+    console.log('✅ OPENAI API RESPONSE - SEQUENCE PLAN GENERATION')
+    console.log('='.repeat(80))
+    console.log('📧 MODEL: gpt-5-mini')
+    console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
+    console.log('\n📝 COMPLETE RESPONSE:')
+    console.log('-'.repeat(60))
+    console.log(text)
+    console.log('-'.repeat(60))
+    console.log('='.repeat(80) + '\n')
 
     if (!text) {
       throw new Error('No content received from OpenAI')
