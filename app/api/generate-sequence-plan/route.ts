@@ -138,6 +138,8 @@ Create a strategic sequence plan that:
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
 8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
 9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
+10. PRIORITIZE industry-relevant customers and social proof - if targeting automotive, mention automotive customers like Honda, Bridgestone, etc.
+11. Use customer names and industry-specific examples to build immediate credibility and relevance
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -149,32 +151,42 @@ MESSAGE VARIATION REQUIREMENTS:
 DETAILED MESSAGE OUTLINES REQUIRED:
 - Create a comprehensive messageOutline for each email and LinkedIn message
 - Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
-- The signalMention field should contain NATURAL, CASUAL phrases to reference the signal (like "I saw you checked out our case studies" or "Nice to see you looking at our demo")
-- The opening field should contain natural opening approaches that feel timely and relevant based on the signal
+- The signalMention field should contain NATURAL, CASUAL phrases that reference ONLY the actual signal provided above
+- The opening field should contain natural opening approaches that feel timely and relevant based on the actual signal
 - The statUsage field should specify HOW to incorporate the specific statistics naturally
+- The customerMention field should specify which industry-relevant customers to mention (e.g., "Honda, Bridgestone" for automotive)
 - The valueProp field should define the core value proposition for that specific message
 - The cta field should specify the call-to-action approach
 - Each message outline should be unique and build upon the previous message in the sequence
 - Focus on natural, human-like language that flows conversationally like the sample emails
 - The signal should flow naturally into relevant questions and value propositions
 - Follow the conversational style of the sample emails - direct, friendly, and engaging
-- Use casual language like "Hey", "Hi", "I saw", "Nice to see", "Quick question", etc.
+- Use casual language like "Hey", "Hi", "Quick question", etc.
 - Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
+- CRITICAL: Only reference the actual signal provided - do not make up or assume additional context
 
 SIGNAL INTEGRATION REQUIREMENTS:
 - Use natural, casual language that flows like the sample emails
 - Focus on the VALUE or OPPORTUNITY the signal represents through natural conversation
 - Make the signal mention feel natural and conversational, not analytical or corporate
 - Create approaches that acknowledge the signal in a friendly, human way
-- Use natural approaches: "I saw you checked out...", "Nice to see you looking at...", "Quick question about..."
 - The signal should flow naturally into relevant questions and value propositions
 - NEVER make presumptive statements about things not mentioned in the signal
 - ONLY reference what the signal explicitly states - don't assume additional context
+- NEVER fabricate engagement like "I saw you checked out..." or "Nice to see you looking at..." unless the signal explicitly mentions this
 - AVOID overused phrases like "smart move", "great step", "exactly what you need"
 - Follow the conversational style of the sample emails - direct, friendly, and engaging
 - Turn corporate speak into natural, casual conversations
-- Use casual language like "Hey", "Hi", "I saw", "Nice to see", "Quick question", etc.
+- Use casual language like "Hey", "Hi", "Quick question", etc.
 - Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
+- CRITICAL: Only work with the actual signal provided - do not invent or assume additional context
+
+SIGNAL INTERPRETATION RULES:
+- If signal mentions "write a campaign" or "campaign for [industry]", this means you're HELPING create outreach TO that industry - don't reference a "campaign"
+- If signal mentions specific actions like "downloaded case study", "visited demo page", "checked pricing" - reference those actual actions naturally
+- If signal is vague like "write me a campaign for automotive leaders" - focus on the TARGET AUDIENCE (automotive leaders) not the campaign creation aspect
+- NEVER say things like "I noticed a campaign" - this makes no sense in outreach context
+- Focus on the INDUSTRY or PERSONA being targeted, not the campaign creation process
 
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 
@@ -191,6 +203,7 @@ Return your response as a JSON object with this exact structure:
         "opening": "Exact opening line or approach",
         "signalMention": "Exact phrase to reference the signal",
         "statUsage": "How to incorporate the specific stats",
+        "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
         "valueProp": "Core value proposition for this message",
         "cta": "Call to action approach"
       }
@@ -206,6 +219,7 @@ Return your response as a JSON object with this exact structure:
         "opening": "Exact opening line or approach",
         "signalMention": "Exact phrase to reference the signal",
         "statUsage": "How to incorporate the specific stats",
+        "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
         "valueProp": "Core value proposition for this message",
         "cta": "Call to action approach"
       }
