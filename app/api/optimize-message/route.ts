@@ -19,16 +19,33 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
     return keywords.some(keyword => 
       itemKeywords.includes(keyword) || 
       itemContent.includes(keyword)
-    ) || item.category === 'statistic' || item.category === 'quote'
+    ) || item.category === 'statistic' || item.category === 'quote' || item.category === 'value_prop'
   })
   
-  // Prioritize statistics and quotes
+  // Add persona-specific context
+  const personaSpecificItems = CONTEXT_REPOSITORY.filter(item => 
+    item.persona?.includes(personaData.id) ||
+    (item.category === 'language_style' && item.persona?.includes(personaData.id))
+  )
+  
+  // Add pain point specific context
+  const painPointItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'pain_points' && (
+      item.persona?.includes(personaData.id) ||
+      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+    )
+  )
+  
+  // Prioritize statistics, quotes, and value props, then case studies, customers, persona-specific, and pain point context
   const prioritizedItems = [
     ...relevantItems.filter(item => item.category === 'statistic'),
     ...relevantItems.filter(item => item.category === 'quote'),
+    ...relevantItems.filter(item => item.category === 'value_prop'),
     ...relevantItems.filter(item => item.category === 'case_study'),
-    ...relevantItems.filter(item => item.category === 'customer')
-  ].slice(0, 6) // Limit to top 6 most relevant to avoid overwhelming
+    ...relevantItems.filter(item => item.category === 'customer'),
+    ...personaSpecificItems,
+    ...painPointItems
+  ].slice(0, 8) // Limit to top 8 most relevant to avoid overwhelming
   
   return prioritizedItems.map(item => 
     `- ${item.title}: ${item.content}`

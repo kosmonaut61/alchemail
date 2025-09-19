@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
 import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry } from '@/lib/context-repository'
+import { formatVariablesForPrompt } from '@/lib/dynamic-variables'
 
 // Helper function to get relevant context items
 function getRelevantContext(signal: string, personaData: any, painPoints: string[]) {
@@ -60,17 +61,44 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     )
   )
   
+  // Add pain point context items
+  const painPointMatches = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'pain_points' && (
+      item.persona?.includes(personaData.id) ||
+      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+    )
+  )
+  
+  // Add value propositions and language styles
+  const valuePropItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'value_prop' && (
+      keywordMatches.includes(item) || 
+      industryMatches.includes(item) ||
+      painPointMatches.includes(item)
+    )
+  )
+  
+  const languageStyleItems = CONTEXT_REPOSITORY.filter(item => 
+    item.category === 'language_style' && (
+      personaData.id === item.persona?.[0] ||
+      painPointMatches.includes(item)
+    )
+  )
+  
   // Add some general high-value context items that are always relevant
   const generalHighValue = CONTEXT_REPOSITORY.filter(item => 
     ['dollar_tree_stats', 'golden_state_foods_stats', 'pepsi_case_study'].includes(item.id)
   )
   
-  // Prioritize statistics first (most important for credibility), then case studies, then customers, then quotes
+  // Prioritize statistics first (most important for credibility), then case studies, then customers, then quotes, then value props, pain points, and language styles
   const allRelevant = [
     ...statisticItems,  // Prioritize statistics first
     ...caseStudyItems, 
     ...customerItems,
     ...quoteItems,
+    ...valuePropItems,  // Add value propositions
+    ...painPointMatches,  // Add pain point context
+    ...languageStyleItems,  // Add language styles
     ...generalHighValue  // Add some general high-value items
   ]
   
@@ -119,10 +147,15 @@ TARGET PERSONA:
 - Role: ${personaData.label}
 - Department: ${personaData.department}
 - Seniority: ${personaData.seniority}
+- Tone Profile: ${personaData.toneProfile}
+- Keywords: ${personaData.keywords.join(', ')}
 - Key Pain Points: ${painPoints.join(', ') || 'Not specified'}
 
 RELEVANT CONTEXT ITEMS (use these for social proof and credibility):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
+
+AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
+${formatVariablesForPrompt()}
 
 SEQUENCE REQUIREMENTS:
 - Emails: ${emailCount}
@@ -131,7 +164,7 @@ SEQUENCE REQUIREMENTS:
 Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
-3. Addresses the target persona's pain points
+3. Addresses the target persona's pain points using their specific tone profile and keywords
 4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn)
 5. Has clear purposes for each touchpoint
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
@@ -140,6 +173,8 @@ Create a strategic sequence plan that:
 9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
 10. PRIORITIZE industry-relevant customers and social proof - if targeting automotive, mention automotive customers like Honda, Bridgestone, etc.
 11. Use customer names and industry-specific examples to build immediate credibility and relevance
+12. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
+13. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -230,12 +265,12 @@ Return your response as a JSON object with this exact structure:
 
 Make sure the sequence feels natural and builds momentum. Each message should advance the conversation and provide value.`
 
-    console.log('🚀 Generating sequence plan with GPT-5-nano...')
+    console.log('🚀 Generating sequence plan with GPT-5-mini...')
     console.log('📝 Signal:', signal.substring(0, 100) + '...')
     console.log('👤 Persona:', personaData.label)
 
     const { text } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: openai('gpt-5-mini'),
       messages: [
         {
           role: 'system',
