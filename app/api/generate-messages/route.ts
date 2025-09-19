@@ -313,6 +313,20 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - Change the tone and approach - some direct, some conversational, some story-driven
       - Avoid template-style writing - make each message feel fresh and different`
 
+      // Log the complete prompt for auditing
+      console.log('\n' + '='.repeat(80))
+      console.log('🤖 OPENAI API CALL - EMAIL GENERATION')
+      console.log('='.repeat(80))
+      console.log('📧 MODEL: gpt-4o-mini')
+      console.log('🎯 PURPOSE: Generate email content')
+      console.log('📅 DAY:', emailPlan.day)
+      console.log('📏 PROMPT LENGTH:', emailPrompt.length, 'characters')
+      console.log('\n📝 COMPLETE PROMPT:')
+      console.log('-'.repeat(60))
+      console.log(emailPrompt)
+      console.log('-'.repeat(60))
+      console.log('='.repeat(80) + '\n')
+
       try {
         const { text: emailContent } = await generateText({
           model: openai('gpt-4o-mini'),
@@ -328,6 +342,18 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           ],
           temperature: 0.8
         })
+
+        console.log('\n' + '='.repeat(80))
+        console.log('✅ OPENAI API RESPONSE - EMAIL GENERATION')
+        console.log('='.repeat(80))
+        console.log('📧 MODEL: gpt-4o-mini')
+        console.log('📅 DAY:', emailPlan.day)
+        console.log('📏 RESPONSE LENGTH:', emailContent.length, 'characters')
+        console.log('\n📝 COMPLETE RESPONSE:')
+        console.log('-'.repeat(60))
+        console.log(emailContent)
+        console.log('-'.repeat(60))
+        console.log('='.repeat(80) + '\n')
         
         generatedMessages.push({
           id: `email-${emailPlan.day}`,
@@ -437,6 +463,20 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - Use different stats and examples than the emails
       - Avoid repetitive signal integration - be more creative`
 
+      // Log the complete prompt for auditing
+      console.log('\n' + '='.repeat(80))
+      console.log('🤖 OPENAI API CALL - LINKEDIN GENERATION')
+      console.log('='.repeat(80))
+      console.log('📧 MODEL: gpt-4o-mini')
+      console.log('🎯 PURPOSE: Generate LinkedIn message content')
+      console.log('📅 DAY:', linkedInPlan.day)
+      console.log('📏 PROMPT LENGTH:', linkedInPrompt.length, 'characters')
+      console.log('\n📝 COMPLETE PROMPT:')
+      console.log('-'.repeat(60))
+      console.log(linkedInPrompt)
+      console.log('-'.repeat(60))
+      console.log('='.repeat(80) + '\n')
+
       try {
         const { text: linkedInContent } = await generateText({
           model: openai('gpt-4o-mini'),
@@ -452,6 +492,18 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           ],
           temperature: 0.8
         })
+
+        console.log('\n' + '='.repeat(80))
+        console.log('✅ OPENAI API RESPONSE - LINKEDIN GENERATION')
+        console.log('='.repeat(80))
+        console.log('📧 MODEL: gpt-4o-mini')
+        console.log('📅 DAY:', linkedInPlan.day)
+        console.log('📏 RESPONSE LENGTH:', linkedInContent.length, 'characters')
+        console.log('\n📝 COMPLETE RESPONSE:')
+        console.log('-'.repeat(60))
+        console.log(linkedInContent)
+        console.log('-'.repeat(60))
+        console.log('='.repeat(80) + '\n')
         
         generatedMessages.push({
           id: `linkedin-${linkedInPlan.day}`,
