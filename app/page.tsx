@@ -11,13 +11,22 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Edit, Trash2 } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
 import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
+import { 
+  getAllContextItems, 
+  addContextItem, 
+  removeContextItem, 
+  getContextItemsByCategory,
+  isCustomContextItem,
+  initializeContextManager 
+} from "@/lib/context-manager"
+import { ContextItemForm } from "@/components/context-item-form"
 
 // Types for the 2.0 app
 interface SequencePlan {
@@ -61,7 +70,13 @@ export default function AlchemailApp20() {
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
+  const [editingContextItem, setEditingContextItem] = useState<ContextItem | null>(null)
   const { toast } = useToast()
+
+  // Initialize context manager on component mount
+  useEffect(() => {
+    initializeContextManager()
+  }, [])
 
   const steps = [
     { id: 1, title: "Signal", description: "Define your outreach signal and target persona" },
@@ -127,14 +142,14 @@ export default function AlchemailApp20() {
     }
   }
 
-  // Get context items by category
-  const getContextItemsByCategory = (category: string) => {
-    return CONTEXT_REPOSITORY.filter(item => item.category === category)
+  // Get context items by category (using context manager)
+  const getContextItemsByCategoryLocal = (category: string) => {
+    return getContextItemsByCategory(category as ContextItem['category'])
   }
 
-  // Get all unique categories
+  // Get all unique categories (including custom items)
   const getAllCategories = () => {
-    const categories = [...new Set(CONTEXT_REPOSITORY.map(item => item.category))]
+    const categories = [...new Set(getAllContextItems().map(item => item.category))]
     return categories.sort()
   }
 
@@ -205,32 +220,6 @@ export default function AlchemailApp20() {
       </header>
 
       <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
-
-        {/* Progress Indicator */}
-        <div className="flex items-center justify-center space-x-4">
-          {steps.map((step, index) => (
-            <div key={step.id} className="flex items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
-                currentStep >= step.id 
-                  ? 'bg-primary text-primary-foreground' 
-                  : 'bg-muted text-muted-foreground'
-              }`}>
-                {step.id}
-              </div>
-              <div className="ml-3 text-left">
-                <p className={`text-sm font-medium ${
-                  currentStep >= step.id ? 'text-foreground' : 'text-muted-foreground'
-                }`}>
-                  {step.title}
-                </p>
-                <p className="text-xs text-muted-foreground">{step.description}</p>
-              </div>
-              {index < steps.length - 1 && (
-                <ArrowRight className="h-4 w-4 text-muted-foreground mx-4" />
-              )}
-            </div>
-          ))}
-        </div>
 
         {/* Step 1: Signal */}
         {currentStep >= 1 && (
@@ -538,7 +527,24 @@ export default function AlchemailApp20() {
                             </SheetTrigger>
                             <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
                               <SheetHeader className="pb-8">
-                                <SheetTitle className="text-xl">Context Repository</SheetTitle>
+                                <div className="flex items-center justify-between">
+                                  <SheetTitle className="text-xl">Context Repository</SheetTitle>
+                                  <ContextItemForm
+                                    onSave={(item) => {
+                                      addContextItem(item)
+                                      toast({
+                                        title: "Context Item Added",
+                                        description: `${item.title} has been added to the repository.`,
+                                      })
+                                    }}
+                                    trigger={
+                                      <Button size="sm">
+                                        <Plus className="h-4 w-4 mr-2" />
+                                        Add Item
+                                      </Button>
+                                    }
+                                  />
+                                </div>
                               </SheetHeader>
                               <div className="mt-4">
                                 <Tabs defaultValue="customer" className="w-full">
@@ -556,16 +562,59 @@ export default function AlchemailApp20() {
                                   {getAllCategories().map((category) => (
                                     <TabsContent key={category} value={category} className="mt-0">
                                       <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
-                                        {getContextItemsByCategory(category).map((item, index) => (
+                                        {getContextItemsByCategoryLocal(category).map((item, index) => (
                                           <div 
                                             key={index} 
                                             className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
                                           >
                                             <div className="flex items-start justify-between mb-4">
-                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
-                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
-                                                {item.category === 'language_style' ? 'style' : item.category}
-                                              </span>
+                                              <div className="flex-1">
+                                                <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
+                                                {isCustomContextItem(item.id) && (
+                                                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                                                    Custom Item
+                                                  </span>
+                                                )}
+                                              </div>
+                                              <div className="flex items-center gap-2">
+                                                <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
+                                                  {item.category === 'language_style' ? 'style' : item.category}
+                                                </span>
+                                                <div className="flex gap-1">
+                                                  <ContextItemForm
+                                                    item={item}
+                                                    isEditing={true}
+                                                    onSave={(updatedItem) => {
+                                                      addContextItem(updatedItem)
+                                                      toast({
+                                                        title: "Context Item Updated",
+                                                        description: `${updatedItem.title} has been updated.`,
+                                                      })
+                                                    }}
+                                                    trigger={
+                                                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                                                        <Edit className="h-3 w-3" />
+                                                      </Button>
+                                                    }
+                                                  />
+                                                  {isCustomContextItem(item.id) && (
+                                                    <Button 
+                                                      variant="ghost" 
+                                                      size="sm" 
+                                                      className="h-8 w-8 p-0 hover:bg-red-200 dark:hover:bg-red-800"
+                                                      onClick={() => {
+                                                        removeContextItem(item.id)
+                                                        toast({
+                                                          title: "Context Item Removed",
+                                                          description: `${item.title} has been removed from the repository.`,
+                                                        })
+                                                      }}
+                                                    >
+                                                      <Trash2 className="h-3 w-3" />
+                                                    </Button>
+                                                  )}
+                                                </div>
+                                              </div>
                                             </div>
                                             <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
                                             {item.industry && item.industry.length > 0 && (
