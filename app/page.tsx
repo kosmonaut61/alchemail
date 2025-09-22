@@ -13,6 +13,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
@@ -196,6 +197,7 @@ export default function AlchemailApp20() {
             
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
+              <HelpModal />
               <ThemeToggle />
             </div>
           </div>
@@ -203,14 +205,6 @@ export default function AlchemailApp20() {
       </header>
 
       <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
-        {/* Welcome Message */}
-        <div className="text-center space-y-4">
-          <h2 className="text-3xl font-bold text-foreground">Create Your Outreach Sequence</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Build powerful, personalized email and LinkedIn sequences that drive results. 
-            Start with your signal and let AI craft the perfect outreach strategy.
-          </p>
-        </div>
 
         {/* Progress Indicator */}
         <div className="flex items-center justify-center space-x-4">
