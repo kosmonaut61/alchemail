@@ -11,8 +11,9 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
@@ -196,6 +197,7 @@ export default function AlchemailApp20() {
             
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
+              <HelpModal />
               <ThemeToggle />
             </div>
           </div>
@@ -203,40 +205,6 @@ export default function AlchemailApp20() {
       </header>
 
       <main className="flex-1 max-w-6xl mx-auto w-full p-6 space-y-8">
-        {/* Welcome Message */}
-        <div className="text-center space-y-4">
-          <h2 className="text-3xl font-bold text-foreground">Create Your Outreach Sequence</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Build powerful, personalized email and LinkedIn sequences that drive results. 
-            Start with your signal and let AI craft the perfect outreach strategy.
-          </p>
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="flex items-center justify-center space-x-4">
-          {steps.map((step, index) => (
-            <div key={step.id} className="flex items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
-                currentStep >= step.id 
-                  ? 'bg-primary text-primary-foreground' 
-                  : 'bg-muted text-muted-foreground'
-              }`}>
-                {step.id}
-              </div>
-              <div className="ml-3 text-left">
-                <p className={`text-sm font-medium ${
-                  currentStep >= step.id ? 'text-foreground' : 'text-muted-foreground'
-                }`}>
-                  {step.title}
-                </p>
-                <p className="text-xs text-muted-foreground">{step.description}</p>
-              </div>
-              {index < steps.length - 1 && (
-                <ArrowRight className="h-4 w-4 text-muted-foreground mx-4" />
-              )}
-            </div>
-          ))}
-        </div>
 
         {/* Step 1: Signal */}
         {currentStep >= 1 && (
@@ -562,52 +530,107 @@ export default function AlchemailApp20() {
                                   {getAllCategories().map((category) => (
                                     <TabsContent key={category} value={category} className="mt-0">
                                       <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
-                                        {getContextItemsByCategory(category).map((item, index) => (
-                                          <div 
-                                            key={index} 
-                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
-                                          >
-                                            <div className="flex items-start justify-between mb-4">
-                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
-                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
-                                                {item.category === 'language_style' ? 'style' : item.category}
-                                              </span>
-                                            </div>
-                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
-                                            {item.industry && item.industry.length > 0 && (
-                                              <div className="mb-4">
-                                                <p className="text-xs opacity-75 mb-2 font-medium">
-                                                  Industries:
-                                                </p>
-                                                <p className="text-xs opacity-75">
-                                                  {item.industry.join(', ')}
-                                                </p>
+                                        {getContextItemsByCategory(category).map((item, index) => {
+                                          const isInSequence = contextItems.some(selectedItem => selectedItem.id === item.id)
+                                          
+                                          return (
+                                            <div 
+                                              key={index} 
+                                              className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
+                                            >
+                                              <div className="flex items-start justify-between mb-4">
+                                                <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
+                                                <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
+                                                  {item.category === 'language_style' ? 'style' : item.category}
+                                                </span>
                                               </div>
-                                            )}
-                                            {item.keywords && item.keywords.length > 0 && (
-                                              <div>
-                                                <p className="text-xs opacity-75 mb-3 font-medium">
-                                                  Keywords:
-                                                </p>
-                                                <div className="flex flex-wrap gap-2">
-                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
-                                                    <span 
-                                                      key={idx} 
-                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
-                                                    >
-                                                      {keyword}
+                                              <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
+                                              {item.industry && item.industry.length > 0 && (
+                                                <div className="mb-4">
+                                                  <p className="text-xs opacity-75 mb-2 font-medium">
+                                                    Industries:
+                                                  </p>
+                                                  <p className="text-xs opacity-75">
+                                                    {item.industry.join(', ')}
+                                                  </p>
+                                                </div>
+                                              )}
+                                              {item.keywords && item.keywords.length > 0 && (
+                                                <div className="mb-4">
+                                                  <p className="text-xs opacity-75 mb-3 font-medium">
+                                                    Keywords:
+                                                  </p>
+                                                  <div className="flex flex-wrap gap-2">
+                                                    {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                      <span 
+                                                        key={idx} 
+                                                        className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
+                                                      >
+                                                        {keyword}
+                                                      </span>
+                                                    ))}
+                                                    {item.keywords.length > 5 && (
+                                                      <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
+                                                        +{item.keywords.length - 5} more
+                                                      </span>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              )}
+                                              
+                                              {/* Action Buttons */}
+                                              <div className="flex items-center justify-between pt-4 border-t border-white/20 dark:border-black/20">
+                                                <div className="flex items-center gap-2">
+                                                  {isInSequence ? (
+                                                    <span className="text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                      In Sequence
                                                     </span>
-                                                  ))}
-                                                  {item.keywords.length > 5 && (
-                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
-                                                      +{item.keywords.length - 5} more
+                                                  ) : (
+                                                    <span className="text-xs text-muted-foreground">
+                                                      Not in sequence
                                                     </span>
                                                   )}
                                                 </div>
+                                                <div className="flex gap-2">
+                                                  {isInSequence ? (
+                                                    <Button
+                                                      variant="outline"
+                                                      size="sm"
+                                                      onClick={() => {
+                                                        setContextItems(prev => prev.filter(selectedItem => selectedItem.id !== item.id))
+                                                        toast({
+                                                          title: "Removed from Sequence",
+                                                          description: `${item.title} has been removed from your sequence.`,
+                                                        })
+                                                      }}
+                                                      className="text-xs h-8 px-3"
+                                                    >
+                                                      <X className="h-3 w-3 mr-1" />
+                                                      Remove
+                                                    </Button>
+                                                  ) : (
+                                                    <Button
+                                                      variant="default"
+                                                      size="sm"
+                                                      onClick={() => {
+                                                        setContextItems(prev => [...prev, item])
+                                                        toast({
+                                                          title: "Added to Sequence",
+                                                          description: `${item.title} has been added to your sequence.`,
+                                                        })
+                                                      }}
+                                                      className="text-xs h-8 px-3"
+                                                    >
+                                                      <Plus className="h-3 w-3 mr-1" />
+                                                      Add to Sequence
+                                                    </Button>
+                                                  )}
+                                                </div>
                                               </div>
-                                            )}
-                                          </div>
-                                        ))}
+                                            </div>
+                                          )
+                                        })}
                                       </div>
                                     </TabsContent>
                                   ))}

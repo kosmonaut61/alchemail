@@ -94,6 +94,11 @@ ${formatSamplesForPrompt(personaData.label)}
 AVAILABLE CONTEXT FOR ENHANCEMENT:
 ${await getContextForOptimizer(signal, personaData, painPoints)}
 
+CUSTOMER LIST ITEMS AVAILABLE:
+${(await getContextForOptimizer(signal, personaData, painPoints)).split('\n').filter(line => line.includes('Customers')).join('\n')}
+
+IMPORTANT: If there are customer list items above, PRESERVE and ENHANCE companies from those lists instead of removing them.
+
 OPTIMIZATION GUIDELINES:
 1. Subtly integrate the signal naturally - don't make it obvious or forced
 2. Enhance the value proposition using available context (quotes, statistics, case studies)
@@ -122,6 +127,9 @@ OPTIMIZATION GUIDELINES:
 25. KEEP messages concise and scannable - don't overwhelm with too many numbers
 26. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
 27. Turn presumptive statements into questions to avoid assumptions
+28. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
+29. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
+30. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -181,6 +189,13 @@ TONE PRESERVATION (CRITICAL):
 - DON'T make emails choppy or robotic - maintain the original's personality and warmth
 - AVOID repetitive phrases like "great step" - vary the language to keep it fresh
 - Use different ways to acknowledge signals and show appreciation
+
+CONTEXT PRESERVATION (CRITICAL):
+- PRESERVE all customer examples from the original message - don't remove Honda, Bridgestone, etc.
+- ENHANCE customer list companies rather than removing them
+- MAINTAIN the variety of context items used in the original
+- DON'T strip out industry-specific customer examples for generic ones
+- KEEP the original's context diversity and relevance
 
 SIGNAL INTEGRATION:
 - Make signal references subtle and natural - avoid obvious statements like "That's a great sign you're exploring ROI"
