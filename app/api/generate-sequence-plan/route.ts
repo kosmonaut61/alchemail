@@ -25,9 +25,15 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Find context items that match industry mentions
   const industryKeywords = ['retail', 'food', 'beverage', 'automotive', 'manufacturing', 'technology', 'healthcare']
-  const industryMatches = industryKeywords
-    .filter(industry => signalLower.includes(industry))
-    .flatMap(industry => getContextItemsByIndustry(industry))
+  const matchedIndustries = industryKeywords.filter(industry => signalLower.includes(industry))
+  console.log('🔍 DEBUG: Signal contains these industries:', matchedIndustries)
+  
+  const industryMatches = matchedIndustries
+    .flatMap(industry => {
+      const matches = getContextItemsByIndustry(industry)
+      console.log(`🔍 DEBUG: Industry "${industry}" matched:`, matches.map(item => ({ id: item.id, title: item.title })))
+      return matches
+    })
   
   // Add customer context items (most important for social proof)
   const customerItems = CONTEXT_REPOSITORY.filter(item => 
@@ -106,6 +112,13 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   const uniqueItems = allRelevant.filter((item, index, self) => 
     index === self.findIndex(t => t.id === item.id)
   )
+  
+  // Debug logging for food & beverage context selection
+  console.log('🔍 DEBUG: Context selection for signal:', signal)
+  console.log('🔍 DEBUG: Industry matches:', industryMatches.map(item => ({ id: item.id, title: item.title, industry: item.industry })))
+  console.log('🔍 DEBUG: Customer items found:', customerItems.map(item => ({ id: item.id, title: item.title, industry: item.industry })))
+  console.log('🔍 DEBUG: All relevant items:', allRelevant.map(item => ({ id: item.id, title: item.title, category: item.category })))
+  console.log('🔍 DEBUG: Final selected items:', uniqueItems.slice(0, 8).map(item => ({ id: item.id, title: item.title, category: item.category })))
   
   return uniqueItems.slice(0, 8)
 }
