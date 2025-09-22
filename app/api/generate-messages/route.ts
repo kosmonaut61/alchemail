@@ -176,6 +176,12 @@ TARGET PERSONA:
       VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
       ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
+      CONTEXT USAGE PRIORITY:
+      1. If there are customer list items (e.g., "Food & Beverage Customers"), use specific company names from those lists for industry relevance
+      2. Use statistics and case studies to provide specific quantified results
+      3. Use quotes to add credibility and emotional connection
+      4. Mix different context types across emails to avoid repetition
+
       AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
       ${formatVariablesForPrompt()}
 
@@ -230,6 +236,8 @@ TARGET PERSONA:
       15. Use the specific stats mentioned in the plan to make the email compelling and credible
       16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
       17. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
+      18. PRIORITIZE CUSTOMER LISTS: If there's a customer list context item (e.g., "Food & Beverage Customers"), use companies from that list when mentioning industry-relevant examples
+      19. CUSTOMER LIST USAGE: When using customer lists, mention 2-3 specific company names from the list to build credibility and relevance
 
       STRUCTURE GUIDELINES:
       - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
