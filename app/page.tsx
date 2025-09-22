@@ -11,23 +11,13 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Edit, Trash2 } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
 import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
-import { 
-  getAllContextItems, 
-  addContextItem, 
-  removeContextItem, 
-  getContextItemsByCategory,
-  isCustomContextItem,
-  initializeContextManager 
-} from "@/lib/context-manager"
-import { ContextItemForm } from "@/components/context-item-form"
-import { ContextItemSelector } from "@/components/context-item-selector"
 
 // Types for the 2.0 app
 interface SequencePlan {
@@ -71,13 +61,7 @@ export default function AlchemailApp20() {
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
-  const [editingContextItem, setEditingContextItem] = useState<ContextItem | null>(null)
   const { toast } = useToast()
-
-  // Initialize context manager on component mount
-  useEffect(() => {
-    initializeContextManager()
-  }, [])
 
   const steps = [
     { id: 1, title: "Signal", description: "Define your outreach signal and target persona" },
@@ -143,14 +127,14 @@ export default function AlchemailApp20() {
     }
   }
 
-  // Get context items by category (using context manager)
-  const getContextItemsByCategoryLocal = (category: string) => {
-    return getContextItemsByCategory(category as ContextItem['category'])
+  // Get context items by category
+  const getContextItemsByCategory = (category: string) => {
+    return CONTEXT_REPOSITORY.filter(item => item.category === category)
   }
 
-  // Get all unique categories (including custom items)
+  // Get all unique categories
   const getAllCategories = () => {
-    const categories = [...new Set(getAllContextItems().map(item => item.category))]
+    const categories = [...new Set(CONTEXT_REPOSITORY.map(item => item.category))]
     return categories.sort()
   }
 
@@ -506,41 +490,15 @@ export default function AlchemailApp20() {
                     </p>
                 </div>
 
-                  {/* Context Items Section */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-semibold">Selected Context Items</h3>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-muted-foreground">
-                          {contextItems.length} items
-                        </span>
-                        <ContextItemSelector
-                          onAddItem={(item) => {
-                            // Check if item is already in the sequence
-                            const isAlreadyAdded = contextItems.some(existing => existing.id === item.id)
-                            if (!isAlreadyAdded) {
-                              setContextItems(prev => [...prev, item])
-                              toast({
-                                title: "Context Item Added",
-                                description: `${item.title} has been added to your sequence.`,
-                              })
-                            } else {
-                              toast({
-                                title: "Item Already Added",
-                                description: `${item.title} is already in your sequence.`,
-                                variant: "destructive",
-                              })
-                            }
-                          }}
-                          existingItems={contextItems}
-                          trigger={
-                            <Button variant="outline" size="sm" className="text-xs">
-                              <Plus className="h-3 w-3 mr-1" />
-                              Add Item
-                            </Button>
-                          }
-                        />
-                        <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
+                  {contextItems.length > 0 && (
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold">Selected Context Items</h3>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-muted-foreground">
+                            {contextItems.length} items
+                          </span>
+                          <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
                             <SheetTrigger asChild>
                               <Button
                                 type="button"
@@ -554,24 +512,7 @@ export default function AlchemailApp20() {
                             </SheetTrigger>
                             <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
                               <SheetHeader className="pb-8">
-                                <div className="flex items-center justify-between">
-                                  <SheetTitle className="text-xl">Context Repository</SheetTitle>
-                                  <ContextItemForm
-                                    onSave={(item) => {
-                                      addContextItem(item)
-                                      toast({
-                                        title: "Context Item Added",
-                                        description: `${item.title} has been added to the repository.`,
-                                      })
-                                    }}
-                                    trigger={
-                                      <Button size="sm">
-                                        <Plus className="h-4 w-4 mr-2" />
-                                        Add Item
-                                      </Button>
-                                    }
-                                  />
-                                </div>
+                                <SheetTitle className="text-xl">Context Repository</SheetTitle>
                               </SheetHeader>
                               <div className="mt-4">
                                 <Tabs defaultValue="customer" className="w-full">
@@ -589,95 +530,107 @@ export default function AlchemailApp20() {
                                   {getAllCategories().map((category) => (
                                     <TabsContent key={category} value={category} className="mt-0">
                                       <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
-                                        {getContextItemsByCategoryLocal(category).map((item, index) => (
-                                          <div 
-                                            key={index} 
-                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
-                                          >
-                                            <div className="flex items-start justify-between mb-4">
-                                              <div className="flex-1">
+                                        {getContextItemsByCategory(category).map((item, index) => {
+                                          const isInSequence = contextItems.some(selectedItem => selectedItem.id === item.id)
+                                          
+                                          return (
+                                            <div 
+                                              key={index} 
+                                              className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
+                                            >
+                                              <div className="flex items-start justify-between mb-4">
                                                 <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
-                                                {isCustomContextItem(item.id) && (
-                                                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-                                                    Custom Item
-                                                  </span>
-                                                )}
-                                              </div>
-                                              <div className="flex items-center gap-2">
                                                 <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
                                                   {item.category === 'language_style' ? 'style' : item.category}
                                                 </span>
-                                                <div className="flex gap-1">
-                                                  <ContextItemForm
-                                                    item={item}
-                                                    isEditing={true}
-                                                    onSave={(updatedItem) => {
-                                                      addContextItem(updatedItem)
-                                                      toast({
-                                                        title: "Context Item Updated",
-                                                        description: `${updatedItem.title} has been updated.`,
-                                                      })
-                                                    }}
-                                                    trigger={
-                                                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                                        <Edit className="h-3 w-3" />
-                                                      </Button>
-                                                    }
-                                                  />
-                                                  {isCustomContextItem(item.id) && (
-                                                    <Button 
-                                                      variant="ghost" 
-                                                      size="sm" 
-                                                      className="h-8 w-8 p-0 hover:bg-red-200 dark:hover:bg-red-800"
+                                              </div>
+                                              <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
+                                              {item.industry && item.industry.length > 0 && (
+                                                <div className="mb-4">
+                                                  <p className="text-xs opacity-75 mb-2 font-medium">
+                                                    Industries:
+                                                  </p>
+                                                  <p className="text-xs opacity-75">
+                                                    {item.industry.join(', ')}
+                                                  </p>
+                                                </div>
+                                              )}
+                                              {item.keywords && item.keywords.length > 0 && (
+                                                <div className="mb-4">
+                                                  <p className="text-xs opacity-75 mb-3 font-medium">
+                                                    Keywords:
+                                                  </p>
+                                                  <div className="flex flex-wrap gap-2">
+                                                    {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                      <span 
+                                                        key={idx} 
+                                                        className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
+                                                      >
+                                                        {keyword}
+                                                      </span>
+                                                    ))}
+                                                    {item.keywords.length > 5 && (
+                                                      <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
+                                                        +{item.keywords.length - 5} more
+                                                      </span>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              )}
+                                              
+                                              {/* Action Buttons */}
+                                              <div className="flex items-center justify-between pt-4 border-t border-white/20 dark:border-black/20">
+                                                <div className="flex items-center gap-2">
+                                                  {isInSequence ? (
+                                                    <span className="text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                      In Sequence
+                                                    </span>
+                                                  ) : (
+                                                    <span className="text-xs text-muted-foreground">
+                                                      Not in sequence
+                                                    </span>
+                                                  )}
+                                                </div>
+                                                <div className="flex gap-2">
+                                                  {isInSequence ? (
+                                                    <Button
+                                                      variant="outline"
+                                                      size="sm"
                                                       onClick={() => {
-                                                        removeContextItem(item.id)
+                                                        setContextItems(prev => prev.filter(selectedItem => selectedItem.id !== item.id))
                                                         toast({
-                                                          title: "Context Item Removed",
-                                                          description: `${item.title} has been removed from the repository.`,
+                                                          title: "Removed from Sequence",
+                                                          description: `${item.title} has been removed from your sequence.`,
                                                         })
                                                       }}
+                                                      className="text-xs h-8 px-3"
                                                     >
-                                                      <Trash2 className="h-3 w-3" />
+                                                      <X className="h-3 w-3 mr-1" />
+                                                      Remove
+                                                    </Button>
+                                                  ) : (
+                                                    <Button
+                                                      variant="default"
+                                                      size="sm"
+                                                      onClick={() => {
+                                                        setContextItems(prev => [...prev, item])
+                                                        toast({
+                                                          title: "Added to Sequence",
+                                                          description: `${item.title} has been added to your sequence.`,
+                                                        })
+                                                      }}
+                                                      className="text-xs h-8 px-3"
+                                                    >
+                                                      <Plus className="h-3 w-3 mr-1" />
+                                                      Add to Sequence
                                                     </Button>
                                                   )}
                                                 </div>
                                               </div>
                                             </div>
-                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
-                                            {item.industry && item.industry.length > 0 && (
-                                              <div className="mb-4">
-                                                <p className="text-xs opacity-75 mb-2 font-medium">
-                                                  Industries:
-                                                </p>
-                                                <p className="text-xs opacity-75">
-                                                  {item.industry.join(', ')}
-                                                </p>
-                                              </div>
-                                            )}
-                                            {item.keywords && item.keywords.length > 0 && (
-                                              <div>
-                                                <p className="text-xs opacity-75 mb-3 font-medium">
-                                                  Keywords:
-                                                </p>
-                                                <div className="flex flex-wrap gap-2">
-                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
-                                                    <span 
-                                                      key={idx} 
-                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
-                                                    >
-                                                      {keyword}
-                                                    </span>
-                                                  ))}
-                                                  {item.keywords.length > 5 && (
-                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
-                                                      +{item.keywords.length - 5} more
-                                                    </span>
-                                                  )}
-                                                </div>
-                                              </div>
-                                            )}
-                                          </div>
-                                        ))}
+                                          )
+                                        })}
                                       </div>
                                     </TabsContent>
                                   ))}
@@ -687,42 +640,35 @@ export default function AlchemailApp20() {
                           </Sheet>
                         </div>
                       </div>
-                      {contextItems.length > 0 ? (
-                        <div className="flex flex-wrap gap-2">
-                          {contextItems.map((item, index) => (
-                            <div
-                              key={index}
-                              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
+                      <div className="flex flex-wrap gap-2">
+                        {contextItems.map((item, index) => (
+                          <div
+                            key={index}
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
+                          >
+                            <span className="font-medium truncate max-w-[200px]" title={item.title}>
+                              {item.title}
+                            </span>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                setContextItems(prev => prev.filter((_, i) => i !== index))
+                                toast({
+                                  title: "Context Item Removed",
+                                  description: `${item.title} has been removed from the sequence.`,
+                                })
+                              }}
+                              className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
                             >
-                              <span className="font-medium truncate max-w-[200px]" title={item.title}>
-                                {item.title}
-                              </span>
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                  setContextItems(prev => prev.filter((_, i) => i !== index))
-                                  toast({
-                                    title: "Context Item Removed",
-                                    description: `${item.title} has been removed from the sequence.`,
-                                  })
-                                }}
-                                className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
-                              >
-                                <X className="h-3 w-3" />
-                              </Button>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-center py-4 text-muted-foreground">
-                          <p className="text-sm">No context items selected yet.</p>
-                          <p className="text-xs mt-1">Click "Add Item" to manually select context items for your sequence.</p>
-                        </div>
-                      )}
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
               
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
