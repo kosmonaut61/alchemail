@@ -176,11 +176,17 @@ TARGET PERSONA:
       VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
       ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
+      CUSTOMER LIST ITEMS AVAILABLE:
+      ${relevantContext.filter(item => item.category === 'customer').map(item => `- ${item.title}: ${item.content}`).join('\n')}
+      
+      IMPORTANT: If there are customer list items above, use companies from those lists instead of individual case studies or statistics.
+
       CONTEXT USAGE PRIORITY:
-      1. If there are customer list items (e.g., "Food & Beverage Customers"), use specific company names from those lists for industry relevance
+      1. CRITICAL: If there are customer list items (e.g., "Automotive Customers", "Logistics Customers"), ALWAYS use specific company names from those lists for industry relevance
       2. Use statistics and case studies to provide specific quantified results
       3. Use quotes to add credibility and emotional connection
-      4. Mix different context types across emails to avoid repetition
+      4. DISTRIBUTE context across emails - each email should use DIFFERENT context items to avoid repetition
+      5. NEVER reuse the same company examples across multiple emails in the same sequence
 
       AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
       ${formatVariablesForPrompt()}
@@ -193,10 +199,19 @@ TARGET PERSONA:
 
       EMAIL SPECIFICATIONS:
       - Day: ${emailPlan.day}
+      - Email Number: ${sequencePlan.emails.indexOf(emailPlan) + 1} of ${sequencePlan.emails.length}
       - Subject: ${emailPlan.subject}
       - Purpose: ${emailPlan.purpose}
       - Signal Integration: ${emailPlan.signalIntegration}
       - Specific Stats to Feature: ${emailPlan.specificStats || 'Use relevant stats from context'}
+
+      CONTEXT DISTRIBUTION FOR THIS EMAIL:
+      - This is Email ${sequencePlan.emails.indexOf(emailPlan) + 1} of ${sequencePlan.emails.length}
+      - Use DIFFERENT context items than previous emails in the sequence
+      - If this is Email 1: Use customer list companies (e.g., from "Automotive Customers" or "Logistics Customers")
+      - If this is Email 2: Use different customer list companies or statistics
+      - If this is Email 3: Use different customer list companies or case studies
+      - NEVER repeat the same company examples used in other emails
 
       DETAILED MESSAGE OUTLINE (FOLLOW NATURALLY):
       ${emailPlan.messageOutline ? `
@@ -236,8 +251,11 @@ TARGET PERSONA:
       15. Use the specific stats mentioned in the plan to make the email compelling and credible
       16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
       17. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
-      18. PRIORITIZE CUSTOMER LISTS: If there's a customer list context item (e.g., "Food & Beverage Customers"), use companies from that list when mentioning industry-relevant examples
+      18. PRIORITIZE CUSTOMER LISTS: If there's a customer list context item (e.g., "Automotive Customers", "Logistics Customers"), use companies from that list when mentioning industry-relevant examples
       19. CUSTOMER LIST USAGE: When using customer lists, mention 2-3 specific company names from the list to build credibility and relevance
+      20. CONTEXT DISTRIBUTION: Each email must use DIFFERENT context items - never repeat the same company examples across emails
+      21. SEQUENCE VARIETY: Email 1 should use different context than Email 2, Email 2 different from Email 3, etc.
+      22. CUSTOMER LIST FIRST: Always check for customer list items first before using individual case studies or statistics
 
       STRUCTURE GUIDELINES:
       - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
