@@ -198,13 +198,15 @@ TARGET PERSONA:
       IMPORTANT: If there are customer list items above, use companies from those lists instead of individual case studies or statistics.
 
       CONTEXT USAGE PRIORITY:
-      1. CRITICAL: If there are customer list items (e.g., "Food & Beverage Customers", "Automotive Customers", "Logistics Customers"), ALWAYS use specific company names from those lists for industry relevance
-      2. MANDATORY: Use the EXACT context items provided above - do not substitute with other companies or examples
-      3. Use statistics and case studies to provide specific quantified results
-      4. Use quotes to add credibility and emotional connection
-      5. DISTRIBUTE context across emails - each email should use DIFFERENT context items to avoid repetition
-      6. NEVER reuse the same company examples across multiple emails in the same sequence
-      7. NEVER use companies not listed in the provided context items
+      1. CRITICAL: Focus on 1-2 PRIMARY context items per email to avoid overwhelming recipients
+      2. If there are customer list items (e.g., "Food & Beverage Customers", "Automotive Customers", "Logistics Customers"), use 1-2 specific company names from those lists
+      3. MANDATORY: Use the EXACT context items provided above - do not substitute with other companies or examples
+      4. Use statistics and case studies to provide specific quantified results (limit to 1-2 per email)
+      5. Use quotes to add credibility and emotional connection (limit to 1 per email)
+      6. DISTRIBUTE context across emails - each email should use DIFFERENT context items to avoid repetition
+      7. NEVER reuse the same company examples across multiple emails in the same sequence
+      8. NEVER use companies not listed in the provided context items
+      9. AVOID cramming multiple customer examples, stats, and case studies into one email
 
       AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
       ${formatVariablesForPrompt()}
@@ -225,10 +227,12 @@ TARGET PERSONA:
 
       CONTEXT DISTRIBUTION FOR THIS EMAIL:
       - This is Email ${sequencePlan.emails.indexOf(emailPlan) + 1} of ${sequencePlan.emails.length}
+      - CRITICAL: Focus on 1-2 PRIMARY context items to avoid overwhelming the recipient
       - Use DIFFERENT context items than previous emails in the sequence
       - If this is Email 1: Use customer list companies (e.g., from "Automotive Customers" or "Logistics Customers")
       - If this is Email 2: Use different customer list companies or statistics
       - If this is Email 3: Use different customer list companies or case studies
+      - AVOID cramming multiple customer examples, stats, and case studies into one email
       - NEVER repeat the same company examples used in other emails
 
       DETAILED MESSAGE OUTLINE (FOLLOW NATURALLY):
