@@ -59,7 +59,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'dollar_tree_case_study',
     title: 'Dollar Tree Case Study',
-    content: 'Dollar Tree saved $3.2 million in freight spend within 6 months, and $6M in 2024 using ProcureOS. Average lane was ~2% below market average.',
+    content: 'Dollar Tree saved $3.2 million in freight spend within 6 months, and $6M in 2024 using Emerge. Average lane was ~2% below market average.',
     category: 'resource',
     industry: ['retail', 'food_retail'],
     keywords: ['dollar tree', 'retail', 'savings', 'cost reduction'],
@@ -119,10 +119,10 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'platform_overview_video',
     title: 'Emerge Platform Overview Video',
-    content: 'Quick 30-second platform overview video showcasing Emerge\'s core capabilities: ProcureOS for freight procurement, Marketplace for carrier access, and key platform features. This is a high-level introduction to the platform, not a detailed case study walkthrough. Use this video to introduce prospects to the platform capabilities, separate from specific customer case studies.',
+    content: 'Quick 30-second platform overview video showcasing Emerge\'s core capabilities for freight procurement, carrier access, and key platform features. This is a high-level introduction to the platform, not a detailed case study walkthrough. Use this video to introduce prospects to the platform capabilities, separate from specific customer case studies.',
     category: 'resource',
     industry: ['logistics', 'transportation', 'retail', 'food_beverage', 'manufacturing', 'automotive'],
-    keywords: ['platform', 'overview', 'video', 'demo', 'procureos', 'marketplace', 'freight', 'procurement', 'carrier management', '30 second', 'quick', 'introduction', 'capabilities'],
+    keywords: ['platform', 'overview', 'video', 'demo', 'freight', 'procurement', 'carrier management', '30 second', 'quick', 'introduction', 'capabilities'],
     pain_points: ['efficiency', 'effort', 'cost'],
     url: 'https://emergemarket.wistia.com/medias/mnrknev8dc'
   },
@@ -147,7 +147,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'coverage_value_prop',
     title: 'Coverage Value Prop',
-    content: 'Limited/unused networks leave lanes uncovered → solved w/ 1,000s of vetted carriers in Emerge Marketplace. Results in ↑ coverage and better lane options.',
+    content: 'Limited/unused networks leave lanes uncovered → solved w/ 1,000s of vetted carriers in Emerge. Results in ↑ coverage and better lane options.',
     category: 'value_prop',
     pain_points: ['efficiency'],
     keywords: ['coverage', 'carriers', 'network', 'lanes', 'capacity']
@@ -157,7 +157,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'dollar_tree_stats',
     title: 'Dollar Tree Statistics',
-    content: 'Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using ProcureOS. Average lane was ~2% below market average.',
+    content: 'Within 6 months, Dollar Tree saved $3.2 million in freight spend, in 2024 Dollar Tree saved $6M using Emerge. Average lane was ~2% below market average.',
     category: 'statistic',
     industry: ['retail'],
     keywords: ['dollar tree', 'savings', '6 months', '6M', '2% below market']
