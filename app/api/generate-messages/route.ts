@@ -125,7 +125,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
 
 export async function POST(request: NextRequest) {
   try {
-    const { signal, persona, painPoints, sequencePlan } = await request.json()
+    const { signal, persona, painPoints, sequencePlan, contextItems } = await request.json()
 
     if (!signal || !persona || !sequencePlan) {
       return NextResponse.json(
@@ -150,10 +150,18 @@ export async function POST(request: NextRequest) {
     console.log('👤 Persona:', personaData.label)
     console.log('📧 Emails:', sequencePlan.emails.length)
     console.log('💼 LinkedIn:', sequencePlan.linkedInMessages.length)
+    console.log('🎯 Context items received:', contextItems?.length || 0)
 
-    // Dynamically select relevant context based on signal
-    const relevantContext = getRelevantContext(signal, personaData, painPoints)
-    console.log('🎯 Selected context items:', relevantContext.map(c => c.title).join(', '))
+    // Use provided context items if available, otherwise dynamically select relevant context
+    let relevantContext: ContextItem[]
+    if (contextItems && contextItems.length > 0) {
+      console.log('✅ Using provided context items:', contextItems.map((c: ContextItem) => c.title).join(', '))
+      relevantContext = contextItems
+    } else {
+      console.log('⚠️ No context items provided, dynamically selecting relevant context')
+      relevantContext = getRelevantContext(signal, personaData, painPoints)
+      console.log('🎯 Dynamically selected context items:', relevantContext.map(c => c.title).join(', '))
+    }
 
     const generatedMessages = []
 

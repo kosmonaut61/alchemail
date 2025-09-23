@@ -815,7 +815,8 @@ export default function AlchemailApp20() {
                         signal,
                         persona,
                         painPoints,
-                        sequencePlan
+                        sequencePlan,
+                        contextItems
                       }
                       console.log('🚀 CLIENT: Making API call to generate-messages')
                       console.log('📧 MODEL: gpt-4o-mini')
@@ -909,7 +910,8 @@ export default function AlchemailApp20() {
                             signal,
                             persona,
                             painPoints,
-                            sequencePlan
+                            sequencePlan,
+                            contextItems
                           }
                           console.log('🔄 CLIENT: Regenerating messages via API call to generate-messages')
                           console.log('📧 MODEL: gpt-4o-mini')
@@ -1024,7 +1026,8 @@ export default function AlchemailApp20() {
                                   type: message.type,
                                   signal,
                                   persona,
-                                  painPoints
+                                  painPoints,
+                                  contextItems
                                 }
                                 console.log('🚀 CLIENT: Making API call to optimize-message')
                                 console.log('📧 MODEL: gpt-5-nano (with gpt-4o-mini fallback)')
@@ -1045,7 +1048,8 @@ export default function AlchemailApp20() {
                                       type: message.type,
                                       signal,
                                       persona,
-                                      painPoints
+                                      painPoints,
+                                      contextItems
                                     }),
                                   })
 

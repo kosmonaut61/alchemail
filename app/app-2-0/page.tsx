@@ -589,7 +589,8 @@ export default function AlchemailApp20() {
                             signal,
                             persona,
                             painPoints,
-                            sequencePlan
+                            sequencePlan,
+                            contextItems
                           }),
                         })
 
@@ -702,7 +703,8 @@ export default function AlchemailApp20() {
                                 signal,
                                 persona,
                                 painPoints,
-                                sequencePlan
+                                sequencePlan,
+                                contextItems
                               }),
                             })
 
@@ -792,7 +794,8 @@ export default function AlchemailApp20() {
                                       type: message.type,
                                       signal,
                                       persona,
-                                      painPoints
+                                      painPoints,
+                                      contextItems
                                     }),
                                   })
 
