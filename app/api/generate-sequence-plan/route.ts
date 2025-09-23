@@ -209,6 +209,7 @@ DETAILED MESSAGE OUTLINES REQUIRED:
 - The customerMention field should specify which 1-2 industry-relevant customers to mention (e.g., "Honda, Bridgestone" for automotive) - focus on quality over quantity
 - The valueProp field should define the core value proposition for that specific message
 - The cta field should specify the call-to-action approach
+- The assignedContext field should specify which 1-2 specific context items from the available context will be used in this message (e.g., "Dollar Tree Case Study, Food & Beverage Customers")
 - Each message outline should be unique and build upon the previous message in the sequence
 - Focus on natural, human-like language that flows conversationally like the sample emails
 - The signal should flow naturally into relevant questions and value propositions
@@ -264,7 +265,8 @@ Return your response as a JSON object with this exact structure:
         "statUsage": "How to incorporate the specific stats",
         "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
         "valueProp": "Core value proposition for this message",
-        "cta": "Call to action approach"
+        "cta": "Call to action approach",
+        "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       }
     }
   ],
@@ -280,7 +282,8 @@ Return your response as a JSON object with this exact structure:
         "statUsage": "How to incorporate the specific stats",
         "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
         "valueProp": "Core value proposition for this message",
-        "cta": "Call to action approach"
+        "cta": "Call to action approach",
+        "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       }
     }
   ],

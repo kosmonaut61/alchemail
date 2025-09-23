@@ -26,11 +26,17 @@ interface SequencePlan {
     subject: string
     purpose: string
     signalIntegration: string
+    messageOutline?: {
+      assignedContext?: string
+    }
   }>
   linkedInMessages: Array<{
     day: number
     purpose: string
     signalIntegration: string
+    messageOutline?: {
+      assignedContext?: string
+    }
   }>
   totalDays: number
 }
@@ -825,6 +831,11 @@ export default function AlchemailApp20() {
                         <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
                           <strong>Signal Integration:</strong> {email.signalIntegration}
                         </p>
+                        {email.messageOutline?.assignedContext && (
+                          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                            <strong>Assigned Context:</strong> {email.messageOutline.assignedContext}
+                          </p>
+                        )}
                 </div>
                     ))}
               </div>
@@ -842,6 +853,11 @@ export default function AlchemailApp20() {
                           <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
                             <strong>Signal Integration:</strong> {message.signalIntegration}
                           </p>
+                          {message.messageOutline?.assignedContext && (
+                            <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                              <strong>Assigned Context:</strong> {message.messageOutline.assignedContext}
+                            </p>
+                          )}
               </div>
                       ))}
                     </div>
