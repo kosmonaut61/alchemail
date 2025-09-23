@@ -13,7 +13,7 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
   
   // Find relevant context items
   const relevantItems = CONTEXT_REPOSITORY.filter(item => {
-    const itemKeywords = item.keywords.map(k => k.toLowerCase())
+    const itemKeywords = (item.keywords || []).map(k => k.toLowerCase())
     const itemContent = item.content.toLowerCase()
     
     return keywords.some(keyword => 
@@ -54,7 +54,7 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
 
 export async function POST(request: NextRequest) {
   try {
-    const { messageId, originalContent, type, signal, persona, painPoints } = await request.json()
+    const { messageId, originalContent, type, signal, persona, painPoints, contextItems } = await request.json()
 
     if (!messageId || !originalContent || !type) {
       return NextResponse.json(
@@ -92,10 +92,16 @@ SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
 AVAILABLE CONTEXT FOR ENHANCEMENT:
-${await getContextForOptimizer(signal, personaData, painPoints)}
+${contextItems && contextItems.length > 0 
+  ? contextItems.map((item: any) => `- ${item.title}: ${item.content}`).join('\n')
+  : await getContextForOptimizer(signal, personaData, painPoints)
+}
 
 CUSTOMER LIST ITEMS AVAILABLE:
-${(await getContextForOptimizer(signal, personaData, painPoints)).split('\n').filter(line => line.includes('Customers')).join('\n')}
+${contextItems && contextItems.length > 0 
+  ? contextItems.filter((item: any) => item.category === 'customer').map((item: any) => `- ${item.title}: ${item.content}`).join('\n')
+  : (await getContextForOptimizer(signal, personaData, painPoints)).split('\n').filter(line => line.includes('Customers')).join('\n')
+}
 
 IMPORTANT: If there are customer list items above, PRESERVE and ENHANCE companies from those lists instead of removing them.
 

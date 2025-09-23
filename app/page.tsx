@@ -102,6 +102,70 @@ export default function AlchemailApp20() {
     }
   }
 
+  const handleContextItemChange = (contextItem: ContextItem, checked: boolean) => {
+    if (checked) {
+      setSelectedContextItems([...selectedContextItems, contextItem])
+    } else {
+      setSelectedContextItems(selectedContextItems.filter((item) => item.id !== contextItem.id))
+    }
+  }
+
+  const selectAllContextItems = () => {
+    setSelectedContextItems([...allContextItems])
+  }
+
+  // Auto-detect relevant context items based on signal text
+  const autoDetectContextItems = (signalText: string) => {
+    if (!signalText) return []
+    
+    const signalLower = signalText.toLowerCase()
+    const relevantItems: ContextItem[] = []
+    
+    // Extract keywords from signal
+    const keywords = signalLower.split(/\s+/).filter(word => word.length > 3)
+    
+    // Industry keywords
+    const industryKeywords = ['retail', 'food', 'beverage', 'automotive', 'logistics', 'manufacturing', 'ecommerce', 'grocery']
+    
+    // Company name keywords
+    const companyKeywords = ['dollar tree', 'golden state foods', 'pepsi', 'molson coors', 'frito lay', 'honda', 'bridgestone']
+    
+    // Find matching context items
+    CONTEXT_REPOSITORY.forEach(item => {
+      // Check if signal contains industry keywords
+      const hasIndustryMatch = industryKeywords.some(keyword => 
+        signalLower.includes(keyword) && 
+        (item.industry?.some(industry => industry.includes(keyword) || industry.includes(keyword.replace(' ', '_'))) || 
+         item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)))
+      )
+      
+      // Check if signal contains company keywords
+      const hasCompanyMatch = companyKeywords.some(company => 
+        signalLower.includes(company) && 
+        (item.content.toLowerCase().includes(company) || 
+         item.title.toLowerCase().includes(company))
+      )
+      
+      // Check if signal contains general keywords
+      const hasKeywordMatch = keywords.some(keyword => 
+        item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
+        item.content.toLowerCase().includes(keyword) ||
+        item.title.toLowerCase().includes(keyword)
+      )
+      
+      if (hasIndustryMatch || hasCompanyMatch || hasKeywordMatch) {
+        relevantItems.push(item)
+      }
+    })
+    
+    // Remove duplicates and limit to top 5 most relevant
+    const uniqueItems = relevantItems.filter((item, index, self) => 
+      index === self.findIndex(t => t.id === item.id)
+    )
+    
+    return uniqueItems.slice(0, 5)
+  }
+
   // Get the selected persona data
   const selectedPersona = PERSONA_DEFINITIONS.find(p => p.id === persona)
 
@@ -177,6 +241,21 @@ export default function AlchemailApp20() {
       }
     }
   }, [signal, selectedPersona])
+
+  // Populate all context items on component mount
+  useEffect(() => {
+    setAllContextItems(CONTEXT_REPOSITORY)
+  }, [])
+
+  // Auto-detect relevant context items when signal changes
+  useEffect(() => {
+    if (signal) {
+      const detectedContextItems = autoDetectContextItems(signal)
+      if (detectedContextItems.length > 0) {
+        setSelectedContextItems(detectedContextItems)
+      }
+    }
+  }, [signal])
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -339,6 +418,238 @@ export default function AlchemailApp20() {
                     )}
                   </div>
                 )}
+
+                {/* Context Items Selection */}
+                {persona && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <Label>Context Items (Optional)</Label>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={selectAllContextItems}
+                          className="text-xs"
+                          disabled={!allContextItems.length}
+                        >
+                          Select All
+                        </Button>
+                        {selectedContextItems.length > 0 && (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setSelectedContextItems([])}
+                            className="text-xs"
+                          >
+                            Clear All
+                          </Button>
+                        )}
+                        <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
+                          <SheetTrigger asChild>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="text-xs"
+                            >
+                              <Eye className="h-3 w-3 mr-1" />
+                              Browse All
+                            </Button>
+                          </SheetTrigger>
+                          <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
+                            <SheetHeader className="pb-8">
+                              <SheetTitle className="text-xl">Context Repository</SheetTitle>
+                            </SheetHeader>
+                            <div className="mt-4">
+                              <Tabs defaultValue="customer" className="w-full">
+                                <TabsList className="grid w-full grid-cols-7 mb-8 h-10">
+                                  {getAllCategories().map((category) => (
+                                    <TabsTrigger 
+                                      key={category} 
+                                      value={category}
+                                      className="text-sm px-4 py-2"
+                                    >
+                                      {category === 'language_style' ? 'Style' : category.replace('_', ' ')}
+                                    </TabsTrigger>
+                                  ))}
+                                </TabsList>
+                                {getAllCategories().map((category) => (
+                                  <TabsContent key={category} value={category} className="mt-0">
+                                    <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
+                                      {getContextItemsByCategory(category).map((item, index) => {
+                                        const isSelected = selectedContextItems.some(selectedItem => selectedItem.id === item.id)
+                                        
+                                        return (
+                                          <div 
+                                            key={index} 
+                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
+                                          >
+                                            <div className="flex items-start justify-between mb-4">
+                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
+                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
+                                                {item.category === 'language_style' ? 'style' : item.category}
+                                              </span>
+                                            </div>
+                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
+                                            {item.industry && item.industry.length > 0 && (
+                                              <div className="mb-4">
+                                                <p className="text-xs opacity-75 mb-2 font-medium">
+                                                  Industries:
+                                                </p>
+                                                <p className="text-xs opacity-75">
+                                                  {item.industry.join(', ')}
+                                                </p>
+                                              </div>
+                                            )}
+                                            {item.keywords && item.keywords.length > 0 && (
+                                              <div className="mb-4">
+                                                <p className="text-xs opacity-75 mb-3 font-medium">
+                                                  Keywords:
+                                                </p>
+                                                <div className="flex flex-wrap gap-2">
+                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                    <span 
+                                                      key={idx} 
+                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
+                                                    >
+                                                      {keyword}
+                                                    </span>
+                                                  ))}
+                                                  {item.keywords.length > 5 && (
+                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
+                                                      +{item.keywords.length - 5} more
+                                                    </span>
+                                                  )}
+                                                </div>
+                                              </div>
+                                            )}
+                                            
+                                            {/* Action Buttons */}
+                                            <div className="flex items-center justify-between pt-4 border-t border-white/20 dark:border-black/20">
+                                              <div className="flex items-center gap-2">
+                                                {isSelected ? (
+                                                  <span className="text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                    Selected
+                                                  </span>
+                                                ) : (
+                                                  <span className="text-xs text-muted-foreground">
+                                                    Not selected
+                                                  </span>
+                                                )}
+                                              </div>
+                                              <div className="flex gap-2">
+                                                {isSelected ? (
+                                                  <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                      setSelectedContextItems(prev => prev.filter(selectedItem => selectedItem.id !== item.id))
+                                                      toast({
+                                                        title: "Removed from Selection",
+                                                        description: `${item.title} has been removed from your selection.`,
+                                                      })
+                                                    }}
+                                                    className="text-xs h-8 px-3"
+                                                  >
+                                                    <X className="h-3 w-3 mr-1" />
+                                                    Remove
+                                                  </Button>
+                                                ) : (
+                                                  <Button
+                                                    variant="default"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                      setSelectedContextItems(prev => [...prev, item])
+                                                      toast({
+                                                        title: "Added to Selection",
+                                                        description: `${item.title} has been added to your selection.`,
+                                                      })
+                                                    }}
+                                                    className="text-xs h-8 px-3"
+                                                  >
+                                                    <Plus className="h-3 w-3 mr-1" />
+                                                    Add to Selection
+                                                  </Button>
+                                                )}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      })}
+                                    </div>
+                                  </TabsContent>
+                                ))}
+                              </Tabs>
+                            </div>
+                          </SheetContent>
+                        </Sheet>
+                      </div>
+                    </div>
+                    <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
+                      {allContextItems.length === 0 && (
+                        <p className="text-sm text-muted-foreground">Loading context items...</p>
+                      )}
+                      {allContextItems.map((item) => (
+                        <div key={item.id} className="flex items-start space-x-2">
+                          <Checkbox
+                            id={`context-${item.id}`}
+                            checked={selectedContextItems.some(selected => selected.id === item.id)}
+                            onCheckedChange={(checked) => handleContextItemChange(item, checked as boolean)}
+                            className="mt-1"
+                          />
+                          <div className="flex-1">
+                            <Label
+                              htmlFor={`context-${item.id}`}
+                              className="text-sm font-medium leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              {item.title}
+                            </Label>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {item.content.length > 100 ? `${item.content.substring(0, 100)}...` : item.content}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {selectedContextItems.length > 0 && (
+                      <div className="space-y-2">
+                        <p className="text-xs text-muted-foreground">
+                          {selectedContextItems.length} context item{selectedContextItems.length !== 1 ? 's' : ''} selected
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedContextItems.map((item, index) => (
+                            <div
+                              key={index}
+                              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
+                            >
+                              <span className="font-medium truncate max-w-[200px]" title={item.title}>
+                                {item.title}
+                              </span>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => {
+                                  setSelectedContextItems(prev => prev.filter((_, i) => i !== index))
+                                  toast({
+                                    title: "Context Item Removed",
+                                    description: `${item.title} has been removed from your selection.`,
+                                  })
+                                }}
+                                className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
+                              >
+                                <X className="h-3 w-3" />
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {currentStep === 1 && (
@@ -410,7 +721,8 @@ export default function AlchemailApp20() {
                         persona,
                         painPoints,
                         emailCount,
-                        linkedInCount
+                        linkedInCount,
+                        contextItems: selectedContextItems
                       }
                       console.log('🚀 CLIENT: Making API call to generate-sequence-plan')
                       console.log('📧 MODEL: gpt-5-mini')
@@ -428,7 +740,8 @@ export default function AlchemailApp20() {
                             persona,
                             painPoints,
                             emailCount,
-                            linkedInCount
+                            linkedInCount,
+                            contextItems: selectedContextItems
                           }),
                         })
 
@@ -490,185 +803,6 @@ export default function AlchemailApp20() {
                     </p>
                 </div>
 
-                  {contextItems.length > 0 && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-semibold">Selected Context Items</h3>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs text-muted-foreground">
-                            {contextItems.length} items
-                          </span>
-                          <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
-                            <SheetTrigger asChild>
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                className="text-xs"
-                              >
-                                <Eye className="h-3 w-3 mr-1" />
-                                Browse All
-                              </Button>
-                            </SheetTrigger>
-                            <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
-                              <SheetHeader className="pb-8">
-                                <SheetTitle className="text-xl">Context Repository</SheetTitle>
-                              </SheetHeader>
-                              <div className="mt-4">
-                                <Tabs defaultValue="customer" className="w-full">
-                                  <TabsList className="grid w-full grid-cols-7 mb-8 h-10">
-                                    {getAllCategories().map((category) => (
-                                      <TabsTrigger 
-                                        key={category} 
-                                        value={category}
-                                        className="text-sm px-4 py-2"
-                                      >
-                                        {category === 'language_style' ? 'Style' : category.replace('_', ' ')}
-                                      </TabsTrigger>
-                                    ))}
-                                  </TabsList>
-                                  {getAllCategories().map((category) => (
-                                    <TabsContent key={category} value={category} className="mt-0">
-                                      <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
-                                        {getContextItemsByCategory(category).map((item, index) => {
-                                          const isInSequence = contextItems.some(selectedItem => selectedItem.id === item.id)
-                                          
-                                          return (
-                                            <div 
-                                              key={index} 
-                                              className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
-                                            >
-                                              <div className="flex items-start justify-between mb-4">
-                                                <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
-                                                <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
-                                                  {item.category === 'language_style' ? 'style' : item.category}
-                                                </span>
-                                              </div>
-                                              <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
-                                              {item.industry && item.industry.length > 0 && (
-                                                <div className="mb-4">
-                                                  <p className="text-xs opacity-75 mb-2 font-medium">
-                                                    Industries:
-                                                  </p>
-                                                  <p className="text-xs opacity-75">
-                                                    {item.industry.join(', ')}
-                                                  </p>
-                                                </div>
-                                              )}
-                                              {item.keywords && item.keywords.length > 0 && (
-                                                <div className="mb-4">
-                                                  <p className="text-xs opacity-75 mb-3 font-medium">
-                                                    Keywords:
-                                                  </p>
-                                                  <div className="flex flex-wrap gap-2">
-                                                    {item.keywords.slice(0, 5).map((keyword, idx) => (
-                                                      <span 
-                                                        key={idx} 
-                                                        className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
-                                                      >
-                                                        {keyword}
-                                                      </span>
-                                                    ))}
-                                                    {item.keywords.length > 5 && (
-                                                      <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
-                                                        +{item.keywords.length - 5} more
-                                                      </span>
-                                                    )}
-                                                  </div>
-                                                </div>
-                                              )}
-                                              
-                                              {/* Action Buttons */}
-                                              <div className="flex items-center justify-between pt-4 border-t border-white/20 dark:border-black/20">
-                                                <div className="flex items-center gap-2">
-                                                  {isInSequence ? (
-                                                    <span className="text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
-                                                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                                                      In Sequence
-                                                    </span>
-                                                  ) : (
-                                                    <span className="text-xs text-muted-foreground">
-                                                      Not in sequence
-                                                    </span>
-                                                  )}
-                                                </div>
-                                                <div className="flex gap-2">
-                                                  {isInSequence ? (
-                                                    <Button
-                                                      variant="outline"
-                                                      size="sm"
-                                                      onClick={() => {
-                                                        setContextItems(prev => prev.filter(selectedItem => selectedItem.id !== item.id))
-                                                        toast({
-                                                          title: "Removed from Sequence",
-                                                          description: `${item.title} has been removed from your sequence.`,
-                                                        })
-                                                      }}
-                                                      className="text-xs h-8 px-3"
-                                                    >
-                                                      <X className="h-3 w-3 mr-1" />
-                                                      Remove
-                                                    </Button>
-                                                  ) : (
-                                                    <Button
-                                                      variant="default"
-                                                      size="sm"
-                                                      onClick={() => {
-                                                        setContextItems(prev => [...prev, item])
-                                                        toast({
-                                                          title: "Added to Sequence",
-                                                          description: `${item.title} has been added to your sequence.`,
-                                                        })
-                                                      }}
-                                                      className="text-xs h-8 px-3"
-                                                    >
-                                                      <Plus className="h-3 w-3 mr-1" />
-                                                      Add to Sequence
-                                                    </Button>
-                                                  )}
-                                                </div>
-                                              </div>
-                                            </div>
-                                          )
-                                        })}
-                                      </div>
-                                    </TabsContent>
-                                  ))}
-                                </Tabs>
-                              </div>
-                            </SheetContent>
-                          </Sheet>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {contextItems.map((item, index) => (
-                          <div
-                            key={index}
-                            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
-                          >
-                            <span className="font-medium truncate max-w-[200px]" title={item.title}>
-                              {item.title}
-                            </span>
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => {
-                                setContextItems(prev => prev.filter((_, i) => i !== index))
-                                toast({
-                                  title: "Context Item Removed",
-                                  description: `${item.title} has been removed from the sequence.`,
-                                })
-                              }}
-                              className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
-                            >
-                              <X className="h-3 w-3" />
-                            </Button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
               
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
@@ -723,7 +857,8 @@ export default function AlchemailApp20() {
                             persona,
                             painPoints,
                             emailCount,
-                            linkedInCount
+                            linkedInCount,
+                            contextItems: selectedContextItems
                           }
                           console.log('🔄 CLIENT: Retrying API call to generate-sequence-plan')
                           console.log('📧 MODEL: gpt-5-mini')
@@ -741,7 +876,8 @@ export default function AlchemailApp20() {
                                 persona,
                                 painPoints,
                                 emailCount,
-                                linkedInCount
+                                linkedInCount,
+                                contextItems: selectedContextItems
                               }),
                             })
 
@@ -815,7 +951,8 @@ export default function AlchemailApp20() {
                         signal,
                         persona,
                         painPoints,
-                        sequencePlan
+                        sequencePlan,
+                        contextItems: selectedContextItems
                       }
                       console.log('🚀 CLIENT: Making API call to generate-messages')
                       console.log('📧 MODEL: gpt-4o-mini')
@@ -833,7 +970,8 @@ export default function AlchemailApp20() {
                             signal,
                             persona,
                             painPoints,
-                            sequencePlan
+                            sequencePlan,
+                            contextItems: selectedContextItems
                           }),
                         })
 
@@ -909,7 +1047,8 @@ export default function AlchemailApp20() {
                             signal,
                             persona,
                             painPoints,
-                            sequencePlan
+                            sequencePlan,
+                            contextItems: selectedContextItems
                           }
                           console.log('🔄 CLIENT: Regenerating messages via API call to generate-messages')
                           console.log('📧 MODEL: gpt-4o-mini')
@@ -927,7 +1066,8 @@ export default function AlchemailApp20() {
                                 signal,
                                 persona,
                                 painPoints,
-                                sequencePlan
+                                sequencePlan,
+                                contextItems: selectedContextItems
                               }),
                             })
 
@@ -1024,7 +1164,8 @@ export default function AlchemailApp20() {
                                   type: message.type,
                                   signal,
                                   persona,
-                                  painPoints
+                                  painPoints,
+                                  contextItems: selectedContextItems
                                 }
                                 console.log('🚀 CLIENT: Making API call to optimize-message')
                                 console.log('📧 MODEL: gpt-5-nano (with gpt-4o-mini fallback)')
@@ -1045,7 +1186,8 @@ export default function AlchemailApp20() {
                                       type: message.type,
                                       signal,
                                       persona,
-                                      painPoints
+                                      painPoints,
+                                      contextItems: selectedContextItems
                                     }),
                                   })
 

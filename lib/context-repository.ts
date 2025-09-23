@@ -17,7 +17,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'retail_customers',
     title: 'Retail Customers',
-    content: 'Dollar Tree, Albertsons, Staples, Wayfair, Foot Locker, U-Haul, Abercrombie, Floor & Decor, Ace',
+    content: 'Notable Retail customers include Dollar Tree, Albertsons, Staples, Wayfair, Foot Locker, U-Haul, Abercrombie, Floor & Decor, Ace',
     category: 'customer',
     industry: ['retail', 'food_retail', 'ecommerce'],
     keywords: ['retail', 'store', 'chain', 'grocery', 'shopping']
@@ -25,7 +25,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'food_beverage_customers',
     title: 'Food & Beverage Customers',
-    content: 'Frito Lay, AB, Olam, Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint',
+    content: 'Notable Food & Beverage customers include Frito Lay, AB, Olam, Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint',
     category: 'customer',
     industry: ['food_beverage', 'food_production', 'beverage'],
     keywords: ['food', 'beverage', 'snack', 'drink', 'production', 'manufacturing']
@@ -33,7 +33,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'automotive_customers',
     title: 'Automotive Customers',
-    content: 'Honda, Bridgestone, Discount Tire',
+    content: 'Notable Automotive customers include Honda, Bridgestone, Discount Tire',
     category: 'customer',
     industry: ['automotive', 'tire', 'manufacturing'],
     keywords: ['auto', 'car', 'tire', 'vehicle', 'automotive']
@@ -41,7 +41,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'logistics_customers',
     title: 'Logistics Customers',
-    content: 'DHL, EZRack, ArcBest, Roadrunner, US Cold Storage, Allen Dist.',
+    content: 'Notable Logistics customers include DHL, EZRack, ArcBest, Roadrunner, US Cold Storage, Allen Dist.',
     category: 'customer',
     industry: ['logistics', 'transportation', 'warehousing'],
     keywords: ['logistics', 'shipping', 'transport', 'warehouse', 'distribution']
@@ -49,7 +49,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'manufacturing_customers',
     title: 'Manufacturing Customers',
-    content: 'Unilever, Whirlpool, Stanley B&D, Jones Soda, Tyson, Mars, Land O\'Lakes, Smithfield, HP Hood, Butterball',
+    content: 'Notable Manufacturing customers include Unilever, Whirlpool, Stanley B&D, Jones Soda, Tyson, Mars, Land O\'Lakes, Smithfield, HP Hood, Butterball',
     category: 'customer',
     industry: ['manufacturing', 'food_production', 'consumer_goods'],
     keywords: ['manufacturing', 'production', 'factory', 'plant', 'industrial']

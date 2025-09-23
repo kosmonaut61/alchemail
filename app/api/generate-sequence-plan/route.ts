@@ -112,7 +112,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
 
 export async function POST(request: NextRequest) {
   try {
-    const { signal, persona, painPoints, emailCount, linkedInCount } = await request.json()
+    const { signal, persona, painPoints, emailCount, linkedInCount, contextItems } = await request.json()
 
     if (!signal || !persona) {
       return NextResponse.json(
@@ -132,8 +132,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Get relevant context items for this signal and persona
-    const relevantContext = getRelevantContext(signal, personaData, painPoints)
+    // Use provided context items if available, otherwise dynamically select relevant context
+    let relevantContext: any[]
+    if (contextItems && contextItems.length > 0) {
+      console.log('✅ Using provided context items for sequence plan:', contextItems.map((c: any) => c.title).join(', '))
+      relevantContext = contextItems
+    } else {
+      console.log('⚠️ No context items provided, dynamically selecting relevant context for sequence plan')
+      relevantContext = getRelevantContext(signal, personaData, painPoints)
+      console.log('🎯 Dynamically selected context items for sequence plan:', relevantContext.map(c => c.title).join(', '))
+    }
 
     // Create the prompt for sequence plan generation
     const prompt = `You are an expert email sequence strategist. Create a strategic sequence plan for B2B outreach.
@@ -175,6 +183,7 @@ Create a strategic sequence plan that:
 11. Use customer names and industry-specific examples to build immediate credibility and relevance
 12. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
 13. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
+14. CRITICAL: LinkedIn messages should reference the email that was just sent - create cross-channel coordination by mentioning the email content, subject line, or key points from the preceding email
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -199,6 +208,13 @@ DETAILED MESSAGE OUTLINES REQUIRED:
 - Use casual language like "Hey", "Hi", "Quick question", etc.
 - Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
 - CRITICAL: Only reference the actual signal provided - do not make up or assume additional context
+
+LINKEDIN MESSAGE COORDINATION REQUIREMENTS:
+- LinkedIn messages MUST casually mention the email that was just sent (e.g., "Quick thought on that email I sent about...", "Building on what I shared earlier...", "One more thing about the email I sent...")
+- Casually reference specific elements from the preceding email: subject line, key stats mentioned, customer examples, or main value proposition
+- Create natural, casual transitions like "Quick thought on that email I sent about..." or "Building on the [specific topic] I mentioned earlier..."
+- Make the LinkedIn message feel like a natural, casual continuation of the email conversation, not a formal follow-up
+- Use casual phrases like "quick thought on that email", "building on what I shared earlier", "one more thing about", "expanding on what I mentioned", "casual follow-up to that email"
 
 SIGNAL INTEGRATION REQUIREMENTS:
 - Use natural, casual language that flows like the sample emails
@@ -334,7 +350,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     } catch (parseError) {
       console.error('❌ Failed to parse sequence plan JSON:', parseError)
       console.error('❌ Raw response was:', text)
-      throw new Error(`Invalid JSON response from AI: ${parseError.message}`)
+      throw new Error(`Invalid JSON response from AI: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`)
     }
 
     // Validate the structure
@@ -376,8 +392,8 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
           }
         ].slice(0, linkedInCount),
         totalDays: Math.max(...[
-          ...(sequencePlan.emails || []).map(e => e.day),
-          ...(sequencePlan.linkedInMessages || []).map(m => m.day)
+          ...(sequencePlan.emails || []).map((e: any) => e.day),
+          ...(sequencePlan.linkedInMessages || []).map((m: any) => m.day)
         ], 8)
       }
     }

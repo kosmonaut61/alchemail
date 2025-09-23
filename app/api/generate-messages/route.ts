@@ -125,7 +125,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
 
 export async function POST(request: NextRequest) {
   try {
-    const { signal, persona, painPoints, sequencePlan } = await request.json()
+    const { signal, persona, painPoints, sequencePlan, contextItems } = await request.json()
 
     if (!signal || !persona || !sequencePlan) {
       return NextResponse.json(
@@ -150,16 +150,27 @@ export async function POST(request: NextRequest) {
     console.log('👤 Persona:', personaData.label)
     console.log('📧 Emails:', sequencePlan.emails.length)
     console.log('💼 LinkedIn:', sequencePlan.linkedInMessages.length)
+    console.log('🎯 Context items received:', contextItems?.length || 0)
 
-    // Dynamically select relevant context based on signal
-    const relevantContext = getRelevantContext(signal, personaData, painPoints)
-    console.log('🎯 Selected context items:', relevantContext.map(c => c.title).join(', '))
+    // Use provided context items if available, otherwise dynamically select relevant context
+    let relevantContext: ContextItem[]
+    if (contextItems && contextItems.length > 0) {
+      console.log('✅ Using provided context items:', contextItems.map((c: ContextItem) => c.title).join(', '))
+      console.log('📋 Context items details:', contextItems.map((c: ContextItem) => ({ id: c.id, title: c.title, category: c.category, content: c.content.substring(0, 100) + '...' })))
+      relevantContext = contextItems
+    } else {
+      console.log('⚠️ No context items provided, dynamically selecting relevant context')
+      relevantContext = getRelevantContext(signal, personaData, painPoints)
+      console.log('🎯 Dynamically selected context items:', relevantContext.map(c => c.title).join(', '))
+    }
 
     const generatedMessages = []
 
     // Generate emails
     for (const emailPlan of sequencePlan.emails) {
       const emailPrompt = `You are a friendly, conversational B2B email writer for Emerge. Write like you're talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon.
+
+CRITICAL INSTRUCTION: You MUST use the specific context items provided below. Do not use any companies, statistics, or examples that are not explicitly listed in the VERIFIED CONTEXT section.
 
 SIGNAL (Primary Reason for Outreach):
 ${signal}
@@ -179,14 +190,21 @@ TARGET PERSONA:
       CUSTOMER LIST ITEMS AVAILABLE:
       ${relevantContext.filter(item => item.category === 'customer').map(item => `- ${item.title}: ${item.content}`).join('\n')}
       
+      DEBUG INFO:
+      - Total context items: ${relevantContext.length}
+      - Customer context items: ${relevantContext.filter(item => item.category === 'customer').length}
+      - Context item IDs: ${relevantContext.map(item => item.id).join(', ')}
+      
       IMPORTANT: If there are customer list items above, use companies from those lists instead of individual case studies or statistics.
 
       CONTEXT USAGE PRIORITY:
-      1. CRITICAL: If there are customer list items (e.g., "Automotive Customers", "Logistics Customers"), ALWAYS use specific company names from those lists for industry relevance
-      2. Use statistics and case studies to provide specific quantified results
-      3. Use quotes to add credibility and emotional connection
-      4. DISTRIBUTE context across emails - each email should use DIFFERENT context items to avoid repetition
-      5. NEVER reuse the same company examples across multiple emails in the same sequence
+      1. CRITICAL: If there are customer list items (e.g., "Food & Beverage Customers", "Automotive Customers", "Logistics Customers"), ALWAYS use specific company names from those lists for industry relevance
+      2. MANDATORY: Use the EXACT context items provided above - do not substitute with other companies or examples
+      3. Use statistics and case studies to provide specific quantified results
+      4. Use quotes to add credibility and emotional connection
+      5. DISTRIBUTE context across emails - each email should use DIFFERENT context items to avoid repetition
+      6. NEVER reuse the same company examples across multiple emails in the same sequence
+      7. NEVER use companies not listed in the provided context items
 
       AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
       ${formatVariablesForPrompt()}
