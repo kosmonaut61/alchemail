@@ -146,12 +146,18 @@ export default function AlchemailApp20() {
          item.title.toLowerCase().includes(company))
       )
       
-      // Check if signal contains general keywords
-      const hasKeywordMatch = keywords.some(keyword => 
-        item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
-        item.content.toLowerCase().includes(keyword) ||
-        item.title.toLowerCase().includes(keyword)
-      )
+      // Check if signal contains general keywords (but be more selective for persona-specific items)
+      const hasKeywordMatch = keywords.some(keyword => {
+        // For persona-specific items, only match if the keyword is in the keywords array or title
+        if (item.category === 'pain_points' || item.category === 'language_style') {
+          return item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
+                 item.title.toLowerCase().includes(keyword)
+        }
+        // For other items, use the broader matching
+        return item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
+               item.content.toLowerCase().includes(keyword) ||
+               item.title.toLowerCase().includes(keyword)
+      })
       
       if (hasIndustryMatch || hasCompanyMatch || hasKeywordMatch) {
         relevantItems.push(item)

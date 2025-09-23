@@ -119,10 +119,10 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'platform_overview_video',
     title: 'Emerge Platform Overview Video',
-    content: 'Comprehensive platform overview showcasing Emerge\'s freight procurement and carrier management capabilities, including ProcureOS, Marketplace, and key features for transportation teams.',
+    content: 'Quick 30-second platform overview video showcasing Emerge\'s core capabilities: ProcureOS for freight procurement, Marketplace for carrier access, and key platform features. This is a high-level introduction to the platform, not a detailed case study walkthrough. Use this video to introduce prospects to the platform capabilities, separate from specific customer case studies.',
     category: 'resource',
     industry: ['logistics', 'transportation', 'retail', 'food_beverage', 'manufacturing', 'automotive'],
-    keywords: ['platform', 'overview', 'video', 'demo', 'procureos', 'marketplace', 'freight', 'procurement', 'carrier management'],
+    keywords: ['platform', 'overview', 'video', 'demo', 'procureos', 'marketplace', 'freight', 'procurement', 'carrier management', '30 second', 'quick', 'introduction', 'capabilities'],
     pain_points: ['efficiency', 'effort', 'cost'],
     url: 'https://emergemarket.wistia.com/medias/mnrknev8dc'
   },
