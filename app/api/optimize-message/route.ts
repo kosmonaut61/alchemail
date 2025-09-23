@@ -41,7 +41,7 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
     ...relevantItems.filter(item => item.category === 'statistic'),
     ...relevantItems.filter(item => item.category === 'quote'),
     ...relevantItems.filter(item => item.category === 'value_prop'),
-    ...relevantItems.filter(item => item.category === 'case_study'),
+    ...relevantItems.filter(item => item.category === 'resource'),
     ...relevantItems.filter(item => item.category === 'customer'),
     ...personaSpecificItems,
     ...painPointItems

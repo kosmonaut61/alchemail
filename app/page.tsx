@@ -174,7 +174,7 @@ export default function AlchemailApp20() {
     switch (category) {
       case 'customer':
         return 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-700'
-      case 'case_study':
+      case 'resource':
         return 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-700'
       case 'statistic':
         return 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200 dark:border-purple-700'

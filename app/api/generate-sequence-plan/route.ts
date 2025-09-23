@@ -39,7 +39,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Add case studies that match
   const caseStudyItems = CONTEXT_REPOSITORY.filter(item => 
-    item.category === 'case_study' && (
+    item.category === 'resource' && (
       keywordMatches.includes(item) || 
       industryMatches.includes(item)
     )

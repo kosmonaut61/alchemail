@@ -97,9 +97,9 @@ function buildDynamicContext(contextItems: ContextItem[]): string {
   }
 
   // Add case studies
-  if (contextByCategory.case_study) {
-    context += "### Relevant Case Studies:\n"
-    contextByCategory.case_study.forEach(item => {
+  if (contextByCategory.resource) {
+    context += "### Relevant Resources:\n"
+    contextByCategory.resource.forEach(item => {
       context += `- ${item.title}: ${item.content}`
       if (item.url) {
         context += ` (URL: ${item.url})`

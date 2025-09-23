@@ -4,7 +4,7 @@ export interface ContextItem {
   id: string
   title: string
   content: string
-  category: 'customer' | 'case_study' | 'value_prop' | 'statistic' | 'quote' | 'language_style' | 'pain_points'
+  category: 'customer' | 'resource' | 'value_prop' | 'statistic' | 'quote' | 'language_style' | 'pain_points'
   industry?: string[]
   persona?: string[]
   pain_points?: string[]
@@ -55,12 +55,12 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     keywords: ['manufacturing', 'production', 'factory', 'plant', 'industrial']
   },
 
-  // Case Studies
+  // Resources
   {
     id: 'dollar_tree_case_study',
     title: 'Dollar Tree Case Study',
     content: 'Dollar Tree saved $3.2 million in freight spend within 6 months, and $6M in 2024 using ProcureOS. Average lane was ~2% below market average.',
-    category: 'case_study',
+    category: 'resource',
     industry: ['retail', 'food_retail'],
     keywords: ['dollar tree', 'retail', 'savings', 'cost reduction'],
     pain_points: ['cost'],
@@ -70,7 +70,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     id: 'golden_state_foods_case_study',
     title: 'Golden State Foods Case Study',
     content: '18% reduction in transportation costs, increased RFP qty to 10 per year. Pool of carriers expanded from 35 to 55—a 57% increase. 35 of their 69 lanes gained new options.',
-    category: 'case_study',
+    category: 'resource',
     industry: ['food_beverage', 'food_production'],
     keywords: ['golden state foods', 'food', 'carrier expansion', 'rfp'],
     pain_points: ['cost', 'efficiency'],
@@ -80,7 +80,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     id: 'ezrack_case_study',
     title: 'EZRack Case Study',
     content: 'Realized 6 figure savings in less than a year, saves countless man hours in manual work.',
-    category: 'case_study',
+    category: 'resource',
     industry: ['logistics', 'warehousing'],
     keywords: ['ezrack', 'logistics', 'savings', 'automation'],
     pain_points: ['effort', 'efficiency'],
@@ -90,7 +90,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     id: 'pepsi_case_study',
     title: 'Pepsi Co. Case Study',
     content: 'Reduced the time to run RFP\'s by 20%.',
-    category: 'case_study',
+    category: 'resource',
     industry: ['food_beverage', 'beverage'],
     keywords: ['pepsi', 'beverage', 'rfp', 'time savings'],
     pain_points: ['effort', 'efficiency'],
@@ -100,7 +100,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     id: 'premier_carrier_program_case_study',
     title: 'Premier Carrier Program Case Study',
     content: 'Premier Carrier Program provides enhanced service levels and priority access to capacity through strategic carrier partnerships.',
-    category: 'case_study',
+    category: 'resource',
     industry: ['logistics', 'transportation'],
     keywords: ['premier carrier', 'program', 'service levels', 'capacity', 'partnerships'],
     pain_points: ['efficiency'],
@@ -110,11 +110,21 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     id: 'dbin_case_study',
     title: 'DBIN Case Study',
     content: 'Dynamic Book It Now (DBIN) enables instant freight booking with real-time pricing and immediate carrier confirmation.',
-    category: 'case_study',
+    category: 'resource',
     industry: ['logistics', 'transportation'],
     keywords: ['dbin', 'dynamic book it now', 'instant booking', 'real-time pricing', 'immediate confirmation'],
     pain_points: ['efficiency', 'effort'],
     url: 'https://www.emergemarket.com/resource/dynamic-book-it-now-case-study'
+  },
+  {
+    id: 'platform_overview_video',
+    title: 'Emerge Platform Overview Video',
+    content: 'Comprehensive platform overview showcasing Emerge\'s freight procurement and carrier management capabilities, including ProcureOS, Marketplace, and key features for transportation teams.',
+    category: 'resource',
+    industry: ['logistics', 'transportation', 'retail', 'food_beverage', 'manufacturing', 'automotive'],
+    keywords: ['platform', 'overview', 'video', 'procureos', 'marketplace', 'freight', 'procurement', 'carrier management'],
+    pain_points: ['efficiency', 'effort', 'cost'],
+    url: 'https://emergemarket.wistia.com/medias/mnrknev8dc'
   },
 
   // Value Propositions
