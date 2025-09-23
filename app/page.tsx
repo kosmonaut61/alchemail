@@ -135,8 +135,8 @@ export default function AlchemailApp20() {
       // Check if signal contains industry keywords
       const hasIndustryMatch = industryKeywords.some(keyword => 
         signalLower.includes(keyword) && 
-        (item.industry?.some(industry => industry.includes(keyword)) || 
-         item.keywords?.some(keyword => keyword.toLowerCase().includes(keyword)))
+        (item.industry?.some(industry => industry.includes(keyword) || industry.includes(keyword.replace(' ', '_'))) || 
+         item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)))
       )
       
       // Check if signal contains company keywords
@@ -241,6 +241,11 @@ export default function AlchemailApp20() {
       }
     }
   }, [signal, selectedPersona])
+
+  // Populate all context items on component mount
+  useEffect(() => {
+    setAllContextItems(CONTEXT_REPOSITORY)
+  }, [])
 
   // Auto-detect relevant context items when signal changes
   useEffect(() => {
@@ -441,9 +446,152 @@ export default function AlchemailApp20() {
                             Clear All
                           </Button>
                         )}
+                        <Sheet open={isContextBrowserOpen} onOpenChange={setIsContextBrowserOpen}>
+                          <SheetTrigger asChild>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="text-xs"
+                            >
+                              <Eye className="h-3 w-3 mr-1" />
+                              Browse All
+                            </Button>
+                          </SheetTrigger>
+                          <SheetContent className="w-[800px] sm:max-w-[800px] p-6">
+                            <SheetHeader className="pb-8">
+                              <SheetTitle className="text-xl">Context Repository</SheetTitle>
+                            </SheetHeader>
+                            <div className="mt-4">
+                              <Tabs defaultValue="customer" className="w-full">
+                                <TabsList className="grid w-full grid-cols-7 mb-8 h-10">
+                                  {getAllCategories().map((category) => (
+                                    <TabsTrigger 
+                                      key={category} 
+                                      value={category}
+                                      className="text-sm px-4 py-2"
+                                    >
+                                      {category === 'language_style' ? 'Style' : category.replace('_', ' ')}
+                                    </TabsTrigger>
+                                  ))}
+                                </TabsList>
+                                {getAllCategories().map((category) => (
+                                  <TabsContent key={category} value={category} className="mt-0">
+                                    <div className="space-y-6 max-h-[65vh] overflow-y-auto pr-4">
+                                      {getContextItemsByCategory(category).map((item, index) => {
+                                        const isSelected = selectedContextItems.some(selectedItem => selectedItem.id === item.id)
+                                        
+                                        return (
+                                          <div 
+                                            key={index} 
+                                            className={`p-6 rounded-xl border ${getCategoryColor(category)} shadow-sm`}
+                                          >
+                                            <div className="flex items-start justify-between mb-4">
+                                              <h4 className="font-semibold text-base leading-tight pr-4">{item.title}</h4>
+                                              <span className="text-xs opacity-75 ml-2 flex-shrink-0 bg-white/20 dark:bg-black/20 px-2 py-1 rounded-full">
+                                                {item.category === 'language_style' ? 'style' : item.category}
+                                              </span>
+                                            </div>
+                                            <p className="text-sm mb-4 leading-relaxed">{item.content}</p>
+                                            {item.industry && item.industry.length > 0 && (
+                                              <div className="mb-4">
+                                                <p className="text-xs opacity-75 mb-2 font-medium">
+                                                  Industries:
+                                                </p>
+                                                <p className="text-xs opacity-75">
+                                                  {item.industry.join(', ')}
+                                                </p>
+                                              </div>
+                                            )}
+                                            {item.keywords && item.keywords.length > 0 && (
+                                              <div className="mb-4">
+                                                <p className="text-xs opacity-75 mb-3 font-medium">
+                                                  Keywords:
+                                                </p>
+                                                <div className="flex flex-wrap gap-2">
+                                                  {item.keywords.slice(0, 5).map((keyword, idx) => (
+                                                    <span 
+                                                      key={idx} 
+                                                      className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium"
+                                                    >
+                                                      {keyword}
+                                                    </span>
+                                                  ))}
+                                                  {item.keywords.length > 5 && (
+                                                    <span className="text-xs px-3 py-1.5 rounded-full bg-white/30 dark:bg-black/30 font-medium">
+                                                      +{item.keywords.length - 5} more
+                                                    </span>
+                                                  )}
+                                                </div>
+                                              </div>
+                                            )}
+                                            
+                                            {/* Action Buttons */}
+                                            <div className="flex items-center justify-between pt-4 border-t border-white/20 dark:border-black/20">
+                                              <div className="flex items-center gap-2">
+                                                {isSelected ? (
+                                                  <span className="text-xs text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                    Selected
+                                                  </span>
+                                                ) : (
+                                                  <span className="text-xs text-muted-foreground">
+                                                    Not selected
+                                                  </span>
+                                                )}
+                                              </div>
+                                              <div className="flex gap-2">
+                                                {isSelected ? (
+                                                  <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                      setSelectedContextItems(prev => prev.filter(selectedItem => selectedItem.id !== item.id))
+                                                      toast({
+                                                        title: "Removed from Selection",
+                                                        description: `${item.title} has been removed from your selection.`,
+                                                      })
+                                                    }}
+                                                    className="text-xs h-8 px-3"
+                                                  >
+                                                    <X className="h-3 w-3 mr-1" />
+                                                    Remove
+                                                  </Button>
+                                                ) : (
+                                                  <Button
+                                                    variant="default"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                      setSelectedContextItems(prev => [...prev, item])
+                                                      toast({
+                                                        title: "Added to Selection",
+                                                        description: `${item.title} has been added to your selection.`,
+                                                      })
+                                                    }}
+                                                    className="text-xs h-8 px-3"
+                                                  >
+                                                    <Plus className="h-3 w-3 mr-1" />
+                                                    Add to Selection
+                                                  </Button>
+                                                )}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )
+                                      })}
+                                    </div>
+                                  </TabsContent>
+                                ))}
+                              </Tabs>
+                            </div>
+                          </SheetContent>
+                        </Sheet>
                       </div>
                     </div>
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
+                      {allContextItems.length === 0 && (
+                        <p className="text-sm text-muted-foreground">Loading context items...</p>
+                      )}
                       {allContextItems.map((item) => (
                         <div key={item.id} className="flex items-start space-x-2">
                           <Checkbox
@@ -467,9 +615,38 @@ export default function AlchemailApp20() {
                       ))}
                     </div>
                     {selectedContextItems.length > 0 && (
-                      <p className="text-xs text-muted-foreground">
-                        {selectedContextItems.length} context item{selectedContextItems.length !== 1 ? 's' : ''} selected
-                      </p>
+                      <div className="space-y-2">
+                        <p className="text-xs text-muted-foreground">
+                          {selectedContextItems.length} context item{selectedContextItems.length !== 1 ? 's' : ''} selected
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedContextItems.map((item, index) => (
+                            <div
+                              key={index}
+                              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-sm ${getCategoryColor(item.category)}`}
+                            >
+                              <span className="font-medium truncate max-w-[200px]" title={item.title}>
+                                {item.title}
+                              </span>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => {
+                                  setSelectedContextItems(prev => prev.filter((_, i) => i !== index))
+                                  toast({
+                                    title: "Context Item Removed",
+                                    description: `${item.title} has been removed from your selection.`,
+                                  })
+                                }}
+                                className="h-4 w-4 p-0 hover:bg-red-200 dark:hover:bg-red-800 rounded-full"
+                              >
+                                <X className="h-3 w-3" />
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
                 )}
