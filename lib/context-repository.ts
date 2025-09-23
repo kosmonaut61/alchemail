@@ -293,7 +293,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Learning complex freight and logistics processes, managing multiple carrier relationships and systems, handling high volume of daily operational tasks, understanding freight rates and market dynamics, coordinating shipments across different modes and regions, managing exceptions and problem resolution, learning to use various transportation management systems, understanding compliance and regulatory requirements, managing customer service and communication, learning to negotiate with carriers.',
     category: 'pain_points',
     persona: ['operations_entry_level'],
-    keywords: ['learning', 'complex', 'freight', 'logistics', 'processes', 'managing', 'carrier', 'relationships', 'systems', 'handling', 'volume', 'daily', 'operational', 'tasks', 'understanding', 'rates', 'market', 'dynamics', 'coordinating', 'shipments', 'modes', 'regions', 'exceptions', 'problem', 'resolution', 'transportation', 'management', 'compliance', 'regulatory', 'requirements', 'customer', 'service', 'communication', 'negotiate']
+    keywords: ['Entry Level', 'complex', 'freight', 'logistics', 'processes', 'managing', 'carrier', 'relationships', 'systems', 'handling', 'volume', 'daily', 'operational', 'tasks', 'understanding', 'rates', 'market', 'dynamics', 'coordinating', 'shipments', 'modes', 'regions', 'exceptions', 'problem', 'resolution', 'transportation', 'management', 'compliance', 'regulatory', 'requirements', 'customer', 'service', 'communication', 'negotiate']
   },
   {
     id: 'operations_entry_level_tone_profile',
@@ -301,7 +301,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Supportive, educational language focusing on learning, growth, and skill development. Use terms like "learning opportunity," "skill development," "career growth," "mentorship," and "professional development." Emphasize support and learning.',
     category: 'language_style',
     persona: ['operations_entry_level'],
-    keywords: ['supportive', 'educational', 'learning', 'growth', 'skill', 'development', 'opportunity', 'career', 'mentorship', 'professional', 'support']
+    keywords: ['Entry Level',]
   },
   
   // Operations Intern

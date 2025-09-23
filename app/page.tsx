@@ -114,8 +114,8 @@ export default function AlchemailApp20() {
     setSelectedContextItems([...allContextItems])
   }
 
-  // Auto-detect relevant context items based on signal text
-  const autoDetectContextItems = (signalText: string) => {
+  // Auto-detect relevant context items based on signal text and selected persona
+  const autoDetectContextItems = (signalText: string, selectedPersona: string) => {
     if (!signalText) return []
     
     const signalLower = signalText.toLowerCase()
@@ -132,6 +132,14 @@ export default function AlchemailApp20() {
     
     // Find matching context items
     CONTEXT_REPOSITORY.forEach(item => {
+      // For persona-specific items, only include if they match the selected persona
+      if (item.category === 'pain_points' || item.category === 'language_style') {
+        if (item.persona?.includes(selectedPersona)) {
+          relevantItems.push(item)
+        }
+        return // Skip keyword matching for persona-specific items
+      }
+      
       // Check if signal contains industry keywords
       const hasIndustryMatch = industryKeywords.some(keyword => 
         signalLower.includes(keyword) && 
@@ -146,18 +154,12 @@ export default function AlchemailApp20() {
          item.title.toLowerCase().includes(company))
       )
       
-      // Check if signal contains general keywords (but be more selective for persona-specific items)
-      const hasKeywordMatch = keywords.some(keyword => {
-        // For persona-specific items, only match if the keyword is in the keywords array or title
-        if (item.category === 'pain_points' || item.category === 'language_style') {
-          return item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
-                 item.title.toLowerCase().includes(keyword)
-        }
-        // For other items, use the broader matching
-        return item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
-               item.content.toLowerCase().includes(keyword) ||
-               item.title.toLowerCase().includes(keyword)
-      })
+      // Check if signal contains general keywords
+      const hasKeywordMatch = keywords.some(keyword => 
+        item.keywords?.some(itemKeyword => itemKeyword.toLowerCase().includes(keyword)) ||
+        item.content.toLowerCase().includes(keyword) ||
+        item.title.toLowerCase().includes(keyword)
+      )
       
       if (hasIndustryMatch || hasCompanyMatch || hasKeywordMatch) {
         relevantItems.push(item)
@@ -253,15 +255,15 @@ export default function AlchemailApp20() {
     setAllContextItems(CONTEXT_REPOSITORY)
   }, [])
 
-  // Auto-detect relevant context items when signal changes
+  // Auto-detect relevant context items when signal or persona changes
   useEffect(() => {
-    if (signal) {
-      const detectedContextItems = autoDetectContextItems(signal)
+    if (signal && persona) {
+      const detectedContextItems = autoDetectContextItems(signal, persona)
       if (detectedContextItems.length > 0) {
         setSelectedContextItems(detectedContextItems)
       }
     }
-  }, [signal])
+  }, [signal, persona])
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
