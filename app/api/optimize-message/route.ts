@@ -45,7 +45,7 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
     ...relevantItems.filter(item => item.category === 'customer'),
     ...personaSpecificItems,
     ...painPointItems
-  ].slice(0, 8) // Limit to top 8 most relevant to avoid overwhelming
+  ].slice(0, 5) // Limit to top 5 most relevant to avoid overwhelming and maintain focus
   
   return prioritizedItems.map(item => 
     `- ${item.title}: ${item.content}`
@@ -91,11 +91,17 @@ CONTEXT:
 SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
-AVAILABLE CONTEXT FOR ENHANCEMENT:
+AVAILABLE CONTEXT FOR ENHANCEMENT (use strategically - focus on 1-2 primary items):
 ${contextItems && contextItems.length > 0 
   ? contextItems.map((item: any) => `- ${item.title}: ${item.content}`).join('\n')
   : await getContextForOptimizer(signal, personaData, painPoints)
 }
+
+CONTEXT DISTRIBUTION STRATEGY:
+- Focus on 1-2 PRIMARY context items to avoid overwhelming the recipient
+- Use different customer examples, statistics, or case studies strategically
+- Avoid cramming multiple context items into one message
+- Build credibility progressively with focused, digestible content
 
 CUSTOMER LIST ITEMS AVAILABLE:
 ${contextItems && contextItems.length > 0 
@@ -129,13 +135,15 @@ OPTIMIZATION GUIDELINES:
 21. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
 22. VARY the content structure - don't use the same pattern as other messages
 23. INCORPORATE different statistics and examples from the context repository
-24. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
-25. KEEP messages concise and scannable - don't overwhelm with too many numbers
-26. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
-27. Turn presumptive statements into questions to avoid assumptions
-28. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
-29. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
-30. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
+24. CRITICAL: Focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names
+25. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
+26. KEEP messages concise and scannable - don't overwhelm with too many numbers
+27. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+28. Turn presumptive statements into questions to avoid assumptions
+29. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
+30. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
+31. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
+32. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
