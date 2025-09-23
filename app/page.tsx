@@ -26,11 +26,17 @@ interface SequencePlan {
     subject: string
     purpose: string
     signalIntegration: string
+    messageOutline?: {
+      assignedContext?: string
+    }
   }>
   linkedInMessages: Array<{
     day: number
     purpose: string
     signalIntegration: string
+    messageOutline?: {
+      assignedContext?: string
+    }
   }>
   totalDays: number
 }
@@ -114,8 +120,8 @@ export default function AlchemailApp20() {
     setSelectedContextItems([...allContextItems])
   }
 
-  // Auto-detect relevant context items based on signal text
-  const autoDetectContextItems = (signalText: string) => {
+  // Auto-detect relevant context items based on signal text and selected persona
+  const autoDetectContextItems = (signalText: string, selectedPersona: string) => {
     if (!signalText) return []
     
     const signalLower = signalText.toLowerCase()
@@ -132,6 +138,14 @@ export default function AlchemailApp20() {
     
     // Find matching context items
     CONTEXT_REPOSITORY.forEach(item => {
+      // For persona-specific items, only include if they match the selected persona
+      if (item.category === 'pain_points' || item.category === 'language_style') {
+        if (item.persona?.includes(selectedPersona)) {
+          relevantItems.push(item)
+        }
+        return // Skip keyword matching for persona-specific items
+      }
+      
       // Check if signal contains industry keywords
       const hasIndustryMatch = industryKeywords.some(keyword => 
         signalLower.includes(keyword) && 
@@ -158,12 +172,12 @@ export default function AlchemailApp20() {
       }
     })
     
-    // Remove duplicates and limit to top 5 most relevant
+    // Remove duplicates and return all matching items
     const uniqueItems = relevantItems.filter((item, index, self) => 
       index === self.findIndex(t => t.id === item.id)
     )
     
-    return uniqueItems.slice(0, 5)
+    return uniqueItems
   }
 
   // Get the selected persona data
@@ -174,7 +188,7 @@ export default function AlchemailApp20() {
     switch (category) {
       case 'customer':
         return 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-700'
-      case 'case_study':
+      case 'resource':
         return 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-700'
       case 'statistic':
         return 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200 dark:border-purple-700'
@@ -247,15 +261,15 @@ export default function AlchemailApp20() {
     setAllContextItems(CONTEXT_REPOSITORY)
   }, [])
 
-  // Auto-detect relevant context items when signal changes
+  // Auto-detect relevant context items when signal or persona changes
   useEffect(() => {
-    if (signal) {
-      const detectedContextItems = autoDetectContextItems(signal)
+    if (signal && persona) {
+      const detectedContextItems = autoDetectContextItems(signal, persona)
       if (detectedContextItems.length > 0) {
         setSelectedContextItems(detectedContextItems)
       }
     }
-  }, [signal])
+  }, [signal, persona])
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -817,6 +831,11 @@ export default function AlchemailApp20() {
                         <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
                           <strong>Signal Integration:</strong> {email.signalIntegration}
                         </p>
+                        {email.messageOutline?.assignedContext && (
+                          <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                            <strong>Assigned Context:</strong> {email.messageOutline.assignedContext}
+                          </p>
+                        )}
                 </div>
                     ))}
               </div>
@@ -834,6 +853,11 @@ export default function AlchemailApp20() {
                           <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
                             <strong>Signal Integration:</strong> {message.signalIntegration}
                           </p>
+                          {message.messageOutline?.assignedContext && (
+                            <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                              <strong>Assigned Context:</strong> {message.messageOutline.assignedContext}
+                            </p>
+                          )}
               </div>
                       ))}
                     </div>

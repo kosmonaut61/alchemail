@@ -8,9 +8,9 @@ export const PREAMBLE_SECTIONS = {
 	•	Always focus on the recipient's pain, goals, or problems — never your own product first.
     
     ### Emerge Overview
-* Emerge modernizes freight operations with ProcureOS, a platform that helps customers save money and streamline their transportation procurement process.
+* Emerge modernizes freight operations with a platform that helps customers save money and streamline their transportation procurement process.
 * $30B+ platform transactions, working with companies like Dollar Tree, Golden State Foods, and Pepsi Bottling Ventures.
-* ProcureOS runs RFPs, spot quoting, real-time benchmarking, streamlined comms.
+* Emerge runs RFPs, spot quoting, real-time benchmarking, streamlined comms.
 * Reduce manual work and turn logistics into a strategic asset.
 
 

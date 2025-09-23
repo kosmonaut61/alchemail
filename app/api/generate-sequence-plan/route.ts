@@ -39,7 +39,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Add case studies that match
   const caseStudyItems = CONTEXT_REPOSITORY.filter(item => 
-    item.category === 'case_study' && (
+    item.category === 'resource' && (
       keywordMatches.includes(item) || 
       industryMatches.includes(item)
     )
@@ -159,8 +159,14 @@ TARGET PERSONA:
 - Keywords: ${personaData.keywords.join(', ')}
 - Key Pain Points: ${painPoints.join(', ') || 'Not specified'}
 
-RELEVANT CONTEXT ITEMS (use these for social proof and credibility):
+RELEVANT CONTEXT ITEMS (distribute these strategically across messages - each message should focus on 1-2 specific items):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
+
+CONTEXT DISTRIBUTION STRATEGY:
+- Each message should focus on 1-2 PRIMARY context items to avoid overwhelming the recipient
+- Distribute different customer examples, case studies, and statistics across the sequence
+- Build credibility progressively by introducing different proof points in each message
+- Avoid cramming all context into every message - create focused, digestible content
 
 AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
 ${formatVariablesForPrompt()}
@@ -178,12 +184,14 @@ Create a strategic sequence plan that:
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
 8. Plans which specific stats/numbers will be featured in each email to build credibility progressively
-9. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
-10. PRIORITIZE industry-relevant customers and social proof - if targeting automotive, mention automotive customers like Honda, Bridgestone, etc.
-11. Use customer names and industry-specific examples to build immediate credibility and relevance
-12. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
-13. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
-14. CRITICAL: LinkedIn messages should reference the email that was just sent - create cross-channel coordination by mentioning the email content, subject line, or key points from the preceding email
+9. CRITICAL: Each message must focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names in a single message
+10. Distribute different customer examples, case studies, and statistics across the sequence to build credibility progressively
+11. Creates different narrative approaches: direct value props, challenge-focused questions, success stories, urgency-driven calls
+12. PRIORITIZE industry-relevant customers and social proof - if targeting automotive, mention automotive customers like Honda, Bridgestone, etc.
+13. Use customer names and industry-specific examples to build immediate credibility and relevance
+14. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
+15. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
+16. CRITICAL: LinkedIn messages should reference the email that was just sent - create cross-channel coordination by mentioning the email content, subject line, or key points from the preceding email
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -197,10 +205,11 @@ DETAILED MESSAGE OUTLINES REQUIRED:
 - Each outline must include natural, conversational guidance for opening lines, signal mentions, stat usage, value props, and CTAs
 - The signalMention field should contain NATURAL, CASUAL phrases that reference ONLY the actual signal provided above
 - The opening field should contain natural opening approaches that feel timely and relevant based on the actual signal
-- The statUsage field should specify HOW to incorporate the specific statistics naturally
-- The customerMention field should specify which industry-relevant customers to mention (e.g., "Honda, Bridgestone" for automotive)
+- The statUsage field should specify HOW to incorporate 1-2 specific statistics naturally (avoid overwhelming with multiple stats)
+- The customerMention field should specify which 1-2 industry-relevant customers to mention (e.g., "Honda, Bridgestone" for automotive) - focus on quality over quantity
 - The valueProp field should define the core value proposition for that specific message
 - The cta field should specify the call-to-action approach
+- The assignedContext field should specify which 1-2 specific context items from the available context will be used in this message (e.g., "Dollar Tree Case Study, Food & Beverage Customers")
 - Each message outline should be unique and build upon the previous message in the sequence
 - Focus on natural, human-like language that flows conversationally like the sample emails
 - The signal should flow naturally into relevant questions and value propositions
@@ -256,7 +265,8 @@ Return your response as a JSON object with this exact structure:
         "statUsage": "How to incorporate the specific stats",
         "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
         "valueProp": "Core value proposition for this message",
-        "cta": "Call to action approach"
+        "cta": "Call to action approach",
+        "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       }
     }
   ],
@@ -272,7 +282,8 @@ Return your response as a JSON object with this exact structure:
         "statUsage": "How to incorporate the specific stats",
         "customerMention": "Which industry-relevant customers to mention (e.g., Honda, Bridgestone for automotive)",
         "valueProp": "Core value proposition for this message",
-        "cta": "Call to action approach"
+        "cta": "Call to action approach",
+        "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       }
     }
   ],

@@ -41,11 +41,11 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
     ...relevantItems.filter(item => item.category === 'statistic'),
     ...relevantItems.filter(item => item.category === 'quote'),
     ...relevantItems.filter(item => item.category === 'value_prop'),
-    ...relevantItems.filter(item => item.category === 'case_study'),
+    ...relevantItems.filter(item => item.category === 'resource'),
     ...relevantItems.filter(item => item.category === 'customer'),
     ...personaSpecificItems,
     ...painPointItems
-  ].slice(0, 8) // Limit to top 8 most relevant to avoid overwhelming
+  ].slice(0, 5) // Limit to top 5 most relevant to avoid overwhelming and maintain focus
   
   return prioritizedItems.map(item => 
     `- ${item.title}: ${item.content}`
@@ -74,10 +74,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`🔍 Optimizing ${type} message with GPT-5 nano: ${messageId}`)
+    console.log(`🔍 Optimizing ${type} message with GPT-5: ${messageId}`)
     console.log('👤 Persona:', personaData.label)
 
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Using your advanced capabilities, optimize this message for maximum engagement and response rates.
+
+CRITICAL: Be CONSERVATIVE with changes. Preserve the original's conversation context, email references, and relationship flow. Only enhance what's already there - don't strip out important context or make follow-up messages sound like cold outreach.
 
 ORIGINAL MESSAGE:
 ${originalContent}
@@ -91,11 +93,17 @@ CONTEXT:
 SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
-AVAILABLE CONTEXT FOR ENHANCEMENT:
+AVAILABLE CONTEXT FOR ENHANCEMENT (use strategically - focus on 1-2 primary items):
 ${contextItems && contextItems.length > 0 
   ? contextItems.map((item: any) => `- ${item.title}: ${item.content}`).join('\n')
   : await getContextForOptimizer(signal, personaData, painPoints)
 }
+
+CONTEXT DISTRIBUTION STRATEGY:
+- Focus on 1-2 PRIMARY context items to avoid overwhelming the recipient
+- Use different customer examples, statistics, or case studies strategically
+- Avoid cramming multiple context items into one message
+- Build credibility progressively with focused, digestible content
 
 CUSTOMER LIST ITEMS AVAILABLE:
 ${contextItems && contextItems.length > 0 
@@ -126,16 +134,20 @@ OPTIMIZATION GUIDELINES:
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
 20. PRESERVE the original's personality and warmth - don't strip out human elements
-21. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
-22. VARY the content structure - don't use the same pattern as other messages
-23. INCORPORATE different statistics and examples from the context repository
-24. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
-25. KEEP messages concise and scannable - don't overwhelm with too many numbers
-26. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
-27. Turn presumptive statements into questions to avoid assumptions
-28. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
-29. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
-30. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
+21. CRITICAL: PRESERVE email references and conversation context - if the original mentions "the email I sent" or "following up on", KEEP those references
+22. PRESERVE the original's conversation flow and relationship context - don't make follow-up messages sound like cold outreach
+23. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
+24. VARY the content structure - don't use the same pattern as other messages
+25. INCORPORATE different statistics and examples from the context repository
+26. CRITICAL: Focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names
+27. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
+28. KEEP messages concise and scannable - don't overwhelm with too many numbers
+29. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+30. Turn presumptive statements into questions to avoid assumptions
+31. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
+32. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
+33. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
+34. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -202,6 +214,13 @@ CONTEXT PRESERVATION (CRITICAL):
 - MAINTAIN the variety of context items used in the original
 - DON'T strip out industry-specific customer examples for generic ones
 - KEEP the original's context diversity and relevance
+
+CONVERSATION CONTEXT PRESERVATION (CRITICAL):
+- PRESERVE email references: "the email I sent", "following up on", "my previous email" - these are ESSENTIAL
+- MAINTAIN follow-up context: if the original is a follow-up message, keep it as a follow-up
+- PRESERVE relationship context: don't make ongoing conversations sound like cold outreach
+- KEEP conversation flow: maintain the natural progression of the conversation
+- PRESERVE timing references: "this week", "recently", "earlier" - these show conversation continuity
 
 SIGNAL INTEGRATION:
 - Make signal references subtle and natural - avoid obvious statements like "That's a great sign you're exploring ROI"
@@ -291,7 +310,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('\n' + '='.repeat(80))
       console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION')
       console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-5-nano')
+      console.log('📧 MODEL: gpt-5')
       console.log('🎯 PURPOSE: Optimize message for engagement')
       console.log('📝 MESSAGE ID:', messageId)
       console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
@@ -302,7 +321,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('='.repeat(80) + '\n')
       
       const { text } = await generateText({
-        model: openai('gpt-5-nano'),
+        model: openai('gpt-5'),
         messages: [
           {
             role: 'system',
@@ -320,9 +339,9 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       })
 
       console.log('\n' + '='.repeat(80))
-      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5 NANO)')
+      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5)')
       console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-5-nano')
+      console.log('📧 MODEL: gpt-5')
       console.log('📝 MESSAGE ID:', messageId)
       console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
       console.log('\n📝 COMPLETE RESPONSE:')
@@ -332,10 +351,10 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('='.repeat(80) + '\n')
       
       optimizedContent = text
-      console.log('✅ GPT-5 nano optimization successful')
+      console.log('✅ GPT-5 optimization successful')
       
     } catch (gpt5Error) {
-      console.warn('⚠️ GPT-5 nano failed, falling back to GPT-4o-mini:', gpt5Error)
+      console.warn('⚠️ GPT-5 failed, falling back to GPT-4o-mini:', gpt5Error)
       
       // Fallback to GPT-4o-mini
       console.log('\n' + '='.repeat(80))
