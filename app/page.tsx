@@ -130,6 +130,14 @@ export default function AlchemailApp20() {
     // Company name keywords
     const companyKeywords = ['dollar tree', 'golden state foods', 'pepsi', 'molson coors', 'frito lay', 'honda', 'bridgestone']
     
+    // Debug logging
+    console.log('🔍 Auto-detection debug:', {
+      signalText,
+      signalLower,
+      keywords,
+      platformVideoItem: CONTEXT_REPOSITORY.find(item => item.id === 'platform_overview_video')
+    })
+    
     // Find matching context items
     CONTEXT_REPOSITORY.forEach(item => {
       // Check if signal contains industry keywords
@@ -155,6 +163,7 @@ export default function AlchemailApp20() {
       
       if (hasIndustryMatch || hasCompanyMatch || hasKeywordMatch) {
         relevantItems.push(item)
+        console.log('✅ Matched item:', item.title, { hasIndustryMatch, hasCompanyMatch, hasKeywordMatch })
       }
     })
     
@@ -163,6 +172,7 @@ export default function AlchemailApp20() {
       index === self.findIndex(t => t.id === item.id)
     )
     
+    console.log('🎯 Final detected items:', uniqueItems.map(item => item.title))
     return uniqueItems.slice(0, 5)
   }
 

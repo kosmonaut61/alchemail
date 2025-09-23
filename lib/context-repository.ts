@@ -122,7 +122,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Comprehensive platform overview showcasing Emerge\'s freight procurement and carrier management capabilities, including ProcureOS, Marketplace, and key features for transportation teams.',
     category: 'resource',
     industry: ['logistics', 'transportation', 'retail', 'food_beverage', 'manufacturing', 'automotive'],
-    keywords: ['platform', 'overview', 'video', 'procureos', 'marketplace', 'freight', 'procurement', 'carrier management'],
+    keywords: ['platform', 'overview', 'video', 'demo', 'procureos', 'marketplace', 'freight', 'procurement', 'carrier management'],
     pain_points: ['efficiency', 'effort', 'cost'],
     url: 'https://emergemarket.wistia.com/medias/mnrknev8dc'
   },
