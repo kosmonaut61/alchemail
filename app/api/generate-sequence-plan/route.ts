@@ -183,6 +183,7 @@ Create a strategic sequence plan that:
 11. Use customer names and industry-specific examples to build immediate credibility and relevance
 12. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
 13. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
+14. CRITICAL: LinkedIn messages should reference the email that was just sent - create cross-channel coordination by mentioning the email content, subject line, or key points from the preceding email
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -207,6 +208,13 @@ DETAILED MESSAGE OUTLINES REQUIRED:
 - Use casual language like "Hey", "Hi", "Quick question", etc.
 - Avoid formal corporate language like "I hope this message finds you well" or "I wanted to reach out"
 - CRITICAL: Only reference the actual signal provided - do not make up or assume additional context
+
+LINKEDIN MESSAGE COORDINATION REQUIREMENTS:
+- LinkedIn messages MUST casually mention the email that was just sent (e.g., "Quick thought on that email I sent about...", "Building on what I shared earlier...", "One more thing about the email I sent...")
+- Casually reference specific elements from the preceding email: subject line, key stats mentioned, customer examples, or main value proposition
+- Create natural, casual transitions like "Quick thought on that email I sent about..." or "Building on the [specific topic] I mentioned earlier..."
+- Make the LinkedIn message feel like a natural, casual continuation of the email conversation, not a formal follow-up
+- Use casual phrases like "quick thought on that email", "building on what I shared earlier", "one more thing about", "expanding on what I mentioned", "casual follow-up to that email"
 
 SIGNAL INTEGRATION REQUIREMENTS:
 - Use natural, casual language that flows like the sample emails
