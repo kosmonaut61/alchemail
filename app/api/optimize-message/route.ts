@@ -79,6 +79,8 @@ export async function POST(request: NextRequest) {
 
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Using your advanced capabilities, optimize this message for maximum engagement and response rates.
 
+CRITICAL: Be CONSERVATIVE with changes. Preserve the original's conversation context, email references, and relationship flow. Only enhance what's already there - don't strip out important context or make follow-up messages sound like cold outreach.
+
 ORIGINAL MESSAGE:
 ${originalContent}
 
@@ -132,18 +134,20 @@ OPTIMIZATION GUIDELINES:
 18. Make sure there are natural line breaks in the message
 19. Make sure the message is at a 5th grade reading level
 20. PRESERVE the original's personality and warmth - don't strip out human elements
-21. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
-22. VARY the content structure - don't use the same pattern as other messages
-23. INCORPORATE different statistics and examples from the context repository
-24. CRITICAL: Focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names
-25. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
-26. KEEP messages concise and scannable - don't overwhelm with too many numbers
-27. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
-28. Turn presumptive statements into questions to avoid assumptions
-29. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
-30. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
-31. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
-32. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
+21. CRITICAL: PRESERVE email references and conversation context - if the original mentions "the email I sent" or "following up on", KEEP those references
+22. PRESERVE the original's conversation flow and relationship context - don't make follow-up messages sound like cold outreach
+23. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
+24. VARY the content structure - don't use the same pattern as other messages
+25. INCORPORATE different statistics and examples from the context repository
+26. CRITICAL: Focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names
+27. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
+28. KEEP messages concise and scannable - don't overwhelm with too many numbers
+29. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+30. Turn presumptive statements into questions to avoid assumptions
+31. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
+32. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
+33. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
+34. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -210,6 +214,13 @@ CONTEXT PRESERVATION (CRITICAL):
 - MAINTAIN the variety of context items used in the original
 - DON'T strip out industry-specific customer examples for generic ones
 - KEEP the original's context diversity and relevance
+
+CONVERSATION CONTEXT PRESERVATION (CRITICAL):
+- PRESERVE email references: "the email I sent", "following up on", "my previous email" - these are ESSENTIAL
+- MAINTAIN follow-up context: if the original is a follow-up message, keep it as a follow-up
+- PRESERVE relationship context: don't make ongoing conversations sound like cold outreach
+- KEEP conversation flow: maintain the natural progression of the conversation
+- PRESERVE timing references: "this week", "recently", "earlier" - these show conversation continuity
 
 SIGNAL INTEGRATION:
 - Make signal references subtle and natural - avoid obvious statements like "That's a great sign you're exploring ROI"
