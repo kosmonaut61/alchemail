@@ -239,7 +239,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Strategic cost optimization vs service reliability balance, limited visibility into end-to-end freight costs, difficulty maintaining flexibility with long-term contracts, fragmented processes across regions and business units, manual time-consuming procurement processes, high administrative overhead managing multiple carriers, lack of real-time visibility into disruptions, volatile freight rates and market cycles, limited ability to benchmark carrier rates effectively, difficulty proving cost savings to stakeholders.',
     category: 'pain_points',
     persona: ['operations_c_suite'],
-    keywords: ['strategic', 'cost optimization', 'service reliability', 'visibility', 'freight costs', 'flexibility', 'contracts', 'fragmented', 'processes', 'procurement', 'administrative', 'carriers', 'disruptions', 'volatile', 'rates', 'benchmark', 'savings', 'stakeholders']
+    keywords: ['operations', 'c-suite']
   },
   {
     id: 'operations_c_suite_tone_profile',
@@ -247,7 +247,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Strategic, executive-level language focusing on ROI, scalability, and enterprise-wide impact. Use terms like "strategic initiatives," "enterprise-wide," "C-level visibility," and "board-level metrics." Emphasize high-level business outcomes and competitive advantage.',
     category: 'language_style',
     persona: ['operations_c_suite'],
-    keywords: ['strategic', 'executive', 'roi', 'scalability', 'enterprise', 'initiatives', 'visibility', 'board', 'metrics', 'outcomes', 'competitive', 'advantage']
+    keywords: ['operations', 'c-suite']
   },
   
   // Operations Upper Management
@@ -257,7 +257,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Strategic Challenges: balancing cost optimization with service reliability and customer expectations, limited visibility into end-to-end freight costs making it hard to forecast and budget accurately, difficulty in maintaining flexibility while also committing to long-term carrier contracts. Operational Pain Points: fragmented processes across regions, modes, and business units that hinder standardization, manual time-consuming tendering and carrier selection processes, high administrative overhead due to managing multiple carriers, freight forwarders, and brokers, lack of real-time visibility into shipment status, exceptions, and disruptions.',
     category: 'pain_points',
     persona: ['operations_upper_management'],
-    keywords: ['strategic', 'challenges', 'cost optimization', 'service reliability', 'customer expectations', 'visibility', 'freight costs', 'forecast', 'budget', 'flexibility', 'carrier contracts', 'operational', 'fragmented', 'processes', 'standardization', 'tendering', 'carrier selection', 'administrative', 'overhead', 'carriers', 'freight forwarders', 'brokers', 'real-time', 'shipment status', 'exceptions', 'disruptions']
+    keywords: ['operations', 'upper management']
   },
   {
     id: 'operations_upper_management_tone_profile',
@@ -265,7 +265,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Management-focused language emphasizing operational efficiency, team leadership, and departmental impact. Use terms like "operational excellence," "team productivity," "process optimization," and "departmental metrics." Focus on practical solutions and team management challenges.',
     category: 'language_style',
     persona: ['operations_upper_management'],
-    keywords: ['management', 'operational', 'efficiency', 'team', 'leadership', 'departmental', 'impact', 'excellence', 'productivity', 'optimization', 'metrics', 'practical', 'solutions', 'challenges']
+    keywords: ['operations', 'upper management']
   },
   
   // Operations Middle Management
@@ -275,7 +275,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Day-to-day operational execution challenges, managing team workload during peak shipping seasons, coordinating between different departments and carriers, implementing new processes while maintaining current operations, limited budget authority for carrier negotiations, pressure to meet cost reduction targets, managing carrier relationships and performance issues, handling exceptions and disruptions in real-time, training team members on new systems and processes, reporting to upper management on operational metrics.',
     category: 'pain_points',
     persona: ['operations_middle_management'],
-    keywords: ['day-to-day', 'operational', 'execution', 'challenges', 'team', 'workload', 'peak', 'shipping', 'seasons', 'coordinating', 'departments', 'carriers', 'implementing', 'processes', 'maintaining', 'operations', 'budget', 'authority', 'negotiations', 'pressure', 'cost reduction', 'targets', 'relationships', 'performance', 'exceptions', 'disruptions', 'real-time', 'training', 'systems', 'reporting', 'management', 'metrics']
+    keywords: ['operations', 'middle management']
   },
   {
     id: 'operations_middle_management_tone_profile',
@@ -283,7 +283,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Practical, hands-on language focusing on execution, team management, and daily operations. Use terms like "day-to-day," "hands-on," "practical solutions," "team coordination," and "operational execution." Emphasize practical implementation and team management.',
     category: 'language_style',
     persona: ['operations_middle_management'],
-    keywords: ['practical', 'hands-on', 'execution', 'team', 'management', 'daily', 'operations', 'solutions', 'coordination', 'implementation']
+    keywords: ['operations', 'middle management']
   },
   
   // Operations Entry Level
@@ -293,7 +293,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Learning complex freight and logistics processes, managing multiple carrier relationships and systems, handling high volume of daily operational tasks, understanding freight rates and market dynamics, coordinating shipments across different modes and regions, managing exceptions and problem resolution, learning to use various transportation management systems, understanding compliance and regulatory requirements, managing customer service and communication, learning to negotiate with carriers.',
     category: 'pain_points',
     persona: ['operations_entry_level'],
-    keywords: ['Entry Level', 'complex', 'freight', 'logistics', 'processes', 'managing', 'carrier', 'relationships', 'systems', 'handling', 'volume', 'daily', 'operational', 'tasks', 'understanding', 'rates', 'market', 'dynamics', 'coordinating', 'shipments', 'modes', 'regions', 'exceptions', 'problem', 'resolution', 'transportation', 'management', 'compliance', 'regulatory', 'requirements', 'customer', 'service', 'communication', 'negotiate']
+    keywords: ['operations', 'entry level']
   },
   {
     id: 'operations_entry_level_tone_profile',
@@ -301,7 +301,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Supportive, educational language focusing on learning, growth, and skill development. Use terms like "learning opportunity," "skill development," "career growth," "mentorship," and "professional development." Emphasize support and learning.',
     category: 'language_style',
     persona: ['operations_entry_level'],
-    keywords: ['Entry Level',]
+    keywords: ['operations', 'entry level']
   },
   
   // Operations Intern
@@ -311,7 +311,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Understanding basic freight and logistics concepts, learning company processes and systems, managing administrative tasks and data entry, understanding different transportation modes, learning to communicate with carriers and customers, understanding basic cost and pricing concepts, managing time and meeting deadlines, learning to use company software and tools, understanding basic compliance requirements, learning to work in a team environment.',
     category: 'pain_points',
     persona: ['operations_intern'],
-    keywords: ['understanding', 'basic', 'freight', 'logistics', 'concepts', 'learning', 'company', 'processes', 'systems', 'managing', 'administrative', 'tasks', 'data', 'entry', 'transportation', 'modes', 'communicate', 'carriers', 'customers', 'cost', 'pricing', 'time', 'deadlines', 'software', 'tools', 'compliance', 'requirements', 'team', 'environment']
+    keywords: ['operations', 'intern']
   },
   {
     id: 'operations_intern_tone_profile',
@@ -319,7 +319,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Encouraging, educational language focusing on learning, exploration, and professional development. Use terms like "learning experience," "exploration," "discovery," "mentorship," and "professional growth." Emphasize learning and development opportunities.',
     category: 'language_style',
     persona: ['operations_intern'],
-    keywords: ['encouraging', 'educational', 'learning', 'exploration', 'professional', 'development', 'experience', 'discovery', 'mentorship', 'growth', 'opportunities']
+    keywords: ['operations', 'intern']
   },
   
   // Finance C-Suite
@@ -329,7 +329,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Strategic financial planning and budgeting challenges, limited visibility into transportation cost drivers, difficulty forecasting freight costs accurately, managing financial risk in volatile freight markets, ensuring compliance with financial regulations, optimizing working capital tied up in transportation, managing currency fluctuations in global operations, ensuring accurate financial reporting and controls, managing relationships with financial stakeholders, balancing cost control with operational requirements.',
     category: 'pain_points',
     persona: ['finance_c_suite'],
-    keywords: ['strategic', 'financial', 'planning', 'budgeting', 'challenges', 'visibility', 'transportation', 'cost', 'drivers', 'forecasting', 'freight', 'costs', 'accurately', 'managing', 'risk', 'volatile', 'markets', 'ensuring', 'compliance', 'regulations', 'optimizing', 'working', 'capital', 'currency', 'fluctuations', 'global', 'operations', 'accurate', 'reporting', 'controls', 'relationships', 'stakeholders', 'balancing', 'control', 'operational', 'requirements']
+    keywords: ['finance', 'c-suite']
   },
   {
     id: 'finance_c_suite_tone_profile',
@@ -337,7 +337,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Executive financial language emphasizing ROI, financial performance, and strategic financial planning. Use terms like "financial performance," "ROI," "strategic planning," "financial controls," and "stakeholder value." Focus on high-level financial outcomes.',
     category: 'language_style',
     persona: ['finance_c_suite'],
-    keywords: ['executive', 'financial', 'language', 'emphasizing', 'roi', 'performance', 'strategic', 'planning', 'controls', 'stakeholder', 'value', 'high-level', 'outcomes']
+    keywords: ['finance', 'c-suite']
   },
   
   // Finance Upper Management
@@ -347,7 +347,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Managing transportation budget and cost control, ensuring accurate financial reporting and analysis, managing financial relationships with carriers, ensuring compliance with financial regulations, managing financial performance metrics, ensuring proper financial controls and processes, managing financial risk and exposure, ensuring proper financial planning and forecasting, managing financial relationships with stakeholders, ensuring proper financial controls and audits.',
     category: 'pain_points',
     persona: ['finance_upper_management'],
-    keywords: ['managing', 'transportation', 'budget', 'cost', 'control', 'ensuring', 'accurate', 'financial', 'reporting', 'analysis', 'relationships', 'carriers', 'compliance', 'regulations', 'performance', 'metrics', 'proper', 'controls', 'processes', 'risk', 'exposure', 'planning', 'forecasting', 'stakeholders', 'audits']
+    keywords: ['finance', 'upper management']
   },
   {
     id: 'finance_upper_management_tone_profile',
@@ -355,7 +355,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Management financial language emphasizing departmental financial performance, team management, and financial controls. Use terms like "financial management," "departmental performance," "financial controls," and "team leadership." Focus on financial management and team leadership.',
     category: 'language_style',
     persona: ['finance_upper_management'],
-    keywords: ['management', 'financial', 'language', 'emphasizing', 'departmental', 'performance', 'team', 'controls', 'leadership']
+    keywords: ['finance', 'upper management']
   },
   
   // Finance Middle Management
@@ -365,7 +365,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Day-to-day financial operations and reporting, managing financial data and analysis, coordinating with operations on budget planning, managing financial relationships with carriers, ensuring accurate financial reporting, managing financial performance metrics, ensuring compliance with financial regulations, managing financial risk and exposure, ensuring proper financial controls and processes, managing financial relationships with stakeholders.',
     category: 'pain_points',
     persona: ['finance_middle_management'],
-    keywords: ['day-to-day', 'financial', 'operations', 'reporting', 'managing', 'data', 'analysis', 'coordinating', 'budget', 'planning', 'relationships', 'carriers', 'ensuring', 'accurate', 'performance', 'metrics', 'compliance', 'regulations', 'risk', 'exposure', 'proper', 'controls', 'processes', 'stakeholders']
+    keywords: ['finance', 'middle management']
   },
   {
     id: 'finance_middle_management_tone_profile',
@@ -373,7 +373,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Practical financial language emphasizing execution, financial analysis, and team coordination. Use terms like "financial analysis," "practical solutions," "team coordination," and "financial execution." Focus on practical financial management.',
     category: 'language_style',
     persona: ['finance_middle_management'],
-    keywords: ['practical', 'financial', 'language', 'emphasizing', 'execution', 'analysis', 'team', 'coordination', 'solutions']
+    keywords: ['finance', 'middle management']
   },
   
   // Finance Entry Level
@@ -383,7 +383,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Learning financial concepts and processes, managing financial data and reporting, understanding financial regulations and compliance, learning to use financial systems and tools, managing financial relationships with carriers, understanding financial performance metrics, learning to analyze financial data, understanding financial risk management, managing financial documentation and records, learning to work with financial stakeholders.',
     category: 'pain_points',
     persona: ['finance_entry_level'],
-    keywords: ['learning', 'financial', 'concepts', 'processes', 'managing', 'data', 'reporting', 'understanding', 'regulations', 'compliance', 'systems', 'tools', 'relationships', 'carriers', 'performance', 'metrics', 'analyze', 'risk', 'management', 'documentation', 'records', 'stakeholders']
+    keywords: ['finance', 'entry level']
   },
   {
     id: 'finance_entry_level_tone_profile',
@@ -391,7 +391,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Supportive financial language emphasizing learning, skill development, and professional growth. Use terms like "financial learning," "skill development," "professional growth," and "financial education." Focus on learning and development.',
     category: 'language_style',
     persona: ['finance_entry_level'],
-    keywords: ['supportive', 'financial', 'language', 'emphasizing', 'learning', 'skill', 'development', 'professional', 'growth', 'education']
+    keywords: ['finance', 'entry level']
   },
   
   // Finance Intern
@@ -401,7 +401,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Understanding basic financial concepts, learning company financial processes, managing financial data entry and reporting, understanding financial regulations and compliance, learning to use financial systems and tools, understanding financial performance metrics, learning to analyze basic financial data, understanding financial risk management, managing financial documentation and records, learning to work with financial stakeholders.',
     category: 'pain_points',
     persona: ['finance_intern'],
-    keywords: ['understanding', 'basic', 'financial', 'concepts', 'learning', 'company', 'processes', 'managing', 'data', 'entry', 'reporting', 'regulations', 'compliance', 'systems', 'tools', 'performance', 'metrics', 'analyze', 'risk', 'management', 'documentation', 'records', 'stakeholders']
+    keywords: ['finance', 'intern']
   },
   {
     id: 'finance_intern_tone_profile',
@@ -409,7 +409,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     content: 'Encouraging financial language emphasizing learning, exploration, and professional development. Use terms like "financial learning," "exploration," "discovery," and "professional development." Focus on learning and exploration.',
     category: 'language_style',
     persona: ['finance_intern'],
-    keywords: ['encouraging', 'financial', 'language', 'emphasizing', 'learning', 'exploration', 'professional', 'development', 'discovery']
+    keywords: ['finance', 'intern']
   }
 ]
 
