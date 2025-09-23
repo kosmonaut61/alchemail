@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`🔍 Optimizing ${type} message with GPT-5 nano: ${messageId}`)
+    console.log(`🔍 Optimizing ${type} message with GPT-5: ${messageId}`)
     console.log('👤 Persona:', personaData.label)
 
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Using your advanced capabilities, optimize this message for maximum engagement and response rates.
@@ -299,7 +299,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('\n' + '='.repeat(80))
       console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION')
       console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-5-nano')
+      console.log('📧 MODEL: gpt-5')
       console.log('🎯 PURPOSE: Optimize message for engagement')
       console.log('📝 MESSAGE ID:', messageId)
       console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
@@ -310,7 +310,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('='.repeat(80) + '\n')
       
       const { text } = await generateText({
-        model: openai('gpt-5-nano'),
+        model: openai('gpt-5'),
         messages: [
           {
             role: 'system',
@@ -328,9 +328,9 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       })
 
       console.log('\n' + '='.repeat(80))
-      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5 NANO)')
+      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5)')
       console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-5-nano')
+      console.log('📧 MODEL: gpt-5')
       console.log('📝 MESSAGE ID:', messageId)
       console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
       console.log('\n📝 COMPLETE RESPONSE:')
@@ -340,10 +340,10 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('='.repeat(80) + '\n')
       
       optimizedContent = text
-      console.log('✅ GPT-5 nano optimization successful')
+      console.log('✅ GPT-5 optimization successful')
       
     } catch (gpt5Error) {
-      console.warn('⚠️ GPT-5 nano failed, falling back to GPT-4o-mini:', gpt5Error)
+      console.warn('⚠️ GPT-5 failed, falling back to GPT-4o-mini:', gpt5Error)
       
       // Fallback to GPT-4o-mini
       console.log('\n' + '='.repeat(80))
