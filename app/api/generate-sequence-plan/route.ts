@@ -179,7 +179,8 @@ ${isIncentivized ? `
 INCENTIVE CAMPAIGN REQUIREMENTS:
 - This is an incentivized campaign with a $${incentiveAmount} gift card offer
 - 50% of messages (approximately ${Math.round((emailCount + linkedInCount) * 0.5)} out of ${emailCount + linkedInCount} total messages) should mention the gift card incentive
-- Distribute the incentive mentions strategically across the sequence - don't put them all at the beginning or end
+- CRITICAL: The FIRST email (Day 1) and FIRST LinkedIn message MUST include the incentive - this sets the expectation from the start
+- Distribute the remaining incentive mentions strategically across the sequence - don't put them all at the beginning or end
 - The incentive should be mentioned naturally in the context of demo bookings or calls
 - Use phrases like "up to $${incentiveAmount} gift card", "$${incentiveAmount} Visa gift card", or "$${incentiveAmount} gift card for your time"
 - Make the incentive feel like a genuine appreciation for their time, not a bribe
@@ -281,7 +282,7 @@ Return your response as a JSON object with this exact structure:
         "cta": "Call to action approach",
         "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       },
-      "includeIncentive": ${isIncentivized ? 'true/false - whether this email should mention the gift card incentive' : 'false'}
+      "includeIncentive": ${isIncentivized ? 'true for first email (Day 1), then distribute remaining incentives across other emails' : 'false'}
     }
   ],
   "linkedInMessages": [
@@ -299,7 +300,7 @@ Return your response as a JSON object with this exact structure:
         "cta": "Call to action approach",
         "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       },
-      "includeIncentive": ${isIncentivized ? 'true/false - whether this LinkedIn message should mention the gift card incentive' : 'false'}
+      "includeIncentive": ${isIncentivized ? 'true for first LinkedIn message, then distribute remaining incentives across other LinkedIn messages' : 'false'}
     }
   ],
   "totalDays": 8
