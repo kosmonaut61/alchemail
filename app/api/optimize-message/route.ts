@@ -150,6 +150,7 @@ OPTIMIZATION GUIDELINES:
 34. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 35. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
 36. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
+37. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -276,6 +277,7 @@ MERGE FIELD FORMATTING:
 - Always preserve merge field syntax exactly: {{variable.name}}
 - Do NOT modify or break merge field formatting
 - You can add new merge fields for personalization where appropriate
+- CRITICAL: When referring to someone's role/title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position"
 
 ${formatVariablesForPrompt()}
 

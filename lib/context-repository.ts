@@ -678,6 +678,213 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'language_style',
     persona: ['finance_intern'],
     keywords: ['finance', 'intern']
+  },
+  
+  // Logistics Department
+  {
+    id: 'logistics_upper_management_pain_points',
+    title: 'Logistics Upper Management Pain Points',
+    content: 'Strategic Challenges: balancing cost optimization with service reliability and customer expectations, limited visibility into end-to-end logistics operations making it hard to forecast and optimize performance, difficulty in maintaining flexibility while also committing to long-term logistics partnerships. Operational Pain Points: fragmented processes across regions, modes, and business units that hinder standardization, manual time-consuming logistics planning and execution processes, high administrative overhead due to managing multiple logistics providers, 3PLs, and carriers.',
+    category: 'pain_points',
+    persona: ['logistics_upper_management'],
+    keywords: ['logistics', 'upper management']
+  },
+  {
+    id: 'logistics_upper_management_tone_profile',
+    title: 'Logistics Upper Management Tone Profile',
+    content: 'Management-focused language emphasizing logistics efficiency, team leadership, and departmental impact. Use terms like "logistics excellence," "team productivity," "process optimization," and "departmental metrics." Focus on practical solutions and team management challenges.',
+    category: 'language_style',
+    persona: ['logistics_upper_management'],
+    keywords: ['logistics', 'upper management']
+  },
+  
+  {
+    id: 'logistics_middle_management_pain_points',
+    title: 'Logistics Middle Management Pain Points',
+    content: 'Day-to-day logistics execution challenges, managing team workload during peak shipping seasons, coordinating between different departments and logistics providers, implementing new processes while maintaining current operations, limited budget authority for logistics negotiations, pressure to meet cost reduction targets, managing logistics provider relationships and performance issues, handling exceptions and disruptions in real-time, training team members on new systems and processes, reporting to upper management on logistics metrics.',
+    category: 'pain_points',
+    persona: ['logistics_middle_management'],
+    keywords: ['logistics', 'middle management']
+  },
+  {
+    id: 'logistics_middle_management_tone_profile',
+    title: 'Logistics Middle Management Tone Profile',
+    content: 'Practical, hands-on language focusing on execution, team management, and daily logistics operations. Use terms like "day-to-day," "hands-on," "practical solutions," "team coordination," and "logistics execution." Emphasize practical implementation and team management.',
+    category: 'language_style',
+    persona: ['logistics_middle_management'],
+    keywords: ['logistics', 'middle management']
+  },
+  
+  {
+    id: 'logistics_entry_level_pain_points',
+    title: 'Logistics Entry Level Pain Points',
+    content: 'Learning complex logistics and transportation processes, managing multiple logistics provider relationships and systems, handling high volume of daily operational tasks, understanding logistics rates and market dynamics, coordinating shipments across different modes and regions, managing exceptions and problem resolution, learning to use various transportation management systems, understanding compliance and regulatory requirements, managing customer service and communication, learning to negotiate with logistics providers.',
+    category: 'pain_points',
+    persona: ['logistics_entry_level'],
+    keywords: ['logistics', 'entry level']
+  },
+  {
+    id: 'logistics_entry_level_tone_profile',
+    title: 'Logistics Entry Level Tone Profile',
+    content: 'Supportive, educational language focusing on learning, growth, and skill development. Use terms like "learning opportunity," "skill development," "career growth," "mentorship," and "professional development." Emphasize support and learning.',
+    category: 'language_style',
+    persona: ['logistics_entry_level'],
+    keywords: ['logistics', 'entry level']
+  },
+  
+  {
+    id: 'logistics_intern_pain_points',
+    title: 'Logistics Intern Pain Points',
+    content: 'Understanding basic logistics and transportation concepts, learning company logistics processes and systems, managing administrative tasks and data entry, understanding different transportation modes and logistics networks, learning to communicate with logistics providers and customers, understanding basic cost and pricing concepts in logistics, managing time and meeting deadlines, learning to use company logistics software and tools, understanding basic compliance requirements, learning to work in a team environment.',
+    category: 'pain_points',
+    persona: ['logistics_intern'],
+    keywords: ['logistics', 'intern']
+  },
+  {
+    id: 'logistics_intern_tone_profile',
+    title: 'Logistics Intern Tone Profile',
+    content: 'Encouraging, educational language focusing on learning, exploration, and professional development. Use terms like "learning experience," "exploration," "discovery," "mentorship," and "professional growth." Emphasize learning and development opportunities.',
+    category: 'language_style',
+    persona: ['logistics_intern'],
+    keywords: ['logistics', 'intern']
+  },
+  
+  // Supply Chain Department
+  {
+    id: 'supply_chain_upper_management_pain_points',
+    title: 'Supply Chain Upper Management Pain Points',
+    content: 'Strategic Challenges: balancing supply chain resilience with cost efficiency and customer service expectations, limited end-to-end visibility across the entire supply chain making it hard to optimize and forecast, difficulty in maintaining supply chain flexibility while also committing to long-term partnerships. Operational Pain Points: fragmented processes across suppliers, manufacturers, distributors, and retailers, manual time-consuming supply chain planning and coordination processes, high administrative overhead due to managing multiple supply chain partners and systems.',
+    category: 'pain_points',
+    persona: ['supply_chain_upper_management'],
+    keywords: ['supply chain', 'upper management']
+  },
+  {
+    id: 'supply_chain_upper_management_tone_profile',
+    title: 'Supply Chain Upper Management Tone Profile',
+    content: 'Management-focused language emphasizing supply chain efficiency, team leadership, and departmental impact. Use terms like "supply chain excellence," "team productivity," "process optimization," and "departmental metrics." Focus on practical solutions and team management challenges.',
+    category: 'language_style',
+    persona: ['supply_chain_upper_management'],
+    keywords: ['supply chain', 'upper management']
+  },
+  
+  {
+    id: 'supply_chain_middle_management_pain_points',
+    title: 'Supply Chain Middle Management Pain Points',
+    content: 'Day-to-day supply chain execution challenges, managing team workload during peak demand seasons, coordinating between different departments and supply chain partners, implementing new processes while maintaining current operations, limited budget authority for supply chain negotiations, pressure to meet cost reduction targets, managing supply chain partner relationships and performance issues, handling exceptions and disruptions in real-time, training team members on new systems and processes, reporting to upper management on supply chain metrics.',
+    category: 'pain_points',
+    persona: ['supply_chain_middle_management'],
+    keywords: ['supply chain', 'middle management']
+  },
+  {
+    id: 'supply_chain_middle_management_tone_profile',
+    title: 'Supply Chain Middle Management Tone Profile',
+    content: 'Practical, hands-on language focusing on execution, team management, and daily supply chain operations. Use terms like "day-to-day," "hands-on," "practical solutions," "team coordination," and "supply chain execution." Emphasize practical implementation and team management.',
+    category: 'language_style',
+    persona: ['supply_chain_middle_management'],
+    keywords: ['supply chain', 'middle management']
+  },
+  
+  {
+    id: 'supply_chain_entry_level_pain_points',
+    title: 'Supply Chain Entry Level Pain Points',
+    content: 'Learning complex supply chain and inventory processes, managing multiple supplier relationships and systems, handling high volume of daily operational tasks, understanding supply chain costs and market dynamics, coordinating across different suppliers and regions, managing exceptions and problem resolution, learning to use various supply chain management systems, understanding compliance and regulatory requirements, managing customer service and communication, learning to negotiate with suppliers.',
+    category: 'pain_points',
+    persona: ['supply_chain_entry_level'],
+    keywords: ['supply chain', 'entry level']
+  },
+  {
+    id: 'supply_chain_entry_level_tone_profile',
+    title: 'Supply Chain Entry Level Tone Profile',
+    content: 'Supportive, educational language focusing on learning, growth, and skill development. Use terms like "learning opportunity," "skill development," "career growth," "mentorship," and "professional development." Emphasize support and learning.',
+    category: 'language_style',
+    persona: ['supply_chain_entry_level'],
+    keywords: ['supply chain', 'entry level']
+  },
+  
+  {
+    id: 'supply_chain_intern_pain_points',
+    title: 'Supply Chain Intern Pain Points',
+    content: 'Understanding basic supply chain and inventory concepts, learning company supply chain processes and systems, managing administrative tasks and data entry, understanding different supply chain networks and flows, learning to communicate with suppliers and internal stakeholders, understanding basic cost and pricing concepts in supply chain, managing time and meeting deadlines, learning to use company supply chain software and tools, understanding basic compliance requirements, learning to work in a team environment.',
+    category: 'pain_points',
+    persona: ['supply_chain_intern'],
+    keywords: ['supply chain', 'intern']
+  },
+  {
+    id: 'supply_chain_intern_tone_profile',
+    title: 'Supply Chain Intern Tone Profile',
+    content: 'Encouraging, educational language focusing on learning, exploration, and professional development. Use terms like "learning experience," "exploration," "discovery," "mentorship," and "professional growth." Emphasize learning and development opportunities.',
+    category: 'language_style',
+    persona: ['supply_chain_intern'],
+    keywords: ['supply chain', 'intern']
+  },
+  
+  // Sourcing Procurement Department
+  {
+    id: 'sourcing_procurement_upper_management_pain_points',
+    title: 'Sourcing Procurement Upper Management Pain Points',
+    content: 'Strategic Challenges: balancing cost optimization with supplier relationship management and risk mitigation, limited visibility into end-to-end procurement processes making it hard to optimize and forecast, difficulty in maintaining procurement flexibility while also committing to long-term supplier contracts. Operational Pain Points: fragmented processes across categories, regions, and business units that hinder standardization, manual time-consuming sourcing and procurement processes, high administrative overhead due to managing multiple suppliers, contracts, and systems.',
+    category: 'pain_points',
+    persona: ['sourcing_procurement_upper_management'],
+    keywords: ['sourcing', 'procurement', 'upper management']
+  },
+  {
+    id: 'sourcing_procurement_upper_management_tone_profile',
+    title: 'Sourcing Procurement Upper Management Tone Profile',
+    content: 'Management-focused language emphasizing procurement efficiency, team leadership, and departmental impact. Use terms like "procurement excellence," "team productivity," "process optimization," and "departmental metrics." Focus on practical solutions and team management challenges.',
+    category: 'language_style',
+    persona: ['sourcing_procurement_upper_management'],
+    keywords: ['sourcing', 'procurement', 'upper management']
+  },
+  
+  {
+    id: 'sourcing_procurement_middle_management_pain_points',
+    title: 'Sourcing Procurement Middle Management Pain Points',
+    content: 'Day-to-day procurement execution challenges, managing team workload during peak sourcing seasons, coordinating between different departments and suppliers, implementing new processes while maintaining current operations, limited budget authority for procurement negotiations, pressure to meet cost reduction targets, managing supplier relationships and performance issues, handling exceptions and disruptions in real-time, training team members on new systems and processes, reporting to upper management on procurement metrics.',
+    category: 'pain_points',
+    persona: ['sourcing_procurement_middle_management'],
+    keywords: ['sourcing', 'procurement', 'middle management']
+  },
+  {
+    id: 'sourcing_procurement_middle_management_tone_profile',
+    title: 'Sourcing Procurement Middle Management Tone Profile',
+    content: 'Practical, hands-on language focusing on execution, team management, and daily procurement operations. Use terms like "day-to-day," "hands-on," "practical solutions," "team coordination," and "procurement execution." Emphasize practical implementation and team management.',
+    category: 'language_style',
+    persona: ['sourcing_procurement_middle_management'],
+    keywords: ['sourcing', 'procurement', 'middle management']
+  },
+  
+  {
+    id: 'sourcing_procurement_entry_level_pain_points',
+    title: 'Sourcing Procurement Entry Level Pain Points',
+    content: 'Learning complex sourcing and procurement processes, managing multiple supplier relationships and systems, handling high volume of daily operational tasks, understanding procurement costs and market dynamics, coordinating across different suppliers and categories, managing exceptions and problem resolution, learning to use various procurement management systems, understanding compliance and regulatory requirements, managing customer service and communication, learning to negotiate with suppliers.',
+    category: 'pain_points',
+    persona: ['sourcing_procurement_entry_level'],
+    keywords: ['sourcing', 'procurement', 'entry level']
+  },
+  {
+    id: 'sourcing_procurement_entry_level_tone_profile',
+    title: 'Sourcing Procurement Entry Level Tone Profile',
+    content: 'Supportive, educational language focusing on learning, growth, and skill development. Use terms like "learning opportunity," "skill development," "career growth," "mentorship," and "professional development." Emphasize support and learning.',
+    category: 'language_style',
+    persona: ['sourcing_procurement_entry_level'],
+    keywords: ['sourcing', 'procurement', 'entry level']
+  },
+  
+  {
+    id: 'sourcing_procurement_intern_pain_points',
+    title: 'Sourcing Procurement Intern Pain Points',
+    content: 'Understanding basic sourcing and procurement concepts, learning company procurement processes and systems, managing administrative tasks and data entry, understanding different sourcing strategies and supplier networks, learning to communicate with suppliers and internal stakeholders, understanding basic cost and pricing concepts in procurement, managing time and meeting deadlines, learning to use company procurement software and tools, understanding basic compliance requirements, learning to work in a team environment.',
+    category: 'pain_points',
+    persona: ['sourcing_procurement_intern'],
+    keywords: ['sourcing', 'procurement', 'intern']
+  },
+  {
+    id: 'sourcing_procurement_intern_tone_profile',
+    title: 'Sourcing Procurement Intern Tone Profile',
+    content: 'Encouraging, educational language focusing on learning, exploration, and professional development. Use terms like "learning experience," "exploration," "discovery," "mentorship," and "professional growth." Emphasize learning and development opportunities.',
+    category: 'language_style',
+    persona: ['sourcing_procurement_intern'],
+    keywords: ['sourcing', 'procurement', 'intern']
   }
 ]
 
