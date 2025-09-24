@@ -131,42 +131,66 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'cost_savings_value_prop',
     title: 'Cost Savings Value Prop',
-    content: 'Benchmark freight rates vs. live market data → avoid overspend. Results in ↓ costs through better rate visibility and stronger negotiation.',
+    content: 'Benchmark rates vs live market data → avoid overspend. Results in ↓ costs through better rate visibility and negotiation.',
     category: 'value_prop',
     pain_points: ['cost'],
     keywords: ['cost', 'savings', 'spend', 'budget', 'money']
   },
   {
-    id: 'efficiency_value_prop',
-    title: 'Efficiency & Speed Value Prop',
-    content: 'Automate and streamline procurement workflows → reduce manual effort and delays. Results in faster RFP cycles and ↑ productivity for logistics teams.',
+    id: 'operational_efficiency_value_prop',
+    title: 'Operational Efficiency Value Prop',
+    content: 'Automate and streamline freight procurement → save time and effort. Reduces manual work and speeds up quote-to-booking cycles for greater productivity.',
     category: 'value_prop',
-    pain_points: ['time'],
-    keywords: ['efficiency', 'speed', 'automation', 'productivity', 'time']
+    pain_points: ['efficiency'],
+    keywords: ['efficiency', 'time', 'productivity', 'automation', 'streamline']
   },
   {
-    id: 'network_capacity_value_prop',
-    title: 'Expanded Capacity Network Value Prop',
-    content: 'Access 45,000+ vetted carriers instantly → no more capacity shortfalls. Results in broader coverage, reliable carriers, and confident scaling of your shipping needs.',
-    category: 'value_prop',
-    pain_points: ['capacity'],
-    keywords: ['capacity', 'network', 'carriers', 'coverage', 'scaling']
-  },
-  {
-    id: 'insights_visibility_value_prop',
-    title: 'Data Insights & Visibility Value Prop',
-    content: 'Gain real-time market intelligence → eliminate blind spots in procurement. Results in smarter decision-making and proactive strategy adjustments based on data-driven insights.',
+    id: 'visibility_control_value_prop',
+    title: 'Visibility & Control Value Prop',
+    content: 'Real-time shipment tracking and centralized oversight → proactive control. Prevents blind spots and enables swift responses to delays, improving operational coordination.',
     category: 'value_prop',
     pain_points: ['visibility'],
-    keywords: ['data', 'insights', 'visibility', 'market trends', 'strategy']
+    keywords: ['visibility', 'tracking', 'oversight', 'real-time', 'communication']
   },
   {
-    id: 'unified_process_value_prop',
-    title: 'Unified Platform Value Prop',
-    content: 'Consolidate all freight procurement on one platform → end fragmented email-and-spreadsheet workflows. Results in a cohesive process and improved collaboration with carriers and teams.',
+    id: 'capacity_network_value_prop',
+    title: 'Network Capacity Value Prop',
+    content: 'Extensive carrier network and instant capacity access → no more capacity shortfalls. Ensures reliable coverage with 45,000+ vetted carriers and elite partners for any load.',
     category: 'value_prop',
-    pain_points: ['fragmentation'],
-    keywords: ['platform', 'streamlined', 'collaboration', 'centralized', 'process']
+    pain_points: ['capacity'],
+    keywords: ['capacity', 'network', 'carriers', 'coverage', 'reliability']
+  },
+  {
+    id: 'data_insights_value_prop',
+    title: 'Data Insights Value Prop',
+    content: 'Data-driven insights and analytics → smarter decisions. Custom dashboards and benchmarking reveal savings, performance metrics, and opportunities to optimize procurement strategies.',
+    category: 'value_prop',
+    pain_points: ['insight'],
+    keywords: ['analytics', 'insights', 'reporting', 'benchmarking', 'optimization']
+  },
+  {
+    id: 'reliability_quality_value_prop',
+    title: 'Quality & Reliability Value Prop',
+    content: 'High-quality carrier partnerships → improved reliability. Rigorous vetting and scorecards ensure carriers meet safety and performance standards, reducing risks and delays.',
+    category: 'value_prop',
+    pain_points: ['reliability'],
+    keywords: ['reliability', 'quality', 'performance', 'safety', 'on-time']
+  },
+  {
+    id: 'integrations_value_prop',
+    title: 'Seamless Integrations Value Prop',
+    content: 'Seamless integrations with TMS and partners → unified workflow. Connect existing systems via API to eliminate double entry, enhance data flow, and automate procurement steps in one platform.',
+    category: 'value_prop',
+    pain_points: ['integration'],
+    keywords: ['integration', 'TMS', 'automation', 'data flow', 'unified']
+  },
+  {
+    id: 'flexibility_value_prop',
+    title: 'Flexibility & Scalability Value Prop',
+    content: 'Flexible procurement strategies → adapt to change quickly. Use mini-bids and AI scenario modeling to adjust to market conditions, handle surges, and rapidly implement optimal freight solutions.',
+    category: 'value_prop',
+    pain_points: ['flexibility'],
+    keywords: ['flexibility', 'adaptability', 'resilience', 'scenario', 'dynamic']
   },
 
   // Statistics
