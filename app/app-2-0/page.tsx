@@ -137,6 +137,7 @@ export default function AlchemailApp20() {
             
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
+              <span className="text-sm text-muted-foreground">Hello World</span>
               <ThemeToggle />
             </div>
           </div>
