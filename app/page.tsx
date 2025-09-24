@@ -67,6 +67,7 @@ export default function AlchemailApp20() {
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
+  const [contextSearchTerm, setContextSearchTerm] = useState("")
   const { toast } = useToast()
 
   const steps = [
@@ -603,11 +604,36 @@ export default function AlchemailApp20() {
                         </Sheet>
                       </div>
                     </div>
+                    
+                    {/* Search Box */}
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Search context items..."
+                        value={contextSearchTerm}
+                        onChange={(e) => setContextSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                    
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
                       {allContextItems.length === 0 && (
                         <p className="text-sm text-muted-foreground">Loading context items...</p>
                       )}
-                      {allContextItems.map((item) => (
+                      {allContextItems.length > 0 && allContextItems.filter(item => 
+                        contextSearchTerm === "" || 
+                        item.title.toLowerCase().includes(contextSearchTerm.toLowerCase()) ||
+                        item.content.toLowerCase().includes(contextSearchTerm.toLowerCase())
+                      ).length === 0 && (
+                        <p className="text-sm text-muted-foreground">No context items found matching "{contextSearchTerm}"</p>
+                      )}
+                      {allContextItems
+                        .filter(item => 
+                          contextSearchTerm === "" || 
+                          item.title.toLowerCase().includes(contextSearchTerm.toLowerCase()) ||
+                          item.content.toLowerCase().includes(contextSearchTerm.toLowerCase())
+                        )
+                        .map((item) => (
                         <div key={item.id} className="flex items-start space-x-2">
                           <Checkbox
                             id={`context-${item.id}`}
