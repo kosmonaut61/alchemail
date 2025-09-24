@@ -757,6 +757,20 @@ export default function AlchemailApp20() {
                         Regenerate
                       </Button>
 
+                      {/* DEBUG: Always show button for testing */}
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="bg-red-600 hover:bg-red-700 text-white"
+                        onClick={() => {
+                          console.log('DEBUG: generatedMessages.length =', generatedMessages.length)
+                          console.log('DEBUG: generatedMessages =', generatedMessages)
+                          alert(`Messages count: ${generatedMessages.length}`)
+                        }}
+                      >
+                        DEBUG ({generatedMessages.length})
+                      </Button>
+
                       {/* Optimize All Button */}
                       {generatedMessages.length > 0 && (
                         <Button
