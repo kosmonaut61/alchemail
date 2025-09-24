@@ -148,6 +148,7 @@ OPTIMIZATION GUIDELINES:
 32. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
 33. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
 34. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
+35. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others

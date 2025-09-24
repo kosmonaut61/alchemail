@@ -295,7 +295,7 @@ async function qaAndPolish(messageType: string, content: string, sequencePlan: a
     console.log(`🔍 QA'ing and polishing ${messageType}...`);
     
     // First, analyze the message
-    const analysis = await analyzeEmailQuality(content, "gpt-5-mini");
+    const analysis = await analyzeEmailQuality(content, "operations_middle_management", ["cost", "efficiency"], "gpt-5-mini");
     
     // Then create a comprehensive polish prompt
     const polishPrompt = `Polish this ${messageType} to meet all quality standards:
@@ -324,6 +324,7 @@ POLISH REQUIREMENTS:
 10. Make language natural and conversational, not robotic
 11. Remove any duplicate CTAs
 12. Ensure proper greeting (Hi [name], or Hey [name],)
+13. Remove all em dashes (—) and replace with regular hyphens (-) or rephrase the sentence
 
 Return the polished message with the same structure (Subject: and content).`;
 
