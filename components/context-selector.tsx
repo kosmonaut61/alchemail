@@ -391,7 +391,7 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
                       </>
                     )}
                     
-                    {/* Other Items */}
+                    {/* Other Items - Grouped by Category */}
                     {otherItems.length > 0 && (
                       <>
                         {suggestedItemsList.length > 0 && (
@@ -401,7 +401,30 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
                             <div className="h-px bg-border/50 flex-1"></div>
                           </div>
                         )}
-                        {otherItems.map((item) => {
+                        
+                        {/* Group other items by category */}
+                        {(() => {
+                          const groupedItems = otherItems.reduce((acc, item) => {
+                            if (!acc[item.category]) {
+                              acc[item.category] = []
+                            }
+                            acc[item.category].push(item)
+                            return acc
+                          }, {} as Record<string, typeof otherItems>)
+                          
+                          return Object.entries(groupedItems).map(([category, items]) => (
+                            <div key={category} className="space-y-2">
+                              {/* Category Section Header */}
+                              <div className="flex items-center gap-2 py-2">
+                                <div className="h-px bg-primary/30 flex-1"></div>
+                                <span className="text-sm font-semibold text-primary px-3 py-1 bg-primary/10 rounded-full">
+                                  {category.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())} ({items.length})
+                                </span>
+                                <div className="h-px bg-primary/30 flex-1"></div>
+                              </div>
+                              
+                              {/* Items in this category */}
+                              {items.map((item) => {
                           const isSelected = selectedItems.some(s => s.id === item.id)
                           const isSuggested = false
                           
@@ -459,6 +482,10 @@ export function ContextSelector({ signal, persona, painPoints, selectedContextIt
                             </div>
                           )
                         })}
+                              </div>
+                            </div>
+                          ))
+                        })()}
                       </>
                     )}
                   </>

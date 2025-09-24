@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
@@ -21,11 +21,14 @@ import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
 
 // Types for the 2.0 app
 interface SequencePlan {
+  isIncentivized?: boolean
+  incentiveAmount?: number
   emails: Array<{
     day: number
     subject: string
     purpose: string
     signalIntegration: string
+    includeIncentive?: boolean
     messageOutline?: {
       assignedContext?: string
     }
@@ -34,6 +37,7 @@ interface SequencePlan {
     day: number
     purpose: string
     signalIntegration: string
+    includeIncentive?: boolean
     messageOutline?: {
       assignedContext?: string
     }
@@ -61,12 +65,15 @@ export default function AlchemailApp20() {
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
   const [emailCount, setEmailCount] = useState(3)
   const [linkedInCount, setLinkedInCount] = useState(2)
+  const [isIncentivized, setIsIncentivized] = useState(false)
+  const [incentiveAmount, setIncentiveAmount] = useState(500)
   const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
   const [contextItems, setContextItems] = useState<any[]>([])
   const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
+  const [contextSearchTerm, setContextSearchTerm] = useState("")
   const { toast } = useToast()
 
   const steps = [
@@ -291,6 +298,7 @@ export default function AlchemailApp20() {
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
               <HelpModal />
+              <span className="text-sm text-muted-foreground">Hello World</span>
               <ThemeToggle />
             </div>
           </div>
@@ -602,11 +610,36 @@ export default function AlchemailApp20() {
                         </Sheet>
                       </div>
                     </div>
+                    
+                    {/* Search Box */}
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Search context items..."
+                        value={contextSearchTerm}
+                        onChange={(e) => setContextSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                    
                     <div className="space-y-3 max-h-60 overflow-y-auto border rounded-md p-4">
                       {allContextItems.length === 0 && (
                         <p className="text-sm text-muted-foreground">Loading context items...</p>
                       )}
-                      {allContextItems.map((item) => (
+                      {allContextItems.length > 0 && allContextItems.filter(item => 
+                        contextSearchTerm === "" || 
+                        item.title.toLowerCase().includes(contextSearchTerm.toLowerCase()) ||
+                        item.content.toLowerCase().includes(contextSearchTerm.toLowerCase())
+                      ).length === 0 && (
+                        <p className="text-sm text-muted-foreground">No context items found matching "{contextSearchTerm}"</p>
+                      )}
+                      {allContextItems
+                        .filter(item => 
+                          contextSearchTerm === "" || 
+                          item.title.toLowerCase().includes(contextSearchTerm.toLowerCase()) ||
+                          item.content.toLowerCase().includes(contextSearchTerm.toLowerCase())
+                        )
+                        .map((item) => (
                         <div key={item.id} className="flex items-start space-x-2">
                           <Checkbox
                             id={`context-${item.id}`}
@@ -723,6 +756,40 @@ export default function AlchemailApp20() {
                 </div>
               </div>
 
+              {/* Incentivized Campaign Toggle */}
+              <div className="space-y-4 p-4 border rounded-lg bg-muted/30">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="incentivized"
+                    checked={isIncentivized}
+                    onCheckedChange={(checked) => setIsIncentivized(checked as boolean)}
+                  />
+                  <Label htmlFor="incentivized" className="text-sm font-medium">
+                    Incentivized Campaign
+                  </Label>
+                </div>
+                {isIncentivized && (
+                  <div className="space-y-2">
+                    <Label htmlFor="incentiveAmount" className="text-sm">
+                      Gift Card Amount ($)
+                    </Label>
+                    <Input
+                      id="incentiveAmount"
+                      type="number"
+                      min="50"
+                      max="1000"
+                      step="50"
+                      value={incentiveAmount}
+                      onChange={(e) => setIncentiveAmount(parseInt(e.target.value) || 500)}
+                      className="w-32"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      50% of messages will mention the gift card incentive for demo bookings
+                    </p>
+                  </div>
+                )}
+              </div>
+
               {!sequencePlan ? (
                 <div className="text-center py-8">
                   <Button 
@@ -736,7 +803,9 @@ export default function AlchemailApp20() {
                         painPoints,
                         emailCount,
                         linkedInCount,
-                        contextItems: selectedContextItems
+                        contextItems: selectedContextItems,
+                        isIncentivized,
+                        incentiveAmount
                       }
                       console.log('🚀 CLIENT: Making API call to generate-sequence-plan')
                       console.log('📧 MODEL: gpt-5-mini')
@@ -755,7 +824,9 @@ export default function AlchemailApp20() {
                             painPoints,
                             emailCount,
                             linkedInCount,
-                            contextItems: selectedContextItems
+                            contextItems: selectedContextItems,
+                            isIncentivized,
+                            incentiveAmount
                           }),
                         })
 
@@ -882,7 +953,9 @@ export default function AlchemailApp20() {
                             painPoints,
                             emailCount,
                             linkedInCount,
-                            contextItems: selectedContextItems
+                            contextItems: selectedContextItems,
+                            isIncentivized,
+                            incentiveAmount
                           }
                           console.log('🔄 CLIENT: Retrying API call to generate-sequence-plan')
                           console.log('📧 MODEL: gpt-5-mini')
@@ -901,7 +974,9 @@ export default function AlchemailApp20() {
                                 painPoints,
                                 emailCount,
                                 linkedInCount,
-                                contextItems: selectedContextItems
+                                contextItems: selectedContextItems,
+                                isIncentivized,
+                                incentiveAmount
                               }),
                             })
 
@@ -1135,8 +1210,127 @@ export default function AlchemailApp20() {
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Regenerate
                       </Button>
+                      {generatedMessages.length > 0 && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={async () => {
+                            const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimizing)
+                            
+                            if (unoptimizedMessages.length === 0) {
+                              toast({
+                                title: "All messages already optimized",
+                                description: "There are no messages left to optimize.",
+                              })
+                              return
+                            }
+
+                            toast({
+                              title: "Optimizing all messages...",
+                              description: `Starting optimization of ${unoptimizedMessages.length} messages.`,
+                            })
+
+                            // Set all unoptimized messages to optimizing state
+                            setGeneratedMessages(prev => prev.map(m => 
+                              !m.isOptimized && !m.isOptimizing ? { ...m, isOptimizing: true } : m
+                            ))
+
+                            let successCount = 0
+                            let failureCount = 0
+
+                            // Optimize each message individually with delays to prevent rate limiting
+                            const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
+                              // Add a small delay between requests to prevent overwhelming the server
+                              if (index > 0) {
+                                await new Promise(resolve => setTimeout(resolve, 1000 * index))
+                              }
+                              try {
+                                const response = await fetch('/api/optimize-message', {
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                                  body: JSON.stringify({
+                                    messageId: message.id,
+                                    originalContent: message.content,
+                                    type: message.type,
+                                    signal,
+                                    persona,
+                                    painPoints,
+                                    contextItems
+                                  }),
+                                })
+
+                                if (!response.ok) {
+                                  throw new Error(`HTTP ${response.status}: Failed to optimize message`)
+                                }
+
+                                const data = await response.json()
+                                
+                                // Update the message with optimized content
+                                setGeneratedMessages(prev => prev.map(m => 
+                                  m.id === message.id ? {
+                                    ...m,
+                                    content: data.optimizedContent,
+                                    originalContent: message.content,
+                                    isOptimized: true,
+                                    isOptimizing: false
+                                  } : m
+                                ))
+
+                                successCount++
+                              } catch (error) {
+                                console.error(`Error optimizing message ${message.id}:`, error)
+                                failureCount++
+                                
+                                // Reset optimizing state on failure
+                                setGeneratedMessages(prev => prev.map(m => 
+                                  m.id === message.id ? { ...m, isOptimizing: false } : m
+                                ))
+                              }
+                            })
+
+                            // Wait for all optimizations to complete
+                            await Promise.all(optimizationPromises)
+
+                            // Show final toast
+                            if (failureCount === 0) {
+                              toast({
+                                title: "All messages optimized!",
+                                description: `Successfully optimized ${successCount} messages.`,
+                              })
+                            } else if (successCount > 0) {
+                              toast({
+                                title: "Optimization completed with some issues",
+                                description: `Optimized ${successCount} messages successfully, ${failureCount} failed.`,
+                                variant: "destructive",
+                              })
+                            } else {
+                              toast({
+                                title: "Optimization failed",
+                                description: "Failed to optimize any messages. Please try again.",
+                                variant: "destructive",
+                              })
+                            }
+                          }}
+                          disabled={generatedMessages.some(m => m.isOptimizing)}
+                        >
+                          {generatedMessages.some(m => m.isOptimizing) ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Optimizing...
+                            </>
+                          ) : (
+                            <>
+                              <Sparkles className="mr-2 h-4 w-4" />
+                              Optimize All
+                            </>
+                          )}
+                        </Button>
+                      )}
                 </div>
               </div>
+
               
                   {generatedMessages.map((message) => (
                     <div key={message.id} className="p-4 border rounded-lg">
@@ -1298,8 +1492,11 @@ export default function AlchemailApp20() {
                   className="text-sm whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{
                     __html: (() => {
-                      // First, convert markdown links to HTML
-                      let processed = message.content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                      // First, convert markdown bold formatting to HTML
+                      let processed = message.content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                      
+                      // Then, convert markdown links to HTML
+                      processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
                       
                       // Then, replace merge fields that are NOT inside href attributes
                       processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
@@ -1314,8 +1511,8 @@ export default function AlchemailApp20() {
                           return match; // Keep original merge field
                         }
                         
-                        // Otherwise, replace with highlighted version
-                        return `<span class="bg-yellow-100 text-yellow-800 px-1 py-0.5 rounded text-xs font-mono">${match}</span>`;
+                        // Otherwise, keep as plain text (no styling)
+                        return match;
                       });
                       
                       // Finally, replace newlines

@@ -148,6 +148,8 @@ OPTIMIZATION GUIDELINES:
 32. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
 33. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
 34. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
+35. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
+36. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others

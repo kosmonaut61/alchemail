@@ -4,7 +4,7 @@ export interface ContextItem {
   id: string
   title: string
   content: string
-  category: 'customer' | 'resource' | 'value_prop' | 'statistic' | 'quote' | 'language_style' | 'pain_points'
+  category: 'customer' | 'resource' | 'value_prop' | 'statistic' | 'quote' | 'language_style' | 'pain_points' | 'solution'
   industry?: string[]
   persona?: string[]
   pain_points?: string[]
@@ -25,7 +25,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'food_beverage_customers',
     title: 'Food & Beverage Customers',
-    content: 'Notable Food & Beverage customers include Frito Lay, AB, Olam, Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint',
+    content: 'Notable Food & Beverage customers include Molson Coors, Pepsi BV, Simmons, Mastronardi, Organic Valley, Nutrabolt, Megamex, Dole, Darigold, Olipop, LesserEvil, Hint',
     category: 'customer',
     industry: ['food_beverage', 'food_production', 'beverage'],
     keywords: ['food', 'beverage', 'snack', 'drink', 'production', 'manufacturing']
@@ -137,20 +137,60 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     keywords: ['cost', 'savings', 'spend', 'budget', 'money']
   },
   {
-    id: 'efficiency_value_prop',
-    title: 'Efficiency Value Prop',
-    content: 'Centralized carrier engagement; automated tendering/comms → save time. Run RFPs, manage spot freight, analyze spend faster/more accurately.',
-    category: 'value_prop',
-    pain_points: ['effort', 'efficiency'],
-    keywords: ['efficiency', 'time', 'automation', 'streamline', 'faster']
-  },
-  {
-    id: 'coverage_value_prop',
-    title: 'Coverage Value Prop',
-    content: 'Limited/unused networks leave lanes uncovered → solved w/ 1,000s of vetted carriers in Emerge. Results in ↑ coverage and better lane options.',
+    id: 'operational_efficiency_value_prop',
+    title: 'Operational Efficiency Value Prop',
+    content: 'Automate and streamline freight procurement → save time and effort. Reduces manual work and speeds up quote-to-booking cycles for greater productivity.',
     category: 'value_prop',
     pain_points: ['efficiency'],
-    keywords: ['coverage', 'carriers', 'network', 'lanes', 'capacity']
+    keywords: ['efficiency', 'time', 'productivity', 'automation', 'streamline']
+  },
+  {
+    id: 'visibility_control_value_prop',
+    title: 'Visibility & Control Value Prop',
+    content: 'Real-time shipment tracking and centralized oversight → proactive control. Prevents blind spots and enables swift responses to delays, improving operational coordination.',
+    category: 'value_prop',
+    pain_points: ['visibility'],
+    keywords: ['visibility', 'tracking', 'oversight', 'real-time', 'communication']
+  },
+  {
+    id: 'capacity_network_value_prop',
+    title: 'Network Capacity Value Prop',
+    content: 'Extensive carrier network and instant capacity access → no more capacity shortfalls. Ensures reliable coverage with 45,000+ vetted carriers and elite partners for any load.',
+    category: 'value_prop',
+    pain_points: ['capacity'],
+    keywords: ['capacity', 'network', 'carriers', 'coverage', 'reliability']
+  },
+  {
+    id: 'data_insights_value_prop',
+    title: 'Data Insights Value Prop',
+    content: 'Data-driven insights and analytics → smarter decisions. Custom dashboards and benchmarking reveal savings, performance metrics, and opportunities to optimize procurement strategies.',
+    category: 'value_prop',
+    pain_points: ['insight'],
+    keywords: ['analytics', 'insights', 'reporting', 'benchmarking', 'optimization']
+  },
+  {
+    id: 'reliability_quality_value_prop',
+    title: 'Quality & Reliability Value Prop',
+    content: 'High-quality carrier partnerships → improved reliability. Rigorous vetting and scorecards ensure carriers meet safety and performance standards, reducing risks and delays.',
+    category: 'value_prop',
+    pain_points: ['reliability'],
+    keywords: ['reliability', 'quality', 'performance', 'safety', 'on-time']
+  },
+  {
+    id: 'integrations_value_prop',
+    title: 'Seamless Integrations Value Prop',
+    content: 'Seamless integrations with TMS and partners → unified workflow. Connect existing systems via API to eliminate double entry, enhance data flow, and automate procurement steps in one platform.',
+    category: 'value_prop',
+    pain_points: ['integration'],
+    keywords: ['integration', 'TMS', 'automation', 'data flow', 'unified']
+  },
+  {
+    id: 'flexibility_value_prop',
+    title: 'Flexibility & Scalability Value Prop',
+    content: 'Flexible procurement strategies → adapt to change quickly. Use mini-bids and AI scenario modeling to adjust to market conditions, handle surges, and rapidly implement optimal freight solutions.',
+    category: 'value_prop',
+    pain_points: ['flexibility'],
+    keywords: ['flexibility', 'adaptability', 'resilience', 'scenario', 'dynamic']
   },
 
   // Statistics
@@ -169,6 +209,50 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'statistic',
     industry: ['food_beverage'],
     keywords: ['18% reduction', '10 per year', '57% increase', '35 to 55 carriers']
+  },
+
+  // Pain Points
+  {
+    id: 'cost',
+    title: 'High Freight Spend & Budget Overruns',
+    content: 'Shippers often overspend on freight due to limited visibility into market rates and budget alignment. Without benchmarking against live market data, freight costs can quickly exceed budgets.',
+    category: 'pain_points',
+    keywords: ['overspend', 'budget', 'cost', 'benchmarking']
+  },
+  {
+    id: 'time',
+    title: 'Time-Consuming Manual Processes',
+    content: 'Traditional freight procurement (annual RFPs, spot quotes) takes too long. Manual spreadsheets and email-driven bids can drag on for months, consuming resources and delaying decisions.',
+    category: 'pain_points',
+    keywords: ['slow', 'manual', 'RFP delays', 'time-consuming', 'inefficient']
+  },
+  {
+    id: 'capacity',
+    title: 'Limited Carrier Network Access',
+    content: 'Many shippers work with a narrow pool of carriers due to time or resource constraints. Inviting only familiar carriers to bids means an under-representation of available capacity, leading to suboptimal rates and potential coverage gaps.',
+    category: 'pain_points',
+    keywords: ['limited carriers', 'capacity constraints', 'network', 'coverage gaps']
+  },
+  {
+    id: 'fragmentation',
+    title: 'Fragmented Procurement Workflow',
+    content: 'Freight procurement data and communications are often siloed across emails and spreadsheets. This fragmentation makes it difficult to track RFPs, counteroffers, and contracts, resulting in version-control issues and miscommunication.',
+    category: 'pain_points',
+    keywords: ['fragmented', 'siloed', 'spreadsheets', 'manual tracking']
+  },
+  {
+    id: 'visibility',
+    title: 'Lack of Market Transparency',
+    content: 'Shippers lack real-time visibility into market pricing and lane performance. Without transparent market data or benchmarking tools, they struggle to make informed decisions and miss opportunities for cost improvement.',
+    category: 'pain_points',
+    keywords: ['no visibility', 'market data', 'transparency', 'unknown rates']
+  },
+  {
+    id: 'reliability',
+    title: 'Carrier Quality & Reliability Concerns',
+    content: 'Onboarding new carriers can be risky without proper vetting. Shippers worry about unknown carriers\' safety, compliance, and service reliability, as using unverified carriers can lead to service failures or compliance issues.',
+    category: 'pain_points',
+    keywords: ['carrier vetting', 'reliability', 'compliance', 'trust']
   },
 
   // Customer Quotes
@@ -195,6 +279,80 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'quote',
     industry: ['logistics'],
     keywords: ['ezrack', 'tms', 'coverage', 'emails', 'spreadsheets']
+  },
+
+  // Solutions / Features
+  {
+    id: 'contract_procurement_feature',
+    title: 'Contract Procurement',
+    content: 'Run efficient annual RFPs and mini-bids with advanced tools. Emerge\'s platform provides carrier insights and robust benchmarking optimized for the contract bid process, streamlining negotiations to secure the best long-term rates.',
+    category: 'solution',
+    pain_points: ['cost', 'time', 'capacity', 'fragmentation'],
+    keywords: ['annual bids', 'mini bids', 'RFP automation', 'contract rates', 'benchmarking']
+  },
+  {
+    id: 'spot_procurement_feature',
+    title: 'Spot Procurement',
+    content: 'Find on-demand freight coverage fast with confidence in your rates. The platform enables seamless RFQ execution, instant "Book It Now" carrier booking, plus real-time tracking and visibility for superior operational control in spot moves.',
+    category: 'solution',
+    pain_points: ['time', 'visibility', 'cost'],
+    keywords: ['spot quotes', 'instant booking', 'tracking', 'visibility', 'on-demand']
+  },
+  {
+    id: 'emerge_marketplace_feature',
+    title: 'Emerge Marketplace',
+    content: 'Grow your carrier network instantly via a digital marketplace of 45,000+ pre-vetted, asset-based carriers. Shippers tap into reliable capacity with competitive bidding, integrating these carriers into RFPs and spot tenders to drive down costs.',
+    category: 'solution',
+    pain_points: ['capacity', 'reliability', 'cost', 'fragmentation'],
+    keywords: ['carrier marketplace', 'vetted carriers', 'capacity', 'competitive rates']
+  },
+  {
+    id: 'emerge_ai_feature',
+    title: 'Emerge AI Tools (ProcureOS)',
+    content: 'Leverage AI-driven procurement intelligence to optimize outcomes. Emerge AI (within ProcureOS) uses machine learning to model scenarios and benchmark decisions against market data, matching loads with ideal carriers for both contract and spot freight.',
+    category: 'solution',
+    pain_points: ['cost', 'time', 'visibility'],
+    keywords: ['AI optimization', 'Scenario Builder', 'Rate Pulse', 'lane matching', 'automation']
+  },
+  {
+    id: 'integrations_feature',
+    title: 'Integrations & Data Partners',
+    content: 'Seamlessly connect Emerge with your existing systems and data sources. Out-of-the-box TMS integrations (e.g., Oracle OTM, MercuryGate) bring Emerge\'s features into your workflow, while data partners like FreightWaves SONAR (market trends) and project44 (real-time tracking) enrich your procurement intelligence.',
+    category: 'solution',
+    pain_points: ['fragmentation', 'visibility', 'integration'],
+    keywords: ['TMS integration', 'FreightWaves', 'project44', 'data integration', 'workflow']
+  },
+  {
+    id: 'premier_partners_feature',
+    title: 'Premier Partners Program',
+    content: 'Access an elite tier of carriers with proven performance. Emerge\'s Premier Carriers and Partners compete for your business, driving down rates through healthy competition and maintaining high service standards as reflected in their scorecards. Their large fleets also offer dedicated capacity for high-volume needs.',
+    category: 'solution',
+    pain_points: ['capacity', 'reliability', 'cost'],
+    keywords: ['Premier carriers', 'elite network', 'service quality', 'dedicated capacity']
+  },
+  {
+    id: 'capacity_link_feature',
+    title: 'Capacity Link (Carrier API Connectivity)',
+    content: 'Integrate carriers on a deeper level with API connectivity. Through Capacity Link, network carriers connect via EDI/API for seamless tendering and tracking directly in their system. This automation enables faster load coverage, competitive spot bidding, and minimal manual intervention via partners like Bitfreighter and others.',
+    category: 'solution',
+    pain_points: ['time', 'integration', 'capacity'],
+    keywords: ['API integration', 'EDI', 'automation', 'carrier connectivity']
+  },
+  {
+    id: 'reporting_analytics_feature',
+    title: 'Reporting & Analytics',
+    content: 'Make data-driven decisions with in-depth analytics. Emerge provides customizable dashboards and reports for scenario tracking, lane benchmarking, savings analysis, and cross-event comparisons, giving shippers strategic insights to continuously improve procurement outcomes.',
+    category: 'solution',
+    pain_points: ['visibility', 'cost', 'time'],
+    keywords: ['analytics', 'dashboards', 'benchmark reports', 'insights', 'KPIs']
+  },
+  {
+    id: 'carrier_scorecards_feature',
+    title: 'Carrier Scorecards',
+    content: 'Evaluate carrier performance and compliance at a glance. Emerge\'s Carrier Scorecards combine FMCSA safety and compliance data with custom performance metrics, offering shippers transparent insight into carrier reliability for more informed carrier selection in bids.',
+    category: 'solution',
+    pain_points: ['reliability', 'visibility'],
+    keywords: ['carrier performance', 'scorecards', 'safety metrics', 'compliance']
   },
 
   // Language Styles

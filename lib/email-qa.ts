@@ -18,9 +18,7 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
       return result.text
     } else {
       const { text, usage, finishReason } = await generateText({
-        model: openai(model, {
-          apiKey: process.env.OPENAI_API_KEY,
-        }),
+        model: openai(model),
         messages: [
           {
             role: "user",
@@ -43,9 +41,7 @@ async function generateTextWithModel(prompt: string, model: string): Promise<str
     console.log('[QA] Falling back to GPT-4o...');
     try {
       const { text } = await generateText({
-        model: openai("gpt-4o", {
-          apiKey: process.env.OPENAI_API_KEY,
-        }),
+        model: openai(model),
         messages: [
           {
             role: "user",
@@ -357,6 +353,7 @@ SPECIFIC THINGS TO CHECK:
 - CTA FLOW - flag if CTA is a separate chunk instead of flowing naturally in the sentence
 - CAMPAIGN SIGNAL - flag if the campaign signal is not referenced or is weak in the email
 - FORMAL LANGUAGE - flag if using formal words like "kindly", "please be advised", "we would love to"
+- AI TELLS - flag if using em dashes (—) as they are an AI tell that should be avoided
 
 Return a JSON array of issues:
 [
@@ -530,6 +527,7 @@ REQUIREMENTS:
 5. Use simple language (5th grade level)
 6. Keep it conversational, not formal
 7. Make the improvements DRAMATIC and EASY TO SEE
+8. Remove all em dashes (—) and replace with regular hyphens (-) or rephrase the sentence
 
 ${isEmailSequence ? 'Return the corrected email sequence in the same format, no explanations' : 'Return ONLY the corrected email, no explanations'}:`
 

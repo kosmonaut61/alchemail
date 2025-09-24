@@ -73,7 +73,7 @@ export const PREAMBLE_SECTIONS = {
 **Sequences:** 3-12 emails, max 3/person/7 days, spread logically (≤2/week for 12 emails)
 **Content:** Each email different pain point/theme, every email has unique CTA, at least 1 names industry customers
 **Campaign Signal:** EVERY email and message must reference and build on the campaign signal - it's the connecting thread throughout the entire campaign
-**Output:** Text emails (not JSON), 11-20 touchpoints/campaign (max 3 LinkedIn), 50% of touchpoints mention $500 Visa gift card for demo
+**Output:** Text emails (not JSON), 11-20 touchpoints/campaign (max 3 LinkedIn)
 
 ### Subject Lines
 **Format:** 3-6 words, sentence case, max 1 emoji (end only), personalized with company/role
