@@ -355,57 +355,149 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     keywords: ['carrier performance', 'scorecards', 'safety metrics', 'compliance']
   },
 
-  // Language Styles
+  // Language Styles - Generic (for cross-persona use)
   {
     id: 'enterprise_language',
     title: 'Enterprise Language Style',
-    content: 'Use "I know enterprise pricing isn\'t one-size-fits-all..." instead of "Your enterprise needs...". Focus on scalability, ROI, and enterprise-level challenges.',
+    content: 'Use "I know enterprise pricing isn\'t one-size-fits-all..." instead of "Your enterprise needs...". Focus on scalability, ROI, and enterprise-level challenges. Best for large organizations and C-suite executives.',
     category: 'language_style',
-    persona: ['Enterprise'],
+    persona: ['ceo', 'coo', 'cfo', 'cpo', 'csco'],
     keywords: ['enterprise', 'scalability', 'roi', 'enterprise-level']
   },
   {
     id: 'smb_language',
     title: 'SMB Language Style',
-    content: 'Use "I know every dollar counts when you\'re growing..." instead of "Small businesses need...". Focus on growth, efficiency, and cost-consciousness.',
+    content: 'Use "I know every dollar counts when you\'re growing..." instead of "Small businesses need...". Focus on growth, efficiency, and cost-consciousness. Best for growing companies and owner/founders.',
     category: 'language_style',
-    persona: ['SMB'],
+    persona: ['owner_founder', 'first_logistics_manager'],
     keywords: ['small business', 'growing', 'every dollar counts', 'growth']
   },
   {
     id: 'cost_focused_language',
     title: 'Cost-Focused Language Style',
-    content: 'Use "I\'d love to show you what your numbers could look like" and "I think you\'d be surprised at how much you could save." Focus on savings and cost reduction.',
+    content: 'Use "I\'d love to show you what your numbers could look like" and "I think you\'d be surprised at how much you could save." Focus on savings and cost reduction. Best for finance roles and cost-conscious personas.',
     category: 'language_style',
+    persona: ['cfo', 'cpo', 'finance_upper_management', 'finance_middle_management', 'finance_entry_level'],
     pain_points: ['cost'],
     keywords: ['cost', 'savings', 'numbers', 'save', 'budget']
   },
   {
     id: 'efficiency_focused_language',
     title: 'Efficiency-Focused Language Style',
-    content: 'Use "I know how tough it can be to manage all those spreadsheets and emails" and "What if you could automate that entire process?" Focus on time savings and automation.',
+    content: 'Use "I know how tough it can be to manage all those spreadsheets and emails" and "What if you could automate that entire process?" Focus on time savings and automation. Best for operations roles and efficiency-focused personas.',
     category: 'language_style',
+    persona: ['coo', 'csco', 'operations_upper_management', 'operations_middle_management', 'operations_entry_level'],
     pain_points: ['effort', 'efficiency'],
     keywords: ['efficiency', 'automation', 'time', 'spreadsheets', 'emails']
   },
   
   // Persona-specific context items
-  // Operations C-Suite
+  // CEO
   {
-    id: 'operations_c_suite_pain_points',
-    title: 'Operations C-Suite Pain Points',
-    content: 'Strategic cost optimization vs service reliability balance, limited visibility into end-to-end freight costs, difficulty maintaining flexibility with long-term contracts, fragmented processes across regions and business units, manual time-consuming procurement processes, high administrative overhead managing multiple carriers, lack of real-time visibility into disruptions, volatile freight rates and market cycles, limited ability to benchmark carrier rates effectively, difficulty proving cost savings to stakeholders.',
+    id: 'ceo_pain_points',
+    title: 'CEO Pain Points',
+    content: 'Strategic Challenges: balancing shareholder demands for profitability with resilient, sustainable freight procurement, limited visibility into how freight costs impact overall corporate strategy, difficulty aligning freight procurement with growth goals. Operational Pain Points: fragmented procurement practices across business units reducing efficiency, over-reliance on outdated procurement models that limit agility, inefficient communication between freight procurement and other strategic functions.',
     category: 'pain_points',
-    persona: ['operations_c_suite'],
-    keywords: ['operations', 'c-suite']
+    persona: ['ceo'],
+    keywords: ['ceo', 'strategic', 'executive', 'corporate']
   },
   {
-    id: 'operations_c_suite_tone_profile',
-    title: 'Operations C-Suite Tone Profile',
-    content: 'Strategic, executive-level language focusing on ROI, scalability, and enterprise-wide impact. Use terms like "strategic initiatives," "enterprise-wide," "C-level visibility," and "board-level metrics." Emphasize high-level business outcomes and competitive advantage.',
+    id: 'ceo_tone_profile',
+    title: 'CEO Tone Profile',
+    content: 'Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.',
     category: 'language_style',
-    persona: ['operations_c_suite'],
-    keywords: ['operations', 'c-suite']
+    persona: ['ceo'],
+    keywords: ['ceo', 'strategic', 'executive', 'vision', 'competitive']
+  },
+  
+  // COO
+  {
+    id: 'coo_pain_points',
+    title: 'COO Pain Points',
+    content: 'Strategic Challenges: translating the CEO\'s vision into executable operational strategies, balancing growth, efficiency, and agility in a fast-changing environment, scaling operations to support expansion while keeping costs under control. Operational Efficiency: eliminating silos between business units to improve collaboration, streamlining processes and reducing inefficiencies in workflows, maintaining consistent performance across global operations.',
+    category: 'pain_points',
+    persona: ['coo'],
+    keywords: ['coo', 'operations', 'execution', 'efficiency']
+  },
+  {
+    id: 'coo_tone_profile',
+    title: 'COO Tone Profile',
+    content: 'Be pragmatic and operational – focus on execution, efficiency, and scalability. Emphasize processes and performance metrics – KPIs, throughput, productivity. Balance detail with clarity – enough to explain how the system runs without bogging down. Results-oriented tone – show how initiatives translate into smoother operations.',
+    category: 'language_style',
+    persona: ['coo'],
+    keywords: ['coo', 'operational', 'efficiency', 'execution', 'metrics']
+  },
+  
+  // CFO
+  {
+    id: 'cfo_pain_points',
+    title: 'CFO Pain Points',
+    content: 'Strategic Challenges: balancing short-term financial performance with long-term growth strategy, driving digital transformation while maintaining financial discipline, navigating M&A, investments, and divestitures. Financial Management: maintaining accurate forecasting in volatile markets, managing cash flow and liquidity under uncertainty, reducing costs without stifling innovation or growth.',
+    category: 'pain_points',
+    persona: ['cfo'],
+    keywords: ['cfo', 'financial', 'strategy', 'performance']
+  },
+  {
+    id: 'cfo_tone_profile',
+    title: 'CFO Tone Profile',
+    content: 'Be precise and evidence-based – numbers, trends, and cost-benefit clarity. Highlight financial impact – ROI, margins, savings, and risk exposure should lead. Be structured – organized, logical delivery with supporting metrics. Eliminate fluff – concise, data-heavy, and straight to financial implications.',
+    category: 'language_style',
+    persona: ['cfo'],
+    keywords: ['cfo', 'financial', 'roi', 'analytics', 'performance']
+  },
+  
+  // CPO
+  {
+    id: 'cpo_pain_points',
+    title: 'CPO Pain Points',
+    content: 'Strategic Challenges: balancing long-term supplier partnerships with short-term cost savings, lack of alignment between procurement and other supply chain stakeholders. Operational Pain Points: manual, time-consuming tendering processes, fragmented workflows across global procurement teams, high administrative burden in managing multiple carriers and brokers.',
+    category: 'pain_points',
+    persona: ['cpo'],
+    keywords: ['cpo', 'procurement', 'sourcing', 'supplier']
+  },
+  {
+    id: 'cpo_tone_profile',
+    title: 'CPO Tone Profile',
+    content: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
+    category: 'language_style',
+    persona: ['cpo'],
+    keywords: ['cpo', 'procurement', 'sourcing', 'strategic', 'excellence']
+  },
+  
+  // CSCO
+  {
+    id: 'csco_pain_points',
+    title: 'CSCO Pain Points',
+    content: 'Strategic Challenges: balancing supply chain resilience with procurement cost efficiency, ensuring freight procurement supports customer service expectations, aligning procurement with sustainability and decarbonization targets. Operational Pain Points: fragmented freight procurement processes across regions and modes, lack of real-time shipment visibility impacting planning accuracy.',
+    category: 'pain_points',
+    persona: ['csco'],
+    keywords: ['csco', 'supply chain', 'resilience', 'customer service']
+  },
+  {
+    id: 'csco_tone_profile',
+    title: 'CSCO Tone Profile',
+    content: 'Be comprehensive but focused – cover risks, dependencies, and performance drivers. Prioritize resilience and optimization – emphasize cost efficiency, reliability, and adaptability. Speak risk-aware – highlight disruptions, mitigations, and continuity planning. Analytical and structured – rely on data, forecasts, and supply chain models.',
+    category: 'language_style',
+    persona: ['csco'],
+    keywords: ['csco', 'supply chain', 'resilience', 'optimization', 'strategy']
+  },
+  
+  // Owner/Founder
+  {
+    id: 'owner_founder_pain_points',
+    title: 'Owner/Founder Pain Points',
+    content: 'Strategic & Vision Challenges: balancing long-term vision with short-term execution pressures, difficulty in prioritizing opportunities vs. distractions, adapting business strategy to rapidly changing market conditions. Financial & Resource Strain: securing consistent cash flow and funding, managing investor expectations while protecting company culture, budget allocation trade-offs between growth and sustainability.',
+    category: 'pain_points',
+    persona: ['owner_founder'],
+    keywords: ['owner', 'founder', 'vision', 'growth', 'strategy']
+  },
+  {
+    id: 'owner_founder_tone_profile',
+    title: 'Owner/Founder Tone Profile',
+    content: 'Be visionary and inspiring – tie messages to purpose, mission, and the "why" behind the business. Personal and passionate – show genuine belief in the product, service, or company\'s journey. Focus on long-term value – sustainability, legacy, and reputation matter alongside financials. Balance detail with narrative – data is useful, but storytelling and conviction often resonate more.',
+    category: 'language_style',
+    persona: ['owner_founder'],
+    keywords: ['owner', 'founder', 'vision', 'growth', 'innovation', 'leadership']
   },
   
   // Operations Upper Management
@@ -478,6 +570,24 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     category: 'language_style',
     persona: ['operations_intern'],
     keywords: ['operations', 'intern']
+  },
+  
+  // First-ever Logistics Manager
+  {
+    id: 'first_logistics_manager_pain_points',
+    title: 'First-ever Logistics Manager Pain Points',
+    content: 'Building from Scratch: establishing processes and systems where none existed before, creating logistics infrastructure for a growing company, defining roles and responsibilities for the new logistics function, setting up carrier relationships and vendor management processes. Resource Constraints: limited budget for logistics technology and tools, need to prove ROI of logistics investments to leadership, balancing cost control with service quality as the company scales.',
+    category: 'pain_points',
+    persona: ['first_logistics_manager'],
+    keywords: ['logistics', 'first-ever', 'startup', 'growing', 'building']
+  },
+  {
+    id: 'first_logistics_manager_tone_profile',
+    title: 'First-ever Logistics Manager Tone Profile',
+    content: 'Be supportive and educational – acknowledge they\'re building something new. Focus on practical, actionable solutions – show how to establish processes and systems. Emphasize growth and scalability – help them build for the future. Use encouraging language – recognize the challenge and opportunity of creating something from scratch.',
+    category: 'language_style',
+    persona: ['first_logistics_manager'],
+    keywords: ['logistics', 'first-ever', 'startup', 'growing', 'building', 'establishing']
   },
   
   // Finance C-Suite
