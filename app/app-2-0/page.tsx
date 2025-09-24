@@ -760,10 +760,11 @@ export default function AlchemailApp20() {
                       {/* Optimize All Button */}
                       {generatedMessages.length > 0 && (
                         <Button
-                          variant="secondary"
+                          variant="default"
                           size="sm"
+                          className="bg-purple-600 hover:bg-purple-700 text-white"
                           onClick={async () => {
-                          const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimizing)
+                            const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimizing)
                           
                           if (unoptimizedMessages.length === 0) {
                             toast({
