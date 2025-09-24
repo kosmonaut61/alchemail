@@ -1434,8 +1434,8 @@ export default function AlchemailApp20() {
                           return match; // Keep original merge field
                         }
                         
-                        // Otherwise, replace with highlighted version
-                        return `<span class="bg-yellow-100 text-yellow-800 px-1 py-0.5 rounded text-xs font-mono">${match}</span>`;
+                        // Otherwise, keep as plain text (no styling)
+                        return match;
                       });
                       
                       // Finally, replace newlines
