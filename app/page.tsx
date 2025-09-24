@@ -1418,8 +1418,11 @@ export default function AlchemailApp20() {
                   className="text-sm whitespace-pre-wrap"
                   dangerouslySetInnerHTML={{
                     __html: (() => {
-                      // First, convert markdown links to HTML
-                      let processed = message.content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                      // First, convert markdown bold formatting to HTML
+                      let processed = message.content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                      
+                      // Then, convert markdown links to HTML
+                      processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
                       
                       // Then, replace merge fields that are NOT inside href attributes
                       processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
