@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -14,7 +14,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
-import { ContextItem } from "@/lib/context-repository"
+import { ContextItem, CONTEXT_REPOSITORY, getContextItemsByPersona } from "@/lib/context-repository"
 
 // Types for the 2.0 app
 interface SequencePlan {
@@ -58,6 +58,26 @@ export default function AlchemailApp20() {
   const [isGeneratingPlan, setIsGeneratingPlan] = useState(false)
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const { toast } = useToast()
+
+  // Initialize all context items on component mount
+  useEffect(() => {
+    setAllContextItems(CONTEXT_REPOSITORY)
+  }, [])
+
+  // Auto-select context items when persona changes
+  useEffect(() => {
+    if (persona) {
+      const personaContextItems = getContextItemsByPersona(persona)
+      if (personaContextItems.length > 0) {
+        setSelectedContextItems(personaContextItems)
+        setContextItems(personaContextItems)
+        toast({
+          title: "Context Items Auto-Selected",
+          description: `Automatically selected ${personaContextItems.length} context items for ${persona}.`,
+        })
+      }
+    }
+  }, [persona, toast])
 
   const steps = [
     { id: 1, title: "Signal", description: "Define your outreach signal and target persona" },
@@ -736,16 +756,13 @@ export default function AlchemailApp20() {
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Regenerate
                       </Button>
-                    </div>
-                  </div>
-
-                  {/* Optimize All Button */}
-                  {generatedMessages.length > 0 && (
-                    <div className="mb-4">
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={async () => {
+                      
+                      {/* Optimize All Button */}
+                      {generatedMessages.length > 0 && (
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          onClick={async () => {
                           const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimizing)
                           
                           if (unoptimizedMessages.length === 0) {
@@ -850,12 +867,13 @@ export default function AlchemailApp20() {
                         ) : (
                           <>
                             <Sparkles className="mr-2 h-4 w-4" />
-                            Optimize All Messages
+                            Optimize All
                           </>
                         )}
-                      </Button>
+                        </Button>
+                      )}
                     </div>
-                  )}
+                  </div>
 
                   {generatedMessages.map((message) => (
                     <div key={message.id} className="p-4 border rounded-lg">
