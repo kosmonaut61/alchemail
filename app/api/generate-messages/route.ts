@@ -255,6 +255,15 @@ TARGET PERSONA:
       
       You MUST include the signal in the email exactly as specified in the signalIntegration instruction above.
 
+      ${sequencePlan.isIncentivized && emailPlan.includeIncentive ? `
+      INCENTIVE REQUIREMENT:
+      - This email should mention the $${sequencePlan.incentiveAmount} gift card incentive
+      - Include it naturally in the context of demo bookings or calls
+      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "$${sequencePlan.incentiveAmount} Visa gift card", or "$${sequencePlan.incentiveAmount} gift card for your time"
+      - Make it feel like genuine appreciation for their time, not a bribe
+      - Only mention it if the email has a demo/call CTA
+      ` : ''}
+
       Write a complete email that:
       1. Uses the exact subject line provided
       2. Follows the purpose and signal integration guidelines EXACTLY as specified
@@ -479,6 +488,15 @@ LINKEDIN MESSAGE SPECIFICATIONS:
       IMPORTANT: Mention the signal naturally and conversationally, like "Nice to see you checking our integrations page" or "I noticed you were looking at our demo page." Make it feel friendly and human, not robotic or analytical.
 
       CRITICAL: You MUST follow the Signal Integration instructions exactly. The signalIntegration field tells you exactly how to integrate the signal - follow it precisely.
+
+      ${sequencePlan.isIncentivized && linkedInPlan.includeIncentive ? `
+      INCENTIVE REQUIREMENT:
+      - This LinkedIn message should mention the $${sequencePlan.incentiveAmount} gift card incentive
+      - Include it naturally in the context of demo bookings or calls
+      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "$${sequencePlan.incentiveAmount} Visa gift card", or "$${sequencePlan.incentiveAmount} gift card for your time"
+      - Make it feel like genuine appreciation for their time, not a bribe
+      - Only mention it if the message has a demo/call CTA
+      ` : ''}
 
 Write a LinkedIn message that:
 1. Follows the purpose and signal integration guidelines

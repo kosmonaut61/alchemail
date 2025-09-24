@@ -112,7 +112,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
 
 export async function POST(request: NextRequest) {
   try {
-    const { signal, persona, painPoints, emailCount, linkedInCount, contextItems } = await request.json()
+    const { signal, persona, painPoints, emailCount, linkedInCount, contextItems, isIncentivized = false, incentiveAmount = 500 } = await request.json()
 
     if (!signal || !persona) {
       return NextResponse.json(
@@ -174,6 +174,17 @@ ${formatVariablesForPrompt()}
 SEQUENCE REQUIREMENTS:
 - Emails: ${emailCount}
 - LinkedIn Messages: ${linkedInCount}
+
+${isIncentivized ? `
+INCENTIVE CAMPAIGN REQUIREMENTS:
+- This is an incentivized campaign with a $${incentiveAmount} gift card offer
+- 50% of messages (approximately ${Math.round((emailCount + linkedInCount) * 0.5)} out of ${emailCount + linkedInCount} total messages) should mention the gift card incentive
+- Distribute the incentive mentions strategically across the sequence - don't put them all at the beginning or end
+- The incentive should be mentioned naturally in the context of demo bookings or calls
+- Use phrases like "up to $${incentiveAmount} gift card", "$${incentiveAmount} Visa gift card", or "$${incentiveAmount} gift card for your time"
+- Make the incentive feel like a genuine appreciation for their time, not a bribe
+- Only mention the incentive in messages that have demo/call CTAs
+` : ''}
 
 Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
@@ -252,6 +263,8 @@ CRITICAL: You must respond with ONLY valid JSON. Do not include any text before 
 
 Return your response as a JSON object with this exact structure:
 {
+  "isIncentivized": ${isIncentivized},
+  "incentiveAmount": ${incentiveAmount},
   "emails": [
     {
       "day": 1,
@@ -267,7 +280,8 @@ Return your response as a JSON object with this exact structure:
         "valueProp": "Core value proposition for this message",
         "cta": "Call to action approach",
         "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
-      }
+      },
+      "includeIncentive": ${isIncentivized ? 'true/false - whether this email should mention the gift card incentive' : 'false'}
     }
   ],
   "linkedInMessages": [
@@ -284,7 +298,8 @@ Return your response as a JSON object with this exact structure:
         "valueProp": "Core value proposition for this message",
         "cta": "Call to action approach",
         "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
-      }
+      },
+      "includeIncentive": ${isIncentivized ? 'true/false - whether this LinkedIn message should mention the gift card incentive' : 'false'}
     }
   ],
   "totalDays": 8

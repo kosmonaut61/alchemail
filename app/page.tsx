@@ -21,11 +21,14 @@ import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
 
 // Types for the 2.0 app
 interface SequencePlan {
+  isIncentivized?: boolean
+  incentiveAmount?: number
   emails: Array<{
     day: number
     subject: string
     purpose: string
     signalIntegration: string
+    includeIncentive?: boolean
     messageOutline?: {
       assignedContext?: string
     }
@@ -34,6 +37,7 @@ interface SequencePlan {
     day: number
     purpose: string
     signalIntegration: string
+    includeIncentive?: boolean
     messageOutline?: {
       assignedContext?: string
     }
@@ -61,6 +65,8 @@ export default function AlchemailApp20() {
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
   const [emailCount, setEmailCount] = useState(3)
   const [linkedInCount, setLinkedInCount] = useState(2)
+  const [isIncentivized, setIsIncentivized] = useState(false)
+  const [incentiveAmount, setIncentiveAmount] = useState(500)
   const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
   const [contextItems, setContextItems] = useState<any[]>([])
   const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
@@ -750,6 +756,40 @@ export default function AlchemailApp20() {
                 </div>
               </div>
 
+              {/* Incentivized Campaign Toggle */}
+              <div className="space-y-4 p-4 border rounded-lg bg-muted/30">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="incentivized"
+                    checked={isIncentivized}
+                    onCheckedChange={(checked) => setIsIncentivized(checked as boolean)}
+                  />
+                  <Label htmlFor="incentivized" className="text-sm font-medium">
+                    Incentivized Campaign
+                  </Label>
+                </div>
+                {isIncentivized && (
+                  <div className="space-y-2">
+                    <Label htmlFor="incentiveAmount" className="text-sm">
+                      Gift Card Amount ($)
+                    </Label>
+                    <Input
+                      id="incentiveAmount"
+                      type="number"
+                      min="50"
+                      max="1000"
+                      step="50"
+                      value={incentiveAmount}
+                      onChange={(e) => setIncentiveAmount(parseInt(e.target.value) || 500)}
+                      className="w-32"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      50% of messages will mention the gift card incentive for demo bookings
+                    </p>
+                  </div>
+                )}
+              </div>
+
               {!sequencePlan ? (
                 <div className="text-center py-8">
                   <Button 
@@ -763,7 +803,9 @@ export default function AlchemailApp20() {
                         painPoints,
                         emailCount,
                         linkedInCount,
-                        contextItems: selectedContextItems
+                        contextItems: selectedContextItems,
+                        isIncentivized,
+                        incentiveAmount
                       }
                       console.log('🚀 CLIENT: Making API call to generate-sequence-plan')
                       console.log('📧 MODEL: gpt-5-mini')
@@ -782,7 +824,9 @@ export default function AlchemailApp20() {
                             painPoints,
                             emailCount,
                             linkedInCount,
-                            contextItems: selectedContextItems
+                            contextItems: selectedContextItems,
+                            isIncentivized,
+                            incentiveAmount
                           }),
                         })
 
@@ -909,7 +953,9 @@ export default function AlchemailApp20() {
                             painPoints,
                             emailCount,
                             linkedInCount,
-                            contextItems: selectedContextItems
+                            contextItems: selectedContextItems,
+                            isIncentivized,
+                            incentiveAmount
                           }
                           console.log('🔄 CLIENT: Retrying API call to generate-sequence-plan')
                           console.log('📧 MODEL: gpt-5-mini')
@@ -928,7 +974,9 @@ export default function AlchemailApp20() {
                                 painPoints,
                                 emailCount,
                                 linkedInCount,
-                                contextItems: selectedContextItems
+                                contextItems: selectedContextItems,
+                                isIncentivized,
+                                incentiveAmount
                               }),
                             })
 
