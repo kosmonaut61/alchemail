@@ -79,7 +79,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'ezrack_case_study',
     title: 'EZRack Case Study',
-    content: 'Realized 6 figure savings in less than a year, saves countless man hours in manual work.',
+    content: 'Realized double digit % savings in less than a year, saves countless man hours in manual work.',
     category: 'resource',
     industry: ['logistics', 'warehousing'],
     keywords: ['ezrack', 'logistics', 'savings', 'automation'],
