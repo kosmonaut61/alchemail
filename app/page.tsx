@@ -23,6 +23,10 @@ import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
 interface SequencePlan {
   isIncentivized?: boolean
   incentiveAmount?: number
+  linkedInConnectionRequest?: {
+    day: number
+    purpose: string
+  }
   emails: Array<{
     day: number
     subject: string
@@ -863,7 +867,7 @@ export default function AlchemailApp20() {
                         
                         toast({
                           title: "Sequence Plan Generated!",
-                          description: `Created ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
+                          description: `Created 1 LinkedIn connection request, ${data.sequencePlan.emails.length} emails, and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                         })
 
                         // Automatically advance to step 3 and start generating messages
@@ -946,6 +950,20 @@ export default function AlchemailApp20() {
                 </div>
 
               
+                  {sequencePlan.linkedInConnectionRequest && (
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">LinkedIn Connection Request</h3>
+                      <div className="p-4 border rounded-lg bg-purple-50 dark:bg-purple-950">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-medium">Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-xs text-muted-foreground">Connection Request</span>
+                        </div>
+                        <h4 className="font-medium">Send Connection Request on LinkedIn</h4>
+                        <p className="text-sm text-muted-foreground mt-1">{sequencePlan.linkedInConnectionRequest.purpose}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
                     {sequencePlan.emails.map((email, index) => (
@@ -1048,7 +1066,7 @@ export default function AlchemailApp20() {
                             
                             toast({
                               title: "Sequence Plan Regenerated!",
-                              description: `Created new ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
+                              description: `Created new 1 LinkedIn connection request, ${data.sequencePlan.emails.length} emails, and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                             })
                           } catch (error) {
                             console.error('Error regenerating sequence plan:', error)

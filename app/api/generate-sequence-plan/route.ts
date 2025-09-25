@@ -204,6 +204,7 @@ Create a strategic sequence plan that:
 14. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
 15. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
 16. CRITICAL: The FIRST LinkedIn message must casually reference the email that was just sent - use natural, conversational language like "Hey, sent something to your inbox but wanted to touch base here too..." or "Sent you an email too but wanted to ask you if..." - make it feel casual and natural, not formal or scripted - avoid using the same phrasing repeatedly, create unique variations for each sequence
+17. CRITICAL: EVERY sequence must start with "Send Connection Request on LinkedIn" on Day 1 - this is always the first step and happens on the same day as the first email
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -267,6 +268,10 @@ Return your response as a JSON object with this exact structure:
 {
   "isIncentivized": ${isIncentivized},
   "incentiveAmount": ${incentiveAmount},
+  "linkedInConnectionRequest": {
+    "day": 1,
+    "purpose": "Send connection request on LinkedIn to establish initial contact before email outreach"
+  },
   "emails": [
     {
       "day": 1,
