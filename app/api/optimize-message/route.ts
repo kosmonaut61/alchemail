@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
 
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Using your advanced capabilities, optimize this message for maximum engagement and response rates.
 
-CRITICAL: Be CONSERVATIVE with changes. Preserve the original's conversation context, email references, and relationship flow. Only enhance what's already there - don't strip out important context or make follow-up messages sound like cold outreach.
+CRITICAL: Rewrite for cohesive, natural flow while preserving the original's conversation context, email references, and relationship flow. Don't just enhance - rewrite to match the persona's tone profile and create smooth, natural sentences that flow together. Keep the main context items but make them feel like a cohesive thought, not choppy fragments.
 
 ORIGINAL MESSAGE:
 ${originalContent}
@@ -150,6 +150,9 @@ OPTIMIZATION GUIDELINES:
 34. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 35. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
 36. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
+37. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
+38. USE ACTUAL URLs: When referencing resources like videos, case studies, or other materials, use the EXACT URLs provided in the context repository - do NOT make up or create fake URLs - if a context item has a URL field, use that exact URL, not a made-up one
+39. WRITE COHESIVE SENTENCES: Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel like a cohesive thought - avoid breaking up natural flow with unnecessary pauses or fragments - make it read like natural conversation, not bullet points
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -276,6 +279,14 @@ MERGE FIELD FORMATTING:
 - Always preserve merge field syntax exactly: {{variable.name}}
 - Do NOT modify or break merge field formatting
 - You can add new merge fields for personalization where appropriate
+- CRITICAL: When referring to someone's role/title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position"
+- CRITICAL: When referencing resources with URLs, use the EXACT URLs from the context repository - do NOT create fake or made-up URLs
+
+COHESIVE WRITING REQUIREMENTS:
+- Rewrite choppy, fragmented sentences into smooth, natural flowing statements
+- Create cohesive thoughts that flow together naturally - avoid unnecessary pauses or fragments
+- Make it read like natural conversation, not bullet points or choppy statements
+- Match the persona's tone profile while maintaining smooth sentence flow
 
 ${formatVariablesForPrompt()}
 
@@ -327,7 +338,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Do NOT add signatures, contact information, or make messages longer than the original.'
+            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',
@@ -377,7 +388,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Do NOT add signatures, contact information, or make messages longer than the original.'
+            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',

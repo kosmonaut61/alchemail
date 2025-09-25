@@ -203,7 +203,7 @@ Create a strategic sequence plan that:
 13. Use customer names and industry-specific examples to build immediate credibility and relevance
 14. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
 15. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
-16. CRITICAL: LinkedIn messages should reference the email that was just sent - create cross-channel coordination by mentioning the email content, subject line, or key points from the preceding email
+16. CRITICAL: The FIRST LinkedIn message must casually reference the email that was just sent - use natural, conversational language like "Hey, sent something to your inbox but wanted to touch base here too..." or "Sent you an email too but wanted to ask you if..." - make it feel casual and natural, not formal or scripted - avoid using the same phrasing repeatedly, create unique variations for each sequence
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -231,11 +231,12 @@ DETAILED MESSAGE OUTLINES REQUIRED:
 - CRITICAL: Only reference the actual signal provided - do not make up or assume additional context
 
 LINKEDIN MESSAGE COORDINATION REQUIREMENTS:
-- LinkedIn messages MUST casually mention the email that was just sent (e.g., "Quick thought on that email I sent about...", "Building on what I shared earlier...", "One more thing about the email I sent...")
-- Casually reference specific elements from the preceding email: subject line, key stats mentioned, customer examples, or main value proposition
-- Create natural, casual transitions like "Quick thought on that email I sent about..." or "Building on the [specific topic] I mentioned earlier..."
-- Make the LinkedIn message feel like a natural, casual continuation of the email conversation, not a formal follow-up
-- Use casual phrases like "quick thought on that email", "building on what I shared earlier", "one more thing about", "expanding on what I mentioned", "casual follow-up to that email"
+- The FIRST LinkedIn message MUST casually reference the email that was just sent - use natural, conversational language that feels authentic and personal
+- Create unique, natural variations for each sequence - avoid using the same phrases repeatedly across different campaigns
+- Casually reference the email in a way that feels like a natural continuation of the conversation, not a formal follow-up
+- Use casual, authentic language that varies each time - create fresh, natural ways to mention the email without being repetitive
+- Make it feel like a genuine, personal touchpoint that builds on the email relationship
+- Do not imply you have spoken with them directly, only that you have previously reached out.
 
 SIGNAL INTEGRATION REQUIREMENTS:
 - Use natural, casual language that flows like the sample emails
