@@ -23,6 +23,10 @@ import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
 interface SequencePlan {
   isIncentivized?: boolean
   incentiveAmount?: number
+  linkedInConnectionRequest?: {
+    day: number
+    purpose: string
+  }
   emails: Array<{
     day: number
     subject: string
@@ -63,8 +67,8 @@ export default function AlchemailApp20() {
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
-  const [emailCount, setEmailCount] = useState(3)
-  const [linkedInCount, setLinkedInCount] = useState(2)
+  const [emailCount, setEmailCount] = useState(8)
+  const [linkedInCount, setLinkedInCount] = useState(3)
   const [isIncentivized, setIsIncentivized] = useState(true)
   const [incentiveAmount, setIncentiveAmount] = useState(500)
   const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
@@ -863,7 +867,7 @@ export default function AlchemailApp20() {
                         
                         toast({
                           title: "Sequence Plan Generated!",
-                          description: `Created ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
+                          description: `Created 1 LinkedIn connection request, ${data.sequencePlan.emails.length} emails, and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                         })
 
                         // Automatically advance to step 3 and start generating messages
@@ -946,6 +950,20 @@ export default function AlchemailApp20() {
                 </div>
 
               
+                  {sequencePlan.linkedInConnectionRequest && (
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">LinkedIn Connection Request</h3>
+                      <div className="p-4 border rounded-lg bg-purple-50 dark:bg-purple-950">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-medium">Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-xs text-muted-foreground">Connection Request</span>
+                        </div>
+                        <h4 className="font-medium">Send Connection Request on LinkedIn</h4>
+                        <p className="text-sm text-muted-foreground mt-1">{sequencePlan.linkedInConnectionRequest.purpose}</p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="space-y-4">
                     <h3 className="font-semibold">Email Sequence</h3>
                     {sequencePlan.emails.map((email, index) => (
@@ -1048,7 +1066,7 @@ export default function AlchemailApp20() {
                             
                             toast({
                               title: "Sequence Plan Regenerated!",
-                              description: `Created new ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
+                              description: `Created new 1 LinkedIn connection request, ${data.sequencePlan.emails.length} emails, and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                             })
                           } catch (error) {
                             console.error('Error regenerating sequence plan:', error)
@@ -1389,6 +1407,21 @@ export default function AlchemailApp20() {
               </div>
 
               
+                  {sequencePlan.linkedInConnectionRequest && (
+                    <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-900">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium">Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                            Connection Request
+                          </span>
+                        </div>
+                      </div>
+                      <h4 className="font-medium mb-2">Send Connection Request on LinkedIn</h4>
+                      <p className="text-sm text-muted-foreground">{sequencePlan.linkedInConnectionRequest.purpose}</p>
+                    </div>
+                  )}
+
                   {generatedMessages.map((message) => (
                     <div key={message.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
