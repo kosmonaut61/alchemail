@@ -1572,12 +1572,41 @@ export default function AlchemailApp20() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => {
-                      navigator.clipboard.writeText(message.content)
-                      toast({
-                        title: "Copied to clipboard!",
-                        description: "Message content copied - ready to paste into your CRM.",
-                      })
+                    onClick={async () => {
+                      try {
+                        // Convert markdown-style formatting to HTML for rich text copying
+                        const htmlContent = message.content
+                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+                          .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+                          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>') // Links
+                          .replace(/\n/g, '<br>') // Line breaks
+                        
+                        // Create a plain text version for fallback
+                        const plainText = message.content
+                          .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold formatting
+                          .replace(/\*(.*?)\*/g, '$1') // Remove italic formatting
+                          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)') // Convert links to text
+                        
+                        // Copy as rich text (HTML) with plain text fallback
+                        await navigator.clipboard.write([
+                          new ClipboardItem({
+                            'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                            'text/plain': new Blob([plainText], { type: 'text/plain' })
+                          })
+                        ])
+                        
+                        toast({
+                          title: "Copied to clipboard!",
+                          description: "Message content copied with formatting - ready to paste into your CRM.",
+                        })
+                      } catch (error) {
+                        // Fallback to plain text if rich text copying fails
+                        navigator.clipboard.writeText(message.content)
+                        toast({
+                          title: "Copied to clipboard!",
+                          description: "Message content copied as plain text.",
+                        })
+                      }
                     }}
                   >
                     Copy
