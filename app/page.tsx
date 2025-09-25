@@ -67,6 +67,37 @@ export default function AlchemailApp20() {
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
+
+  // Auto-select context items when persona changes
+  const handlePersonaChange = (newPersona: string) => {
+    setPersona(newPersona)
+    
+    // Auto-select relevant context items for this persona
+    const personaData = PERSONA_DEFINITIONS.find(p => p.id === newPersona)
+    if (personaData) {
+      // Find pain point and tone profile context items that match this persona
+      const relevantContextItems = allContextItems.filter(item => {
+        // Check if this context item is relevant to the persona
+        if (item.persona && item.persona.includes(newPersona)) {
+          return true
+        }
+        
+        // Check if this is a pain point or tone profile context item
+        if (item.category === 'pain_points' || item.category === 'language_style') {
+          return true
+        }
+        
+        return false
+      })
+      
+      // Add these items to selected context items (without duplicates)
+      setSelectedContextItems(prev => {
+        const existingIds = new Set(prev.map(item => item.id))
+        const newItems = relevantContextItems.filter(item => !existingIds.has(item.id))
+        return [...prev, ...newItems]
+      })
+    }
+  }
   const [emailCount, setEmailCount] = useState(8)
   const [linkedInCount, setLinkedInCount] = useState(3)
   const [isIncentivized, setIsIncentivized] = useState(true)
@@ -340,7 +371,7 @@ export default function AlchemailApp20() {
 
                 <div className="space-y-2">
                   <Label htmlFor="persona">Target Persona *</Label>
-                  <Select value={persona} onValueChange={setPersona}>
+                  <Select value={persona} onValueChange={handlePersonaChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
