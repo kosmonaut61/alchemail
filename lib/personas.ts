@@ -1,4 +1,4 @@
-// Detailed persona definitions with pain points and tone profiles
+// Simplified persona definitions with merged content
 
 export interface PersonaDefinition {
   id: string
