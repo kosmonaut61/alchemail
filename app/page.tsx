@@ -1411,7 +1411,7 @@ export default function AlchemailApp20() {
                     <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-900">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-sm font-medium">Step 1: Day {sequencePlan.linkedInConnectionRequest.day}</span>
                           <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                             Connection Request
                           </span>
@@ -1422,11 +1422,14 @@ export default function AlchemailApp20() {
                     </div>
                   )}
 
-                  {generatedMessages.map((message) => (
+                  {generatedMessages.map((message, index) => {
+                    // Calculate step number: Step 1 is connection request, so messages start at Step 2
+                    const stepNumber = index + 2
+                    return (
                     <div key={message.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Day {message.day}</span>
+                          <span className="text-sm font-medium">Step {stepNumber}: Day {message.day}</span>
                           <span className={`px-2 py-1 rounded-full text-xs ${
                             message.type === 'email' 
                               ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
@@ -1612,7 +1615,8 @@ export default function AlchemailApp20() {
                 />
               </div>
                     </div>
-                  ))}
+                    )
+                  })}
                 </div>
               )}
             </CardContent>
