@@ -434,7 +434,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
         console.log('='.repeat(80) + '\n')
         
         generatedMessages.push({
-          id: `email-${emailPlan.day}`,
+          id: `email-${emailPlan.day}-${sequencePlan.emails.indexOf(emailPlan)}`,
           type: 'email',
           day: emailPlan.day,
           content: emailContent,
@@ -607,7 +607,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
         console.log('='.repeat(80) + '\n')
         
         generatedMessages.push({
-          id: `linkedin-${linkedInPlan.day}`,
+          id: `linkedin-${linkedInPlan.day}-${sequencePlan.linkedInMessages.indexOf(linkedInPlan)}`,
           type: 'linkedin',
           day: linkedInPlan.day,
           content: linkedInContent,
