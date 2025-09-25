@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
-import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry, ContextItem } from "@/lib/context-repository"
+import { CONTEXT_REPOSITORY, ContextItem } from "@/lib/context-repository"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
 import { formatSamplesForPrompt, getPersonaExampleEmail } from "@/lib/email-samples"
 import { formatVariablesForPrompt } from "@/lib/dynamic-variables"
@@ -30,14 +30,20 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Find context items that match signal keywords
   const signalKeywords = [...industryKeywords, ...companyKeywords, ...specificKeywords]
-  const keywordMatches = getContextItemsByKeywords(signalKeywords.filter(keyword => 
-    signalLower.includes(keyword)
-  ))
+  const keywordMatches = CONTEXT_REPOSITORY.filter(item => 
+    item.keywords && signalKeywords.some(keyword => 
+      signalLower.includes(keyword) && item.keywords!.some(itemKeyword => 
+        itemKeyword.toLowerCase().includes(keyword.toLowerCase())
+      )
+    )
+  )
   
   // Find context items that match industry mentions
   const industryMatches = industryKeywords
     .filter(industry => signalLower.includes(industry))
-    .flatMap(industry => getContextItemsByIndustry(industry))
+    .flatMap(industry => CONTEXT_REPOSITORY.filter(item => 
+      item.industry && item.industry.includes(industry)
+    ))
   
   // Also find context items by checking if any context item keywords appear in the signal
   const directMatches = CONTEXT_REPOSITORY.filter(item => {
@@ -257,11 +263,13 @@ TARGET PERSONA:
 
       ${sequencePlan.isIncentivized && emailPlan.includeIncentive ? `
       INCENTIVE REQUIREMENT:
-      - This email should mention the $${sequencePlan.incentiveAmount} gift card incentive
+      - This email should mention the gift card incentive
+      - CRITICAL: Always use "up to $${sequencePlan.incentiveAmount}" language - never promise the full amount
       - Include it naturally in the context of demo bookings or calls
-      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "$${sequencePlan.incentiveAmount} Visa gift card", or "$${sequencePlan.incentiveAmount} gift card for your time"
+      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "up to $${sequencePlan.incentiveAmount} Visa gift card", or "up to $${sequencePlan.incentiveAmount} gift card for your time"
       - Make it feel like genuine appreciation for their time, not a bribe
       - Only mention it if the email has a demo/call CTA
+      - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the incentive separately
       ` : ''}
 
       Write a complete email that:
@@ -491,11 +499,13 @@ LINKEDIN MESSAGE SPECIFICATIONS:
 
       ${sequencePlan.isIncentivized && linkedInPlan.includeIncentive ? `
       INCENTIVE REQUIREMENT:
-      - This LinkedIn message should mention the $${sequencePlan.incentiveAmount} gift card incentive
+      - This LinkedIn message should mention the gift card incentive
+      - CRITICAL: Always use "up to $${sequencePlan.incentiveAmount}" language - never promise the full amount
       - Include it naturally in the context of demo bookings or calls
-      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "$${sequencePlan.incentiveAmount} Visa gift card", or "$${sequencePlan.incentiveAmount} gift card for your time"
+      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "up to $${sequencePlan.incentiveAmount} Visa gift card", or "up to $${sequencePlan.incentiveAmount} gift card for your time"
       - Make it feel like genuine appreciation for their time, not a bribe
       - Only mention it if the message has a demo/call CTA
+      - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the incentive separately
       ` : ''}
 
 Write a LinkedIn message that:
