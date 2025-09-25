@@ -151,6 +151,7 @@ OPTIMIZATION GUIDELINES:
 35. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
 36. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
 37. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
+38. USE ACTUAL URLs: When referencing resources like videos, case studies, or other materials, use the EXACT URLs provided in the context repository - do NOT make up or create fake URLs - if a context item has a URL field, use that exact URL, not a made-up one
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -278,6 +279,7 @@ MERGE FIELD FORMATTING:
 - Do NOT modify or break merge field formatting
 - You can add new merge fields for personalization where appropriate
 - CRITICAL: When referring to someone's role/title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position"
+- CRITICAL: When referencing resources with URLs, use the EXACT URLs from the context repository - do NOT create fake or made-up URLs
 
 ${formatVariablesForPrompt()}
 
@@ -329,7 +331,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Do NOT add signatures, contact information, or make messages longer than the original.'
+            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',
@@ -379,7 +381,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Do NOT add signatures, contact information, or make messages longer than the original.'
+            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',
