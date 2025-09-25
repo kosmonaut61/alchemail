@@ -65,7 +65,7 @@ export default function AlchemailApp20() {
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
   const [emailCount, setEmailCount] = useState(3)
   const [linkedInCount, setLinkedInCount] = useState(2)
-  const [isIncentivized, setIsIncentivized] = useState(false)
+  const [isIncentivized, setIsIncentivized] = useState(true)
   const [incentiveAmount, setIncentiveAmount] = useState(500)
   const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
   const [contextItems, setContextItems] = useState<any[]>([])
@@ -865,6 +865,50 @@ export default function AlchemailApp20() {
                           title: "Sequence Plan Generated!",
                           description: `Created ${data.sequencePlan.emails.length} emails and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                         })
+
+                        // Automatically advance to step 3 and start generating messages
+                        setCurrentStep(3)
+                        
+                        // Start generating messages immediately
+                        setIsGeneratingMessages(true)
+                        try {
+                          const messagesResponse = await fetch('/api/generate-messages', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                              sequencePlan: data.sequencePlan,
+                              signal,
+                              persona,
+                              painPoints,
+                              contextItems: data.contextItems || [],
+                              isIncentivized,
+                              incentiveAmount
+                            }),
+                          })
+
+                          if (!messagesResponse.ok) {
+                            throw new Error('Failed to generate messages')
+                          }
+
+                          const messagesData = await messagesResponse.json()
+                          setGeneratedMessages(messagesData.messages)
+                          
+                          toast({
+                            title: "Sequence Generated!",
+                            description: `Generated ${messagesData.messages.length} optimized messages.`,
+                          })
+                        } catch (messagesError) {
+                          console.error('Error generating messages:', messagesError)
+                          toast({
+                            title: "Message Generation Failed",
+                            description: "Failed to generate messages. Please try again.",
+                            variant: "destructive",
+                          })
+                        } finally {
+                          setIsGeneratingMessages(false)
+                        }
                       } catch (error) {
                         console.error('Error generating sequence plan:', error)
                         toast({
