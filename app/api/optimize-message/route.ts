@@ -90,6 +90,11 @@ CONTEXT:
 - Signal: ${signal}
 - Pain Points: ${painPoints.join(', ') || 'Not specified'}
 
+PERSONA-SPECIFIC PAIN POINTS TO REFERENCE:
+${personaData.painPoints.slice(0, 3).map(painPoint => `- ${painPoint}`).join('\n')}
+
+CRITICAL: Reference at least ONE specific pain point from the persona's pain points above that directly relates to the message content. This makes the message highly relevant and personalized to their specific challenges. Choose the most relevant pain point and weave it naturally into the message.
+
 SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
