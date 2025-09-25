@@ -67,6 +67,37 @@ export default function AlchemailApp20() {
   const [painPoints, setPainPoints] = useState<string[]>([])
   const [selectedContextItems, setSelectedContextItems] = useState<ContextItem[]>([])
   const [allContextItems, setAllContextItems] = useState<ContextItem[]>([])
+
+  // Auto-select context items when persona changes
+  const handlePersonaChange = (newPersona: string) => {
+    setPersona(newPersona)
+    
+    // Auto-select relevant context items for this persona
+    const personaData = PERSONA_DEFINITIONS.find(p => p.id === newPersona)
+    if (personaData) {
+      // Find pain point and tone profile context items that match this persona
+      const relevantContextItems = allContextItems.filter(item => {
+        // Check if this context item is relevant to the persona
+        if (item.persona && item.persona.includes(newPersona)) {
+          return true
+        }
+        
+        // Check if this is a pain point or tone profile context item
+        if (item.category === 'pain_points' || item.category === 'language_style') {
+          return true
+        }
+        
+        return false
+      })
+      
+      // Add these items to selected context items (without duplicates)
+      setSelectedContextItems(prev => {
+        const existingIds = new Set(prev.map(item => item.id))
+        const newItems = relevantContextItems.filter(item => !existingIds.has(item.id))
+        return [...prev, ...newItems]
+      })
+    }
+  }
   const [emailCount, setEmailCount] = useState(8)
   const [linkedInCount, setLinkedInCount] = useState(3)
   const [isIncentivized, setIsIncentivized] = useState(true)
@@ -340,7 +371,7 @@ export default function AlchemailApp20() {
 
                 <div className="space-y-2">
                   <Label htmlFor="persona">Target Persona *</Label>
-                  <Select value={persona} onValueChange={setPersona}>
+                  <Select value={persona} onValueChange={handlePersonaChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select target persona" />
                     </SelectTrigger>
@@ -350,52 +381,26 @@ export default function AlchemailApp20() {
                         C-Suite
                       </div>
                       <SelectItem value="ceo">CEO</SelectItem>
+                      <SelectItem value="president">President</SelectItem>
                       <SelectItem value="coo">COO</SelectItem>
                       <SelectItem value="cfo">CFO</SelectItem>
-                      <SelectItem value="cpo">CPO (Chief Procurement Officer)</SelectItem>
                       <SelectItem value="csco">CSCO (Chief Supply Chain Officer)</SelectItem>
-                      <SelectItem value="owner_founder">Owner / Founder</SelectItem>
                       
-                      {/* Upper Management Level */}
+                      {/* Operations Department */}
                       <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-                        Upper Management
+                        Operations
                       </div>
-                      <SelectItem value="operations_upper_management">Operations</SelectItem>
-                      <SelectItem value="finance_upper_management">Finance</SelectItem>
-                      <SelectItem value="logistics_upper_management">Logistics</SelectItem>
-                      <SelectItem value="supply_chain_upper_management">Supply Chain</SelectItem>
-                      <SelectItem value="sourcing_procurement_upper_management">Sourcing Procurement</SelectItem>
+                      <SelectItem value="operations_management">Operations Management</SelectItem>
+                      <SelectItem value="operations_entry_level">Operations Entry Level</SelectItem>
+                      <SelectItem value="operations_intern">Operations Intern</SelectItem>
                       
-                      {/* Middle Management Level */}
+                      {/* Finance Department */}
                       <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-                        Middle Management
+                        Finance
                       </div>
-                      <SelectItem value="operations_middle_management">Operations</SelectItem>
-                      <SelectItem value="finance_middle_management">Finance</SelectItem>
-                      <SelectItem value="logistics_middle_management">Logistics</SelectItem>
-                      <SelectItem value="supply_chain_middle_management">Supply Chain</SelectItem>
-                      <SelectItem value="sourcing_procurement_middle_management">Sourcing Procurement</SelectItem>
-                      <SelectItem value="first_logistics_manager">First-ever Logistics Manager</SelectItem>
-                      
-                      {/* Entry Level */}
-                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-                        Entry Level
-                      </div>
-                      <SelectItem value="operations_entry_level">Operations</SelectItem>
-                      <SelectItem value="finance_entry_level">Finance</SelectItem>
-                      <SelectItem value="logistics_entry_level">Logistics</SelectItem>
-                      <SelectItem value="supply_chain_entry_level">Supply Chain</SelectItem>
-                      <SelectItem value="sourcing_procurement_entry_level">Sourcing Procurement</SelectItem>
-                      
-                      {/* Intern Level */}
-                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-                        Intern
-                      </div>
-                      <SelectItem value="operations_intern">Operations</SelectItem>
-                      <SelectItem value="finance_intern">Finance</SelectItem>
-                      <SelectItem value="logistics_intern">Logistics</SelectItem>
-                      <SelectItem value="supply_chain_intern">Supply Chain</SelectItem>
-                      <SelectItem value="sourcing_procurement_intern">Sourcing Procurement</SelectItem>
+                      <SelectItem value="finance_management">Finance Management</SelectItem>
+                      <SelectItem value="finance_entry_level">Finance Entry Level</SelectItem>
+                      <SelectItem value="finance_intern">Finance Intern</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
