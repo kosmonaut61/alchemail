@@ -157,7 +157,9 @@ OPTIMIZATION GUIDELINES:
 36. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
 37. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
 38. USE ACTUAL URLs: When referencing resources like videos, case studies, or other materials, use the EXACT URLs provided in the context repository - do NOT make up or create fake URLs - if a context item has a URL field, use that exact URL, not a made-up one
-39. WRITE COHESIVE SENTENCES: Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel like a cohesive thought - avoid breaking up natural flow with unnecessary pauses or fragments - make it read like natural conversation, not bullet points
+39. GIFT CARD LANGUAGE: If mentioning gift card incentives, ALWAYS use "up to $X" language - never promise the full amount. Example: "up to $500 gift card" not "$500 gift card"
+40. DEMO REQUESTS: When asking for time, use "quick chat" language rather than time-boxed demos. Mention the incentive separately after the chat request
+41. WRITE COHESIVE SENTENCES: Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel like a cohesive thought - avoid breaking up natural flow with unnecessary pauses or fragments - make it read like natural conversation, not bullet points
 
 MESSAGE UNIQUENESS & VARIATION:
 - Make each message completely unique and different from others
@@ -264,9 +266,9 @@ Call-to-Action (CTA) Rules:
     - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
   * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
 - Examples of NATURAL link integration with correct URLs:
-  * "Want to [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
+  * "Want to [schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
   * "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
-  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a walkthrough](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)?"
+  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)?"
 - AVOID: Entire sentence links like "[Would you be open to a quick chat to explore this further?](url)"
 
 FINAL FLOW REVIEW (CRITICAL):
