@@ -390,40 +390,38 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     if (!sequencePlan.emails || !sequencePlan.linkedInMessages || !sequencePlan.totalDays) {
       console.warn('⚠️ Invalid sequence plan structure, using fallback')
       
-      // Create a fallback sequence plan
+      // Create a fallback sequence plan with proper email count
+      const fallbackEmails = []
+      for (let i = 0; i < emailCount; i++) {
+        const day = 1 + (i * 3) // Space emails 3 days apart
+        fallbackEmails.push({
+          day: day,
+          subject: i === 0 ? "Quick question about your freight costs" : 
+                   i === emailCount - 1 ? "One last thought on freight savings" :
+                   `Following up on freight optimization (${i + 1})`,
+          purpose: i === 0 ? "Initial value-driven opener" :
+                   i === emailCount - 1 ? "Final attempt with urgency" :
+                   "Reinforce value proposition",
+          signalIntegration: i === 0 ? "Lead with the signal and provide value" :
+                             i === emailCount - 1 ? "Highlight time-sensitive aspects of the signal" :
+                             "Share specific examples related to the signal"
+        })
+      }
+      
       sequencePlan = {
-        emails: [
-          {
-            day: 1,
-            subject: "Quick question about your freight costs",
-            purpose: "Initial value-driven opener",
-            signalIntegration: "Lead with the signal and provide value"
-          },
-          {
-            day: 4,
-            subject: "Following up on freight optimization",
-            purpose: "Reinforce value proposition",
-            signalIntegration: "Share specific examples related to the signal"
-          },
-          {
-            day: 8,
-            subject: "One last thought on freight savings",
-            purpose: "Final attempt with urgency",
-            signalIntegration: "Highlight time-sensitive aspects of the signal"
+        emails: fallbackEmails,
+        linkedInMessages: (() => {
+          const fallbackLinkedInMessages = []
+          for (let i = 0; i < linkedInCount; i++) {
+            const day = 3 + (i * 4) // Space LinkedIn messages 4 days apart, starting day 3
+            fallbackLinkedInMessages.push({
+              day: day,
+              purpose: i === 0 ? "Connect and add value" : "Follow up on email",
+              signalIntegration: i === 0 ? "Share industry insight related to their challenges" : "Reference the email and offer additional resources"
+            })
           }
-        ].slice(0, emailCount),
-        linkedInMessages: [
-          {
-            day: 3,
-            purpose: "Connect and add value",
-            signalIntegration: "Share industry insight related to their challenges"
-          },
-          {
-            day: 7,
-            purpose: "Follow up on email",
-            signalIntegration: "Reference the email and offer additional resources"
-          }
-        ].slice(0, linkedInCount),
+          return fallbackLinkedInMessages
+        })(),
         totalDays: Math.max(...[
           ...(sequencePlan.emails || []).map((e: any) => e.day),
           ...(sequencePlan.linkedInMessages || []).map((m: any) => m.day)
