@@ -212,6 +212,9 @@ Create a strategic sequence plan that:
 16. CRITICAL: The FIRST LinkedIn message must casually reference the email that was just sent - use natural, conversational language like "Hey, sent something to your inbox but wanted to touch base here too..." or "Sent you an email too but wanted to ask you if..." - make it feel casual and natural, not formal or scripted - avoid using the same phrasing repeatedly, create unique variations for each sequence
 17. CRITICAL: EVERY sequence must start with "Send Connection Request on LinkedIn" on Day 1 - this is always the first step and happens on the same day as the first email
 18. CRITICAL: ALTERNATE message types - never have multiple LinkedIn messages in a row - intersperse LinkedIn messages between emails to create a natural flow
+19. MANDATORY: Follow this exact pattern: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (NO EXCEPTIONS)
+20. FORBIDDEN: Any sequence that has LinkedIn → LinkedIn → LinkedIn or Email → Email → Email
+21. VALIDATION: Before generating, verify that no two consecutive messages are the same type
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -281,6 +284,19 @@ CRITICAL DAY SPACING REQUIREMENTS:
 - LinkedIn messages should be spaced 1-2 days later from previous message
 - CRITICAL: NEVER have 2 or more LinkedIn messages with consecutive "daysLater" values - always alternate between emails and LinkedIn messages
 - LinkedIn messages should be interspersed between emails, not bunched together
+- MANDATORY PATTERN: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (alternating pattern)
+- FORBIDDEN: LinkedIn → LinkedIn → LinkedIn (any consecutive LinkedIn messages)
+- Each message type must alternate - no exceptions
+
+MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
+- Step 1: LinkedIn Connection Request (daysLater: 0)
+- Step 2: First Email (daysLater: 0) 
+- Step 3: First LinkedIn Message (daysLater: 2)
+- Step 4: Second Email (daysLater: 4)
+- Step 5: Second LinkedIn Message (daysLater: 6)
+- Step 6: Third Email (daysLater: 8)
+- Step 7: Third LinkedIn Message (daysLater: 10)
+- Continue alternating: Email → LinkedIn → Email → LinkedIn
 
 {
   "isIncentivized": ${isIncentivized},
@@ -407,10 +423,10 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     if (!sequencePlan.emails || !sequencePlan.linkedInMessages || !sequencePlan.totalDays) {
       console.warn('⚠️ Invalid sequence plan structure, using fallback')
       
-      // Create a fallback sequence plan with proper email count
+      // Create a fallback sequence plan with proper email count and alternating pattern
       const fallbackEmails = []
       for (let i = 0; i < emailCount; i++) {
-        const daysLater = i === 0 ? 0 : 2 // First email is same day, others are 2 days later
+        const daysLater = i * 4 // Emails at 0, 4, 8, 12... (alternating with LinkedIn at 2, 6, 10...)
         fallbackEmails.push({
           daysLater: daysLater,
           subject: i === 0 ? "Quick question about your freight costs" : 
@@ -420,8 +436,8 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
                    i === emailCount - 1 ? "Final attempt with urgency" :
                    "Reinforce value proposition",
           signalIntegration: i === 0 ? "Lead with the signal and provide value" :
-                             i === emailCount - 1 ? "Highlight time-sensitive aspects of the signal" :
-                             "Share specific examples related to the signal"
+                               i === emailCount - 1 ? "Highlight time-sensitive aspects of the signal" :
+                               "Share specific examples related to the signal"
         })
       }
       
@@ -430,7 +446,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
         linkedInMessages: (() => {
           const fallbackLinkedInMessages = []
           for (let i = 0; i < linkedInCount; i++) {
-            const daysLater = 2 + (i * 2) // First LinkedIn is 2 days later, others are 2 days apart
+            const daysLater = 2 + (i * 4) // LinkedIn at 2, 6, 10... (alternating with emails at 0, 4, 8...)
             fallbackLinkedInMessages.push({
               daysLater: daysLater,
               purpose: i === 0 ? "Connect and add value" : "Follow up on email",
