@@ -2,6 +2,43 @@ import { NextRequest, NextResponse } from 'next/server'
 import { generateText } from 'ai'
 import { openai } from '@ai-sdk/openai'
 
+async function getContextForOptimizer(signal: string, personaData: any, painPoints: string[]) {
+  const { CONTEXT_REPOSITORY } = await import('@/lib/context-repository')
+  
+  // Get relevant context based on signal and persona
+  const signalLower = signal.toLowerCase()
+  const keywords = signalLower.split(/\s+/).filter(word => word.length > 3)
+  
+  // Find relevant context items
+  const relevantItems = CONTEXT_REPOSITORY.filter(item => {
+    const itemKeywords = (item.keywords || []).map(k => k.toLowerCase())
+    const itemContent = item.content.toLowerCase()
+    
+    // Check if any keywords match
+    const keywordMatch = keywords.some(keyword => 
+      itemKeywords.includes(keyword) || itemContent.includes(keyword)
+    )
+    
+    // Check if persona-specific
+    if (item.persona) {
+      return item.persona === personaData.id
+    }
+    
+    return keywordMatch
+  })
+  
+  // If no relevant items found, get some general ones
+  if (relevantItems.length === 0) {
+    return CONTEXT_REPOSITORY.slice(0, 5).map(item => 
+      `${item.title}: ${item.content}`
+    ).join('\n')
+  }
+  
+  return relevantItems.map(item => 
+    `${item.title}: ${item.content}`
+  ).join('\n')
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -39,10 +76,10 @@ export async function POST(request: NextRequest) {
     console.log(`🔍 Running Optimo redundancy cleanup for ${messages.length} messages`)
     console.log('👤 Persona:', personaData.label)
 
-    // Build context items string
+    // Build context items string - use provided context or auto-detect
     const contextItemsString = contextItems && contextItems.length > 0 
       ? contextItems.map((item: any) => `${item.title}: ${item.content}`).join('\n')
-      : ''
+      : await getContextForOptimizer(signal, personaData, painPoints)
 
     const redundancyPrompt = `You are an expert message redundancy detector and optimizer. Your task is to analyze a complete campaign of optimized messages and eliminate repetitive language, redundant phrases, and similar patterns while maintaining each message's unique value and purpose.
 
@@ -59,6 +96,14 @@ PERSONA CONTEXT:
 
 AVAILABLE CONTEXT ITEMS:
 ${contextItemsString}
+
+CUSTOMER LIST ITEMS AVAILABLE:
+${contextItems && contextItems.length > 0 
+  ? contextItems.filter((item: any) => item.category === 'customer').map((item: any) => `- ${item.title}: ${item.content}`).join('\n')
+  : (await getContextForOptimizer(signal, personaData, painPoints)).split('\n').filter(line => line.includes('Customers')).join('\n')
+}
+
+IMPORTANT: If there are customer list items above, PRESERVE and ENHANCE companies from those lists instead of removing them.
 
 REDUNDANCY DETECTION & ELIMINATION RULES:
 
