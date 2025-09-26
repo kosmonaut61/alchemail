@@ -4,11 +4,23 @@ import { openai } from '@ai-sdk/openai'
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages, signal, persona, painPoints, contextItems } = await request.json()
+    const body = await request.json()
+    console.log('🔍 OPTIMO API - Request body:', JSON.stringify(body, null, 2))
+    
+    const { messages, signal, persona, painPoints, contextItems } = body
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      console.error('❌ OPTIMO API - Invalid messages array:', messages)
       return NextResponse.json(
-        { error: 'Messages array is required' },
+        { error: 'Messages array is required and must be non-empty' },
+        { status: 400 }
+      )
+    }
+
+    if (!signal || !persona) {
+      console.error('❌ OPTIMO API - Missing required fields:', { signal, persona })
+      return NextResponse.json(
+        { error: 'Signal and persona are required' },
         { status: 400 }
       )
     }
@@ -93,9 +105,28 @@ CONTEXT DIVERSITY REQUIREMENTS:
 - Maintain variety in opening approaches and structures
 
 OUTPUT FORMAT:
-Return the optimized messages in the exact same JSON format as input, with each message's content updated to eliminate redundancy while preserving its unique value and purpose.
+You MUST return ONLY a valid JSON array with the exact same structure as the input messages. Each message should have the same id, type, and updated content.
 
-CRITICAL: Do NOT make messages longer. Keep the same length or shorter. Focus only on eliminating redundancy and varying language patterns.`
+Example format:
+[
+  {
+    "id": "test-1",
+    "type": "email", 
+    "content": "optimized content here"
+  },
+  {
+    "id": "test-2",
+    "type": "email",
+    "content": "optimized content here"
+  }
+]
+
+CRITICAL REQUIREMENTS:
+- Return ONLY the JSON array, no other text
+- Do NOT make messages longer. Keep the same length or shorter
+- Focus only on eliminating redundancy and varying language patterns
+- Preserve all merge fields exactly: {{contact.first_name}}, {{contact.title}}, etc.
+- Preserve all URLs exactly as provided`
 
     console.log('\n' + '='.repeat(80))
     console.log('🤖 OPENAI API CALL - REDUNDANCY OPTIMIZATION (OPTIMO)')
@@ -115,7 +146,7 @@ CRITICAL: Do NOT make messages longer. Keep the same length or shorter. Focus on
       messages: [
         {
           role: 'system',
-          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy.'
+          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Do not include any explanatory text or formatting outside the JSON array.'
         },
         {
           role: 'user',
@@ -143,13 +174,33 @@ CRITICAL: Do NOT make messages longer. Keep the same length or shorter. Focus on
     // Parse the response - expect JSON array of messages
     let optimizedMessages
     try {
+      // Try to parse as JSON first
       optimizedMessages = JSON.parse(text)
     } catch (parseError) {
       console.error('❌ Failed to parse JSON response:', parseError)
-      throw new Error('Invalid JSON response from AI model')
+      console.error('❌ Raw response text:', text)
+      
+      // If JSON parsing fails, try to extract JSON from the text
+      const jsonMatch = text.match(/\[[\s\S]*\]/)
+      if (jsonMatch) {
+        try {
+          optimizedMessages = JSON.parse(jsonMatch[0])
+        } catch (secondParseError) {
+          console.error('❌ Failed to parse extracted JSON:', secondParseError)
+          throw new Error('Invalid JSON response from AI model')
+        }
+      } else {
+        throw new Error('No valid JSON array found in response')
+      }
     }
 
     if (!Array.isArray(optimizedMessages) || optimizedMessages.length !== messages.length) {
+      console.error('❌ Invalid response format:', {
+        isArray: Array.isArray(optimizedMessages),
+        length: optimizedMessages?.length,
+        expectedLength: messages.length,
+        response: optimizedMessages
+      })
       throw new Error('Response format invalid - expected array of messages')
     }
 

@@ -1451,6 +1451,7 @@ export default function AlchemailApp20() {
 
                                 let successCount = 0
                                 let failureCount = 0
+                                const successfullyOptimizedMessages: any[] = []
 
                                 // Optimize each message individually with delays to prevent rate limiting
                                 const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
@@ -1492,6 +1493,13 @@ export default function AlchemailApp20() {
                                       } : m
                                     ))
 
+                                    // Track this successfully optimized message for redundancy cleanup
+                                    successfullyOptimizedMessages.push({
+                                      id: message.id,
+                                      type: message.type,
+                                      content: data.optimizedContent
+                                    })
+
                                     successCount++
                                   } catch (error) {
                                     console.error(`Error optimizing message ${message.id}:`, error)
@@ -1515,14 +1523,7 @@ export default function AlchemailApp20() {
                                   })
 
                                   try {
-                                    // Get all optimized messages for redundancy cleanup
-                                    const optimizedMessages = generatedMessages
-                                      .filter(m => m.isOptimized)
-                                      .map(m => ({
-                                        id: m.id,
-                                        type: m.type,
-                                        content: m.content
-                                      }))
+                                    console.log('🔍 OPTIMO - Sending messages for redundancy cleanup:', successfullyOptimizedMessages)
 
                                     const redundancyResponse = await fetch('/api/optimize-redundancy', {
                                       method: 'POST',
@@ -1530,7 +1531,7 @@ export default function AlchemailApp20() {
                                         'Content-Type': 'application/json',
                                       },
                                       body: JSON.stringify({
-                                        messages: optimizedMessages,
+                                        messages: successfullyOptimizedMessages,
                                         signal,
                                         persona,
                                         painPoints,
