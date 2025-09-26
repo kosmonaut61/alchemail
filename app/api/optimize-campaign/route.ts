@@ -82,6 +82,11 @@ export async function POST(request: NextRequest) {
       `${msg.type} ${index + 1}:\n${msg.content}\n`
     ).join('\n')
 
+    console.log('🔍 TURBO: Original campaign structure:')
+    messages.forEach((msg, index) => {
+      console.log(`  ${index + 1}. ${msg.type} ${index + 1}`)
+    })
+
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach campaigns. Using your advanced capabilities, optimize this ENTIRE CAMPAIGN for maximum engagement and response rates.
 
 CRITICAL: This is a CAMPAIGN-LEVEL optimization. You must analyze all messages together and ensure they work as a cohesive sequence while maintaining individual message quality. Focus on eliminating repetition, creating variety, and building a natural conversation flow across the entire campaign.
@@ -308,15 +313,23 @@ CAMPAIGN OUTPUT FORMAT:
 Return the optimized campaign in the exact same format as the input, with each message clearly labeled by type and number. Ensure each message is completely unique while maintaining the overall campaign coherence.
 
 CRITICAL OUTPUT REQUIREMENTS:
-- Each message must be labeled exactly as: "Email 1:", "Email 2:", "Email 3:", "Email 4:", "LinkedIn Message 1:", "LinkedIn Message 2:", etc.
+- Return EXACTLY ${messages.length} messages in the EXACT same order as the input
+- Each message must be labeled exactly as it appears in the original campaign
 - Use EXACT capitalization: "Email" (capital E) and "LinkedIn Message" (capital L and M)
-- Return ALL ${messages.length} messages from the original campaign - do not skip or omit any messages
+- DO NOT SKIP ANY MESSAGES - return all messages from 1 to ${messages.length}
+- DO NOT REORDER MESSAGES - maintain the exact sequence
 - Preserve all markdown formatting including **bold text** and [link text](url) formats
 - Ensure every message has proper CTAs with working markdown links
 - Maintain the exact structure and formatting of the original campaign
 - Do not add any extra text, explanations, or formatting outside the message content
 - CRITICAL: The output must contain exactly ${messages.length} messages, no more, no less
-- CRITICAL: Use the exact format "Email 1:", "Email 2:", etc. - do not use lowercase "email" or other variations`
+- CRITICAL: Use the exact format "Email 1:", "Email 2:", etc. - do not use lowercase "email" or other variations
+- CRITICAL: If the original has "Email 5:", "Email 6:", "Email 7:", you MUST return "Email 5:", "Email 6:", "Email 7:" - do not skip them
+
+EXPECTED OUTPUT SEQUENCE (based on input):
+${messages.map((msg, index) => `- ${msg.type} ${index + 1}:`).join('\n')}
+
+CRITICAL: Return ALL of these messages in this exact order. Do not skip any numbers.`
 
     // Custom GPT-5 optimization with fallback
     let optimizedContent: string
@@ -421,6 +434,21 @@ CRITICAL OUTPUT REQUIREMENTS:
     
     if (!optimizedContent || optimizedContent.trim().length === 0) {
       throw new Error('No optimized content received from OpenAI')
+    }
+
+    // Validate that all expected messages are present
+    const expectedMessageCount = messages.length
+    const foundMessageHeaders = optimizedContent.match(/(?:email|linkedin message) \d+:/gi) || []
+    const foundMessageCount = foundMessageHeaders.length
+    
+    console.log('🔍 TURBO: Validation check:')
+    console.log(`  Expected messages: ${expectedMessageCount}`)
+    console.log(`  Found messages: ${foundMessageCount}`)
+    console.log(`  Message headers: ${foundMessageHeaders.join(', ')}`)
+    
+    if (foundMessageCount < expectedMessageCount) {
+      console.warn(`⚠️ TURBO: AI only returned ${foundMessageCount} messages, expected ${expectedMessageCount}`)
+      console.warn('⚠️ TURBO: Some messages may be missing from the optimized campaign')
     }
 
     console.log('✅ TURBO: Campaign optimized successfully')
