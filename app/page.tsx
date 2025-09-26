@@ -115,6 +115,7 @@ export default function AlchemailApp20() {
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
   const [contextSearchTerm, setContextSearchTerm] = useState("")
   const [isOptimoMode, setIsOptimoMode] = useState(false)
+  const [isOptimoRunning, setIsOptimoRunning] = useState(false)
   const { toast } = useToast()
 
   const steps = [
@@ -1807,20 +1808,80 @@ export default function AlchemailApp20() {
                                 <Loader2 className="mr-2 h-3 w-3 animate-spin" />
                                 Optimizing...
                               </>
-                            ) : message.isOptimized || message.isOptimo ? (
+                            ) : isOptimoRunning ? (
                               <>
-                                <RefreshCw className="mr-2 h-3 w-3" />
-                                {message.currentVersion === 'optimo' ? 'Show Optimized' : 
-                                 message.currentVersion === 'optimized' ? 'Show Original' : 
-                                 'Show Optimo'}
-                      </>
-                    ) : (
-                      <>
+                                <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+                                Optimo...
+                              </>
+                            ) : (
+                              <>
                                 <Sparkles className="mr-2 h-3 w-3" />
                                 Optimize
-                      </>
-                    )}
+                              </>
+                            )}
                   </Button>
+                  
+                  {(message.isOptimized || message.isOptimo) ? (
+                    <div className="flex gap-2">
+                      <Select
+                        value={message.currentVersion || 'original'}
+                        disabled={isOptimoRunning}
+                        onValueChange={(value: 'original' | 'optimized' | 'optimo') => {
+                          let newContent = message.content
+                          let newIsOptimized = false
+                          let newIsOptimo = false
+                          
+                          if (value === 'original') {
+                            newContent = message.originalContent || message.content
+                          } else if (value === 'optimized') {
+                            newContent = message.optimizedContent || message.content
+                            newIsOptimized = true
+                          } else if (value === 'optimo') {
+                            newContent = message.optimoContent || message.content
+                            newIsOptimo = true
+                          }
+                          
+                          setGeneratedMessages(prev => prev.map(m => 
+                            m.id === message.id ? { 
+                              ...m, 
+                              content: newContent,
+                              currentVersion: value,
+                              isOptimized: newIsOptimized,
+                              isOptimo: newIsOptimo
+                            } : m
+                          ))
+                          
+                          const versionNames = {
+                            original: 'Original',
+                            optimized: 'Optimized',
+                            optimo: 'Optimo'
+                          }
+                          
+                          toast({
+                            title: `Showing ${versionNames[value]}`,
+                            description: `Now displaying the ${versionNames[value].toLowerCase()} version of this message.`,
+                          })
+                        }}
+                      >
+                        <SelectTrigger className="w-32">
+                          <SelectValue />
+                          {isOptimoRunning && (
+                            <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                          )}
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="original">Original</SelectItem>
+                          {message.optimizedContent && (
+                            <SelectItem value="optimized">Optimized</SelectItem>
+                          )}
+                          {message.optimoContent && (
+                            <SelectItem value="optimo">Optimo</SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ) : null}
+                  
                   <Button
                     variant="outline"
                     size="sm"
