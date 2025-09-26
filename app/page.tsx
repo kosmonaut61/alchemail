@@ -56,6 +56,9 @@ interface GeneratedMessage {
   daysLater: number
   content: string
   originalContent?: string
+  optimizedContent?: string
+  optimoContent?: string
+  currentVersion?: 'original' | 'optimized' | 'optimo'
   isOptimized?: boolean
   isGenerating?: boolean
   isOptimizing?: boolean
@@ -1382,6 +1385,8 @@ export default function AlchemailApp20() {
                                         ...m,
                                         content: data.optimizedContent,
                                         originalContent: message.content,
+                                        optimizedContent: data.optimizedContent,
+                                        currentVersion: 'optimized',
                                         isOptimized: true,
                                         isOptimizing: false
                                       } : m
@@ -1488,6 +1493,8 @@ export default function AlchemailApp20() {
                                         ...m,
                                         content: data.optimizedContent,
                                         originalContent: message.content,
+                                        optimizedContent: data.optimizedContent,
+                                        currentVersion: 'optimized',
                                         isOptimized: true,
                                         isOptimizing: false
                                       } : m
@@ -1544,14 +1551,18 @@ export default function AlchemailApp20() {
                                     }
 
                                     const redundancyData = await redundancyResponse.json()
+                                    console.log('🔍 OPTIMO - Redundancy cleanup response:', redundancyData)
                                     
                                     // Update messages with redundancy-optimized content
                                     setGeneratedMessages(prev => prev.map(m => {
                                       const optimizedMessage = redundancyData.optimizedMessages.find((opt: any) => opt.id === m.id)
                                       if (optimizedMessage) {
+                                        console.log(`🔍 OPTIMO - Updating message ${m.id} with Optimo content`)
                                         return {
                                           ...m,
                                           content: optimizedMessage.content,
+                                          optimoContent: optimizedMessage.content,
+                                          currentVersion: 'optimo',
                                           isOptimo: true
                                         }
                                       }
@@ -1635,36 +1646,73 @@ export default function AlchemailApp20() {
                           }`}>
                             {message.type === 'email' ? 'Email' : 'LinkedIn'}
                           </span>
-                          {message.isOptimo && (
+                          {message.currentVersion === 'optimo' && (
                             <span className="px-2 py-1 rounded-full text-xs bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200">
                               Optimo
                             </span>
                           )}
-                          {message.isOptimized && !message.isOptimo && (
+                          {message.currentVersion === 'optimized' && (
                             <span className="px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                               Optimized
+                            </span>
+                          )}
+                          {message.currentVersion === 'original' && (message.isOptimized || message.isOptimo) && (
+                            <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+                              Original
                             </span>
                           )}
                         </div>
                         <div className="flex gap-2">
                           <Button 
-                            variant={message.isOptimized || message.isOptimo ? "default" : "outline"} 
+                            variant={(message.isOptimized || message.isOptimo) ? "default" : "outline"} 
                             size="sm"
                             onClick={async () => {
                               if (message.isOptimized || message.isOptimo) {
-                                // Show original content
+                                // Cycle through versions: optimo -> optimized -> original
+                                let newVersion: 'original' | 'optimized' | 'optimo' = 'original'
+                                let newContent = message.originalContent || message.content
+                                let newIsOptimized = false
+                                let newIsOptimo = false
+                                
+                                if (message.currentVersion === 'optimo') {
+                                  newVersion = 'optimized'
+                                  newContent = message.optimizedContent || message.content
+                                  newIsOptimized = true
+                                } else if (message.currentVersion === 'optimized') {
+                                  newVersion = 'original'
+                                  newContent = message.originalContent || message.content
+                                } else {
+                                  // Currently showing original, cycle back to optimo if available
+                                  if (message.optimoContent) {
+                                    newVersion = 'optimo'
+                                    newContent = message.optimoContent
+                                    newIsOptimo = true
+                                  } else if (message.optimizedContent) {
+                                    newVersion = 'optimized'
+                                    newContent = message.optimizedContent
+                                    newIsOptimized = true
+                                  }
+                                }
+                                
                                 setGeneratedMessages(prev => prev.map(m => 
                                   m.id === message.id ? { 
                                     ...m, 
-                                    isOptimized: false,
-                                    isOptimo: false,
-                                    content: m.originalContent || m.content
+                                    content: newContent,
+                                    currentVersion: newVersion,
+                                    isOptimized: newIsOptimized,
+                                    isOptimo: newIsOptimo
                                   } : m
                                 ))
                                 
+                                const versionNames = {
+                                  original: 'Original',
+                                  optimized: 'Optimized',
+                                  optimo: 'Optimo'
+                                }
+                                
                                 toast({
-                                  title: "Showing Original",
-                                  description: "Now displaying the original version of this message.",
+                                  title: `Showing ${versionNames[newVersion]}`,
+                                  description: `Now displaying the ${versionNames[newVersion].toLowerCase()} version of this message.`,
                                 })
                               } else {
                                 // Optimize the message
@@ -1727,6 +1775,9 @@ export default function AlchemailApp20() {
                                     m.id === message.id ? { 
                                       ...m, 
                                       content: data.optimizedContent,
+                                      originalContent: message.content,
+                                      optimizedContent: data.optimizedContent,
+                                      currentVersion: 'optimized',
                                       isOptimized: true,
                                       isOptimizing: false
                                     } : m
@@ -1759,7 +1810,9 @@ export default function AlchemailApp20() {
                             ) : message.isOptimized || message.isOptimo ? (
                               <>
                                 <RefreshCw className="mr-2 h-3 w-3" />
-                                Show Original
+                                {message.currentVersion === 'optimo' ? 'Show Optimized' : 
+                                 message.currentVersion === 'optimized' ? 'Show Original' : 
+                                 'Show Optimo'}
                       </>
                     ) : (
                       <>

@@ -196,6 +196,34 @@ CRITICAL REQUIREMENTS:
       }
     }
 
+    // Handle case where GPT-5 returns an object instead of array
+    if (!Array.isArray(optimizedMessages)) {
+      console.warn('⚠️ GPT-5 returned object instead of array, attempting to convert...')
+      
+      // Try to convert object to array format
+      if (typeof optimizedMessages === 'object' && optimizedMessages !== null) {
+        const convertedMessages = []
+        for (const [key, value] of Object.entries(optimizedMessages)) {
+          // Extract ID from key like "MESSAGE 1 (EMAIL)" or use original message ID
+          const messageIndex = parseInt(key.match(/\d+/)?.[0] || '0') - 1
+          const originalMessage = messages[messageIndex]
+          
+          if (originalMessage && typeof value === 'string') {
+            convertedMessages.push({
+              id: originalMessage.id,
+              type: originalMessage.type,
+              content: value
+            })
+          }
+        }
+        
+        if (convertedMessages.length === messages.length) {
+          optimizedMessages = convertedMessages
+          console.log('✅ Successfully converted object response to array format')
+        }
+      }
+    }
+
     if (!Array.isArray(optimizedMessages) || optimizedMessages.length !== messages.length) {
       console.error('❌ Invalid response format:', {
         isArray: Array.isArray(optimizedMessages),
