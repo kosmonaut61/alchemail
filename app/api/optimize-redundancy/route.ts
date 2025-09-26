@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
 CAMPAIGN MESSAGES TO ANALYZE:
 ${messages.map((msg: any, index: number) => `
-MESSAGE ${index + 1} (${msg.type.toUpperCase()}):
+MESSAGE ${index + 1} (ID: ${msg.id}, TYPE: ${msg.type.toUpperCase()}):
 ${msg.content}
 `).join('\n')}
 
@@ -107,22 +107,24 @@ CONTEXT DIVERSITY REQUIREMENTS:
 OUTPUT FORMAT:
 You MUST return ONLY a valid JSON array with the exact same structure as the input messages. Each message should have the same id, type, and updated content.
 
-Example format:
+Example format (use the EXACT IDs from the input messages):
 [
   {
-    "id": "test-1",
+    "id": "email-3-5",
     "type": "email", 
     "content": "optimized content here"
   },
   {
-    "id": "test-2",
-    "type": "email",
+    "id": "linkedin-2-1",
+    "type": "linkedin",
     "content": "optimized content here"
   }
 ]
 
 CRITICAL REQUIREMENTS:
 - Return ONLY the JSON array, no other text
+- Use the EXACT same IDs as the input messages (e.g., "email-3-5", "linkedin-2-1")
+- Use the EXACT same types as the input messages
 - Do NOT make messages longer. Keep the same length or shorter
 - Focus only on eliminating redundancy and varying language patterns
 - Preserve all merge fields exactly: {{contact.first_name}}, {{contact.title}}, etc.
@@ -146,7 +148,7 @@ CRITICAL REQUIREMENTS:
       messages: [
         {
           role: 'system',
-          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Do not include any explanatory text or formatting outside the JSON array.'
+          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Use the EXACT same IDs and types as the input messages. Do not include any explanatory text or formatting outside the JSON array.'
         },
         {
           role: 'user',
