@@ -262,14 +262,14 @@ TARGET PERSONA:
       You MUST include the signal in the email exactly as specified in the signalIntegration instruction above.
 
       ${sequencePlan.isIncentivized && emailPlan.includeIncentive ? `
-      INCENTIVE REQUIREMENT:
-      - This email should mention the gift card incentive
-      - CRITICAL: Always use "up to $${sequencePlan.incentiveAmount}" language - never promise the full amount
-      - Include it naturally in the context of demo bookings or calls
-      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "up to $${sequencePlan.incentiveAmount} Visa gift card", or "up to $${sequencePlan.incentiveAmount} gift card for your time"
-      - Make it feel like genuine appreciation for their time, not a bribe
-      - Only mention it if the email has a demo/call CTA
-      - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the incentive separately
+COMPENSATION REQUIREMENT:
+- This email should mention the gift card compensation for their valuable time
+- CRITICAL: Always use "up to $${sequencePlan.incentiveAmount}" language - never promise the full amount
+- Include it naturally in the context of demo bookings or calls
+- Use professional phrases like "up to $${sequencePlan.incentiveAmount} gift card for your time", "$${sequencePlan.incentiveAmount} Visa gift card as appreciation", or "$${sequencePlan.incentiveAmount} gift card to compensate you for your valuable time"
+- Frame it as compensation for their time, not an incentive to meet with us
+- Only mention it if the email has a demo/call CTA
+- When asking for time, request a "quick chat" rather than time-boxed demos, then mention the compensation separately
       ` : ''}
 
       Write a complete email that:
@@ -498,14 +498,14 @@ LINKEDIN MESSAGE SPECIFICATIONS:
       CRITICAL: You MUST follow the Signal Integration instructions exactly. The signalIntegration field tells you exactly how to integrate the signal - follow it precisely.
 
       ${sequencePlan.isIncentivized && linkedInPlan.includeIncentive ? `
-      INCENTIVE REQUIREMENT:
-      - This LinkedIn message should mention the gift card incentive
+      COMPENSATION REQUIREMENT:
+      - This LinkedIn message should mention the gift card compensation for their valuable time
       - CRITICAL: Always use "up to $${sequencePlan.incentiveAmount}" language - never promise the full amount
       - Include it naturally in the context of demo bookings or calls
-      - Use phrases like "up to $${sequencePlan.incentiveAmount} gift card", "up to $${sequencePlan.incentiveAmount} Visa gift card", or "up to $${sequencePlan.incentiveAmount} gift card for your time"
-      - Make it feel like genuine appreciation for their time, not a bribe
+      - Use professional phrases like "up to $${sequencePlan.incentiveAmount} gift card for your time", "$${sequencePlan.incentiveAmount} Visa gift card as appreciation", or "$${sequencePlan.incentiveAmount} gift card to compensate you for your valuable time"
+      - Frame it as compensation for their time, not an incentive to meet with us
       - Only mention it if the message has a demo/call CTA
-      - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the incentive separately
+      - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the compensation separately
       ` : ''}
 
 Write a LinkedIn message that:

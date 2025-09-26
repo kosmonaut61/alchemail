@@ -785,14 +785,14 @@ export default function AlchemailApp20() {
                     checked={isIncentivized}
                     onCheckedChange={(checked) => setIsIncentivized(checked as boolean)}
                   />
-                  <Label htmlFor="incentivized" className="text-sm font-medium">
-                    Incentivized Campaign
-                  </Label>
+                <Label htmlFor="incentivized" className="text-sm font-medium">
+                  Compensation Campaign
+                </Label>
                 </div>
                 {isIncentivized && (
                   <div className="space-y-2">
                     <Label htmlFor="incentiveAmount" className="text-sm">
-                      Gift Card Amount ($)
+                      Compensation Amount ($)
                     </Label>
                     <Input
                       id="incentiveAmount"
