@@ -197,7 +197,7 @@ Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
 3. Addresses the target persona's pain points using their specific tone profile and keywords
-4. Uses VARIED spacing between messages (1-4 days for emails, 1-3 days for LinkedIn) - CRITICAL: ONLY the first LinkedIn message can be on the same day as another message - all other messages must have unique day numbers - NEVER bunch LinkedIn messages together on consecutive days - VARY the gaps to avoid predictable patterns
+4. Uses VARIED spacing between messages (2-5 days for all messages) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number - NEVER bunch LinkedIn messages together on consecutive days - VARY the gaps to avoid predictable patterns
 5. Has clear purposes for each touchpoint
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
@@ -210,14 +210,14 @@ Create a strategic sequence plan that:
 14. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
 15. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
 16. CRITICAL: The FIRST LinkedIn message must casually reference the email that was just sent - use natural, conversational language like "Hey, sent something to your inbox but wanted to touch base here too..." or "Sent you an email too but wanted to ask you if..." - make it feel casual and natural, not formal or scripted - avoid using the same phrasing repeatedly, create unique variations for each sequence
-17. CRITICAL: EVERY sequence must start with "Send Connection Request on LinkedIn" on Day 1 - this is always the first step and happens on the same day as the first email
+17. CRITICAL: EVERY sequence must start with "Send Connection Request on LinkedIn" on Day 0 - this is always the first step and happens before any other messages
 18. CRITICAL: ALTERNATE message types - never have multiple LinkedIn messages in a row - intersperse LinkedIn messages between emails to create a natural flow
 19. MANDATORY: Follow this exact pattern: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (NO EXCEPTIONS)
-20. FORBIDDEN: Any sequence that has LinkedIn → LinkedIn → LinkedIn or Email → Email → Email
+20. FORBIDDEN: Any sequence that has LinkedIn → LinkedIn → LinkedIn (consecutive LinkedIn messages)
 21. VALIDATION: Before generating, verify that no two consecutive messages are the same type
-22. TIMING VARIETY: Use different gaps between messages (1, 2, 3, 4 days) to create natural, unpredictable timing - avoid using the same gap repeatedly
+22. TIMING VARIETY: Use different gaps between messages (2, 3, 4, 5 days) to create natural, unpredictable timing - avoid using the same gap repeatedly
 23. MANDATORY VARIETY: You MUST use at least 3 different gap values in your sequence - do not use the same gap more than twice in a row
-24. EXAMPLE VARIED PATTERN: 0, 1, 3, 6, 8, 11, 13, 16 (gaps: 1, 2, 3, 2, 3, 2, 3) - this creates natural, unpredictable timing
+24. EXAMPLE VARIED PATTERN: 0, 1, 4, 7, 11, 15, 19, 23 (gaps: 1, 3, 3, 4, 4, 4, 4) - this creates natural, unpredictable timing
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -283,28 +283,27 @@ CRITICAL DAY SPACING REQUIREMENTS:
 - Use "daysLater" field to indicate how many days after the previous message this should be sent
 - LinkedIn connection request is always "daysLater": 0 (same day as start)
 - First email is always "daysLater": 1 (day after connection request)
-- First LinkedIn message is always "daysLater": 0 (same day as first email - ONLY same-day message allowed)
-- All subsequent emails should be spaced 2-3 days later from previous message
-- All subsequent LinkedIn messages should be spaced 1-2 days later from previous message
-- CRITICAL: ONLY the first LinkedIn message can be on the same day as another message
-- CRITICAL: NEVER have 2 or more LinkedIn messages with consecutive "daysLater" values - always alternate between emails and LinkedIn messages
-- LinkedIn messages should be interspersed between emails, not bunched together
+- All subsequent messages should be spaced 2-5 days later from previous message
+- CRITICAL: NEVER have 2 LinkedIn messages in a row - always alternate between emails and LinkedIn messages
+- CRITICAL: Emails CAN be sent one after another (no restriction on consecutive emails)
 - MANDATORY PATTERN: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (alternating pattern)
-- FORBIDDEN: LinkedIn → LinkedIn → LinkedIn (any consecutive LinkedIn messages)
-- Each message type must alternate - no exceptions
+- FORBIDDEN: LinkedIn → LinkedIn (any consecutive LinkedIn messages)
+- ALLOWED: Email → Email (consecutive emails are fine)
+- Each LinkedIn message must be separated by at least one email
 
 MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
 - Step 1: LinkedIn Connection Request (daysLater: 0)
 - Step 2: First Email (daysLater: 1) 
-- Step 3: First LinkedIn Message (daysLater: 0 - same day as first email, ONLY same-day message allowed)
-- Step 4: Second Email (daysLater: 2-4 from previous, vary this)
-- Step 5: Second LinkedIn Message (daysLater: 1-3 from previous, vary this)
-- Step 6: Third Email (daysLater: 2-4 from previous, vary this)
-- Step 7: Third LinkedIn Message (daysLater: 1-3 from previous, vary this)
+- Step 3: First LinkedIn Message (daysLater: 2-5 from previous, vary this)
+- Step 4: Second Email (daysLater: 2-5 from previous, vary this)
+- Step 5: Second LinkedIn Message (daysLater: 2-5 from previous, vary this)
+- Step 6: Third Email (daysLater: 2-5 from previous, vary this)
+- Step 7: Third LinkedIn Message (daysLater: 2-5 from previous, vary this)
 - Continue alternating: Email → LinkedIn → Email → LinkedIn
 - CRITICAL: Vary the spacing between messages - don't use the same gap repeatedly
-- Use different gaps like 1, 2, 3, 4 days to create natural, unpredictable timing
-- CRITICAL: ONLY the first LinkedIn message can be on the same day as another message
+- Use different gaps like 2, 3, 4, 5 days to create natural, unpredictable timing
+- CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number
+- CRITICAL: NEVER use daysLater: 0 except for the very first LinkedIn connection request
 
 {
   "isIncentivized": ${isIncentivized},

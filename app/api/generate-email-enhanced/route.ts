@@ -185,22 +185,22 @@ ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and
 Generate a campaign with 3-5 emails + 2-3 LinkedIn messages where EVERY communication references the campaign signal. Format as:
 Campaign Name: [Name]
 
-Email 1 (Day 0):
+Email 1 (Day 1):
 Subject: [subject]
 
 [email body with proper line breaks between paragraphs]
 [CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)]
 
-Email 2 (Day 3):
+Email 2 (Day 4):
 Subject: [subject]
 
 [email body with proper line breaks between paragraphs]
 [CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)]
 
-LinkedIn Message 1 (Day 1):
+LinkedIn Message 1 (Day 3):
 [message]
 
-LinkedIn Message 2 (Day 5):
+LinkedIn Message 2 (Day 7):
 [message]
 
 Continue pattern...

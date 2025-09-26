@@ -99,30 +99,30 @@ Generate the complete sequence:
 
 Campaign Name: [Brief campaign name based on signal]
 
-EMAIL 1 (Day 0):
+EMAIL 1 (Day 1):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here - not advice about how to write it. Make it conversational, address their pain points, include social proof, and end with a natural Apollo CTA link]
 
-EMAIL 2 (Day 3):
+EMAIL 2 (Day 4):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here - follow up on the signal, different social proof, natural Apollo CTA]
 
-EMAIL 3 (Day 7):
+EMAIL 3 (Day 8):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here - continue the signal story, different social proof, natural Apollo CTA]
 
-EMAIL 4 (Day 11):
+EMAIL 4 (Day 12):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here - final follow up on the signal, different social proof, natural Apollo CTA]
 
-LINKEDIN MESSAGE 1 (Day 1):
+LINKEDIN MESSAGE 1 (Day 3):
 [Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]
 
-LINKEDIN MESSAGE 2 (Day 5):
+LINKEDIN MESSAGE 2 (Day 7):
 [Write the actual LinkedIn message content here - brief follow up, references the signal, includes soft CTA]`;
 
     console.log('📧 Generating complete sequence with gpt-5-nano...');

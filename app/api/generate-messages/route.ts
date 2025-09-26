@@ -320,17 +320,17 @@ COMPENSATION REQUIREMENT:
       - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
 
       MESSAGE TYPE VARIATION BY TIMING:
-      - Same Day (0 days later): Follow the signalIntegration instruction from the sequence plan
-      - 2 Days Later: Question-based approach focusing on challenges (start with question)
-      - 4 Days Later: Story-driven with customer success focus (start with story/customer name)
-      - 6 Days Later: Urgency-driven with clear next steps (start with urgency/time)
+      - 1 Day Later: Follow the signalIntegration instruction from the sequence plan
+      - 2-3 Days Later: Question-based approach focusing on challenges (start with question)
+      - 4-5 Days Later: Story-driven with customer success focus (start with story/customer name)
+      - 6+ Days Later: Urgency-driven with clear next steps (start with urgency/time)
       - LinkedIn: More casual, personal, and conversational (start with personal note)
 
       TIMING-SPECIFIC INSTRUCTIONS:
-      - Same Day (0 days later): Follow the signalIntegration instruction from the sequence plan
-      - 2 Days Later: Start with a question about their challenges
-      - 4 Days Later: Start with a customer story or success example
-      - 6 Days Later: Start with urgency or time-sensitive language
+      - 1 Day Later: Follow the signalIntegration instruction from the sequence plan
+      - 2-3 Days Later: Start with a question about their challenges
+      - 4-5 Days Later: Start with a customer story or success example
+      - 6+ Days Later: Start with urgency or time-sensitive language
       - LinkedIn: Start with personal/casual language, avoid formal openings
 
       VARIED OPENING EXAMPLES (USE DIFFERENT ONES):

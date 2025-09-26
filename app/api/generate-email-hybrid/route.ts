@@ -145,7 +145,7 @@ SUPPORTING GUIDELINES:
 
 Generate the first email and LinkedIn message for this sequence:
 
-EMAIL 1 (Day 0):
+EMAIL 1 (Day 1):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here following these STRICT rules:
@@ -158,7 +158,7 @@ Subject: [Subject line that references the signal]
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
-LINKEDIN MESSAGE 1 (Day 1):
+LINKEDIN MESSAGE 1 (Day 3):
 [Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]`
 
   console.log('🤖 Generating Batch 1 with model:', model)
@@ -241,7 +241,7 @@ SUPPORTING GUIDELINES:
 
 Generate emails 2, 3, 4 and the second LinkedIn message for this sequence:
 
-EMAIL 2 (Day 3):
+EMAIL 2 (Day 5):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here following these STRICT rules:
@@ -254,7 +254,7 @@ Subject: [Subject line that references the signal]
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
-EMAIL 3 (Day 7):
+EMAIL 3 (Day 9):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here following these STRICT rules:
@@ -267,7 +267,7 @@ Subject: [Subject line that references the signal]
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
-EMAIL 4 (Day 11):
+EMAIL 4 (Day 13):
 Subject: [Subject line that references the signal]
 
 [Write the actual email content here following these STRICT rules:
@@ -280,7 +280,7 @@ Subject: [Subject line that references the signal]
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
-LINKEDIN MESSAGE 2 (Day 5):
+LINKEDIN MESSAGE 2 (Day 7):
 [Write the actual LinkedIn message content here - brief follow-up, reference previous touchpoints, soft CTA]`
 
   console.log('🤖 Generating Batch 2 with model:', model)

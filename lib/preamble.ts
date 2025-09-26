@@ -70,7 +70,7 @@ export const PREAMBLE_SECTIONS = {
 **Advanced:** Conditional fallbacks ({{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}), letter case ({{contact.title->lowercase}}), date operators ({{now.day->plus_X}})
 
 ### Campaign Structure
-**Sequences:** 3-12 emails, max 3/person/7 days, spread logically (≤2/week for 12 emails)
+**Sequences:** 3-12 emails, max 3/person/30 days, spread logically with 2-5 day gaps between messages
 **Content:** Each email different pain point/theme, every email has unique CTA, at least 1 names industry customers
 **Campaign Signal:** EVERY email and message must reference and build on the campaign signal - it's the connecting thread throughout the entire campaign
 **Output:** Text emails (not JSON), 11-20 touchpoints/campaign (max 3 LinkedIn)

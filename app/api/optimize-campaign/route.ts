@@ -93,7 +93,7 @@ CRITICAL: This is a CAMPAIGN-LEVEL optimization. You must analyze all messages t
 
 ABSOLUTELY CRITICAL: You must return EXACTLY ${messages.length} messages in the EXACT same order as the input. Do not skip any messages, do not consolidate messages, do not reorder messages. Each message must be separate and optimized individually.
 
-SAME-DAY MESSAGES ARE SEPARATE: If you see multiple messages scheduled for the same day (like "Email 5:", "Email 6:", "Email 7:", "Email 8:" all on the same day), they are STILL SEPARATE MESSAGES that must be returned individually. Do not skip them just because they're on the same day. Each message gets its own optimization.
+ALL MESSAGES ARE SEPARATE: Each message in the campaign is a separate, individual message that must be returned and optimized individually. Do not skip, consolidate, or reorder any messages.
 
 COMPLETE CAMPAIGN TO OPTIMIZE:
 ${campaignContent}
@@ -331,9 +331,8 @@ CRITICAL OUTPUT REQUIREMENTS:
 - CRITICAL: The output must contain exactly ${messages.length} messages, no more, no less
 - CRITICAL: Use the exact format "Email 1:", "Email 2:", etc. - do not use lowercase "email" or other variations
 - CRITICAL: If the original has "Email 5:", "Email 6:", "Email 7:", "Email 8:", you MUST return "Email 5:", "Email 6:", "Email 7:", "Email 8:" - do not skip any of them
-- CRITICAL: Even if messages are scheduled for the same day, they are still separate messages that must be returned
-- CRITICAL: Same-day messages are NOT the same message - they are separate, individual messages that each need their own optimization
-- CRITICAL: If you see "Email 5:", "Email 6:", "Email 7:", "Email 8:" all on the same day, you must return ALL FOUR messages separately
+- CRITICAL: Each message is separate and individual - they each need their own optimization
+- CRITICAL: If you see "Email 5:", "Email 6:", "Email 7:", "Email 8:", you must return ALL FOUR messages separately
 
 EXPECTED OUTPUT SEQUENCE (based on input):
 ${messages.map((msg, index) => `- ${msg.type} ${index + 1}:`).join('\n')}
@@ -341,20 +340,20 @@ ${messages.map((msg, index) => `- ${msg.type} ${index + 1}:`).join('\n')}
 CRITICAL: Return ALL of these messages in this exact order. Do not skip any numbers. Do not consolidate messages. Each message must be separate and optimized individually.
 
 EXAMPLE: If your input has:
-- Email 5: (Day 3)
-- Email 6: (Day 3) 
-- Email 7: (Day 3)
-- Email 8: (Day 3)
-- Email 9: (Day 4)
+- Email 5: (optimized)
+- Email 6: (optimized)
+- Email 7: (optimized)
+- Email 8: (optimized)
+- Email 9: (optimized)
 
 You MUST return:
 - Email 5: (optimized)
 - Email 6: (optimized)
-- Email 7: (optimized) 
+- Email 7: (optimized)
 - Email 8: (optimized)
 - Email 9: (optimized)
 
-Do NOT skip Email 6, 7, 8 just because they're on the same day as Email 5.`
+Do NOT skip any messages. Return ALL messages in the exact order provided.`
 
     // Custom GPT-5 optimization with fallback
     let optimizedContent: string
