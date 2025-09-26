@@ -113,7 +113,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'network_capacity_value_prop',
     title: 'Network Capacity Value Prop',
-    content: 'Extensive carrier network and instant capacity access → no more capacity shortfalls. Ensures reliable coverage with 45,000+ vetted carriers and elite partners for any load.',
+    content: 'Extensive carrier network and instant capacity access → no more capacity shortfalls. Ensures reliable coverage with thousands of vetted carriers and elite partners for any load.',
     category: 'value_prop',
     pain_points: ['capacity'],
     keywords: ['capacity', 'network', 'carriers', 'coverage', 'reliability']

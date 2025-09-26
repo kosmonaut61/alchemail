@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { openai } from "@ai-sdk/openai"
 import { generateText } from "ai"
-import { CONTEXT_REPOSITORY, getContextItemsByKeywords, getContextItemsByIndustry } from '@/lib/context-repository'
+import { CONTEXT_REPOSITORY } from '@/lib/context-repository'
 import { formatVariablesForPrompt } from '@/lib/dynamic-variables'
 
 // Helper function to get relevant context items
@@ -21,13 +21,19 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Find context items that match keywords (broader matching)
   const keywordMatches = allKeywords
-    .flatMap(keyword => getContextItemsByKeywords([keyword]))
+    .flatMap(keyword => CONTEXT_REPOSITORY.filter(item => 
+      item.keywords && item.keywords.some(itemKeyword => 
+        itemKeyword.toLowerCase().includes(keyword.toLowerCase())
+      )
+    ))
   
   // Find context items that match industry mentions
   const industryKeywords = ['retail', 'food', 'beverage', 'automotive', 'manufacturing', 'technology', 'healthcare']
   const industryMatches = industryKeywords
     .filter(industry => signalLower.includes(industry))
-    .flatMap(industry => getContextItemsByIndustry(industry))
+    .flatMap(industry => CONTEXT_REPOSITORY.filter(item => 
+      item.industry && item.industry.includes(industry)
+    ))
   
   // Add customer context items (most important for social proof)
   const customerItems = CONTEXT_REPOSITORY.filter(item => 
@@ -191,7 +197,7 @@ Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
 3. Addresses the target persona's pain points using their specific tone profile and keywords
-4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn)
+4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number
 5. Has clear purposes for each touchpoint
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
@@ -265,6 +271,15 @@ SIGNAL INTERPRETATION RULES:
 CRITICAL: You must respond with ONLY valid JSON. Do not include any text before or after the JSON. The response must be parseable as JSON.
 
 Return your response as a JSON object with this exact structure:
+
+CRITICAL DAY SPACING REQUIREMENTS:
+- Each message must have a UNIQUE day number - no duplicates allowed
+- Emails should be spaced 2-3 days apart
+- LinkedIn messages should be spaced 1-2 days apart
+- LinkedIn connection request is always Day 1
+- First email is always Day 1 (same day as connection request)
+- All subsequent messages must have different day numbers
+
 {
   "isIncentivized": ${isIncentivized},
   "incentiveAmount": ${incentiveAmount},
@@ -393,7 +408,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       // Create a fallback sequence plan with proper email count
       const fallbackEmails = []
       for (let i = 0; i < emailCount; i++) {
-        const day = 1 + (i * 3) // Space emails 3 days apart
+        const day = 1 + (i * 2) // Space emails 2 days apart
         fallbackEmails.push({
           day: day,
           subject: i === 0 ? "Quick question about your freight costs" : 
@@ -413,7 +428,7 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
         linkedInMessages: (() => {
           const fallbackLinkedInMessages = []
           for (let i = 0; i < linkedInCount; i++) {
-            const day = 3 + (i * 4) // Space LinkedIn messages 4 days apart, starting day 3
+            const day = 3 + (i * 2) // Space LinkedIn messages 2 days apart, starting day 3
             fallbackLinkedInMessages.push({
               day: day,
               purpose: i === 0 ? "Connect and add value" : "Follow up on email",
