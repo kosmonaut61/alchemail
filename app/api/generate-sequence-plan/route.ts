@@ -197,7 +197,7 @@ Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
 3. Addresses the target persona's pain points using their specific tone profile and keywords
-4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number - NEVER bunch LinkedIn messages together on consecutive days
+4. Uses VARIED spacing between messages (1-4 days for emails, 1-3 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number - NEVER bunch LinkedIn messages together on consecutive days - VARY the gaps to avoid predictable patterns
 5. Has clear purposes for each touchpoint
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
@@ -215,6 +215,9 @@ Create a strategic sequence plan that:
 19. MANDATORY: Follow this exact pattern: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (NO EXCEPTIONS)
 20. FORBIDDEN: Any sequence that has LinkedIn → LinkedIn → LinkedIn or Email → Email → Email
 21. VALIDATION: Before generating, verify that no two consecutive messages are the same type
+22. TIMING VARIETY: Use different gaps between messages (1, 2, 3, 4 days) to create natural, unpredictable timing - avoid using the same gap repeatedly
+23. MANDATORY VARIETY: You MUST use at least 3 different gap values in your sequence - do not use the same gap more than twice in a row
+24. EXAMPLE VARIED PATTERN: 0, 1, 3, 6, 8, 11, 13, 16 (gaps: 1, 2, 3, 2, 3, 2, 3) - this creates natural, unpredictable timing
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -291,12 +294,14 @@ CRITICAL DAY SPACING REQUIREMENTS:
 MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
 - Step 1: LinkedIn Connection Request (daysLater: 0)
 - Step 2: First Email (daysLater: 0) 
-- Step 3: First LinkedIn Message (daysLater: 2)
-- Step 4: Second Email (daysLater: 4)
-- Step 5: Second LinkedIn Message (daysLater: 6)
-- Step 6: Third Email (daysLater: 8)
-- Step 7: Third LinkedIn Message (daysLater: 10)
+- Step 3: First LinkedIn Message (daysLater: 1-3, vary this)
+- Step 4: Second Email (daysLater: 2-4 from previous, vary this)
+- Step 5: Second LinkedIn Message (daysLater: 1-3 from previous, vary this)
+- Step 6: Third Email (daysLater: 2-4 from previous, vary this)
+- Step 7: Third LinkedIn Message (daysLater: 1-3 from previous, vary this)
 - Continue alternating: Email → LinkedIn → Email → LinkedIn
+- CRITICAL: Vary the spacing between messages - don't use the same gap repeatedly
+- Use different gaps like 1, 2, 3, 4 days to create natural, unpredictable timing
 
 {
   "isIncentivized": ${isIncentivized},
@@ -425,8 +430,9 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       
       // Create a fallback sequence plan with proper email count and alternating pattern
       const fallbackEmails = []
+      const emailSpacing = [0, 3, 7, 11, 15, 19, 23, 27] // Varied spacing: 0, 3, 4, 4, 4, 4, 4, 4
       for (let i = 0; i < emailCount; i++) {
-        const daysLater = i * 4 // Emails at 0, 4, 8, 12... (alternating with LinkedIn at 2, 6, 10...)
+        const daysLater = emailSpacing[i] || (emailSpacing[emailSpacing.length - 1] + (i - emailSpacing.length + 1) * 4)
         fallbackEmails.push({
           daysLater: daysLater,
           subject: i === 0 ? "Quick question about your freight costs" : 
@@ -445,8 +451,9 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
         emails: fallbackEmails,
         linkedInMessages: (() => {
           const fallbackLinkedInMessages = []
+          const linkedInSpacing = [1, 5, 9, 13, 17, 21, 25, 29] // Varied spacing: 1, 5, 4, 4, 4, 4, 4, 4
           for (let i = 0; i < linkedInCount; i++) {
-            const daysLater = 2 + (i * 4) // LinkedIn at 2, 6, 10... (alternating with emails at 0, 4, 8...)
+            const daysLater = linkedInSpacing[i] || (linkedInSpacing[linkedInSpacing.length - 1] + (i - linkedInSpacing.length + 1) * 4)
             fallbackLinkedInMessages.push({
               daysLater: daysLater,
               purpose: i === 0 ? "Connect and add value" : "Follow up on email",
