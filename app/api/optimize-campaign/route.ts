@@ -308,11 +308,13 @@ CAMPAIGN OUTPUT FORMAT:
 Return the optimized campaign in the exact same format as the input, with each message clearly labeled by type and number. Ensure each message is completely unique while maintaining the overall campaign coherence.
 
 CRITICAL OUTPUT REQUIREMENTS:
-- Each message must be labeled exactly as: "Email 1:", "Email 2:", "Email 3:", "Email 4:", "LinkedIn Message 1:", "LinkedIn Message 2:"
+- Each message must be labeled exactly as it appears in the original campaign (e.g., "Email 1:", "Email 2:", "LinkedIn Message 1:", etc.)
+- Return ALL ${messages.length} messages from the original campaign - do not skip or omit any messages
 - Preserve all markdown formatting including **bold text** and [link text](url) formats
 - Ensure every message has proper CTAs with working markdown links
 - Maintain the exact structure and formatting of the original campaign
-- Do not add any extra text, explanations, or formatting outside the message content`
+- Do not add any extra text, explanations, or formatting outside the message content
+- CRITICAL: The output must contain exactly ${messages.length} messages, no more, no less`
 
     // Custom GPT-5 optimization with fallback
     let optimizedContent: string

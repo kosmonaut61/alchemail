@@ -1473,6 +1473,7 @@ export default function AlchemailApp20() {
                               const messageMatches = [...optimizedCampaign.matchAll(messageRegex)]
                               
                               console.log('🔍 TURBO: Found', messageMatches.length, 'message matches')
+                              console.log('🔍 TURBO: Expected', generatedMessages.length, 'messages')
                               
                               // Create a map of message numbers to content
                               const optimizedMessages = new Map()
@@ -1482,6 +1483,12 @@ export default function AlchemailApp20() {
                                 optimizedMessages.set(messageNumber, content)
                                 console.log(`📧 Message ${messageNumber} parsed, length:`, content.length)
                               })
+                              
+                              // Check if we got all expected messages
+                              if (messageMatches.length < generatedMessages.length) {
+                                console.warn(`⚠️ TURBO: Only parsed ${messageMatches.length} messages, expected ${generatedMessages.length}`)
+                                console.warn('⚠️ TURBO: This might indicate the AI didn\'t return all messages')
+                              }
                               
                               // Update each message with its optimized content
                               setGeneratedMessages(prev => prev.map((message, index) => {
@@ -1499,7 +1506,8 @@ export default function AlchemailApp20() {
                                 }
                                 
                                 // Fallback: if parsing failed, keep original content but mark as optimized
-                                console.warn(`Failed to parse optimized content for message ${messageNumber}`)
+                                console.warn(`⚠️ TURBO: Failed to parse optimized content for message ${messageNumber}`)
+                                console.warn(`⚠️ TURBO: Keeping original content for message ${messageNumber}`)
                                 return { ...message, isOptimizing: false }
                               }))
 
