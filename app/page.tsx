@@ -116,6 +116,7 @@ export default function AlchemailApp20() {
   const [contextSearchTerm, setContextSearchTerm] = useState("")
   const [isTurboMode, setIsTurboMode] = useState(false)
   const [isTurboRunning, setIsTurboRunning] = useState(false)
+  const [turboPhase, setTurboPhase] = useState<'analysis' | 'application' | null>(null)
   const { toast } = useToast()
 
   const steps = [
@@ -1445,9 +1446,10 @@ export default function AlchemailApp20() {
                                 }
 
                                 setIsTurboMode(true)
+                                setTurboPhase('analysis')
                                 toast({
                                   title: "Starting Turbo optimization...",
-                                  description: `Optimizing ${unoptimizedMessages.length} messages with redundancy cleanup.`,
+                                  description: `Analyzing ${unoptimizedMessages.length} messages for redundancy patterns.`,
                                 })
 
                                 // Set all unoptimized messages to optimizing state
@@ -1527,15 +1529,16 @@ export default function AlchemailApp20() {
                                 if (successCount > 0) {
                                   toast({
                                     title: "Individual optimization complete",
-                                    description: "Now running Turbo redundancy cleanup...",
+                                    description: "Now analyzing sequence for redundancy patterns...",
                                   })
 
                                   setIsTurboRunning(true) // Set Turbo running state
 
                                   try {
-                                    console.log('🔍 TURBO - Sending messages for redundancy cleanup:', successfullyOptimizedMessages)
+                                    console.log('🔍 TURBO - Starting analysis phase for:', successfullyOptimizedMessages)
 
-                                    const redundancyResponse = await fetch('/api/optimize-turbo', {
+                                    // Phase 1: Analysis
+                                    const analysisResponse = await fetch('/api/analyze-turbo', {
                                       method: 'POST',
                                       headers: {
                                         'Content-Type': 'application/json',
@@ -1549,22 +1552,69 @@ export default function AlchemailApp20() {
                                       }),
                                     })
 
-                                    if (!redundancyResponse.ok) {
-                                      throw new Error(`HTTP ${redundancyResponse.status}: Failed to run redundancy cleanup`)
+                                    if (!analysisResponse.ok) {
+                                      throw new Error(`HTTP ${analysisResponse.status}: Failed to run Turbo analysis`)
                                     }
 
-                                    const redundancyData = await redundancyResponse.json()
-                                    console.log('🔍 TURBO - Redundancy cleanup response:', redundancyData)
+                                    const analysisData = await analysisResponse.json()
+                                    console.log('🔍 TURBO - Analysis response:', analysisData)
                                     
-                                    // Update messages with redundancy-optimized content
+                                    toast({
+                                      title: "Analysis complete",
+                                      description: "Now applying Turbo edits to each message...",
+                                    })
+
+                                    setTurboPhase('application')
+
+                                    // Phase 2: Apply edits to each message individually
+                                    const editPromises = successfullyOptimizedMessages.map(async (message: any) => {
+                                      const messageEditPlan = analysisData.editPlan.find((plan: any) => plan.messageId === message.id)
+                                      if (!messageEditPlan) {
+                                        console.warn(`No edit plan found for message ${message.id}`)
+                                        return null
+                                      }
+
+                                      try {
+                                        const editResponse = await fetch('/api/optimize-turbo', {
+                                          method: 'POST',
+                                          headers: {
+                                            'Content-Type': 'application/json',
+                                          },
+                                          body: JSON.stringify({
+                                            message,
+                                            editPlan: messageEditPlan,
+                                            signal,
+                                            persona,
+                                            painPoints,
+                                            contextItems
+                                          })
+                                        })
+
+                                        if (!editResponse.ok) {
+                                          throw new Error(`HTTP ${editResponse.status}: Failed to apply edits to message ${message.id}`)
+                                        }
+
+                                        const editData = await editResponse.json()
+                                        console.log(`🔍 TURBO - Edit applied to message ${message.id}:`, editData)
+                                        return editData.editedMessage
+                                      } catch (editError) {
+                                        console.error(`Error applying edits to message ${message.id}:`, editError)
+                                        return null
+                                      }
+                                    })
+
+                                    const editedMessages = await Promise.all(editPromises)
+                                    const successfulEdits = editedMessages.filter(msg => msg !== null)
+
+                                    // Update messages with Turbo content
                                     setGeneratedMessages(prev => prev.map(m => {
-                                      const optimizedMessage = redundancyData.optimizedMessages.find((opt: any) => opt.id === m.id)
-                                      if (optimizedMessage) {
+                                      const editedMessage = successfulEdits.find((edit: any) => edit.id === m.id)
+                                      if (editedMessage) {
                                         console.log(`🔍 TURBO - Updating message ${m.id} with Turbo content`)
                                         return {
                                           ...m,
-                                          content: optimizedMessage.content,
-                                          turboContent: optimizedMessage.content,
+                                          content: editedMessage.content,
+                                          turboContent: editedMessage.content,
                                           currentVersion: 'turbo',
                                           isTurbo: true
                                         }
@@ -1574,17 +1624,18 @@ export default function AlchemailApp20() {
 
                                     toast({
                                       title: "Turbo optimization complete!",
-                                      description: `Successfully optimized ${successCount} messages with redundancy cleanup.`,
+                                      description: `Successfully applied Turbo edits to ${successfulEdits.length} messages.`,
                                     })
-                                  } catch (redundancyError) {
-                                    console.error('Error in redundancy cleanup:', redundancyError)
+                                  } catch (turboError) {
+                                    console.error('Error in Turbo process:', turboError)
                                     toast({
                                       title: "Individual optimization complete",
-                                      description: "Messages optimized individually, but redundancy cleanup failed. Individual optimizations are still active.",
+                                      description: "Messages optimized individually, but Turbo process failed. Individual optimizations are still active.",
                                       variant: "destructive",
                                     })
                                   } finally {
                                     setIsTurboRunning(false) // Always clear the Turbo running state
+                                    setTurboPhase(null)
                                   }
                                 } else {
                                   toast({
@@ -1593,6 +1644,7 @@ export default function AlchemailApp20() {
                                     variant: "destructive",
                                   })
                                   setIsTurboRunning(false) // Clear Turbo running state on overall failure
+                                  setTurboPhase(null)
                                 }
 
                                 setIsTurboMode(false)
@@ -1816,9 +1868,9 @@ export default function AlchemailApp20() {
                             ) : isTurboRunning ? (
                               <>
                                 <Loader2 className="mr-2 h-3 w-3 animate-spin" />
-                                Turbo...
-                      </>
-                    ) : (
+                                {turboPhase === 'analysis' ? 'Analyzing...' : turboPhase === 'application' ? 'Applying...' : 'Turbo...'}
+                              </>
+                            ) : (
                       <>
                                 <Sparkles className="mr-2 h-3 w-3" />
                                 Optimize
