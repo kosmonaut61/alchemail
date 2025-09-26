@@ -133,7 +133,7 @@ CRITICAL REQUIREMENTS:
     console.log('\n' + '='.repeat(80))
     console.log('🤖 OPENAI API CALL - REDUNDANCY OPTIMIZATION (OPTIMO)')
     console.log('='.repeat(80))
-    console.log('📧 MODEL: gpt-5')
+    console.log('📧 MODEL: gpt-5 (Optimo Redundancy Cleanup)')
     console.log('🎯 PURPOSE: Eliminate redundancy across campaign messages')
     console.log('📝 MESSAGE COUNT:', messages.length)
     console.log('📏 PROMPT LENGTH:', redundancyPrompt.length, 'characters')
