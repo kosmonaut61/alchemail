@@ -98,6 +98,14 @@ OPTIMIZATION GUIDELINES:
 - **VARY** language patterns while maintaining natural flow
 - **ELIMINATE** only true redundancy, not legitimate repetition for emphasis
 
+BOLD FORMATTING PRESERVATION (CRITICAL):
+- **PRESERVE ALL BOLD FORMATTING** exactly as provided in input messages
+- **DO NOT REMOVE** any existing **bold** formatting
+- **DO NOT MODIFY** any existing **bold** formatting
+- **ENHANCE** by adding **bold** to key phrases, statistics, and value propositions that are not already bolded
+- **MAINTAIN** all **bold** text for company names, statistics, and important points
+- **ENSURE** key information remains visually emphasized with **bold** formatting
+
 CONTEXT DIVERSITY REQUIREMENTS:
 - Use different customer examples from the context repository
 - Vary statistics and success stories across messages
@@ -128,7 +136,12 @@ CRITICAL REQUIREMENTS:
 - Do NOT make messages longer. Keep the same length or shorter
 - Focus only on eliminating redundancy and varying language patterns
 - Preserve all merge fields exactly: {{contact.first_name}}, {{contact.title}}, etc.
-- Preserve all URLs exactly as provided`
+- Preserve all URLs exactly as provided
+- **CRITICAL**: PRESERVE ALL BOLD FORMATTING (**text**) exactly as provided - DO NOT remove any bold formatting
+- **CRITICAL**: ENHANCE bold formatting by adding **bold** to key phrases, statistics, and value propositions
+- **CRITICAL**: Strengthen CTAs, don't weaken them - make them more specific and benefit-focused
+- **CRITICAL**: Maintain natural link integration within sentences
+- **CRITICAL**: Enhance visual formatting to make key information stand out`
 
     console.log('\n' + '='.repeat(80))
     console.log('🤖 OPENAI API CALL - REDUNDANCY OPTIMIZATION (OPTIMO)')
@@ -148,7 +161,7 @@ CRITICAL REQUIREMENTS:
       messages: [
         {
           role: 'system',
-          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Use the EXACT same IDs and types as the input messages. Do not include any explanatory text or formatting outside the JSON array.'
+          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Use the EXACT same IDs and types as the input messages. Do not include any explanatory text or formatting outside the JSON array. CRITICAL: PRESERVE ALL BOLD FORMATTING (**text**) exactly as provided in the input messages. Do NOT remove or modify any bold formatting. CRITICAL: ENHANCE bold formatting by adding **bold** to key phrases, statistics, and value propositions that are not already bolded.'
         },
         {
           role: 'user',
