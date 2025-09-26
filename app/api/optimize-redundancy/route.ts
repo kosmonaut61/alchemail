@@ -127,6 +127,9 @@ REDUNDANCY DETECTION & ELIMINATION RULES:
    - Vary CTA approaches and language
    - Use different urgency levels
    - Mix meeting requests with resource sharing
+   - **PRESERVE** existing CTA variety - don't make all CTAs identical
+   - **MAINTAIN** different CTA structures across messages
+   - **KEEP** original CTA language - don't standardize to "quick chat"
 
 5. **Redundant Context Usage**:
    - Ensure different customer examples across messages
@@ -150,6 +153,14 @@ BOLD FORMATTING PRESERVATION (CRITICAL):
 - **ENHANCE** by adding **bold** to key phrases, statistics, and value propositions that are not already bolded
 - **MAINTAIN** all **bold** text for company names, statistics, and important points
 - **ENSURE** key information remains visually emphasized with **bold** formatting
+
+PERSONALIZATION PRESERVATION (CRITICAL):
+- **PRESERVE** persona-specific language and tone (e.g., "steep learning curve", "early in your finance career")
+- **MAINTAIN** personal touches and conversational connectors
+- **KEEP** original personalization elements that make messages feel human
+- **PRESERVE** relationship context and conversation flow
+- **MAINTAIN** the warm, approachable tone of the original messages
+- **AVOID** making messages too generic or corporate
 
 CONTEXT DIVERSITY REQUIREMENTS:
 - Use different customer examples from the context repository
@@ -184,7 +195,7 @@ CRITICAL REQUIREMENTS:
 - Preserve all URLs exactly as provided
 - **CRITICAL**: PRESERVE ALL BOLD FORMATTING (**text**) exactly as provided - DO NOT remove any bold formatting
 - **CRITICAL**: ENHANCE bold formatting by adding **bold** to key phrases, statistics, and value propositions
-- **CRITICAL**: Strengthen CTAs, don't weaken them - make them more specific and benefit-focused
+- **CRITICAL**: PRESERVE CTA variety - don't make all CTAs identical or standardize to "quick chat"
 - **CRITICAL**: Maintain natural link integration within sentences
 - **CRITICAL**: Enhance visual formatting to make key information stand out`
 
@@ -206,7 +217,7 @@ CRITICAL REQUIREMENTS:
       messages: [
         {
           role: 'system',
-          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Use the EXACT same IDs and types as the input messages. Do not include any explanatory text or formatting outside the JSON array. CRITICAL: PRESERVE ALL BOLD FORMATTING (**text**) exactly as provided in the input messages. Do NOT remove or modify any bold formatting. CRITICAL: ENHANCE bold formatting by adding **bold** to key phrases, statistics, and value propositions that are not already bolded.'
+          content: 'You are an expert message redundancy optimizer. Analyze campaign messages and eliminate repetitive language while preserving each message\'s unique value. Always preserve merge field syntax ({{variable.name}}) exactly as provided. Use ONLY exact URLs from context. Focus on varying language patterns and eliminating true redundancy. CRITICAL: You must return ONLY a valid JSON array with the exact same structure as the input messages. Use the EXACT same IDs and types as the input messages. Do not include any explanatory text or formatting outside the JSON array. CRITICAL: PRESERVE ALL BOLD FORMATTING (**text**) exactly as provided in the input messages. Do NOT remove or modify any bold formatting. CRITICAL: ENHANCE bold formatting by adding **bold** to key phrases, statistics, and value propositions that are not already bolded. CRITICAL: PRESERVE CTA variety - don\'t make all CTAs identical or standardize to "quick chat". CRITICAL: PRESERVE persona-specific language and personalization elements that make messages feel human.'
         },
         {
           role: 'user',
