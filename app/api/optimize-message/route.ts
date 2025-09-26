@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`🔍 Optimizing ${type} message with GPT-5: ${messageId}`)
+    console.log(`🔍 Optimizing ${type} message with GPT-5-mini: ${messageId}`)
     console.log('👤 Persona:', personaData.label)
 
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Using your advanced capabilities, optimize this message for maximum engagement and response rates.
@@ -320,106 +320,54 @@ QUALITY TARGET: Match the tone, confidence, and impact of the successful email e
 
 IMPORTANT: Preserve the warm, conversational tone of the original. Don't make emails too short or aggressive. Maintain the friendly, human element while improving structure and flow.`
 
-    // Custom GPT-5 nano optimization with fallback
+    // Use GPT-5-mini for individual optimization (boss preference)
     let optimizedContent: string
     
-    try {
-      console.log('🚀 Attempting optimization with GPT-5 nano...')
-      
-      // Log the complete prompt for auditing
-      console.log('\n' + '='.repeat(80))
-      console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION')
-      console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-5')
-      console.log('🎯 PURPOSE: Optimize message for engagement')
-      console.log('📝 MESSAGE ID:', messageId)
-      console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
-      console.log('\n📝 COMPLETE PROMPT:')
-      console.log('-'.repeat(60))
-      console.log(optimizationPrompt)
-      console.log('-'.repeat(60))
-      console.log('='.repeat(80) + '\n')
-      
-      const { text } = await generateText({
-        model: openai('gpt-5'),
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
-          },
-          {
-            role: 'user',
-            content: optimizationPrompt
-          }
-        ],
-        temperature: 0.7,
-        topP: 0.9,
-        frequencyPenalty: 0.1,
-        presencePenalty: 0.1
-      })
+    console.log('🚀 Optimizing with GPT-5-mini...')
+    
+    // Log the complete prompt for auditing
+    console.log('\n' + '='.repeat(80))
+    console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION')
+    console.log('='.repeat(80))
+    console.log('📧 MODEL: gpt-5-mini')
+    console.log('🎯 PURPOSE: Optimize message for engagement')
+    console.log('📝 MESSAGE ID:', messageId)
+    console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
+    console.log('\n📝 COMPLETE PROMPT:')
+    console.log('-'.repeat(60))
+    console.log(optimizationPrompt)
+    console.log('-'.repeat(60))
+    console.log('='.repeat(80) + '\n')
+    
+    const { text } = await generateText({
+      model: openai('gpt-5-mini'),
+      messages: [
+        {
+          role: 'system',
+          content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
+        },
+        {
+          role: 'user',
+          content: optimizationPrompt
+        }
+      ],
+      temperature: 0.7
+    })
 
-      console.log('\n' + '='.repeat(80))
-      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5)')
-      console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-5')
-      console.log('📝 MESSAGE ID:', messageId)
-      console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
-      console.log('\n📝 COMPLETE RESPONSE:')
-      console.log('-'.repeat(60))
-      console.log(text)
-      console.log('-'.repeat(60))
-      console.log('='.repeat(80) + '\n')
-      
-      optimizedContent = text
-      console.log('✅ GPT-5 optimization successful')
-      
-    } catch (gpt5Error) {
-      console.warn('⚠️ GPT-5 failed, falling back to GPT-4o-mini:', gpt5Error)
-      
-      // Fallback to GPT-4o-mini
-      console.log('\n' + '='.repeat(80))
-      console.log('🤖 OPENAI API CALL - MESSAGE OPTIMIZATION (FALLBACK)')
-      console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-4o-mini')
-      console.log('🎯 PURPOSE: Optimize message for engagement (fallback)')
-      console.log('📝 MESSAGE ID:', messageId)
-      console.log('📏 PROMPT LENGTH:', optimizationPrompt.length, 'characters')
-      console.log('\n📝 COMPLETE PROMPT:')
-      console.log('-'.repeat(60))
-      console.log(optimizationPrompt)
-      console.log('-'.repeat(60))
-      console.log('='.repeat(80) + '\n')
-      
-      const { text } = await generateText({
-        model: openai('gpt-4o-mini'),
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
-          },
-          {
-            role: 'user',
-            content: optimizationPrompt
-          }
-        ],
-        temperature: 0.7
-      })
-
-      console.log('\n' + '='.repeat(80))
-      console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-4O-MINI FALLBACK)')
-      console.log('='.repeat(80))
-      console.log('📧 MODEL: gpt-4o-mini')
-      console.log('📝 MESSAGE ID:', messageId)
-      console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
-      console.log('\n📝 COMPLETE RESPONSE:')
-      console.log('-'.repeat(60))
-      console.log(text)
-      console.log('-'.repeat(60))
-      console.log('='.repeat(80) + '\n')
-      
-      optimizedContent = text
-      console.log('✅ Fallback optimization with GPT-4o-mini successful')
-    }
+    console.log('\n' + '='.repeat(80))
+    console.log('✅ OPENAI API RESPONSE - MESSAGE OPTIMIZATION (GPT-5-MINI)')
+    console.log('='.repeat(80))
+    console.log('📧 MODEL: gpt-5-mini')
+    console.log('📝 MESSAGE ID:', messageId)
+    console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
+    console.log('\n📝 COMPLETE RESPONSE:')
+    console.log('-'.repeat(60))
+    console.log(text)
+    console.log('-'.repeat(60))
+    console.log('='.repeat(80) + '\n')
+    
+    optimizedContent = text
+    console.log('✅ GPT-5-mini optimization successful')
     
     if (!optimizedContent || optimizedContent.trim().length === 0) {
       throw new Error('No optimized content received from OpenAI')
@@ -443,7 +391,8 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         'Emotional resonance optimization',
         'Persuasion techniques applied',
         'Credibility and trust signals enhanced'
-      ]
+      ],
+      model: 'gpt-5-mini'
     })
 
   } catch (error) {
