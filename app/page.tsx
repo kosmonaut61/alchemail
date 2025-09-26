@@ -24,11 +24,11 @@ interface SequencePlan {
   isIncentivized?: boolean
   incentiveAmount?: number
   linkedInConnectionRequest?: {
-    day: number
+    daysLater: number
     purpose: string
   }
   emails: Array<{
-    day: number
+    daysLater: number
     subject: string
     purpose: string
     signalIntegration: string
@@ -38,7 +38,7 @@ interface SequencePlan {
     }
   }>
   linkedInMessages: Array<{
-    day: number
+    daysLater: number
     purpose: string
     signalIntegration: string
     includeIncentive?: boolean
@@ -52,7 +52,7 @@ interface SequencePlan {
 interface GeneratedMessage {
   id: string
   type: 'email' | 'linkedin'
-  day: number
+  daysLater: number
   content: string
   originalContent?: string
   isOptimized?: boolean
@@ -960,7 +960,7 @@ export default function AlchemailApp20() {
                       <h3 className="font-semibold">LinkedIn Connection Request</h3>
                       <div className="p-4 border rounded-lg bg-purple-50 dark:bg-purple-950">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-sm font-medium">{sequencePlan.linkedInConnectionRequest.daysLater === 0 ? 'Same Day' : `${sequencePlan.linkedInConnectionRequest.daysLater} Days Later`}</span>
                           <span className="text-xs text-muted-foreground">Connection Request</span>
                         </div>
                         <h4 className="font-medium">Send Connection Request on LinkedIn</h4>
@@ -997,7 +997,7 @@ export default function AlchemailApp20() {
                       {sequencePlan.linkedInMessages.map((message, index) => (
                         <div key={index} className="p-4 border rounded-lg bg-blue-50 dark:bg-blue-950">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium">Day {message.day}</span>
+                            <span className="text-sm font-medium">{message.daysLater === 0 ? 'Same Day' : `${message.daysLater} Days Later`}</span>
                             <span className="text-xs text-muted-foreground">LinkedIn {index + 1}</span>
                 </div>
                           <p className="text-sm text-muted-foreground">{message.purpose}</p>
@@ -1416,7 +1416,7 @@ export default function AlchemailApp20() {
                     <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-900">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Step 1: Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-sm font-medium">Step 1: {sequencePlan.linkedInConnectionRequest.daysLater === 0 ? 'Same Day' : `${sequencePlan.linkedInConnectionRequest.daysLater} Days Later`}</span>
                           <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                             Connection Request
                           </span>
@@ -1434,7 +1434,7 @@ export default function AlchemailApp20() {
                     <div key={message.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Step {stepNumber}: Day {message.day}</span>
+                          <span className="text-sm font-medium">Step {stepNumber}: {message.daysLater === 0 ? 'Same Day' : `${message.daysLater} Days Later`}</span>
                           <span className={`px-2 py-1 rounded-full text-xs ${
                             message.type === 'email' 
                               ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
