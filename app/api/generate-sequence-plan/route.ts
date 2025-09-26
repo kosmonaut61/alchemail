@@ -182,15 +182,15 @@ SEQUENCE REQUIREMENTS:
 - LinkedIn Messages: ${linkedInCount}
 
 ${isIncentivized ? `
-INCENTIVE CAMPAIGN REQUIREMENTS:
-- This is an incentivized campaign with a $${incentiveAmount} gift card offer
-- 50% of messages (approximately ${Math.round((emailCount + linkedInCount) * 0.5)} out of ${emailCount + linkedInCount} total messages) should mention the gift card incentive
-- CRITICAL: The FIRST email (Day 1) and FIRST LinkedIn message MUST include the incentive - this sets the expectation from the start
-- Distribute the remaining incentive mentions strategically across the sequence - don't put them all at the beginning or end
-- The incentive should be mentioned naturally in the context of demo bookings or calls
-- Use phrases like "up to $${incentiveAmount} gift card", "$${incentiveAmount} Visa gift card", or "$${incentiveAmount} gift card for your time"
-- Make the incentive feel like a genuine appreciation for their time, not a bribe
-- Only mention the incentive in messages that have demo/call CTAs
+COMPENSATION CAMPAIGN REQUIREMENTS:
+- This campaign includes $${incentiveAmount} gift card compensation for their valuable time
+- 50% of messages (approximately ${Math.round((emailCount + linkedInCount) * 0.5)} out of ${emailCount + linkedInCount} total messages) should mention the gift card compensation
+- CRITICAL: The FIRST email (Day 1) and FIRST LinkedIn message MUST include the compensation - this sets the expectation from the start
+- Distribute the remaining compensation mentions strategically across the sequence - don't put them all at the beginning or end
+- The compensation should be mentioned naturally in the context of demo bookings or calls
+- Use professional phrases like "up to $${incentiveAmount} gift card for your time", "$${incentiveAmount} Visa gift card as appreciation", or "$${incentiveAmount} gift card to compensate you for your valuable time"
+- Frame it as compensation for their time, not an incentive to meet with us
+- Only mention the compensation in messages that have demo/call CTAs
 ` : ''}
 
 Create a strategic sequence plan that:
@@ -321,7 +321,7 @@ MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
         "cta": "Call to action approach",
         "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       },
-      "includeIncentive": ${isIncentivized ? 'true for first email (Day 1), then distribute remaining incentives across other emails' : 'false'}
+      "includeIncentive": ${isIncentivized ? 'true for first email (Day 1), then distribute remaining gift cards across other emails' : 'false'}
     }
   ],
   "linkedInMessages": [
@@ -339,7 +339,7 @@ MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
         "cta": "Call to action approach",
         "assignedContext": "Which 1-2 specific context items will be used in this message (e.g., 'Dollar Tree Case Study, Food & Beverage Customers')"
       },
-      "includeIncentive": ${isIncentivized ? 'true for first LinkedIn message, then distribute remaining incentives across other LinkedIn messages' : 'false'}
+      "includeIncentive": ${isIncentivized ? 'true for first LinkedIn message, then distribute remaining gift cards across other LinkedIn messages' : 'false'}
     }
   ],
   "totalDays": 8
