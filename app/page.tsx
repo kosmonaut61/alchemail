@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, Zap } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
@@ -1410,6 +1410,108 @@ export default function AlchemailApp20() {
                             <>
                               <Sparkles className="mr-2 h-4 w-4" />
                               Optimize All
+                            </>
+                          )}
+                        </Button>
+                      )}
+                      {generatedMessages.length > 0 && (
+                        <Button
+                          variant="default"
+                          size="sm"
+                          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0"
+                          onClick={async () => {
+                            if (generatedMessages.length === 0) {
+                              toast({
+                                title: "No messages to optimize",
+                                description: "Please generate messages first.",
+                              })
+                              return
+                            }
+
+                            toast({
+                              title: "🚀 Turbo optimizing campaign...",
+                              description: `Analyzing ${generatedMessages.length} messages for campaign-level optimization.`,
+                            })
+
+                            // Set all messages to optimizing state
+                            setGeneratedMessages(prev => prev.map(m => ({ ...m, isOptimizing: true })))
+
+                            try {
+                              const response = await fetch('/api/optimize-campaign', {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  messages: generatedMessages.map(m => ({
+                                    id: m.id,
+                                    type: m.type,
+                                    content: m.content
+                                  })),
+                                  signal,
+                                  persona,
+                                  painPoints,
+                                  contextItems
+                                }),
+                              })
+
+                              if (!response.ok) {
+                                throw new Error(`HTTP ${response.status}: Failed to optimize campaign`)
+                              }
+
+                              const data = await response.json()
+                              
+                              // Parse the optimized campaign and update messages
+                              const optimizedCampaign = data.optimizedCampaign
+                              
+                              // Split the campaign back into individual messages
+                              const messageSections = optimizedCampaign.split(/(?:Email|LinkedIn Message) \d+:/)
+                              const messageTypes = optimizedCampaign.match(/(?:Email|LinkedIn Message) \d+:/g) || []
+                              
+                              // Update each message with its optimized content
+                              setGeneratedMessages(prev => prev.map((message, index) => {
+                                if (index < messageSections.length - 1) {
+                                  const optimizedContent = messageSections[index + 1].trim()
+                                  return {
+                                    ...message,
+                                    content: optimizedContent,
+                                    originalContent: message.content,
+                                    isOptimized: true,
+                                    isOptimizing: false
+                                  }
+                                }
+                                return { ...message, isOptimizing: false }
+                              }))
+
+                              toast({
+                                title: "🚀 Turbo optimization complete!",
+                                description: `Campaign optimized with ${data.optimizations.length} improvements applied.`,
+                              })
+
+                            } catch (error) {
+                              console.error('Error in Turbo optimization:', error)
+                              
+                              // Reset optimizing state on failure
+                              setGeneratedMessages(prev => prev.map(m => ({ ...m, isOptimizing: false })))
+                              
+                              toast({
+                                title: "Turbo optimization failed",
+                                description: "Please try again or use individual optimization.",
+                                variant: "destructive",
+                              })
+                            }
+                          }}
+                          disabled={generatedMessages.some(m => m.isOptimizing)}
+                        >
+                          {generatedMessages.some(m => m.isOptimizing) ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Turbo Optimizing...
+                            </>
+                          ) : (
+                            <>
+                              <Zap className="mr-2 h-4 w-4" />
+                              Turbo
                             </>
                           )}
                         </Button>
