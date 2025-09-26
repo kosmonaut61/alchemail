@@ -178,7 +178,7 @@ OPTIMIZATION GUIDELINES (apply to each message individually):
 31. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
 32. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 33. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
-34. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
+34. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments - CRITICAL: Every message MUST have at least 2-3 bolded phrases to highlight key value propositions
 35. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
 36. USE ACTUAL URLs: When referencing resources like videos, case studies, or other materials, use the EXACT URLs provided in the context repository - do NOT make up or create fake URLs - if a context item has a URL field, use that exact URL, not a made-up one
 37. GIFT CARD LANGUAGE: If mentioning gift card compensation, ALWAYS use "up to $X" language - never promise the full amount. Example: "up to $500 gift card for your time" not "$500 gift card". Frame it as compensation for their valuable time, not an incentive to meet. The gift card is applicable to a demo. Do not reference a specific amount of time required to participate in a demo to be eligible. Keep the gift card as a secondary thought in the call to action. We are primarily trying to have an initial conversation to see if they are eligible for a demo and compensation.
@@ -239,6 +239,8 @@ Call-to-Action (CTA) Rules:
 - Link only 2-4 key words in the middle of sentences, not entire phrases
 - Make the link feel like a natural part of the conversation flow
 - CRITICAL: Never show URLs as plain text - always wrap them in markdown link format [text](url)
+- CRITICAL: Every message MUST have a clear, actionable CTA with proper markdown links
+- CRITICAL: Ensure all CTAs are properly formatted and functional - no missing or broken links
 - LINK TYPE RULES:
   * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
   * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
@@ -303,7 +305,14 @@ QUALITY TARGET: Match the tone, confidence, and impact of the successful email e
 IMPORTANT: Preserve the warm, conversational tone of the original. Don't make emails too short or aggressive. Maintain the friendly, human element while improving structure and flow.
 
 CAMPAIGN OUTPUT FORMAT:
-Return the optimized campaign in the exact same format as the input, with each message clearly labeled by type and number. Ensure each message is completely unique while maintaining the overall campaign coherence.`
+Return the optimized campaign in the exact same format as the input, with each message clearly labeled by type and number. Ensure each message is completely unique while maintaining the overall campaign coherence.
+
+CRITICAL OUTPUT REQUIREMENTS:
+- Each message must be labeled exactly as: "Email 1:", "Email 2:", "Email 3:", "Email 4:", "LinkedIn Message 1:", "LinkedIn Message 2:"
+- Preserve all markdown formatting including **bold text** and [link text](url) formats
+- Ensure every message has proper CTAs with working markdown links
+- Maintain the exact structure and formatting of the original campaign
+- Do not add any extra text, explanations, or formatting outside the message content`
 
     // Custom GPT-5 optimization with fallback
     let optimizedContent: string

@@ -1464,14 +1464,31 @@ export default function AlchemailApp20() {
                               // Parse the optimized campaign and update messages
                               const optimizedCampaign = data.optimizedCampaign
                               
-                              // Split the campaign back into individual messages
-                              const messageSections = optimizedCampaign.split(/(?:Email|LinkedIn Message) \d+:/)
-                              const messageTypes = optimizedCampaign.match(/(?:Email|LinkedIn Message) \d+:/g) || []
+                              console.log('🔍 TURBO: Parsing optimized campaign...')
+                              console.log('📄 Campaign length:', optimizedCampaign.length)
+                              console.log('📄 Campaign preview:', optimizedCampaign.substring(0, 500))
+                              
+                              // Improved parsing logic to preserve formatting and links
+                              const messageRegex = /(?:Email|LinkedIn Message) (\d+):\s*([\s\S]*?)(?=(?:Email|LinkedIn Message) \d+:|$)/g
+                              const messageMatches = [...optimizedCampaign.matchAll(messageRegex)]
+                              
+                              console.log('🔍 TURBO: Found', messageMatches.length, 'message matches')
+                              
+                              // Create a map of message numbers to content
+                              const optimizedMessages = new Map()
+                              messageMatches.forEach((match, index) => {
+                                const messageNumber = parseInt(match[1])
+                                const content = match[2].trim()
+                                optimizedMessages.set(messageNumber, content)
+                                console.log(`📧 Message ${messageNumber} parsed, length:`, content.length)
+                              })
                               
                               // Update each message with its optimized content
                               setGeneratedMessages(prev => prev.map((message, index) => {
-                                if (index < messageSections.length - 1) {
-                                  const optimizedContent = messageSections[index + 1].trim()
+                                const messageNumber = index + 1
+                                const optimizedContent = optimizedMessages.get(messageNumber)
+                                
+                                if (optimizedContent) {
                                   return {
                                     ...message,
                                     content: optimizedContent,
@@ -1480,6 +1497,9 @@ export default function AlchemailApp20() {
                                     isOptimizing: false
                                   }
                                 }
+                                
+                                // Fallback: if parsing failed, keep original content but mark as optimized
+                                console.warn(`Failed to parse optimized content for message ${messageNumber}`)
                                 return { ...message, isOptimizing: false }
                               }))
 
