@@ -1530,6 +1530,8 @@ export default function AlchemailApp20() {
                                     description: "Now running Optimo redundancy cleanup...",
                                   })
 
+                                  setIsOptimoRunning(true) // Set Optimo running state
+
                                   try {
                                     console.log('🔍 OPTIMO - Sending messages for redundancy cleanup:', successfullyOptimizedMessages)
 
@@ -1581,6 +1583,8 @@ export default function AlchemailApp20() {
                                       description: "Messages optimized individually, but redundancy cleanup failed. Individual optimizations are still active.",
                                       variant: "destructive",
                                     })
+                                  } finally {
+                                    setIsOptimoRunning(false) // Always clear the Optimo running state
                                   }
                                 } else {
                                   toast({
@@ -1588,6 +1592,7 @@ export default function AlchemailApp20() {
                                     description: "Failed to optimize any messages. Please try again.",
                                     variant: "destructive",
                                   })
+                                  setIsOptimoRunning(false) // Clear Optimo running state on overall failure
                                 }
 
                                 setIsOptimoMode(false)
