@@ -57,12 +57,12 @@ interface GeneratedMessage {
   content: string
   originalContent?: string
   optimizedContent?: string
-  optimoContent?: string
-  currentVersion?: 'original' | 'optimized' | 'optimo'
+  turboContent?: string
+  currentVersion?: 'original' | 'optimized' | 'turbo'
   isOptimized?: boolean
   isGenerating?: boolean
   isOptimizing?: boolean
-  isOptimo?: boolean
+  isTurbo?: boolean
 }
 
 export default function AlchemailApp20() {
@@ -114,8 +114,8 @@ export default function AlchemailApp20() {
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
   const [contextSearchTerm, setContextSearchTerm] = useState("")
-  const [isOptimoMode, setIsOptimoMode] = useState(false)
-  const [isOptimoRunning, setIsOptimoRunning] = useState(false)
+  const [isTurboMode, setIsTurboMode] = useState(false)
+  const [isTurboRunning, setIsTurboRunning] = useState(false)
   const { toast } = useToast()
 
   const steps = [
@@ -1306,9 +1306,9 @@ export default function AlchemailApp20() {
                       {generatedMessages.length > 0 && (
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="outline"
-                              size="sm"
+                        <Button
+                          variant="outline"
+                          size="sm"
                               disabled={generatedMessages.some(m => m.isOptimizing)}
                             >
                               {generatedMessages.some(m => m.isOptimizing) ? (
@@ -1327,114 +1327,114 @@ export default function AlchemailApp20() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem
-                              onClick={async () => {
-                                const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimo && !m.isOptimizing)
-                                
-                                if (unoptimizedMessages.length === 0) {
-                                  toast({
-                                    title: "All messages already optimized",
-                                    description: "There are no messages left to optimize.",
-                                  })
-                                  return
-                                }
+                          onClick={async () => {
+                                const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isTurbo && !m.isOptimizing)
+                            
+                            if (unoptimizedMessages.length === 0) {
+                              toast({
+                                title: "All messages already optimized",
+                                description: "There are no messages left to optimize.",
+                              })
+                              return
+                            }
 
-                                toast({
-                                  title: "Optimizing all messages...",
-                                  description: `Starting optimization of ${unoptimizedMessages.length} messages.`,
+                            toast({
+                              title: "Optimizing all messages...",
+                              description: `Starting optimization of ${unoptimizedMessages.length} messages.`,
+                            })
+
+                            // Set all unoptimized messages to optimizing state
+                            setGeneratedMessages(prev => prev.map(m => 
+                                  !m.isOptimized && !m.isTurbo && !m.isOptimizing ? { ...m, isOptimizing: true } : m
+                            ))
+
+                            let successCount = 0
+                            let failureCount = 0
+
+                            // Optimize each message individually with delays to prevent rate limiting
+                            const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
+                              // Add a small delay between requests to prevent overwhelming the server
+                              if (index > 0) {
+                                await new Promise(resolve => setTimeout(resolve, 1000 * index))
+                              }
+                              try {
+                                const response = await fetch('/api/optimize-message', {
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                                  body: JSON.stringify({
+                                    messageId: message.id,
+                                    originalContent: message.content,
+                                    type: message.type,
+                                    signal,
+                                    persona,
+                                    painPoints,
+                                    contextItems
+                                  }),
                                 })
 
-                                // Set all unoptimized messages to optimizing state
+                                if (!response.ok) {
+                                  throw new Error(`HTTP ${response.status}: Failed to optimize message`)
+                                }
+
+                                const data = await response.json()
+                                
+                                // Update the message with optimized content
                                 setGeneratedMessages(prev => prev.map(m => 
-                                  !m.isOptimized && !m.isOptimo && !m.isOptimizing ? { ...m, isOptimizing: true } : m
-                                ))
-
-                                let successCount = 0
-                                let failureCount = 0
-
-                                // Optimize each message individually with delays to prevent rate limiting
-                                const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
-                                  // Add a small delay between requests to prevent overwhelming the server
-                                  if (index > 0) {
-                                    await new Promise(resolve => setTimeout(resolve, 1000 * index))
-                                  }
-                                  try {
-                                    const response = await fetch('/api/optimize-message', {
-                                      method: 'POST',
-                                      headers: {
-                                        'Content-Type': 'application/json',
-                                      },
-                                      body: JSON.stringify({
-                                        messageId: message.id,
-                                        originalContent: message.content,
-                                        type: message.type,
-                                        signal,
-                                        persona,
-                                        painPoints,
-                                        contextItems
-                                      }),
-                                    })
-
-                                    if (!response.ok) {
-                                      throw new Error(`HTTP ${response.status}: Failed to optimize message`)
-                                    }
-
-                                    const data = await response.json()
-                                    
-                                    // Update the message with optimized content
-                                    setGeneratedMessages(prev => prev.map(m => 
-                                      m.id === message.id ? {
-                                        ...m,
-                                        content: data.optimizedContent,
-                                        originalContent: message.content,
+                                  m.id === message.id ? {
+                                    ...m,
+                                    content: data.optimizedContent,
+                                    originalContent: message.content,
                                         optimizedContent: data.optimizedContent,
                                         currentVersion: 'optimized',
-                                        isOptimized: true,
-                                        isOptimizing: false
-                                      } : m
-                                    ))
+                                    isOptimized: true,
+                                    isOptimizing: false
+                                  } : m
+                                ))
 
-                                    successCount++
-                                  } catch (error) {
-                                    console.error(`Error optimizing message ${message.id}:`, error)
-                                    failureCount++
-                                    
-                                    // Reset optimizing state on failure
-                                    setGeneratedMessages(prev => prev.map(m => 
-                                      m.id === message.id ? { ...m, isOptimizing: false } : m
-                                    ))
-                                  }
-                                })
+                                successCount++
+                              } catch (error) {
+                                console.error(`Error optimizing message ${message.id}:`, error)
+                                failureCount++
+                                
+                                // Reset optimizing state on failure
+                                setGeneratedMessages(prev => prev.map(m => 
+                                  m.id === message.id ? { ...m, isOptimizing: false } : m
+                                ))
+                              }
+                            })
 
-                                // Wait for all optimizations to complete
-                                await Promise.all(optimizationPromises)
+                            // Wait for all optimizations to complete
+                            await Promise.all(optimizationPromises)
 
-                                // Show final toast
-                                if (failureCount === 0) {
-                                  toast({
-                                    title: "All messages optimized!",
-                                    description: `Successfully optimized ${successCount} messages.`,
-                                  })
-                                } else if (successCount > 0) {
-                                  toast({
-                                    title: "Optimization completed with some issues",
-                                    description: `Optimized ${successCount} messages successfully, ${failureCount} failed.`,
-                                    variant: "destructive",
-                                  })
-                                } else {
-                                  toast({
-                                    title: "Optimization failed",
-                                    description: "Failed to optimize any messages. Please try again.",
-                                    variant: "destructive",
-                                  })
-                                }
-                              }}
+                            // Show final toast
+                            if (failureCount === 0) {
+                              toast({
+                                title: "All messages optimized!",
+                                description: `Successfully optimized ${successCount} messages.`,
+                              })
+                            } else if (successCount > 0) {
+                              toast({
+                                title: "Optimization completed with some issues",
+                                description: `Optimized ${successCount} messages successfully, ${failureCount} failed.`,
+                                variant: "destructive",
+                              })
+                            } else {
+                              toast({
+                                title: "Optimization failed",
+                                description: "Failed to optimize any messages. Please try again.",
+                                variant: "destructive",
+                              })
+                            }
+                          }}
                             >
                               <Sparkles className="mr-2 h-4 w-4" />
                               Optimize All
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={async () => {
-                                const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimo && !m.isOptimizing)
+                                const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isTurbo && !m.isOptimizing)
                                 
                                 if (unoptimizedMessages.length === 0) {
                                   toast({
@@ -1444,15 +1444,15 @@ export default function AlchemailApp20() {
                                   return
                                 }
 
-                                setIsOptimoMode(true)
+                                setIsTurboMode(true)
                                 toast({
-                                  title: "Starting Optimo optimization...",
+                                  title: "Starting Turbo optimization...",
                                   description: `Optimizing ${unoptimizedMessages.length} messages with redundancy cleanup.`,
                                 })
 
                                 // Set all unoptimized messages to optimizing state
                                 setGeneratedMessages(prev => prev.map(m => 
-                                  !m.isOptimized && !m.isOptimo && !m.isOptimizing ? { ...m, isOptimizing: true } : m
+                                  !m.isOptimized && !m.isTurbo && !m.isOptimizing ? { ...m, isOptimizing: true } : m
                                 ))
 
                                 let successCount = 0
@@ -1527,15 +1527,15 @@ export default function AlchemailApp20() {
                                 if (successCount > 0) {
                                   toast({
                                     title: "Individual optimization complete",
-                                    description: "Now running Optimo redundancy cleanup...",
+                                    description: "Now running Turbo redundancy cleanup...",
                                   })
 
-                                  setIsOptimoRunning(true) // Set Optimo running state
+                                  setIsTurboRunning(true) // Set Turbo running state
 
                                   try {
-                                    console.log('🔍 OPTIMO - Sending messages for redundancy cleanup:', successfullyOptimizedMessages)
+                                    console.log('🔍 TURBO - Sending messages for redundancy cleanup:', successfullyOptimizedMessages)
 
-                                    const redundancyResponse = await fetch('/api/optimize-redundancy', {
+                                    const redundancyResponse = await fetch('/api/optimize-turbo', {
                                       method: 'POST',
                                       headers: {
                                         'Content-Type': 'application/json',
@@ -1554,26 +1554,26 @@ export default function AlchemailApp20() {
                                     }
 
                                     const redundancyData = await redundancyResponse.json()
-                                    console.log('🔍 OPTIMO - Redundancy cleanup response:', redundancyData)
+                                    console.log('🔍 TURBO - Redundancy cleanup response:', redundancyData)
                                     
                                     // Update messages with redundancy-optimized content
                                     setGeneratedMessages(prev => prev.map(m => {
                                       const optimizedMessage = redundancyData.optimizedMessages.find((opt: any) => opt.id === m.id)
                                       if (optimizedMessage) {
-                                        console.log(`🔍 OPTIMO - Updating message ${m.id} with Optimo content`)
+                                        console.log(`🔍 TURBO - Updating message ${m.id} with Turbo content`)
                                         return {
                                           ...m,
                                           content: optimizedMessage.content,
-                                          optimoContent: optimizedMessage.content,
-                                          currentVersion: 'optimo',
-                                          isOptimo: true
+                                          turboContent: optimizedMessage.content,
+                                          currentVersion: 'turbo',
+                                          isTurbo: true
                                         }
                                       }
                                       return m
                                     }))
 
                                     toast({
-                                      title: "Optimo optimization complete!",
+                                      title: "Turbo optimization complete!",
                                       description: `Successfully optimized ${successCount} messages with redundancy cleanup.`,
                                     })
                                   } catch (redundancyError) {
@@ -1584,7 +1584,7 @@ export default function AlchemailApp20() {
                                       variant: "destructive",
                                     })
                                   } finally {
-                                    setIsOptimoRunning(false) // Always clear the Optimo running state
+                                    setIsTurboRunning(false) // Always clear the Turbo running state
                                   }
                                 } else {
                                   toast({
@@ -1592,14 +1592,14 @@ export default function AlchemailApp20() {
                                     description: "Failed to optimize any messages. Please try again.",
                                     variant: "destructive",
                                   })
-                                  setIsOptimoRunning(false) // Clear Optimo running state on overall failure
+                                  setIsTurboRunning(false) // Clear Turbo running state on overall failure
                                 }
 
-                                setIsOptimoMode(false)
+                                setIsTurboMode(false)
                               }}
                             >
                               <Sparkles className="mr-2 h-4 w-4" />
-                              Optimize All with Optimo
+                              Optimize All with Turbo
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -1652,9 +1652,9 @@ export default function AlchemailApp20() {
                           }`}>
                             {message.type === 'email' ? 'Email' : 'LinkedIn'}
                           </span>
-                          {message.currentVersion === 'optimo' && (
+                          {message.currentVersion === 'turbo' && (
                             <span className="px-2 py-1 rounded-full text-xs bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200">
-                              Optimo
+                              Turbo
                             </span>
                           )}
                           {message.currentVersion === 'optimized' && (
@@ -1662,7 +1662,7 @@ export default function AlchemailApp20() {
                               Optimized
                             </span>
                           )}
-                          {message.currentVersion === 'original' && (message.isOptimized || message.isOptimo) && (
+                          {message.currentVersion === 'original' && (message.isOptimized || message.isTurbo) && (
                             <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
                               Original
                             </span>
@@ -1670,17 +1670,17 @@ export default function AlchemailApp20() {
                         </div>
                         <div className="flex gap-2">
                           <Button 
-                            variant={(message.isOptimized || message.isOptimo) ? "default" : "outline"} 
+                            variant={(message.isOptimized || message.isTurbo) ? "default" : "outline"} 
                             size="sm"
                             onClick={async () => {
-                              if (message.isOptimized || message.isOptimo) {
-                                // Cycle through versions: optimo -> optimized -> original
-                                let newVersion: 'original' | 'optimized' | 'optimo' = 'original'
+                              if (message.isOptimized || message.isTurbo) {
+                                // Cycle through versions: turbo -> optimized -> original
+                                let newVersion: 'original' | 'optimized' | 'turbo' = 'original'
                                 let newContent = message.originalContent || message.content
                                 let newIsOptimized = false
-                                let newIsOptimo = false
+                                let newIsTurbo = false
                                 
-                                if (message.currentVersion === 'optimo') {
+                                if (message.currentVersion === 'turbo') {
                                   newVersion = 'optimized'
                                   newContent = message.optimizedContent || message.content
                                   newIsOptimized = true
@@ -1688,11 +1688,11 @@ export default function AlchemailApp20() {
                                   newVersion = 'original'
                                   newContent = message.originalContent || message.content
                                 } else {
-                                  // Currently showing original, cycle back to optimo if available
-                                  if (message.optimoContent) {
-                                    newVersion = 'optimo'
-                                    newContent = message.optimoContent
-                                    newIsOptimo = true
+                                  // Currently showing original, cycle back to turbo if available
+                                  if (message.turboContent) {
+                                    newVersion = 'turbo'
+                                    newContent = message.turboContent
+                                    newIsTurbo = true
                                   } else if (message.optimizedContent) {
                                     newVersion = 'optimized'
                                     newContent = message.optimizedContent
@@ -1706,14 +1706,14 @@ export default function AlchemailApp20() {
                                     content: newContent,
                                     currentVersion: newVersion,
                                     isOptimized: newIsOptimized,
-                                    isOptimo: newIsOptimo
+                                    isTurbo: newIsTurbo
                                   } : m
                                 ))
                                 
                                 const versionNames = {
                                   original: 'Original',
                                   optimized: 'Optimized',
-                                  optimo: 'Optimo'
+                                  turbo: 'Turbo'
                                 }
                                 
                                 toast({
@@ -1813,37 +1813,37 @@ export default function AlchemailApp20() {
                                 <Loader2 className="mr-2 h-3 w-3 animate-spin" />
                                 Optimizing...
                               </>
-                            ) : isOptimoRunning ? (
+                            ) : isTurboRunning ? (
                               <>
                                 <Loader2 className="mr-2 h-3 w-3 animate-spin" />
-                                Optimo...
-                              </>
-                            ) : (
-                              <>
+                                Turbo...
+                      </>
+                    ) : (
+                      <>
                                 <Sparkles className="mr-2 h-3 w-3" />
                                 Optimize
-                              </>
-                            )}
+                      </>
+                    )}
                   </Button>
                   
-                  {(message.isOptimized || message.isOptimo) ? (
+                  {(message.isOptimized || message.isTurbo) ? (
                     <div className="flex gap-2">
                       <Select
                         value={message.currentVersion || 'original'}
-                        disabled={isOptimoRunning}
-                        onValueChange={(value: 'original' | 'optimized' | 'optimo') => {
+                        disabled={isTurboRunning}
+                        onValueChange={(value: 'original' | 'optimized' | 'turbo') => {
                           let newContent = message.content
                           let newIsOptimized = false
-                          let newIsOptimo = false
+                          let newIsTurbo = false
                           
                           if (value === 'original') {
                             newContent = message.originalContent || message.content
                           } else if (value === 'optimized') {
                             newContent = message.optimizedContent || message.content
                             newIsOptimized = true
-                          } else if (value === 'optimo') {
-                            newContent = message.optimoContent || message.content
-                            newIsOptimo = true
+                          } else if (value === 'turbo') {
+                            newContent = message.turboContent || message.content
+                            newIsTurbo = true
                           }
                           
                           setGeneratedMessages(prev => prev.map(m => 
@@ -1852,14 +1852,14 @@ export default function AlchemailApp20() {
                               content: newContent,
                               currentVersion: value,
                               isOptimized: newIsOptimized,
-                              isOptimo: newIsOptimo
+                              isTurbo: newIsTurbo
                             } : m
                           ))
                           
                           const versionNames = {
                             original: 'Original',
                             optimized: 'Optimized',
-                            optimo: 'Optimo'
+                            turbo: 'Turbo'
                           }
                           
                           toast({
@@ -1870,7 +1870,7 @@ export default function AlchemailApp20() {
                       >
                         <SelectTrigger className="w-32">
                           <SelectValue />
-                          {isOptimoRunning && (
+                          {isTurboRunning && (
                             <Loader2 className="ml-2 h-4 w-4 animate-spin" />
                           )}
                         </SelectTrigger>
@@ -1879,8 +1879,8 @@ export default function AlchemailApp20() {
                           {message.optimizedContent && (
                             <SelectItem value="optimized">Optimized</SelectItem>
                           )}
-                          {message.optimoContent && (
-                            <SelectItem value="optimo">Optimo</SelectItem>
+                          {message.turboContent && (
+                            <SelectItem value="turbo">Turbo</SelectItem>
                           )}
                         </SelectContent>
                       </Select>

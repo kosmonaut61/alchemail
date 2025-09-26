@@ -42,12 +42,12 @@ async function getContextForOptimizer(signal: string, personaData: any, painPoin
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    console.log('🔍 OPTIMO API - Request body:', JSON.stringify(body, null, 2))
+    console.log('🔍 TURBO API - Request body:', JSON.stringify(body, null, 2))
     
     const { messages, signal, persona, painPoints, contextItems } = body
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      console.error('❌ OPTIMO API - Invalid messages array:', messages)
+      console.error('❌ TURBO API - Invalid messages array:', messages)
       return NextResponse.json(
         { error: 'Messages array is required and must be non-empty' },
         { status: 400 }
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!signal || !persona) {
-      console.error('❌ OPTIMO API - Missing required fields:', { signal, persona })
+      console.error('❌ TURBO API - Missing required fields:', { signal, persona })
       return NextResponse.json(
         { error: 'Signal and persona are required' },
         { status: 400 }
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.log(`🔍 Running Optimo redundancy cleanup for ${messages.length} messages`)
+    console.log(`🔍 Running Turbo redundancy cleanup for ${messages.length} messages`)
     console.log('👤 Persona:', personaData.label)
 
     // Build context items string - use provided context or auto-detect
@@ -200,9 +200,9 @@ CRITICAL REQUIREMENTS:
 - **CRITICAL**: Enhance visual formatting to make key information stand out`
 
     console.log('\n' + '='.repeat(80))
-    console.log('🤖 OPENAI API CALL - REDUNDANCY OPTIMIZATION (OPTIMO)')
+    console.log('🤖 OPENAI API CALL - REDUNDANCY OPTIMIZATION (TURBO)')
     console.log('='.repeat(80))
-    console.log('📧 MODEL: gpt-5 (Optimo Redundancy Cleanup)')
+    console.log('📧 MODEL: gpt-5 (Turbo Redundancy Cleanup)')
     console.log('🎯 PURPOSE: Eliminate redundancy across campaign messages')
     console.log('📝 MESSAGE COUNT:', messages.length)
     console.log('📏 PROMPT LENGTH:', redundancyPrompt.length, 'characters')
