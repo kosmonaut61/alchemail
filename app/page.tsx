@@ -1468,9 +1468,34 @@ export default function AlchemailApp20() {
                               console.log('📄 Campaign length:', optimizedCampaign.length)
                               console.log('📄 Campaign preview:', optimizedCampaign.substring(0, 500))
                               
+                              // Debug: Look for message headers in the campaign
+                              const messageHeaders = optimizedCampaign.match(/(?:email|linkedin message) \d+:/gi)
+                              console.log('🔍 TURBO: Found message headers:', messageHeaders)
+                              
                               // Improved parsing logic to preserve formatting and links
-                              const messageRegex = /(?:Email|LinkedIn Message) (\d+):\s*([\s\S]*?)(?=(?:Email|LinkedIn Message) \d+:|$)/g
-                              const messageMatches = [...optimizedCampaign.matchAll(messageRegex)]
+                              // Make regex case-insensitive to handle "email 1:" vs "Email 1:"
+                              let messageRegex = /(?:email|linkedin message) (\d+):\s*([\s\S]*?)(?=(?:email|linkedin message) \d+:|$)/gi
+                              let messageMatches = [...optimizedCampaign.matchAll(messageRegex)]
+                              
+                              // Fallback: if no matches found, try alternative patterns
+                              if (messageMatches.length === 0) {
+                                console.log('🔍 TURBO: No matches with standard regex, trying fallback patterns...')
+                                
+                                // Try with more flexible patterns
+                                const fallbackPatterns = [
+                                  /(?:email|linkedin message|message) (\d+):\s*([\s\S]*?)(?=(?:email|linkedin message|message) \d+:|$)/gi,
+                                  /(?:email|linkedin|message) (\d+):\s*([\s\S]*?)(?=(?:email|linkedin|message) \d+:|$)/gi,
+                                  /(\d+)\.\s*([\s\S]*?)(?=\d+\.|$)/g
+                                ]
+                                
+                                for (const pattern of fallbackPatterns) {
+                                  messageMatches = [...optimizedCampaign.matchAll(pattern)]
+                                  if (messageMatches.length > 0) {
+                                    console.log('🔍 TURBO: Found matches with fallback pattern:', pattern)
+                                    break
+                                  }
+                                }
+                              }
                               
                               console.log('🔍 TURBO: Found', messageMatches.length, 'message matches')
                               console.log('🔍 TURBO: Expected', generatedMessages.length, 'messages')
