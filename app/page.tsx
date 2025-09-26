@@ -11,7 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, ChevronDown } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
@@ -58,6 +59,7 @@ interface GeneratedMessage {
   isOptimized?: boolean
   isGenerating?: boolean
   isOptimizing?: boolean
+  isOptimo?: boolean
 }
 
 export default function AlchemailApp20() {
@@ -109,6 +111,7 @@ export default function AlchemailApp20() {
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
   const [contextSearchTerm, setContextSearchTerm] = useState("")
+  const [isOptimoMode, setIsOptimoMode] = useState(false)
   const { toast } = useToast()
 
   const steps = [
@@ -1297,122 +1300,291 @@ export default function AlchemailApp20() {
                         Regenerate
                       </Button>
                       {generatedMessages.length > 0 && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={async () => {
-                            const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimizing)
-                            
-                            if (unoptimizedMessages.length === 0) {
-                              toast({
-                                title: "All messages already optimized",
-                                description: "There are no messages left to optimize.",
-                              })
-                              return
-                            }
-
-                            toast({
-                              title: "Optimizing all messages...",
-                              description: `Starting optimization of ${unoptimizedMessages.length} messages.`,
-                            })
-
-                            // Set all unoptimized messages to optimizing state
-                            setGeneratedMessages(prev => prev.map(m => 
-                              !m.isOptimized && !m.isOptimizing ? { ...m, isOptimizing: true } : m
-                            ))
-
-                            let successCount = 0
-                            let failureCount = 0
-
-                            // Optimize each message individually with delays to prevent rate limiting
-                            const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
-                              // Add a small delay between requests to prevent overwhelming the server
-                              if (index > 0) {
-                                await new Promise(resolve => setTimeout(resolve, 1000 * index))
-                              }
-                              try {
-                                const response = await fetch('/api/optimize-message', {
-                                  method: 'POST',
-                                  headers: {
-                                    'Content-Type': 'application/json',
-                                  },
-                                  body: JSON.stringify({
-                                    messageId: message.id,
-                                    originalContent: message.content,
-                                    type: message.type,
-                                    signal,
-                                    persona,
-                                    painPoints,
-                                    contextItems
-                                  }),
-                                })
-
-                                if (!response.ok) {
-                                  throw new Error(`HTTP ${response.status}: Failed to optimize message`)
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              disabled={generatedMessages.some(m => m.isOptimizing)}
+                            >
+                              {generatedMessages.some(m => m.isOptimizing) ? (
+                                <>
+                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                  Optimizing...
+                                </>
+                              ) : (
+                                <>
+                                  <Sparkles className="mr-2 h-4 w-4" />
+                                  Optimize All
+                                  <ChevronDown className="ml-2 h-4 w-4" />
+                                </>
+                              )}
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem
+                              onClick={async () => {
+                                const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimo && !m.isOptimizing)
+                                
+                                if (unoptimizedMessages.length === 0) {
+                                  toast({
+                                    title: "All messages already optimized",
+                                    description: "There are no messages left to optimize.",
+                                  })
+                                  return
                                 }
 
-                                const data = await response.json()
-                                
-                                // Update the message with optimized content
+                                toast({
+                                  title: "Optimizing all messages...",
+                                  description: `Starting optimization of ${unoptimizedMessages.length} messages.`,
+                                })
+
+                                // Set all unoptimized messages to optimizing state
                                 setGeneratedMessages(prev => prev.map(m => 
-                                  m.id === message.id ? {
-                                    ...m,
-                                    content: data.optimizedContent,
-                                    originalContent: message.content,
-                                    isOptimized: true,
-                                    isOptimizing: false
-                                  } : m
+                                  !m.isOptimized && !m.isOptimo && !m.isOptimizing ? { ...m, isOptimizing: true } : m
                                 ))
 
-                                successCount++
-                              } catch (error) {
-                                console.error(`Error optimizing message ${message.id}:`, error)
-                                failureCount++
-                                
-                                // Reset optimizing state on failure
-                                setGeneratedMessages(prev => prev.map(m => 
-                                  m.id === message.id ? { ...m, isOptimizing: false } : m
-                                ))
-                              }
-                            })
+                                let successCount = 0
+                                let failureCount = 0
 
-                            // Wait for all optimizations to complete
-                            await Promise.all(optimizationPromises)
+                                // Optimize each message individually with delays to prevent rate limiting
+                                const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
+                                  // Add a small delay between requests to prevent overwhelming the server
+                                  if (index > 0) {
+                                    await new Promise(resolve => setTimeout(resolve, 1000 * index))
+                                  }
+                                  try {
+                                    const response = await fetch('/api/optimize-message', {
+                                      method: 'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json',
+                                      },
+                                      body: JSON.stringify({
+                                        messageId: message.id,
+                                        originalContent: message.content,
+                                        type: message.type,
+                                        signal,
+                                        persona,
+                                        painPoints,
+                                        contextItems
+                                      }),
+                                    })
 
-                            // Show final toast
-                            if (failureCount === 0) {
-                              toast({
-                                title: "All messages optimized!",
-                                description: `Successfully optimized ${successCount} messages.`,
-                              })
-                            } else if (successCount > 0) {
-                              toast({
-                                title: "Optimization completed with some issues",
-                                description: `Optimized ${successCount} messages successfully, ${failureCount} failed.`,
-                                variant: "destructive",
-                              })
-                            } else {
-                              toast({
-                                title: "Optimization failed",
-                                description: "Failed to optimize any messages. Please try again.",
-                                variant: "destructive",
-                              })
-                            }
-                          }}
-                          disabled={generatedMessages.some(m => m.isOptimizing)}
-                        >
-                          {generatedMessages.some(m => m.isOptimizing) ? (
-                            <>
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              Optimizing...
-                            </>
-                          ) : (
-                            <>
+                                    if (!response.ok) {
+                                      throw new Error(`HTTP ${response.status}: Failed to optimize message`)
+                                    }
+
+                                    const data = await response.json()
+                                    
+                                    // Update the message with optimized content
+                                    setGeneratedMessages(prev => prev.map(m => 
+                                      m.id === message.id ? {
+                                        ...m,
+                                        content: data.optimizedContent,
+                                        originalContent: message.content,
+                                        isOptimized: true,
+                                        isOptimizing: false
+                                      } : m
+                                    ))
+
+                                    successCount++
+                                  } catch (error) {
+                                    console.error(`Error optimizing message ${message.id}:`, error)
+                                    failureCount++
+                                    
+                                    // Reset optimizing state on failure
+                                    setGeneratedMessages(prev => prev.map(m => 
+                                      m.id === message.id ? { ...m, isOptimizing: false } : m
+                                    ))
+                                  }
+                                })
+
+                                // Wait for all optimizations to complete
+                                await Promise.all(optimizationPromises)
+
+                                // Show final toast
+                                if (failureCount === 0) {
+                                  toast({
+                                    title: "All messages optimized!",
+                                    description: `Successfully optimized ${successCount} messages.`,
+                                  })
+                                } else if (successCount > 0) {
+                                  toast({
+                                    title: "Optimization completed with some issues",
+                                    description: `Optimized ${successCount} messages successfully, ${failureCount} failed.`,
+                                    variant: "destructive",
+                                  })
+                                } else {
+                                  toast({
+                                    title: "Optimization failed",
+                                    description: "Failed to optimize any messages. Please try again.",
+                                    variant: "destructive",
+                                  })
+                                }
+                              }}
+                            >
                               <Sparkles className="mr-2 h-4 w-4" />
                               Optimize All
-                            </>
-                          )}
-                        </Button>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={async () => {
+                                const unoptimizedMessages = generatedMessages.filter(m => !m.isOptimized && !m.isOptimo && !m.isOptimizing)
+                                
+                                if (unoptimizedMessages.length === 0) {
+                                  toast({
+                                    title: "All messages already optimized",
+                                    description: "There are no messages left to optimize.",
+                                  })
+                                  return
+                                }
+
+                                setIsOptimoMode(true)
+                                toast({
+                                  title: "Starting Optimo optimization...",
+                                  description: `Optimizing ${unoptimizedMessages.length} messages with redundancy cleanup.`,
+                                })
+
+                                // Set all unoptimized messages to optimizing state
+                                setGeneratedMessages(prev => prev.map(m => 
+                                  !m.isOptimized && !m.isOptimo && !m.isOptimizing ? { ...m, isOptimizing: true } : m
+                                ))
+
+                                let successCount = 0
+                                let failureCount = 0
+
+                                // Optimize each message individually with delays to prevent rate limiting
+                                const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
+                                  // Add a small delay between requests to prevent overwhelming the server
+                                  if (index > 0) {
+                                    await new Promise(resolve => setTimeout(resolve, 1000 * index))
+                                  }
+                                  try {
+                                    const response = await fetch('/api/optimize-message', {
+                                      method: 'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json',
+                                      },
+                                      body: JSON.stringify({
+                                        messageId: message.id,
+                                        originalContent: message.content,
+                                        type: message.type,
+                                        signal,
+                                        persona,
+                                        painPoints,
+                                        contextItems
+                                      }),
+                                    })
+
+                                    if (!response.ok) {
+                                      throw new Error(`HTTP ${response.status}: Failed to optimize message`)
+                                    }
+
+                                    const data = await response.json()
+                                    
+                                    // Update the message with optimized content
+                                    setGeneratedMessages(prev => prev.map(m => 
+                                      m.id === message.id ? {
+                                        ...m,
+                                        content: data.optimizedContent,
+                                        originalContent: message.content,
+                                        isOptimized: true,
+                                        isOptimizing: false
+                                      } : m
+                                    ))
+
+                                    successCount++
+                                  } catch (error) {
+                                    console.error(`Error optimizing message ${message.id}:`, error)
+                                    failureCount++
+                                    
+                                    // Reset optimizing state on failure
+                                    setGeneratedMessages(prev => prev.map(m => 
+                                      m.id === message.id ? { ...m, isOptimizing: false } : m
+                                    ))
+                                  }
+                                })
+
+                                // Wait for all optimizations to complete
+                                await Promise.all(optimizationPromises)
+
+                                // If we have successful optimizations, proceed with redundancy cleanup
+                                if (successCount > 0) {
+                                  toast({
+                                    title: "Individual optimization complete",
+                                    description: "Now running Optimo redundancy cleanup...",
+                                  })
+
+                                  try {
+                                    // Get all optimized messages for redundancy cleanup
+                                    const optimizedMessages = generatedMessages
+                                      .filter(m => m.isOptimized)
+                                      .map(m => ({
+                                        id: m.id,
+                                        type: m.type,
+                                        content: m.content
+                                      }))
+
+                                    const redundancyResponse = await fetch('/api/optimize-redundancy', {
+                                      method: 'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json',
+                                      },
+                                      body: JSON.stringify({
+                                        messages: optimizedMessages,
+                                        signal,
+                                        persona,
+                                        painPoints,
+                                        contextItems
+                                      }),
+                                    })
+
+                                    if (!redundancyResponse.ok) {
+                                      throw new Error(`HTTP ${redundancyResponse.status}: Failed to run redundancy cleanup`)
+                                    }
+
+                                    const redundancyData = await redundancyResponse.json()
+                                    
+                                    // Update messages with redundancy-optimized content
+                                    setGeneratedMessages(prev => prev.map(m => {
+                                      const optimizedMessage = redundancyData.optimizedMessages.find((opt: any) => opt.id === m.id)
+                                      if (optimizedMessage) {
+                                        return {
+                                          ...m,
+                                          content: optimizedMessage.content,
+                                          isOptimo: true
+                                        }
+                                      }
+                                      return m
+                                    }))
+
+                                    toast({
+                                      title: "Optimo optimization complete!",
+                                      description: `Successfully optimized ${successCount} messages with redundancy cleanup.`,
+                                    })
+                                  } catch (redundancyError) {
+                                    console.error('Error in redundancy cleanup:', redundancyError)
+                                    toast({
+                                      title: "Individual optimization complete",
+                                      description: "Messages optimized individually, but redundancy cleanup failed. Individual optimizations are still active.",
+                                      variant: "destructive",
+                                    })
+                                  }
+                                } else {
+                                  toast({
+                                    title: "Optimization failed",
+                                    description: "Failed to optimize any messages. Please try again.",
+                                    variant: "destructive",
+                                  })
+                                }
+
+                                setIsOptimoMode(false)
+                              }}
+                            >
+                              <Sparkles className="mr-2 h-4 w-4" />
+                              Optimize All with Optimo
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       )}
                 </div>
               </div>
@@ -1462,7 +1634,12 @@ export default function AlchemailApp20() {
                           }`}>
                             {message.type === 'email' ? 'Email' : 'LinkedIn'}
                           </span>
-                          {message.isOptimized && (
+                          {message.isOptimo && (
+                            <span className="px-2 py-1 rounded-full text-xs bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200">
+                              Optimo
+                            </span>
+                          )}
+                          {message.isOptimized && !message.isOptimo && (
                             <span className="px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                               Optimized
                             </span>
@@ -1470,15 +1647,16 @@ export default function AlchemailApp20() {
                         </div>
                         <div className="flex gap-2">
                           <Button 
-                            variant={message.isOptimized ? "default" : "outline"} 
+                            variant={message.isOptimized || message.isOptimo ? "default" : "outline"} 
                             size="sm"
                             onClick={async () => {
-                              if (message.isOptimized) {
+                              if (message.isOptimized || message.isOptimo) {
                                 // Show original content
                                 setGeneratedMessages(prev => prev.map(m => 
                                   m.id === message.id ? { 
                                     ...m, 
                                     isOptimized: false,
+                                    isOptimo: false,
                                     content: m.originalContent || m.content
                                   } : m
                                 ))
@@ -1577,7 +1755,7 @@ export default function AlchemailApp20() {
                                 <Loader2 className="mr-2 h-3 w-3 animate-spin" />
                                 Optimizing...
                               </>
-                            ) : message.isOptimized ? (
+                            ) : message.isOptimized || message.isOptimo ? (
                               <>
                                 <RefreshCw className="mr-2 h-3 w-3" />
                                 Show Original
