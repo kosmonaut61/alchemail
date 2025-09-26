@@ -994,9 +994,17 @@ export default function AlchemailApp20() {
                     <div className="space-y-4">
                       <h3 className="font-semibold">LinkedIn Messages</h3>
                       {sequencePlan.linkedInMessages.map((message, index) => {
-                        // Calculate gap from previous step
-                        const previousStepDay = index === 0 ? 0 : sequencePlan.linkedInMessages[index - 1].daysLater
-                        const gap = message.daysLater - previousStepDay
+                        // Calculate gap from previous step in the sequence
+                        // LinkedIn messages are interspersed between emails, so we need to find the previous message
+                        let gap = 0
+                        if (index === 0) {
+                          // First LinkedIn message is typically 2-3 days after first email (Day 1)
+                          gap = message.daysLater - 1 // Gap from first email (Day 1)
+                        } else {
+                          // Calculate gap from previous LinkedIn message
+                          const previousLinkedInMessage = sequencePlan.linkedInMessages[index - 1]
+                          gap = message.daysLater - previousLinkedInMessage.daysLater
+                        }
                         const timingText = gap === 0 ? 'Same Day' : `${gap} Days Later`
                         
                         return (
@@ -1595,8 +1603,8 @@ export default function AlchemailApp20() {
                     // Calculate gap from previous step
                     let gap = 0
                     if (index === 0) {
-                      // First message is always same day as connection request
-                      gap = 0
+                      // First message is 1 day after connection request (Day 0)
+                      gap = message.daysLater
                     } else {
                       // Calculate gap from previous message
                       const previousMessage = generatedMessages[index - 1]
