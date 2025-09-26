@@ -31,7 +31,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   // Find context items that match signal keywords
   const signalKeywords = [...industryKeywords, ...companyKeywords, ...specificKeywords]
   const keywordMatches = CONTEXT_REPOSITORY.filter(item => 
-    item.keywords && signalKeywords.some(keyword => 
+    item.keywords && Array.isArray(item.keywords) && signalKeywords.some(keyword => 
       signalLower.includes(keyword) && item.keywords!.some(itemKeyword => 
         itemKeyword.toLowerCase().includes(keyword.toLowerCase())
       )
@@ -47,7 +47,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Also find context items by checking if any context item keywords appear in the signal
   const directMatches = CONTEXT_REPOSITORY.filter(item => {
-    if (item.keywords) {
+    if (item.keywords && Array.isArray(item.keywords)) {
       return item.keywords.some(keyword => signalLower.includes(keyword.toLowerCase()))
     }
     return false
@@ -90,14 +90,14 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
     item.category === 'value_prop' && (
       keywordMatches.includes(item) || 
       industryMatches.includes(item) ||
-      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+      (painPoints && Array.isArray(painPoints) && painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase())))
     )
   )
   
   const languageStyleItems = CONTEXT_REPOSITORY.filter(item => 
     item.category === 'language_style' && (
       personaData.id === item.persona?.[0] ||
-      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+      (painPoints && Array.isArray(painPoints) && painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase())))
     )
   )
   
@@ -105,7 +105,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   const painPointMatches = CONTEXT_REPOSITORY.filter(item => 
     item.category === 'pain_points' && (
       item.persona?.includes(personaData.id) ||
-      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+      (painPoints && Array.isArray(painPoints) && painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase())))
     )
   )
   
@@ -186,9 +186,9 @@ TARGET PERSONA:
 - Department: ${personaData.department}
 - Seniority: ${personaData.seniority}
 - Tone Profile: ${personaData.toneProfile}
-- Keywords to Use: ${personaData.keywords.join(', ')}
-- Selected Pain Points: ${painPoints.join(', ') || 'Not specified'}
-- All Available Pain Points: ${personaData.painPoints.join('; ')}
+- Keywords to Use: ${personaData.keywords?.join(', ') || 'Not specified'}
+- Selected Pain Points: ${painPoints?.join(', ') || 'Not specified'}
+- All Available Pain Points: ${personaData.painPoints?.join('; ') || 'Not specified'}
 
       VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
       ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
@@ -224,7 +224,7 @@ TARGET PERSONA:
       ${getPersonaExampleEmail(personaData.label)}
 
       EMAIL SPECIFICATIONS:
-      - Day: ${emailPlan.day}
+      - Days Later: ${emailPlan.daysLater}
       - Email Number: ${sequencePlan.emails.indexOf(emailPlan) + 1} of ${sequencePlan.emails.length}
       - Subject: ${emailPlan.subject}
       - Purpose: ${emailPlan.purpose}
@@ -319,18 +319,18 @@ TARGET PERSONA:
       - Avoid corporate jargon and formal phrases
       - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
 
-      MESSAGE TYPE VARIATION BY DAY:
-      - Day 1: Follow the signalIntegration instruction from the sequence plan
-      - Day 3: Question-based approach focusing on challenges (start with question)
-      - Day 5: Story-driven with customer success focus (start with story/customer name)
-      - Day 7: Urgency-driven with clear next steps (start with urgency/time)
+      MESSAGE TYPE VARIATION BY TIMING:
+      - Same Day (0 days later): Follow the signalIntegration instruction from the sequence plan
+      - 2 Days Later: Question-based approach focusing on challenges (start with question)
+      - 4 Days Later: Story-driven with customer success focus (start with story/customer name)
+      - 6 Days Later: Urgency-driven with clear next steps (start with urgency/time)
       - LinkedIn: More casual, personal, and conversational (start with personal note)
 
-      DAY-SPECIFIC INSTRUCTIONS:
-      - Day 1: Follow the signalIntegration instruction from the sequence plan
-      - Day 3: Start with a question about their challenges
-      - Day 5: Start with a customer story or success example
-      - Day 7: Start with urgency or time-sensitive language
+      TIMING-SPECIFIC INSTRUCTIONS:
+      - Same Day (0 days later): Follow the signalIntegration instruction from the sequence plan
+      - 2 Days Later: Start with a question about their challenges
+      - 4 Days Later: Start with a customer story or success example
+      - 6 Days Later: Start with urgency or time-sensitive language
       - LinkedIn: Start with personal/casual language, avoid formal openings
 
       VARIED OPENING EXAMPLES (USE DIFFERENT ONES):
@@ -434,9 +434,9 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
         console.log('='.repeat(80) + '\n')
         
         generatedMessages.push({
-          id: `email-${emailPlan.day}-${sequencePlan.emails.indexOf(emailPlan)}`,
+          id: `email-${emailPlan.daysLater}-${sequencePlan.emails.indexOf(emailPlan)}`,
           type: 'email',
-          day: emailPlan.day,
+          daysLater: emailPlan.daysLater,
           content: emailContent,
           originalContent: emailContent,
           isOptimized: false,
@@ -444,10 +444,10 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           isOptimizing: false
         })
 
-        console.log(`✅ Generated email for day ${emailPlan.day}`)
+        console.log(`✅ Generated email for ${emailPlan.daysLater} days later`)
 
       } catch (emailError) {
-        console.error(`❌ Error generating email for day ${emailPlan.day}:`, emailError)
+        console.error(`❌ Error generating email for ${emailPlan.daysLater} days later:`, emailError)
         // Continue with other emails even if one fails
       }
     }
@@ -464,9 +464,9 @@ TARGET PERSONA:
 - Department: ${personaData.department}
 - Seniority: ${personaData.seniority}
 - Tone Profile: ${personaData.toneProfile}
-- Keywords to Use: ${personaData.keywords.join(', ')}
-- Selected Pain Points: ${painPoints.join(', ') || 'Not specified'}
-- All Available Pain Points: ${personaData.painPoints.join('; ')}
+- Keywords to Use: ${personaData.keywords?.join(', ') || 'Not specified'}
+- Selected Pain Points: ${painPoints?.join(', ') || 'Not specified'}
+- All Available Pain Points: ${personaData.painPoints?.join('; ') || 'Not specified'}
 
 VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
 ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
@@ -478,7 +478,7 @@ EXAMPLE EMAIL FOR THIS PERSONA (use as a template for tone and structure):
 ${getPersonaExampleEmail(personaData.label)}
 
 LINKEDIN MESSAGE SPECIFICATIONS:
-      - Day: ${linkedInPlan.day}
+      - Days Later: ${linkedInPlan.daysLater}
       - Purpose: ${linkedInPlan.purpose}
       - Signal Integration: ${linkedInPlan.signalIntegration}
       - Specific Stats to Feature: ${linkedInPlan.specificStats || 'Use relevant stats from context'}
@@ -607,9 +607,9 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
         console.log('='.repeat(80) + '\n')
         
         generatedMessages.push({
-          id: `linkedin-${linkedInPlan.day}-${sequencePlan.linkedInMessages.indexOf(linkedInPlan)}`,
+          id: `linkedin-${linkedInPlan.daysLater}-${sequencePlan.linkedInMessages.indexOf(linkedInPlan)}`,
           type: 'linkedin',
-          day: linkedInPlan.day,
+          daysLater: linkedInPlan.daysLater,
           content: linkedInContent,
           originalContent: linkedInContent,
           isOptimized: false,
@@ -617,16 +617,16 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           isOptimizing: false
         })
 
-        console.log(`✅ Generated LinkedIn message for day ${linkedInPlan.day}`)
+        console.log(`✅ Generated LinkedIn message for ${linkedInPlan.daysLater} days later`)
 
       } catch (linkedInError) {
-        console.error(`❌ Error generating LinkedIn message for day ${linkedInPlan.day}:`, linkedInError)
+        console.error(`❌ Error generating LinkedIn message for ${linkedInPlan.daysLater} days later:`, linkedInError)
         // Continue with other messages even if one fails
       }
     }
 
-    // Sort messages by day
-    generatedMessages.sort((a, b) => a.day - b.day)
+    // Sort messages by daysLater
+    generatedMessages.sort((a, b) => a.daysLater - b.daysLater)
 
     console.log('✅ All messages generated successfully')
 

@@ -22,7 +22,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   // Find context items that match keywords (broader matching)
   const keywordMatches = allKeywords
     .flatMap(keyword => CONTEXT_REPOSITORY.filter(item => 
-      item.keywords && item.keywords.some(itemKeyword => 
+      item.keywords && Array.isArray(item.keywords) && item.keywords.some(itemKeyword => 
         itemKeyword.toLowerCase().includes(keyword.toLowerCase())
       )
     ))
@@ -32,7 +32,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   const industryMatches = industryKeywords
     .filter(industry => signalLower.includes(industry))
     .flatMap(industry => CONTEXT_REPOSITORY.filter(item => 
-      item.industry && item.industry.includes(industry)
+      item.industry && Array.isArray(item.industry) && item.industry.includes(industry)
     ))
   
   // Add customer context items (most important for social proof)
@@ -71,7 +71,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   const painPointMatches = CONTEXT_REPOSITORY.filter(item => 
     item.category === 'pain_points' && (
       item.persona?.includes(personaData.id) ||
-      painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase()))
+      (painPoints && Array.isArray(painPoints) && painPoints.some(pp => item.content.toLowerCase().includes(pp.toLowerCase())))
     )
   )
   
@@ -118,7 +118,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
 
 export async function POST(request: NextRequest) {
   try {
-    const { signal, persona, painPoints, emailCount, linkedInCount, contextItems, isIncentivized = false, incentiveAmount = 500 } = await request.json()
+    const { signal, persona, painPoints = [], emailCount, linkedInCount, contextItems, isIncentivized = false, incentiveAmount = 500 } = await request.json()
 
     if (!signal || !persona) {
       return NextResponse.json(
@@ -197,7 +197,7 @@ Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
 3. Addresses the target persona's pain points using their specific tone profile and keywords
-4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number
+4. Uses appropriate spacing between messages (2-3 days for emails, 1-2 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number - NEVER bunch LinkedIn messages together on consecutive days
 5. Has clear purposes for each touchpoint
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
@@ -211,6 +211,10 @@ Create a strategic sequence plan that:
 15. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
 16. CRITICAL: The FIRST LinkedIn message must casually reference the email that was just sent - use natural, conversational language like "Hey, sent something to your inbox but wanted to touch base here too..." or "Sent you an email too but wanted to ask you if..." - make it feel casual and natural, not formal or scripted - avoid using the same phrasing repeatedly, create unique variations for each sequence
 17. CRITICAL: EVERY sequence must start with "Send Connection Request on LinkedIn" on Day 1 - this is always the first step and happens on the same day as the first email
+18. CRITICAL: ALTERNATE message types - never have multiple LinkedIn messages in a row - intersperse LinkedIn messages between emails to create a natural flow
+19. MANDATORY: Follow this exact pattern: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (NO EXCEPTIONS)
+20. FORBIDDEN: Any sequence that has LinkedIn → LinkedIn → LinkedIn or Email → Email → Email
+21. VALIDATION: Before generating, verify that no two consecutive messages are the same type
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -273,23 +277,37 @@ CRITICAL: You must respond with ONLY valid JSON. Do not include any text before 
 Return your response as a JSON object with this exact structure:
 
 CRITICAL DAY SPACING REQUIREMENTS:
-- Each message must have a UNIQUE day number - no duplicates allowed
-- Emails should be spaced 2-3 days apart
-- LinkedIn messages should be spaced 1-2 days apart
-- LinkedIn connection request is always Day 1
-- First email is always Day 1 (same day as connection request)
-- All subsequent messages must have different day numbers
+- Use "daysLater" field to indicate how many days after the previous message this should be sent
+- LinkedIn connection request is always "daysLater": 0 (same day as start)
+- First email is always "daysLater": 0 (same day as connection request)
+- Emails should be spaced 2-3 days later from previous message
+- LinkedIn messages should be spaced 1-2 days later from previous message
+- CRITICAL: NEVER have 2 or more LinkedIn messages with consecutive "daysLater" values - always alternate between emails and LinkedIn messages
+- LinkedIn messages should be interspersed between emails, not bunched together
+- MANDATORY PATTERN: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (alternating pattern)
+- FORBIDDEN: LinkedIn → LinkedIn → LinkedIn (any consecutive LinkedIn messages)
+- Each message type must alternate - no exceptions
+
+MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
+- Step 1: LinkedIn Connection Request (daysLater: 0)
+- Step 2: First Email (daysLater: 0) 
+- Step 3: First LinkedIn Message (daysLater: 2)
+- Step 4: Second Email (daysLater: 4)
+- Step 5: Second LinkedIn Message (daysLater: 6)
+- Step 6: Third Email (daysLater: 8)
+- Step 7: Third LinkedIn Message (daysLater: 10)
+- Continue alternating: Email → LinkedIn → Email → LinkedIn
 
 {
   "isIncentivized": ${isIncentivized},
   "incentiveAmount": ${incentiveAmount},
   "linkedInConnectionRequest": {
-    "day": 1,
+    "daysLater": 0,
     "purpose": "Send connection request on LinkedIn to establish initial contact before email outreach"
   },
   "emails": [
     {
-      "day": 1,
+      "daysLater": 0,
       "subject": "Subject line here",
       "purpose": "Purpose of this email",
       "signalIntegration": "Exactly how to mention the signal in this message",
@@ -308,7 +326,7 @@ CRITICAL DAY SPACING REQUIREMENTS:
   ],
   "linkedInMessages": [
     {
-      "day": 3,
+      "daysLater": 2,
       "purpose": "Purpose of this LinkedIn message",
       "signalIntegration": "Exactly how to mention the signal in this message",
       "specificStats": "Which specific stats/numbers from the context items to feature in this LinkedIn message (1 stat max)",
@@ -405,12 +423,12 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     if (!sequencePlan.emails || !sequencePlan.linkedInMessages || !sequencePlan.totalDays) {
       console.warn('⚠️ Invalid sequence plan structure, using fallback')
       
-      // Create a fallback sequence plan with proper email count
+      // Create a fallback sequence plan with proper email count and alternating pattern
       const fallbackEmails = []
       for (let i = 0; i < emailCount; i++) {
-        const day = 1 + (i * 2) // Space emails 2 days apart
+        const daysLater = i * 4 // Emails at 0, 4, 8, 12... (alternating with LinkedIn at 2, 6, 10...)
         fallbackEmails.push({
-          day: day,
+          daysLater: daysLater,
           subject: i === 0 ? "Quick question about your freight costs" : 
                    i === emailCount - 1 ? "One last thought on freight savings" :
                    `Following up on freight optimization (${i + 1})`,
@@ -418,8 +436,8 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
                    i === emailCount - 1 ? "Final attempt with urgency" :
                    "Reinforce value proposition",
           signalIntegration: i === 0 ? "Lead with the signal and provide value" :
-                             i === emailCount - 1 ? "Highlight time-sensitive aspects of the signal" :
-                             "Share specific examples related to the signal"
+                               i === emailCount - 1 ? "Highlight time-sensitive aspects of the signal" :
+                               "Share specific examples related to the signal"
         })
       }
       
@@ -428,9 +446,9 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
         linkedInMessages: (() => {
           const fallbackLinkedInMessages = []
           for (let i = 0; i < linkedInCount; i++) {
-            const day = 3 + (i * 2) // Space LinkedIn messages 2 days apart, starting day 3
+            const daysLater = 2 + (i * 4) // LinkedIn at 2, 6, 10... (alternating with emails at 0, 4, 8...)
             fallbackLinkedInMessages.push({
-              day: day,
+              daysLater: daysLater,
               purpose: i === 0 ? "Connect and add value" : "Follow up on email",
               signalIntegration: i === 0 ? "Share industry insight related to their challenges" : "Reference the email and offer additional resources"
             })
@@ -438,8 +456,8 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
           return fallbackLinkedInMessages
         })(),
         totalDays: Math.max(...[
-          ...(sequencePlan.emails || []).map((e: any) => e.day),
-          ...(sequencePlan.linkedInMessages || []).map((m: any) => m.day)
+          ...(sequencePlan.emails || []).map((e: any) => e.daysLater),
+          ...(sequencePlan.linkedInMessages || []).map((m: any) => m.daysLater)
         ], 8)
       }
     }

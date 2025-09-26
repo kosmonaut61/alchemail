@@ -24,11 +24,11 @@ interface SequencePlan {
   isIncentivized?: boolean
   incentiveAmount?: number
   linkedInConnectionRequest?: {
-    day: number
+    daysLater: number
     purpose: string
   }
   emails: Array<{
-    day: number
+    daysLater: number
     subject: string
     purpose: string
     signalIntegration: string
@@ -38,7 +38,7 @@ interface SequencePlan {
     }
   }>
   linkedInMessages: Array<{
-    day: number
+    daysLater: number
     purpose: string
     signalIntegration: string
     includeIncentive?: boolean
@@ -52,7 +52,7 @@ interface SequencePlan {
 interface GeneratedMessage {
   id: string
   type: 'email' | 'linkedin'
-  day: number
+  daysLater: number
   content: string
   originalContent?: string
   isOptimized?: boolean
@@ -333,7 +333,6 @@ export default function AlchemailApp20() {
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
               <HelpModal />
-              <span className="text-sm text-muted-foreground">Hello World</span>
               <ThemeToggle />
             </div>
           </div>
@@ -960,7 +959,7 @@ export default function AlchemailApp20() {
                       <h3 className="font-semibold">LinkedIn Connection Request</h3>
                       <div className="p-4 border rounded-lg bg-purple-50 dark:bg-purple-950">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-sm font-medium">Same Day</span>
                           <span className="text-xs text-muted-foreground">Connection Request</span>
                         </div>
                         <h4 className="font-medium">Send Connection Request on LinkedIn</h4>
@@ -974,8 +973,8 @@ export default function AlchemailApp20() {
                     {sequencePlan.emails.map((email, index) => (
                       <div key={index} className="p-4 border rounded-lg">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium">Day {email.day}</span>
-                          <span className="text-xs text-muted-foreground">Email {index + 1}</span>
+                          <span className="text-sm font-medium">Email {index + 1}</span>
+                          <span className="text-xs text-muted-foreground">{email.daysLater === 0 ? 'Same Day' : `${email.daysLater} Days Later`}</span>
                 </div>
                         <h4 className="font-medium">{email.subject}</h4>
                         <p className="text-sm text-muted-foreground mt-1">{email.purpose}</p>
@@ -994,11 +993,17 @@ export default function AlchemailApp20() {
                   {sequencePlan.linkedInMessages.length > 0 && (
                     <div className="space-y-4">
                       <h3 className="font-semibold">LinkedIn Messages</h3>
-                      {sequencePlan.linkedInMessages.map((message, index) => (
+                      {sequencePlan.linkedInMessages.map((message, index) => {
+                        // Calculate gap from previous step
+                        const previousStepDay = index === 0 ? 0 : sequencePlan.linkedInMessages[index - 1].daysLater
+                        const gap = message.daysLater - previousStepDay
+                        const timingText = gap === 0 ? 'Same Day' : `${gap} Days Later`
+                        
+                        return (
                         <div key={index} className="p-4 border rounded-lg bg-blue-50 dark:bg-blue-950">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium">Day {message.day}</span>
-                            <span className="text-xs text-muted-foreground">LinkedIn {index + 1}</span>
+                            <span className="text-sm font-medium">LinkedIn {index + 1}</span>
+                            <span className="text-xs text-muted-foreground">{timingText}</span>
                 </div>
                           <p className="text-sm text-muted-foreground">{message.purpose}</p>
                           <p className="text-xs text-blue-600 dark:text-blue-400 mt-2">
@@ -1009,8 +1014,9 @@ export default function AlchemailApp20() {
                               <strong>Assigned Context:</strong> {message.messageOutline.assignedContext}
                             </p>
                           )}
-              </div>
-                      ))}
+                        </div>
+                        )
+                      })}
                     </div>
                   )}
 
@@ -1416,7 +1422,7 @@ export default function AlchemailApp20() {
                     <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-900">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Step 1: Day {sequencePlan.linkedInConnectionRequest.day}</span>
+                          <span className="text-sm font-medium">Step 1: Same Day</span>
                           <span className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                             Connection Request
                           </span>
@@ -1430,11 +1436,25 @@ export default function AlchemailApp20() {
                   {generatedMessages.map((message, index) => {
                     // Calculate step number: Step 1 is connection request, so messages start at Step 2
                     const stepNumber = index + 2
+                    
+                    // Calculate gap from previous step
+                    let gap = 0
+                    if (index === 0) {
+                      // First message is always same day as connection request
+                      gap = 0
+                    } else {
+                      // Calculate gap from previous message
+                      const previousMessage = generatedMessages[index - 1]
+                      gap = message.daysLater - previousMessage.daysLater
+                    }
+                    
+                    const timingText = gap === 0 ? 'Same Day' : `${gap} Days Later`
+                    
                     return (
                     <div key={message.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Step {stepNumber}: Day {message.day}</span>
+                          <span className="text-sm font-medium">Step {stepNumber}: {timingText}</span>
                           <span className={`px-2 py-1 rounded-full text-xs ${
                             message.type === 'email' 
                               ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
