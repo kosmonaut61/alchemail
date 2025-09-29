@@ -16,6 +16,15 @@ export async function POST(request: NextRequest) {
     }
 
     console.log(`🔧 Applying campaign feedback to ${messages.length} messages`)
+    console.log('📋 Available feedback keys:', Object.keys(feedbackPlan))
+    console.log('💬 User Feedback:', userFeedback || 'No feedback provided')
+    
+    // Check for missing feedback
+    const expectedKeys = Array.from({length: messages.length}, (_, i) => `message${i + 1}`)
+    const missingKeys = expectedKeys.filter(key => !feedbackPlan[key])
+    if (missingKeys.length > 0) {
+      console.warn(`⚠️ Missing feedback for messages: ${missingKeys.join(', ')}`)
+    }
 
     // Process all messages in parallel with their specific feedback
     const feedbackPromises = messages.map(async (message: any, index: number) => {

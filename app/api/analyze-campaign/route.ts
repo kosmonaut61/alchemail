@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
     console.log(`🔍 Analyzing campaign with GPT-5: ${messages.length} messages`)
     console.log('👤 Persona:', persona)
     console.log('📝 Signal:', signal.substring(0, 100) + '...')
+    console.log('💬 User Feedback:', userFeedback || 'No feedback provided')
 
     // Use optimized versions if available, otherwise use original
     const messagesToAnalyze = messages.map((m: any) => ({
@@ -81,13 +82,14 @@ FEEDBACK GUIDELINES:
 
 USER FEEDBACK INTEGRATION RULES:
 - CRITICAL: Analyze user feedback carefully to determine which specific message(s) it applies to
-- If user feedback mentions "last message", "final message", "last email", etc., apply it ONLY to the final message in the sequence
+- If user feedback mentions "last message", "final message", "last email", etc., apply it ONLY to the final message in the sequence (this is message${messagesToAnalyze.length} in a ${messagesToAnalyze.length}-message sequence)
 - If user feedback mentions "first message", "opening", "initial", etc., apply it ONLY to the first message
 - If user feedback mentions "middle messages", "follow-up", etc., apply it to the appropriate middle messages
 - If user feedback is general (like "make tone more urgent"), consider how it applies to each message individually
 - NEVER apply specific content feedback (like "say X") to all messages - only to the relevant message(s)
 - Use user feedback to inform the overall campaign analysis and create targeted feedback for individual messages
 - If user feedback is about a specific message position, create feedback ONLY for that message position
+- IMPORTANT: This sequence has ${messagesToAnalyze.length} messages total, so "last message" refers to message${messagesToAnalyze.length}
 
 Return ONLY valid JSON with this exact structure:
 {
@@ -122,9 +124,34 @@ Return ONLY valid JSON with this exact structure:
       "feedback": "Specific improvements needed for this message",
       "priority": "high|medium|low",
       "suggestions": ["specific suggestion 1", "specific suggestion 2"]
+    },
+    "message7": {
+      "feedback": "Specific improvements needed for this message",
+      "priority": "high|medium|low",
+      "suggestions": ["specific suggestion 1", "specific suggestion 2"]
+    },
+    "message8": {
+      "feedback": "Specific improvements needed for this message",
+      "priority": "high|medium|low",
+      "suggestions": ["specific suggestion 1", "specific suggestion 2"]
+    },
+    "message9": {
+      "feedback": "Specific improvements needed for this message",
+      "priority": "high|medium|low",
+      "suggestions": ["specific suggestion 1", "specific suggestion 2"]
+    },
+    "message10": {
+      "feedback": "Specific improvements needed for this message",
+      "priority": "high|medium|low",
+      "suggestions": ["specific suggestion 1", "specific suggestion 2"]
     }
   }
 }
+
+IMPORTANT: This sequence has ${messagesToAnalyze.length} messages total. You MUST provide feedback for ALL ${messagesToAnalyze.length} messages in the feedbackPlan object. 
+- If there are more than 10 messages, continue the pattern with message11, message12, etc.
+- If there are fewer than 10 messages, only include the messages that exist (e.g., if there are 5 messages, only include message1 through message5)
+- CRITICAL: Always provide feedback for the exact number of messages in this sequence: ${messagesToAnalyze.length} messages
 
 CRITICAL: Return ONLY the JSON object, no other text. The response must be parseable as JSON.`
 
@@ -136,6 +163,16 @@ CRITICAL: Return ONLY the JSON object, no other text. The response must be parse
     console.log('✅ Campaign analysis complete')
 
     const campaignPlan = JSON.parse(analysis.text)
+    
+    // Validate that we have feedback for all messages
+    const expectedMessageCount = messagesToAnalyze.length
+    const actualFeedbackCount = Object.keys(campaignPlan.feedbackPlan || {}).length
+    
+    console.log(`📊 Feedback validation: Expected ${expectedMessageCount} messages, got feedback for ${actualFeedbackCount} messages`)
+    
+    if (actualFeedbackCount < expectedMessageCount) {
+      console.warn(`⚠️ Warning: Missing feedback for ${expectedMessageCount - actualFeedbackCount} messages`)
+    }
     
     return NextResponse.json({ campaignPlan })
 
