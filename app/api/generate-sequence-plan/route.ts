@@ -281,6 +281,13 @@ CRITICAL: You must respond with ONLY valid JSON. Do not include any text before 
 
 Return your response as a JSON object with this exact structure:
 
+CRITICAL MESSAGE COUNT REQUIREMENTS:
+- You MUST generate exactly ${emailCount} emails in the "emails" array
+- You MUST generate exactly ${linkedInCount} LinkedIn messages in the "linkedInMessages" array
+- Do NOT limit yourself to the example structure below - generate the full number of messages requested
+- Each message should have unique daysLater values that are strictly increasing
+- The example below shows the structure for ONE email and ONE LinkedIn message - you need to create ${emailCount} emails and ${linkedInCount} LinkedIn messages
+
 CRITICAL DAY SPACING REQUIREMENTS:
 - Use "daysLater" field to indicate how many days from the START of the campaign (Day 0)
 - LinkedIn connection request is always "daysLater": 0 (Day 0)
@@ -354,6 +361,8 @@ MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
   ],
   "totalDays": 8
 }
+
+IMPORTANT: The example above shows the structure for ONE email and ONE LinkedIn message. You must generate exactly ${emailCount} emails and ${linkedInCount} LinkedIn messages following this same structure. Each message should have unique daysLater values that are strictly increasing.
 
 Make sure the sequence feels natural and builds momentum. Each message should advance the conversation and provide value.`
 
@@ -435,9 +444,19 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
       
       // Create a fallback sequence plan with proper email count and alternating pattern
       const fallbackEmails = []
-      const emailSpacing = [0, 3, 7, 11, 15, 19, 23, 27] // Varied spacing: 0, 3, 4, 4, 4, 4, 4, 4
+      // Generate dynamic spacing for any number of emails
+      const generateEmailSpacing = (count: number) => {
+        const spacing = [0] // First email is always day 0
+        for (let i = 1; i < count; i++) {
+          // Use varied spacing: 3, 4, 5, 3, 4, 5 pattern for natural timing
+          const baseSpacing = 3 + (i % 3) // 3, 4, 5, 3, 4, 5...
+          spacing.push(spacing[spacing.length - 1] + baseSpacing)
+        }
+        return spacing
+      }
+      const emailSpacing = generateEmailSpacing(emailCount)
       for (let i = 0; i < emailCount; i++) {
-        const daysLater = emailSpacing[i] || (emailSpacing[emailSpacing.length - 1] + (i - emailSpacing.length + 1) * 4)
+        const daysLater = emailSpacing[i]
         fallbackEmails.push({
           daysLater: daysLater,
           subject: i === 0 ? "Quick question about your freight costs" : 
@@ -452,24 +471,33 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
         })
       }
       
+      // Generate LinkedIn messages with dynamic spacing
+      const fallbackLinkedInMessages = []
+      const generateLinkedInSpacing = (count: number) => {
+        const spacing = [1] // First LinkedIn message is day 1
+        for (let i = 1; i < count; i++) {
+          // Use varied spacing: 4, 5, 6, 4, 5, 6 pattern for natural timing
+          const baseSpacing = 4 + (i % 3) // 4, 5, 6, 4, 5, 6...
+          spacing.push(spacing[spacing.length - 1] + baseSpacing)
+        }
+        return spacing
+      }
+      const linkedInSpacing = generateLinkedInSpacing(linkedInCount)
+      for (let i = 0; i < linkedInCount; i++) {
+        const daysLater = linkedInSpacing[i]
+        fallbackLinkedInMessages.push({
+          daysLater: daysLater,
+          purpose: i === 0 ? "Connect and add value" : "Follow up on email",
+          signalIntegration: i === 0 ? "Share industry insight related to their challenges" : "Reference the email and offer additional resources"
+        })
+      }
+
       sequencePlan = {
         emails: fallbackEmails,
-        linkedInMessages: (() => {
-          const fallbackLinkedInMessages = []
-          const linkedInSpacing = [1, 5, 9, 13, 17, 21, 25, 29] // Varied spacing: 1, 5, 4, 4, 4, 4, 4, 4
-          for (let i = 0; i < linkedInCount; i++) {
-            const daysLater = linkedInSpacing[i] || (linkedInSpacing[linkedInSpacing.length - 1] + (i - linkedInSpacing.length + 1) * 4)
-            fallbackLinkedInMessages.push({
-              daysLater: daysLater,
-              purpose: i === 0 ? "Connect and add value" : "Follow up on email",
-              signalIntegration: i === 0 ? "Share industry insight related to their challenges" : "Reference the email and offer additional resources"
-            })
-          }
-          return fallbackLinkedInMessages
-        })(),
+        linkedInMessages: fallbackLinkedInMessages,
         totalDays: Math.max(...[
-          ...(sequencePlan.emails || []).map((e: any) => e.daysLater),
-          ...(sequencePlan.linkedInMessages || []).map((m: any) => m.daysLater)
+          ...fallbackEmails.map((e: any) => e.daysLater),
+          ...fallbackLinkedInMessages.map((m: any) => m.daysLater)
         ], 8)
       }
     }
