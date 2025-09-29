@@ -177,8 +177,8 @@ SUPPORTING GUIDELINES:
 2. Address pain points that align with the signal: ${painPoints.join(", ")}
 3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Make it sound like a real person wrote it, not marketing copy
-5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-   CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 6. Be creative and compelling - focus on the signal story first, word count will be optimized later
 
 ${samples ? 'MOST IMPORTANT: Match the sample emails exactly in tone, style, and approach. Copy their natural, conversational feel.' : ''}
@@ -190,13 +190,13 @@ Email 1 (Day 0):
 Subject: [subject]
 
 [email body with proper line breaks between paragraphs]
-[CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)]
+[CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)]
 
 Email 2 (Day 3):
 Subject: [subject]
 
 [email body with proper line breaks between paragraphs]
-[CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)]
+[CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)]
 
 LinkedIn Message 1 (Day 1):
 [message]
@@ -209,8 +209,8 @@ Continue pattern...
 FORMATTING REQUIREMENTS:
 - Include proper line breaks between EVERY paragraph in emails
 - EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - NO EXCEPTIONS
-- Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+- Apollo link format: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - Example CTAs that flow naturally: "[Want to chat about this?](link)", "[Sound like something that could help?](link)", "[Worth a quick call?](link)"
 - NEVER use formal language like "kindly" - keep it conversational and relaxed
 - Make output ready to paste directly into CRM/marketing tools

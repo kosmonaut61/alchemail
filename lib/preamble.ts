@@ -23,8 +23,8 @@ export const PREAMBLE_SECTIONS = {
 
 
 ### 5. Call-to-Action (CTA) Rules
-•	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-•	CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+•	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+•	CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting_alias}} (with dot)
 •	No other links in body unless specifically offering an overview → then plain "one-page overview."
 •	Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end.
 
@@ -60,13 +60,13 @@ export const PREAMBLE_SECTIONS = {
   - Dollar Tree: "Read their success story here"
   - Golden State Foods: "See how they reduced costs by 18%"  
   - EZRack: "Check out their 6-figure savings"
-**CTA URL:** \`https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min\`
-**CRITICAL APOLLO LINK FORMAT:** Always use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+**CTA URL:** \`https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min\`
+**CRITICAL APOLLO LINK FORMAT:** Always use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting_alias}} (with dot)
 
 ### Dynamic Variables
 **Contact Fields:** {{contact.first_name}}, {{contact.last_name}}, {{contact.email}}, {{contact.domain}}, {{contact.location_city}}, {{contact.location_state}}, {{contact.location_country}}, {{contact.phone}}, {{contact.title}}, {{contact.opt_out_message}}
 **Account Fields:** {{account.name}}, {{account.company_unprocessed_name}}, {{account.company_location_city}}, {{account.company_location_state}}, {{account.company_location_country}}, {{account.latest_funding_type}}, {{account.company_size}}, {{account.vertical}}, {{account.industry}}
-**Sender Fields:** {{sender.first_name}}, {{sender.last_name}}, {{sender.email}}, {{sender.meeting_alias}}
+**Sender Fields:** {{sender.first_name}}, {{sender.last_name}}, {{sender.email}}, {{sender_meeting_alias}}
 **Intent Fields:** {{primary_intent_signal}}, {{secondary_intent_signal}}
 **Time Fields:** {{now.day}}, {{now.month}}, {{now.time_of_day}}, {{now.weekday}}, {{now.year}}
 **Advanced:** Conditional fallbacks ({{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}), letter case ({{contact.title->lowercase}}), date operators ({{now.day->plus_X}})

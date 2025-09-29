@@ -140,8 +140,8 @@ SUPPORTING GUIDELINES:
 2. Address pain points that align with the signal: ${painPoints.join(", ")}
 3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Make it sound like a real person wrote it, not marketing copy
-5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-   CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 6. Be creative and compelling - focus on the signal story first, word count will be optimized later
 
 Generate the first email and LinkedIn message for this sequence:
@@ -155,8 +155,8 @@ Subject: [Subject line that references the signal]
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
@@ -238,8 +238,8 @@ SUPPORTING GUIDELINES:
 2. Address pain points that align with the signal: ${painPoints.join(", ")}
 3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Make it sound like a real person wrote it, not marketing copy
-5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-   CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 6. Be creative and compelling - focus on the signal story first, word count will be optimized later
 
 Generate emails 2, 3, 4 and the second LinkedIn message for this sequence:
@@ -253,8 +253,8 @@ Subject: [Subject line that references the signal]
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
@@ -267,8 +267,8 @@ Subject: [Subject line that references the signal]
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
@@ -281,8 +281,8 @@ Subject: [Subject line that references the signal]
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 

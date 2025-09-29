@@ -190,7 +190,7 @@ Generate EMAIL 1 (Day 0) following these STRICT rules:
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 - No signature block - email ends at CTA
 - Plain text only, no formatting
 - Subject line: 1-5 words, under 40 characters, mobile-friendly
@@ -235,7 +235,7 @@ Generate EMAIL 2 (Day 3) following these STRICT rules:
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 - No signature block - email ends at CTA
 - Plain text only, no formatting
 - Subject line: 1-5 words, under 40 characters, mobile-friendly
@@ -281,7 +281,7 @@ Generate EMAIL 3 (Day 7) following these STRICT rules:
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 - No signature block - email ends at CTA
 - Plain text only, no formatting
 - Subject line: 1-5 words, under 40 characters, mobile-friendly
@@ -327,7 +327,7 @@ Generate EMAIL 4 (Day 11) following these STRICT rules:
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 - No signature block - email ends at CTA
 - Plain text only, no formatting
 - Subject line: 1-5 words, under 40 characters, mobile-friendly

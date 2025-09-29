@@ -256,8 +256,8 @@ Call-to-Action (CTA) Rules:
 - Make the link feel like a natural part of the conversation flow
 - CRITICAL: Never show URLs as plain text - always wrap them in markdown link format [text](url)
 - LINK TYPE RULES:
-  * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-    CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+  * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+    CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
   * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
     - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
     - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
@@ -265,12 +265,12 @@ Call-to-Action (CTA) Rules:
     - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
     - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
     - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
-  * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-    CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+  * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+    CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - Examples of NATURAL link integration with correct URLs:
-  * "Want to [schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
+  * "Want to [schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
   * "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
-  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)?"
+  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)?"
 - AVOID: Entire sentence links like "[Would you be open to a quick chat to explore this further?](url)"
 
 FINAL FLOW REVIEW (CRITICAL):
