@@ -45,6 +45,9 @@ CAMPAIGN ANALYSIS TASKS:
 10. Ensure proper use of context items and customer examples
 11. Verify CTA variety and effectiveness
 12. Check for proper use of gift card language and demo requests
+13. CRITICAL: If user feedback is provided, analyze it carefully and apply it ONLY to the appropriate message(s) in the sequence
+14. For user feedback about specific content (like "say X in the last message"), apply that feedback ONLY to the relevant message, not all messages
+15. Use user feedback to inform the overall campaign analysis and create targeted, specific feedback for individual messages
 
 FORMATTING CONSISTENCY CHECKS:
 - Are em dashes (—) being used consistently or should they be replaced with hyphens?
@@ -68,6 +71,16 @@ FEEDBACK GUIDELINES:
 - Include formatting consistency feedback when relevant
 - Suggest specific context items or customer examples to vary
 - Recommend specific CTA improvements or link formatting fixes
+
+USER FEEDBACK INTEGRATION RULES:
+- CRITICAL: Analyze user feedback carefully to determine which specific message(s) it applies to
+- If user feedback mentions "last message", "final message", "last email", etc., apply it ONLY to the final message in the sequence
+- If user feedback mentions "first message", "opening", "initial", etc., apply it ONLY to the first message
+- If user feedback mentions "middle messages", "follow-up", etc., apply it to the appropriate middle messages
+- If user feedback is general (like "make tone more urgent"), consider how it applies to each message individually
+- NEVER apply specific content feedback (like "say X") to all messages - only to the relevant message(s)
+- Use user feedback to inform the overall campaign analysis and create targeted feedback for individual messages
+- If user feedback is about a specific message position, create feedback ONLY for that message position
 
 Return ONLY valid JSON with this exact structure:
 {
