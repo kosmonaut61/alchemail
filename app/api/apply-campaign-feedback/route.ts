@@ -40,8 +40,10 @@ ${feedback.feedback}
 SPECIFIC SUGGESTIONS:
 ${feedback.suggestions.join('\n')}
 
-USER FEEDBACK (CRITICAL - MUST BE INCORPORATED):
+USER FEEDBACK CONTEXT:
 ${userFeedback || 'No specific user feedback provided'}
+
+NOTE: User feedback has already been analyzed and incorporated into the specific feedback for each message above. Apply only the feedback provided for this specific message, not the general user feedback.
 
 CONTEXT:
 - Message Type: ${message.type}
@@ -56,8 +58,9 @@ ${contextItems && contextItems.length > 0
 }
 
 CRITICAL REQUIREMENTS:
-1. USER FEEDBACK INTEGRATION: The user feedback above is CRITICAL and MUST be incorporated into the message. This is the primary directive from the user and takes precedence over other suggestions.
-2. Apply the user feedback while maintaining message quality and formatting standards
+1. FEEDBACK APPLICATION: Apply ONLY the specific feedback provided for this message above. The user feedback context is provided for reference but has already been analyzed and incorporated into the specific feedback for this message.
+2. Apply the specific feedback while maintaining message quality and formatting standards
+3. Do NOT apply the general user feedback to every message - only apply the specific feedback provided for this individual message
 
 CRITICAL FORMATTING RULES:
 3. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
