@@ -1595,12 +1595,24 @@ export default function AlchemailApp20() {
                     size="sm"
                     onClick={async () => {
                       try {
-                        // Convert markdown-style formatting to HTML for rich text copying
-                        const htmlContent = message.content
+                        // Convert markdown-style formatting to clean HTML for rich text copying
+                        let processed = message.content
                           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
                           .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
-                          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>') // Links
-                          .replace(/\n/g, '<br>') // Line breaks
+                          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>') // Links - clean format
+                        
+                        // Convert to clean div structure like the example
+                        const htmlContent = processed
+                          .split('\n')
+                          .map(line => {
+                            const trimmed = line.trim()
+                            if (trimmed === '') {
+                              return '<div><br></div>'
+                            } else {
+                              return `<div>${trimmed}</div>`
+                            }
+                          })
+                          .join('')
                         
                         // Create a plain text version for fallback
                         const plainText = message.content
@@ -1643,8 +1655,8 @@ export default function AlchemailApp20() {
                       // First, convert markdown bold formatting to HTML
                       let processed = message.content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
                       
-                      // Then, convert markdown links to HTML
-                      processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                      // Then, convert markdown links to clean HTML (no extra styling)
+                      processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');
                       
                       // Then, replace merge fields that are NOT inside href attributes
                       processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
@@ -1896,8 +1908,8 @@ export default function AlchemailApp20() {
                                 // First, convert markdown bold formatting to HTML
                                 let processed = message.content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
                                 
-                                // Then, convert markdown links to HTML
-                                processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                                // Then, convert markdown links to clean HTML (no extra styling)
+                                processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');
                                 
                                 // Then, replace merge fields that are NOT inside href attributes
                                 processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
