@@ -41,6 +41,20 @@ CAMPAIGN ANALYSIS TASKS:
 6. Ensure each message has unique value and doesn't repeat previous content
 7. Check for proper spacing and timing in the sequence
 8. Verify that each message builds on the previous one appropriately
+9. Check for formatting consistency (bold text, links, merge fields)
+10. Ensure proper use of context items and customer examples
+11. Verify CTA variety and effectiveness
+12. Check for proper use of gift card language and demo requests
+
+FORMATTING CONSISTENCY CHECKS:
+- Are em dashes (—) being used consistently or should they be replaced with hyphens?
+- Are key context items properly bolded with **formatting**?
+- Are Apollo merge fields like {{contact.title}} being used appropriately?
+- Are actual URLs being used for case studies and resources?
+- Is gift card language using "up to $X" format consistently?
+- Are demo requests using "quick chat" language rather than time-boxed demos?
+- Are links integrated naturally into sentences, not as entire sentence links?
+- Are customer examples and statistics varied across messages?
 
 FEEDBACK GUIDELINES:
 - Be specific about what needs to change in each message
@@ -48,6 +62,9 @@ FEEDBACK GUIDELINES:
 - Focus on campaign coherence, not individual message quality
 - Suggest concrete improvements, not vague recommendations
 - Consider the user's feedback when provided
+- Include formatting consistency feedback when relevant
+- Suggest specific context items or customer examples to vary
+- Recommend specific CTA improvements or link formatting fixes
 
 Return ONLY valid JSON with this exact structure:
 {
