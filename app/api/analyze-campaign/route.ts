@@ -39,7 +39,11 @@ USER FEEDBACK: ${userFeedback || 'No specific feedback provided'}
 CAMPAIGN ANALYSIS TASKS:
 1. CRITICAL: Verify that the campaign signal "${signal}" is properly integrated and referenced throughout the sequence
 2. Check that each message builds on the signal story arc and maintains connection to the original outreach reason
-3. Identify repetitive phrases, stats, or customer examples across messages
+3. CRITICAL: Identify repetitive phrases, stats, or customer examples across messages - especially look for:
+   - Identical or near-identical signal integration phrases (e.g., "As a CEO with a decade of experience" appearing in multiple emails)
+   - Same opening patterns or structures
+   - Repeated statistics or customer examples
+   - Identical value propositions or pain point references
 4. Check for varied opening approaches and value propositions
 5. Ensure proper story arc progression and signal integration
 6. Verify tone consistency with persona
@@ -54,6 +58,7 @@ CAMPAIGN ANALYSIS TASKS:
 15. CRITICAL: If user feedback is provided, analyze it carefully and apply it ONLY to the appropriate message(s) in the sequence
 16. For user feedback about specific content (like "say X in the last message"), apply that feedback ONLY to the relevant message, not all messages
 17. Use user feedback to inform the overall campaign analysis and create targeted, specific feedback for individual messages
+18. CRITICAL: Flag any messages that use identical or nearly identical phrasing for the same concept - this creates robotic, repetitive feel
 
 FORMATTING CONSISTENCY CHECKS:
 - Are em dashes (—) being used consistently or should they be replaced with hyphens?
@@ -79,6 +84,12 @@ FEEDBACK GUIDELINES:
 - Suggest specific context items or customer examples to vary
 - Recommend specific CTA improvements or link formatting fixes
 - Ensure the signal story arc is maintained throughout the entire sequence
+- CRITICAL: For repetitive signal integration, provide specific alternative phrasings:
+  * If signal is about "decades of experience", suggest variations like: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
+  * If signal is about specific pain points, vary how you reference them across messages
+  * If signal is about company growth/challenges, use different angles and phrasings
+- CRITICAL: Flag HIGH priority for any message that uses identical phrasing to previous messages for the same concept
+- Provide specific alternative phrasings and approaches for each repetitive element identified
 
 USER FEEDBACK INTEGRATION RULES:
 - CRITICAL: Analyze user feedback carefully to determine which specific message(s) it applies to
