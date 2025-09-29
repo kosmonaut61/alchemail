@@ -55,6 +55,9 @@ FORMATTING CONSISTENCY CHECKS:
 - Are demo requests using "quick chat" language rather than time-boxed demos?
 - Are links integrated naturally into sentences, not as entire sentence links?
 - Are customer examples and statistics varied across messages?
+- CRITICAL: Does every email have at least one Apollo meeting link?
+- CRITICAL: Are Apollo meeting link texts varied across messages (not all saying "schedule a quick chat")?
+- Are Apollo links using different phrases like "book a demo", "set up a call", "schedule a meeting", etc.?
 
 FEEDBACK GUIDELINES:
 - Be specific about what needs to change in each message
