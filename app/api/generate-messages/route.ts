@@ -190,6 +190,34 @@ TARGET PERSONA:
 - Selected Pain Points: ${painPoints?.join(', ') || 'Not specified'}
 - All Available Pain Points: ${personaData.painPoints?.join('; ') || 'Not specified'}
 
+PAIN POINT DISTRIBUTION FOR THIS EMAIL:
+- This is Email ${sequencePlan.emails.indexOf(emailPlan) + 1} of ${sequencePlan.emails.length}
+- Total pain points available: ${painPoints?.length || 0}
+- CRITICAL: Focus on 1-2 PRIMARY pain points to avoid overwhelming the recipient
+${painPoints?.length === 1 ? `
+- SINGLE PAIN POINT DETECTED: Since only 1 pain point is provided, use DIFFERENT ANGLES and DESCRIPTIONS for each email:
+  - Email 1: Focus on the core challenge (e.g., "steep learning curve")
+  - Email 2: Focus on related aspects (e.g., "complex processes", "new systems", "ramping up")
+  - Email 3: Focus on impact/consequences (e.g., "time-consuming", "overwhelming", "difficult to master")
+  - Email 4: Focus on solutions/outcomes (e.g., "streamlined approach", "simplified process", "easier to understand")
+- NEVER use the exact same pain point phrase across multiple emails
+- Use varied language to describe the same underlying challenge
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"` : `
+- MULTIPLE PAIN POINTS: Use DIFFERENT pain points than previous emails in the sequence
+- If this is Email 1: Focus on pain point 1-2 from the list
+- If this is Email 2: Focus on pain point 2-3 from the list  
+- If this is Email 3: Focus on pain point 3-4 from the list
+- If this is Email 4: Focus on pain point 4-5 from the list
+- AVOID repeating the same pain point phrases across multiple emails
+- NEVER use the same pain point description in multiple emails
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"`}
+
       VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
       ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 

@@ -161,6 +161,17 @@ CRITICAL REQUIREMENTS:
 3. Each message should reference the signal in the opening and weave it throughout
 4. Plan different social proof/stats for each message (don't repeat the same case study)
 5. Ensure the sequence feels natural and personalized, not robotic
+6. DISTRIBUTE PAIN POINTS across messages - each message should focus on 1-2 different pain points to avoid repetition
+7. NEVER use the same pain point phrase across multiple messages (e.g., avoid "steep learning curve" in every email)
+8. SINGLE PAIN POINT HANDLING: If only 1 pain point is provided, use different angles/descriptions for each message:
+   - Message 1: Core challenge (e.g., "steep learning curve")
+   - Message 2: Related aspects (e.g., "complex processes", "new systems") 
+   - Message 3: Impact/consequences (e.g., "time-consuming", "overwhelming")
+   - Message 4: Solutions/outcomes (e.g., "streamlined approach", "simplified process")
+9. CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+   - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+   - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+   - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
 
 Create a JSON plan with this structure:
 {
@@ -264,6 +275,15 @@ CRITICAL REQUIREMENTS:
 4. Match the tone: ${messagePlan.tone}
 5. Make it feel natural and personalized, not robotic
 6. Create a cohesive story that builds on the sequence plan
+7. FOCUS ON 1-2 SPECIFIC PAIN POINTS - avoid repeating the same pain point phrases from other messages
+8. NEVER use generic pain point phrases like "steep learning curve" if it was used in previous messages
+9. SINGLE PAIN POINT VARIATION: If only 1 pain point exists, use different angles:
+   - Core challenge, related aspects, impact/consequences, or solutions/outcomes
+   - Never repeat the exact same phrase across messages
+10. CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+    - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+    - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+    - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
 
 Generate ${messageType.toUpperCase()} following these rules:
 - 95-100 words total

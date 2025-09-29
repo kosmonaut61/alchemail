@@ -77,6 +77,14 @@ CRITICAL REQUIREMENTS:
    - Instead of "As a CEO with a decade of experience", try: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
    - Vary the opening approach while maintaining the signal connection
    - Use different angles to reference the same underlying concept
+6. CRITICAL: VARIED PAIN POINT INTEGRATION - Avoid repeating the same pain point phrases across messages:
+   - If "steep learning curve" was used in other messages, use different pain point language
+   - Focus on 1-2 specific pain points per message, not all pain points
+   - Use varied descriptions of the same underlying challenges
+   - CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+     - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+     - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+     - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
 
 CRITICAL FORMATTING RULES:
 3. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
