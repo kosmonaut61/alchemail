@@ -1839,16 +1839,65 @@ export default function AlchemailApp20() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => {
-                          // Copy all finalized messages
-                          const allContent = finalizedMessages.map((m, i) => 
-                            `Message ${i+1} (${m.type}, Day ${m.daysLater}):\n${m.content}\n`
-                          ).join('\n---\n')
-                          navigator.clipboard.writeText(allContent)
-                          toast({
-                            title: "Campaign Copied!",
-                            description: "All finalized messages copied to clipboard.",
-                          })
+                        onClick={async () => {
+                          try {
+                            // Convert all messages to rich HTML format
+                            const htmlMessages = finalizedMessages.map((m, i) => {
+                              // Convert markdown-style formatting to clean HTML
+                              let processed = m.content
+                                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+                                .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+                                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>') // Links
+                              
+                              // Convert to clean div structure
+                              const htmlContent = processed
+                                .split('\n')
+                                .map(line => {
+                                  const trimmed = line.trim()
+                                  if (trimmed === '') {
+                                    return '<div><br></div>'
+                                  } else {
+                                    return `<div>${trimmed}</div>`
+                                  }
+                                })
+                                .join('')
+                              
+                              return `<div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                <h4>Message ${i+1} (${m.type}, Day ${m.daysLater})</h4>
+                                ${htmlContent}
+                              </div>`
+                            }).join('')
+                            
+                            const fullHtmlContent = `<div>${htmlMessages}</div>`
+                            
+                            // Create plain text version for fallback
+                            const plainText = finalizedMessages.map((m, i) => 
+                              `Message ${i+1} (${m.type}, Day ${m.daysLater}):\n${m.content}\n`
+                            ).join('\n---\n')
+                            
+                            // Copy as rich text (HTML) with plain text fallback
+                            await navigator.clipboard.write([
+                              new ClipboardItem({
+                                'text/html': new Blob([fullHtmlContent], { type: 'text/html' }),
+                                'text/plain': new Blob([plainText], { type: 'text/plain' })
+                              })
+                            ])
+                            
+                            toast({
+                              title: "Campaign Copied!",
+                              description: "All finalized messages copied with formatting - ready to paste into your CRM.",
+                            })
+                          } catch (error) {
+                            // Fallback to plain text if rich text copying fails
+                            const allContent = finalizedMessages.map((m, i) => 
+                              `Message ${i+1} (${m.type}, Day ${m.daysLater}):\n${m.content}\n`
+                            ).join('\n---\n')
+                            navigator.clipboard.writeText(allContent)
+                            toast({
+                              title: "Campaign Copied!",
+                              description: "All finalized messages copied as plain text.",
+                            })
+                          }
                         }}
                       >
                         <Copy className="mr-2 h-4 w-4" />
@@ -1886,12 +1935,53 @@ export default function AlchemailApp20() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => {
-                                navigator.clipboard.writeText(message.content)
-                                toast({
-                                  title: "Message Copied!",
-                                  description: "Message copied to clipboard.",
-                                })
+                              onClick={async () => {
+                                try {
+                                  // Convert markdown-style formatting to clean HTML for rich text copying
+                                  let processed = message.content
+                                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+                                    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+                                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>') // Links - clean format
+                                  
+                                  // Convert to clean div structure like the example
+                                  const htmlContent = processed
+                                    .split('\n')
+                                    .map(line => {
+                                      const trimmed = line.trim()
+                                      if (trimmed === '') {
+                                        return '<div><br></div>'
+                                      } else {
+                                        return `<div>${trimmed}</div>`
+                                      }
+                                    })
+                                    .join('')
+                                  
+                                  // Create a plain text version for fallback
+                                  const plainText = message.content
+                                    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold formatting
+                                    .replace(/\*(.*?)\*/g, '$1') // Remove italic formatting
+                                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)') // Convert links to text
+                                  
+                                  // Copy as rich text (HTML) with plain text fallback
+                                  await navigator.clipboard.write([
+                                    new ClipboardItem({
+                                      'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                                      'text/plain': new Blob([plainText], { type: 'text/plain' })
+                                    })
+                                  ])
+                                  
+                                  toast({
+                                    title: "Copied to clipboard!",
+                                    description: "Message content copied with formatting - ready to paste into your CRM.",
+                                  })
+                                } catch (error) {
+                                  // Fallback to plain text if rich text copying fails
+                                  navigator.clipboard.writeText(message.content)
+                                  toast({
+                                    title: "Copied to clipboard!",
+                                    description: "Message content copied as plain text.",
+                                  })
+                                }
                               }}
                             >
                               <Copy className="mr-2 h-3 w-3" />
