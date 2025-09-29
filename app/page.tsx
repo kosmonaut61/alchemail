@@ -1684,6 +1684,20 @@ export default function AlchemailApp20() {
                   })}
                 </div>
               )}
+
+              {/* Next Button for Step 3 */}
+              {currentStep === 3 && generatedMessages.length > 0 && (
+                <div className="flex justify-end">
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={!canProceedToNext()}
+                    className="bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/25"
+                  >
+                    Next: Campaign
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
         )}
@@ -1890,10 +1904,39 @@ export default function AlchemailApp20() {
                           </div>
                         </div>
                         
-                        <div className="prose prose-sm max-w-none">
-                          <pre className="whitespace-pre-wrap font-sans text-sm">
-                            {message.content}
-                          </pre>
+                        <div className="bg-muted/50 rounded-md p-3">
+                          <div 
+                            className="text-sm whitespace-pre-wrap"
+                            dangerouslySetInnerHTML={{
+                              __html: (() => {
+                                // First, convert markdown bold formatting to HTML
+                                let processed = message.content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                                
+                                // Then, convert markdown links to HTML
+                                processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium cursor-pointer" style="color: #2563eb; text-decoration: underline;">$1</a>');
+                                
+                                // Then, replace merge fields that are NOT inside href attributes
+                                processed = processed.replace(/{{([^}]+)}}/g, (match, field) => {
+                                  // Check if this merge field is inside an href attribute
+                                  const beforeMatch = processed.substring(0, processed.indexOf(match));
+                                  const lastHref = beforeMatch.lastIndexOf('href=');
+                                  const lastQuote = beforeMatch.lastIndexOf('"', lastHref);
+                                  const nextQuote = processed.indexOf('"', lastHref);
+                                  
+                                  // If we're inside an href attribute, don't replace
+                                  if (lastHref > lastQuote && lastHref < nextQuote) {
+                                    return match; // Keep original merge field
+                                  }
+                                  
+                                  // Otherwise, keep as plain text (no styling)
+                                  return match;
+                                });
+                                
+                                // Finally, replace newlines
+                                return processed.replace(/\n/g, '<br>');
+                              })()
+                            }}
+                          />
                         </div>
                       </div>
                     )
