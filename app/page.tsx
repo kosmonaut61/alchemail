@@ -1448,18 +1448,8 @@ export default function AlchemailApp20() {
                     // Calculate step number: Step 1 is connection request, so messages start at Step 2
                     const stepNumber = index + 2
                     
-                    // Calculate gap from previous step
-                    let gap = 0
-                    if (index === 0) {
-                      // First message is always same day as connection request
-                      gap = 0
-                    } else {
-                      // Calculate gap from previous message
-                      const previousMessage = generatedMessages[index - 1]
-                      gap = message.daysLater - previousMessage.daysLater
-                    }
-                    
-                    const timingText = gap === 0 ? 'Same Day' : `${gap} Days Later`
+                    // Calculate timing text based on absolute daysLater value
+                    const timingText = message.daysLater === 0 ? 'Same Day' : `${message.daysLater} Days Later`
                     
                     return (
                     <div key={message.id} className="p-4 border rounded-lg">
@@ -1856,14 +1846,7 @@ export default function AlchemailApp20() {
                   
                   {finalizedMessages.map((message, index) => {
                     const stepNumber = index + 2
-                    let gap = 0
-                    if (index === 0) {
-                      gap = 0
-                    } else {
-                      const previousMessage = finalizedMessages[index - 1]
-                      gap = message.daysLater - previousMessage.daysLater
-                    }
-                    const timingText = gap === 0 ? 'Same Day' : `${gap} Days Later`
+                    const timingText = message.daysLater === 0 ? 'Same Day' : `${message.daysLater} Days Later`
                     
                     return (
                       <div key={message.id} className="p-4 border rounded-lg">
