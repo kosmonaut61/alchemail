@@ -31,6 +31,9 @@ export async function POST(request: NextRequest) {
       
       const editPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Apply this specific feedback to improve this message for campaign coherence while maintaining all formatting standards.
 
+CAMPAIGN SIGNAL (Primary Reason for Outreach):
+"${signal}"
+
 ORIGINAL MESSAGE:
 ${message.content}
 
@@ -48,7 +51,6 @@ NOTE: User feedback has already been analyzed and incorporated into the specific
 CONTEXT:
 - Message Type: ${message.type}
 - Target Persona: ${persona}
-- Signal: ${signal}
 - Pain Points: ${painPoints?.join(', ') || 'Not specified'}
 
 AVAILABLE CONTEXT FOR ENHANCEMENT (use strategically - focus on 1-2 primary items):
@@ -58,9 +60,10 @@ ${contextItems && contextItems.length > 0
 }
 
 CRITICAL REQUIREMENTS:
-1. FEEDBACK APPLICATION: Apply ONLY the specific feedback provided for this message above. The user feedback context is provided for reference but has already been analyzed and incorporated into the specific feedback for this message.
-2. Apply the specific feedback while maintaining message quality and formatting standards
-3. Do NOT apply the general user feedback to every message - only apply the specific feedback provided for this individual message
+1. SIGNAL INTEGRATION: Ensure the message properly references and builds on the campaign signal "${signal}" - this is the core reason for the outreach and must be maintained throughout the sequence
+2. FEEDBACK APPLICATION: Apply ONLY the specific feedback provided for this message above. The user feedback context is provided for reference but has already been analyzed and incorporated into the specific feedback for this message.
+3. Apply the specific feedback while maintaining message quality and formatting standards
+4. Do NOT apply the general user feedback to every message - only apply the specific feedback provided for this individual message
 
 CRITICAL FORMATTING RULES:
 3. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided

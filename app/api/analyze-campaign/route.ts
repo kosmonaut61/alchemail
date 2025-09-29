@@ -25,6 +25,9 @@ export async function POST(request: NextRequest) {
 
     const analysisPrompt = `You are an expert email campaign strategist. Analyze this complete email sequence for campaign coherence and generate specific feedback for each message.
 
+CAMPAIGN SIGNAL (Primary Reason for Outreach):
+"${signal}"
+
 SEQUENCE TO ANALYZE:
 ${messagesToAnalyze.map((m: any, i: number) => 
   `Message ${i+1} (${m.type}, Day ${m.daysLater}):\n${m.content}\n`
@@ -33,21 +36,23 @@ ${messagesToAnalyze.map((m: any, i: number) =>
 USER FEEDBACK: ${userFeedback || 'No specific feedback provided'}
 
 CAMPAIGN ANALYSIS TASKS:
-1. Identify repetitive phrases, stats, or customer examples across messages
-2. Check for varied opening approaches and value propositions
-3. Ensure proper story arc progression and signal integration
-4. Verify tone consistency with persona
-5. Look for opportunities to improve campaign flow and coherence
-6. Ensure each message has unique value and doesn't repeat previous content
-7. Check for proper spacing and timing in the sequence
-8. Verify that each message builds on the previous one appropriately
-9. Check for formatting consistency (bold text, links, merge fields)
-10. Ensure proper use of context items and customer examples
-11. Verify CTA variety and effectiveness
-12. Check for proper use of gift card language and demo requests
-13. CRITICAL: If user feedback is provided, analyze it carefully and apply it ONLY to the appropriate message(s) in the sequence
-14. For user feedback about specific content (like "say X in the last message"), apply that feedback ONLY to the relevant message, not all messages
-15. Use user feedback to inform the overall campaign analysis and create targeted, specific feedback for individual messages
+1. CRITICAL: Verify that the campaign signal "${signal}" is properly integrated and referenced throughout the sequence
+2. Check that each message builds on the signal story arc and maintains connection to the original outreach reason
+3. Identify repetitive phrases, stats, or customer examples across messages
+4. Check for varied opening approaches and value propositions
+5. Ensure proper story arc progression and signal integration
+6. Verify tone consistency with persona
+7. Look for opportunities to improve campaign flow and coherence
+8. Ensure each message has unique value and doesn't repeat previous content
+9. Check for proper spacing and timing in the sequence
+10. Verify that each message builds on the previous one appropriately
+11. Check for formatting consistency (bold text, links, merge fields)
+12. Ensure proper use of context items and customer examples
+13. Verify CTA variety and effectiveness
+14. Check for proper use of gift card language and demo requests
+15. CRITICAL: If user feedback is provided, analyze it carefully and apply it ONLY to the appropriate message(s) in the sequence
+16. For user feedback about specific content (like "say X in the last message"), apply that feedback ONLY to the relevant message, not all messages
+17. Use user feedback to inform the overall campaign analysis and create targeted, specific feedback for individual messages
 
 FORMATTING CONSISTENCY CHECKS:
 - Are em dashes (—) being used consistently or should they be replaced with hyphens?
@@ -63,6 +68,7 @@ FORMATTING CONSISTENCY CHECKS:
 - Are Apollo links using different phrases like "book a demo", "set up a call", "schedule a meeting", etc.?
 
 FEEDBACK GUIDELINES:
+- CRITICAL: Prioritize signal integration - ensure each message properly references and builds on the campaign signal "${signal}"
 - Be specific about what needs to change in each message
 - Prioritize feedback based on impact (high/medium/low)
 - Focus on campaign coherence, not individual message quality
@@ -71,6 +77,7 @@ FEEDBACK GUIDELINES:
 - Include formatting consistency feedback when relevant
 - Suggest specific context items or customer examples to vary
 - Recommend specific CTA improvements or link formatting fixes
+- Ensure the signal story arc is maintained throughout the entire sequence
 
 USER FEEDBACK INTEGRATION RULES:
 - CRITICAL: Analyze user feedback carefully to determine which specific message(s) it applies to
