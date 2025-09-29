@@ -73,6 +73,10 @@ CRITICAL REQUIREMENTS:
 2. FEEDBACK APPLICATION: Apply ONLY the specific feedback provided for this message above. The user feedback context is provided for reference but has already been analyzed and incorporated into the specific feedback for this message.
 3. Apply the specific feedback while maintaining message quality and formatting standards
 4. Do NOT apply the general user feedback to every message - only apply the specific feedback provided for this individual message
+5. CRITICAL: VARIED SIGNAL INTEGRATION - If the feedback mentions repetitive signal integration, use DIFFERENT phrasings than other messages in the campaign:
+   - Instead of "As a CEO with a decade of experience", try: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
+   - Vary the opening approach while maintaining the signal connection
+   - Use different angles to reference the same underlying concept
 
 CRITICAL FORMATTING RULES:
 3. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
@@ -101,6 +105,11 @@ CRITICAL FORMATTING RULES:
 26. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
 27. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
 28. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
+29. CRITICAL: VARY REPETITIVE PHRASES - If the original message uses phrases that appear in other campaign messages, rewrite them with different wording while maintaining the same meaning:
+   - "As a CEO with a decade of experience" → "With your background in leadership", "Given your tenure at the helm", "Having led through market changes"
+   - "After a decade as {{contact.title}}" → "With your track record in...", "Given your experience navigating...", "In your role leading..."
+   - "Many CEOs tell us" → "Leaders in your position often share", "Executives frequently mention", "CEOs consistently report"
+   - "balancing shareholder demands" → "managing investor expectations", "navigating profit pressures", "addressing stakeholder requirements"
 
 Call-to-Action (CTA) Rules:
 - NATURAL LINK INTEGRATION: Weave links naturally into sentences, not as entire sentence links
