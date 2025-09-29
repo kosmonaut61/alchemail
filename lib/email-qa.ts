@@ -327,7 +327,8 @@ ANALYSIS CRITERIA:
 8. **Personalization**: Must reference recipient's needs/interests (flag if not personalized)
 9. **Campaign Signal**: Must reference and build on the campaign signal (flag if signal is missing or weak)
 10. **CTA**: Has some form of call-to-action (only flag if completely missing)
-11. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
+11. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
+    CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 
 **IMPORTANT: Flag these specific issues to improve CRM compatibility and readability.**
 
@@ -519,11 +520,21 @@ ${qualityReport.issues.slice(0, 5).map(issue =>
 PERSONA: ${persona}
 PAIN POINTS: ${painPoints.join(', ')}
 
+PAIN POINT DISTRIBUTION AND PHRASING RULES:
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept to avoid repetition:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
+- NEVER repeat the exact same pain point phrase if it was used in other messages in the campaign
+- Focus on 1-2 specific pain points, not all pain points at once
+- Use varied descriptions of the same underlying challenges
+
 REQUIREMENTS:
 1. Fix all listed issues with CLEAR, OBVIOUS improvements
 2. Add proper subject lines if missing
 3. Add proper greeting: "Hey [name]," or "Hi [name],"
-4. Add clear CTA: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+4. Add clear CTA: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 5. Use simple language (5th grade level)
 6. Keep it conversational, not formal
 7. Make the improvements DRAMATIC and EASY TO SEE
@@ -591,7 +602,7 @@ export async function doubleCheckFinalEmail(
     }
     
     if (!hasCTA) {
-      fixedEmail += '\n\n[Would it make sense to connect?](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)'
+      fixedEmail += '\n\n[Would it make sense to connect?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)'
       additionalFixes.push('Added CTA')
     }
     

@@ -95,6 +95,15 @@ ${personaData.painPoints.slice(0, 3).map(painPoint => `- ${painPoint}`).join('\n
 
 CRITICAL: Reference at least ONE specific pain point from the persona's pain points above that directly relates to the message content. This makes the message highly relevant and personalized to their specific challenges. Choose the most relevant pain point and weave it naturally into the message.
 
+PAIN POINT DISTRIBUTION AND PHRASING RULES:
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept to avoid repetition:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
+- NEVER repeat the exact same pain point phrase if it was used in other messages in the campaign
+- Focus on 1-2 specific pain points, not all pain points at once
+- Use varied descriptions of the same underlying challenges
+
 SUCCESSFUL EMAIL EXAMPLES TO EMULATE:
 ${formatSamplesForPrompt(personaData.label)}
 
@@ -256,7 +265,8 @@ Call-to-Action (CTA) Rules:
 - Make the link feel like a natural part of the conversation flow
 - CRITICAL: Never show URLs as plain text - always wrap them in markdown link format [text](url)
 - LINK TYPE RULES:
-  * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+  * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+    CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
   * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
     - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
     - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
@@ -264,11 +274,12 @@ Call-to-Action (CTA) Rules:
     - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
     - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
     - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
-  * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+  * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+    CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - Examples of NATURAL link integration with correct URLs:
-  * "Want to [schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
+  * "Want to [schedule a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min) to explore this further?"
   * "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
-  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)?"
+  * "Would you like me to [send the Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study) or [book a quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)?"
 - AVOID: Entire sentence links like "[Would you be open to a quick chat to explore this further?](url)"
 
 FINAL FLOW REVIEW (CRITICAL):

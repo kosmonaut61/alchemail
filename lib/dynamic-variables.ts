@@ -150,7 +150,7 @@ export const DYNAMIC_VARIABLES: DynamicVariable[] = [
   },
   {
     category: 'Sender Fields',
-    name: '{{sender.meeting_alias}}',
+    name: '{{sender_meeting_alias}}',
     description: 'Sender\'s meeting booking alias',
     example: 'sarah-johnson-emerge'
   },

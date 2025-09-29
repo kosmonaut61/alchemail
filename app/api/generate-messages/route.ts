@@ -190,6 +190,34 @@ TARGET PERSONA:
 - Selected Pain Points: ${painPoints?.join(', ') || 'Not specified'}
 - All Available Pain Points: ${personaData.painPoints?.join('; ') || 'Not specified'}
 
+PAIN POINT DISTRIBUTION FOR THIS EMAIL:
+- This is Email ${sequencePlan.emails.indexOf(emailPlan) + 1} of ${sequencePlan.emails.length}
+- Total pain points available: ${painPoints?.length || 0}
+- CRITICAL: Focus on 1-2 PRIMARY pain points to avoid overwhelming the recipient
+${painPoints?.length === 1 ? `
+- SINGLE PAIN POINT DETECTED: Since only 1 pain point is provided, use DIFFERENT ANGLES and DESCRIPTIONS for each email:
+  - Email 1: Focus on the core challenge (e.g., "steep learning curve")
+  - Email 2: Focus on related aspects (e.g., "complex processes", "new systems", "ramping up")
+  - Email 3: Focus on impact/consequences (e.g., "time-consuming", "overwhelming", "difficult to master")
+  - Email 4: Focus on solutions/outcomes (e.g., "streamlined approach", "simplified process", "easier to understand")
+- NEVER use the exact same pain point phrase across multiple emails
+- Use varied language to describe the same underlying challenge
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"` : `
+- MULTIPLE PAIN POINTS: Use DIFFERENT pain points than previous emails in the sequence
+- If this is Email 1: Focus on pain point 1-2 from the list
+- If this is Email 2: Focus on pain point 2-3 from the list  
+- If this is Email 3: Focus on pain point 3-4 from the list
+- If this is Email 4: Focus on pain point 4-5 from the list
+- AVOID repeating the same pain point phrases across multiple emails
+- NEVER use the same pain point description in multiple emails
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"`}
+
       VERIFIED CONTEXT (ONLY use these exact facts - do not make up any customer claims or numbers):
       ${relevantContext.map(item => `- ${item.title}: ${item.content}`).join('\n')}
 
@@ -304,7 +332,8 @@ COMPENSATION REQUIREMENT:
       - End with clear, hyperlinked CTA using NATURAL link integration
       - Weave links into sentences naturally (2-4 key words), not entire sentence links
       - LINK TYPE RULES:
-        * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+        * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+          CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
         * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
           - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
           - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
@@ -312,8 +341,9 @@ COMPENSATION REQUIREMENT:
           - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
           - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
           - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
-        * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
-      - Examples: "Would you be open to a [quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
+        * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+          CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
+      - Examples: "Would you be open to a [quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min) to explore this?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
       - Keep sentences short and punchy
       - Use active voice and direct language
       - Avoid corporate jargon and formal phrases
@@ -554,7 +584,8 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - CRITICAL: Format all links as markdown [text](url) - never show plain URLs
       - Use NATURAL link integration: weave links into sentences (2-4 key words)
       - LINK TYPE RULES:
-        * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+        * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+          CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
         * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
           - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
           - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
@@ -562,7 +593,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           - [Pepsi case study](https://www.emergemarket.com/resource/pepsi-bottling-case-study)
           - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
           - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
-      - Examples: "Want to [jump on a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) this week?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."`
+      - Examples: "Want to [jump on a call](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min) this week?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."`
 
       // Log the complete prompt for auditing
       console.log('\n' + '='.repeat(80))

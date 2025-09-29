@@ -75,8 +75,20 @@ SUPPORTING GUIDELINES:
 2. Address pain points that align with the signal: ${painPoints.join(", ")}
 3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Make it sound like a real person wrote it, not marketing copy
-5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 6. Be creative and compelling - focus on the signal story first, word count will be optimized later
+7. FOCUS ON 1-2 SPECIFIC PAIN POINTS per email - avoid repeating the same pain point phrases across emails
+8. NEVER use generic pain point phrases like "steep learning curve" in multiple emails
+9. SINGLE PAIN POINT VARIATION: If only 1 pain point exists, use different angles per email:
+   - Email 1: Core challenge (e.g., "steep learning curve")
+   - Email 2: Related aspects (e.g., "complex processes", "new systems")
+   - Email 3: Impact/consequences (e.g., "time-consuming", "overwhelming") 
+   - Email 4: Solutions/outcomes (e.g., "streamlined approach", "simplified process")
+10. CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept:
+    - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+    - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+    - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
 
 Generate a complete email sequence following these rules:
 - 95-150 words per email
@@ -84,7 +96,8 @@ Generate a complete email sequence following these rules:
 - Max 4 sentences per paragraph  
 - 3-4 paragraphs total per email
 - ONE clear quantified result only (not multiple stats)
-- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender_meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting
 - Subject line: 1-5 words, under 40 characters, mobile-friendly
