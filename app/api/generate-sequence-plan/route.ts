@@ -197,7 +197,7 @@ Create a strategic sequence plan that:
 1. Creates UNIQUE signal integration approaches for each message - avoid repetitive "I noticed you" patterns
 2. Builds value and trust progressively
 3. Addresses the target persona's pain points using their specific tone profile and keywords
-4. Uses VARIED spacing between messages (1-4 days for emails, 1-3 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number - NEVER bunch LinkedIn messages together on consecutive days - VARY the gaps to avoid predictable patterns
+4. Uses VARIED spacing between messages (1-4 days for emails, 1-3 days for LinkedIn) - CRITICAL: NO TWO MESSAGES CAN BE ON THE SAME DAY - each message must have a unique day number - NEVER bunch LinkedIn messages together on consecutive days - VARY the gaps to avoid predictable patterns - CRITICAL: daysLater values must be STRICTLY INCREASING - each subsequent message must have a higher daysLater value than the previous one - NEVER use the same daysLater value twice - NEVER use a lower daysLater value than a previous message
 5. Has clear purposes for each touchpoint
 6. Varies signal integration: some messages lead with stats, others with questions, others with stories
 7. Strategically distributes specific stats across the sequence - each email should focus on 1-2 specific quantified results from the context items
@@ -218,6 +218,8 @@ Create a strategic sequence plan that:
 22. TIMING VARIETY: Use different gaps between messages (1, 2, 3, 4 days) to create natural, unpredictable timing - avoid using the same gap repeatedly
 23. MANDATORY VARIETY: You MUST use at least 3 different gap values in your sequence - do not use the same gap more than twice in a row
 24. EXAMPLE VARIED PATTERN: 0, 1, 3, 6, 8, 11, 13, 16 (gaps: 1, 2, 3, 2, 3, 2, 3) - this creates natural, unpredictable timing
+25. CRITICAL DAYS LATER VALIDATION: Before finalizing, verify that daysLater values are strictly increasing: 0, 1, 2, 3, 4, 5, 6, 7, etc. - NEVER: 0, 1, 2, 1, 3 (this would cause negative days)
+26. EXAMPLE CORRECT SEQUENCE: Email1 (0), LinkedIn1 (1), Email2 (3), LinkedIn2 (5), Email3 (7), LinkedIn3 (9) - each number is higher than the previous
 
 MESSAGE VARIATION REQUIREMENTS:
 - Each message must have a DISTINCTLY different approach
@@ -280,11 +282,13 @@ CRITICAL: You must respond with ONLY valid JSON. Do not include any text before 
 Return your response as a JSON object with this exact structure:
 
 CRITICAL DAY SPACING REQUIREMENTS:
-- Use "daysLater" field to indicate how many days after the previous message this should be sent
-- LinkedIn connection request is always "daysLater": 0 (same day as start)
-- First email is always "daysLater": 0 (same day as connection request)
-- Emails should be spaced 2-3 days later from previous message
-- LinkedIn messages should be spaced 1-2 days later from previous message
+- Use "daysLater" field to indicate how many days from the START of the campaign (Day 0)
+- LinkedIn connection request is always "daysLater": 0 (Day 0)
+- First email is always "daysLater": 0 (Day 0 - same day as connection request)
+- CRITICAL: daysLater values must be STRICTLY INCREASING - each subsequent message must have a higher daysLater value
+- NEVER use the same daysLater value twice
+- NEVER use a lower daysLater value than a previous message
+- Example correct sequence: 0, 1, 3, 5, 7, 9 (each number is higher than the previous)
 - CRITICAL: NEVER have 2 or more LinkedIn messages with consecutive "daysLater" values - always alternate between emails and LinkedIn messages
 - LinkedIn messages should be interspersed between emails, not bunched together
 - MANDATORY PATTERN: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (alternating pattern)
@@ -294,12 +298,13 @@ CRITICAL DAY SPACING REQUIREMENTS:
 MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
 - Step 1: LinkedIn Connection Request (daysLater: 0)
 - Step 2: First Email (daysLater: 0) 
-- Step 3: First LinkedIn Message (daysLater: 1-3, vary this)
-- Step 4: Second Email (daysLater: 2-4 from previous, vary this)
-- Step 5: Second LinkedIn Message (daysLater: 1-3 from previous, vary this)
-- Step 6: Third Email (daysLater: 2-4 from previous, vary this)
-- Step 7: Third LinkedIn Message (daysLater: 1-3 from previous, vary this)
+- Step 3: First LinkedIn Message (daysLater: 1, 2, or 3 - must be higher than 0)
+- Step 4: Second Email (daysLater: 3, 4, 5, or 6 - must be higher than Step 3)
+- Step 5: Second LinkedIn Message (daysLater: 5, 6, 7, or 8 - must be higher than Step 4)
+- Step 6: Third Email (daysLater: 7, 8, 9, or 10 - must be higher than Step 5)
+- Step 7: Third LinkedIn Message (daysLater: 9, 10, 11, or 12 - must be higher than Step 6)
 - Continue alternating: Email → LinkedIn → Email → LinkedIn
+- CRITICAL: Each daysLater value must be higher than the previous one
 - CRITICAL: Vary the spacing between messages - don't use the same gap repeatedly
 - Use different gaps like 1, 2, 3, 4 days to create natural, unpredictable timing
 
