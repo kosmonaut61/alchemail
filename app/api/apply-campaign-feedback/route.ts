@@ -6,7 +6,7 @@ import { formatSamplesForPrompt } from '@/lib/email-samples'
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages, feedbackPlan, signal, persona, painPoints, contextItems } = await request.json()
+    const { messages, feedbackPlan, signal, persona, painPoints, contextItems, userFeedback } = await request.json()
 
     if (!messages || !feedbackPlan) {
       return NextResponse.json(
@@ -40,6 +40,9 @@ ${feedback.feedback}
 SPECIFIC SUGGESTIONS:
 ${feedback.suggestions.join('\n')}
 
+USER FEEDBACK (CRITICAL - MUST BE INCORPORATED):
+${userFeedback || 'No specific user feedback provided'}
+
 CONTEXT:
 - Message Type: ${message.type}
 - Target Persona: ${persona}
@@ -52,33 +55,37 @@ ${contextItems && contextItems.length > 0
   : 'No additional context provided'
 }
 
+CRITICAL REQUIREMENTS:
+1. USER FEEDBACK INTEGRATION: The user feedback above is CRITICAL and MUST be incorporated into the message. This is the primary directive from the user and takes precedence over other suggestions.
+2. Apply the user feedback while maintaining message quality and formatting standards
+
 CRITICAL FORMATTING RULES:
-1. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
-2. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
-3. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
-4. USE ACTUAL URLs: When referencing resources like videos, case studies, or other materials, use the EXACT URLs provided in the context repository - do NOT make up or create fake URLs - if a context item has a URL field, use that exact URL, not a made-up one
-5. GIFT CARD LANGUAGE: If mentioning gift card compensation, ALWAYS use "up to $X" language - never promise the full amount. Example: "up to $500 gift card for your time" not "$500 gift card". Frame it as compensation for their valuable time, not an incentive to meet. The gift card is applicable to a demo. Do not reference a specific amount of time required to participate in a demo to be eligible. Keep the gift card as a secondary thought in the call to action. We are primarily trying to have an initial conversation to see if they are eligible for a demo and compensation.
-6. DEMO REQUESTS: When asking for time, use "quick chat" language rather than time-boxed demos. Mention the compensation separately after the chat request
-7. WRITE COHESIVE SENTENCES: Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel like a cohesive thought - avoid breaking up natural flow with unnecessary pauses or fragments - make it read like natural conversation, not bullet points
-8. MAKE SURE THERE IS LESS THAN 3 ADVERBS in the message
-9. KEEP SENTENCES NATURALLY FLOWING - don't force them to be too short if it makes them choppy
-10. MAKE SURE THERE ARE NATURAL LINE BREAKS in the message
-11. MAKE SURE THE MESSAGE IS AT A 5TH GRADE READING LEVEL
-12. PRESERVE the original's personality and warmth - don't strip out human elements
-13. CRITICAL: PRESERVE email references and conversation context - if the original mentions "the email I sent" or "following up on", KEEP those references
-14. PRESERVE the original's conversation flow and relationship context - don't make follow-up messages sound like cold outreach
-15. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
-16. VARY the content structure - don't use the same pattern as other messages
-17. INCORPORATE different statistics and examples from the context repository
-18. CRITICAL: Focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names
-19. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
-20. KEEP messages concise and scannable - don't overwhelm with too many numbers
-21. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
-22. Turn presumptive statements into questions to avoid assumptions
-23. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
-24. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
-25. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
-26. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
+3. REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence - em dashes are an AI tell that should be avoided
+4. BOLD KEY CONTEXT ITEMS: Use **bold formatting** to highlight 2-3 complete thoughts or phrases that contain the most impactful context items - bold entire meaningful phrases including company names, statistics, and value propositions (like "**Golden State Foods cut freight costs by 18%**" or "**Dollar Tree saved $6M**") - ensure the whole thought is bolded, not just fragments
+5. USE APOLLO ROLE FIELDS: When referring to someone's role or title, use Apollo merge fields like {{contact.title}} or {{contact.job_title}} instead of generic terms like "your role" or "your position" - this personalizes the message with their actual job title
+6. USE ACTUAL URLs: When referencing resources like videos, case studies, or other materials, use the EXACT URLs provided in the context repository - do NOT make up or create fake URLs - if a context item has a URL field, use that exact URL, not a made-up one
+7. GIFT CARD LANGUAGE: If mentioning gift card compensation, ALWAYS use "up to $X" language - never promise the full amount. Example: "up to $500 gift card for your time" not "$500 gift card". Frame it as compensation for their valuable time, not an incentive to meet. The gift card is applicable to a demo. Do not reference a specific amount of time required to participate in a demo to be eligible. Keep the gift card as a secondary thought in the call to action. We are primarily trying to have an initial conversation to see if they are eligible for a demo and compensation.
+8. DEMO REQUESTS: When asking for time, use "quick chat" language rather than time-boxed demos. Mention the compensation separately after the chat request
+9. WRITE COHESIVE SENTENCES: Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel like a cohesive thought - avoid breaking up natural flow with unnecessary pauses or fragments - make it read like natural conversation, not bullet points
+10. MAKE SURE THERE IS LESS THAN 3 ADVERBS in the message
+11. KEEP SENTENCES NATURALLY FLOWING - don't force them to be too short if it makes them choppy
+12. MAKE SURE THERE ARE NATURAL LINE BREAKS in the message
+13. MAKE SURE THE MESSAGE IS AT A 5TH GRADE READING LEVEL
+14. PRESERVE the original's personality and warmth - don't strip out human elements
+15. CRITICAL: PRESERVE email references and conversation context - if the original mentions "the email I sent" or "following up on", KEEP those references
+16. PRESERVE the original's conversation flow and relationship context - don't make follow-up messages sound like cold outreach
+17. USE CUSTOMER QUOTES from available context to add credibility and emotional connection
+18. VARY the content structure - don't use the same pattern as other messages
+19. INCORPORATE different statistics and examples from the context repository
+20. CRITICAL: Focus on 1-2 PRIMARY context items - avoid overwhelming recipients with too many examples, stats, or customer names
+21. BE SELECTIVE with context - use 1-2 key stats/quote per message, not everything
+22. KEEP messages concise and scannable - don't overwhelm with too many numbers
+23. REPLACE ASSUMPTIONS WITH QUESTIONS: Instead of "I noticed you're focusing on..." say "Are you focusing on...?"
+24. Turn presumptive statements into questions to avoid assumptions
+25. PRESERVE CUSTOMER LISTS: If the original message mentions companies from customer lists (e.g., Honda, Bridgestone from Automotive Customers), KEEP them in the optimized version
+26. ENHANCE CUSTOMER EXAMPLES: Don't remove customer list companies - instead, make them more compelling and relevant
+27. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
+28. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 
 Call-to-Action (CTA) Rules:
 - NATURAL LINK INTEGRATION: Weave links naturally into sentences, not as entire sentence links

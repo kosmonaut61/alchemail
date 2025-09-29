@@ -1758,7 +1758,8 @@ export default function AlchemailApp20() {
                           signal,
                           persona,
                           painPoints,
-                          contextItems: selectedContextItems
+                          contextItems: selectedContextItems,
+                          userFeedback: campaignFeedback
                         })
                       })
                       
