@@ -62,6 +62,100 @@ interface GeneratedMessage {
 
 export default function AlchemailApp20() {
   const [currentStep, setCurrentStep] = useState(1)
+
+  // Auto-optimize all messages function
+  const autoOptimizeAllMessages = async (messages: any[], signal: string, persona: string, painPoints: string[], contextItems: any[]) => {
+    const unoptimizedMessages = messages.filter(m => !m.isOptimized && !m.isOptimizing)
+    
+    if (unoptimizedMessages.length === 0) {
+      return
+    }
+
+    console.log(`🚀 Auto-optimizing ${unoptimizedMessages.length} messages...`)
+
+    // Set all unoptimized messages to optimizing state
+    setGeneratedMessages(prev => prev.map(m => 
+      !m.isOptimized && !m.isOptimizing ? { ...m, isOptimizing: true } : m
+    ))
+
+    let successCount = 0
+    let failureCount = 0
+
+    // Optimize each message individually with delays to prevent rate limiting
+    const optimizationPromises = unoptimizedMessages.map(async (message, index) => {
+      // Add a small delay between requests to prevent overwhelming the server
+      if (index > 0) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * index))
+      }
+      try {
+        const response = await fetch('/api/optimize-message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messageId: message.id,
+            originalContent: message.content,
+            type: message.type,
+            signal,
+            persona,
+            painPoints,
+            contextItems
+          }),
+        })
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: Failed to optimize message`)
+        }
+
+        const data = await response.json()
+        
+        // Update the message with optimized content
+        setGeneratedMessages(prev => prev.map(m => 
+          m.id === message.id ? {
+            ...m,
+            content: data.optimizedContent,
+            originalContent: message.content,
+            isOptimized: true,
+            isOptimizing: false
+          } : m
+        ))
+
+        successCount++
+      } catch (error) {
+        console.error(`Error auto-optimizing message ${message.id}:`, error)
+        failureCount++
+        
+        // Reset optimizing state on failure
+        setGeneratedMessages(prev => prev.map(m => 
+          m.id === message.id ? { ...m, isOptimizing: false } : m
+        ))
+      }
+    })
+
+    // Wait for all optimizations to complete
+    await Promise.all(optimizationPromises)
+
+    // Show final toast
+    if (failureCount === 0) {
+      toast({
+        title: "Auto-optimization complete!",
+        description: `Successfully optimized ${successCount} messages.`,
+      })
+    } else if (successCount > 0) {
+      toast({
+        title: "Auto-optimization completed with some issues",
+        description: `Optimized ${successCount} messages successfully, ${failureCount} failed.`,
+        variant: "destructive",
+      })
+    } else {
+      toast({
+        title: "Auto-optimization failed",
+        description: "Failed to optimize any messages. You can try the Optimize All button manually.",
+        variant: "destructive",
+      })
+    }
+  }
   const [signal, setSignal] = useState("")
   const [persona, setPersona] = useState<string>("")
   const [painPoints, setPainPoints] = useState<string[]>([])
@@ -916,8 +1010,11 @@ export default function AlchemailApp20() {
                           
                           toast({
                             title: "Sequence Generated!",
-                            description: `Generated ${messagesData.messages.length} optimized messages.`,
+                            description: `Generated ${messagesData.messages.length} messages. Auto-optimizing...`,
                           })
+
+                          // Automatically optimize all messages
+                          await autoOptimizeAllMessages(messagesData.messages, signal, persona, painPoints, contextItems)
                         } catch (messagesError) {
                           console.error('Error generating messages:', messagesError)
                           toast({
@@ -1193,8 +1290,11 @@ export default function AlchemailApp20() {
                         
                         toast({
                           title: "Messages Generated!",
-                          description: `Created ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages.`,
+                          description: `Created ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages. Auto-optimizing...`,
                         })
+
+                        // Automatically optimize all messages
+                        await autoOptimizeAllMessages(data.messages, signal, persona, painPoints, selectedContextItems)
                       } catch (error) {
                         console.error('Error generating messages:', error)
                         toast({
@@ -1289,8 +1389,11 @@ export default function AlchemailApp20() {
                             
                             toast({
                               title: "Messages Regenerated!",
-                              description: `Created new ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages.`,
+                              description: `Created new ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages. Auto-optimizing...`,
                             })
+
+                            // Automatically optimize all messages
+                            await autoOptimizeAllMessages(data.messages, signal, persona, painPoints, selectedContextItems)
                           } catch (error) {
                             console.error('Error regenerating messages:', error)
                             toast({
