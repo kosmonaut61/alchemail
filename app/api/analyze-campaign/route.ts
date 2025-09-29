@@ -44,6 +44,8 @@ CAMPAIGN ANALYSIS TASKS:
    - Same opening patterns or structures
    - Repeated statistics or customer examples
    - Identical value propositions or pain point references
+   - CRITICAL: Repetitive pain point phrases (e.g., "steep learning curve" appearing in multiple emails)
+   - Same pain point descriptions across multiple messages
 4. Check for varied opening approaches and value propositions
 5. Ensure proper story arc progression and signal integration
 6. Verify tone consistency with persona
@@ -87,6 +89,10 @@ FEEDBACK GUIDELINES:
 - CRITICAL: For repetitive signal integration, provide specific alternative phrasings:
   * If signal is about "decades of experience", suggest variations like: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
   * If signal is about specific pain points, vary how you reference them across messages
+  * CRITICAL: For repetitive pain point phrases, provide specific alternative phrasings:
+    - Instead of "steep learning curve" → suggest "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+    - Instead of "time-consuming" → suggest "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+    - Instead of "overwhelming" → suggest "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
   * If signal is about company growth/challenges, use different angles and phrasings
 - CRITICAL: Flag HIGH priority for any message that uses identical phrasing to previous messages for the same concept
 - Provide specific alternative phrasings and approaches for each repetitive element identified

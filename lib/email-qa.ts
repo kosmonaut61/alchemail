@@ -520,6 +520,15 @@ ${qualityReport.issues.slice(0, 5).map(issue =>
 PERSONA: ${persona}
 PAIN POINTS: ${painPoints.join(', ')}
 
+PAIN POINT DISTRIBUTION AND PHRASING RULES:
+- CRITICAL: VARY PAIN POINT PHRASING - Use different ways to express the same concept to avoid repetition:
+  - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
+  - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
+  - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
+- NEVER repeat the exact same pain point phrase if it was used in other messages in the campaign
+- Focus on 1-2 specific pain points, not all pain points at once
+- Use varied descriptions of the same underlying challenges
+
 REQUIREMENTS:
 1. Fix all listed issues with CLEAR, OBVIOUS improvements
 2. Add proper subject lines if missing
