@@ -76,6 +76,7 @@ SUPPORTING GUIDELINES:
 3. Match the persona context: ${selectedPersona?.seniority} in ${selectedPersona?.department}
 4. Make it sound like a real person wrote it, not marketing copy
 5. EVERY EMAIL MUST HAVE AN APOLLO LINK CTA that flows naturally in the sentence - can be anywhere in the email, format as [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 6. Be creative and compelling - focus on the signal story first, word count will be optimized later
 
 Generate a complete email sequence following these rules:
@@ -85,6 +86,7 @@ Generate a complete email sequence following these rules:
 - 3-4 paragraphs total per email
 - ONE clear quantified result only (not multiple stats)
 - Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting
 - Subject line: 1-5 words, under 40 characters, mobile-friendly

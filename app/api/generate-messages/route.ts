@@ -305,6 +305,7 @@ COMPENSATION REQUIREMENT:
       - Weave links into sentences naturally (2-4 key words), not entire sentence links
       - LINK TYPE RULES:
         * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+          CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
         * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
           - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
           - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)
@@ -313,6 +314,7 @@ COMPENSATION REQUIREMENT:
           - [Premier Carrier Program case study](https://www.emergemarket.com/resource/premier-carrier-case-study)
           - [DBIN case study](https://www.emergemarket.com/resource/dynamic-book-it-now-case-study)
         * For DEMO/PRESENTATION: Use Apollo URL: [book a demo](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+          CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
       - Examples: "Would you be open to a [quick chat](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) to explore this?" or "I can [share the Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study) with you."
       - Keep sentences short and punchy
       - Use active voice and direct language
@@ -555,6 +557,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       - Use NATURAL link integration: weave links into sentences (2-4 key words)
       - LINK TYPE RULES:
         * For MEETING/CALL requests: Use Apollo URL: [schedule a call](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+          CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
         * For CASE STUDY sharing: Use ONLY actual case study URLs from context:
           - [Dollar Tree case study](https://www.emergemarket.com/resource/dollar-tree-study)
           - [Golden State Foods case study](https://www.emergemarket.com/resource/golden-state-foods-case-study)

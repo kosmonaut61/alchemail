@@ -328,6 +328,7 @@ ANALYSIS CRITERIA:
 9. **Campaign Signal**: Must reference and build on the campaign signal (flag if signal is missing or weak)
 10. **CTA**: Has some form of call-to-action (only flag if completely missing)
 11. **Apollo Links**: CTA should be formatted as [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min) (CRITICAL - always flag missing Apollo links)
+    CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 
 **IMPORTANT: Flag these specific issues to improve CRM compatibility and readability.**
 
@@ -524,6 +525,7 @@ REQUIREMENTS:
 2. Add proper subject lines if missing
 3. Add proper greeting: "Hey [name]," or "Hi [name],"
 4. Add clear CTA: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 5. Use simple language (5th grade level)
 6. Keep it conversational, not formal
 7. Make the improvements DRAMATIC and EASY TO SEE

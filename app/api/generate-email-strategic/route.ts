@@ -271,6 +271,7 @@ Generate ${messageType.toUpperCase()} following these rules:
 - Max 3 sentences per paragraph
 - 2-3 paragraphs total
 - Natural Apollo CTA link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 - No signature block - email ends at CTA
 - Plain text only, no formatting except for the Apollo CTA link
 - Subject line: 1-5 words, under 40 characters, mobile-friendly
@@ -316,6 +317,7 @@ POLISH REQUIREMENTS:
 2. Fix message length: 20-100 words total
 3. Add natural line breaks between paragraphs
 4. Format CTA links properly: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+   CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 5. Ensure 5th grade reading level or lower
 6. Limit to 3 adverbs maximum
 7. Verify social proof is included and relevant

@@ -24,6 +24,7 @@ export const PREAMBLE_SECTIONS = {
 
 ### 5. Call-to-Action (CTA) Rules
 •	Format CTAs as clickable links: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min)
+•	CRITICAL: Apollo links MUST use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 •	No other links in body unless specifically offering an overview → then plain "one-page overview."
 •	Keep CTA that flows naturally in the sentence - can be anywhere in the email, not just at the end.
 
@@ -60,6 +61,7 @@ export const PREAMBLE_SECTIONS = {
   - Golden State Foods: "See how they reduced costs by 18%"  
   - EZRack: "Check out their 6-figure savings"
 **CTA URL:** \`https://app.apollo.io/#/meet/managed-meetings/{{sender.meeting_alias}}/n9l-1si-q4y/30-min\`
+**CRITICAL APOLLO LINK FORMAT:** Always use {{sender.meeting_alias}} (with underscore) - NEVER use {{sender.meeting.alias}} (with dot)
 
 ### Dynamic Variables
 **Contact Fields:** {{contact.first_name}}, {{contact.last_name}}, {{contact.email}}, {{contact.domain}}, {{contact.location_city}}, {{contact.location_state}}, {{contact.location_country}}, {{contact.phone}}, {{contact.title}}, {{contact.opt_out_message}}
