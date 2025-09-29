@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, Copy } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
@@ -109,22 +109,31 @@ export default function AlchemailApp20() {
   const [isGeneratingMessages, setIsGeneratingMessages] = useState(false)
   const [isContextBrowserOpen, setIsContextBrowserOpen] = useState(false)
   const [contextSearchTerm, setContextSearchTerm] = useState("")
+  
+  // Campaign step state
+  const [campaignFeedback, setCampaignFeedback] = useState("")
+  const [isAnalyzingCampaign, setIsAnalyzingCampaign] = useState(false)
+  const [isFinalizingCampaign, setIsFinalizingCampaign] = useState(false)
+  const [campaignPlan, setCampaignPlan] = useState(null)
+  const [finalizedMessages, setFinalizedMessages] = useState<GeneratedMessage[]>([])
+  
   const { toast } = useToast()
 
   const steps = [
     { id: 1, title: "Signal", description: "Define your outreach signal and target persona" },
     { id: 2, title: "Sequence Plan", description: "Review context and generate sequence plan" },
-    { id: 3, title: "Generate", description: "Generate and optimize your sequence" }
+    { id: 3, title: "Generate", description: "Generate and optimize your sequence" },
+    { id: 4, title: "Campaign", description: "Finalize campaign with feedback and coherence" }
   ]
 
   const handleNext = () => {
-    if (currentStep < 3) {
+    if (currentStep < 4) {
       setCurrentStep(currentStep + 1)
     }
   }
 
   const handlePrevious = () => {
-    if (currentStep > 1) {
+    if (currentStep > 1 && currentStep < 4) { // Can't go back from Campaign step
       setCurrentStep(currentStep - 1)
     }
   }
@@ -137,6 +146,8 @@ export default function AlchemailApp20() {
         return sequencePlan !== null
       case 3:
         return generatedMessages.length > 0
+      case 4:
+        return false // Campaign step is final
       default:
         return false
     }
@@ -1669,6 +1680,222 @@ export default function AlchemailApp20() {
                 />
               </div>
                     </div>
+                    )
+                  })}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Step 4: Campaign */}
+        {currentStep >= 4 && (
+          <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+            <CardHeader className="pb-6">
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <div className="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg shadow-orange-600/25">4</div>
+                <Sparkles className="h-5 w-5 text-orange-600" />
+                <span>Finalize Campaign</span>
+              </CardTitle>
+              <CardDescription>
+                Review your sequence and provide feedback for final campaign optimization
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Feedback Input */}
+              <div className="space-y-2">
+                <Label htmlFor="campaign-feedback">Campaign Feedback (Optional)</Label>
+                <Textarea
+                  id="campaign-feedback"
+                  placeholder="Any specific feedback or requirements for the campaign? (e.g., 'Make the tone more urgent', 'Focus more on cost savings', 'Add more customer examples')"
+                  value={campaignFeedback}
+                  onChange={(e) => setCampaignFeedback(e.target.value)}
+                  rows={3}
+                />
+              </div>
+
+              {/* Finalize Campaign Button */}
+              <div className="flex justify-center">
+                <Button
+                  onClick={async () => {
+                    setIsAnalyzingCampaign(true)
+                    
+                    try {
+                      // Phase 1: Analyze campaign
+                      const analysisResponse = await fetch('/api/analyze-campaign', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          messages: generatedMessages,
+                          signal,
+                          persona,
+                          painPoints,
+                          contextItems: selectedContextItems,
+                          userFeedback: campaignFeedback
+                        })
+                      })
+                      
+                      if (!analysisResponse.ok) {
+                        throw new Error('Campaign analysis failed')
+                      }
+                      
+                      const { campaignPlan } = await analysisResponse.json()
+                      setCampaignPlan(campaignPlan)
+                      setIsAnalyzingCampaign(false)
+                      setIsFinalizingCampaign(true)
+                      
+                      // Phase 2: Apply feedback
+                      const finalizeResponse = await fetch('/api/apply-campaign-feedback', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          messages: generatedMessages,
+                          feedbackPlan: campaignPlan.feedbackPlan,
+                          signal,
+                          persona,
+                          painPoints,
+                          contextItems: selectedContextItems
+                        })
+                      })
+                      
+                      if (!finalizeResponse.ok) {
+                        throw new Error('Campaign finalization failed')
+                      }
+                      
+                      const { finalizedMessages, stats } = await finalizeResponse.json()
+                      setFinalizedMessages(finalizedMessages)
+                      setIsFinalizingCampaign(false)
+                      
+                      // Show results with partial success handling
+                      if (stats.failed > 0) {
+                        toast({
+                          title: "Campaign Finalized with Issues",
+                          description: `Successfully finalized ${stats.successful} messages, ${stats.failed} failed.`,
+                          variant: "destructive",
+                        })
+                      } else {
+                        toast({
+                          title: "Campaign Finalized!",
+                          description: `Successfully finalized all ${stats.total} messages.`,
+                        })
+                      }
+                      
+                    } catch (error) {
+                      console.error('Campaign finalization failed:', error)
+                      setIsAnalyzingCampaign(false)
+                      setIsFinalizingCampaign(false)
+                      toast({
+                        title: "Campaign Finalization Failed",
+                        description: "Please try again.",
+                        variant: "destructive",
+                      })
+                    }
+                  }}
+                  disabled={isAnalyzingCampaign || isFinalizingCampaign}
+                  size="lg"
+                >
+                  {isAnalyzingCampaign ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Analyzing Campaign...
+                    </>
+                  ) : isFinalizingCampaign ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Finalizing Campaign...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Finalize Campaign
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {/* Display Finalized Messages */}
+              {finalizedMessages.length > 0 && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold">Finalized Campaign</h3>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          // Copy all finalized messages
+                          const allContent = finalizedMessages.map((m, i) => 
+                            `Message ${i+1} (${m.type}, Day ${m.daysLater}):\n${m.content}\n`
+                          ).join('\n---\n')
+                          navigator.clipboard.writeText(allContent)
+                          toast({
+                            title: "Campaign Copied!",
+                            description: "All finalized messages copied to clipboard.",
+                          })
+                        }}
+                      >
+                        <Copy className="mr-2 h-4 w-4" />
+                        Copy All
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {finalizedMessages.map((message, index) => {
+                    const stepNumber = index + 2
+                    let gap = 0
+                    if (index === 0) {
+                      gap = 0
+                    } else {
+                      const previousMessage = finalizedMessages[index - 1]
+                      gap = message.daysLater - previousMessage.daysLater
+                    }
+                    const timingText = gap === 0 ? 'Same Day' : `${gap} Days Later`
+                    
+                    return (
+                      <div key={message.id} className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">Step {stepNumber}: {timingText}</span>
+                            <span className={`px-2 py-1 rounded-full text-xs ${
+                              message.type === 'email' 
+                                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
+                                : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                            }`}>
+                              {message.type === 'email' ? 'Email' : 'LinkedIn'}
+                            </span>
+                            <span className="px-2 py-1 rounded-full text-xs bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
+                              Finalized
+                            </span>
+                            {message.feedbackError && (
+                              <span className="px-2 py-1 rounded-full text-xs bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                                Feedback Failed
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                navigator.clipboard.writeText(message.content)
+                                toast({
+                                  title: "Message Copied!",
+                                  description: "Message copied to clipboard.",
+                                })
+                              }}
+                            >
+                              <Copy className="mr-2 h-3 w-3" />
+                              Copy
+                            </Button>
+                          </div>
+                        </div>
+                        
+                        <div className="prose prose-sm max-w-none">
+                          <pre className="whitespace-pre-wrap font-sans text-sm">
+                            {message.content}
+                          </pre>
+                        </div>
+                      </div>
                     )
                   })}
                 </div>
