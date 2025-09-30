@@ -284,6 +284,10 @@ CRITICAL REQUIREMENTS:
     - Instead of "steep learning curve" → try "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"
     - Instead of "time-consuming" → try "takes forever", "eats up hours", "slows everything down", "bogs down the process"
     - Instead of "overwhelming" → try "a lot to take in", "information overload", "feels like drinking from a firehose", "can be daunting"
+11. CRITICAL MERGE FIELD SYNTAX: Always use {{#endif}} to close conditionals, NEVER use {{/if}}
+    - Correct: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}
+    - WRONG: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{/if}}
+    - This is critical for CRM compatibility - incorrect syntax breaks merge fields
 
 Generate ${messageType.toUpperCase()} following these rules:
 - 95-100 words total

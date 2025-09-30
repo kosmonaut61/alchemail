@@ -528,6 +528,10 @@ PAIN POINT DISTRIBUTION AND PHRASING RULES:
 - NEVER repeat the exact same pain point phrase if it was used in other messages in the campaign
 - Focus on 1-2 specific pain points, not all pain points at once
 - Use varied descriptions of the same underlying challenges
+- CRITICAL MERGE FIELD SYNTAX: Always use {{#endif}} to close conditionals, NEVER use {{/if}}
+  - Correct: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}
+  - WRONG: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{/if}}
+  - This is critical for CRM compatibility - incorrect syntax breaks merge fields
 
 REQUIREMENTS:
 1. Fix all listed issues with CLEAR, OBVIOUS improvements
