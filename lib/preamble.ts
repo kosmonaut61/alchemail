@@ -70,6 +70,7 @@ export const PREAMBLE_SECTIONS = {
 **Intent Fields:** {{primary_intent_signal}}, {{secondary_intent_signal}}
 **Time Fields:** {{now.day}}, {{now.month}}, {{now.time_of_day}}, {{now.weekday}}, {{now.year}}
 **Advanced:** Conditional fallbacks ({{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}), letter case ({{contact.title->lowercase}}), date operators ({{now.day->plus_X}})
+**CRITICAL MERGE FIELD SYNTAX:** Always use {{#endif}} to close conditionals, NEVER use {{/if}}
 
 ### Campaign Structure
 **Sequences:** 3-12 emails, max 3/person/7 days, spread logically (≤2/week for 12 emails)

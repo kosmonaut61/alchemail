@@ -244,6 +244,12 @@ ${painPoints?.length === 1 ? `
 
       AVAILABLE DYNAMIC VARIABLES FOR PERSONALIZATION:
       ${formatVariablesForPrompt()}
+      
+      CRITICAL MERGE FIELD SYNTAX RULES:
+      - Always use {{#endif}} to close conditionals, NEVER use {{/if}}
+      - Correct: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{#endif}}
+      - WRONG: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{/if}}
+      - This is critical for CRM compatibility - incorrect syntax breaks merge fields
 
       EMAIL STRUCTURE EXAMPLES (follow this tone and structure):
       ${formatSamplesForPrompt(personaData.label)}
