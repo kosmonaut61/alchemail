@@ -178,6 +178,8 @@ export async function POST(request: NextRequest) {
 
 CRITICAL INSTRUCTION: You MUST use the specific context items provided below. Do not use any companies, statistics, or examples that are not explicitly listed in the VERIFIED CONTEXT section.
 
+**CRITICAL STATISTICS VALIDATION**: Use ONLY the exact statistics provided in the context repository. DO NOT create, fabricate, or invent any specific percentage numbers, dollar amounts, or time savings that are not explicitly listed in the verified context. If no specific statistics are available, use general descriptive language instead of specific numbers.
+
 SIGNAL (Primary Reason for Outreach):
 ${signal}
 

@@ -73,7 +73,8 @@ CRITICAL REQUIREMENTS:
 2. FEEDBACK APPLICATION: Apply ONLY the specific feedback provided for this message above. The user feedback context is provided for reference but has already been analyzed and incorporated into the specific feedback for this message.
 3. Apply the specific feedback while maintaining message quality and formatting standards
 4. Do NOT apply the general user feedback to every message - only apply the specific feedback provided for this individual message
-5. CRITICAL: VARIED SIGNAL INTEGRATION - If the feedback mentions repetitive signal integration, use DIFFERENT phrasings than other messages in the campaign:
+5. **CRITICAL STATISTICS VALIDATION**: Use ONLY the exact statistics provided in the context repository below. DO NOT create, fabricate, or invent any specific percentage numbers, dollar amounts, or time savings that are not explicitly listed in the verified context. If no specific statistics are available, use general descriptive language instead of specific numbers.
+6. CRITICAL: VARIED SIGNAL INTEGRATION - If the feedback mentions repetitive signal integration, use DIFFERENT phrasings than other messages in the campaign:
    - Instead of "As a CEO with a decade of experience", try: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
    - Vary the opening approach while maintaining the signal connection
    - Use different angles to reference the same underlying concept
