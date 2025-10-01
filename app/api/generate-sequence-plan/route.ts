@@ -93,7 +93,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   
   // Add some general high-value context items that are always relevant
   const generalHighValue = CONTEXT_REPOSITORY.filter(item => 
-    ['dollar_tree_stats', 'golden_state_foods_stats', 'pepsi_case_study'].includes(item.id)
+    ['dollar_tree_stats', 'golden_state_foods_stats', 'ezrack_stats', 'pepsi_stats', 'dbin_stats', 'pepsi_case_study'].includes(item.id)
   )
   
   // Prioritize statistics first (most important for credibility), then case studies, then customers, then quotes, then value props, pain points, and language styles

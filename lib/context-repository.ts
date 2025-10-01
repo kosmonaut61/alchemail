@@ -85,6 +85,53 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
     url: 'https://emergemarket.wistia.com/medias/mnrknev8dc'
   },
 
+  // Statistics
+  {
+    id: 'dollar_tree_stats',
+    title: 'Dollar Tree Statistics',
+    content: 'Dollar Tree achieved $6M annual savings through freight procurement optimization. Saved $3.2 million in freight spend within 6 months, and $6M in 2024 using ProcureOS. Average lane was ~2% below market average.',
+    category: 'statistic',
+    industry: ['retail', 'food_retail'],
+    keywords: ['dollar tree', 'cost reduction', 'savings', '15%', '6M'],
+    pain_points: ['cost']
+  },
+  {
+    id: 'golden_state_foods_stats',
+    title: 'Golden State Foods Statistics',
+    content: 'Golden State Foods cut freight costs by 18% and increased RFP quantity from 1 to 10 per year.',
+    category: 'statistic',
+    industry: ['food_beverage', 'food_production'],
+    keywords: ['golden state foods', '18%', 'cost reduction', 'rfp', '10 per year'],
+    pain_points: ['cost', 'efficiency']
+  },
+  {
+    id: 'ezrack_stats',
+    title: 'EZRack Statistics',
+    content: 'EZRack realized double-digit percentage savings in less than a year.',
+    category: 'statistic',
+    industry: ['logistics', 'warehousing'],
+    keywords: ['ezrack', 'double-digit', 'savings', 'percentage'],
+    pain_points: ['cost', 'efficiency']
+  },
+  {
+    id: 'pepsi_stats',
+    title: 'Pepsi Statistics',
+    content: 'Pepsi Co. reduced the time to run RFPs by ~20% through streamlined procurement processes.',
+    category: 'statistic',
+    industry: ['food_beverage', 'beverage'],
+    keywords: ['pepsi', '20%', 'rfp', 'time reduction', 'streamlined'],
+    pain_points: ['efficiency', 'time']
+  },
+  {
+    id: 'dbin_stats',
+    title: 'Dynamic Book It Now Statistics',
+    content: '80% of tender transactions through Dynamic Book It Now are virtually instantaneous with direct integrations. Average savings when customers use DBIN are 8.5% with one customer saving 22% below market on one of their lanes.',
+    category: 'statistic',
+    industry: ['logistics', 'transportation'],
+    keywords: ['dbin', 'dynamic book it now', '80%', 'instantaneous', '8.5%', 'savings', '22%', 'market'],
+    pain_points: ['efficiency', 'time', 'cost']
+  },
+
   // Value Propositions
   {
     id: 'cost_savings_value_prop',
