@@ -75,9 +75,10 @@ CRITICAL REQUIREMENTS:
 4. Do NOT apply the general user feedback to every message - only apply the specific feedback provided for this individual message
 5. **CRITICAL STATISTICS VALIDATION**: Use ONLY the exact statistics provided in the context repository below. DO NOT create, fabricate, or invent any specific percentage numbers, dollar amounts, or time savings that are not explicitly listed in the verified context. If no specific statistics are available, use general descriptive language instead of specific numbers.
 6. CRITICAL: VARIED SIGNAL INTEGRATION - If the feedback mentions repetitive signal integration, use DIFFERENT phrasings than other messages in the campaign:
-   - Instead of "As a CEO with a decade of experience", try: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
+   - Instead of "As a CEO with a decade of experience", try: "With your background in...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record...", "Leading through...", "Navigating as...", "Steering through...", "Managing through...", "Overseeing during..."
    - Vary the opening approach while maintaining the signal connection
    - Use different angles to reference the same underlying concept
+   - AVOID overusing "Given your tenure" - use it sparingly and only when it fits naturally
 6. CRITICAL: VARIED PAIN POINT INTEGRATION - Avoid repeating the same pain point phrases across messages:
    - If "steep learning curve" was used in other messages, use different pain point language
    - Focus on 1-2 specific pain points per message, not all pain points
@@ -119,8 +120,9 @@ CRITICAL FORMATTING RULES:
 27. MAINTAIN CONTEXT DIVERSITY: Preserve the variety of customer examples from different context items
 28. AVOID CONTEXT OVERLOAD: Don't add more context items than the original message - focus on enhancing what's already there
 29. CRITICAL: VARY REPETITIVE PHRASES - If the original message uses phrases that appear in other campaign messages, rewrite them with different wording while maintaining the same meaning:
-   - "As a CEO with a decade of experience" → "With your background in leadership", "Given your tenure at the helm", "Having led through market changes"
-   - "After a decade as {{contact.title}}" → "With your track record in...", "Given your experience navigating...", "In your role leading..."
+   - "As a CEO with a decade of experience" → "With your background in leadership", "Having led through market changes", "With your track record in...", "In your role leading...", "Steering through...", "Managing through..."
+   - "After a decade as {{contact.title}}" → "With your track record in...", "Having navigated through...", "In your role leading...", "Leading through...", "Overseeing during..."
+   - "Given your tenure" → "With your experience", "Having led through", "In your role", "With your background", "Leading through", "Navigating as"
    - "Many CEOs tell us" → "Leaders in your position often share", "Executives frequently mention", "CEOs consistently report"
    - "balancing shareholder demands" → "managing investor expectations", "navigating profit pressures", "addressing stakeholder requirements"
 

@@ -31,11 +31,16 @@ With these improvements, the campaign finalizer should now:
 Instead of repeatedly using "As a CEO with a decade of experience", the system will now suggest variations like:
 
 - "With your background in leadership"
-- "Given your tenure at the helm" 
 - "Having led through market changes"
 - "With your track record in..."
-- "Given your experience navigating..."
 - "In your role leading..."
+- "Leading through..."
+- "Navigating as..."
+- "Steering through..."
+- "Managing through..."
+- "Overseeing during..."
+
+**IMPORTANT**: The system now specifically avoids overusing "Given your tenure" which was becoming a new repetitive pattern.
 
 ## How to Test
 

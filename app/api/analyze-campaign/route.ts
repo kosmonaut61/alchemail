@@ -41,6 +41,7 @@ CAMPAIGN ANALYSIS TASKS:
 2. Check that each message builds on the signal story arc and maintains connection to the original outreach reason
 3. CRITICAL: Identify repetitive phrases, stats, or customer examples across messages - especially look for:
    - Identical or near-identical signal integration phrases (e.g., "As a CEO with a decade of experience" appearing in multiple emails)
+   - CRITICAL: "Given your tenure" appearing in multiple emails - this is a known repetitive pattern that should be flagged
    - Same opening patterns or structures
    - Repeated statistics or customer examples
    - Identical value propositions or pain point references
@@ -87,7 +88,8 @@ FEEDBACK GUIDELINES:
 - Recommend specific CTA improvements or link formatting fixes
 - Ensure the signal story arc is maintained throughout the entire sequence
 - CRITICAL: For repetitive signal integration, provide specific alternative phrasings:
-  * If signal is about "decades of experience", suggest variations like: "With your background in...", "Given your tenure...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record..."
+  * If signal is about "decades of experience", suggest variations like: "With your background in...", "Having led through...", "Your experience navigating...", "In your role as...", "With your track record...", "Leading through...", "Navigating as...", "Steering through...", "Managing through...", "Overseeing during..."
+  * AVOID overusing "Given your tenure" - flag it as repetitive if it appears in multiple messages
   * If signal is about specific pain points, vary how you reference them across messages
   * CRITICAL: For repetitive pain point phrases, provide specific alternative phrasings:
     - Instead of "steep learning curve" → suggest "complex processes", "new systems to master", "ramping up quickly", "getting up to speed", "learning the ropes"

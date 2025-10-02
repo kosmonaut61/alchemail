@@ -2040,6 +2040,66 @@ export default function AlchemailApp20() {
                               size="sm"
                               onClick={async () => {
                                 try {
+                                  // Show loading state
+                                  toast({
+                                    title: "Re-finalizing message...",
+                                    description: "Applying campaign context to avoid repetitive phrases.",
+                                  })
+
+                                  const response = await fetch('/api/refinalize-message', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                      messageId: message.id,
+                                      messageContent: message.content,
+                                      messageType: message.type,
+                                      signal: signal,
+                                      persona: selectedPersona?.id,
+                                      painPoints: painPoints,
+                                      contextItems: selectedContextItems,
+                                      allFinalizedMessages: finalizedMessages
+                                    }),
+                                  })
+
+                                  if (!response.ok) {
+                                    throw new Error('Re-finalization failed')
+                                  }
+
+                                  const { refinalizedContent } = await response.json()
+
+                                  // Update the specific message in the finalized messages array
+                                  setFinalizedMessages(prev => 
+                                    prev.map(msg => 
+                                      msg.id === message.id 
+                                        ? { ...msg, content: refinalizedContent }
+                                        : msg
+                                    )
+                                  )
+
+                                  toast({
+                                    title: "Message re-finalized!",
+                                    description: "Message updated with improved variety and reduced repetition.",
+                                  })
+                                } catch (error) {
+                                  console.error('Re-finalization failed:', error)
+                                  toast({
+                                    title: "Re-finalization failed",
+                                    description: "Please try again.",
+                                    variant: "destructive",
+                                  })
+                                }
+                              }}
+                            >
+                              <RefreshCw className="mr-2 h-3 w-3" />
+                              Re-finalize
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={async () => {
+                                try {
                                   // Convert markdown-style formatting to clean HTML for rich text copying
                                   let processed = message.content
                                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
