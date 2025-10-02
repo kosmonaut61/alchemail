@@ -66,15 +66,9 @@ ${otherMessages}
 
 CRITICAL REPETITION AVOIDANCE RULES:
 1. **ANALYZE OTHER MESSAGES FIRST**: Before re-finalizing, identify phrases, patterns, and structures used in other messages
-2. **AVOID REPETITIVE PHRASES**: Do not use phrases that appear in other messages, especially:
-   - "Given your tenure" (known repetitive pattern)
-   - "As a [role] with [experience]"
-   - "Having led through"
-   - "With your background in"
-   - "In your role as"
-   - Any other phrases that appear multiple times across the campaign
-3. **VARY OPENING APPROACHES**: Use a different opening style than other messages
-4. **VARY SIGNAL INTEGRATION**: Reference the signal differently than other messages
+2. **AVOID REPETITIVE PHRASES**: Do not use any phrases that appear in other messages - scan the entire campaign for repeated language
+3. **VARY OPENING APPROACHES**: Use a completely different opening style than other messages - analyze how other messages start and choose a different approach
+4. **VARY SIGNAL INTEGRATION**: Reference the signal differently than other messages - find new ways to connect to the signal
 5. **VARY PAIN POINT REFERENCES**: Use different ways to reference pain points than other messages
 6. **VARY STATISTICS/EXAMPLES**: Use different customer examples or statistics than other messages
 7. **VARY CTA LANGUAGE**: Use different call-to-action phrasing than other messages
