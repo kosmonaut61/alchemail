@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
       signal, 
       painPoints, 
       contextItems, 
+      linkedInCount = 0,
       enableQA = true, 
       model = "gpt-5" 
     } = body;
@@ -73,11 +74,18 @@ export async function POST(request: NextRequest) {
     console.log('📧 Generating Email 4...');
     const email4 = await generateEmail4({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
     
-    console.log('💼 Generating LinkedIn 1...');
-    const linkedin1 = await generateLinkedIn1({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    let linkedin1 = '';
+    let linkedin2 = '';
     
-    console.log('💼 Generating LinkedIn 2...');
-    const linkedin2 = await generateLinkedIn2({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+    if (linkedInCount > 0) {
+      console.log('💼 Generating LinkedIn 1...');
+      linkedin1 = await generateLinkedIn1({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+      
+      if (linkedInCount > 1) {
+        console.log('💼 Generating LinkedIn 2...');
+        linkedin2 = await generateLinkedIn2({ persona, signal, painPoints, dynamicContext, personaContext, preamble, selectedPersona });
+      }
+    }
 
     console.log('✅ Phase 1 Complete: All messages generated sequentially');
 
@@ -104,19 +112,23 @@ export async function POST(request: NextRequest) {
       console.log('🔍 QA\'ing Email 4...');
       const qa4 = await qaMessage("Email 4", email4);
       
-      console.log('🔍 QA\'ing LinkedIn 1...');
-      const qa5 = await qaMessage("LinkedIn 1", linkedin1);
-      
-      console.log('🔍 QA\'ing LinkedIn 2...');
-      const qa6 = await qaMessage("LinkedIn 2", linkedin2);
+      if (linkedInCount > 0) {
+        console.log('🔍 QA\'ing LinkedIn 1...');
+        const qa5 = await qaMessage("LinkedIn 1", linkedin1);
+        
+        if (linkedInCount > 1) {
+          console.log('🔍 QA\'ing LinkedIn 2...');
+          const qa6 = await qaMessage("LinkedIn 2", linkedin2);
+        }
+      }
       
       qaResults = {
         email1: qa1,
         email2: qa2,
         email3: qa3,
         email4: qa4,
-        linkedin1: qa5,
-        linkedin2: qa6
+        ...(linkedInCount > 0 && { linkedin1: qa5 }),
+        ...(linkedInCount > 1 && { linkedin2: qa6 })
       };
 
       console.log('✅ Phase 3 Complete: All messages QA\'d sequentially');
@@ -133,9 +145,11 @@ ${email3}
 
 ${email4}
 
-LinkedIn Message 1: ${linkedin1}
+${linkedInCount > 0 ? `LinkedIn Message 1: ${linkedin1}
 
-LinkedIn Message 2: ${linkedin2}`;
+` : ''}${linkedInCount > 1 ? `LinkedIn Message 2: ${linkedin2}
+
+` : ''}`;
 
     const response = {
       email: fullSequence,

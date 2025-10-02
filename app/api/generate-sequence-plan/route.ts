@@ -209,11 +209,19 @@ Create a strategic sequence plan that:
 13. Use customer names and industry-specific examples to build immediate credibility and relevance
 14. INCORPORATE the persona's tone profile and keywords throughout the sequence plan to ensure messaging resonates with their communication style
 15. Use the persona's keywords naturally in subject lines, value props, and CTAs to speak their language
+${linkedInCount > 0 ? `
 16. CRITICAL: The FIRST LinkedIn message must casually reference the email that was just sent - use natural, conversational language like "Hey, sent something to your inbox but wanted to touch base here too..." or "Sent you an email too but wanted to ask you if..." - make it feel casual and natural, not formal or scripted - avoid using the same phrasing repeatedly, create unique variations for each sequence
 17. CRITICAL: EVERY sequence must start with "Send Connection Request on LinkedIn" on Day 1 - this is always the first step and happens on the same day as the first email
 18. CRITICAL: ALTERNATE message types - never have multiple LinkedIn messages in a row - intersperse LinkedIn messages between emails to create a natural flow
 19. MANDATORY: Follow this exact pattern: Email → LinkedIn → Email → LinkedIn → Email → LinkedIn (NO EXCEPTIONS)
 20. FORBIDDEN: Any sequence that has LinkedIn → LinkedIn → LinkedIn or Email → Email → Email
+` : `
+16. CRITICAL: Email-only sequence - no LinkedIn messages, connection requests, or LinkedIn-related steps
+17. CRITICAL: This is an email-only campaign - focus entirely on email touchpoints
+18. CRITICAL: No LinkedIn alternation required - all messages are emails
+19. MANDATORY: Follow this exact pattern: Email → Email → Email → Email (email-only sequence)
+20. FORBIDDEN: Any LinkedIn messages, connection requests, or LinkedIn-related content
+`}
 21. VALIDATION: Before generating, verify that no two consecutive messages are the same type
 22. TIMING VARIETY: Use different gaps between messages (1, 2, 3, 4 days) to create natural, unpredictable timing - avoid using the same gap repeatedly
 23. MANDATORY VARIETY: You MUST use at least 3 different gap values in your sequence - do not use the same gap more than twice in a row
@@ -290,6 +298,7 @@ CRITICAL MESSAGE COUNT REQUIREMENTS:
 
 CRITICAL DAY SPACING REQUIREMENTS:
 - Use "daysLater" field to indicate how many days from the START of the campaign (Day 0)
+${linkedInCount > 0 ? `
 - LinkedIn connection request is always "daysLater": 0 (Day 0)
 - First email is always "daysLater": 0 (Day 0 - same day as connection request)
 - CRITICAL: daysLater values must be STRICTLY INCREASING - each subsequent message must have a higher daysLater value
@@ -314,14 +323,35 @@ MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
 - CRITICAL: Each daysLater value must be higher than the previous one
 - CRITICAL: Vary the spacing between messages - don't use the same gap repeatedly
 - Use different gaps like 1, 2, 3, 4 days to create natural, unpredictable timing
+` : `
+- First email is always "daysLater": 0 (Day 0)
+- CRITICAL: daysLater values must be STRICTLY INCREASING - each subsequent message must have a higher daysLater value
+- NEVER use the same daysLater value twice
+- NEVER use a lower daysLater value than a previous message
+- Example correct sequence: 0, 3, 7, 11, 15 (each number is higher than the previous)
+- MANDATORY PATTERN: Email → Email → Email → Email (email-only sequence)
+- NO LinkedIn messages or connection requests
+
+MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
+- Step 1: First Email (daysLater: 0)
+- Step 2: Second Email (daysLater: 3, 4, 5, or 6 - must be higher than 0)
+- Step 3: Third Email (daysLater: 7, 8, 9, or 10 - must be higher than Step 2)
+- Step 4: Fourth Email (daysLater: 11, 12, 13, or 14 - must be higher than Step 3)
+- Continue with emails only: Email → Email → Email → Email
+- CRITICAL: Each daysLater value must be higher than the previous one
+- CRITICAL: Vary the spacing between messages - don't use the same gap repeatedly
+- Use different gaps like 3, 4, 5, 6 days to create natural, unpredictable timing
+`}
 
 {
   "isIncentivized": ${isIncentivized},
   "incentiveAmount": ${incentiveAmount},
+${linkedInCount > 0 ? `
   "linkedInConnectionRequest": {
     "daysLater": 0,
     "purpose": "Send connection request on LinkedIn to establish initial contact before email outreach"
   },
+` : ''}
   "emails": [
     {
       "daysLater": 0,

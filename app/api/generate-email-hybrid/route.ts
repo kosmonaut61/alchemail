@@ -10,7 +10,7 @@ import { getPreamble } from "@/lib/preamble"
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { persona, signal, painPoints, contextItems, enableQA = true, model = "gpt-5" } = body
+    const { persona, signal, painPoints, contextItems, linkedInCount = 0, enableQA = true, model = "gpt-5" } = body
 
     console.log('🚀 ===== HYBRID EMAIL GENERATION START =====')
     console.log('📝 Request:', { persona, signal, painPoints: painPoints?.length, contextItems: contextItems?.length, enableQA, model })
@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
 ` : ''
     const preamble = getPreamble()
 
-    // Batch 1: Generate Email 1 + LinkedIn Message 1
-    console.log('📧 Starting Batch 1: Email 1 + LinkedIn Message 1')
+    // Batch 1: Generate Email 1 + LinkedIn Message 1 (if LinkedIn count > 0)
+    console.log(`📧 Starting Batch 1: Email 1${linkedInCount > 0 ? ' + LinkedIn Message 1' : ''}`)
     const batch1Result = await generateBatch1({
       persona,
       signal,
@@ -41,11 +41,12 @@ export async function POST(request: NextRequest) {
       preamble,
       enableQA,
       model,
-      selectedPersona
+      selectedPersona,
+      linkedInCount
     })
 
-    // Batch 2: Generate Emails 2-4 + LinkedIn Message 2 (parallel)
-    console.log('📧 Starting Batch 2: Emails 2-4 + LinkedIn Message 2')
+    // Batch 2: Generate Emails 2-4 + LinkedIn Message 2 (if LinkedIn count > 1)
+    console.log(`📧 Starting Batch 2: Emails 2-4${linkedInCount > 1 ? ' + LinkedIn Message 2' : ''}`)
     const batch2Result = await generateBatch2({
       persona,
       signal,
@@ -55,7 +56,8 @@ export async function POST(request: NextRequest) {
       preamble,
       enableQA,
       model,
-      selectedPersona
+      selectedPersona,
+      linkedInCount
     })
 
     // Combine results
@@ -79,15 +81,17 @@ ${fullSequence.email3}
 
 ${fullSequence.email4}
 
+${linkedInCount > 0 ? `
 LinkedIn Message 1:
 ${fullSequence.linkedin1}
-
+` : ''}${linkedInCount > 1 ? `
 LinkedIn Message 2:
-${fullSequence.linkedin2}`
+${fullSequence.linkedin2}
+` : ''}`
 
     console.log('✅ Hybrid generation complete!')
     console.log('📊 Total emails generated:', 4)
-    console.log('📊 LinkedIn messages generated:', 2)
+    console.log('📊 LinkedIn messages generated:', linkedInCount)
 
     return NextResponse.json({
       email: fullEmailSequence,
@@ -121,7 +125,8 @@ async function generateBatch1({
   preamble,
   enableQA,
   model,
-  selectedPersona
+  selectedPersona,
+  linkedInCount = 0
 }: any) {
   const prompt = `${preamble}
 
@@ -159,7 +164,7 @@ SUPPORTING GUIDELINES:
     - WRONG: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{/if}}
     - This is critical for CRM compatibility - incorrect syntax breaks merge fields
 
-Generate the first email and LinkedIn message for this sequence:
+Generate the first email${linkedInCount > 0 ? ' and LinkedIn message' : ''} for this sequence:
 
 EMAIL 1 (Day 0):
 Subject: [Subject line that references the signal]
@@ -175,26 +180,34 @@ Subject: [Subject line that references the signal]
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
+${linkedInCount > 0 ? `
 LINKEDIN MESSAGE 1 (Day 1):
-[Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]`
+[Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]
+` : ''}`
 
   console.log('🤖 Generating Batch 1 with model:', model)
   
   let email1: string
-  let linkedin1: string
+  let linkedin1: string = ''
   
   if (model.startsWith('gpt-5')) {
     const result = await runWithGpt5(prompt)
     console.log(`✅ Batch 1 generated with ${result.model}`)
     const content = result.text
     
-    // Split the content into email and LinkedIn parts
-    const parts = content.split('LINKEDIN MESSAGE 1')
-    email1 = parts[0]?.trim() || content
-    linkedin1 = parts[1]?.trim() || 'Hi {{contact.first_name}}, following up on our conversation about ' + signal
+    if (linkedInCount > 0) {
+      // Split the content into email and LinkedIn parts
+      const parts = content.split('LINKEDIN MESSAGE 1')
+      email1 = parts[0]?.trim() || content
+      linkedin1 = parts[1]?.trim() || 'Hi {{contact.first_name}}, following up on our conversation about ' + signal
+    } else {
+      email1 = content
+    }
   } else {
     email1 = await generateTextWithModel(prompt, model)
-    linkedin1 = 'Hi {{contact.first_name}}, following up on our conversation about ' + signal
+    if (linkedInCount > 0) {
+      linkedin1 = 'Hi {{contact.first_name}}, following up on our conversation about ' + signal
+    }
   }
 
   // QA for Batch 1
@@ -234,7 +247,8 @@ async function generateBatch2({
   preamble,
   enableQA,
   model,
-  selectedPersona
+  selectedPersona,
+  linkedInCount = 0
 }: any) {
   const prompt = `${preamble}
 
@@ -272,7 +286,7 @@ SUPPORTING GUIDELINES:
     - WRONG: {{#if contact.first_name}}{{contact.first_name}}{{#else}}there{{/if}}
     - This is critical for CRM compatibility - incorrect syntax breaks merge fields
 
-Generate emails 2, 3, 4 and the second LinkedIn message for this sequence:
+Generate emails 2, 3, 4${linkedInCount > 1 ? ' and the second LinkedIn message' : ''} for this sequence:
 
 EMAIL 2 (Day 3):
 Subject: [Subject line that references the signal]
@@ -316,8 +330,10 @@ Subject: [Subject line that references the signal]
 - No signature block - email ends at CTA
 - Plain text only, no formatting]
 
+${linkedInCount > 1 ? `
 LINKEDIN MESSAGE 2 (Day 5):
-[Write the actual LinkedIn message content here - brief follow-up, reference previous touchpoints, soft CTA]`
+[Write the actual LinkedIn message content here - brief follow-up, reference previous touchpoints, soft CTA]
+` : ''}`
 
   console.log('🤖 Generating Batch 2 with model:', model)
   
@@ -342,7 +358,7 @@ LINKEDIN MESSAGE 2 (Day 5):
       email3 = parts[i + 1]?.trim() || ''
     } else if (parts[i]?.includes('EMAIL 4')) {
       email4 = parts[i + 1]?.trim() || ''
-    } else if (parts[i]?.includes('LINKEDIN MESSAGE 2')) {
+    } else if (linkedInCount > 1 && parts[i]?.includes('LINKEDIN MESSAGE 2')) {
       linkedin2 = parts[i + 1]?.trim() || ''
     }
   }

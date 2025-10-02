@@ -193,7 +193,7 @@ export default function AlchemailApp20() {
     }
   }
   const [emailCount, setEmailCount] = useState(8)
-  const [linkedInCount, setLinkedInCount] = useState(3)
+  const [linkedInCount, setLinkedInCount] = useState(0)
   const [isIncentivized, setIsIncentivized] = useState(true)
   const [incentiveAmount, setIncentiveAmount] = useState(500)
   const [sequencePlan, setSequencePlan] = useState<SequencePlan | null>(null)
