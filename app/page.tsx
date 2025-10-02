@@ -1548,8 +1548,8 @@ export default function AlchemailApp20() {
                   )}
 
                   {generatedMessages.map((message, index) => {
-                    // Calculate step number: Step 1 is connection request, so messages start at Step 2
-                    const stepNumber = index + 2
+                    // Calculate step number: Step 1 is connection request only if LinkedIn count > 0
+                    const stepNumber = linkedInCount > 0 ? index + 2 : index + 1
                     
                     // Calculate timing text based on absolute daysLater value
                     const timingText = message.daysLater === 0 ? 'Same Day' : `${message.daysLater} Days Later`
@@ -2010,7 +2010,7 @@ export default function AlchemailApp20() {
                   </div>
                   
                   {finalizedMessages.map((message, index) => {
-                    const stepNumber = index + 2
+                    const stepNumber = linkedInCount > 0 ? index + 2 : index + 1
                     const timingText = message.daysLater === 0 ? 'Same Day' : `${message.daysLater} Days Later`
                     
                     return (
