@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { openai } from '@/lib/openai-models'
+import { generateWithGPT5 } from '@/lib/openai-models'
 
 export async function POST(request: NextRequest) {
   try {
@@ -114,19 +114,7 @@ QUALITY STANDARDS:
 
 Return the re-finalized message with the same format as the original, but with enhanced variety and uniqueness compared to other messages in the campaign.`
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        {
-          role: 'system',
-          content: refinalizePrompt
-        }
-      ],
-      temperature: 0.7,
-      max_tokens: 1000
-    })
-
-    const refinalizedContent = completion.choices[0]?.message?.content?.trim()
+    const refinalizedContent = await generateWithGPT5(refinalizePrompt, 'gpt-4o')
 
     if (!refinalizedContent) {
       throw new Error('No content generated from re-finalization')
