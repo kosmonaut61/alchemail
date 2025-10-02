@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
       signal, 
       painPoints, 
       contextItems, 
+      linkedInCount = 0,
       enableQA = false, 
       model = "gpt-5" 
     } = body;
@@ -137,11 +138,13 @@ Subject: [Subject line that references the signal]
 
 [Write the actual email content here - final follow up on the signal, different social proof, natural Apollo CTA]
 
+${linkedInCount > 0 ? `
 LINKEDIN MESSAGE 1 (Day 1):
 [Write the actual LinkedIn message content here - brief, personalized, references the signal, includes soft CTA]
 
 LINKEDIN MESSAGE 2 (Day 5):
-[Write the actual LinkedIn message content here - brief follow up, references the signal, includes soft CTA]`;
+[Write the actual LinkedIn message content here - brief follow up, references the signal, includes soft CTA]
+` : ''}`;
 
     console.log('📧 Generating complete sequence with gpt-5-nano...');
     const result = await runWithGpt5(prompt);

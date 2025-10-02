@@ -81,7 +81,7 @@ async function processRequest(request: NextRequest, sessionId: string) {
       // The frontend will show progress based on the generation process
     }
     
-    const { persona, signal, painPoints, contextItems, enableQA = false, model = "gpt-5" } = await request.json()
+    const { persona, signal, painPoints, contextItems, linkedInCount = 0, enableQA = false, model = "gpt-5" } = await request.json()
     console.log('📝 Parsed request data')
     
     // Update status: Starting generation
@@ -214,13 +214,17 @@ Subject: [subject]
 [email body with proper line breaks between paragraphs]
 [CTA with Apollo link: [CTA text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)]
 
+${linkedInCount > 0 ? `
 LinkedIn Message 1 (Day 1):
 [message]
 
+${linkedInCount > 1 ? `
 LinkedIn Message 2 (Day 5):
 [message]
+` : ''}
 
 Continue pattern...
+` : ''}
 
 FORMATTING REQUIREMENTS:
 - Include proper line breaks between EVERY paragraph in emails

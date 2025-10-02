@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
       signal, 
       painPoints, 
       contextItems, 
+      linkedInCount = 0,
       enableQA = true, 
       model = "gpt-5" 
     } = body;
@@ -65,7 +66,8 @@ export async function POST(request: NextRequest) {
       persona: selectedPersona, 
       painPoints, 
       dynamicContext, 
-      personaContext 
+      personaContext,
+      linkedInCount 
     });
     
     console.log('✅ Phase 1 Complete: Sequence plan created');
@@ -77,8 +79,16 @@ export async function POST(request: NextRequest) {
     const email2 = await generateInitialMessage("email2", sequencePlan, { signal, personaContext, dynamicContext, preamble });
     const email3 = await generateInitialMessage("email3", sequencePlan, { signal, personaContext, dynamicContext, preamble });
     const email4 = await generateInitialMessage("email4", sequencePlan, { signal, personaContext, dynamicContext, preamble });
-    const linkedin1 = await generateInitialMessage("linkedin1", sequencePlan, { signal, personaContext, dynamicContext, preamble });
-    const linkedin2 = await generateInitialMessage("linkedin2", sequencePlan, { signal, personaContext, dynamicContext, preamble });
+    let linkedin1 = '';
+    let linkedin2 = '';
+    
+    if (linkedInCount > 0) {
+      linkedin1 = await generateInitialMessage("linkedin1", sequencePlan, { signal, personaContext, dynamicContext, preamble });
+    }
+    
+    if (linkedInCount > 1) {
+      linkedin2 = await generateInitialMessage("linkedin2", sequencePlan, { signal, personaContext, dynamicContext, preamble });
+    }
 
     console.log('✅ Phase 2 Complete: All initial messages generated');
 
@@ -91,16 +101,24 @@ export async function POST(request: NextRequest) {
       const qa2 = await qaAndPolish("Email 2", email2, sequencePlan);
       const qa3 = await qaAndPolish("Email 3", email3, sequencePlan);
       const qa4 = await qaAndPolish("Email 4", email4, sequencePlan);
-      const qa5 = await qaAndPolish("LinkedIn 1", linkedin1, sequencePlan);
-      const qa6 = await qaAndPolish("LinkedIn 2", linkedin2, sequencePlan);
+      let qa5 = null;
+      let qa6 = null;
+      
+      if (linkedInCount > 0) {
+        qa5 = await qaAndPolish("LinkedIn 1", linkedin1, sequencePlan);
+      }
+      
+      if (linkedInCount > 1) {
+        qa6 = await qaAndPolish("LinkedIn 2", linkedin2, sequencePlan);
+      }
       
       qaResults = {
         email1: qa1,
         email2: qa2,
         email3: qa3,
         email4: qa4,
-        linkedin1: qa5,
-        linkedin2: qa6
+        ...(linkedInCount > 0 && { linkedin1: qa5 }),
+        ...(linkedInCount > 1 && { linkedin2: qa6 })
       };
 
       console.log('✅ Phase 3 Complete: All messages QA\'d and polished');
@@ -117,9 +135,11 @@ ${email3}
 
 ${email4}
 
+${linkedInCount > 0 ? `
 LinkedIn Message 1: ${linkedin1}
-
-LinkedIn Message 2: ${linkedin2}`;
+` : ''}${linkedInCount > 1 ? `
+LinkedIn Message 2: ${linkedin2}
+` : ''}`;
 
     const response = {
       email: fullSequence,
@@ -147,7 +167,7 @@ LinkedIn Message 2: ${linkedin2}`;
 }
 
 // PHASE 1: Create Strategic Sequence Plan
-async function createSequencePlan({ signal, persona, painPoints, dynamicContext, personaContext }: any) {
+async function createSequencePlan({ signal, persona, painPoints, dynamicContext, personaContext, linkedInCount = 0 }: any) {
   const prompt = `Create a strategic sequence plan for this email campaign:
 
 SIGNAL: ${signal}
@@ -203,18 +223,21 @@ Create a JSON plan with this structure:
       "socialProof": "Different social proof/stat for this email",
       "tone": "Tone and approach for this email"
     },
+${linkedInCount > 0 ? `
     "linkedin1": {
       "purpose": "What this LinkedIn message accomplishes",
       "signalFocus": "How this message focuses on the signal",
       "socialProof": "Different social proof/stat for this message",
       "tone": "Tone and approach for this message"
     },
+` : ''}${linkedInCount > 1 ? `
     "linkedin2": {
       "purpose": "What this LinkedIn message accomplishes", 
       "signalFocus": "How this message focuses on the signal",
       "socialProof": "Different social proof/stat for this message",
       "tone": "Tone and approach for this message"
     }
+` : ''}
   }
 }
 
@@ -238,8 +261,8 @@ Return ONLY the JSON object, no other text.`;
         email2: { purpose: "Follow-up", signalFocus: "Reference signal", socialProof: "Different client story", tone: "Conversational" },
         email3: { purpose: "Value proposition", signalFocus: "Reference signal", socialProof: "Another client story", tone: "Conversational" },
         email4: { purpose: "Final follow-up", signalFocus: "Reference signal", socialProof: "Final client story", tone: "Conversational" },
-        linkedin1: { purpose: "Soft touch", signalFocus: "Reference signal", socialProof: "Brief success mention", tone: "Professional" },
-        linkedin2: { purpose: "Follow-up touch", signalFocus: "Reference signal", socialProof: "Brief success mention", tone: "Professional" }
+        ...(linkedInCount > 0 && { linkedin1: { purpose: "Soft touch", signalFocus: "Reference signal", socialProof: "Brief success mention", tone: "Professional" } }),
+        ...(linkedInCount > 1 && { linkedin2: { purpose: "Follow-up touch", signalFocus: "Reference signal", socialProof: "Brief success mention", tone: "Professional" } })
       }
     };
   }
