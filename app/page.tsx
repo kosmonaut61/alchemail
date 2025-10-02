@@ -58,6 +58,7 @@ interface GeneratedMessage {
   isOptimized?: boolean
   isGenerating?: boolean
   isOptimizing?: boolean
+  isRefinalizing?: boolean
 }
 
 export default function AlchemailApp20() {
@@ -2040,6 +2041,15 @@ export default function AlchemailApp20() {
                               size="sm"
                               onClick={async () => {
                                 try {
+                                  // Set refinalizing state
+                                  setFinalizedMessages(prev => 
+                                    prev.map(msg => 
+                                      msg.id === message.id 
+                                        ? { ...msg, isRefinalizing: true }
+                                        : msg
+                                    )
+                                  )
+
                                   // Show loading state
                                   toast({
                                     title: "Re-finalizing message...",
@@ -2073,7 +2083,7 @@ export default function AlchemailApp20() {
                                   setFinalizedMessages(prev => 
                                     prev.map(msg => 
                                       msg.id === message.id 
-                                        ? { ...msg, content: refinalizedContent }
+                                        ? { ...msg, content: refinalizedContent, isRefinalizing: false }
                                         : msg
                                     )
                                   )
@@ -2084,6 +2094,16 @@ export default function AlchemailApp20() {
                                   })
                                 } catch (error) {
                                   console.error('Re-finalization failed:', error)
+                                  
+                                  // Reset refinalizing state on failure
+                                  setFinalizedMessages(prev => 
+                                    prev.map(msg => 
+                                      msg.id === message.id 
+                                        ? { ...msg, isRefinalizing: false }
+                                        : msg
+                                    )
+                                  )
+                                  
                                   toast({
                                     title: "Re-finalization failed",
                                     description: "Please try again.",
@@ -2091,9 +2111,19 @@ export default function AlchemailApp20() {
                                   })
                                 }
                               }}
+                              disabled={message.isRefinalizing}
                             >
-                              <RefreshCw className="mr-2 h-3 w-3" />
-                              Re-finalize
+                              {message.isRefinalizing ? (
+                                <>
+                                  <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+                                  Re-finalizing...
+                                </>
+                              ) : (
+                                <>
+                                  <RefreshCw className="mr-2 h-3 w-3" />
+                                  Re-finalize
+                                </>
+                              )}
                             </Button>
                             <Button
                               variant="outline"
