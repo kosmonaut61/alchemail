@@ -312,6 +312,7 @@ ${linkedInCount > 0 ? `
 - Each message type must alternate - no exceptions
 
 MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
+${linkedInCount > 0 ? `
 - Step 1: LinkedIn Connection Request (daysLater: 0)
 - Step 2: First Email (daysLater: 0) 
 - Step 3: First LinkedIn Message (daysLater: 1, 2, or 3 - must be higher than 0)
@@ -320,6 +321,13 @@ MANDATORY SEQUENCE PATTERN (NO EXCEPTIONS):
 - Step 6: Third Email (daysLater: 7, 8, 9, or 10 - must be higher than Step 5)
 - Step 7: Third LinkedIn Message (daysLater: 9, 10, 11, or 12 - must be higher than Step 6)
 - Continue alternating: Email → LinkedIn → Email → LinkedIn
+` : `
+- Step 1: First Email (daysLater: 0)
+- Step 2: Second Email (daysLater: 3, 4, 5, or 6 - must be higher than 0)
+- Step 3: Third Email (daysLater: 7, 8, 9, or 10 - must be higher than Step 2)
+- Step 4: Fourth Email (daysLater: 11, 12, 13, or 14 - must be higher than Step 3)
+- Continue with emails only: Email → Email → Email → Email
+`}
 - CRITICAL: Each daysLater value must be higher than the previous one
 - CRITICAL: Vary the spacing between messages - don't use the same gap repeatedly
 - Use different gaps like 1, 2, 3, 4 days to create natural, unpredictable timing
