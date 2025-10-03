@@ -81,6 +81,7 @@ RE-FINALIZATION GUIDELINES:
 5. **MAINTAIN PERSONA TONE**: Keep the appropriate tone for ${personaData.seniority} in ${personaData.department}
 6. **PRESERVE FORMATTING**: Maintain proper merge fields, links, and structure
 7. **ENSURE NATURAL FLOW**: Make the message feel natural and conversational
+8. **STRATEGIC BOLD ANALYSIS**: Re-evaluate the entire message to determine the most impactful places for bold formatting - don't just preserve existing bold, but strategically place it where it will have the greatest visual impact and engagement
 
 SPECIFIC IMPROVEMENTS TO APPLY:
 - Use different opening approaches than other messages
@@ -90,13 +91,22 @@ SPECIFIC IMPROVEMENTS TO APPLY:
 - Use varied CTA language
 - Apply different sentence structures and flow
 - Use different transition phrases and connectors
+- RE-ANALYZE AND OPTIMIZE BOLD FORMATTING: Re-evaluate the entire message to determine where bold formatting would be most impactful - focus on key statistics, company names, value propositions, and the most compelling statements
 
 FORMATTING REQUIREMENTS:
 - Preserve all merge fields exactly: {{contact.first_name}}, {{account.name}}, etc.
 - Maintain Apollo link format: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
+- CRITICAL: STRATEGIC BOLD FORMATTING: Re-analyze the message content to strategically apply **bold formatting** to the most impactful elements:
+  * Prioritize key statistics and numbers (e.g., "saved $6M", "cut costs by 18%")
+  * Highlight company names and success stories (e.g., "Dollar Tree", "Golden State Foods")
+  * Emphasize value propositions and benefits (e.g., "faster procurement", "reduced costs")
+  * Bold compelling statements that drive engagement
+  * Use 2-3 strategic bold sections maximum for optimal impact
+  * Bold complete thoughts, not fragments - ensure the whole meaningful phrase is bolded
 - Keep proper markdown formatting for bold text: **text**
 - Maintain proper line breaks and paragraph structure
 - Preserve case study links with exact URLs from context
+- REMOVE EM DASHES: Replace all em dashes (—) with regular hyphens (-) or rephrase the sentence
 
 QUALITY STANDARDS:
 - 100-150 words for emails, under 100 words for LinkedIn
