@@ -1825,15 +1825,31 @@ export default function AlchemailApp20() {
                           })
                         ])
                         
+                        // Celebrate individual message copy!
+                        confetti({
+                          particleCount: 60,
+                          spread: 50,
+                          origin: { y: 0.6 },
+                          colors: ['#3b82f6', '#10b981', '#f59e0b']
+                        })
+
                         toast({
-                          title: "Copied to clipboard!",
+                          title: "Copied to clipboard! 📝",
                           description: "Message content copied with formatting - ready to paste into your CRM.",
                         })
                       } catch (error) {
                         // Fallback to plain text if rich text copying fails
                         navigator.clipboard.writeText(message.content)
+                        // Celebrate individual message copy (fallback)!
+                        confetti({
+                          particleCount: 60,
+                          spread: 50,
+                          origin: { y: 0.6 },
+                          colors: ['#3b82f6', '#10b981', '#f59e0b']
+                        })
+
                         toast({
-                          title: "Copied to clipboard!",
+                          title: "Copied to clipboard! 📝",
                           description: "Message content copied as plain text.",
                         })
                       }
@@ -2279,15 +2295,31 @@ export default function AlchemailApp20() {
                                     })
                                   ])
                                   
+                                  // Celebrate finalized message copy!
+                                  confetti({
+                                    particleCount: 70,
+                                    spread: 55,
+                                    origin: { y: 0.6 },
+                                    colors: ['#8b5cf6', '#06b6d4', '#10b981']
+                                  })
+
                                   toast({
-                                    title: "Copied to clipboard!",
+                                    title: "Copied to clipboard! 🎯",
                                     description: "Message content copied with formatting - ready to paste into your CRM.",
                                   })
                                 } catch (error) {
                                   // Fallback to plain text if rich text copying fails
                                   navigator.clipboard.writeText(message.content)
+                                  // Celebrate finalized message copy (fallback)!
+                                  confetti({
+                                    particleCount: 70,
+                                    spread: 55,
+                                    origin: { y: 0.6 },
+                                    colors: ['#8b5cf6', '#06b6d4', '#10b981']
+                                  })
+
                                   toast({
-                                    title: "Copied to clipboard!",
+                                    title: "Copied to clipboard! 🎯",
                                     description: "Message content copied as plain text.",
                                   })
                                 }
