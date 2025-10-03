@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import confetti from "canvas-confetti"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -11,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, Copy } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, Copy, PartyPopper } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
@@ -223,7 +224,41 @@ export default function AlchemailApp20() {
 
   const handleNext = () => {
     if (currentStep < 4) {
-      setCurrentStep(currentStep + 1)
+      const newStep = currentStep + 1
+      setCurrentStep(newStep)
+      
+      // Celebrate each step transition with confetti!
+      setTimeout(() => {
+        switch (newStep) {
+          case 2:
+            // Sequence Plan step
+            confetti({
+              particleCount: 80,
+              spread: 60,
+              origin: { y: 0.6 },
+              colors: ['#10b981', '#3b82f6', '#8b5cf6']
+            })
+            break
+          case 3:
+            // Generate step
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: { y: 0.6 },
+              colors: ['#f59e0b', '#ef4444', '#ec4899', '#06b6d4']
+            })
+            break
+          case 4:
+            // Campaign step
+            confetti({
+              particleCount: 120,
+              spread: 80,
+              origin: { y: 0.6 },
+              colors: ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899']
+            })
+            break
+        }
+      }, 300) // Small delay to let the step transition animate
     }
   }
 
@@ -438,6 +473,24 @@ export default function AlchemailApp20() {
             
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-9 w-9 p-0"
+                onClick={() => {
+                  // Test confetti with a more dramatic effect
+                  confetti({
+                    particleCount: 150,
+                    spread: 60,
+                    origin: { y: 0.6 },
+                    colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff']
+                  })
+                }}
+                title="Test Confetti! 🎉"
+              >
+                <PartyPopper className="h-4 w-4" />
+                <span className="sr-only">Test Confetti</span>
+              </Button>
               <HelpModal />
               <ThemeToggle />
             </div>
@@ -975,8 +1028,16 @@ export default function AlchemailApp20() {
                         setSequencePlan(data.sequencePlan)
                         setContextItems(data.contextItems || [])
                         
+                        // Celebrate sequence plan generation!
+                        confetti({
+                          particleCount: 90,
+                          spread: 65,
+                          origin: { y: 0.6 },
+                          colors: ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b']
+                        })
+                        
                         toast({
-                          title: "Sequence Plan Generated!",
+                          title: "Sequence Plan Generated! 🎯",
                           description: `Created 1 LinkedIn connection request, ${data.sequencePlan.emails.length} emails, and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                         })
 
@@ -1009,8 +1070,16 @@ export default function AlchemailApp20() {
                           const messagesData = await messagesResponse.json()
                           setGeneratedMessages(messagesData.messages)
                           
+                          // Celebrate message generation!
+                          confetti({
+                            particleCount: 110,
+                            spread: 75,
+                            origin: { y: 0.6 },
+                            colors: ['#f59e0b', '#ef4444', '#ec4899', '#06b6d4', '#8b5cf6']
+                          })
+                          
                           toast({
-                            title: "Sequence Generated!",
+                            title: "Sequence Generated! ✨",
                             description: `Generated ${messagesData.messages.length} messages. Auto-optimizing...`,
                           })
 
@@ -1184,8 +1253,16 @@ export default function AlchemailApp20() {
                             setSequencePlan(data.sequencePlan)
                             setContextItems(data.contextItems || [])
                             
+                            // Celebrate sequence plan regeneration!
+                            confetti({
+                              particleCount: 90,
+                              spread: 65,
+                              origin: { y: 0.6 },
+                              colors: ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b']
+                            })
+                            
                             toast({
-                              title: "Sequence Plan Regenerated!",
+                              title: "Sequence Plan Regenerated! 🎯",
                               description: `Created new 1 LinkedIn connection request, ${data.sequencePlan.emails.length} emails, and ${data.sequencePlan.linkedInMessages.length} LinkedIn messages.`,
                             })
                           } catch (error) {
@@ -1289,8 +1366,16 @@ export default function AlchemailApp20() {
                         
                         setGeneratedMessages(data.messages)
                         
+                        // Celebrate manual message generation!
+                        confetti({
+                          particleCount: 110,
+                          spread: 75,
+                          origin: { y: 0.6 },
+                          colors: ['#f59e0b', '#ef4444', '#ec4899', '#06b6d4', '#8b5cf6']
+                        })
+                        
                         toast({
-                          title: "Messages Generated!",
+                          title: "Messages Generated! ✨",
                           description: `Created ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages. Auto-optimizing...`,
                         })
 
@@ -1388,8 +1473,16 @@ export default function AlchemailApp20() {
                             
                             setGeneratedMessages(data.messages)
                             
+                            // Celebrate message regeneration!
+                            confetti({
+                              particleCount: 110,
+                              spread: 75,
+                              origin: { y: 0.6 },
+                              colors: ['#f59e0b', '#ef4444', '#ec4899', '#06b6d4', '#8b5cf6']
+                            })
+                            
                             toast({
-                              title: "Messages Regenerated!",
+                              title: "Messages Regenerated! ✨",
                               description: `Created new ${data.emailsGenerated} emails and ${data.linkedInGenerated} LinkedIn messages. Auto-optimizing...`,
                             })
 
@@ -1732,15 +1825,31 @@ export default function AlchemailApp20() {
                           })
                         ])
                         
+                        // Celebrate individual message copy!
+                        confetti({
+                          particleCount: 60,
+                          spread: 50,
+                          origin: { y: 0.6 },
+                          colors: ['#3b82f6', '#10b981', '#f59e0b']
+                        })
+
                         toast({
-                          title: "Copied to clipboard!",
+                          title: "Copied to clipboard! 📝",
                           description: "Message content copied with formatting - ready to paste into your CRM.",
                         })
                       } catch (error) {
                         // Fallback to plain text if rich text copying fails
                         navigator.clipboard.writeText(message.content)
+                        // Celebrate individual message copy (fallback)!
+                        confetti({
+                          particleCount: 60,
+                          spread: 50,
+                          origin: { y: 0.6 },
+                          colors: ['#3b82f6', '#10b981', '#f59e0b']
+                        })
+
                         toast({
-                          title: "Copied to clipboard!",
+                          title: "Copied to clipboard! 📝",
                           description: "Message content copied as plain text.",
                         })
                       }
@@ -1887,16 +1996,24 @@ export default function AlchemailApp20() {
                       setFinalizedMessages(finalizedMessages)
                       setIsFinalizingCampaign(false)
                       
+                      // Celebrate campaign finalization!
+                      confetti({
+                        particleCount: 130,
+                        spread: 85,
+                        origin: { y: 0.6 },
+                        colors: ['#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#84cc16']
+                      })
+                      
                       // Show results with partial success handling
                       if (stats.failed > 0) {
                         toast({
-                          title: "Campaign Finalized with Issues",
+                          title: "Campaign Finalized with Issues 🚀",
                           description: `Successfully finalized ${stats.successful} messages, ${stats.failed} failed.`,
                           variant: "destructive",
                         })
                       } else {
                         toast({
-                          title: "Campaign Finalized!",
+                          title: "Campaign Finalized! 🚀",
                           description: `Successfully finalized all ${stats.total} messages.`,
                         })
                       }
@@ -1987,8 +2104,15 @@ export default function AlchemailApp20() {
                               })
                             ])
                             
+                            // Launch confetti celebration!
+                            confetti({
+                              particleCount: 100,
+                              spread: 70,
+                              origin: { y: 0.6 }
+                            })
+
                             toast({
-                              title: "Campaign Copied!",
+                              title: "Campaign Copied! 🎉",
                               description: "All finalized messages copied with formatting - ready to paste into your CRM.",
                             })
                           } catch (error) {
@@ -1997,8 +2121,16 @@ export default function AlchemailApp20() {
                               `Message ${i+1} (${m.type}, Day ${m.daysLater}):\n${m.content}\n`
                             ).join('\n---\n')
                             navigator.clipboard.writeText(allContent)
+                            
+                            // Launch confetti celebration!
+                            confetti({
+                              particleCount: 100,
+                              spread: 70,
+                              origin: { y: 0.6 }
+                            })
+
                             toast({
-                              title: "Campaign Copied!",
+                              title: "Campaign Copied! 🎉",
                               description: "All finalized messages copied as plain text.",
                             })
                           }
@@ -2163,15 +2295,31 @@ export default function AlchemailApp20() {
                                     })
                                   ])
                                   
+                                  // Celebrate finalized message copy!
+                                  confetti({
+                                    particleCount: 70,
+                                    spread: 55,
+                                    origin: { y: 0.6 },
+                                    colors: ['#8b5cf6', '#06b6d4', '#10b981']
+                                  })
+
                                   toast({
-                                    title: "Copied to clipboard!",
+                                    title: "Copied to clipboard! 🎯",
                                     description: "Message content copied with formatting - ready to paste into your CRM.",
                                   })
                                 } catch (error) {
                                   // Fallback to plain text if rich text copying fails
                                   navigator.clipboard.writeText(message.content)
+                                  // Celebrate finalized message copy (fallback)!
+                                  confetti({
+                                    particleCount: 70,
+                                    spread: 55,
+                                    origin: { y: 0.6 },
+                                    colors: ['#8b5cf6', '#06b6d4', '#10b981']
+                                  })
+
                                   toast({
-                                    title: "Copied to clipboard!",
+                                    title: "Copied to clipboard! 🎯",
                                     description: "Message content copied as plain text.",
                                   })
                                 }
