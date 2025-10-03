@@ -58,6 +58,7 @@ interface GeneratedMessage {
   isOptimized?: boolean
   isGenerating?: boolean
   isOptimizing?: boolean
+  isRefinalizing?: boolean
 }
 
 export default function AlchemailApp20() {
@@ -2035,6 +2036,95 @@ export default function AlchemailApp20() {
                             )}
                           </div>
                           <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={async () => {
+                                try {
+                                  // Set refinalizing state
+                                  setFinalizedMessages(prev => 
+                                    prev.map(msg => 
+                                      msg.id === message.id 
+                                        ? { ...msg, isRefinalizing: true }
+                                        : msg
+                                    )
+                                  )
+
+                                  // Show loading state
+                                  toast({
+                                    title: "Re-finalizing message...",
+                                    description: "Applying campaign context to avoid repetitive phrases.",
+                                  })
+
+                                  const response = await fetch('/api/refinalize-message', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                      messageId: message.id,
+                                      messageContent: message.content,
+                                      messageType: message.type,
+                                      signal: signal,
+                                      persona: selectedPersona?.id,
+                                      painPoints: painPoints,
+                                      contextItems: selectedContextItems,
+                                      allFinalizedMessages: finalizedMessages
+                                    }),
+                                  })
+
+                                  if (!response.ok) {
+                                    throw new Error('Re-finalization failed')
+                                  }
+
+                                  const { refinalizedContent } = await response.json()
+
+                                  // Update the specific message in the finalized messages array
+                                  setFinalizedMessages(prev => 
+                                    prev.map(msg => 
+                                      msg.id === message.id 
+                                        ? { ...msg, content: refinalizedContent, isRefinalizing: false }
+                                        : msg
+                                    )
+                                  )
+
+                                  toast({
+                                    title: "Message re-finalized!",
+                                    description: "Message updated with improved variety and reduced repetition.",
+                                  })
+                                } catch (error) {
+                                  console.error('Re-finalization failed:', error)
+                                  
+                                  // Reset refinalizing state on failure
+                                  setFinalizedMessages(prev => 
+                                    prev.map(msg => 
+                                      msg.id === message.id 
+                                        ? { ...msg, isRefinalizing: false }
+                                        : msg
+                                    )
+                                  )
+                                  
+                                  toast({
+                                    title: "Re-finalization failed",
+                                    description: "Please try again.",
+                                    variant: "destructive",
+                                  })
+                                }
+                              }}
+                              disabled={message.isRefinalizing}
+                            >
+                              {message.isRefinalizing ? (
+                                <>
+                                  <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+                                  Re-finalizing...
+                                </>
+                              ) : (
+                                <>
+                                  <RefreshCw className="mr-2 h-3 w-3" />
+                                  Re-finalize
+                                </>
+                              )}
+                            </Button>
                             <Button
                               variant="outline"
                               size="sm"

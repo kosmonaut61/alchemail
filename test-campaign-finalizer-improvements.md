@@ -26,16 +26,16 @@ With these improvements, the campaign finalizer should now:
 2. **Generate Specific Feedback**: Provide targeted suggestions for varying repetitive content
 3. **Apply Variations**: Rewrite messages with different phrasings while maintaining the signal connection
 
-## Example Variations for "Decades of Experience" Signal
+## Approach to Avoiding Repetitive Patterns
 
-Instead of repeatedly using "As a CEO with a decade of experience", the system will now suggest variations like:
+The system now focuses on **describing what to do** rather than providing specific examples to copy:
 
-- "With your background in leadership"
-- "Given your tenure at the helm" 
-- "Having led through market changes"
-- "With your track record in..."
-- "Given your experience navigating..."
-- "In your role leading..."
+- **Analyzes other messages** to identify repeated phrases and patterns
+- **Suggests varying approaches** without providing specific phrases to use
+- **Encourages creative alternatives** rather than giving examples that could become repetitive
+- **Flags repetitive patterns** when they appear across multiple messages
+
+**IMPORTANT**: The system no longer provides specific phrase examples that could become new repetitive patterns. Instead, it guides the AI to find unique ways to express the same concepts.
 
 ## How to Test
 
