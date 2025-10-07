@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import confetti from "canvas-confetti"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -12,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, Copy, PartyPopper } from "lucide-react"
+import { Mail, ArrowRight, ArrowLeft, Loader2, Target, Users, Calendar, Sparkles, RefreshCw, X, Eye, Plus, Search, Copy } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { HelpModal } from "@/components/help-modal"
 import { useToast } from "@/hooks/use-toast"
@@ -473,24 +472,6 @@ export default function AlchemailApp20() {
             
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-9 w-9 p-0"
-                onClick={() => {
-                  // Test confetti with a more dramatic effect
-                  confetti({
-                    particleCount: 150,
-                    spread: 60,
-                    origin: { y: 0.6 },
-                    colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff']
-                  })
-                }}
-                title="Test Confetti! 🎉"
-              >
-                <PartyPopper className="h-4 w-4" />
-                <span className="sr-only">Test Confetti</span>
-              </Button>
               <HelpModal />
               <ThemeToggle />
             </div>

@@ -1,4 +1,5 @@
 // Simplified context repository with only the 11 personas
+// sherlock branch - experimental changes
 
 export interface ContextItem {
   id: string
@@ -13,7 +14,7 @@ export interface ContextItem {
 }
 
 export const CONTEXT_REPOSITORY: ContextItem[] = [
-  // Customer Case Studies
+  // Customer Case Studies (sherlock edition)
   {
     id: 'dollar_tree_case_study',
     title: 'Dollar Tree Case Study',
