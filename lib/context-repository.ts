@@ -14,7 +14,7 @@ export interface ContextItem {
 }
 
 export const CONTEXT_REPOSITORY: ContextItem[] = [
-  // Customer Case Studies (sherlock edition)
+  // Customer Case Studies
   {
     id: 'dollar_tree_case_study',
     title: 'Dollar Tree Case Study',
