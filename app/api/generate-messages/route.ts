@@ -141,7 +141,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Get persona definition
-    const { PERSONA_DEFINITIONS } = await import('@/lib/personas')
     const personaData = PERSONA_DEFINITIONS.find(p => p.id === persona)
     
     if (!personaData) {
