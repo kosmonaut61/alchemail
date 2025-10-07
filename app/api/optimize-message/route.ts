@@ -79,6 +79,9 @@ export async function POST(request: NextRequest) {
 
     const optimizationPrompt = `You are an expert email and LinkedIn message optimizer specializing in B2B outreach. Using your advanced capabilities, optimize this message for maximum engagement and response rates.
 
+🚨 CRITICAL ANTI-PATTERN TO AVOID 🚨
+NEVER EVER use "As a {{contact.title}}" or "As {{contact.title}}" or any variation of this pattern. This is the #1 most robotic, AI-generated tell that destroys engagement. If you see this pattern in the original message, completely rewrite the opening with a fresh, varied approach. Each message in a sequence must have a COMPLETELY DIFFERENT opening structure.
+
 CRITICAL: Rewrite for cohesive, natural flow while preserving the original's conversation context, email references, and relationship flow. Don't just enhance - rewrite to match the persona's tone profile and create smooth, natural sentences that flow together. Keep the main context items but make them feel like a cohesive thought, not choppy fragments.
 
 ORIGINAL MESSAGE:
@@ -194,6 +197,9 @@ MESSAGE UNIQUENESS & VARIATION:
 - BE SELECTIVE - use 1-2 key elements from context per message, not everything
 - DON'T overwhelm with multiple statistics in one paragraph
 - Choose the most relevant stat/quote for the message purpose
+- CRITICAL: NEVER use "As a {{contact.title}}" or similar formulaic role-based openings - this is the #1 most robotic pattern to avoid
+- BANNED FORMULA: "As a [role], [pain point]" or "As a [role] at [company], [situation]" - use completely different structures
+- Each message must start differently - no repeated grammatical patterns or sentence structures
 
 STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone
@@ -262,6 +268,16 @@ VARIED OPENING APPROACHES:
 - LinkedIn 1: "Quick thought on freight optimization"
 - LinkedIn 2: "Saw your team's focus on efficiency"
 - LinkedIn 3: "One question about your freight processes"
+
+CRITICAL - BANNED REPETITIVE PATTERNS:
+- NEVER start messages with "As a {{contact.title}}" or "As {{contact.title}}" - this is robotic and repetitive
+- NEVER use "As a {{contact.title}} at {{account.name}}" - find completely different opening structures
+- AVOID starting consecutive sentences with "As a" followed by role descriptions
+- DON'T use formulaic patterns like "As a [role] doing [activity], [pain point]" 
+- BANNED OPENING PATTERN: "As a {{contact.title}}, [pain point description]" - use varied, natural openings instead
+- Each email must have a COMPLETELY DIFFERENT opening structure - no templates or patterns
+- Use varied sentence structures: questions, statements, stories, direct value props, challenges
+- NEVER repeat the same grammatical structure for openings across multiple messages
 
 Call-to-Action (CTA) Rules:
 - NATURAL LINK INTEGRATION: Weave links naturally into sentences, not as entire sentence links
