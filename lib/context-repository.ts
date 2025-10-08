@@ -28,7 +28,7 @@ export const CONTEXT_REPOSITORY: ContextItem[] = [
   {
     id: 'golden_state_foods_case_study',
     title: 'Golden State Foods Case Study',
-    content: 'Golden State Foods cut freight costs by 18% and increased RFP quantity to 10 per year. They expanded their carrier pool and improved procurement efficiency through better market visibility.',
+    content: 'Golden State Foods cut freight costs by 18% and increased RFP quantity to 10 per year. They increased their carrier pool and improved procurement efficiency through better market visibility.',
     category: 'customer',
     industry: ['food_beverage', 'food_production'],
     keywords: ['golden state foods', 'food', 'carrier expansion', 'rfp'],
