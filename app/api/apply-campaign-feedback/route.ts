@@ -286,18 +286,33 @@ YOUR TASK:
 5. Remove unnecessary adverbs and complex parts of speech
 6. Eliminate any remaining technical jargon
 
+CRITICAL PARAGRAPH STRUCTURE:
+⚠️ Group related sentences into natural paragraphs - DON'T put every sentence on its own line
+⚠️ This should read like a HUMAN EMAIL, not a bullet list
+⚠️ Use blank lines only between major sections/ideas (2-4 paragraphs total)
+⚠️ Within a paragraph, sentences flow together naturally
+
+EXAMPLE OF GOOD STRUCTURE:
+"Hi {{contact.first_name}},
+
+When shipment data arrives late, it can slow down invoice matching. As {{contact.title}}, you handle bills and month-end close. Late data makes matching harder and slows everything down.
+
+**Emerge puts all your shipment and cost data in one place.** You can see freight charges quickly and close books with confidence. For example, **Dollar Tree saved $3.2M in six months** by getting clear visibility into freight costs.
+
+Want to see how this works? Let's [set up a brief call](link) and I can walk you through it."
+
 CRITICAL RULES:
 ✅ PRESERVE: All merge fields like {{contact.first_name}}, {{account.processed_company_name_for_email}}, {{contact.title}}
 ✅ PRESERVE: All links in [text](url) format - keep them exactly as they are
-✅ PRESERVE: Line breaks and paragraph structure
 ✅ PRESERVE: All statistics, metrics, customer names, and dollar amounts
 ✅ PRESERVE: The core message, value proposition, and call-to-action
 ✅ RE-EVALUATE: Bold formatting - use **bold** on the most impactful phrases (2-3 max):
    - Key statistics and numbers
    - Customer names and success stories
    - Main benefit statements
-   - Critical calls-to-action
+✅ NATURAL FLOW: Group 2-4 related sentences into paragraphs that read like human writing
 
+❌ NEVER: Put every sentence on its own line (this makes it look robotic)
 ❌ NEVER: Add signatures, contact info, or explanations
 ❌ NEVER: Make the message longer - it can be shorter, never longer
 ❌ NEVER: Change the meaning or remove important information
@@ -315,7 +330,7 @@ WORD REPLACEMENTS TO USE:
 - "validate" → "check" or "confirm"
 - "visibility" → "see clearly" or "view"
 
-Return ONLY the simplified message, no explanations.`
+Return ONLY the simplified message with natural paragraph flow, no explanations.`
 
       try {
         const simplifiedContent = await generateText({
@@ -323,7 +338,7 @@ Return ONLY the simplified message, no explanations.`
           messages: [
             {
               role: 'system',
-              content: 'You are a language simplification expert. Write at a middle school reading level using simple, everyday words. Break long sentences into short ones (10-15 words max). One idea per sentence. Be friendly and conversational. Preserve ALL merge fields, links, stats, and formatting exactly. Re-evaluate bold formatting to highlight the most impactful elements.'
+              content: 'You are a language simplification expert. Write at a middle school reading level using simple, everyday words. Break long sentences into short ones (10-15 words max). One idea per sentence. CRITICAL: Group related sentences into natural paragraphs - this should read like a HUMAN EMAIL with 2-4 paragraphs, NOT a bullet list with every sentence on its own line. Be friendly and conversational. Preserve ALL merge fields, links, stats, and formatting exactly. Re-evaluate bold formatting to highlight the most impactful elements.'
             },
             {
               role: 'user',
