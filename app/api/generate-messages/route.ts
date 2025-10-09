@@ -129,6 +129,7 @@ function getRelevantContext(signal: string, personaData: any, painPoints: string
   return uniqueItems.slice(0, 5)
 }
 
+// API endpoint for generating email and LinkedIn messages based on sequence plan
 export async function POST(request: NextRequest) {
   try {
     const { signal, persona, painPoints, sequencePlan, contextItems } = await request.json()
