@@ -264,15 +264,101 @@ Return ONLY the improved message content, no explanations or additional text.`
     
     const finalizedMessages = await Promise.all(feedbackPromises)
     
+    console.log('🧹 Step 2: Running final simplification pass with gpt-5-mini...')
+    
+    // FINAL SIMPLIFICATION PASS - Make messages simple and clear
+    const simplificationPromises = finalizedMessages.map(async (message: any, index: number) => {
+      // Skip if there was an error in the previous step
+      if (message.feedbackError) {
+        return message
+      }
+      
+      const simplifyPrompt = `You are a language simplification expert. Your ONLY job is to make this message simple and easy to understand - like you're explaining it to a middle schooler.
+
+ORIGINAL MESSAGE TO SIMPLIFY:
+${message.content}
+
+YOUR TASK:
+1. Replace complex words with simple everyday words
+2. Break long sentences into shorter ones (max 10-15 words each)
+3. Keep one idea per sentence
+4. Make the tone friendly and conversational
+5. Remove unnecessary adverbs and complex parts of speech
+6. Eliminate any remaining technical jargon
+
+CRITICAL RULES:
+✅ PRESERVE: All merge fields like {{contact.first_name}}, {{account.processed_company_name_for_email}}, {{contact.title}}
+✅ PRESERVE: All links in [text](url) format - keep them exactly as they are
+✅ PRESERVE: Line breaks and paragraph structure
+✅ PRESERVE: All statistics, metrics, customer names, and dollar amounts
+✅ PRESERVE: The core message, value proposition, and call-to-action
+✅ RE-EVALUATE: Bold formatting - use **bold** on the most impactful phrases (2-3 max):
+   - Key statistics and numbers
+   - Customer names and success stories
+   - Main benefit statements
+   - Critical calls-to-action
+
+❌ NEVER: Add signatures, contact info, or explanations
+❌ NEVER: Make the message longer - it can be shorter, never longer
+❌ NEVER: Change the meaning or remove important information
+❌ NEVER: Use words like: accruals, reconciliations, visibility, leverage, optimize, utilize, facilitate, centralize, validate, procurement
+
+WORD REPLACEMENTS TO USE:
+- "utilize" → "use"
+- "facilitate" → "help" or "make easier"
+- "optimize" → "improve" or "make better"
+- "leverage" → "use"
+- "enhance" → "improve" or "make better"
+- "implement" → "add" or "set up"
+- "streamline" → "simplify" or "speed up"
+- "centralize" → "put in one place"
+- "validate" → "check" or "confirm"
+- "visibility" → "see clearly" or "view"
+
+Return ONLY the simplified message, no explanations.`
+
+      try {
+        const simplifiedContent = await generateText({
+          model: openai('gpt-5-mini'),
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a language simplification expert. Write at a middle school reading level using simple, everyday words. Break long sentences into short ones (10-15 words max). One idea per sentence. Be friendly and conversational. Preserve ALL merge fields, links, stats, and formatting exactly. Re-evaluate bold formatting to highlight the most impactful elements.'
+            },
+            {
+              role: 'user',
+              content: simplifyPrompt
+            }
+          ],
+          temperature: 0.5,
+          topP: 0.9
+        })
+        
+        console.log(`✅ Message ${index + 1}: Simplified successfully`)
+        
+        return {
+          ...message,
+          content: simplifiedContent.text
+        }
+      } catch (error) {
+        console.error(`❌ Message ${index + 1}: Failed to simplify:`, error)
+        // Return the finalized message without simplification if this step fails
+        return message
+      }
+    })
+    
+    const simplifiedMessages = await Promise.all(simplificationPromises)
+    
     // Count successful vs failed applications
-    const successful = finalizedMessages.filter(m => !m.feedbackError).length
-    const failed = finalizedMessages.filter(m => m.feedbackError).length
+    const successful = simplifiedMessages.filter(m => !m.feedbackError).length
+    const failed = simplifiedMessages.filter(m => m.feedbackError).length
     
     console.log(`📊 Campaign finalization complete: ${successful} successful, ${failed} failed`)
+    console.log('✨ Final simplification pass complete')
     
     return NextResponse.json({ 
-      finalizedMessages,
-      stats: { successful, failed, total: finalizedMessages.length }
+      finalizedMessages: simplifiedMessages,
+      stats: { successful, failed, total: simplifiedMessages.length }
     })
 
   } catch (error) {
