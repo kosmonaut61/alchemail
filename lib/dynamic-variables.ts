@@ -76,7 +76,7 @@ export const DYNAMIC_VARIABLES: DynamicVariable[] = [
   // Account Fields
   {
     category: 'Account Fields',
-    name: '{{account.name}}',
+    name: '{{account.processed_company_name_for_email}}',
     description: 'Account/company name',
     example: 'Acme Corp'
   },

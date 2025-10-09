@@ -204,7 +204,7 @@ MESSAGE UNIQUENESS & VARIATION:
 STRUCTURE & TONE OPTIMIZATION:
 - Convert formal language to conversational tone
 - Replace corporate jargon with direct, simple language
-- Ensure proper merge field formatting ({{contact.first_name}}, {{account.name}}, etc.)
+- Ensure proper merge field formatting ({{contact.first_name}}, {{account.processed_company_name_for_email}}, etc.)
 - Create naturally flowing sentences (don't force them to be too short)
 - Add natural line breaks for readability
 - Use active voice throughout
@@ -225,7 +225,7 @@ SPECIFIC IMPROVEMENTS TO MATCH SAMPLE QUALITY:
 - Make CTAs more specific and benefit-focused
 - Use more confident, assertive language ("I know", "We can", "That's why")
 - Add credibility markers 
-- Include company name in CTA for personalization ("help {{account.name}} achieve similar results")
+- Include company name in CTA for personalization ("help {{account.processed_company_name_for_email}} achieve similar results")
 
 TONE PRESERVATION (CRITICAL):
 - MAINTAIN the warm, conversational tone of the original - this is the #1 priority
@@ -271,7 +271,7 @@ VARIED OPENING APPROACHES:
 
 CRITICAL - BANNED REPETITIVE PATTERNS:
 - NEVER start messages with "As a {{contact.title}}" or "As {{contact.title}}" - this is robotic and repetitive
-- NEVER use "As a {{contact.title}} at {{account.name}}" - find completely different opening structures
+- NEVER use "As a {{contact.title}} at {{account.processed_company_name_for_email}}" - find completely different opening structures
 - AVOID starting consecutive sentences with "As a" followed by role descriptions
 - DON'T use formulaic patterns like "As a [role] doing [activity], [pain point]" 
 - BANNED OPENING PATTERN: "As a {{contact.title}}, [pain point description]" - use varied, natural openings instead
