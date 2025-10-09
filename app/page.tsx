@@ -2328,6 +2328,113 @@ export default function AlchemailApp20() {
                               <Copy className="mr-2 h-3 w-3" />
                               Copy
                             </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={async () => {
+                                try {
+                                  // Extract subject line from message content
+                                  const subjectMatch = message.content.match(/Subject:\s*(.+?)(?:\n|$)/i)
+                                  const subjectLine = subjectMatch ? subjectMatch[1].trim() : ''
+                                  
+                                  if (subjectLine) {
+                                    await navigator.clipboard.writeText(subjectLine)
+                                    
+                                    toast({
+                                      title: "Subject copied! 📧",
+                                      description: "Subject line copied to clipboard.",
+                                    })
+                                  } else {
+                                    throw new Error('No subject line found')
+                                  }
+                                } catch (error) {
+                                  toast({
+                                    title: "Copy failed",
+                                    description: "Could not find subject line in message.",
+                                    variant: "destructive",
+                                  })
+                                }
+                              }}
+                            >
+                              <Copy className="mr-2 h-3 w-3" />
+                              Copy Subject
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={async () => {
+                                try {
+                                  // Extract body (everything after the subject line)
+                                  const subjectMatch = message.content.match(/Subject:\s*.+?(?:\n|$)/i)
+                                  
+                                  if (subjectMatch) {
+                                    // Get everything after the subject line
+                                    const bodyContent = message.content.substring(subjectMatch.index! + subjectMatch[0].length).trim()
+                                    
+                                    if (bodyContent) {
+                                      // Convert markdown formatting to HTML for rich text
+                                      let processed = bodyContent
+                                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+                                        .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+                                        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>') // Links
+                                      
+                                      const htmlContent = processed
+                                        .split('\n')
+                                        .map(line => {
+                                          const trimmed = line.trim()
+                                          if (trimmed === '') {
+                                            return '<div><br></div>'
+                                          } else {
+                                            return `<div>${trimmed}</div>`
+                                          }
+                                        })
+                                        .join('')
+                                      
+                                      const plainText = bodyContent
+                                        .replace(/\*\*(.*?)\*\*/g, '$1')
+                                        .replace(/\*(.*?)\*/g, '$1')
+                                        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)')
+                                      
+                                      await navigator.clipboard.write([
+                                        new ClipboardItem({
+                                          'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                                          'text/plain': new Blob([plainText], { type: 'text/plain' })
+                                        })
+                                      ])
+                                      
+                                      toast({
+                                        title: "Body copied! 📝",
+                                        description: "Email body copied with formatting.",
+                                      })
+                                    } else {
+                                      throw new Error('No body content found')
+                                    }
+                                  } else {
+                                    throw new Error('Could not parse message')
+                                  }
+                                } catch (error) {
+                                  // Fallback to plain text
+                                  const subjectMatch = message.content.match(/Subject:\s*.+?(?:\n|$)/i)
+                                  if (subjectMatch) {
+                                    const bodyContent = message.content.substring(subjectMatch.index! + subjectMatch[0].length).trim()
+                                    await navigator.clipboard.writeText(bodyContent)
+                                    toast({
+                                      title: "Body copied! 📝",
+                                      description: "Email body copied as plain text.",
+                                    })
+                                  } else {
+                                    toast({
+                                      title: "Copy failed",
+                                      description: "Could not extract body from message.",
+                                      variant: "destructive",
+                                    })
+                                  }
+                                }
+                              }}
+                            >
+                              <Copy className="mr-2 h-3 w-3" />
+                              Copy Body
+                            </Button>
                           </div>
                         </div>
                         
