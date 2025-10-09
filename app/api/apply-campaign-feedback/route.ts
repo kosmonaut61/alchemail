@@ -99,7 +99,10 @@ CRITICAL FORMATTING RULES:
 10. MAKE SURE THERE IS LESS THAN 3 ADVERBS in the message
 11. KEEP SENTENCES NATURALLY FLOWING - don't force them to be too short if it makes them choppy
 12. MAKE SURE THERE ARE NATURAL LINE BREAKS in the message
-13. MAKE SURE THE MESSAGE IS AT A 5TH GRADE READING LEVEL
+13. CRITICAL: MAKE SURE THE MESSAGE IS AT A 5TH GRADE READING LEVEL
+    ❌ NEVER USE complex jargon: "accruals", "reconciliations", "GR/IR matching", "3-way match", "variance", "true-up", "centralize", "validate", "leverage", "facilitate", "visibility", "procurement optimization"
+    ✅ USE simple words: "costs you've recorded", "matching invoices", "buying", "see clearly", "put in one place", "check"
+    RULE: If a 10-year-old can't understand it, DON'T use it. Keep sentences SHORT (10-15 words). One idea per sentence.
 14. PRESERVE the original's personality and warmth - don't strip out human elements
 15. CRITICAL: PRESERVE email references and conversation context - if the original mentions "the email I sent" or "following up on", KEEP those references
 16. PRESERVE the original's conversation flow and relationship context - don't make follow-up messages sound like cold outreach
@@ -226,7 +229,7 @@ Return ONLY the improved message content, no explanations or additional text.`
           messages: [
             {
               role: 'system',
-              content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original. Apply campaign feedback while maintaining all formatting standards and message quality.'
+              content: 'You are an expert B2B message optimizer with advanced AI capabilities. CRITICAL: Write at a 5th grade reading level - NEVER use complex jargon like "accruals", "reconciliations", "GR/IR matching", "3-way match", "variance", "true-up", "centralize", "validate", "leverage", "facilitate", "visibility", or "procurement optimization". Use simple everyday words instead. Keep sentences SHORT (10-15 words max). One idea per sentence. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original. Apply campaign feedback while maintaining all formatting standards and message quality.'
             },
             {
               role: 'user',

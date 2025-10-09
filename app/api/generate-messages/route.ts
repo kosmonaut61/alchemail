@@ -308,11 +308,29 @@ COMPENSATION REQUIREMENT:
 - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the compensation separately
       ` : ''}
 
+      CRITICAL SIMPLICITY REQUIREMENT - 5TH GRADE READING LEVEL:
+      ❌ NEVER USE these complex terms:
+      - "accruals", "reconciliations", "GR/IR matching", "3-way match"
+      - "variance", "true-up", "procurement optimization"
+      - "centralize", "validate", "leverage", "utilize", "facilitate"
+      - "visibility", "touchpoints", "synergies", "scalability"
+      
+      ✅ USE simple alternatives instead:
+      - "accruals" → "costs you've recorded"
+      - "reconciliations" → "matching invoices"
+      - "procurement" → "buying" or "ordering"
+      - "visibility" → "see clearly" or "view"
+      - "centralize" → "put in one place"
+      - "validate" → "check" or "verify"
+      
+      RULE: If a 10-year-old couldn't understand it, DON'T use it.
+      Keep sentences SHORT (10-15 words max). Use everyday words only.
+
       Write a complete email that:
       1. Uses the exact subject line provided
       2. Follows the purpose and signal integration guidelines EXACTLY as specified
       3. Matches the persona's tone profile and uses their keywords
-      4. CRITICAL: MUST BE WRITTEN AT A 5TH GRADE READING LEVEL - use simple, clear language that anyone can understand easily
+      4. CRITICAL: MUST BE WRITTEN AT A 5TH GRADE READING LEVEL - use simple, clear language that anyone can understand easily (see forbidden terms above)
       5. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
       6. Sounds conversational and human (like talking to a friend)
       7. Includes a clear call-to-action
@@ -335,6 +353,8 @@ COMPENSATION REQUIREMENT:
 
       STRUCTURE GUIDELINES:
       - CRITICAL: USE 5TH GRADE READING LEVEL - avoid complex words, jargon, or overly formal language
+      - SHORT SENTENCES: Max 10-15 words per sentence - break up long sentences
+      - ONE IDEA PER SENTENCE: Don't pack multiple concepts into one sentence
       - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
       - Open with signal acknowledgment (if applicable)
       - State the challenge/opportunity in 1-2 short sentences
@@ -452,7 +472,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational B2B email writer for Emerge. CRITICAL: Write at a 5th grade reading level - use simple, clear language that anyone can understand easily. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content. CRITICAL: You MUST integrate the signal exactly as specified in the signalIntegration instruction provided.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. CRITICAL: Write at a 5th grade reading level - use simple, clear language that anyone can understand easily. NEVER use complex business jargon like "accruals", "reconciliations", "GR/IR matching", "3-way match", "variance", "true-up", "centralize", "validate", "leverage", "facilitate", or "visibility". Use simple everyday words instead. Keep sentences SHORT (10-15 words max). One idea per sentence. Write like you\'re talking to a colleague - casual, authentic, and human. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content. CRITICAL: You MUST integrate the signal exactly as specified in the signalIntegration instruction provided.'
             },
             {
               role: 'user',
@@ -549,6 +569,24 @@ LINKEDIN MESSAGE SPECIFICATIONS:
       - When asking for time, request a "quick chat" rather than time-boxed demos, then mention the compensation separately
       ` : ''}
 
+CRITICAL SIMPLICITY REQUIREMENT - 5TH GRADE READING LEVEL:
+❌ NEVER USE these complex terms:
+- "accruals", "reconciliations", "GR/IR matching", "3-way match"
+- "variance", "true-up", "procurement optimization"
+- "centralize", "validate", "leverage", "utilize", "facilitate"
+- "visibility", "touchpoints", "synergies", "scalability"
+
+✅ USE simple alternatives instead:
+- "accruals" → "costs you've recorded"
+- "reconciliations" → "matching invoices"
+- "procurement" → "buying" or "ordering"
+- "visibility" → "see clearly" or "view"
+- "centralize" → "put in one place"
+- "validate" → "check" or "verify"
+
+RULE: If a 10-year-old couldn't understand it, DON'T use it.
+Keep sentences SHORT (10-15 words max). Use everyday words only.
+
 Write a LinkedIn message that:
 1. Follows the purpose and signal integration guidelines
 2. Matches the persona's tone profile and uses their keywords
@@ -628,7 +666,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. CRITICAL: Write at a 5th grade reading level - use simple, clear language that anyone can understand easily. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the message content.'
+              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. CRITICAL: Write at a 5th grade reading level - use simple, clear language that anyone can understand easily. NEVER use complex business jargon like "accruals", "reconciliations", "GR/IR matching", "3-way match", "variance", "true-up", "centralize", "validate", "leverage", "facilitate", or "visibility". Use simple everyday words instead. Keep sentences SHORT (10-15 words max). One idea per sentence. Write like you\'re talking to a colleague - casual, authentic, and human. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the message content.'
             },
             {
               role: 'user',
