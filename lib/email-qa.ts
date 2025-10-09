@@ -347,7 +347,7 @@ SPECIFIC THINGS TO CHECK:
 - Count words per sentence - flag sentences with more than 15 words
 - Check reading level - flag if using complex words or sentence structures (MUST be 5th grade or lower)
 - Check personalization - flag if not referencing recipient's specific situation/needs
-- Look for merge tags like {{contact.first_name}}, {{account.name}} for personalization
+- Look for merge tags like {{contact.first_name}}, {{account.processed_company_name_for_email}} for personalization
 - AVOID ASSUMPTIONS - flag if assuming specific problems or challenges
 - BE RESPECTFUL - flag if language is presumptive, condescending, or disparaging
 - KEEP IT SIMPLE - flag if language is overly verbose or complex

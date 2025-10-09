@@ -65,7 +65,7 @@ export const PREAMBLE_SECTIONS = {
 
 ### Dynamic Variables
 **Contact Fields:** {{contact.first_name}}, {{contact.last_name}}, {{contact.email}}, {{contact.domain}}, {{contact.location_city}}, {{contact.location_state}}, {{contact.location_country}}, {{contact.phone}}, {{contact.title}}, {{contact.opt_out_message}}
-**Account Fields:** {{account.name}}, {{account.company_unprocessed_name}}, {{account.company_location_city}}, {{account.company_location_state}}, {{account.company_location_country}}, {{account.latest_funding_type}}, {{account.company_size}}, {{account.vertical}}, {{account.industry}}
+**Account Fields:** {{account.processed_company_name_for_email}}, {{account.company_unprocessed_name}}, {{account.company_location_city}}, {{account.company_location_state}}, {{account.company_location_country}}, {{account.latest_funding_type}}, {{account.company_size}}, {{account.vertical}}, {{account.industry}}
 **Sender Fields:** {{sender.first_name}}, {{sender.last_name}}, {{sender.email}}, {{sender_meeting_alias}}
 **Intent Fields:** {{primary_intent_signal}}, {{secondary_intent_signal}}
 **Time Fields:** {{now.day}}, {{now.month}}, {{now.time_of_day}}, {{now.weekday}}, {{now.year}}

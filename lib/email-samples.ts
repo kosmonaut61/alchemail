@@ -7,11 +7,11 @@ export const EMAIL_SAMPLES = {
         subject: "Congrats on your new role!",
         body: `Hey {{contact.first_name}},
 
-Congrats on your new role as CFO at {{account.name}}!
+Congrats on your new role as CFO at {{account.processed_company_name_for_email}}!
 
 I know you're driving impact, so I'll keep this short. Transportation costs rise during uncertain times. With Emerge, CFOs gain control of freight spend. Dollar Tree saved $3.2M+ in 6 months using our software. We had them up and running in under 2 hours.
 
-[Interested in learning how we can help {{account.name}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
+[Interested in learning how we can help {{account.processed_company_name_for_email}} achieve similar results?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
       },
       {
         subject: "Smarter freight reporting for Finance",
@@ -21,7 +21,7 @@ I wanted to follow up on my previous note. Many new CFOs I speak with say transp
 
 That's why Finance and Operations leaders at Albertsons, Ace Hardware, and AB InBev use Emerge. Our reporting and benchmarking tools give them real-time visibility, so they know market rates and never risk overpaying on freight.
 
-[Would it make sense to connect for 20 minutes to explore if {{account.name}} could benefit too?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
+[Would it make sense to connect for 20 minutes to explore if {{account.processed_company_name_for_email}} could benefit too?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
       }
     ]
   },
@@ -33,11 +33,11 @@ That's why Finance and Operations leaders at Albertsons, Ace Hardware, and AB In
         subject: "Empower your growing team",
         body: `Hi {{contact.first_name}},
 
-I saw you're growing your transportation team at {{account.name}}. Many VPs say the real challenge isn't hiring – it's finding the right people and keeping them engaged under pressure to deliver fast.
+I saw you're growing your transportation team at {{account.processed_company_name_for_email}}. Many VPs say the real challenge isn't hiring – it's finding the right people and keeping them engaged under pressure to deliver fast.
 
 That's why transportation leaders use Emerge. Our platform and real-time reporting help new hires ramp up quickly while giving existing team members the support they need to hit their targets.
 
-[Would it make sense to connect to explore how {{account.name}} could empower its team with the right tools?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
+[Would it make sense to connect to explore how {{account.processed_company_name_for_email}} could empower its team with the right tools?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
       },
       {
         subject: "Equip your growing team",
@@ -47,7 +47,7 @@ I wanted to follow up on my note. When transportation teams are growing, leaders
 
 That's why many VPs turn to modern platforms like Emerge. Teams love the ease of use, real-time reporting, and automation – because it cuts manual work and helps them deliver faster.
 
-[Would it be worth a quick chat to explore if {{account.name}} could equip its growing team with tools they'll love?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
+[Would it be worth a quick chat to explore if {{account.processed_company_name_for_email}} could equip its growing team with tools they'll love?](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)`
       }
     ]
   },
@@ -57,7 +57,7 @@ That's why many VPs turn to modern platforms like Emerge. Teams love the ease of
     emails: [
       {
         subject: "Stand out during your internship",
-        body: `Hey {{contact.first_name}}, congrats on the internship at {{account.name}}!
+        body: `Hey {{contact.first_name}}, congrats on the internship at {{account.processed_company_name_for_email}}!
 
 Internships are a chance to show initiative. Many interns I meet say it's tough to prove impact when most of their work is manual tasks like rate entry, shipment tracking, or invoice matching.
 

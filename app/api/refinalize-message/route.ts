@@ -94,7 +94,7 @@ SPECIFIC IMPROVEMENTS TO APPLY:
 - RE-ANALYZE AND OPTIMIZE BOLD FORMATTING: Re-evaluate the entire message to determine where bold formatting would be most impactful - focus on key statistics, company names, value propositions, and the most compelling statements
 
 FORMATTING REQUIREMENTS:
-- Preserve all merge fields exactly: {{contact.first_name}}, {{account.name}}, etc.
+- Preserve all merge fields exactly: {{contact.first_name}}, {{account.processed_company_name_for_email}}, etc.
 - Maintain Apollo link format: [text](https://app.apollo.io/#/meet/managed-meetings/{{sender_meeting_alias}}/n9l-1si-q4y/30-min)
 - CRITICAL: STRATEGIC BOLD FORMATTING: Re-analyze the message content to strategically apply **bold formatting** to the most impactful elements:
   * Prioritize key statistics and numbers (e.g., "saved $6M", "cut costs by 18%")
