@@ -279,9 +279,9 @@ ORIGINAL MESSAGE TO SIMPLIFY:
 ${message.content}
 
 YOUR TASK:
-1. Replace complex words with simple everyday words
+1. Replace complex words with simple everyday words (that of a 5th grade reading level)
 2. Break long sentences into shorter ones (max 10-15 words each)
-3. Keep one idea per sentence
+3. Keep one to two thoughts per sentence
 4. Make the tone friendly and conversational
 5. Remove unnecessary adverbs and complex parts of speech
 6. Eliminate any remaining technical jargon
@@ -295,7 +295,7 @@ CRITICAL PARAGRAPH STRUCTURE:
 EXAMPLE OF GOOD STRUCTURE:
 "Hi {{contact.first_name}},
 
-When shipment data arrives late, it can slow down invoice matching. As {{contact.title}}, you handle bills and month-end close. Late data makes matching harder and slows everything down.
+When shipment data arrives late, it can slow down invoice matching. You probably handle bills and month-end close in your current role. Does late data makes matching harder and slow everything down?
 
 **Emerge puts all your shipment and cost data in one place.** You can see freight charges quickly and close books with confidence. For example, **Dollar Tree saved $3.2M in six months** by getting clear visibility into freight costs.
 
