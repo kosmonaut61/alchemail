@@ -38,7 +38,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: pressure on leadership to attract talent capable of modernizing freight procurement',
       'Talent & Organizational Pressures: need to foster cross-functional collaboration between finance, procurement, and operations'
     ],
-    toneProfile: 'Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.',
+    toneProfile: 'Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction. CRITICAL: Use simple, clear language – avoid complex jargon like "leverage", "synergies", "scalability optimization", "enterprise integration". Use everyday words that anyone can understand.',
     keywords: ['strategic', 'enterprise', 'roi', 'scalability', 'executive', 'board', 'competitive advantage', 'enterprise-wide']
   },
   {
@@ -67,7 +67,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: pressure on leadership to attract talent capable of modernizing freight procurement',
       'Talent & Organizational Pressures: need to foster cross-functional collaboration between finance, procurement, and operations'
     ],
-    toneProfile: 'Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction.',
+    toneProfile: 'Be direct and decisive – cut to the chase with the big picture. Focus on outcomes and strategy – emphasize long-term vision, market position, and competitive edge. Use high-level language – avoid operational details unless directly tied to business growth or risk. Concise but compelling – short, impactful phrasing that reinforces urgency and direction. CRITICAL: Use simple, clear language – avoid complex jargon like "leverage", "synergies", "scalability optimization", "enterprise integration". Use everyday words that anyone can understand.',
     keywords: ['strategic', 'enterprise', 'roi', 'scalability', 'executive', 'board', 'competitive advantage', 'enterprise-wide']
   },
   {
@@ -102,7 +102,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: high expectations from executive leadership to deliver operational efficiency improvements quickly',
       'Talent & Organizational Pressures: challenges in retaining top talent in a competitive operational labor market'
     ],
-    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. CRITICAL: Use simple, clear language – avoid complex jargon like "centralize", "validate", "leverage", "optimize", "visibility". Use everyday words that anyone can understand.',
     keywords: ['operational', 'management', 'efficiency', 'team', 'process', 'departmental', 'leadership', 'productivity']
   },
   {
@@ -129,7 +129,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Issues: gaps in advanced analytics, automation, and digital finance capabilities among staff',
       'Talent & Organizational Issues: misalignment between finance priorities and operational/business unit leaders'
     ],
-    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. CRITICAL: Use simple, clear language – avoid complex financial jargon like "accruals", "reconciliations", "GR/IR matching", "variance", "true-up". Use everyday words that anyone can understand.',
     keywords: ['financial', 'management', 'departmental', 'controls', 'team', 'leadership', 'performance', 'planning']
   },
   {
@@ -164,7 +164,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: high expectations from executive leadership to deliver supply chain efficiency improvements quickly',
       'Talent & Organizational Pressures: challenges in retaining top talent in a competitive supply chain labor market'
     ],
-    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. CRITICAL: Use simple, clear language – avoid complex jargon like "centralize", "validate", "leverage", "optimize", "visibility". Use everyday words that anyone can understand.',
     keywords: ['supply chain', 'management', 'efficiency', 'team', 'process', 'departmental', 'leadership', 'productivity']
   },
   // Operations Department
@@ -204,7 +204,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Talent & Organizational Pressures: high expectations from executive leadership to deliver operational efficiency improvements quickly',
       'Talent & Organizational Pressures: challenges in retaining top talent in a competitive operational labor market'
     ],
-    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. Be actionable and tactical – focus on "what needs to happen next." Provide clarity and guidance – simplify priorities for their teams. Problem-solving tone – address bottlenecks, performance issues, and team management. Collaborative but firm – engage them in decisions while setting clear expectations.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. Be actionable and tactical – focus on "what needs to happen next." Provide clarity and guidance – simplify priorities for their teams. Problem-solving tone – address bottlenecks, performance issues, and team management. Collaborative but firm – engage them in decisions while setting clear expectations. CRITICAL: Use simple, clear language – avoid complex jargon like "centralize", "validate", "leverage", "optimize", "visibility". Use everyday words that anyone can understand.',
     keywords: ['operational', 'management', 'efficiency', 'team', 'process', 'departmental', 'leadership', 'productivity', 'practical', 'execution', 'coordination', 'solutions']
   },
   {
@@ -320,7 +320,7 @@ export const PERSONA_DEFINITIONS: PersonaDefinition[] = [
       'Strategic Pressures: pressure to identify cost-saving opportunities in freight without undermining service quality',
       'Strategic Pressures: challenges in quantifying the financial impact of disruptions (e.g., port congestion, strikes)'
     ],
-    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. Be actionable and tactical – focus on "what needs to happen next." Provide clarity and guidance – simplify priorities for their teams. Problem-solving tone – address bottlenecks, performance issues, and team management. Collaborative but firm – engage them in decisions while setting clear expectations.',
+    toneProfile: 'Be strategic with operational depth – balance long-term goals with actionable next steps. Use comparative insights – benchmark performance, highlight best practices. Show resource allocation impact – budgets, technology adoption, vendor choices. Confident and professional – present clear recommendations backed by data. Be actionable and tactical – focus on "what needs to happen next." Provide clarity and guidance – simplify priorities for their teams. Problem-solving tone – address bottlenecks, performance issues, and team management. Collaborative but firm – engage them in decisions while setting clear expectations. CRITICAL: Use simple, clear language – avoid complex financial jargon like "accruals", "reconciliations", "GR/IR matching", "variance", "true-up". Use everyday words that anyone can understand.',
     keywords: ['financial', 'management', 'departmental', 'controls', 'team', 'leadership', 'performance', 'planning', 'analysis', 'practical', 'execution', 'coordination', 'solutions']
   },
   {
