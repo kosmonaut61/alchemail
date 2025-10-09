@@ -311,27 +311,29 @@ COMPENSATION REQUIREMENT:
       1. Uses the exact subject line provided
       2. Follows the purpose and signal integration guidelines EXACTLY as specified
       3. Matches the persona's tone profile and uses their keywords
-      4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
-      5. Sounds conversational and human (like talking to a friend)
-      6. Includes a clear call-to-action
-      7. Is concise but compelling (100-150 words)
-      8. Does NOT include a signature or sign-off
-      9. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
-      10. If no relevant context is available, focus on the signal and pain points without making specific customer claims
-      11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
-      12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
-      13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
-      14. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
-      15. Use the specific stats mentioned in the plan to make the email compelling and credible
-      16. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
-      17. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
-      18. PRIORITIZE CUSTOMER LISTS: If there's a customer list context item (e.g., "Automotive Customers", "Logistics Customers"), use companies from that list when mentioning industry-relevant examples
-      19. CUSTOMER LIST USAGE: When using customer lists, mention 2-3 specific company names from the list to build credibility and relevance
-      20. CONTEXT DISTRIBUTION: Each email must use DIFFERENT context items - never repeat the same company examples across emails
-      21. SEQUENCE VARIETY: Email 1 should use different context than Email 2, Email 2 different from Email 3, etc.
-      22. CUSTOMER LIST FIRST: Always check for customer list items first before using individual case studies or statistics
+      4. CRITICAL: MUST BE WRITTEN AT A 5TH GRADE READING LEVEL - use simple, clear language that anyone can understand easily
+      5. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
+      6. Sounds conversational and human (like talking to a friend)
+      7. Includes a clear call-to-action
+      8. Is concise but compelling (100-150 words)
+      9. Does NOT include a signature or sign-off
+      10. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1-2 specific quantified results from the VERIFIED CONTEXT
+      11. If no relevant context is available, focus on the signal and pain points without making specific customer claims
+      12. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+      13. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+      14. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+      15. Make each email unique and different - avoid generic phrases like "you're not alone" or "many companies"
+      16. Use the specific stats mentioned in the plan to make the email compelling and credible
+      17. Don't overwhelm with too many stats - focus on the 1-2 specific ones planned for this email
+      18. MUST integrate the signal as specified in the signalIntegration field - this is mandatory
+      19. PRIORITIZE CUSTOMER LISTS: If there's a customer list context item (e.g., "Automotive Customers", "Logistics Customers"), use companies from that list when mentioning industry-relevant examples
+      20. CUSTOMER LIST USAGE: When using customer lists, mention 2-3 specific company names from the list to build credibility and relevance
+      21. CONTEXT DISTRIBUTION: Each email must use DIFFERENT context items - never repeat the same company examples across emails
+      22. SEQUENCE VARIETY: Email 1 should use different context than Email 2, Email 2 different from Email 3, etc.
+      23. CUSTOMER LIST FIRST: Always check for customer list items first before using individual case studies or statistics
 
       STRUCTURE GUIDELINES:
+      - CRITICAL: USE 5TH GRADE READING LEVEL - avoid complex words, jargon, or overly formal language
       - Start with personal greeting using merge fields: "Hi {{contact.first_name}},"
       - Open with signal acknowledgment (if applicable)
       - State the challenge/opportunity in 1-2 short sentences
@@ -414,6 +416,7 @@ NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
 IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 
       CORE PRINCIPLES:
+      - CRITICAL: WRITE AT A 5TH GRADE READING LEVEL - simple words, short sentences, easy to understand
       - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
       - Focus on the recipient's potential challenges, not assumptions about their current situation
       - Use different approaches and stats for each email to avoid repetition
@@ -448,7 +451,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational B2B email writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content. CRITICAL: You MUST integrate the signal exactly as specified in the signalIntegration instruction provided.'
+              content: 'You are a friendly, conversational B2B email writer for Emerge. CRITICAL: Write at a 5th grade reading level - use simple, clear language that anyone can understand easily. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the email content. CRITICAL: You MUST integrate the signal exactly as specified in the signalIntegration instruction provided.'
             },
             {
               role: 'user',
@@ -548,19 +551,20 @@ LINKEDIN MESSAGE SPECIFICATIONS:
 Write a LinkedIn message that:
 1. Follows the purpose and signal integration guidelines
 2. Matches the persona's tone profile and uses their keywords
-3. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
-4. Is appropriate for the target persona's seniority level
-5. Feels personal and professional and only uses 5th grade level language
-6. Is concise (50-100 words)
-7. Includes a clear call-to-action
-8. Feels natural and builds on previous messages
-9. Does NOT include a signature or sign-off
-10. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1 specific quantified result from the VERIFIED CONTEXT
-11. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
-12. NEVER assume what the recipient downloaded, their specific problems, or their business situation
-13. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
-14. Make each message unique and different - avoid generic phrases
-15. Use the specific stat mentioned in the plan to make the message compelling and credible
+3. CRITICAL: MUST BE WRITTEN AT A 5TH GRADE READING LEVEL - use simple, clear language that anyone can understand easily
+4. Focuses on the recipient's potential challenges and goals - NEVER assume what they downloaded or their specific business situation
+5. Is appropriate for the target persona's seniority level
+6. Feels personal and professional
+7. Is concise (50-100 words)
+8. Includes a clear call-to-action
+9. Feels natural and builds on previous messages
+10. Does NOT include a signature or sign-off
+11. Focus on the SPECIFIC STATS mentioned in "Specific Stats to Feature" - use 1 specific quantified result from the VERIFIED CONTEXT
+12. NEVER mention specific dollar amounts, percentages, or savings unless they are explicitly provided in the VERIFIED CONTEXT
+13. NEVER assume what the recipient downloaded, their specific problems, or their business situation
+14. Focus on potential challenges they MIGHT face based on their role, not assumptions about their current situation
+15. Make each message unique and different - avoid generic phrases
+16. Use the specific stat mentioned in the plan to make the message compelling and credible
 
 CRITICAL: Only use facts from the VERIFIED CONTEXT section. Never make up customer names, savings amounts, percentages, or results that aren't explicitly provided. If you don't have specific numbers, don't mention any. NEVER assume what the recipient downloaded or their specific business situation.
 
@@ -575,6 +579,7 @@ NEVER ASSUME OR MENTION (unless the signal explicitly mentions it):
 IMPORTANT: If the signal explicitly mentions the recipient downloaded something, you CAN reference this fact as it's part of the signal, not an assumption. However, do NOT assume which specific case study, document, or resource they downloaded - only reference the general fact that they downloaded something.
 
       CORE PRINCIPLES:
+      - CRITICAL: WRITE AT A 5TH GRADE READING LEVEL - simple words, short sentences, easy to understand
       - Start with specific, quantified results from the VERIFIED CONTEXT (this builds credibility)
       - Focus on the recipient's potential challenges, not assumptions about their current situation
       - Use different approaches and stats for each message to avoid repetition
@@ -622,7 +627,7 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
           messages: [
             {
               role: 'system',
-              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the message content.'
+              content: 'You are a friendly, conversational LinkedIn message writer for Emerge. CRITICAL: Write at a 5th grade reading level - use simple, clear language that anyone can understand easily. Write like you\'re talking to a colleague - casual, authentic, and human. Keep it simple and avoid corporate jargon. Focus on the recipient\'s potential challenges and goals based on their role, not assumptions about their current situation. If the signal explicitly mentions the recipient downloaded something, you can reference this general fact but do NOT assume which specific document they downloaded. Do not include signatures, sign-offs, or contact information - just the message content.'
             },
             {
               role: 'user',
