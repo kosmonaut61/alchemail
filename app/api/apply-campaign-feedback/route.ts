@@ -292,14 +292,16 @@ CRITICAL PARAGRAPH STRUCTURE:
 ⚠️ Use blank lines only between major sections/ideas (2-4 paragraphs total)
 ⚠️ Within a paragraph, sentences flow together naturally
 
-EXAMPLE OF GOOD STRUCTURE:
+Lorem ipsum example of good email structure:
 "Hi {{contact.first_name}},
 
-When shipment data arrives late, it can slow down invoice matching. You probably handle bills and month-end close in your current role. Does late data makes matching harder and slow everything down?
+Lorem elit laborum do nulla qui non reprehenderit? Laborum dolore sunt sit laborum labore cupidatat nostrud. 
 
-**Emerge puts all your shipment and cost data in one place.** You can see freight charges quickly and close books with confidence. For example, **Dollar Tree saved $3.2M in six months** by getting clear visibility into freight costs.
+Deserunt tempor magna et non occaecat. Adipisicing adipisicing dolore Lorem voluptate ipsum deserunt ipsum. 
 
-Want to see how this works? Let's [set up a brief call](link) and I can walk you through it."
+In consequat qui **nulla nostrud proident excepteur reprehenderit nostrud magna** ut est. 
+
+Anim est ea laborum incididunt non reprehenderit? Laborum cillum duis consectetur aliquip labore nostrud."
 
 CRITICAL RULES:
 ✅ PRESERVE: All merge fields like {{contact.first_name}}, {{account.processed_company_name_for_email}}, {{contact.title}}
