@@ -1902,7 +1902,13 @@ export default function AlchemailApp20() {
 
               {/* Next Button for Step 3 */}
               {currentStep === 3 && generatedMessages.length > 0 && (
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Optimization Status:</span>
+                    <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                      {generatedMessages.filter(m => m.isOptimized).length} / {generatedMessages.length} Optimized
+                    </span>
+                  </div>
                   <Button 
                     onClick={handleNext} 
                     disabled={!canProceedToNext()}
