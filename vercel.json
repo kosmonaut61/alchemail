@@ -6,6 +6,9 @@
   "functions": {
     "app/api/generate-email-enhanced/route.ts": {
       "maxDuration": 300
+    },
+    "app/api/apply-campaign-feedback/route.ts": {
+      "maxDuration": 300
     }
   }
 }
