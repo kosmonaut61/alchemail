@@ -304,6 +304,7 @@ In consequat qui **nulla nostrud proident excepteur reprehenderit nostrud magna*
 Anim est ea laborum incididunt non reprehenderit? Laborum cillum duis consectetur aliquip labore nostrud."
 
 CRITICAL RULES:
+✅ PRESERVE: Email subject lines - if the message starts with "Subject:" keep it exactly on the first line
 ✅ PRESERVE: All merge fields like {{contact.first_name}}, {{account.processed_company_name_for_email}}, {{contact.title}}
 ✅ PRESERVE: All links in [text](url) format - keep them exactly as they are
 ✅ PRESERVE: All statistics, metrics, customer names, and dollar amounts
@@ -340,7 +341,7 @@ Return ONLY the simplified message with natural paragraph flow, no explanations.
           messages: [
             {
               role: 'system',
-              content: 'You are a language simplification expert. Write at a middle school reading level using simple, everyday words. Break long sentences into short ones (10-15 words max). One idea per sentence. CRITICAL: Group related sentences into natural paragraphs - this should read like a HUMAN EMAIL with 2-4 paragraphs, NOT a bullet list with every sentence on its own line. Be friendly and conversational. Preserve ALL merge fields, links, stats, and formatting exactly. Re-evaluate bold formatting to highlight the most impactful elements.'
+              content: 'You are a language simplification expert. Write at a middle school reading level using simple, everyday words. Break long sentences into short ones (10-15 words max). One idea per sentence. CRITICAL: Group related sentences into natural paragraphs - this should read like a HUMAN EMAIL with 2-4 paragraphs, NOT a bullet list with every sentence on its own line. Be friendly and conversational. CRITICAL: Preserve subject lines exactly if present - they should remain on the first line starting with "Subject:". Preserve ALL merge fields, links, stats, and formatting exactly. Re-evaluate bold formatting to highlight the most impactful elements.'
             },
             {
               role: 'user',

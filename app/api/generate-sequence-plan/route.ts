@@ -421,25 +421,84 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     console.log('-'.repeat(60))
     console.log('='.repeat(80) + '\n')
 
-    const { text } = await generateText({
-      model: openai('gpt-5-mini'),
-      messages: [
-        {
-          role: 'system',
-          content: 'You are an expert email sequence strategist specializing in B2B outreach. Create a sequence plan around the signal provided that weaves the signal throughout each interaction. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
-        },
-        {
-          role: 'user',
-          content: prompt
-        }
-      ],
-      temperature: 0.7
-    })
+    let text: string
+    let modelUsed = 'gpt-5-mini'
+
+    const isQuotaOrAccessError = (err: unknown) => {
+      if (!err) return false
+      const errorLike = err as { message?: string; code?: string; status?: number; response?: any }
+      const responseError = errorLike?.response?.data?.error
+      const message =
+        errorLike?.message ||
+        responseError?.message ||
+        (typeof err === 'string' ? err : undefined)
+      const code = errorLike?.code || responseError?.code
+      const status = errorLike?.status || errorLike?.response?.status
+
+      const normalizedMessage = message?.toLowerCase() || ''
+
+      return (
+        code === 'insufficient_quota' ||
+        code === 'access_terminated' ||
+        status === 403 ||
+        status === 429 ||
+        normalizedMessage.includes('you exceeded your current quota') ||
+        normalizedMessage.includes('insufficient_quota') ||
+        normalizedMessage.includes('account is inactive') ||
+        normalizedMessage.includes('does not have access to the model')
+      )
+    }
+
+    try {
+      const response = await generateText({
+        model: openai('gpt-5-mini'),
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert email sequence strategist specializing in B2B outreach. Create a sequence plan around the signal provided that weaves the signal throughout each interaction. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        temperature: 0.7
+      })
+
+      text = response.text
+    } catch (modelError) {
+      console.error('⚠️ GPT-5-mini request failed, attempting GPT-4o fallback...', modelError)
+
+      if (!isQuotaOrAccessError(modelError)) {
+        throw modelError
+      }
+
+      // Quota or access errors usually indicate the account lacks GPT-5 access; try GPT-4o instead
+      const fallbackResponse = await generateText({
+        model: openai('gpt-4o'),
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an expert email sequence strategist specializing in B2B outreach. Create a sequence plan around the signal provided that weaves the signal throughout each interaction. You must respond with ONLY valid JSON. Do not include any explanatory text, markdown formatting, or code blocks. Return only the JSON object.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        temperature: 0.7
+      })
+
+      text = fallbackResponse.text
+
+      modelUsed = 'gpt-4o'
+      console.log('✅ GPT-4o fallback succeeded for sequence plan generation')
+    }
 
     console.log('\n' + '='.repeat(80))
     console.log('✅ OPENAI API RESPONSE - SEQUENCE PLAN GENERATION')
     console.log('='.repeat(80))
-    console.log('📧 MODEL: gpt-5-mini')
+    console.log('📧 MODEL:', modelUsed)
     console.log('📏 RESPONSE LENGTH:', text.length, 'characters')
     console.log('\n📝 COMPLETE RESPONSE:')
     console.log('-'.repeat(60))

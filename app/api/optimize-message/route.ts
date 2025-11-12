@@ -329,7 +329,8 @@ COHESIVE WRITING REQUIREMENTS:
 ${formatVariablesForPrompt()}
 
 For emails:
-- Keep subject lines under 50 characters
+- CRITICAL: Preserve the subject line format - if the message starts with "Subject:" keep it on the first line
+- Keep subject lines under 50 characters (you can improve the wording but keep the format)
 - Use proper email formatting with clear sections
 - Include strong value proposition early
 - End with clear, specific call-to-action
@@ -376,7 +377,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
+            content: 'You are an expert B2B message optimizer with advanced AI capabilities. You specialize in creating highly engaging, persuasive messages that drive responses and conversions. CRITICAL: Preserve subject lines - if the message starts with "Subject:" keep it on the first line with the same format. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',
@@ -426,7 +427,7 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
         messages: [
           {
             role: 'system',
-            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
+            content: 'You are an expert B2B message optimizer. Improve messages for maximum engagement while maintaining authenticity and professionalism. CRITICAL: Preserve subject lines - if the message starts with "Subject:" keep it on the first line with the same format. Always preserve merge field syntax ({{variable.name}}) exactly as provided. CRITICAL: Use ONLY the exact URLs provided in the context repository - do NOT create fake or made-up URLs. Rewrite choppy, fragmented sentences into smooth, natural flowing statements that feel cohesive. Do NOT add signatures, contact information, or make messages longer than the original.'
           },
           {
             role: 'user',
