@@ -203,7 +203,17 @@ COHESIVE WRITING REQUIREMENTS:
 ${formatVariablesForPrompt()}
 
 For emails:
-- Keep subject lines under 50 characters
+- CRITICAL: Subject lines MUST be exactly 3 lines (3 separate lines, not one long line)
+- Each line should be short, punchy, and work together to create curiosity and engagement
+- Line 1: Hook or benefit (5-8 words max)
+- Line 2: Value proposition or question (5-8 words max)  
+- Line 3: Call to action or urgency (4-6 words max)
+- Example format:
+  Subject: Quick question about freight costs
+  
+  Can we save you $6M?
+  
+  Worth a quick chat?
 - Use proper email formatting with clear sections
 - Include strong value proposition early
 - End with clear, specific call-to-action
@@ -244,9 +254,88 @@ Return ONLY the improved message content, no explanations or additional text.`
         
         console.log(`✅ Message ${index + 1}: Feedback applied successfully`)
         
+        // Extract and regenerate subject line as 3 lines for emails
+        let finalContent = editedContent.text
+        if (message.type === 'email') {
+          try {
+            if (!process.env.OPENAI_API_KEY) {
+              console.warn(`⚠️ Message ${index + 1}: No API key for subject line generation, keeping original`)
+            } else {
+              // Extract existing subject line
+              const subjectMatch = finalContent.match(/Subject:\s*(.+?)(?:\n|$)/i)
+              if (subjectMatch) {
+                const oldSubject = subjectMatch[1].trim()
+                
+                // Generate 3-line subject line
+                const subjectPrompt = `You are an expert email subject line writer. Create a compelling 3-line subject line for this B2B email.
+
+ORIGINAL SUBJECT LINE:
+${oldSubject}
+
+EMAIL CONTENT:
+${finalContent.substring(subjectMatch.index! + subjectMatch[0].length).trim().substring(0, 500)}
+
+CAMPAIGN SIGNAL:
+"${signal}"
+
+REQUIREMENTS:
+1. Create EXACTLY 3 lines (not one long line)
+2. Each line should be short, punchy, and work together
+3. Line 1: Hook or benefit (5-8 words max) - create curiosity
+4. Line 2: Value proposition or question (5-8 words max) - add value
+5. Line 3: Call to action or urgency (4-6 words max) - drive action
+6. All 3 lines should work together to tell a complete story
+7. Keep it conversational and human, not corporate
+8. Reference the campaign signal naturally if relevant
+9. Make it mobile-friendly (short lines that display well on mobile)
+
+EXAMPLE FORMAT:
+Subject: Quick question about freight costs
+
+Can we save you $6M?
+
+Worth a quick chat?
+
+Return ONLY the subject line in this exact format:
+Subject: [line 1]
+
+[line 2]
+
+[line 3]`
+
+              const subjectResponse = await generateText({
+                model: openai('gpt-4o-mini', {
+                  apiKey: process.env.OPENAI_API_KEY,
+                }),
+                messages: [
+                  {
+                    role: 'system',
+                    content: 'You are an expert email subject line writer specializing in B2B outreach. Create compelling, multi-line subject lines that drive opens and engagement.'
+                  },
+                  {
+                    role: 'user',
+                    content: subjectPrompt
+                  }
+                ],
+                temperature: 0.8,
+                maxTokens: 150
+              })
+              
+              // Replace the old subject line with the new 3-line version
+              const newSubject = subjectResponse.text.trim()
+              finalContent = finalContent.replace(/Subject:\s*.+?(?:\n|$)/i, newSubject + '\n')
+                console.log(`✅ Message ${index + 1}: Subject line converted to 3 lines`)
+              }
+            }
+          } catch (subjectError) {
+            console.error(`⚠️ Message ${index + 1}: Failed to generate 3-line subject, keeping original:`, subjectError)
+            // Continue with original subject if generation fails
+          }
+        }
+        
         return {
           ...message,
-          content: editedContent.text,
+          content: finalContent,
           isCampaignFinalized: true,
           campaignFeedback: feedback
         }
