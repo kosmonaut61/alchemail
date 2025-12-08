@@ -371,8 +371,14 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('-'.repeat(60))
       console.log('='.repeat(80) + '\n')
       
+      if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OpenAI API key not configured')
+      }
+
       const { text } = await generateText({
-        model: openai('gpt-5'),
+        model: openai('gpt-5', {
+          apiKey: process.env.OPENAI_API_KEY,
+        }),
         messages: [
           {
             role: 'system',
@@ -421,8 +427,14 @@ IMPORTANT: Preserve the warm, conversational tone of the original. Don't make em
       console.log('-'.repeat(60))
       console.log('='.repeat(80) + '\n')
       
+      if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OpenAI API key not configured')
+      }
+
       const { text } = await generateText({
-        model: openai('gpt-4o-mini'),
+        model: openai('gpt-4o-mini', {
+          apiKey: process.env.OPENAI_API_KEY,
+        }),
         messages: [
           {
             role: 'system',
