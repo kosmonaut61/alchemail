@@ -421,8 +421,17 @@ Make sure the sequence feels natural and builds momentum. Each message should ad
     console.log('-'.repeat(60))
     console.log('='.repeat(80) + '\n')
 
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json(
+        { error: 'OpenAI API key not configured' },
+        { status: 500 }
+      )
+    }
+
     const { text } = await generateText({
-      model: openai('gpt-5-mini'),
+      model: openai('gpt-5-mini', {
+        apiKey: process.env.OPENAI_API_KEY,
+      }),
       messages: [
         {
           role: 'system',

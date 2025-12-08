@@ -467,8 +467,14 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       console.log('='.repeat(80) + '\n')
 
       try {
+        if (!process.env.OPENAI_API_KEY) {
+          throw new Error('OpenAI API key not configured')
+        }
+
         const { text: emailContent } = await generateText({
-          model: openai('gpt-4o-mini'),
+          model: openai('gpt-4o-mini', {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
           messages: [
             {
               role: 'system',
@@ -661,8 +667,14 @@ IMPORTANT: If the signal explicitly mentions the recipient downloaded something,
       console.log('='.repeat(80) + '\n')
 
       try {
+        if (!process.env.OPENAI_API_KEY) {
+          throw new Error('OpenAI API key not configured')
+        }
+
         const { text: linkedInContent } = await generateText({
-          model: openai('gpt-4o-mini'),
+          model: openai('gpt-4o-mini', {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
           messages: [
             {
               role: 'system',
