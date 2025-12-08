@@ -205,15 +205,11 @@ ${formatVariablesForPrompt()}
 For emails:
 - CRITICAL: Subject lines MUST be exactly 3 lines (3 separate lines, not one long line)
 - Each line should be short, punchy, and work together to create curiosity and engagement
-- Line 1: Hook or benefit (5-8 words max)
-- Line 2: Value proposition or question (5-8 words max)  
-- Line 3: Call to action or urgency (4-6 words max)
-- Example format:
-  Subject: Quick question about freight costs
-  
-  Can we save you $6M?
-  
-  Worth a quick chat?
+- Line 1: Hook or benefit (5-8 words max) - be specific and unique, avoid generic patterns
+- Line 2: Value proposition or question (5-8 words max) - add concrete value
+- Line 3: Call to action or urgency (4-6 words max) - drive action
+- AVOID repetitive patterns - do NOT start multiple subject lines with the same phrase
+- Each subject line must be UNIQUE and DIFFERENT from others in the campaign
 - Use proper email formatting with clear sections
 - Include strong value proposition early
 - End with clear, specific call-to-action
@@ -257,10 +253,10 @@ Return ONLY the improved message content, no explanations or additional text.`
         // Extract and regenerate subject line as 3 lines for emails
         let finalContent = editedContent.text
         if (message.type === 'email') {
-          try {
-            if (!process.env.OPENAI_API_KEY) {
-              console.warn(`⚠️ Message ${index + 1}: No API key for subject line generation, keeping original`)
-            } else {
+          if (!process.env.OPENAI_API_KEY) {
+            console.warn(`⚠️ Message ${index + 1}: No API key for subject line generation, keeping original`)
+          } else {
+            try {
               // Extract existing subject line
               const subjectMatch = finalContent.match(/Subject:\s*(.+?)(?:\n|$)/i)
               if (subjectMatch) {
@@ -278,30 +274,35 @@ ${finalContent.substring(subjectMatch.index! + subjectMatch[0].length).trim().su
 CAMPAIGN SIGNAL:
 "${signal}"
 
-REQUIREMENTS:
-1. Create EXACTLY 3 lines (not one long line)
-2. Each line should be short, punchy, and work together
-3. Line 1: Hook or benefit (5-8 words max) - create curiosity
-4. Line 2: Value proposition or question (5-8 words max) - add value
-5. Line 3: Call to action or urgency (4-6 words max) - drive action
-6. All 3 lines should work together to tell a complete story
-7. Keep it conversational and human, not corporate
-8. Reference the campaign signal naturally if relevant
-9. Make it mobile-friendly (short lines that display well on mobile)
+CRITICAL REQUIREMENTS:
+1. Create EXACTLY 3 separate lines - each line must be on its own line with a blank line between them
+2. Line 1: Hook or benefit (5-8 words max) - create curiosity, be specific and unique
+3. Line 2: Value proposition or question (5-8 words max) - add concrete value or ask a compelling question
+4. Line 3: Call to action or urgency (4-6 words max) - drive action with a clear next step
+5. All 3 lines must work together to tell a complete, cohesive story
+6. Keep it conversational and human, not corporate or formulaic
+7. Reference the campaign signal naturally if relevant
+8. Make it mobile-friendly (short lines that display well on mobile)
+9. AVOID repetitive patterns - do NOT start multiple subject lines with the same phrase like "Tired of..." or "Want to..."
+10. Each subject line must be UNIQUE and DIFFERENT from others in the campaign
+11. Be creative and varied - use different approaches for each email
 
-EXAMPLE FORMAT:
-Subject: Quick question about freight costs
+FORBIDDEN PATTERNS:
+- Do NOT use "Tired of..." as an opening
+- Do NOT use "Want to..." as an opening
+- Do NOT use generic phrases that could apply to any email
+- Do NOT repeat the same structure across multiple subject lines
+- Do NOT use examples from this prompt - create something completely original
 
-Can we save you $6M?
+OUTPUT FORMAT (MANDATORY):
+You MUST return the subject line in this EXACT format with blank lines between each line:
+Subject: [first line - 5-8 words]
 
-Worth a quick chat?
+[second line - 5-8 words]
 
-Return ONLY the subject line in this exact format:
-Subject: [line 1]
+[third line - 4-6 words]
 
-[line 2]
-
-[line 3]`
+CRITICAL: There must be a blank line between "Subject:" and the first line, and blank lines between each of the 3 lines.`
 
               const subjectResponse = await generateText({
                 model: openai('gpt-4o-mini', {
@@ -310,26 +311,48 @@ Subject: [line 1]
                 messages: [
                   {
                     role: 'system',
-                    content: 'You are an expert email subject line writer specializing in B2B outreach. Create compelling, multi-line subject lines that drive opens and engagement.'
+                    content: 'You are an expert email subject line writer specializing in B2B outreach. Create compelling, unique, multi-line subject lines that drive opens and engagement. CRITICAL: Never use repetitive patterns like "Tired of..." or "Want to..." - be creative and varied. Each subject line must be completely unique and different.'
                   },
                   {
                     role: 'user',
                     content: subjectPrompt
                   }
                 ],
-                temperature: 0.8,
-                maxTokens: 150
+                temperature: 0.9,
+                maxTokens: 200
               })
               
               // Replace the old subject line with the new 3-line version
-              const newSubject = subjectResponse.text.trim()
-              finalContent = finalContent.replace(/Subject:\s*.+?(?:\n|$)/i, newSubject + '\n')
-                console.log(`✅ Message ${index + 1}: Subject line converted to 3 lines`)
+              let newSubject = subjectResponse.text.trim()
+              
+              // Extract the 3 lines from the response
+              const lines = newSubject.split(/\n+/).filter(line => line.trim().length > 0)
+              
+              // Remove "Subject:" prefix if present to extract just the content
+              const subjectContent = lines.map(line => line.replace(/^Subject:\s*/i, '').trim()).filter(line => line.length > 0)
+              
+              // Validate we have at least 3 lines of content
+              if (subjectContent.length >= 3) {
+                // Take the first 3 lines
+                const line1 = subjectContent[0]
+                const line2 = subjectContent[1]
+                const line3 = subjectContent[2]
+                
+                // Format as proper 3-line subject with blank lines
+                newSubject = `Subject: ${line1}\n\n${line2}\n\n${line3}`
+                
+                // Replace the entire subject line section
+                finalContent = finalContent.replace(/Subject:\s*.+?(?:\n\n|\n(?=\n)|\n(?=[A-Z])|$)/is, newSubject + '\n\n')
+                console.log(`✅ Message ${index + 1}: Subject line converted to 3 lines: "${line1}" / "${line2}" / "${line3}"`)
+              } else {
+                console.warn(`⚠️ Message ${index + 1}: Generated subject doesn't have 3 lines (got ${subjectContent.length}), keeping original`)
+                // Keep original if validation fails
               }
+              }
+            } catch (subjectError) {
+              console.error(`⚠️ Message ${index + 1}: Failed to generate 3-line subject, keeping original:`, subjectError)
+              // Continue with original subject if generation fails
             }
-          } catch (subjectError) {
-            console.error(`⚠️ Message ${index + 1}: Failed to generate 3-line subject, keeping original:`, subjectError)
-            // Continue with original subject if generation fails
           }
         }
         
@@ -424,8 +447,15 @@ WORD REPLACEMENTS TO USE:
 Return ONLY the simplified message with natural paragraph flow, no explanations.`
 
       try {
+        if (!process.env.OPENAI_API_KEY) {
+          console.warn(`⚠️ Message ${index + 1}: No API key for simplification, keeping finalized version`)
+          return message
+        }
+
         const simplifiedContent = await generateText({
-          model: openai('gpt-5-mini'),
+          model: openai('gpt-5-mini', {
+            apiKey: process.env.OPENAI_API_KEY,
+          }),
           messages: [
             {
               role: 'system',
