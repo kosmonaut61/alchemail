@@ -253,10 +253,10 @@ Return ONLY the improved message content, no explanations or additional text.`
         // Extract and regenerate subject line as 3 lines for emails
         let finalContent = editedContent.text
         if (message.type === 'email') {
-          try {
-            if (!process.env.OPENAI_API_KEY) {
-              console.warn(`⚠️ Message ${index + 1}: No API key for subject line generation, keeping original`)
-            } else {
+          if (!process.env.OPENAI_API_KEY) {
+            console.warn(`⚠️ Message ${index + 1}: No API key for subject line generation, keeping original`)
+          } else {
+            try {
               // Extract existing subject line
               const subjectMatch = finalContent.match(/Subject:\s*(.+?)(?:\n|$)/i)
               if (subjectMatch) {
@@ -348,10 +348,11 @@ CRITICAL: There must be a blank line between "Subject:" and the first line, and 
                 console.warn(`⚠️ Message ${index + 1}: Generated subject doesn't have 3 lines (got ${subjectContent.length}), keeping original`)
                 // Keep original if validation fails
               }
+              }
+            } catch (subjectError) {
+              console.error(`⚠️ Message ${index + 1}: Failed to generate 3-line subject, keeping original:`, subjectError)
+              // Continue with original subject if generation fails
             }
-          } catch (subjectError) {
-            console.error(`⚠️ Message ${index + 1}: Failed to generate 3-line subject, keeping original:`, subjectError)
-            // Continue with original subject if generation fails
           }
         }
         
