@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { OpenAI } from 'openai'
-
-const WORKFLOW_ID = 'wf_693c77f188cc8190823a200bf9ad277600f80275a4c4acbd'
+import { runWorkflow } from '@/lib/workflow-3-0'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,113 +21,110 @@ export async function POST(request: NextRequest) {
 
     console.log('🚀 ===== ALCHEMAIL 3.0 WORKFLOW CALL =====')
     console.log('📝 Query:', query.substring(0, 100) + (query.length > 100 ? '...' : ''))
-    console.log('🔗 Workflow ID:', WORKFLOW_ID)
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+    // Call the workflow with the query
+    const result = await runWorkflow({
+      input_as_text: query
     })
 
+    console.log('✅ Workflow completed')
+    console.log('📋 Result type:', typeof result)
+    console.log('📋 Result keys:', result ? Object.keys(result) : 'null')
+
+    // Extract email content from the workflow result
+    // The workflow should return the campaignWriterResult which contains the messages
     let emailContent = ''
-    let run: any = null
+    let messages: any[] = []
 
-    try {
-      // Try the workflows API (beta)
-      const workflowRun = await openai.beta.workflows.runs.create({
-        workflow_id: WORKFLOW_ID,
-        input: {
-          query: query,
-        },
-      })
+    console.log('📋 Full result:', JSON.stringify(result, null, 2))
 
-      console.log('✅ Workflow run created:', workflowRun.id)
-      run = workflowRun
-
-      // Poll for completion
-      let attempts = 0
-      const maxAttempts = 60 // 5 minutes max (5 second intervals)
-
-      while (run.status === 'queued' || run.status === 'in_progress') {
-        if (attempts >= maxAttempts) {
-          throw new Error('Workflow execution timeout')
+    // The workflow returns the result from withTrace, which should contain campaignWriterResult
+    // Check various possible result structures
+    if (result && typeof result === 'object') {
+      // Check if result has messages directly
+      if (Array.isArray(result.messages)) {
+        messages = result.messages
+      } 
+      // Check if result has campaignWriterResult
+      else if (result.campaignWriterResult) {
+        const campaignResult = result.campaignWriterResult
+        console.log('📋 Found campaignWriterResult:', JSON.stringify(campaignResult, null, 2))
+        
+        if (campaignResult.output_text) {
+          try {
+            const parsed = JSON.parse(campaignResult.output_text)
+            console.log('📋 Parsed output_text:', JSON.stringify(parsed, null, 2))
+            if (parsed.messages && Array.isArray(parsed.messages)) {
+              messages = parsed.messages
+            } else if (parsed.success && parsed.messages) {
+              messages = parsed.messages
+            } else {
+              emailContent = campaignResult.output_text
+            }
+          } catch (e) {
+            console.log('📋 Could not parse output_text as JSON, using as string')
+            emailContent = campaignResult.output_text
+          }
+        } else if (campaignResult.output_parsed) {
+          console.log('📋 Found output_parsed:', JSON.stringify(campaignResult.output_parsed, null, 2))
+          if (campaignResult.output_parsed.messages && Array.isArray(campaignResult.output_parsed.messages)) {
+            messages = campaignResult.output_parsed.messages
+          } else if (campaignResult.output_parsed.success && campaignResult.output_parsed.messages) {
+            messages = campaignResult.output_parsed.messages
+          } else {
+            emailContent = JSON.stringify(campaignResult.output_parsed, null, 2)
+          }
         }
-
-        await new Promise(resolve => setTimeout(resolve, 5000)) // Wait 5 seconds
-
-        run = await openai.beta.workflows.runs.retrieve({
-          workflow_id: WORKFLOW_ID,
-          run_id: run.id,
-        })
-
-        attempts++
-        console.log(`⏳ Attempt ${attempts}: Status = ${run.status}`)
       }
-
-      if (run.status === 'failed') {
-        console.error('❌ Workflow failed:', JSON.stringify(run, null, 2))
-        throw new Error('Workflow execution failed')
+      // Check for direct output fields
+      else if (result.output_text) {
+        try {
+          const parsed = JSON.parse(result.output_text)
+          if (parsed.messages && Array.isArray(parsed.messages)) {
+            messages = parsed.messages
+          } else {
+            emailContent = result.output_text
+          }
+        } catch {
+          emailContent = result.output_text
+        }
+      } else if (result.output_parsed) {
+        if (result.output_parsed.messages && Array.isArray(result.output_parsed.messages)) {
+          messages = result.output_parsed.messages
+        } else {
+          emailContent = JSON.stringify(result.output_parsed, null, 2)
+        }
+      } else {
+        // Fallback: stringify the whole result for debugging
+        emailContent = JSON.stringify(result, null, 2)
       }
-
-      console.log('✅ Workflow completed:', run.status)
-      console.log('📋 Full run object:', JSON.stringify(run, null, 2))
-
-    } catch (apiError: any) {
-      // If workflows API doesn't exist or fails, log the error
-      console.error('❌ Workflow API error:', apiError)
-      
-      // Check if it's a method not found error
-      if (apiError.message?.includes('workflows') || apiError.code === 'method_not_found') {
-        throw new Error('Workflows API not available. Please ensure you are using a compatible OpenAI SDK version.')
-      }
-      
-      throw apiError
+    } else if (typeof result === 'string') {
+      emailContent = result
     }
 
-    // Extract the output from the workflow run
-    // The output structure depends on your workflow
-    if (run.output) {
-      // Try to extract email content from various possible output formats
-      if (typeof run.output === 'string') {
-        emailContent = run.output
-      } else if (run.output.email) {
-        emailContent = run.output.email
-      } else if (run.output.content) {
-        emailContent = run.output.content
-      } else if (run.output.text) {
-        emailContent = run.output.text
-      } else if (run.output.message) {
-        emailContent = run.output.message
-      } else if (run.output.result) {
-        emailContent = typeof run.output.result === 'string' 
-          ? run.output.result 
-          : JSON.stringify(run.output.result, null, 2)
+    // If we have messages, format them for display
+    if (messages.length > 0) {
+      console.log(`📧 Found ${messages.length} messages`)
+      // For now, just take the first email message's content
+      const firstEmail = messages.find(m => m.type === 'email')
+      if (firstEmail && firstEmail.content) {
+        emailContent = firstEmail.content
+      } else if (messages[0] && messages[0].content) {
+        emailContent = messages[0].content
       } else {
-        // If output is an object, try to stringify it or find the email field
-        emailContent = JSON.stringify(run.output, null, 2)
-      }
-    } else if (run.result) {
-      // Some workflows return result directly
-      emailContent = typeof run.result === 'string' 
-        ? run.result 
-        : JSON.stringify(run.result, null, 2)
-    } else {
-      // Fallback: check the steps for output
-      if (run.steps && run.steps.length > 0) {
-        const lastStep = run.steps[run.steps.length - 1]
-        if (lastStep.output) {
-          emailContent = typeof lastStep.output === 'string' 
-            ? lastStep.output 
-            : JSON.stringify(lastStep.output, null, 2)
-        } else if (lastStep.result) {
-          emailContent = typeof lastStep.result === 'string' 
-            ? lastStep.result 
-            : JSON.stringify(lastStep.result, null, 2)
-        }
+        // Format all messages
+        emailContent = messages.map((msg, idx) => {
+          if (msg.content) {
+            return `Email ${idx + 1}:\n${msg.content}`
+          }
+          return JSON.stringify(msg, null, 2)
+        }).join('\n\n---\n\n')
       }
     }
 
     if (!emailContent) {
       console.error('❌ No email content found in workflow output')
-      console.log('📋 Full run object:', JSON.stringify(run, null, 2))
+      console.log('📋 Full result object:', JSON.stringify(result, null, 2))
       throw new Error('No email content returned from workflow. Check the workflow output format.')
     }
 
@@ -139,7 +134,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       content: emailContent,
-      runId: run.id,
+      messages: messages.length > 0 ? messages : undefined,
     })
 
   } catch (error) {
@@ -154,4 +149,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-
