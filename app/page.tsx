@@ -19,6 +19,7 @@ import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { PERSONA_DEFINITIONS } from "@/lib/personas"
 import { ContextItem, CONTEXT_REPOSITORY } from "@/lib/context-repository"
+import Link from "next/link"
 
 // Types for the 2.0 app
 interface SequencePlan {
@@ -473,6 +474,15 @@ export default function AlchemailApp20() {
             
             {/* Right: Actions */}
             <div className="flex items-center gap-3">
+              <Link href="/app-3-0">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-9"
+                >
+                  3.0
+                </Button>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"
