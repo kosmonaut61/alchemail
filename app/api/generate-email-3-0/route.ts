@@ -21,15 +21,27 @@ export async function POST(request: NextRequest) {
 
     console.log('🚀 ===== ALCHEMAIL 3.0 WORKFLOW CALL =====')
     console.log('📝 Query:', query.substring(0, 100) + (query.length > 100 ? '...' : ''))
+    console.log('🔑 API Key present:', !!process.env.OPENAI_API_KEY)
+    console.log('🔑 API Key length:', process.env.OPENAI_API_KEY?.length || 0)
 
     // Call the workflow with the query
-    const result = await runWorkflow({
-      input_as_text: query
-    })
+    let result: any
+    try {
+      console.log('📞 Calling runWorkflow...')
+      result = await runWorkflow({
+        input_as_text: query
+      })
+      console.log('✅ Workflow completed')
+    } catch (workflowError: any) {
+      console.error('❌ Workflow execution error:', workflowError)
+      console.error('❌ Error message:', workflowError.message)
+      console.error('❌ Error stack:', workflowError.stack)
+      throw new Error(`Workflow execution failed: ${workflowError.message}`)
+    }
 
-    console.log('✅ Workflow completed')
     console.log('📋 Result type:', typeof result)
-    console.log('📋 Result keys:', result ? Object.keys(result) : 'null')
+    console.log('📋 Result keys:', result && typeof result === 'object' ? Object.keys(result) : 'not an object')
+    console.log('📋 Result value:', result)
 
     // Extract email content from the workflow result
     // The workflow should return the campaignWriterResult which contains the messages
